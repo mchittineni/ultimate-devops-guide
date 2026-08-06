@@ -1,0 +1,42 @@
+{
+  // Rule reference: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+  "config": {
+    "default": true,
+
+    // Prose is one paragraph per line; Prettier owns wrapping and formatting,
+    // so there is no hard line-length limit here.
+    "MD013": false,
+
+    // Every file opens with YAML frontmatter, so the first line is not a heading.
+    "MD041": false,
+
+    // ...and that frontmatter carries a `title`, which markdownlint would otherwise
+    // count as the document's h1 — making the real `# <id>. <title>` heading look
+    // like a duplicate. Empty pattern disables frontmatter title detection.
+    "MD025": { "front_matter_title": "" },
+
+    // Answers deliberately use bold lead-ins ("**Trade-offs**", "**How it works**")
+    // to label a paragraph inside a section without adding it to the heading outline.
+    "MD036": false,
+
+    // Section names repeat across the document set (Detail, Example, Interview tips),
+    // so only flag duplicate headings that are actual siblings.
+    "MD024": { "siblings_only": true },
+
+    // The README uses <details>/<summary> for the collapsible table of contents.
+    "MD033": { "allowed_elements": ["details", "summary", "br", "img"] },
+
+    // Question titles are questions, so headings end in "?".
+    "MD026": { "punctuation": ".,;:!" },
+
+    // Match Prettier's output so the two tools never disagree.
+    "MD004": { "style": "dash" },
+    "MD029": { "style": "ordered" },
+    "MD035": { "style": "---" },
+    "MD048": { "style": "backtick" },
+    "MD049": { "style": "underscore" },
+    "MD050": { "style": "asterisk" }
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**", "dist/**", "build/**"]
+}

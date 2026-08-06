@@ -21,7 +21,7 @@ tags:
 
 **Where the time actually goes.** Break the interval into stages and measure each:
 
-```
+```text
 commit → CI complete → PR reviewed → merged → deployed to staging → approved → in production
 ```
 

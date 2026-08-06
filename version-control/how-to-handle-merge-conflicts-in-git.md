@@ -35,7 +35,7 @@ git rebase --continue           # or: git commit   (for a merge)
 
 **Reading the markers**
 
-```
+```text
 <<<<<<< HEAD
 const timeout = 30;          # the branch you are on (during merge)
 =======

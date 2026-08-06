@@ -35,7 +35,7 @@ tags:
 
 What happens on `kubectl apply -f deployment.yaml`:
 
-```
+```text
 kubectl → apiserver (authn/authz/admission) → etcd
 deployment controller → creates ReplicaSet → ReplicaSet controller → creates Pods (nodeName empty)
 scheduler → binds Pod to a Node

@@ -1,0 +1,11 @@
+# Dependencies and build output
+node_modules/
+dist/
+build/
+
+# Python caches
+__pycache__/
+.venv/
+
+# License text is reproduced verbatim
+LICENSE

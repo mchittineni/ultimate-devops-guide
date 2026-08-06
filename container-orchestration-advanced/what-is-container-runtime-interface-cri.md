@@ -21,7 +21,7 @@ tags:
 
 **The layers**
 
-```
+```text
 kubelet ──CRI (gRPC)──▶ containerd / CRI-O ──OCI runtime spec──▶ runc / crun / gVisor / Kata
 ```
 

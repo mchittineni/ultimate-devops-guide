@@ -28,7 +28,7 @@ The human gate exists for business reasons — marketing timing, regulated chang
 
 ## Example
 
-```
+```text
 commit → build & unit tests → package artifact → deploy to staging
        → integration + contract tests → security scan → performance test
        → [manual approval] → deploy to production → smoke tests

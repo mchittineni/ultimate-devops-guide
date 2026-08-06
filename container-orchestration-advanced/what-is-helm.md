@@ -19,7 +19,7 @@ tags:
 
 **Structure**
 
-```
+```text
 mychart/
   Chart.yaml         # name, version, appVersion, dependencies
   values.yaml        # default configuration

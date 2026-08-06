@@ -27,7 +27,7 @@ tags:
 
 **Its costs.** Two permanent branches double the merge surface. Feature branches often live for weeks, which delays integration feedback — precisely what CI is meant to prevent. Release stabilisation periods create a "code freeze" culture. For a continuously deployed web service, this ceremony buys very little.
 
-```
+```text
 main     ──●───────────────●────────────●──  (v1.0)      (v1.1)   (v1.1.1)
             \             /            /
 release      \        ●──●            /

@@ -12,38 +12,45 @@ concurrency:
   group: validate-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  PYTHON_VERSION: "3.13"
+  NODE_VERSION: "24"
+
 jobs:
   validate:
     name: Validate content vault
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
-          python-version: "3.11"
+          python-version: ${{ env.PYTHON_VERSION }}
 
-      # Frontmatter schema, filename slugs, unique IDs, link integrity,
-      # and that no generated index has drifted from the question files.
+      # Frontmatter schema, filename slugs, unique IDs, heading consistency,
+      # relative link integrity, and whether any generated index has drifted.
       - name: Validate questions, links, and indexes
         run: python3 scripts/validate_content.py
 
       - name: Fail if indexes are stale
         run: python3 scripts/generate_indexes.py --check
 
-  format:
-    name: Check Markdown formatting
+  lint:
+    name: Lint and format Markdown
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: "20"
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Check formatting with Prettier
         run: npx --yes prettier@3 --check "**/*.md"
+
+      - name: Lint with markdownlint
+        run: npx --yes markdownlint-cli2 "**/*.md"

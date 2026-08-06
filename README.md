@@ -291,7 +291,7 @@ Difficulty is marked 🟢 Beginner · 🟡 Intermediate · 🔴 Advanced.
 
 ## Repository structure
 
-```
+```text
 .
 ├── core-devops-concepts/           # topic-slug/
 │   ├── README.md                   #   generated topic index

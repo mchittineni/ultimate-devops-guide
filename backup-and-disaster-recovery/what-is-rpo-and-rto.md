@@ -17,7 +17,7 @@ tags:
 
 Picture an outage on a timeline:
 
-```
+```text
    ← RPO →                    ← RTO →
 [last good copy] ......... [FAILURE] ......... [service restored]
    data lost in this window        time customers are down

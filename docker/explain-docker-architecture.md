@@ -31,7 +31,7 @@ The layered design matters: because `containerd` and `runc` implement OCI standa
 
 ## Example
 
-```
+```text
 docker CLI ──REST/socket──▶ dockerd ──gRPC──▶ containerd ──▶ containerd-shim ──▶ runc ──▶ [namespaces + cgroups] ──▶ your process
                               │
                               └──▶ registry (pull/push), BuildKit (build), libnetwork (networks)

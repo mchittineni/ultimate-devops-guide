@@ -15,7 +15,7 @@ The bar here is **an answer that would land well in a real interview** — not a
 
 ### 1. File location and name
 
-```
+```text
 topic-slug/question-title-slug.md
 ```
 
@@ -84,11 +84,22 @@ python3 scripts/generate_indexes.py     # rewrite all indexes from the question 
 python3 scripts/validate_content.py     # frontmatter, naming, links, index freshness
 ```
 
-Both are stdlib-only Python 3.11+. Optionally run the formatter CI also runs:
+Both are stdlib-only Python 3.11+ — nothing to install.
+
+Then run the two Markdown checks CI runs. Neither needs a `package.json`; `npx` fetches them on demand:
 
 ```bash
-npx prettier --check "**/*.md"
+npx prettier@3 --write "**/*.md"        # formatting (config: .prettierrc.json)
+npx markdownlint-cli2 "**/*.md"         # linting   (config: .markdownlint-cli2.jsonc)
 ```
+
+Run the generator _before_ Prettier. The generator emits compact tables and Prettier pads them into aligned columns; comparisons are whitespace-normalised, so running them in that order settles and neither tool undoes the other.
+
+A few linter conventions worth knowing, all deliberate and encoded in `.markdownlint-cli2.jsonc`:
+
+- **Bold lead-ins** (`**Trade-offs**`) are used to label a paragraph inside a section without adding it to the heading outline — `MD036` is disabled for this.
+- **Every code fence needs a language.** Use `text` for ASCII diagrams and plain output.
+- **Line length is unlimited** (`MD013` off) — write one paragraph per line and let the editor wrap.
 
 ### 5. Open the pull request
 

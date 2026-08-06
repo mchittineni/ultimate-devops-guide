@@ -32,7 +32,7 @@ tags:
 
 ## Example
 
-```
+```text
 trace_id=b7e1  ├─ gateway            240ms
                │  ├─ auth-service     12ms
                │  └─ checkout        225ms

@@ -1,0 +1,56 @@
+# --- OS ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Editors and IDEs ---
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+*.swo
+*~
+.\#*
+\#*\#
+
+# --- Node (linting and formatting tooling only) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.eslintcache
+.cache/
+
+# --- Python (validation and index-generation scripts) ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# --- Obsidian (this vault syncs into Obsidian) ---
+.obsidian/
+.trash/
+
+# --- Local and generated output ---
+*.log
+*.tmp
+.env
+.env.local
+.env.*.local
+/dist/
+/build/
+/site/
+/_site/
