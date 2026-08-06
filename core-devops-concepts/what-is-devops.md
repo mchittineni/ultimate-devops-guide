@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 1. What is DevOps?
+# What is DevOps?
 
 **Short answer:** DevOps is a set of cultural practices, working agreements, and automation that shortens the time between committing a change and running it safely in production, while keeping the system reliable.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 11. What is Kubernetes?
+# What is Kubernetes?
 
 **Short answer:** Kubernetes is an open-source container orchestrator that runs containerised workloads across a cluster of machines, continuously reconciling actual state towards the desired state you declare.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 15. Explain the difference between Docker Swarm and Kubernetes
+# Explain the difference between Docker Swarm and Kubernetes
 
 **Short answer:** Both orchestrate containers across a cluster, but Swarm optimises for simplicity and Kubernetes for capability. Swarm is easy to learn and limited; Kubernetes is complex, extensible, and the industry standard.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 87. What is GitOps?
+# What is GitOps?
 
 **Short answer:** GitOps is an operating model where the desired state of infrastructure and applications lives in Git, and an in-cluster controller continuously reconciles the running system towards that state — making Git the single source of truth and the only change interface.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 55. Compare different Configuration Management tools
+# Compare different Configuration Management tools
 
 **Short answer:** Ansible is agentless, YAML-based, and easiest to adopt; Puppet is declarative, agent-based, and strongest at continuous enforcement and compliance; Chef is Ruby-based with the best testing story; Salt is fastest at scale with event-driven automation.
 

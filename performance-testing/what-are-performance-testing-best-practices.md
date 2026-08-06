@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 74. What are Performance Testing Best Practices?
+# What are Performance Testing Best Practices?
 
 **Short answer:** Test against realistic workloads and data in a production-like environment, define pass/fail thresholds from your SLOs, measure percentiles, change one variable at a time, and automate a regression test in the pipeline.
 

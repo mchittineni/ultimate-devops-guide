@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 105. What is Lead Time for Changes?
+# What is Lead Time for Changes?
 
 **Short answer:** Lead time for changes is the elapsed time from code commit to that code running successfully in production. It measures the efficiency of the delivery pipeline, and elite teams keep it under an hour.
 

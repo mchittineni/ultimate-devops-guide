@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 8. What is Dockerfile?
+# What is Dockerfile?
 
 **Short answer:** A Dockerfile is the text recipe for building an image — an ordered list of instructions that Docker executes to produce reproducible, layered, versionable images.
 

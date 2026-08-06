@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 40. What are Security Best Practices in DevOps?
+# What are Security Best Practices in DevOps?
 
 **Short answer:** Automate security into the pipeline, eliminate long-lived secrets, apply least privilege everywhere, keep dependencies and images patched, and make production observable enough to detect and respond to compromise quickly.
 

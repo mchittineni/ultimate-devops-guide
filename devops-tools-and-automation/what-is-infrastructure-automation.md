@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 86. What is Infrastructure Automation?
+# What is Infrastructure Automation?
 
 **Short answer:** Infrastructure automation is the use of code and tooling to provision, configure, scale, and repair infrastructure without manual intervention — covering everything from creating a VPC to rotating credentials and replacing failed nodes.
 

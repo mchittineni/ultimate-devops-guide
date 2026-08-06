@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 93. What is Spot Instance pricing?
+# What is Spot Instance pricing?
 
 **Short answer:** Spot instances sell a cloud provider's spare capacity at up to 90% off on-demand, on the condition that it can be reclaimed with a short warning — typically two minutes — making it ideal for interruptible workloads.
 

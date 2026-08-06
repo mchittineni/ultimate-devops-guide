@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 126. What is DevOps Culture?
+# What is DevOps Culture?
 
 **Short answer:** DevOps culture is the set of shared values that make the practices work — shared ownership of production, blamelessness, continuous learning, collaboration over handoffs, and treating operational quality as everyone's responsibility.
 

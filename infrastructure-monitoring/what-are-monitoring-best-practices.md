@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 133. What are Monitoring Best Practices?
+# What are Monitoring Best Practices?
 
 **Short answer:** Monitor what users experience, alert only on actionable symptoms, define signals with USE and RED, keep dashboards purposeful, manage cardinality and cost, and treat monitoring configuration as code.
 

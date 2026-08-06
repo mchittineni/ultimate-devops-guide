@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 34. What is Grafana?
+# What is Grafana?
 
 **Short answer:** Grafana is an open-source visualisation and dashboarding platform that queries many data sources — Prometheus, Loki, Elasticsearch, CloudWatch, SQL databases — and presents them in unified dashboards with alerting.
 

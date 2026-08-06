@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 48. What is Git Flow?
+# What is Git Flow?
 
 **Short answer:** Git Flow is a branching model with two permanent branches — `main` (released code) and `develop` (integration) — plus feature, release, and hotfix branches, designed for software with scheduled, versioned releases.
 

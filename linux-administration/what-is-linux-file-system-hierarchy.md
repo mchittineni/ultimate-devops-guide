@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 45. What is Linux File System Hierarchy?
+# What is Linux File System Hierarchy?
 
 **Short answer:** The Filesystem Hierarchy Standard defines a single tree rooted at `/`, with each top-level directory having a defined purpose — `/etc` for configuration, `/var` for variable data, `/usr` for programs, `/proc` and `/sys` for kernel interfaces.
 

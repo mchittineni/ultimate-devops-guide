@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 25. What are the different types of cloud services?
+# What are the different types of cloud services?
 
 **Short answer:** The three classic models are IaaS (you manage the OS upwards), PaaS (you manage the application only), and SaaS (you just use the software). Serverless and containers-as-a-service sit between IaaS and PaaS.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 35. Explain the difference between monitoring and logging
+# Explain the difference between monitoring and logging
 
 **Short answer:** Logging records discrete events with context, one line at a time; monitoring collects and evaluates aggregated numeric signals over time. Logs tell you what happened in a specific request; monitoring tells you how the system is behaving overall.
 

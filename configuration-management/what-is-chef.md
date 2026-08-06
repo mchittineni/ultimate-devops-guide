@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 53. What is Chef?
+# What is Chef?
 
 **Short answer:** Chef is a configuration management tool that describes desired state in Ruby-based "recipes" grouped into "cookbooks", applied by a `chef-client` agent that converges the node towards the state defined on the Chef Infra Server.
 

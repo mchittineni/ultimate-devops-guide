@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 5. What is Continuous Deployment?
+# What is Continuous Deployment?
 
 **Short answer:** Continuous Deployment removes the manual approval from continuous delivery: every change that passes the automated pipeline goes to production automatically, with no human in the loop.
 

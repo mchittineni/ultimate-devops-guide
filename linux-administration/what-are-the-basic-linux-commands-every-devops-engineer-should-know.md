@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 41. What are the basic Linux commands every DevOps engineer should know?
+# What are the basic Linux commands every DevOps engineer should know?
 
 **Short answer:** File and text handling (`ls`, `find`, `grep`, `sed`, `awk`, `tail`), process and resource inspection (`ps`, `top`, `df`, `du`, `free`, `lsof`), networking (`ss`, `curl`, `dig`, `tcpdump`), service control (`systemctl`, `journalctl`), and permissions (`chmod`, `chown`).
 

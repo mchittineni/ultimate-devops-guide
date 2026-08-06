@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 122. What is an Incident Response Plan?
+# What is an Incident Response Plan?
 
 **Short answer:** An incident response plan is the documented, rehearsed procedure for handling incidents — defining severity criteria, roles, escalation paths, communication templates, and the steps for detection through post-incident review.
 

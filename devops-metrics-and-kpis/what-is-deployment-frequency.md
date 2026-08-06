@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 104. What is Deployment Frequency?
+# What is Deployment Frequency?
 
 **Short answer:** Deployment frequency is how often an organisation successfully releases to production. It is the headline throughput metric, and a proxy for batch size — frequent deployment means small, low-risk changes.
 

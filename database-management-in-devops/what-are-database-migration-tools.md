@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 113. What are Database Migration Tools?
+# What are Database Migration Tools?
 
 **Short answer:** Flyway and Liquibase for the JVM and general use, Alembic for Python, and framework-native tools (Rails, Django, Entity Framework, Prisma) — all of which apply versioned, tracked schema changes in a repeatable order.
 

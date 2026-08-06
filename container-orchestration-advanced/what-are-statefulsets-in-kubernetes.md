@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 81. What are StatefulSets in Kubernetes?
+# What are StatefulSets in Kubernetes?
 
 **Short answer:** A StatefulSet manages pods that need stable identity — a predictable name, stable network hostname, and their own persistent storage that survives rescheduling — making it the workload type for databases and other stateful systems.
 

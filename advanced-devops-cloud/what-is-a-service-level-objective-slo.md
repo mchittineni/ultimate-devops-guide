@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 149. What is a Service Level Objective (SLO)?
+# What is a Service Level Objective (SLO)?
 
 **Short answer:** An SLO is the internal reliability target for a service level indicator over a defined window — the number the team commits to, from which the error budget is derived.
 

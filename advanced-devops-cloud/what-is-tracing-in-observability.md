@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 154. What is Tracing in Observability?
+# What is Tracing in Observability?
 
 **Short answer:** Distributed tracing follows a single request across every service it touches, recording each operation as a timed span, so you can see exactly where time was spent and where a failure occurred in a distributed system.
 

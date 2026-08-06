@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 72. What are different types of Performance Tests?
+# What are different types of Performance Tests?
 
 **Short answer:** Load (expected traffic), stress (beyond capacity, to find the breaking point), spike (sudden surge), soak/endurance (sustained over hours), volume (large data sets), scalability (does adding resources help), and benchmark (comparison baseline).
 

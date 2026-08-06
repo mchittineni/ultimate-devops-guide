@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 144. What is Chaos Engineering?
+# What is Chaos Engineering?
 
 **Short answer:** Chaos engineering is the disciplined practice of running controlled experiments that inject failure into a system to test a hypothesis about its resilience — finding weaknesses before they cause an outage.
 

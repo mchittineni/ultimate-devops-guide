@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 24. What is Google Cloud Platform (GCP)?
+# What is Google Cloud Platform (GCP)?
 
 **Short answer:** Google Cloud Platform is Google's cloud, known for Kubernetes (which it created), a genuinely global network, and strong data and machine-learning services such as BigQuery.
 

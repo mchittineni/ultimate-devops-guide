@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 124. What are Incident Severity Levels?
+# What are Incident Severity Levels?
 
 **Short answer:** Severity levels classify incidents by user impact, driving the response — who is paged, how fast, how often stakeholders are updated, and whether a post-mortem is mandatory. A typical scale runs SEV-1 (critical) to SEV-4 (minor).
 

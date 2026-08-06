@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 123. What is Post-Mortem Analysis?
+# What is Post-Mortem Analysis?
 
 **Short answer:** A post-mortem is a written, blameless analysis after an incident that establishes the timeline, identifies contributing factors, and produces owned, tracked actions to make recurrence less likely or less severe.
 

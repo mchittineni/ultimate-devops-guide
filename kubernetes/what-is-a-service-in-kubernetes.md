@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 14. What is a Service in Kubernetes?
+# What is a Service in Kubernetes?
 
 **Short answer:** A Service is a stable network endpoint — a virtual IP and DNS name — that load-balances traffic to a dynamic set of pods selected by labels, insulating clients from pod churn.
 

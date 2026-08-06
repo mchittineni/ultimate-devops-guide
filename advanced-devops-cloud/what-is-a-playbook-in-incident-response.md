@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 152. What is a Playbook in Incident Response?
+# What is a Playbook in Incident Response?
 
 **Short answer:** A playbook is the coordinated response process for a class of incident — who does what, in what order, with what decision points and communications — as opposed to a runbook, which is the technical procedure for one specific task.
 

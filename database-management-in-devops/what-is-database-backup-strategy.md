@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 114. What is Database Backup Strategy?
+# What is Database Backup Strategy?
 
 **Short answer:** A database backup strategy combines full backups, continuous transaction-log archiving for point-in-time recovery, off-site immutable copies, and — critically — regularly tested restores, all sized to meet defined RPO and RTO targets.
 

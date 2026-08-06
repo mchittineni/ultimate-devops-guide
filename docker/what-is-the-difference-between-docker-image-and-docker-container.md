@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 7. What is the difference between Docker Image and Docker Container?
+# What is the difference between Docker Image and Docker Container?
 
 **Short answer:** An image is an immutable, read-only template built from a Dockerfile; a container is a running instance of that image with a thin writable layer on top. Image is to container what a class is to an object, or a binary to a process.
 

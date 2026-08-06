@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 118. What is SSL/TLS?
+# What is SSL/TLS?
 
 **Short answer:** TLS (Transport Layer Security, the successor to SSL) encrypts network traffic and authenticates the server, providing confidentiality, integrity, and identity for connections such as HTTPS.
 

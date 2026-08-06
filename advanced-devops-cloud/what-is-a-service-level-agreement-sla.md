@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 148. What is a Service Level Agreement (SLA)?
+# What is a Service Level Agreement (SLA)?
 
 **Short answer:** An SLA is a contractual commitment to a customer about service performance — typically availability — with defined measurement, exclusions, and financial remedies such as service credits when it is missed.
 

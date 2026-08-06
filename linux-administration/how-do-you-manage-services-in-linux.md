@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 44. How do you manage services in Linux?
+# How do you manage services in Linux?
 
 **Short answer:** With `systemctl` on modern distributions — start, stop, restart, reload, enable, and disable units — plus `journalctl` for their logs, and unit files under `/etc/systemd/system` for configuration.
 

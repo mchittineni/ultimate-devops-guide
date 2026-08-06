@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 71. What is Performance Testing?
+# What is Performance Testing?
 
 **Short answer:** Performance testing measures how a system behaves under a defined workload — its throughput, latency, resource use, and stability — to verify it meets requirements and to find the point at which it degrades.
 

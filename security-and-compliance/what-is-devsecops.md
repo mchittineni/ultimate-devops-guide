@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 36. What is DevSecOps?
+# What is DevSecOps?
 
 **Short answer:** DevSecOps integrates security into every stage of the delivery pipeline rather than bolting it on at the end — making security a shared responsibility of the whole team, automated and continuous.
 

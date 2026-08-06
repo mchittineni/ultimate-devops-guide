@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 156. What is a Service Mesh Control Plane?
+# What is a Service Mesh Control Plane?
 
 **Short answer:** The control plane is the management layer of a service mesh — it discovers services, translates high-level policy into proxy configuration, distributes it to the data-plane proxies, and issues the certificates that make mutual TLS work.
 

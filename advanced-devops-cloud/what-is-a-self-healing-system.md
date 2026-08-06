@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 158. What is a Self-Healing System?
+# What is a Self-Healing System?
 
 **Short answer:** A self-healing system automatically detects failures and recovers from them without human intervention — restarting failed processes, replacing unhealthy instances, failing over, and reverting bad changes.
 

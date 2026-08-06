@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 61. What is Backup and Disaster Recovery?
+# What is Backup and Disaster Recovery?
 
 **Short answer:** Backup is copying data so it can be restored after loss; disaster recovery is the broader capability of restoring an entire service after a major failure. Backup is one component of DR, not a substitute for it.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 28. What is Ansible?
+# What is Ansible?
 
 **Short answer:** Ansible is an agentless configuration management and automation tool that connects over SSH (or WinRM) and applies idempotent tasks described in YAML playbooks against an inventory of hosts.
 

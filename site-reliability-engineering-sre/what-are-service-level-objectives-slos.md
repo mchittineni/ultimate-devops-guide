@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 97. What are Service Level Objectives (SLOs)?
+# What are Service Level Objectives (SLOs)?
 
 **Short answer:** An SLO is an internal target for a service level indicator over a defined window — for example, "99.9% of requests succeed over 28 days" — that sets the reliability bar and generates the error budget.
 

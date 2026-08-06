@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 12. What are the main components of Kubernetes architecture?
+# What are the main components of Kubernetes architecture?
 
 **Short answer:** A control plane (API server, etcd, scheduler, controller manager, cloud controller manager) makes decisions about the cluster, and node components (kubelet, kube-proxy, container runtime) execute them on each worker machine.
 

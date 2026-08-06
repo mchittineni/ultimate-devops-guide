@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 88. What is ArgoCD?
+# What is ArgoCD?
 
 **Short answer:** Argo CD is a declarative GitOps continuous delivery controller for Kubernetes. It watches Git repositories for manifests, compares them with live cluster state, and syncs the difference — automatically or on approval — with a UI showing health and drift.
 

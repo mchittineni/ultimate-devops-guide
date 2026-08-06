@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 16. What is CI/CD Pipeline?
+# What is CI/CD Pipeline?
 
 **Short answer:** A CI/CD pipeline is the automated path from a commit to running software: a sequence of stages that build, test, scan, package, and deploy a change, failing fast and giving the team a single verdict on whether the change is safe.
 

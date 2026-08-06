@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 111. What is Database DevOps?
+# What is Database DevOps?
 
 **Short answer:** Database DevOps applies DevOps practices — version control, automated testing, continuous integration, and automated deployment — to database schemas and data, so database changes ship as safely and frequently as application changes.
 

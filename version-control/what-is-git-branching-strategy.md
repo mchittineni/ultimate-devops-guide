@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 47. What is Git Branching Strategy?
+# What is Git Branching Strategy?
 
 **Short answer:** A branching strategy is the team's agreement on how branches are created, merged, and released — the main options being trunk-based development, GitHub Flow, Git Flow, and release branching, chosen to match release cadence and risk.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 26. What is Infrastructure as Code?
+# What is Infrastructure as Code?
 
 **Short answer:** Infrastructure as Code is the practice of defining infrastructure in machine-readable files that are version-controlled, reviewed, and applied automatically — so environments are reproducible rather than hand-built.
 

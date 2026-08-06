@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 59. What is Auto Scaling?
+# What is Auto Scaling?
 
 **Short answer:** Auto scaling automatically adds or removes capacity in response to demand signals, keeping performance acceptable during peaks and cost low during troughs, without human intervention.
 

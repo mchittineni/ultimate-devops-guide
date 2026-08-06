@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 43. What is systemd?
+# What is systemd?
 
 **Short answer:** systemd is the init system and service manager on most modern Linux distributions — PID 1. It starts the system, supervises services with dependency-aware parallel startup, and provides logging, timers, resource control, and sandboxing.
 

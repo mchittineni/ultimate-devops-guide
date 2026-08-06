@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 68. What is Service Mesh?
+# What is Service Mesh?
 
 **Short answer:** A service mesh is a dedicated infrastructure layer that handles service-to-service communication — traffic management, mutual TLS, retries, and telemetry — by intercepting traffic in sidecar proxies, so applications do not implement these concerns themselves.
 

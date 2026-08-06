@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 159. What is Canary Analysis?
+# What is Canary Analysis?
 
 **Short answer:** Canary analysis is the automated evaluation of a canary release — statistically comparing the new version's metrics against the current version's over a defined period, and promoting or rolling back based on the result rather than on human judgement.
 

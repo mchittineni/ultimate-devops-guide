@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 125. What is On-Call Management?
+# What is On-Call Management?
 
 **Short answer:** On-call management is the practice of organising who responds to production alerts outside normal hours — rotations, escalation policies, compensation, and the alert hygiene that makes the rotation sustainable.
 

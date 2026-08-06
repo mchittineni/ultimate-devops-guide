@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 29. What is the difference between Ansible and Terraform?
+# What is the difference between Ansible and Terraform?
 
 **Short answer:** Terraform provisions and manages the lifecycle of infrastructure declaratively with state; Ansible configures what runs inside and on top of that infrastructure procedurally without state. They are complements, not competitors.
 

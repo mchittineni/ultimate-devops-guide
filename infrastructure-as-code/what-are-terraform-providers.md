@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 30. What are Terraform providers?
+# What are Terraform providers?
 
 **Short answer:** A provider is a plugin that teaches Terraform how to talk to an API — AWS, Azure, Kubernetes, GitHub, Datadog — exposing that platform's resources and data sources to HCL.
 

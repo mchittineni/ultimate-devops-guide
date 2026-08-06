@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 128. What is Blameless Culture?
+# What is Blameless Culture?
 
 **Short answer:** A blameless culture treats failures as symptoms of systemic weaknesses rather than individual fault, so people report problems openly and the organisation learns fast enough to prevent recurrence.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 83. What is Helm?
+# What is Helm?
 
 **Short answer:** Helm is the package manager for Kubernetes. It packages manifests into versioned, parameterised **charts**, renders them with user-supplied values, and installs them as tracked **releases** that can be upgraded and rolled back.
 

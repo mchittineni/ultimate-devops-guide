@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 119. What is a Web Application Firewall (WAF)?
+# What is a Web Application Firewall (WAF)?
 
 **Short answer:** A WAF inspects HTTP/HTTPS traffic at layer 7 and blocks malicious requests — SQL injection, cross-site scripting, path traversal, bot abuse — before they reach the application, complementing rather than replacing secure coding.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 38. What is Container Security?
+# What is Container Security?
 
 **Short answer:** Container security spans the whole lifecycle — securing the image, the build pipeline, the registry, the runtime configuration, and the orchestrator — because a container is only as safe as the weakest of those layers.
 

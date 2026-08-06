@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 13. What is a Pod in Kubernetes?
+# What is a Pod in Kubernetes?
 
 **Short answer:** A Pod is the smallest deployable unit in Kubernetes — one or more containers that share a network namespace, IP address, and storage volumes, and are always scheduled together on the same node.
 

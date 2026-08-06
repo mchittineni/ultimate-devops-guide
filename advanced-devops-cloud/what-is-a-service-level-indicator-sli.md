@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 150. What is a Service Level Indicator (SLI)?
+# What is a Service Level Indicator (SLI)?
 
 **Short answer:** An SLI is the quantitative measurement underpinning an SLO — typically the ratio of good events to valid events — chosen to reflect what users actually experience.
 

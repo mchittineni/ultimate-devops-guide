@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 54. What is Salt (SaltStack)?
+# What is Salt (SaltStack)?
 
 **Short answer:** Salt is a configuration management and remote execution framework built on a very fast messaging bus, able to run commands across tens of thousands of nodes in seconds, in either agent (minion) or agentless (SSH) mode.
 

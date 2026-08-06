@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 60. What is Disaster Recovery?
+# What is Disaster Recovery?
 
 **Short answer:** Disaster recovery is the set of plans, capabilities, and procedures for restoring service after a major failure — a region outage, data corruption, or ransomware — measured by how much data you can lose (RPO) and how long recovery may take (RTO).
 

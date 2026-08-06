@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 57. What is High Availability?
+# What is High Availability?
 
 **Short answer:** High availability is designing a system to remain operational despite component failures, by removing single points of failure, adding redundancy, and detecting and routing around failures automatically.
 

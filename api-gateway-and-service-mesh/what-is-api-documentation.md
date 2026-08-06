@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 80. What is API Documentation?
+# What is API Documentation?
 
 **Short answer:** API documentation describes how to use an API — endpoints, parameters, schemas, authentication, errors, and examples — and is most valuable when generated from a machine-readable specification such as OpenAPI so it cannot drift from the implementation.
 

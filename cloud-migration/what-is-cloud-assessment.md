@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 138. What is Cloud Assessment?
+# What is Cloud Assessment?
 
 **Short answer:** Cloud assessment is the discovery and analysis phase before migration — inventorying applications and infrastructure, mapping dependencies, measuring utilisation, estimating cost, and producing a prioritised migration plan with a strategy per application.
 

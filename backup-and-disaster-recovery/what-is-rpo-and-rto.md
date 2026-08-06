@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 63. What is RPO and RTO?
+# What is RPO and RTO?
 
 **Short answer:** RPO (Recovery Point Objective) is the maximum acceptable amount of data loss measured in time; RTO (Recovery Time Objective) is the maximum acceptable time to restore service. RPO drives backup and replication design; RTO drives recovery architecture.
 

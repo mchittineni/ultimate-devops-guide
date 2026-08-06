@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 56. What is Scalability in DevOps?
+# What is Scalability in DevOps?
 
 **Short answer:** Scalability is a system's ability to handle increased load by adding resources — vertically (a bigger machine) or horizontally (more machines) — ideally automatically and without redesign.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 78. What is API Security?
+# What is API Security?
 
 **Short answer:** API security is protecting APIs against unauthorised access and abuse through strong authentication, fine-grained authorisation, transport encryption, input validation, rate limiting, and monitoring — guided by the OWASP API Security Top 10.
 

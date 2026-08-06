@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 157. What is GitHub Actions?
+# What is GitHub Actions?
 
 **Short answer:** GitHub Actions is GitHub's built-in CI/CD and automation platform. Workflows defined in YAML in `.github/workflows/` respond to repository events, running jobs on GitHub-hosted or self-hosted runners.
 

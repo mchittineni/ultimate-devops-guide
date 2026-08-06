@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 135. What is Log Management?
+# What is Log Management?
 
 **Short answer:** Log management is the pipeline that collects, parses, enriches, stores, indexes, and expires log data from across a system, making it searchable for debugging, auditing, and security investigation.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 58. What is Load Balancing?
+# What is Load Balancing?
 
 **Short answer:** Load balancing distributes incoming traffic across multiple backend instances, improving throughput and availability by routing only to healthy targets and removing failed ones automatically.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 90. What are Deployment Strategies?
+# What are Deployment Strategies?
 
 **Short answer:** Deployment strategies control how a new version replaces the old — recreate, rolling, blue/green, canary, A/B, and shadow — trading off downtime, resource cost, rollback speed, and confidence.
 

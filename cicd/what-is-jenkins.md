@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 17. What is Jenkins?
+# What is Jenkins?
 
 **Short answer:** Jenkins is an open-source automation server for building CI/CD pipelines, extended by a very large plugin ecosystem and configured as code through declarative `Jenkinsfile` pipelines stored alongside the application.
 

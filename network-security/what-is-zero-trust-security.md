@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 117. What is Zero Trust Security?
+# What is Zero Trust Security?
 
 **Short answer:** Zero trust is a security model that removes implicit trust based on network location. Every request is authenticated, authorised, and encrypted regardless of where it originates — "never trust, always verify."
 

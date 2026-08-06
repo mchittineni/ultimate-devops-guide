@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 66. What is Cloud Native Architecture?
+# What is Cloud Native Architecture?
 
 **Short answer:** Cloud native architecture designs applications specifically for cloud environments — as loosely coupled, containerised, dynamically orchestrated services that are resilient, observable, and changed frequently through automation.
 

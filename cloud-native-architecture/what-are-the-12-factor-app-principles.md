@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 70. What are the 12-Factor App principles?
+# What are the 12-Factor App principles?
 
 **Short answer:** The Twelve-Factor App is a methodology for building services that are portable, disposable, and suited to continuous deployment on cloud platforms — covering config, dependencies, processes, state, logs, and parity between environments.
 

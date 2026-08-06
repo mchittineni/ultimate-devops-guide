@@ -27,7 +27,7 @@ from lib_content import (
 
 REQUIRED_TAGS = {"devops", "interview-questions"}
 LINK_RE = re.compile(r"\[[^\]]*\]\((\.[^)\s]+)\)")
-HEADING_RE = re.compile(r"^# (\d+)\. (.+)$", re.M)
+HEADING_RE = re.compile(r"^# (.+)$", re.M)
 
 
 def strip_code_blocks(text: str) -> str:
@@ -92,12 +92,9 @@ def check_questions(topics, errors: list[str]) -> None:
 
             heading = HEADING_RE.search(q.body)
             if not heading:
-                errors.append(f"{rel}: body must start with a `# <id>. <title>` heading")
-            else:
-                if int(heading.group(1)) != q.id:
-                    errors.append(f"{rel}: heading number {heading.group(1)} != id {q.id}")
-                if heading.group(2).strip() != q.title:
-                    errors.append(f"{rel}: heading text does not match frontmatter title")
+                errors.append(f"{rel}: body must start with a `# <title>` heading")
+            elif heading.group(1).strip() != q.title:
+                errors.append(f"{rel}: heading text does not match frontmatter title")
 
             # Indented prose outside a fence silently renders as a code block.
             in_fence = False

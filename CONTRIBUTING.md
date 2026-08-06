@@ -48,7 +48,7 @@ tags:
 ### 3. Body structure
 
 ````markdown
-# 11. What is Kubernetes?
+# What is Kubernetes?
 
 **Short answer:** two or three sentences.
 
@@ -71,7 +71,7 @@ The substance — mechanisms, trade-offs, vocabulary.
 [⬅ Back to Kubernetes](./README.md) · [All topics](../README.md)
 ````
 
-The `# <id>. <title>` heading must match the frontmatter exactly.
+The `# <title>` heading must match the frontmatter exactly.
 
 **Do not indent prose by four spaces.** Markdown renders it as a code block; the validator rejects it.
 

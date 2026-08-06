@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 50. How to handle merge conflicts in Git?
+# How to handle merge conflicts in Git?
 
 **Short answer:** Fetch the latest target branch, merge or rebase, inspect each conflicted file, resolve by choosing or combining the changes, remove the markers, run the tests, then `git add` and complete the merge or `git rebase --continue`.
 

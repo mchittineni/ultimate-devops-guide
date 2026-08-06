@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 94. How to implement cost tagging strategy?
+# How to implement cost tagging strategy?
 
 **Short answer:** Define a small mandatory tag schema (owner, environment, cost centre, application), enforce it automatically through IaC defaults and policy, activate the tags for cost allocation, and report untagged spend as a tracked metric until it approaches zero.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 76. What is an API Gateway?
+# What is an API Gateway?
 
 **Short answer:** An API gateway is a single entry point for client traffic that routes requests to backend services while handling cross-cutting concerns — authentication, rate limiting, TLS termination, caching, and observability — in one place.
 

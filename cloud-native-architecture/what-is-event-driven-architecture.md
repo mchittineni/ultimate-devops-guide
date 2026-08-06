@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 69. What is Event-Driven Architecture?
+# What is Event-Driven Architecture?
 
 **Short answer:** Event-driven architecture structures a system around the production, detection, and consumption of events, so producers emit facts about what happened and consumers react independently, without the producer knowing who is listening.
 

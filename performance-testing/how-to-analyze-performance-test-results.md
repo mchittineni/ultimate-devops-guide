@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 75. How to analyze Performance Test Results?
+# How to analyze Performance Test Results?
 
 **Short answer:** Start from the user-facing signals — throughput, error rate, and latency percentiles over time — then correlate with resource and dependency metrics to locate the bottleneck, and validate the finding by fixing one thing and re-testing.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 64. What is Business Continuity Planning?
+# What is Business Continuity Planning?
 
 **Short answer:** Business continuity planning is the organisation-wide discipline of keeping critical business functions running through a disruption — of which IT disaster recovery is one part alongside people, facilities, suppliers, and communications.
 

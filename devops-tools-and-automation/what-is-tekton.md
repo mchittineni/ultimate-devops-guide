@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 89. What is Tekton?
+# What is Tekton?
 
 **Short answer:** Tekton is a Kubernetes-native CI/CD framework where pipelines are custom resources — Tasks, Pipelines, and their Runs — so builds execute as pods in the cluster and are managed with the same tooling as any other Kubernetes workload.
 

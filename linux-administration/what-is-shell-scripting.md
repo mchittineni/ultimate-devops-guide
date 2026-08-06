@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 42. What is Shell Scripting?
+# What is Shell Scripting?
 
 **Short answer:** Shell scripting is automating sequences of shell commands in a file so operational tasks are repeatable, reviewable, and runnable by anyone or anything — including CI pipelines and cron.
 

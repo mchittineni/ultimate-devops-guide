@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 10. Explain Docker Architecture
+# Explain Docker Architecture
 
 **Short answer:** Docker uses a client/server architecture: the CLI talks over a REST API to the Docker daemon, which builds images, manages containers via a runtime stack (containerd → runc), and pulls or pushes images to registries.
 

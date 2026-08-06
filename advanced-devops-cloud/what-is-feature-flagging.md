@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 146. What is Feature Flagging?
+# What is Feature Flagging?
 
 **Short answer:** Feature flagging wraps functionality in a runtime conditional so it can be turned on or off without deploying — decoupling deployment from release and enabling gradual rollout, instant kill switches, and experimentation.
 

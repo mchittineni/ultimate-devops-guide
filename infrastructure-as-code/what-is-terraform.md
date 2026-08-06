@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 27. What is Terraform?
+# What is Terraform?
 
 **Short answer:** Terraform is HashiCorp's open-source infrastructure-as-code tool that provisions resources across any provider with a declarative language (HCL), tracking what it manages in a state file and showing a reviewable plan before applying changes.
 

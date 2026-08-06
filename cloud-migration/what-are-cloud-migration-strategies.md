@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 137. What are Cloud Migration Strategies?
+# What are Cloud Migration Strategies?
 
 **Short answer:** The "6 Rs" — rehost, replatform, repurchase, refactor, retire, and retain — chosen per application based on business value, technical fit, effort, and risk.
 

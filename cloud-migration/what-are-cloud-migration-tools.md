@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 140. What are Cloud Migration Tools?
+# What are Cloud Migration Tools?
 
 **Short answer:** Discovery tools (AWS Application Discovery Service, Azure Migrate, Device42), server and database replication tools (AWS MGN and DMS, Azure Migrate, GCP Migrate to Virtual Machines), data transfer services (DataSync, Snowball, Storage Migration Service), and IaC to build the target environment.
 

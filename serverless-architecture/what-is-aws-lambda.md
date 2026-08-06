@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 107. What is AWS Lambda?
+# What is AWS Lambda?
 
 **Short answer:** AWS Lambda is Amazon's function-as-a-service platform. You upload code as a zip or container image, configure memory and a trigger, and AWS runs it on demand — scaling automatically and billing per millisecond of execution.
 

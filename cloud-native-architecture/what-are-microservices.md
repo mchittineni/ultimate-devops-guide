@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 67. What are Microservices?
+# What are Microservices?
 
 **Short answer:** Microservices are an architectural style that structures an application as a set of small, independently deployable services, each owning a single business capability and its own data, communicating over the network.
 

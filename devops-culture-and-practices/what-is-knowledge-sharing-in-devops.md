@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 129. What is Knowledge Sharing in DevOps?
+# What is Knowledge Sharing in DevOps?
 
 **Short answer:** Knowledge sharing is the deliberate practice of spreading operational and technical understanding across a team — through documentation, runbooks, pairing, reviews, and internal talks — so capability does not depend on specific individuals.
 

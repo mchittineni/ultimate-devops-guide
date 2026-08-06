@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 141. What is Platform Engineering?
+# What is Platform Engineering?
 
 **Short answer:** Platform engineering builds and runs an internal developer platform — a curated, self-service layer over infrastructure — treating developers as customers and the platform as a product with a roadmap, users, and success metrics.
 

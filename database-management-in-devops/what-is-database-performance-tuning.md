@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 115. What is Database Performance Tuning?
+# What is Database Performance Tuning?
 
 **Short answer:** Database performance tuning is the systematic process of finding and removing bottlenecks — through query optimisation, indexing, schema design, configuration, and caching — guided by measurement rather than guesswork.
 

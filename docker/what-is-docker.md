@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 6. What is Docker?
+# What is Docker?
 
 **Short answer:** Docker is a platform for packaging an application together with its dependencies into a portable image, then running that image as an isolated process — a container — on any host with a container runtime.
 

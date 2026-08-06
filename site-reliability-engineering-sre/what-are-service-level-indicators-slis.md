@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 98. What are Service Level Indicators (SLIs)?
+# What are Service Level Indicators (SLIs)?
 
 **Short answer:** An SLI is a carefully defined quantitative measure of some aspect of service quality — typically expressed as the ratio of good events to total valid events — that reflects what users actually experience.
 

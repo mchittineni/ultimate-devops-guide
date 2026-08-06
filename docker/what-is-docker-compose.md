@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 9. What is Docker Compose?
+# What is Docker Compose?
 
 **Short answer:** Docker Compose defines and runs multi-container applications from a single YAML file, so an entire local stack — app, database, cache, queue — starts with `docker compose up`.
 

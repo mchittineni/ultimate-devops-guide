@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 134. What is Application Performance Monitoring?
+# What is Application Performance Monitoring?
 
 **Short answer:** APM instruments applications to measure their internal behaviour — request latency broken down by code path, database and external call timings, error rates, and traces — so you can find _why_ a service is slow, not merely that it is.
 

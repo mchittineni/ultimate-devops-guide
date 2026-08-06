@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 151. What is a Runbook?
+# What is a Runbook?
 
 **Short answer:** A runbook is a documented procedure for performing a specific operational task or responding to a specific alert — the diagnostic and remediation steps, in order, that let any qualified engineer handle the situation consistently.
 

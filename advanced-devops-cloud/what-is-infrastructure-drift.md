@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 160. What is Infrastructure Drift?
+# What is Infrastructure Drift?
 
 **Short answer:** Infrastructure drift is divergence between the infrastructure described in code and the infrastructure actually running — usually caused by manual changes, external automation, or failed applies — undermining reproducibility and hiding risk.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 51. What is Configuration Management?
+# What is Configuration Management?
 
 **Short answer:** Configuration management is the practice of defining, applying, and continuously enforcing the desired state of systems — packages, files, services, users — from version-controlled definitions, so every machine is consistent and drift is corrected automatically.
 

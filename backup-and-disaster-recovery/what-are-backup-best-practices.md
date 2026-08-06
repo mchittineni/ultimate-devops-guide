@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 65. What are backup best practices?
+# What are backup best practices?
 
 **Short answer:** Automate backups, follow 3-2-1-1-0, encrypt everything, keep an immutable copy in a separate account, monitor every job, and — above all — test restores on a schedule.
 

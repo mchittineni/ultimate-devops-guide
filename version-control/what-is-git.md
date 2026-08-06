@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 46. What is Git?
+# What is Git?
 
 **Short answer:** Git is a distributed version control system that records project history as a graph of immutable commits, giving every clone the full history and enabling cheap branching, offline work, and safe collaboration.
 

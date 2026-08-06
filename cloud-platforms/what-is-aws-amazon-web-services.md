@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 22. What is AWS (Amazon Web Services)?
+# What is AWS (Amazon Web Services)?
 
 **Short answer:** AWS is Amazon's cloud platform and the largest provider by market share, offering 200+ services across compute, storage, networking, databases, and managed application services in regions worldwide.
 

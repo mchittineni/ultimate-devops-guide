@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 139. What is Application Modernization?
+# What is Application Modernization?
 
 **Short answer:** Application modernisation is updating legacy applications to take advantage of cloud-native capabilities — containerisation, managed services, microservices, serverless — to improve scalability, delivery speed, and maintainability.
 

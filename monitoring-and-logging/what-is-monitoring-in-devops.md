@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 31. What is monitoring in DevOps?
+# What is monitoring in DevOps?
 
 **Short answer:** Monitoring is the continuous collection and evaluation of system signals — metrics, logs, traces, and events — to know whether a service is healthy, to alert humans when it is not, and to give evidence during diagnosis.
 

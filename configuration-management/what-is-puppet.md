@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 52. What is Puppet?
+# What is Puppet?
 
 **Short answer:** Puppet is a declarative, agent-based configuration management tool. Nodes run an agent that periodically fetches a compiled catalogue from a Puppet server and enforces the described state, correcting drift on every run.
 

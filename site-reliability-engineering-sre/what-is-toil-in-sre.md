@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 100. What is Toil in SRE?
+# What is Toil in SRE?
 
 **Short answer:** Toil is manual, repetitive, automatable, tactical work with no enduring value, that scales linearly with service growth. SRE treats it as a measurable quantity to be capped and systematically eliminated.
 

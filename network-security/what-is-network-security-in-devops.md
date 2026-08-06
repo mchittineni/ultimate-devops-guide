@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 116. What is Network Security in DevOps?
+# What is Network Security in DevOps?
 
 **Short answer:** Network security in DevOps means designing, provisioning, and continuously verifying network controls as code — segmentation, least-privilege firewall rules, encryption in transit, and monitoring — so protection is deployed and audited automatically alongside the workloads it protects.
 

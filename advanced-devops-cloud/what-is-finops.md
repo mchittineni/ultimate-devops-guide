@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 142. What is FinOps?
+# What is FinOps?
 
 **Short answer:** FinOps is the operational discipline of bringing financial accountability to variable cloud spend — a collaboration between engineering, finance, and business to make cost a measurable, owned engineering attribute.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 92. What are Reserved Instances?
+# What are Reserved Instances?
 
 **Short answer:** Reserved Instances are a billing commitment — you agree to a specific amount of compute for one or three years in exchange for a discount of roughly 30–70% versus on-demand pricing. They are a financial arrangement, not a different kind of server.
 

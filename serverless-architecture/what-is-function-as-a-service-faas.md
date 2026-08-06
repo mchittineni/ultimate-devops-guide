@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 110. What is Function as a Service (FaaS)?
+# What is Function as a Service (FaaS)?
 
 **Short answer:** FaaS is the compute model at the heart of serverless: you deploy individual functions that the platform executes in response to events, scaling each independently and billing only for execution time.
 

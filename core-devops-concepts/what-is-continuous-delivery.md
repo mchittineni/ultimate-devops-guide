@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 4. What is Continuous Delivery?
+# What is Continuous Delivery?
 
 **Short answer:** Continuous Delivery extends CI so that every build that passes the pipeline is a release candidate — deployable to production at any moment by pressing a button. The decision to release stays with a human.
 

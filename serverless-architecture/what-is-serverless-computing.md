@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 106. What is Serverless Computing?
+# What is Serverless Computing?
 
 **Short answer:** Serverless is a cloud execution model where the provider fully manages the servers — provisioning, scaling, and patching — and you are billed only for actual execution, scaling to zero when idle. Servers still exist; you simply never operate them.
 

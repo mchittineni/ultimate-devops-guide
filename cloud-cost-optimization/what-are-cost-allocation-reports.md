@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 95. What are cost allocation reports?
+# What are cost allocation reports?
 
 **Short answer:** Cost allocation reports break cloud spend down by dimensions such as account, service, tag, and team, so costs can be attributed to the group that incurred them — enabling showback, chargeback, and informed optimisation.
 

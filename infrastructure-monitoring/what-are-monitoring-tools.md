@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 132. What are Monitoring Tools?
+# What are Monitoring Tools?
 
 **Short answer:** Prometheus with Grafana is the open-source standard for metrics; ELK/OpenSearch or Loki for logs; Jaeger or Tempo for traces; and Datadog, New Relic, or Dynatrace as commercial all-in-one platforms — plus the cloud providers' native offerings.
 

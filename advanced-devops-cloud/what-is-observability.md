@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 153. What is Observability?
+# What is Observability?
 
 **Short answer:** Observability is the property of a system that lets you understand its internal state from its external outputs — well enough to answer questions you did not anticipate when you instrumented it.
 

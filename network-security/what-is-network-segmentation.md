@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 120. What is Network Segmentation?
+# What is Network Segmentation?
 
 **Short answer:** Network segmentation divides a network into isolated zones so that a compromise in one cannot move freely into another — limiting lateral movement, reducing blast radius, and shrinking compliance scope.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 143. What is Policy as Code?
+# What is Policy as Code?
 
 **Short answer:** Policy as code expresses governance rules — security, compliance, cost, and operational standards — as executable code that is version-controlled, tested, and enforced automatically in pipelines and at runtime.
 

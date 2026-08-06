@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 62. What are different types of backups?
+# What are different types of backups?
 
 **Short answer:** Full (everything, every time), incremental (changes since the last backup of any type), differential (changes since the last full backup), plus snapshots, continuous data protection, and synthetic fulls.
 

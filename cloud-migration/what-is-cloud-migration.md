@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 136. What is Cloud Migration?
+# What is Cloud Migration?
 
 **Short answer:** Cloud migration is the process of moving applications, data, and infrastructure from on-premises data centres (or another cloud) to a cloud platform — planned in phases with assessment, strategy selection per application, execution, and optimisation.
 

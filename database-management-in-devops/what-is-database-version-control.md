@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 112. What is Database Version Control?
+# What is Database Version Control?
 
 **Short answer:** Database version control means keeping schema definitions and change scripts in the same repository as the application, versioned and reviewed, so any environment can be built to a known schema version reproducibly.
 

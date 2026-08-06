@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 21. What is Cloud Computing?
+# What is Cloud Computing?
 
 **Short answer:** Cloud computing is the on-demand delivery of compute, storage, networking, and higher-level services over the internet, billed by consumption, with the provider operating the physical infrastructure.
 

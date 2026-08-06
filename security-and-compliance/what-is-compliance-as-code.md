@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 39. What is Compliance as Code?
+# What is Compliance as Code?
 
 **Short answer:** Compliance as Code expresses regulatory and internal control requirements as executable policies that are enforced automatically in pipelines and at runtime, producing continuous evidence instead of periodic manual audits.
 

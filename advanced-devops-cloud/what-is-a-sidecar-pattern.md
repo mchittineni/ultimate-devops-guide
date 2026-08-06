@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 155. What is a Sidecar Pattern?
+# What is a Sidecar Pattern?
 
 **Short answer:** The sidecar pattern deploys a helper container alongside the main application container in the same pod, sharing its network namespace and volumes, to provide capabilities — proxying, logging, secret rotation — without modifying the application.
 

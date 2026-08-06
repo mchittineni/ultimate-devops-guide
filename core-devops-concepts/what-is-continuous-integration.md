@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 3. What is Continuous Integration?
+# What is Continuous Integration?
 
 **Short answer:** Continuous Integration is the practice of merging every developer's work into a shared mainline at least daily, where an automated build and test suite verifies each merge within minutes.
 

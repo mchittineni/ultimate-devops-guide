@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 96. What is Site Reliability Engineering?
+# What is Site Reliability Engineering?
 
 **Short answer:** SRE is Google's discipline of applying software engineering to operations — running services against explicit reliability targets, using error budgets to balance velocity against stability, and automating away repetitive operational work.
 

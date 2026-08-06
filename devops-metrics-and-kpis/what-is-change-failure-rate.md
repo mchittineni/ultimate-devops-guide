@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 103. What is Change Failure Rate?
+# What is Change Failure Rate?
 
 **Short answer:** Change failure rate is the percentage of deployments to production that cause a degraded service requiring remediation — a rollback, hotfix, or patch. It is DORA's primary quality metric.
 

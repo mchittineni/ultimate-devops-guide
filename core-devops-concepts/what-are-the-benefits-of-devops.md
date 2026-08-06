@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 2. What are the benefits of DevOps?
+# What are the benefits of DevOps?
 
 **Short answer:** Faster and more frequent delivery, lower change failure rate, quicker recovery from incidents, and better collaboration — benefits that compound because small, frequent changes are inherently safer than large, rare ones.
 

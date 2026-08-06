@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 91. What is Cloud Cost Optimization?
+# What is Cloud Cost Optimization?
 
 **Short answer:** Cloud cost optimisation is the continuous practice of reducing cloud spend without harming performance or reliability — through right-sizing, commitment discounts, eliminating waste, architectural change, and making cost visible to the teams that create it.
 

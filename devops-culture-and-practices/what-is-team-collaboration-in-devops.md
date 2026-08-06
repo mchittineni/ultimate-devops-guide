@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 130. What is Team Collaboration in DevOps?
+# What is Team Collaboration in DevOps?
 
 **Short answer:** Collaboration in DevOps means development, operations, security, and product working as one team towards shared outcomes — with joint ownership, shared tooling and visibility, and structures that remove handoffs rather than formalising them.
 

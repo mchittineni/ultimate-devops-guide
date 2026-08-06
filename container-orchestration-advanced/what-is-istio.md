@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 84. What is Istio?
+# What is Istio?
 
 **Short answer:** Istio is a service mesh for Kubernetes that manages service-to-service traffic through Envoy proxies, providing mutual TLS, fine-grained traffic routing, resilience policies, and uniform telemetry without changing application code.
 

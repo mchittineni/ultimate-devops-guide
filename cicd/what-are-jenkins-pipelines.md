@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 18. What are Jenkins Pipelines?
+# What are Jenkins Pipelines?
 
 **Short answer:** A Jenkins Pipeline is a build workflow defined as code in a `Jenkinsfile`, expressed as stages and steps, versioned with the application, and able to survive controller restarts.
 

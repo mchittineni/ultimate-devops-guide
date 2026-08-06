@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 19. What is GitLab CI?
+# What is GitLab CI?
 
 **Short answer:** GitLab CI/CD is the pipeline engine built into GitLab, configured by a `.gitlab-ci.yml` file in the repository and executed by GitLab Runners, with the registry, environments, and security scanning integrated into the same product.
 

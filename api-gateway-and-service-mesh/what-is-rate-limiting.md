@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 79. What is Rate Limiting?
+# What is Rate Limiting?
 
 **Short answer:** Rate limiting caps how many requests a client may make in a time window, protecting backends from overload and abuse, ensuring fair use, and controlling cost.
 

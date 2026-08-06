@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 102. What is Mean Time to Recovery (MTTR)?
+# What is Mean Time to Recovery (MTTR)?
 
 **Short answer:** MTTR is the average time from the start of a service-affecting incident to full restoration. It measures how quickly you recover rather than how rarely you fail — and it is usually the more improvable of the two.
 

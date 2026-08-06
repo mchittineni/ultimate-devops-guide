@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 73. What are Performance Testing Tools?
+# What are Performance Testing Tools?
 
 **Short answer:** k6 and Gatling for modern code-first load testing, JMeter for broad protocol support, Locust for Python-based scripting, and Vegeta or wrk for quick HTTP benchmarks — plus APM tooling to see what the system did under load.
 

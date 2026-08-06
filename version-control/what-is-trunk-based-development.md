@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 49. What is Trunk Based Development?
+# What is Trunk Based Development?
 
 **Short answer:** Trunk-based development is a branching model where all developers integrate into a single shared branch at least daily, using very short-lived branches or direct commits, with unfinished work hidden behind feature flags.
 

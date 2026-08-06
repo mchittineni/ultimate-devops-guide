@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 85. What is Container Runtime Interface (CRI)?
+# What is Container Runtime Interface (CRI)?
 
 **Short answer:** The Container Runtime Interface is the gRPC API through which the kubelet talks to a container runtime. It decoupled Kubernetes from Docker, allowing any compliant runtime — containerd, CRI-O — to be plugged in.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 32. What is ELK Stack?
+# What is ELK Stack?
 
 **Short answer:** The ELK stack is Elasticsearch (search and analytics store), Logstash (ingestion and transformation pipeline), and Kibana (visualisation) — a platform for centralising, searching, and analysing logs. With Beats added it is often called the Elastic Stack.
 

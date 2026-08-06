@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 127. What are DevOps Best Practices?
+# What are DevOps Best Practices?
 
 **Short answer:** Version everything, automate the path to production, integrate continuously in small batches, test automatically at every stage, build infrastructure as code, monitor comprehensively, and review incidents blamelessly.
 

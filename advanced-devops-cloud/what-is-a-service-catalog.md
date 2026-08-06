@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 147. What is a Service Catalog?
+# What is a Service Catalog?
 
 **Short answer:** A service catalogue is the authoritative inventory of an organisation's software services — recording what each service is, who owns it, its dependencies, documentation, dashboards, and runbooks — usually surfaced through a developer portal such as Backstage.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 108. What are the benefits of Serverless?
+# What are the benefits of Serverless?
 
 **Short answer:** No infrastructure to operate, automatic scaling from zero to peak, pay-only-for-use billing, faster time to market, and built-in high availability — letting small teams ship production services without an operations burden.
 

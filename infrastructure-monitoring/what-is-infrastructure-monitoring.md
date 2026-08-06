@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 131. What is Infrastructure Monitoring?
+# What is Infrastructure Monitoring?
 
 **Short answer:** Infrastructure monitoring is the continuous collection of health and performance signals from the compute, storage, network, and platform layers — hosts, containers, clusters, databases, and cloud services — to detect problems and inform capacity decisions.
 

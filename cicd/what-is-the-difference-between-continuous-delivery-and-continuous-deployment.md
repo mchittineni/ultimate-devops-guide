@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 20. What is the difference between Continuous Delivery and Continuous Deployment?
+# What is the difference between Continuous Delivery and Continuous Deployment?
 
 **Short answer:** Both keep every change production-ready through an automated pipeline. Continuous delivery stops at a manual approval before production; continuous deployment releases automatically with no human gate.
 

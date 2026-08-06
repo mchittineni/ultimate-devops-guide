@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 145. What is Blue/Green Deployment?
+# What is Blue/Green Deployment?
 
 **Short answer:** Blue/green deployment runs two identical production environments — one live (blue), one idle with the new version (green) — and switches all traffic at once after verification, giving instant rollback by switching back.
 

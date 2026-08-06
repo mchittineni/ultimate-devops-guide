@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 101. What are DevOps Metrics?
+# What are DevOps Metrics?
 
 **Short answer:** DevOps metrics measure the performance of the software delivery system itself. The four DORA metrics — deployment frequency, lead time for changes, change failure rate, and time to restore — are the industry standard, complemented by reliability and flow metrics.
 

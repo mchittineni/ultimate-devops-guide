@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 37. What is Infrastructure Security?
+# What is Infrastructure Security?
 
 **Short answer:** Infrastructure security is the protection of the compute, network, storage, and identity layers that applications run on — through least-privilege access, network segmentation, encryption, hardening, patching, and continuous monitoring.
 

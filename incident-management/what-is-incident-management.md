@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 121. What is Incident Management?
+# What is Incident Management?
 
 **Short answer:** Incident management is the structured process for detecting, responding to, resolving, and learning from unplanned service disruptions — with defined roles, severity levels, communication paths, and a blameless review afterwards.
 

@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 33. What is Prometheus?
+# What is Prometheus?
 
 **Short answer:** Prometheus is an open-source monitoring system that scrapes time-series metrics from instrumented targets over HTTP, stores them locally with a powerful query language (PromQL), and evaluates alerting rules that fire through Alertmanager.
 

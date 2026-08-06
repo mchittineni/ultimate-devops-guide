@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 23. What is Azure?
+# What is Azure?
 
 **Short answer:** Microsoft Azure is Microsoft's cloud platform, strongest in enterprises already invested in Microsoft technology thanks to deep integration with Entra ID (formerly Azure AD), Windows Server, and Microsoft 365.
 

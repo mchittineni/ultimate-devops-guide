@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 82. What are DaemonSets in Kubernetes?
+# What are DaemonSets in Kubernetes?
 
 **Short answer:** A DaemonSet ensures a copy of a pod runs on every node (or every node matching a selector), automatically adding pods to new nodes and removing them when nodes leave — the pattern for node-level agents.
 

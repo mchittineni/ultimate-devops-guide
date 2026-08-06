@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 99. What is Error Budget?
+# What is Error Budget?
 
 **Short answer:** The error budget is the amount of unreliability an SLO permits — `1 − SLO` over the window. It converts reliability from an argument into an accounting exercise: while budget remains, ship; when it is spent, fix.
 

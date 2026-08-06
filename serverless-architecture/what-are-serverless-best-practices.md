@@ -9,7 +9,7 @@ tags:
   - interview-questions
 ---
 
-# 109. What are Serverless Best Practices?
+# What are Serverless Best Practices?
 
 **Short answer:** Keep functions small and single-purpose, make handlers idempotent, initialise expensive resources outside the handler, mind cold starts, apply least-privilege IAM per function, and instrument everything with structured logs and traces.
 
