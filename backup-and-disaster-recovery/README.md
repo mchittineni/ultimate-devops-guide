@@ -11,17 +11,18 @@ tags:
 
 Backup types, RPO/RTO targets, business continuity planning, and the discipline of testing restores.
 
-**5 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 0
+**6 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 1
 
 ## Questions
 
-| #   | Question                                                                           | Difficulty      |
-| --- | ---------------------------------------------------------------------------------- | --------------- |
-| 61  | [What is Backup and Disaster Recovery?](./what-is-backup-and-disaster-recovery.md) | 🟢 Beginner     |
-| 62  | [What are different types of backups?](./what-are-different-types-of-backups.md)   | 🟢 Beginner     |
-| 63  | [What is RPO and RTO?](./what-is-rpo-and-rto.md)                                   | 🟢 Beginner     |
-| 64  | [What is Business Continuity Planning?](./what-is-business-continuity-planning.md) | 🟡 Intermediate |
-| 65  | [What are backup best practices?](./what-are-backup-best-practices.md)             | 🟢 Beginner     |
+| #   | Question                                                                                                                                                   | Difficulty      |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 61  | [What is Backup and Disaster Recovery?](./what-is-backup-and-disaster-recovery.md)                                                                         | 🟢 Beginner     |
+| 62  | [What are different types of backups?](./what-are-different-types-of-backups.md)                                                                           | 🟢 Beginner     |
+| 63  | [What is RPO and RTO?](./what-is-rpo-and-rto.md)                                                                                                           | 🟢 Beginner     |
+| 64  | [What is Business Continuity Planning?](./what-is-business-continuity-planning.md)                                                                         | 🟡 Intermediate |
+| 65  | [What are backup best practices?](./what-are-backup-best-practices.md)                                                                                     | 🟢 Beginner     |
+| 239 | [How do you execute a Disaster Recovery failover with minimal RTO and RPO?](./how-do-you-execute-a-disaster-recovery-failover-with-minimal-rto-and-rpo.md) | 🔴 Advanced     |
 
 ## What interviewers probe here
 
