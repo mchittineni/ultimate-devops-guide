@@ -11,7 +11,7 @@ tags:
 
 Security built into the delivery pipeline: scanning layers, SBOMs and supply-chain provenance, image signing, secretless pipelines, and vulnerability triage that does not stall delivery.
 
-**9 questions** · 🟢 Beginner: 0 · 🟡 Intermediate: 7 · 🔴 Advanced: 2
+**10 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 7 · 🔴 Advanced: 2
 
 ## Questions
 
@@ -26,6 +26,7 @@ Security built into the delivery pipeline: scanning layers, SBOMs and supply-cha
 | 167 | [How do you scan Infrastructure as Code before it is applied?](./how-do-you-scan-infrastructure-as-code-before-it-is-applied.md)                                       | 🟡 Intermediate |
 | 168 | [How do you prioritise vulnerabilities without blocking delivery?](./how-do-you-prioritise-vulnerabilities-without-blocking-delivery.md)                               | 🔴 Advanced     |
 | 244 | [How do you enforce Kubernetes admission control with Kyverno or OPA Gatekeeper?](./how-do-you-enforce-kubernetes-admission-control-with-kyverno-or-opa-gatekeeper.md) | 🟡 Intermediate |
+| 290 | [What does shift left security mean?](./what-does-shift-left-security-mean.md)                                                                                         | 🟢 Beginner     |
 
 ## What interviewers probe here
 
