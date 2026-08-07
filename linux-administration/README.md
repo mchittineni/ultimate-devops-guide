@@ -11,17 +11,19 @@ tags:
 
 The operating system under everything - commands, shell scripting, systemd, service management, and the filesystem hierarchy.
 
-**5 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 0
+**7 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 2 · 🔴 Advanced: 0
 
 ## Questions
 
-| #   | Question                                                                                                                                         | Difficulty      |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| 41  | [What are the basic Linux commands every DevOps engineer should know?](./what-are-the-basic-linux-commands-every-devops-engineer-should-know.md) | 🟢 Beginner     |
-| 42  | [What is Shell Scripting?](./what-is-shell-scripting.md)                                                                                         | 🟢 Beginner     |
-| 43  | [What is systemd?](./what-is-systemd.md)                                                                                                         | 🟡 Intermediate |
-| 44  | [How do you manage services in Linux?](./how-do-you-manage-services-in-linux.md)                                                                 | 🟢 Beginner     |
-| 45  | [What is Linux File System Hierarchy?](./what-is-linux-file-system-hierarchy.md)                                                                 | 🟢 Beginner     |
+| #   | Question                                                                                                                                                               | Difficulty      |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 41  | [What are the basic Linux commands every DevOps engineer should know?](./what-are-the-basic-linux-commands-every-devops-engineer-should-know.md)                       | 🟢 Beginner     |
+| 42  | [What is Shell Scripting?](./what-is-shell-scripting.md)                                                                                                               | 🟢 Beginner     |
+| 43  | [What is systemd?](./what-is-systemd.md)                                                                                                                               | 🟡 Intermediate |
+| 44  | [How do you manage services in Linux?](./how-do-you-manage-services-in-linux.md)                                                                                       | 🟢 Beginner     |
+| 45  | [What is Linux File System Hierarchy?](./what-is-linux-file-system-hierarchy.md)                                                                                       | 🟢 Beginner     |
+| 238 | [How do you troubleshoot SSH failures, high CPU, and disk space on Linux servers?](./how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md) | 🟢 Beginner     |
+| 265 | [How do you analyse logs and text files with grep, awk, and sed?](./how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed.md)                                   | 🟡 Intermediate |
 
 ## What interviewers probe here
 
