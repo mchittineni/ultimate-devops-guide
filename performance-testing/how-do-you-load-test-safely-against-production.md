@@ -92,7 +92,10 @@ export default function () {
 ```bash
 # Abort must be one action, and rehearsed before the test starts.
 kubectl delete job/loadtest-orders               # stop generation
-kubectl annotate rollout api canary-weight=0     # remove any test route
+kubectl argo rollouts abort api                  # controller-level abort: traffic back to stable
+# An annotation would only change metadata - the traffic controller ignores it. Use the
+# rollout's own abort verb, then confirm the split actually moved before you believe it:
+kubectl argo rollouts get rollout api            # canary weight must read 0 / stable 100
 # Then confirm recovery on real-user SLIs before declaring the test over.
 
 # The alternative test: remove capacity instead of adding traffic.
