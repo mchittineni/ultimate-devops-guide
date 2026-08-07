@@ -2,14 +2,14 @@
 
 # ⚙️ Cloud, DevOps, Platform & SRE Guide
 
-**275 questions across 40 topics - answered to the depth an interviewer actually expects.**
+**305 questions across 40 topics - answered to the depth an interviewer actually expects.**
 
 Role tracks: **DevOps** (junior → senior) · **DevSecOps** · **SecOps** · **SRE** · **SLO** · **SLA** · **AWS** · **Azure** · **GCP** · **Cloud** · **Platform Engineering**
 
 Every answer gives you a short answer you can say out loud, the detail and trade-offs behind it, a runnable example, and the follow-ups to expect.
 
 [![Validate](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/validate-and-format.yml/badge.svg)](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/validate-and-format.yml)
-![Questions](https://img.shields.io/badge/questions-275-blue)
+![Questions](https://img.shields.io/badge/questions-305-blue)
 ![Topics](https://img.shields.io/badge/topics-40-blueviolet)
 ![Difficulty](https://img.shields.io/badge/difficulty-🟢%2087%20·%20🟡%20142%20·%20🔴%2046-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -52,24 +52,24 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 
 <!-- STATS:START -->
 
-**275 questions** across **40 topics** - 🟢 87 Beginner · 🟡 142 Intermediate · 🔴 46 Advanced
+**305 questions** across **40 topics** - 🟢 95 Beginner · 🟡 143 Intermediate · 🔴 67 Advanced
 
 ### 🧱 Foundations
 
 | Topic                                                                | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                   |
 | -------------------------------------------------------------------- | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------ |
-| **[Core DevOps Concepts](./core-devops-concepts/README.md)**         | 5         | 4   | 1   | 0   | what DevOps actually changes, why it exists, and how CI, continuous delivery, and continuous…    |
-| **[Linux Administration](./linux-administration/README.md)**         | 7         | 5   | 2   | 0   | The operating system under everything - commands, shell scripting, systemd, service management,… |
-| **[Version Control](./version-control/README.md)**                   | 8         | 3   | 5   | 0   | Git mechanics and the branching models teams actually argue about, including how to resolve…     |
-| **[Scripting and Automation](./scripting-and-automation/README.md)** | 2         | 0   | 2   | 0   | The scripting layer under every pipeline - defensive Bash for orchestration, and Python for…     |
+| **[Core DevOps Concepts](./core-devops-concepts/README.md)**         | 6         | 4   | 1   | 1   | what DevOps actually changes, why it exists, and how CI, continuous delivery, and continuous…    |
+| **[Linux Administration](./linux-administration/README.md)**         | 8         | 5   | 2   | 1   | The operating system under everything - commands, shell scripting, systemd, service management,… |
+| **[Version Control](./version-control/README.md)**                   | 9         | 3   | 5   | 1   | Git mechanics and the branching models teams actually argue about, including how to resolve…     |
+| **[Scripting and Automation](./scripting-and-automation/README.md)** | 4         | 1   | 2   | 1   | The scripting layer under every pipeline - defensive Bash for orchestration, and Python for…     |
 
 ### 📦 Containers and Kubernetes
 
 | Topic                                                                                | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                   |
 | ------------------------------------------------------------------------------------ | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------ |
-| **[Docker](./docker/README.md)**                                                     | 7         | 4   | 3   | 0   | Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the…       |
+| **[Docker](./docker/README.md)**                                                     | 8         | 4   | 3   | 1   | Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the…       |
 | **[Kubernetes](./kubernetes/README.md)**                                             | 11        | 3   | 7   | 1   | The control plane, the workload objects you touch daily, and the networking abstractions that…   |
-| **[Container Orchestration Advanced](./container-orchestration-advanced/README.md)** | 5         | 0   | 2   | 3   | Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime… |
+| **[Container Orchestration Advanced](./container-orchestration-advanced/README.md)** | 6         | 1   | 2   | 3   | Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime… |
 
 ### 🔁 Delivery and Automation
 
@@ -77,17 +77,17 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 | -------------------------------------------------------------------------- | --------- | --- | --- | --- | --------------------------------------------------------------------------------------------------- |
 | **[CI/CD](./cicd/README.md)**                                              | 7         | 2   | 4   | 1   | Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deployment distinction…   |
 | **[Infrastructure as Code](./infrastructure-as-code/README.md)**           | 8         | 3   | 4   | 1   | Declarative infrastructure with Terraform and Ansible - state, providers, idempotency, and where…   |
-| **[Configuration Management](./configuration-management/README.md)**       | 5         | 1   | 4   | 0   | Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pull, agent versus…    |
-| **[DevOps Tools and Automation](./devops-tools-and-automation/README.md)** | 5         | 1   | 4   | 0   | GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to ship without downtime. |
+| **[Configuration Management](./configuration-management/README.md)**       | 6         | 1   | 4   | 1   | Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pull, agent versus…    |
+| **[DevOps Tools and Automation](./devops-tools-and-automation/README.md)** | 6         | 1   | 4   | 1   | GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to ship without downtime. |
 
 ### ☁️ Cloud Providers
 
 | Topic                                                              | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                    |
 | ------------------------------------------------------------------ | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------- |
-| **[Cloud Platforms](./cloud-platforms/README.md)**                 | 5         | 5   | 0   | 0   | Cloud service models and the three major providers - enough breadth to discuss AWS, Azure, and…   |
-| **[Cloud Cost Optimization](./cloud-cost-optimization/README.md)** | 6         | 2   | 4   | 0   | Reserved and spot capacity, tagging discipline, and the reports that turn a cloud bill into…      |
-| **[Cloud Migration](./cloud-migration/README.md)**                 | 5         | 1   | 4   | 0   | Assessment, the 6 Rs, application modernization, and the tooling that moves workloads without…    |
-| **[AWS Engineering](./aws-engineering/README.md)**                 | 12        | 0   | 8   | 4   | VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage… |
+| **[Cloud Platforms](./cloud-platforms/README.md)**                 | 7         | 5   | 1   | 1   | Cloud service models and the three major providers - enough breadth to discuss AWS, Azure, and…   |
+| **[Cloud Cost Optimization](./cloud-cost-optimization/README.md)** | 7         | 2   | 4   | 1   | Reserved and spot capacity, tagging discipline, and the reports that turn a cloud bill into…      |
+| **[Cloud Migration](./cloud-migration/README.md)**                 | 6         | 1   | 4   | 1   | Assessment, the 6 Rs, application modernization, and the tooling that moves workloads without…    |
+| **[AWS Engineering](./aws-engineering/README.md)**                 | 13        | 1   | 8   | 4   | VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage… |
 | **[Azure Engineering](./azure-engineering/README.md)**             | 9         | 1   | 6   | 2   | the resource hierarchy, Entra ID and RBAC, VNet and private endpoint design, AKS, Bicep, Azure…   |
 | **[GCP Engineering](./gcp-engineering/README.md)**                 | 9         | 1   | 7   | 1   | resource hierarchy and org policies, IAM without service-account keys, the global VPC, GKE…       |
 | **[Cloud Engineering](./cloud-engineering/README.md)**             | 7         | 1   | 3   | 3   | landing zones, hybrid connectivity, least-privilege identity, multi-region resilience,…           |
@@ -96,24 +96,24 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 
 | Topic                                                                                  | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                   |
 | -------------------------------------------------------------------------------------- | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------ |
-| **[Scalability and High Availability](./scalability-and-high-availability/README.md)** | 6         | 4   | 2   | 0   | scaling dimensions, load balancing, auto scaling, and recovery objectives.                       |
-| **[Cloud Native Architecture](./cloud-native-architecture/README.md)**                 | 5         | 0   | 4   | 1   | Microservices, service mesh, event-driven design, and the Twelve-Factor principles that make…    |
-| **[Performance Testing](./performance-testing/README.md)**                             | 5         | 3   | 2   | 0   | Load, stress, soak, and spike testing - how to design them, which tools to use, and how to read… |
-| **[API Gateway and Service Mesh](./api-gateway-and-service-mesh/README.md)**           | 5         | 3   | 2   | 0   | gateway responsibilities, security, rate limiting, and documentation as a first-class artifact.  |
-| **[Serverless Architecture](./serverless-architecture/README.md)**                     | 5         | 4   | 1   | 0   | Functions as a service, the operational model behind them, and the design patterns that keep…    |
-| **[Database Management in DevOps](./database-management-in-devops/README.md)**         | 5         | 0   | 4   | 1   | version control, migration tooling, backup strategy, and performance tuning.                     |
+| **[Scalability and High Availability](./scalability-and-high-availability/README.md)** | 7         | 4   | 2   | 1   | scaling dimensions, load balancing, auto scaling, and recovery objectives.                       |
+| **[Cloud Native Architecture](./cloud-native-architecture/README.md)**                 | 6         | 1   | 4   | 1   | Microservices, service mesh, event-driven design, and the Twelve-Factor principles that make…    |
+| **[Performance Testing](./performance-testing/README.md)**                             | 6         | 3   | 2   | 1   | Load, stress, soak, and spike testing - how to design them, which tools to use, and how to read… |
+| **[API Gateway and Service Mesh](./api-gateway-and-service-mesh/README.md)**           | 6         | 3   | 2   | 1   | gateway responsibilities, security, rate limiting, and documentation as a first-class artifact.  |
+| **[Serverless Architecture](./serverless-architecture/README.md)**                     | 6         | 4   | 1   | 1   | Functions as a service, the operational model behind them, and the design patterns that keep…    |
+| **[Database Management in DevOps](./database-management-in-devops/README.md)**         | 6         | 1   | 4   | 1   | version control, migration tooling, backup strategy, and performance tuning.                     |
 
 ### 📈 Reliability and Operations
 
 | Topic                                                                              | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                       |
 | ---------------------------------------------------------------------------------- | --------- | --- | --- | --- | ---------------------------------------------------------------------------------------------------- |
-| **[Monitoring and Logging](./monitoring-and-logging/README.md)**                   | 6         | 4   | 2   | 0   | Metrics, logs, and the toolchain - Prometheus, Grafana, and the ELK stack - plus the conceptual…     |
+| **[Monitoring and Logging](./monitoring-and-logging/README.md)**                   | 7         | 4   | 2   | 1   | Metrics, logs, and the toolchain - Prometheus, Grafana, and the ELK stack - plus the conceptual…     |
 | **[Backup and Disaster Recovery](./backup-and-disaster-recovery/README.md)**       | 6         | 4   | 1   | 1   | Backup types, RPO/RTO targets, business continuity planning, and the discipline of testing restores. |
 | **[Site Reliability Engineering (SRE)](./site-reliability-engineering/README.md)** | 9         | 1   | 6   | 2   | SLIs, SLOs, error budgets, and the systematic elimination of toil.                                   |
-| **[DevOps Metrics and KPIs](./devops-metrics-and-kpis/README.md)**                 | 5         | 3   | 2   | 0   | The four DORA metrics and the measurement habits that keep them honest.                              |
-| **[Incident Management](./incident-management/README.md)**                         | 5         | 2   | 3   | 0   | response plans, severity levels, on-call practice, and blameless learning.                           |
-| **[Infrastructure Monitoring](./infrastructure-monitoring/README.md)**             | 5         | 2   | 3   | 0   | Host and platform monitoring, APM, log management, and the practices that keep dashboards and…       |
-| **[SLO Engineering](./slo-engineering/README.md)**                                 | 7         | 0   | 3   | 4   | choosing targets, burn-rate alerting, correct latency SLIs, error budget policies, and SLOs for…     |
+| **[DevOps Metrics and KPIs](./devops-metrics-and-kpis/README.md)**                 | 6         | 3   | 2   | 1   | The four DORA metrics and the measurement habits that keep them honest.                              |
+| **[Incident Management](./incident-management/README.md)**                         | 6         | 2   | 3   | 1   | response plans, severity levels, on-call practice, and blameless learning.                           |
+| **[Infrastructure Monitoring](./infrastructure-monitoring/README.md)**             | 6         | 2   | 3   | 1   | Host and platform monitoring, APM, log management, and the practices that keep dashboards and…       |
+| **[SLO Engineering](./slo-engineering/README.md)**                                 | 8         | 1   | 3   | 4   | choosing targets, burn-rate alerting, correct latency SLIs, error budget policies, and SLOs for…     |
 | **[SLA Management](./sla-management/README.md)**                                   | 7         | 2   | 4   | 1   | SLA versus SLO versus OLA, downtime and composite availability arithmetic, contract clauses,…        |
 
 ### 🔐 Security
@@ -121,23 +121,23 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 | Topic                                                              | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                    |
 | ------------------------------------------------------------------ | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------- |
 | **[Security and Compliance](./security-and-compliance/README.md)** | 5         | 1   | 3   | 1   | DevSecOps practice, infrastructure and container hardening, and compliance expressed as code.     |
-| **[Network Security](./network-security/README.md)**               | 6         | 2   | 4   | 0   | Zero trust, TLS, web application firewalls, and segmentation - the controls that protect traffic… |
-| **[DevSecOps](./devsecops/README.md)**                             | 9         | 0   | 7   | 2   | scanning layers, SBOMs and supply-chain provenance, image signing, secretless pipelines, and…     |
+| **[Network Security](./network-security/README.md)**               | 7         | 2   | 4   | 1   | Zero trust, TLS, web application firewalls, and segmentation - the controls that protect traffic… |
+| **[DevSecOps](./devsecops/README.md)**                             | 10        | 1   | 7   | 2   | scanning layers, SBOMs and supply-chain provenance, image signing, secretless pipelines, and…     |
 | **[SecOps and Threat Detection](./secops/README.md)**              | 8         | 2   | 4   | 2   | SOC workflow, SIEM and normalisation, detection engineering, MITRE ATT&CK coverage, threat…       |
 
 ### 🧭 Platform and Leadership
 
 | Topic                                                                        | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                    |
 | ---------------------------------------------------------------------------- | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------- |
-| **[DevOps Culture and Practices](./devops-culture-and-practices/README.md)** | 5         | 4   | 1   | 0   | The human half of DevOps - shared ownership, blamelessness, knowledge sharing, and collaboration… |
+| **[DevOps Culture and Practices](./devops-culture-and-practices/README.md)** | 6         | 4   | 1   | 1   | The human half of DevOps - shared ownership, blamelessness, knowledge sharing, and collaboration… |
 | **[Advanced DevOps & Cloud](./advanced-devops-cloud/README.md)**             | 20        | 5   | 8   | 7   | platform engineering, FinOps, policy as code, chaos engineering, observability, and progressive…  |
-| **[Platform Engineering](./platform-engineering/README.md)**                 | 13        | 0   | 5   | 8   | IDPs, golden paths, Backstage, Crossplane, self-service environments, adoption metrics, and safe… |
+| **[Platform Engineering](./platform-engineering/README.md)**                 | 14        | 1   | 5   | 8   | IDPs, golden paths, Backstage, Crossplane, self-service environments, adoption metrics, and safe… |
 
 ### 🎤 Interview Prep
 
 | Topic                                                        | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                            |
 | ------------------------------------------------------------ | --------- | --- | --- | --- | ----------------------------------------------------------------------------------------- |
-| **[Interview Experience](./interview-experience/README.md)** | 5         | 4   | 1   | 0   | How the interview itself works - the round structure, explaining your project, answering… |
+| **[Interview Experience](./interview-experience/README.md)** | 6         | 4   | 1   | 1   | How the interview itself works - the round structure, explaining your project, answering… |
 
 <!-- STATS:END -->
 
@@ -151,25 +151,26 @@ Every question in the repository, collapsed by topic - open only the ones you ar
 
 ### 🧱 Foundations
 
-_22 questions_
+_27 questions_
 
 <details>
-<summary><b>Core DevOps Concepts</b> · 5 questions · 🟢 4 🟡 1 🔴 0</summary>
+<summary><b>Core DevOps Concepts</b> · 6 questions · 🟢 4 🟡 1 🔴 1</summary>
 
 [Open the Core DevOps Concepts index →](./core-devops-concepts/README.md)
 
-| No. | Question                                                                                      | Difficulty      |
-| --- | --------------------------------------------------------------------------------------------- | --------------- |
-| 1   | [What is DevOps?](./core-devops-concepts/what-is-devops.md)                                   | 🟢 Beginner     |
-| 2   | [What are the benefits of DevOps?](./core-devops-concepts/what-are-the-benefits-of-devops.md) | 🟢 Beginner     |
-| 3   | [What is Continuous Integration?](./core-devops-concepts/what-is-continuous-integration.md)   | 🟢 Beginner     |
-| 4   | [What is Continuous Delivery?](./core-devops-concepts/what-is-continuous-delivery.md)         | 🟢 Beginner     |
-| 5   | [What is Continuous Deployment?](./core-devops-concepts/what-is-continuous-deployment.md)     | 🟡 Intermediate |
+| No. | Question                                                                                                                                                    | Difficulty      |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 1   | [What is DevOps?](./core-devops-concepts/what-is-devops.md)                                                                                                 | 🟢 Beginner     |
+| 2   | [What are the benefits of DevOps?](./core-devops-concepts/what-are-the-benefits-of-devops.md)                                                               | 🟢 Beginner     |
+| 3   | [What is Continuous Integration?](./core-devops-concepts/what-is-continuous-integration.md)                                                                 | 🟢 Beginner     |
+| 4   | [What is Continuous Delivery?](./core-devops-concepts/what-is-continuous-delivery.md)                                                                       | 🟢 Beginner     |
+| 5   | [What is Continuous Deployment?](./core-devops-concepts/what-is-continuous-deployment.md)                                                                   | 🟡 Intermediate |
+| 285 | [How do you take a monthly release process to daily deployments?](./core-devops-concepts/how-do-you-take-a-monthly-release-process-to-daily-deployments.md) | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Linux Administration</b> · 7 questions · 🟢 5 🟡 2 🔴 0</summary>
+<summary><b>Linux Administration</b> · 8 questions · 🟢 5 🟡 2 🔴 1</summary>
 
 [Open the Linux Administration index →](./linux-administration/README.md)
 
@@ -182,11 +183,12 @@ _22 questions_
 | 45  | [What is Linux File System Hierarchy?](./linux-administration/what-is-linux-file-system-hierarchy.md)                                                                                       | 🟢 Beginner     |
 | 238 | [How do you troubleshoot SSH failures, high CPU, and disk space on Linux servers?](./linux-administration/how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md) | 🟢 Beginner     |
 | 265 | [How do you analyse logs and text files with grep, awk, and sed?](./linux-administration/how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed.md)                                   | 🟡 Intermediate |
+| 295 | [How do you debug a Linux performance problem from first principles?](./linux-administration/how-do-you-debug-a-linux-performance-problem-from-first-principles.md)                         | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Version Control</b> · 8 questions · 🟢 3 🟡 5 🔴 0</summary>
+<summary><b>Version Control</b> · 9 questions · 🟢 3 🟡 5 🔴 1</summary>
 
 [Open the Version Control index →](./version-control/README.md)
 
@@ -200,27 +202,30 @@ _22 questions_
 | 254 | [How do you use Git hooks for automated linting, testing, and commit validation?](./version-control/how-do-you-use-git-hooks-for-automated-linting-testing-and-commit-validation.md) | 🟢 Beginner     |
 | 263 | [What is the difference between git merge, rebase, and cherry-pick?](./version-control/what-is-the-difference-between-git-merge-rebase-and-cherry-pick.md)                           | 🟡 Intermediate |
 | 264 | [How do you undo changes in Git safely?](./version-control/how-do-you-undo-changes-in-git-safely.md)                                                                                 | 🟡 Intermediate |
+| 305 | [How do you recover from a bad Git history rewrite?](./version-control/how-do-you-recover-from-a-bad-git-history-rewrite.md)                                                         | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Scripting and Automation</b> · 2 questions · 🟢 0 🟡 2 🔴 0</summary>
+<summary><b>Scripting and Automation</b> · 4 questions · 🟢 1 🟡 2 🔴 1</summary>
 
 [Open the Scripting and Automation index →](./scripting-and-automation/README.md)
 
-| No. | Question                                                                                                                          | Difficulty      |
-| --- | --------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 266 | [How do you write a production-grade Bash script?](./scripting-and-automation/how-do-you-write-a-production-grade-bash-script.md) | 🟡 Intermediate |
-| 267 | [What do you use Python for as a DevOps engineer?](./scripting-and-automation/what-do-you-use-python-for-as-a-devops-engineer.md) | 🟡 Intermediate |
+| No. | Question                                                                                                                                                                      | Difficulty      |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 266 | [How do you write a production-grade Bash script?](./scripting-and-automation/how-do-you-write-a-production-grade-bash-script.md)                                             | 🟡 Intermediate |
+| 267 | [What do you use Python for as a DevOps engineer?](./scripting-and-automation/what-do-you-use-python-for-as-a-devops-engineer.md)                                             | 🟡 Intermediate |
+| 301 | [When do you use Bash and when do you use Python?](./scripting-and-automation/when-do-you-use-bash-and-when-do-you-use-python.md)                                             | 🟢 Beginner     |
+| 302 | [How do you turn a pile of ad hoc scripts into maintainable automation?](./scripting-and-automation/how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation.md) | 🔴 Advanced     |
 
 </details>
 
 ### 📦 Containers and Kubernetes
 
-_23 questions_
+_25 questions_
 
 <details>
-<summary><b>Docker</b> · 7 questions · 🟢 4 🟡 3 🔴 0</summary>
+<summary><b>Docker</b> · 8 questions · 🟢 4 🟡 3 🔴 1</summary>
 
 [Open the Docker index →](./docker/README.md)
 
@@ -233,6 +238,7 @@ _23 questions_
 | 10  | [Explain Docker Architecture](./docker/explain-docker-architecture.md)                                                                            | 🟡 Intermediate |
 | 252 | [What are Docker network types (Bridge, Host, Overlay, Macvlan)?](./docker/what-are-docker-network-types-bridge-host-overlay-macvlan.md)          | 🟡 Intermediate |
 | 260 | [How do you reduce Docker image size and build time?](./docker/how-do-you-reduce-docker-image-size-and-build-time.md)                             | 🟡 Intermediate |
+| 291 | [How do namespaces, cgroups, and capabilities isolate a container?](./docker/how-do-namespaces-cgroups-and-capabilities-isolate-a-container.md)   | 🔴 Advanced     |
 
 </details>
 
@@ -258,23 +264,24 @@ _23 questions_
 </details>
 
 <details>
-<summary><b>Container Orchestration Advanced</b> · 5 questions · 🟢 0 🟡 2 🔴 3</summary>
+<summary><b>Container Orchestration Advanced</b> · 6 questions · 🟢 1 🟡 2 🔴 3</summary>
 
 [Open the Container Orchestration Advanced index →](./container-orchestration-advanced/README.md)
 
-| No. | Question                                                                                                                    | Difficulty      |
-| --- | --------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 81  | [What are StatefulSets in Kubernetes?](./container-orchestration-advanced/what-are-statefulsets-in-kubernetes.md)           | 🔴 Advanced     |
-| 82  | [What are DaemonSets in Kubernetes?](./container-orchestration-advanced/what-are-daemonsets-in-kubernetes.md)               | 🟡 Intermediate |
-| 83  | [What is Helm?](./container-orchestration-advanced/what-is-helm.md)                                                         | 🟡 Intermediate |
-| 84  | [What is Istio?](./container-orchestration-advanced/what-is-istio.md)                                                       | 🔴 Advanced     |
-| 85  | [What is Container Runtime Interface (CRI)?](./container-orchestration-advanced/what-is-container-runtime-interface-cri.md) | 🔴 Advanced     |
+| No. | Question                                                                                                                                                | Difficulty      |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 81  | [What are StatefulSets in Kubernetes?](./container-orchestration-advanced/what-are-statefulsets-in-kubernetes.md)                                       | 🔴 Advanced     |
+| 82  | [What are DaemonSets in Kubernetes?](./container-orchestration-advanced/what-are-daemonsets-in-kubernetes.md)                                           | 🟡 Intermediate |
+| 83  | [What is Helm?](./container-orchestration-advanced/what-is-helm.md)                                                                                     | 🟡 Intermediate |
+| 84  | [What is Istio?](./container-orchestration-advanced/what-is-istio.md)                                                                                   | 🔴 Advanced     |
+| 85  | [What is Container Runtime Interface (CRI)?](./container-orchestration-advanced/what-is-container-runtime-interface-cri.md)                             | 🔴 Advanced     |
+| 284 | [What is container orchestration and why do you need it?](./container-orchestration-advanced/what-is-container-orchestration-and-why-do-you-need-it.md) | 🟢 Beginner     |
 
 </details>
 
 ### 🔁 Delivery and Automation
 
-_25 questions_
+_27 questions_
 
 <details>
 <summary><b>CI/CD</b> · 7 questions · 🟢 2 🟡 4 🔴 1</summary>
@@ -312,56 +319,60 @@ _25 questions_
 </details>
 
 <details>
-<summary><b>Configuration Management</b> · 5 questions · 🟢 1 🟡 4 🔴 0</summary>
+<summary><b>Configuration Management</b> · 6 questions · 🟢 1 🟡 4 🔴 1</summary>
 
 [Open the Configuration Management index →](./configuration-management/README.md)
 
-| No. | Question                                                                                                                           | Difficulty      |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 51  | [What is Configuration Management?](./configuration-management/what-is-configuration-management.md)                                | 🟢 Beginner     |
-| 52  | [What is Puppet?](./configuration-management/what-is-puppet.md)                                                                    | 🟡 Intermediate |
-| 53  | [What is Chef?](./configuration-management/what-is-chef.md)                                                                        | 🟡 Intermediate |
-| 54  | [What is Salt (SaltStack)?](./configuration-management/what-is-salt-saltstack.md)                                                  | 🟡 Intermediate |
-| 55  | [Compare different Configuration Management tools](./configuration-management/compare-different-configuration-management-tools.md) | 🟡 Intermediate |
+| No. | Question                                                                                                                                              | Difficulty      |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 51  | [What is Configuration Management?](./configuration-management/what-is-configuration-management.md)                                                   | 🟢 Beginner     |
+| 52  | [What is Puppet?](./configuration-management/what-is-puppet.md)                                                                                       | 🟡 Intermediate |
+| 53  | [What is Chef?](./configuration-management/what-is-chef.md)                                                                                           | 🟡 Intermediate |
+| 54  | [What is Salt (SaltStack)?](./configuration-management/what-is-salt-saltstack.md)                                                                     | 🟡 Intermediate |
+| 55  | [Compare different Configuration Management tools](./configuration-management/compare-different-configuration-management-tools.md)                    | 🟡 Intermediate |
+| 283 | [How do you run Ansible at scale across thousands of hosts?](./configuration-management/how-do-you-run-ansible-at-scale-across-thousands-of-hosts.md) | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>DevOps Tools and Automation</b> · 5 questions · 🟢 1 🟡 4 🔴 0</summary>
+<summary><b>DevOps Tools and Automation</b> · 6 questions · 🟢 1 🟡 4 🔴 1</summary>
 
 [Open the DevOps Tools and Automation index →](./devops-tools-and-automation/README.md)
 
-| No. | Question                                                                                                 | Difficulty      |
-| --- | -------------------------------------------------------------------------------------------------------- | --------------- |
-| 86  | [What is Infrastructure Automation?](./devops-tools-and-automation/what-is-infrastructure-automation.md) | 🟢 Beginner     |
-| 87  | [What is GitOps?](./devops-tools-and-automation/what-is-gitops.md)                                       | 🟡 Intermediate |
-| 88  | [What is ArgoCD?](./devops-tools-and-automation/what-is-argocd.md)                                       | 🟡 Intermediate |
-| 89  | [What is Tekton?](./devops-tools-and-automation/what-is-tekton.md)                                       | 🟡 Intermediate |
-| 90  | [What are Deployment Strategies?](./devops-tools-and-automation/what-are-deployment-strategies.md)       | 🟡 Intermediate |
+| No. | Question                                                                                                                                     | Difficulty      |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 86  | [What is Infrastructure Automation?](./devops-tools-and-automation/what-is-infrastructure-automation.md)                                     | 🟢 Beginner     |
+| 87  | [What is GitOps?](./devops-tools-and-automation/what-is-gitops.md)                                                                           | 🟡 Intermediate |
+| 88  | [What is ArgoCD?](./devops-tools-and-automation/what-is-argocd.md)                                                                           | 🟡 Intermediate |
+| 89  | [What is Tekton?](./devops-tools-and-automation/what-is-tekton.md)                                                                           | 🟡 Intermediate |
+| 90  | [What are Deployment Strategies?](./devops-tools-and-automation/what-are-deployment-strategies.md)                                           | 🟡 Intermediate |
+| 289 | [How do you consolidate a sprawling DevOps toolchain?](./devops-tools-and-automation/how-do-you-consolidate-a-sprawling-devops-toolchain.md) | 🔴 Advanced     |
 
 </details>
 
 ### ☁️ Cloud Providers
 
-_53 questions_
+_58 questions_
 
 <details>
-<summary><b>Cloud Platforms</b> · 5 questions · 🟢 5 🟡 0 🔴 0</summary>
+<summary><b>Cloud Platforms</b> · 7 questions · 🟢 5 🟡 1 🔴 1</summary>
 
 [Open the Cloud Platforms index →](./cloud-platforms/README.md)
 
-| No. | Question                                                                                                               | Difficulty  |
-| --- | ---------------------------------------------------------------------------------------------------------------------- | ----------- |
-| 21  | [What is Cloud Computing?](./cloud-platforms/what-is-cloud-computing.md)                                               | 🟢 Beginner |
-| 22  | [What is AWS (Amazon Web Services)?](./cloud-platforms/what-is-aws-amazon-web-services.md)                             | 🟢 Beginner |
-| 23  | [What is Azure?](./cloud-platforms/what-is-azure.md)                                                                   | 🟢 Beginner |
-| 24  | [What is Google Cloud Platform (GCP)?](./cloud-platforms/what-is-google-cloud-platform-gcp.md)                         | 🟢 Beginner |
-| 25  | [What are the different types of cloud services?](./cloud-platforms/what-are-the-different-types-of-cloud-services.md) | 🟢 Beginner |
+| No. | Question                                                                                                                             | Difficulty      |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
+| 21  | [What is Cloud Computing?](./cloud-platforms/what-is-cloud-computing.md)                                                             | 🟢 Beginner     |
+| 22  | [What is AWS (Amazon Web Services)?](./cloud-platforms/what-is-aws-amazon-web-services.md)                                           | 🟢 Beginner     |
+| 23  | [What is Azure?](./cloud-platforms/what-is-azure.md)                                                                                 | 🟢 Beginner     |
+| 24  | [What is Google Cloud Platform (GCP)?](./cloud-platforms/what-is-google-cloud-platform-gcp.md)                                       | 🟢 Beginner     |
+| 25  | [What are the different types of cloud services?](./cloud-platforms/what-are-the-different-types-of-cloud-services.md)               | 🟢 Beginner     |
+| 281 | [How do you choose a cloud provider for a new workload?](./cloud-platforms/how-do-you-choose-a-cloud-provider-for-a-new-workload.md) | 🟡 Intermediate |
+| 282 | [How does networking differ across AWS, Azure, and GCP?](./cloud-platforms/how-does-networking-differ-across-aws-azure-and-gcp.md)   | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Cloud Cost Optimization</b> · 6 questions · 🟢 2 🟡 4 🔴 0</summary>
+<summary><b>Cloud Cost Optimization</b> · 7 questions · 🟢 2 🟡 4 🔴 1</summary>
 
 [Open the Cloud Cost Optimization index →](./cloud-cost-optimization/README.md)
 
@@ -373,26 +384,28 @@ _53 questions_
 | 94  | [How to implement cost tagging strategy?](./cloud-cost-optimization/how-to-implement-cost-tagging-strategy.md)                                                                                             | 🟡 Intermediate |
 | 95  | [What are cost allocation reports?](./cloud-cost-optimization/what-are-cost-allocation-reports.md)                                                                                                         | 🟡 Intermediate |
 | 246 | [How do you implement real-time Kubernetes cost monitoring using OpenCost or Kubecost?](./cloud-cost-optimization/how-do-you-implement-real-time-kubernetes-cost-monitoring-using-opencost-or-kubecost.md) | 🟡 Intermediate |
+| 278 | [How do you cut a cloud bill without hurting reliability?](./cloud-cost-optimization/how-do-you-cut-a-cloud-bill-without-hurting-reliability.md)                                                           | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Cloud Migration</b> · 5 questions · 🟢 1 🟡 4 🔴 0</summary>
+<summary><b>Cloud Migration</b> · 6 questions · 🟢 1 🟡 4 🔴 1</summary>
 
 [Open the Cloud Migration index →](./cloud-migration/README.md)
 
-| No. | Question                                                                                         | Difficulty      |
-| --- | ------------------------------------------------------------------------------------------------ | --------------- |
-| 136 | [What is Cloud Migration?](./cloud-migration/what-is-cloud-migration.md)                         | 🟢 Beginner     |
-| 137 | [What are Cloud Migration Strategies?](./cloud-migration/what-are-cloud-migration-strategies.md) | 🟡 Intermediate |
-| 138 | [What is Cloud Assessment?](./cloud-migration/what-is-cloud-assessment.md)                       | 🟡 Intermediate |
-| 139 | [What is Application Modernization?](./cloud-migration/what-is-application-modernization.md)     | 🟡 Intermediate |
-| 140 | [What are Cloud Migration Tools?](./cloud-migration/what-are-cloud-migration-tools.md)           | 🟡 Intermediate |
+| No. | Question                                                                                                                                                                             | Difficulty      |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
+| 136 | [What is Cloud Migration?](./cloud-migration/what-is-cloud-migration.md)                                                                                                             | 🟢 Beginner     |
+| 137 | [What are Cloud Migration Strategies?](./cloud-migration/what-are-cloud-migration-strategies.md)                                                                                     | 🟡 Intermediate |
+| 138 | [What is Cloud Assessment?](./cloud-migration/what-is-cloud-assessment.md)                                                                                                           | 🟡 Intermediate |
+| 139 | [What is Application Modernization?](./cloud-migration/what-is-application-modernization.md)                                                                                         | 🟡 Intermediate |
+| 140 | [What are Cloud Migration Tools?](./cloud-migration/what-are-cloud-migration-tools.md)                                                                                               | 🟡 Intermediate |
+| 279 | [How do you migrate a production database to the cloud with near-zero downtime?](./cloud-migration/how-do-you-migrate-a-production-database-to-the-cloud-with-near-zero-downtime.md) | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>AWS Engineering</b> · 12 questions · 🟢 0 🟡 8 🔴 4</summary>
+<summary><b>AWS Engineering</b> · 13 questions · 🟢 1 🟡 8 🔴 4</summary>
 
 [Open the AWS Engineering index →](./aws-engineering/README.md)
 
@@ -410,6 +423,7 @@ _53 questions_
 | 247 | [How do you secure pod access to AWS resources using EKS Pod Identity or IRSA?](./aws-engineering/how-do-you-secure-pod-access-to-aws-resources-using-eks-pod-identity-or-irsa.md)             | 🟡 Intermediate |
 | 248 | [How do you build a CI/CD pipeline using AWS CodePipeline, CodeBuild, and CodeDeploy?](./aws-engineering/how-do-you-build-a-ci-cd-pipeline-using-aws-codepipeline-codebuild-and-codedeploy.md) | 🟡 Intermediate |
 | 249 | [How do you architect an end-to-end production DevOps project on AWS?](./aws-engineering/how-do-you-architect-an-end-to-end-production-devops-project-on-aws.md)                               | 🔴 Advanced     |
+| 277 | [What are the core AWS services a DevOps engineer uses daily?](./aws-engineering/what-are-the-core-aws-services-a-devops-engineer-uses-daily.md)                                               | 🟢 Beginner     |
 
 </details>
 
@@ -470,10 +484,10 @@ _53 questions_
 
 ### 🏗️ Architecture and Scale
 
-_31 questions_
+_37 questions_
 
 <details>
-<summary><b>Scalability and High Availability</b> · 6 questions · 🟢 4 🟡 2 🔴 0</summary>
+<summary><b>Scalability and High Availability</b> · 7 questions · 🟢 4 🟡 2 🔴 1</summary>
 
 [Open the Scalability and High Availability index →](./scalability-and-high-availability/README.md)
 
@@ -485,101 +499,108 @@ _31 questions_
 | 59  | [What is Auto Scaling?](./scalability-and-high-availability/what-is-auto-scaling.md)                                                                                                 | 🟢 Beginner     |
 | 60  | [What is Disaster Recovery?](./scalability-and-high-availability/what-is-disaster-recovery.md)                                                                                       | 🟡 Intermediate |
 | 269 | [What is the difference between a layer 4 and a layer 7 load balancer?](./scalability-and-high-availability/what-is-the-difference-between-a-layer-4-and-a-layer-7-load-balancer.md) | 🟡 Intermediate |
+| 300 | [How do you design a system to degrade gracefully under overload?](./scalability-and-high-availability/how-do-you-design-a-system-to-degrade-gracefully-under-overload.md)           | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Cloud Native Architecture</b> · 5 questions · 🟢 0 🟡 4 🔴 1</summary>
+<summary><b>Cloud Native Architecture</b> · 6 questions · 🟢 1 🟡 4 🔴 1</summary>
 
 [Open the Cloud Native Architecture index →](./cloud-native-architecture/README.md)
 
-| No. | Question                                                                                                       | Difficulty      |
-| --- | -------------------------------------------------------------------------------------------------------------- | --------------- |
-| 66  | [What is Cloud Native Architecture?](./cloud-native-architecture/what-is-cloud-native-architecture.md)         | 🟡 Intermediate |
-| 67  | [What are Microservices?](./cloud-native-architecture/what-are-microservices.md)                               | 🟡 Intermediate |
-| 68  | [What is Service Mesh?](./cloud-native-architecture/what-is-service-mesh.md)                                   | 🔴 Advanced     |
-| 69  | [What is Event-Driven Architecture?](./cloud-native-architecture/what-is-event-driven-architecture.md)         | 🟡 Intermediate |
-| 70  | [What are the 12-Factor App principles?](./cloud-native-architecture/what-are-the-12-factor-app-principles.md) | 🟡 Intermediate |
+| No. | Question                                                                                                                                                   | Difficulty      |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 66  | [What is Cloud Native Architecture?](./cloud-native-architecture/what-is-cloud-native-architecture.md)                                                     | 🟡 Intermediate |
+| 67  | [What are Microservices?](./cloud-native-architecture/what-are-microservices.md)                                                                           | 🟡 Intermediate |
+| 68  | [What is Service Mesh?](./cloud-native-architecture/what-is-service-mesh.md)                                                                               | 🔴 Advanced     |
+| 69  | [What is Event-Driven Architecture?](./cloud-native-architecture/what-is-event-driven-architecture.md)                                                     | 🟡 Intermediate |
+| 70  | [What are the 12-Factor App principles?](./cloud-native-architecture/what-are-the-12-factor-app-principles.md)                                             | 🟡 Intermediate |
+| 280 | [What is the difference between a monolith and microservices?](./cloud-native-architecture/what-is-the-difference-between-a-monolith-and-microservices.md) | 🟢 Beginner     |
 
 </details>
 
 <details>
-<summary><b>Performance Testing</b> · 5 questions · 🟢 3 🟡 2 🔴 0</summary>
+<summary><b>Performance Testing</b> · 6 questions · 🟢 3 🟡 2 🔴 1</summary>
 
 [Open the Performance Testing index →](./performance-testing/README.md)
 
-| No. | Question                                                                                                                 | Difficulty      |
-| --- | ------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| 71  | [What is Performance Testing?](./performance-testing/what-is-performance-testing.md)                                     | 🟢 Beginner     |
-| 72  | [What are different types of Performance Tests?](./performance-testing/what-are-different-types-of-performance-tests.md) | 🟢 Beginner     |
-| 73  | [What are Performance Testing Tools?](./performance-testing/what-are-performance-testing-tools.md)                       | 🟢 Beginner     |
-| 74  | [What are Performance Testing Best Practices?](./performance-testing/what-are-performance-testing-best-practices.md)     | 🟡 Intermediate |
-| 75  | [How to analyze Performance Test Results?](./performance-testing/how-to-analyze-performance-test-results.md)             | 🟡 Intermediate |
+| No. | Question                                                                                                                   | Difficulty      |
+| --- | -------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 71  | [What is Performance Testing?](./performance-testing/what-is-performance-testing.md)                                       | 🟢 Beginner     |
+| 72  | [What are different types of Performance Tests?](./performance-testing/what-are-different-types-of-performance-tests.md)   | 🟢 Beginner     |
+| 73  | [What are Performance Testing Tools?](./performance-testing/what-are-performance-testing-tools.md)                         | 🟢 Beginner     |
+| 74  | [What are Performance Testing Best Practices?](./performance-testing/what-are-performance-testing-best-practices.md)       | 🟡 Intermediate |
+| 75  | [How to analyze Performance Test Results?](./performance-testing/how-to-analyze-performance-test-results.md)               | 🟡 Intermediate |
+| 298 | [How do you load test safely against production?](./performance-testing/how-do-you-load-test-safely-against-production.md) | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>API Gateway and Service Mesh</b> · 5 questions · 🟢 3 🟡 2 🔴 0</summary>
+<summary><b>API Gateway and Service Mesh</b> · 6 questions · 🟢 3 🟡 2 🔴 1</summary>
 
 [Open the API Gateway and Service Mesh index →](./api-gateway-and-service-mesh/README.md)
 
-| No. | Question                                                                                                                    | Difficulty      |
-| --- | --------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 76  | [What is an API Gateway?](./api-gateway-and-service-mesh/what-is-an-api-gateway.md)                                         | 🟡 Intermediate |
-| 77  | [What are the benefits of using API Gateway?](./api-gateway-and-service-mesh/what-are-the-benefits-of-using-api-gateway.md) | 🟢 Beginner     |
-| 78  | [What is API Security?](./api-gateway-and-service-mesh/what-is-api-security.md)                                             | 🟡 Intermediate |
-| 79  | [What is Rate Limiting?](./api-gateway-and-service-mesh/what-is-rate-limiting.md)                                           | 🟢 Beginner     |
-| 80  | [What is API Documentation?](./api-gateway-and-service-mesh/what-is-api-documentation.md)                                   | 🟢 Beginner     |
+| No. | Question                                                                                                                                                                      | Difficulty      |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 76  | [What is an API Gateway?](./api-gateway-and-service-mesh/what-is-an-api-gateway.md)                                                                                           | 🟡 Intermediate |
+| 77  | [What are the benefits of using API Gateway?](./api-gateway-and-service-mesh/what-are-the-benefits-of-using-api-gateway.md)                                                   | 🟢 Beginner     |
+| 78  | [What is API Security?](./api-gateway-and-service-mesh/what-is-api-security.md)                                                                                               | 🟡 Intermediate |
+| 79  | [What is Rate Limiting?](./api-gateway-and-service-mesh/what-is-rate-limiting.md)                                                                                             | 🟢 Beginner     |
+| 80  | [What is API Documentation?](./api-gateway-and-service-mesh/what-is-api-documentation.md)                                                                                     | 🟢 Beginner     |
+| 276 | [How do you run a service mesh in production without the sidecar tax?](./api-gateway-and-service-mesh/how-do-you-run-a-service-mesh-in-production-without-the-sidecar-tax.md) | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Serverless Architecture</b> · 5 questions · 🟢 4 🟡 1 🔴 0</summary>
+<summary><b>Serverless Architecture</b> · 6 questions · 🟢 4 🟡 1 🔴 1</summary>
 
 [Open the Serverless Architecture index →](./serverless-architecture/README.md)
 
-| No. | Question                                                                                                 | Difficulty      |
-| --- | -------------------------------------------------------------------------------------------------------- | --------------- |
-| 106 | [What is Serverless Computing?](./serverless-architecture/what-is-serverless-computing.md)               | 🟢 Beginner     |
-| 107 | [What is AWS Lambda?](./serverless-architecture/what-is-aws-lambda.md)                                   | 🟢 Beginner     |
-| 108 | [What are the benefits of Serverless?](./serverless-architecture/what-are-the-benefits-of-serverless.md) | 🟢 Beginner     |
-| 109 | [What are Serverless Best Practices?](./serverless-architecture/what-are-serverless-best-practices.md)   | 🟡 Intermediate |
-| 110 | [What is Function as a Service (FaaS)?](./serverless-architecture/what-is-function-as-a-service-faas.md) | 🟢 Beginner     |
+| No. | Question                                                                                                                                   | Difficulty      |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
+| 106 | [What is Serverless Computing?](./serverless-architecture/what-is-serverless-computing.md)                                                 | 🟢 Beginner     |
+| 107 | [What is AWS Lambda?](./serverless-architecture/what-is-aws-lambda.md)                                                                     | 🟢 Beginner     |
+| 108 | [What are the benefits of Serverless?](./serverless-architecture/what-are-the-benefits-of-serverless.md)                                   | 🟢 Beginner     |
+| 109 | [What are Serverless Best Practices?](./serverless-architecture/what-are-serverless-best-practices.md)                                     | 🟡 Intermediate |
+| 110 | [What is Function as a Service (FaaS)?](./serverless-architecture/what-is-function-as-a-service-faas.md)                                   | 🟢 Beginner     |
+| 303 | [How do you design a serverless system for production?](./serverless-architecture/how-do-you-design-a-serverless-system-for-production.md) | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Database Management in DevOps</b> · 5 questions · 🟢 0 🟡 4 🔴 1</summary>
+<summary><b>Database Management in DevOps</b> · 6 questions · 🟢 1 🟡 4 🔴 1</summary>
 
 [Open the Database Management in DevOps index →](./database-management-in-devops/README.md)
 
-| No. | Question                                                                                                       | Difficulty      |
-| --- | -------------------------------------------------------------------------------------------------------------- | --------------- |
-| 111 | [What is Database DevOps?](./database-management-in-devops/what-is-database-devops.md)                         | 🟡 Intermediate |
-| 112 | [What is Database Version Control?](./database-management-in-devops/what-is-database-version-control.md)       | 🟡 Intermediate |
-| 113 | [What are Database Migration Tools?](./database-management-in-devops/what-are-database-migration-tools.md)     | 🟡 Intermediate |
-| 114 | [What is Database Backup Strategy?](./database-management-in-devops/what-is-database-backup-strategy.md)       | 🟡 Intermediate |
-| 115 | [What is Database Performance Tuning?](./database-management-in-devops/what-is-database-performance-tuning.md) | 🔴 Advanced     |
+| No. | Question                                                                                                                                                 | Difficulty      |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 111 | [What is Database DevOps?](./database-management-in-devops/what-is-database-devops.md)                                                                   | 🟡 Intermediate |
+| 112 | [What is Database Version Control?](./database-management-in-devops/what-is-database-version-control.md)                                                 | 🟡 Intermediate |
+| 113 | [What are Database Migration Tools?](./database-management-in-devops/what-are-database-migration-tools.md)                                               | 🟡 Intermediate |
+| 114 | [What is Database Backup Strategy?](./database-management-in-devops/what-is-database-backup-strategy.md)                                                 | 🟡 Intermediate |
+| 115 | [What is Database Performance Tuning?](./database-management-in-devops/what-is-database-performance-tuning.md)                                           | 🔴 Advanced     |
+| 286 | [What does a DevOps engineer need to know about databases?](./database-management-in-devops/what-does-a-devops-engineer-need-to-know-about-databases.md) | 🟢 Beginner     |
 
 </details>
 
 ### 📈 Reliability and Operations
 
-_50 questions_
+_55 questions_
 
 <details>
-<summary><b>Monitoring and Logging</b> · 6 questions · 🟢 4 🟡 2 🔴 0</summary>
+<summary><b>Monitoring and Logging</b> · 7 questions · 🟢 4 🟡 2 🔴 1</summary>
 
 [Open the Monitoring and Logging index →](./monitoring-and-logging/README.md)
 
-| No. | Question                                                                                                                                                          | Difficulty      |
-| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 31  | [What is monitoring in DevOps?](./monitoring-and-logging/what-is-monitoring-in-devops.md)                                                                         | 🟢 Beginner     |
-| 32  | [What is ELK Stack?](./monitoring-and-logging/what-is-elk-stack.md)                                                                                               | 🟡 Intermediate |
-| 33  | [What is Prometheus?](./monitoring-and-logging/what-is-prometheus.md)                                                                                             | 🟢 Beginner     |
-| 34  | [What is Grafana?](./monitoring-and-logging/what-is-grafana.md)                                                                                                   | 🟢 Beginner     |
-| 35  | [Explain the difference between monitoring and logging](./monitoring-and-logging/explain-the-difference-between-monitoring-and-logging.md)                        | 🟢 Beginner     |
-| 253 | [How do you write effective PromQL queries and Alertmanager rules?](./monitoring-and-logging/how-do-you-write-effective-promql-queries-and-alertmanager-rules.md) | 🟡 Intermediate |
+| No. | Question                                                                                                                                                                | Difficulty      |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 31  | [What is monitoring in DevOps?](./monitoring-and-logging/what-is-monitoring-in-devops.md)                                                                               | 🟢 Beginner     |
+| 32  | [What is ELK Stack?](./monitoring-and-logging/what-is-elk-stack.md)                                                                                                     | 🟡 Intermediate |
+| 33  | [What is Prometheus?](./monitoring-and-logging/what-is-prometheus.md)                                                                                                   | 🟢 Beginner     |
+| 34  | [What is Grafana?](./monitoring-and-logging/what-is-grafana.md)                                                                                                         | 🟢 Beginner     |
+| 35  | [Explain the difference between monitoring and logging](./monitoring-and-logging/explain-the-difference-between-monitoring-and-logging.md)                              | 🟢 Beginner     |
+| 253 | [How do you write effective PromQL queries and Alertmanager rules?](./monitoring-and-logging/how-do-you-write-effective-promql-queries-and-alertmanager-rules.md)       | 🟡 Intermediate |
+| 296 | [How do you design a logging pipeline that stays affordable at scale?](./monitoring-and-logging/how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale.md) | 🔴 Advanced     |
 
 </details>
 
@@ -619,52 +640,55 @@ _50 questions_
 </details>
 
 <details>
-<summary><b>DevOps Metrics and KPIs</b> · 5 questions · 🟢 3 🟡 2 🔴 0</summary>
+<summary><b>DevOps Metrics and KPIs</b> · 6 questions · 🟢 3 🟡 2 🔴 1</summary>
 
 [Open the DevOps Metrics and KPIs index →](./devops-metrics-and-kpis/README.md)
 
-| No. | Question                                                                                                 | Difficulty      |
-| --- | -------------------------------------------------------------------------------------------------------- | --------------- |
-| 101 | [What are DevOps Metrics?](./devops-metrics-and-kpis/what-are-devops-metrics.md)                         | 🟢 Beginner     |
-| 102 | [What is Mean Time to Recovery (MTTR)?](./devops-metrics-and-kpis/what-is-mean-time-to-recovery-mttr.md) | 🟢 Beginner     |
-| 103 | [What is Change Failure Rate?](./devops-metrics-and-kpis/what-is-change-failure-rate.md)                 | 🟡 Intermediate |
-| 104 | [What is Deployment Frequency?](./devops-metrics-and-kpis/what-is-deployment-frequency.md)               | 🟢 Beginner     |
-| 105 | [What is Lead Time for Changes?](./devops-metrics-and-kpis/what-is-lead-time-for-changes.md)             | 🟡 Intermediate |
+| No. | Question                                                                                                                                                                 | Difficulty      |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
+| 101 | [What are DevOps Metrics?](./devops-metrics-and-kpis/what-are-devops-metrics.md)                                                                                         | 🟢 Beginner     |
+| 102 | [What is Mean Time to Recovery (MTTR)?](./devops-metrics-and-kpis/what-is-mean-time-to-recovery-mttr.md)                                                                 | 🟢 Beginner     |
+| 103 | [What is Change Failure Rate?](./devops-metrics-and-kpis/what-is-change-failure-rate.md)                                                                                 | 🟡 Intermediate |
+| 104 | [What is Deployment Frequency?](./devops-metrics-and-kpis/what-is-deployment-frequency.md)                                                                               | 🟢 Beginner     |
+| 105 | [What is Lead Time for Changes?](./devops-metrics-and-kpis/what-is-lead-time-for-changes.md)                                                                             | 🟡 Intermediate |
+| 288 | [How do you build a metrics program without teams gaming the numbers?](./devops-metrics-and-kpis/how-do-you-build-a-metrics-program-without-teams-gaming-the-numbers.md) | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Incident Management</b> · 5 questions · 🟢 2 🟡 3 🔴 0</summary>
+<summary><b>Incident Management</b> · 6 questions · 🟢 2 🟡 3 🔴 1</summary>
 
 [Open the Incident Management index →](./incident-management/README.md)
 
-| No. | Question                                                                                         | Difficulty      |
-| --- | ------------------------------------------------------------------------------------------------ | --------------- |
-| 121 | [What is Incident Management?](./incident-management/what-is-incident-management.md)             | 🟢 Beginner     |
-| 122 | [What is an Incident Response Plan?](./incident-management/what-is-an-incident-response-plan.md) | 🟡 Intermediate |
-| 123 | [What is Post-Mortem Analysis?](./incident-management/what-is-post-mortem-analysis.md)           | 🟡 Intermediate |
-| 124 | [What are Incident Severity Levels?](./incident-management/what-are-incident-severity-levels.md) | 🟢 Beginner     |
-| 125 | [What is On-Call Management?](./incident-management/what-is-on-call-management.md)               | 🟡 Intermediate |
+| No. | Question                                                                                                                                 | Difficulty      |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 121 | [What is Incident Management?](./incident-management/what-is-incident-management.md)                                                     | 🟢 Beginner     |
+| 122 | [What is an Incident Response Plan?](./incident-management/what-is-an-incident-response-plan.md)                                         | 🟡 Intermediate |
+| 123 | [What is Post-Mortem Analysis?](./incident-management/what-is-post-mortem-analysis.md)                                                   | 🟡 Intermediate |
+| 124 | [What are Incident Severity Levels?](./incident-management/what-are-incident-severity-levels.md)                                         | 🟢 Beginner     |
+| 125 | [What is On-Call Management?](./incident-management/what-is-on-call-management.md)                                                       | 🟡 Intermediate |
+| 292 | [How do you run a major incident as incident commander?](./incident-management/how-do-you-run-a-major-incident-as-incident-commander.md) | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Infrastructure Monitoring</b> · 5 questions · 🟢 2 🟡 3 🔴 0</summary>
+<summary><b>Infrastructure Monitoring</b> · 6 questions · 🟢 2 🟡 3 🔴 1</summary>
 
 [Open the Infrastructure Monitoring index →](./infrastructure-monitoring/README.md)
 
-| No. | Question                                                                                                                 | Difficulty      |
-| --- | ------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| 131 | [What is Infrastructure Monitoring?](./infrastructure-monitoring/what-is-infrastructure-monitoring.md)                   | 🟢 Beginner     |
-| 132 | [What are Monitoring Tools?](./infrastructure-monitoring/what-are-monitoring-tools.md)                                   | 🟢 Beginner     |
-| 133 | [What are Monitoring Best Practices?](./infrastructure-monitoring/what-are-monitoring-best-practices.md)                 | 🟡 Intermediate |
-| 134 | [What is Application Performance Monitoring?](./infrastructure-monitoring/what-is-application-performance-monitoring.md) | 🟡 Intermediate |
-| 135 | [What is Log Management?](./infrastructure-monitoring/what-is-log-management.md)                                         | 🟡 Intermediate |
+| No. | Question                                                                                                                                                                 | Difficulty      |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
+| 131 | [What is Infrastructure Monitoring?](./infrastructure-monitoring/what-is-infrastructure-monitoring.md)                                                                   | 🟢 Beginner     |
+| 132 | [What are Monitoring Tools?](./infrastructure-monitoring/what-are-monitoring-tools.md)                                                                                   | 🟢 Beginner     |
+| 133 | [What are Monitoring Best Practices?](./infrastructure-monitoring/what-are-monitoring-best-practices.md)                                                                 | 🟡 Intermediate |
+| 134 | [What is Application Performance Monitoring?](./infrastructure-monitoring/what-is-application-performance-monitoring.md)                                                 | 🟡 Intermediate |
+| 135 | [What is Log Management?](./infrastructure-monitoring/what-is-log-management.md)                                                                                         | 🟡 Intermediate |
+| 293 | [How do you control metric cardinality and monitoring cost at scale?](./infrastructure-monitoring/how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale.md) | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>SLO Engineering</b> · 7 questions · 🟢 0 🟡 3 🔴 4</summary>
+<summary><b>SLO Engineering</b> · 8 questions · 🟢 1 🟡 3 🔴 4</summary>
 
 [Open the SLO Engineering index →](./slo-engineering/README.md)
 
@@ -677,6 +701,7 @@ _50 questions_
 | 181 | [How do you define SLOs for batch and asynchronous workloads?](./slo-engineering/how-do-you-define-slos-for-batch-and-asynchronous-workloads.md) | 🔴 Advanced     |
 | 182 | [How do you handle SLOs for dependencies you do not own?](./slo-engineering/how-do-you-handle-slos-for-dependencies-you-do-not-own.md)           | 🔴 Advanced     |
 | 183 | [What tooling do you use to implement SLOs?](./slo-engineering/what-tooling-do-you-use-to-implement-slos.md)                                     | 🟡 Intermediate |
+| 304 | [What do you need before you can set your first SLO?](./slo-engineering/what-do-you-need-before-you-can-set-your-first-slo.md)                   | 🟢 Beginner     |
 
 </details>
 
@@ -699,7 +724,7 @@ _50 questions_
 
 ### 🔐 Security
 
-_28 questions_
+_30 questions_
 
 <details>
 <summary><b>Security and Compliance</b> · 5 questions · 🟢 1 🟡 3 🔴 1</summary>
@@ -717,7 +742,7 @@ _28 questions_
 </details>
 
 <details>
-<summary><b>Network Security</b> · 6 questions · 🟢 2 🟡 4 🔴 0</summary>
+<summary><b>Network Security</b> · 7 questions · 🟢 2 🟡 4 🔴 1</summary>
 
 [Open the Network Security index →](./network-security/README.md)
 
@@ -729,11 +754,12 @@ _28 questions_
 | 119 | [What is a Web Application Firewall (WAF)?](./network-security/what-is-a-web-application-firewall-waf.md)                                           | 🟢 Beginner     |
 | 120 | [What is Network Segmentation?](./network-security/what-is-network-segmentation.md)                                                                 | 🟡 Intermediate |
 | 270 | [What happens when a user opens your application in a browser?](./network-security/what-happens-when-a-user-opens-your-application-in-a-browser.md) | 🟡 Intermediate |
+| 297 | [How do you design defence in depth for a cloud network?](./network-security/how-do-you-design-defence-in-depth-for-a-cloud-network.md)             | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>DevSecOps</b> · 9 questions · 🟢 0 🟡 7 🔴 2</summary>
+<summary><b>DevSecOps</b> · 10 questions · 🟢 1 🟡 7 🔴 2</summary>
 
 [Open the DevSecOps index →](./devsecops/README.md)
 
@@ -748,6 +774,7 @@ _28 questions_
 | 167 | [How do you scan Infrastructure as Code before it is applied?](./devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md)                                       | 🟡 Intermediate |
 | 168 | [How do you prioritise vulnerabilities without blocking delivery?](./devsecops/how-do-you-prioritise-vulnerabilities-without-blocking-delivery.md)                               | 🔴 Advanced     |
 | 244 | [How do you enforce Kubernetes admission control with Kyverno or OPA Gatekeeper?](./devsecops/how-do-you-enforce-kubernetes-admission-control-with-kyverno-or-opa-gatekeeper.md) | 🟡 Intermediate |
+| 290 | [What does shift left security mean?](./devsecops/what-does-shift-left-security-mean.md)                                                                                         | 🟢 Beginner     |
 
 </details>
 
@@ -771,20 +798,21 @@ _28 questions_
 
 ### 🧭 Platform and Leadership
 
-_38 questions_
+_40 questions_
 
 <details>
-<summary><b>DevOps Culture and Practices</b> · 5 questions · 🟢 4 🟡 1 🔴 0</summary>
+<summary><b>DevOps Culture and Practices</b> · 6 questions · 🟢 4 🟡 1 🔴 1</summary>
 
 [Open the DevOps Culture and Practices index →](./devops-culture-and-practices/README.md)
 
-| No. | Question                                                                                                        | Difficulty      |
-| --- | --------------------------------------------------------------------------------------------------------------- | --------------- |
-| 126 | [What is DevOps Culture?](./devops-culture-and-practices/what-is-devops-culture.md)                             | 🟢 Beginner     |
-| 127 | [What are DevOps Best Practices?](./devops-culture-and-practices/what-are-devops-best-practices.md)             | 🟢 Beginner     |
-| 128 | [What is Blameless Culture?](./devops-culture-and-practices/what-is-blameless-culture.md)                       | 🟡 Intermediate |
-| 129 | [What is Knowledge Sharing in DevOps?](./devops-culture-and-practices/what-is-knowledge-sharing-in-devops.md)   | 🟢 Beginner     |
-| 130 | [What is Team Collaboration in DevOps?](./devops-culture-and-practices/what-is-team-collaboration-in-devops.md) | 🟢 Beginner     |
+| No. | Question                                                                                                                                  | Difficulty      |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 126 | [What is DevOps Culture?](./devops-culture-and-practices/what-is-devops-culture.md)                                                       | 🟢 Beginner     |
+| 127 | [What are DevOps Best Practices?](./devops-culture-and-practices/what-are-devops-best-practices.md)                                       | 🟢 Beginner     |
+| 128 | [What is Blameless Culture?](./devops-culture-and-practices/what-is-blameless-culture.md)                                                 | 🟡 Intermediate |
+| 129 | [What is Knowledge Sharing in DevOps?](./devops-culture-and-practices/what-is-knowledge-sharing-in-devops.md)                             | 🟢 Beginner     |
+| 130 | [What is Team Collaboration in DevOps?](./devops-culture-and-practices/what-is-team-collaboration-in-devops.md)                           | 🟢 Beginner     |
+| 287 | [How do you scale DevOps culture across many teams?](./devops-culture-and-practices/how-do-you-scale-devops-culture-across-many-teams.md) | 🔴 Advanced     |
 
 </details>
 
@@ -819,7 +847,7 @@ _38 questions_
 </details>
 
 <details>
-<summary><b>Platform Engineering</b> · 13 questions · 🟢 0 🟡 5 🔴 8</summary>
+<summary><b>Platform Engineering</b> · 14 questions · 🟢 1 🟡 5 🔴 8</summary>
 
 [Open the Platform Engineering index →](./platform-engineering/README.md)
 
@@ -838,15 +866,16 @@ _38 questions_
 | 242 | [How do you monitor AI/LLM applications for latency, GPU metrics, and token costs?](./platform-engineering/how-do-you-monitor-ai-llm-applications-for-latency-gpu-metrics-and-token-costs.md)         | 🟡 Intermediate |
 | 243 | [How do you design a production MLOps pipeline using Ray or Kubeflow?](./platform-engineering/how-do-you-design-a-production-mlops-pipeline-using-ray-or-kubeflow.md)                                 | 🔴 Advanced     |
 | 245 | [How do you deploy and scale Vector Databases in Kubernetes for RAG applications?](./platform-engineering/how-do-you-deploy-and-scale-vector-databases-in-kubernetes-for-rag-applications.md)         | 🔴 Advanced     |
+| 299 | [What does a platform engineer actually do day to day?](./platform-engineering/what-does-a-platform-engineer-actually-do-day-to-day.md)                                                               | 🟢 Beginner     |
 
 </details>
 
 ### 🎤 Interview Prep
 
-_5 questions_
+_6 questions_
 
 <details>
-<summary><b>Interview Experience</b> · 5 questions · 🟢 4 🟡 1 🔴 0</summary>
+<summary><b>Interview Experience</b> · 6 questions · 🟢 4 🟡 1 🔴 1</summary>
 
 [Open the Interview Experience index →](./interview-experience/README.md)
 
@@ -857,6 +886,7 @@ _5 questions_
 | 273 | [How do you answer scenario-based troubleshooting questions?](./interview-experience/how-do-you-answer-scenario-based-troubleshooting-questions.md)       | 🟡 Intermediate |
 | 274 | [What are the most frequently asked DevOps interview questions?](./interview-experience/what-are-the-most-frequently-asked-devops-interview-questions.md) | 🟢 Beginner     |
 | 275 | [What questions should you ask your interviewer?](./interview-experience/what-questions-should-you-ask-your-interviewer.md)                               | 🟢 Beginner     |
+| 294 | [How do you handle a DevOps system design round?](./interview-experience/how-do-you-handle-a-devops-system-design-round.md)                               | 🔴 Advanced     |
 
 </details>
 
