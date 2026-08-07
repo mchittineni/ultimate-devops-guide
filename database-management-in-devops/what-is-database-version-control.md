@@ -17,14 +17,14 @@ tags:
 
 **Two approaches**
 
-- **Migration-based (imperative).** A numbered sequence of change scripts (`V1__init.sql`, `V2__add_orders.sql`). The tool tracks which have been applied in a metadata table and runs the missing ones in order. Explicit, auditable, and the dominant approach — Flyway, Liquibase, Alembic, Rails migrations.
-- **State-based (declarative).** You maintain the desired schema definition; the tool computes the diff against the target database and generates the change script. Convenient for development, but generated scripts need review before production — an automated diff will happily generate a destructive statement.
+- **Migration-based (imperative).** A numbered sequence of change scripts (`V1__init.sql`, `V2__add_orders.sql`). The tool tracks which have been applied in a metadata table and runs the missing ones in order. Explicit, auditable, and the dominant approach - Flyway, Liquibase, Alembic, Rails migrations.
+- **State-based (declarative).** You maintain the desired schema definition; the tool computes the diff against the target database and generates the change script. Convenient for development, but generated scripts need review before production - an automated diff will happily generate a destructive statement.
 
 Many teams use both: declarative for authoring, with the generated migration committed and reviewed.
 
 **What good practice requires**
 
-- Migrations are **immutable once merged** — never edit an applied script; write a new one. Editing breaks the checksum and diverges environments.
+- Migrations are **immutable once merged** - never edit an applied script; write a new one. Editing breaks the checksum and diverges environments.
 - Scripts are **idempotent or guarded** where possible, and every one is tested by running it against a copy of production-shaped data.
 - **Rollback plans** exist, whether as a down script or a documented forward-fix. In practice, forward-fix is safer for data-destructive changes.
 - **Reference data** (lookup tables, feature configuration) is versioned too.
@@ -47,7 +47,7 @@ flyway migrate     # runs only what has not been applied, records checksums
 
 - "Never edit an applied migration" is the rule that reveals whether you have lived with this.
 - Explain the migration-versus-state trade-off; naming both approaches shows breadth.
-- Point out that reviewing generated diffs is mandatory — tools generate `DROP` statements cheerfully.
+- Point out that reviewing generated diffs is mandatory - tools generate `DROP` statements cheerfully.
 
 ---
 

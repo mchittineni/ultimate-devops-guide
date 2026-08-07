@@ -11,7 +11,7 @@ tags:
 
 # What is Database DevOps?
 
-**Short answer:** Database DevOps applies DevOps practices — version control, automated testing, continuous integration, and automated deployment — to database schemas and data, so database changes ship as safely and frequently as application changes.
+**Short answer:** Database DevOps applies DevOps practices - version control, automated testing, continuous integration, and automated deployment - to database schemas and data, so database changes ship as safely and frequently as application changes.
 
 ## Detail
 
@@ -20,18 +20,18 @@ tags:
 **Core practices**
 
 - **Schema as code.** Migration scripts live in the application repository, reviewed like any other change.
-- **Migration tooling** — Flyway, Liquibase, Alembic, or a framework's built-in migrations — applies versioned, ordered, tracked changes and records what has run.
-- **Automated testing** — migrations run against an ephemeral database in CI, seeded with production-shaped data, including a rollback test.
-- **Continuous delivery** — migrations run automatically as part of deployment, not as a separate manual step.
-- **Backward compatibility** — every migration must work with both the currently running application version and the new one, because they coexist during a rolling deploy.
-- **Observability** — monitor migration duration, lock waits, and replication lag during rollout.
+- **Migration tooling** - Flyway, Liquibase, Alembic, or a framework's built-in migrations - applies versioned, ordered, tracked changes and records what has run.
+- **Automated testing** - migrations run against an ephemeral database in CI, seeded with production-shaped data, including a rollback test.
+- **Continuous delivery** - migrations run automatically as part of deployment, not as a separate manual step.
+- **Backward compatibility** - every migration must work with both the currently running application version and the new one, because they coexist during a rolling deploy.
+- **Observability** - monitor migration duration, lock waits, and replication lag during rollout.
 
 **The expand/contract pattern** is the central technique:
 
-1. **Expand** — add the new column/table, nullable and additive only.
-2. **Migrate** — deploy code that writes to both old and new, backfill existing rows in batches.
-3. **Switch** — deploy code that reads from the new location.
-4. **Contract** — after confidence, remove the old column and the dual-write code.
+1. **Expand** - add the new column/table, nullable and additive only.
+2. **Migrate** - deploy code that writes to both old and new, backfill existing rows in batches.
+3. **Switch** - deploy code that reads from the new location.
+4. **Contract** - after confidence, remove the old column and the dual-write code.
 
 Each step is independently deployable and reversible. It takes several releases, and that is the point.
 
@@ -45,7 +45,7 @@ CREATE INDEX CONCURRENTLY idx_users_email_verified ON users (email_verified);
 
 ## Interview tips
 
-- Expand/contract is the answer to "how do you change a schema with zero downtime?" — know all four steps.
+- Expand/contract is the answer to "how do you change a schema with zero downtime?" - know all four steps.
 - Mention that destructive changes (drop column, rename) are never done in the same release as the code change.
 - Long-running locks on large tables are the practical danger; `CONCURRENTLY`, batched backfills, and lock timeouts are the mitigations.
 
