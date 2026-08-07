@@ -36,7 +36,7 @@ tags:
 
 ```python
 # Idempotency + partial batch failure: the two things every SQS consumer needs.
-import json, os, boto3
+import json, os, time, boto3
 from botocore.exceptions import ClientError
 
 ddb = boto3.resource("dynamodb")                       # created once, reused when warm
@@ -49,15 +49,25 @@ def handler(event, context):
             body = json.loads(record["body"])
             key = body["order_id"]                      # business key, not the message id
             try:
+                # Claim the key: succeeds if unseen, or if a previous attempt died
+                # before completing. Only COMPLETED blocks the write.
                 seen.put_item(
-                    Item={"pk": key, "ttl": int(context.get_remaining_time_in_millis()/1000) + 86400},
-                    ConditionExpression="attribute_not_exists(pk)",
+                    Item={"pk": key, "state": "IN_PROGRESS", "ttl": int(time.time()) + 86400},
+                    ConditionExpression="attribute_not_exists(pk) OR #s <> :done",
+                    ExpressionAttributeNames={"#s": "state"},
+                    ExpressionAttributeValues={":done": "COMPLETED"},
                 )
             except ClientError as exc:
                 if exc.response["Error"]["Code"] == "ConditionalCheckFailedException":
-                    continue                            # already processed - skip, do not fail
+                    continue                            # already completed - skip, do not fail
                 raise
-            process(body)
+            process(body)                               # may raise: record stays IN_PROGRESS, retry allowed
+            seen.update_item(                           # only now is the key permanently suppressed
+                Key={"pk": key},
+                UpdateExpression="SET #s = :done",
+                ExpressionAttributeNames={"#s": "state"},
+                ExpressionAttributeValues={":done": "COMPLETED"},
+            )
         except Exception:
             failures.append({"itemIdentifier": record["messageId"]})   # only this one retries
     return {"batchItemFailures": failures}
