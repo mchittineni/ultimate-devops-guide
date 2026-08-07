@@ -9,7 +9,7 @@ tags:
 
 # Configuration Management
 
-Keeping fleets consistent with Puppet, Chef, Ansible, and Salt — push versus pull, agent versus agentless.
+Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pull, agent versus agentless.
 
 **5 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 4 · 🔴 Advanced: 0
 

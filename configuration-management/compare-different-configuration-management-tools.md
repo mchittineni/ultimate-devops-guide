@@ -28,13 +28,13 @@ tags:
 | Testing           | Molecule                                        | rspec-puppet, Litmus                                | Test Kitchen, ChefSpec, InSpec             | kitchen-salt                       |
 | Best fit          | Ad-hoc automation, orchestration, mixed estates | Regulated environments needing enforcement evidence | Complex logic, strong test discipline      | Huge fleets, event-driven response |
 
-**How to choose.** Weigh: can you install agents? How large is the estate? Does compliance require continuous enforcement and reporting? What does the team already know? And critically — how much of the estate could be made immutable instead?
+**How to choose.** Weigh: can you install agents? How large is the estate? Does compliance require continuous enforcement and reporting? What does the team already know? And critically - how much of the estate could be made immutable instead?
 
 **The honest modern answer:** for greenfield cloud work, most configuration moves into container images and Kubernetes manifests, with Terraform provisioning and Ansible filling the remaining gaps (golden-image builds, network appliances, legacy VMs). Full-fat configuration management is now most valuable in large, long-lived, regulated estates.
 
 ## Interview tips
 
-- Answer with selection criteria, then a recommendation — a raw feature table alone reads as memorised.
+- Answer with selection criteria, then a recommendation - a raw feature table alone reads as memorised.
 - Naming the shift towards immutable infrastructure shows current thinking.
 - Team familiarity is a legitimate deciding factor; say so, because it is true in practice.
 

@@ -17,17 +17,17 @@ tags:
 
 **Terminology** (Chef leans hard on the cooking metaphor):
 
-- **Resource** — a unit of configuration (`package`, `template`, `service`).
-- **Recipe** — an ordered list of resources, written in a Ruby DSL.
-- **Cookbook** — a package of recipes, templates, files, attributes, and tests.
-- **Run list** — the ordered set of recipes and roles applied to a node.
-- **Attributes** — configuration data with a precedence hierarchy (defaults, node, role, environment, override).
-- **Data bags** — shared data, optionally encrypted for secrets.
-- **Chef Infra Server** — stores cookbooks and node data; **Chef Workstation** is where you author and test.
+- **Resource** - a unit of configuration (`package`, `template`, `service`).
+- **Recipe** - an ordered list of resources, written in a Ruby DSL.
+- **Cookbook** - a package of recipes, templates, files, attributes, and tests.
+- **Run list** - the ordered set of recipes and roles applied to a node.
+- **Attributes** - configuration data with a precedence hierarchy (defaults, node, role, environment, override).
+- **Data bags** - shared data, optionally encrypted for secrets.
+- **Chef Infra Server** - stores cookbooks and node data; **Chef Workstation** is where you author and test.
 
 **Two-phase execution** is Chef's distinctive behaviour: the compile phase evaluates the Ruby and builds a resource collection, then the converge phase executes those resources in order. Ruby code outside a resource block runs at compile time, which surprises newcomers.
 
-Because recipes are Ruby, Chef offers more programmatic power than a pure DSL — and more rope. Its testing story is strong: **Test Kitchen** spins up real instances, **ChefSpec** unit-tests the resource collection, and **InSpec** verifies the converged system (and doubles as a standalone compliance tool).
+Because recipes are Ruby, Chef offers more programmatic power than a pure DSL - and more rope. Its testing story is strong: **Test Kitchen** spins up real instances, **ChefSpec** unit-tests the resource collection, and **InSpec** verifies the converged system (and doubles as a standalone compliance tool).
 
 ## Example
 
@@ -53,7 +53,7 @@ end
 ## Interview tips
 
 - Compile versus converge phase is the classic Chef gotcha worth naming.
-- InSpec is worth highlighting — it outlives Chef itself as a compliance-as-code tool.
+- InSpec is worth highlighting - it outlives Chef itself as a compliance-as-code tool.
 - Position it against Puppet (Ruby DSL and imperative-friendly vs declarative) and Ansible (agent vs agentless).
 
 ---

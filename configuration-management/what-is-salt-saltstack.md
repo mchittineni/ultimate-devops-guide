@@ -19,12 +19,12 @@ tags:
 
 **Concepts**
 
-- **States** — desired configuration in YAML with Jinja templating, stored in `.sls` files (the "state tree").
-- **Grains** — static facts about a minion (OS, CPU, roles), used for targeting.
-- **Pillar** — secure, per-minion data, the right place for secrets and environment-specific values.
-- **Targeting** — select minions by glob, grain, pillar, subnet, or compound expressions.
-- **Reactor and beacons** — beacons emit events (a file changed, a service died) and the reactor responds automatically, enabling genuine event-driven automation.
-- **Salt Mine and orchestration** — cross-node data sharing and multi-node workflow coordination.
+- **States** - desired configuration in YAML with Jinja templating, stored in `.sls` files (the "state tree").
+- **Grains** - static facts about a minion (OS, CPU, roles), used for targeting.
+- **Pillar** - secure, per-minion data, the right place for secrets and environment-specific values.
+- **Targeting** - select minions by glob, grain, pillar, subnet, or compound expressions.
+- **Reactor and beacons** - beacons emit events (a file changed, a service died) and the reactor responds automatically, enabling genuine event-driven automation.
+- **Salt Mine and orchestration** - cross-node data sharing and multi-node workflow coordination.
 
 Salt's differentiators are raw execution speed and the event-driven reactor system. Its trade-offs are a more complex master setup than Ansible and a smaller ecosystem than Ansible or Puppet.
 
