@@ -11,14 +11,16 @@ tags:
 
 The scripting layer under every pipeline - defensive Bash for orchestration, and Python for cloud APIs, structured data, and the tooling Bash cannot carry.
 
-**2 questions** · 🟢 Beginner: 0 · 🟡 Intermediate: 2 · 🔴 Advanced: 0
+**4 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 2 · 🔴 Advanced: 1
 
 ## Questions
 
-| #   | Question                                                                                                 | Difficulty      |
-| --- | -------------------------------------------------------------------------------------------------------- | --------------- |
-| 266 | [How do you write a production-grade Bash script?](./how-do-you-write-a-production-grade-bash-script.md) | 🟡 Intermediate |
-| 267 | [What do you use Python for as a DevOps engineer?](./what-do-you-use-python-for-as-a-devops-engineer.md) | 🟡 Intermediate |
+| #   | Question                                                                                                                                             | Difficulty      |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 266 | [How do you write a production-grade Bash script?](./how-do-you-write-a-production-grade-bash-script.md)                                             | 🟡 Intermediate |
+| 267 | [What do you use Python for as a DevOps engineer?](./what-do-you-use-python-for-as-a-devops-engineer.md)                                             | 🟡 Intermediate |
+| 301 | [When do you use Bash and when do you use Python?](./when-do-you-use-bash-and-when-do-you-use-python.md)                                             | 🟢 Beginner     |
+| 302 | [How do you turn a pile of ad hoc scripts into maintainable automation?](./how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation.md) | 🔴 Advanced     |
 
 ## What interviewers probe here
 
