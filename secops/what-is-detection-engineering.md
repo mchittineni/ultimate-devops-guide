@@ -17,18 +17,18 @@ tags:
 
 **The lifecycle:** pick a threat (from a threat model, an incident, or an ATT&CK technique relevant to your stack) → confirm the telemetry exists to see it → write the detection → generate the behaviour in a lab and confirm it fires → tune against 30 days of production data to measure false positives → ship with a playbook → review on a schedule and retire what no longer earns its keep.
 
-**Detect behaviour, not artifacts.** An IP address, a file hash, or a specific tool name is trivially changed by an attacker. `kubectl exec` into a production Pod by an identity that never does that, a service account authenticating from a new ASN, a container spawning a shell — these survive tool changes. This is the "pyramid of pain": the higher up you detect, the more expensive it is for the adversary to adapt.
+**Detect behaviour, not artifacts.** An IP address, a file hash, or a specific tool name is trivially changed by an attacker. `kubectl exec` into a production Pod by an identity that never does that, a service account authenticating from a new ASN, a container spawning a shell - these survive tool changes. This is the "pyramid of pain": the higher up you detect, the more expensive it is for the adversary to adapt.
 
 **Validation is what distinguishes it from rule-writing.** Use Atomic Red Team, Stratus Red Team (cloud-native), or Caldera to execute the technique in a controlled environment and assert the rule fires. Unvalidated rules routinely turn out to reference a field the source does not populate.
 
-**Measure two things.** _Precision_ — of alerts this rule raised, how many were real, tracked per rule so bad rules are visible. _Coverage_ — which techniques you can see at all, usually mapped onto an ATT&CK matrix heat map, with honesty about which gaps are telemetry gaps rather than rule gaps.
+**Measure two things.** _Precision_ - of alerts this rule raised, how many were real, tracked per rule so bad rules are visible. _Coverage_ - which techniques you can see at all, usually mapped onto an ATT&CK matrix heat map, with honesty about which gaps are telemetry gaps rather than rule gaps.
 
 **Tuning is not suppression.** Excluding a noisy source wholesale creates a blind spot an attacker can occupy. Prefer narrowing the rule's logic (specific service account plus specific namespace plus expected schedule) and record why.
 
 ## Example
 
 ```yaml
-# Falco: shell spawned inside a container — behavioural, tool-agnostic
+# Falco: shell spawned inside a container - behavioural, tool-agnostic
 - rule: Shell in container
   desc: A shell was executed inside a container, excluding known debug workflows
   condition: >
@@ -52,7 +52,7 @@ stratus detonate aws.execution.ec2-user-data
 
 - The pyramid-of-pain argument for behavioural over artifact-based detection is the core idea to articulate.
 - Naming Atomic Red Team or Stratus Red Team for validation, and per-rule precision tracking, marks real experience.
-- Expect: "how do you know what you cannot see?" — ATT&CK coverage mapping, and treating telemetry gaps as platform work.
+- Expect: "how do you know what you cannot see?" - ATT&CK coverage mapping, and treating telemetry gaps as platform work.
 
 ---
 

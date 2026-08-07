@@ -11,7 +11,7 @@ tags:
 
 # What is EDR and how does it differ from antivirus?
 
-**Short answer:** Traditional antivirus blocks known-bad files by signature. EDR (Endpoint Detection and Response) continuously records endpoint behaviour — process trees, network connections, file and registry activity — detects suspicious patterns, and gives responders the ability to investigate and act remotely. Antivirus asks "is this file bad?"; EDR asks "is this behaviour bad?" and keeps the evidence either way.
+**Short answer:** Traditional antivirus blocks known-bad files by signature. EDR (Endpoint Detection and Response) continuously records endpoint behaviour - process trees, network connections, file and registry activity - detects suspicious patterns, and gives responders the ability to investigate and act remotely. Antivirus asks "is this file bad?"; EDR asks "is this behaviour bad?" and keeps the evidence either way.
 
 ## Detail
 
@@ -21,7 +21,7 @@ tags:
 | Historical visibility | none            | continuous telemetry, queryable                        |
 | Response              | quarantine file | isolate host, kill process, collect artifacts remotely |
 | Fileless attacks      | largely blind   | in scope (script interpreters, LOLBins)                |
-| Analyst workload      | low             | high — it produces detections to triage                |
+| Analyst workload      | low             | high - it produces detections to triage                |
 
 **XDR and MDR, briefly.** XDR extends the same idea beyond the endpoint, correlating endpoint, identity, email, and cloud telemetry in one product. MDR is a service: someone else's analysts watch your EDR/XDR around the clock. The distinction matters in interviews because organisations frequently buy EDR and then discover nobody is watching it at 3am.
 
@@ -34,8 +34,8 @@ tags:
 ## Interview tips
 
 - The signature-versus-behaviour one-liner is the answer; add "and it retains telemetry for investigation".
-- Mention eBPF sensors and container attribution — it shows you have deployed this on modern infrastructure, not just laptops.
-- Expect: "do you need EDR if hosts are immutable and short-lived?" — yes for detection and forensics, but response shifts to rebuild.
+- Mention eBPF sensors and container attribution - it shows you have deployed this on modern infrastructure, not just laptops.
+- Expect: "do you need EDR if hosts are immutable and short-lived?" - yes for detection and forensics, but response shifts to rebuild.
 
 ---
 

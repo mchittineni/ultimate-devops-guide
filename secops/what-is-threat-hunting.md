@@ -11,7 +11,7 @@ tags:
 
 # What is threat hunting?
 
-**Short answer:** Threat hunting is the proactive search for adversary activity that existing detections did not catch. It is hypothesis-driven — you state what an attacker would look like in your telemetry, query for it, and either find something or convert the hunt into a new detection. Its main output is usually not an incident but improved coverage.
+**Short answer:** Threat hunting is the proactive search for adversary activity that existing detections did not catch. It is hypothesis-driven - you state what an attacker would look like in your telemetry, query for it, and either find something or convert the hunt into a new detection. Its main output is usually not an incident but improved coverage.
 
 ## Detail
 
@@ -19,11 +19,11 @@ tags:
 
 **Where hypotheses come from:** threat intelligence about groups targeting your sector, a technique from the ATT&CK matrix you cannot yet detect, the assumption of a known weakness in your own architecture ("what would abuse of this over-privileged role look like?"), and anomalies noticed during unrelated work.
 
-**Three common styles.** _Intel-driven_ — start from a reported campaign's behaviour. _Hypothesis-driven_ — as above, from your own threat model. _Baseline/anomaly-driven_ — build the normal profile of something (which service accounts touch this namespace, which countries authenticate) and investigate the outliers. Baselining is the most productive in cloud environments, where "normal" is narrow and machine-generated.
+**Three common styles.** _Intel-driven_ - start from a reported campaign's behaviour. _Hypothesis-driven_ - as above, from your own threat model. _Baseline/anomaly-driven_ - build the normal profile of something (which service accounts touch this namespace, which countries authenticate) and investigate the outliers. Baselining is the most productive in cloud environments, where "normal" is narrow and machine-generated.
 
 **Every hunt has one of three outcomes**, and all are valuable: an incident is opened; a new detection rule is written; or a telemetry gap is identified and becomes platform work. A hunt that finds nothing and produces nothing was scoped badly.
 
-**Document and repeat.** Hunts live as notebooks or saved queries with their hypothesis, data sources, query, and findings, so they can be re-run after the environment changes. Recurring hunts that stay valuable should graduate into scheduled detections — hunting is where detections come from.
+**Document and repeat.** Hunts live as notebooks or saved queries with their hypothesis, data sources, query, and findings, so they can be re-run after the environment changes. Recurring hunts that stay valuable should graduate into scheduled detections - hunting is where detections come from.
 
 **Prerequisites people underestimate:** enough retained telemetry (90 days minimum for scoping), an asset and identity inventory to define "normal", and analyst time that is protected from the alert queue. Without protected time, hunting is always deferred.
 
@@ -43,9 +43,9 @@ ORDER BY calls DESC;
 
 ## Interview tips
 
-- State a concrete hypothesis out loud — that single sentence is what interviewers are listening for.
+- State a concrete hypothesis out loud - that single sentence is what interviewers are listening for.
 - "A hunt that finds nothing still produces a detection or a telemetry gap" is a strong, mature framing.
-- Expect: "how is this different from monitoring?" — monitoring answers known questions automatically; hunting asks new ones and then automates them.
+- Expect: "how is this different from monitoring?" - monitoring answers known questions automatically; hunting asks new ones and then automates them.
 
 ---
 
