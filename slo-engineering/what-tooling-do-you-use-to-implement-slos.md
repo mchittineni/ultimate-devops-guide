@@ -11,7 +11,7 @@ tags:
 
 # What tooling do you use to implement SLOs?
 
-**Short answer:** Define SLOs declaratively in the service repository — OpenSLO or Sloth YAML — and generate the recording rules, burn-rate alerts, and dashboards from that definition. Hand-written PromQL for every SLO does not survive contact with 40 services; the specification should be reviewed like code and the artefacts should be generated.
+**Short answer:** Define SLOs declaratively in the service repository - OpenSLO or Sloth YAML - and generate the recording rules, burn-rate alerts, and dashboards from that definition. Hand-written PromQL for every SLO does not survive contact with 40 services; the specification should be reviewed like code and the artefacts should be generated.
 
 ## Detail
 
@@ -29,14 +29,14 @@ tags:
 
 **Long windows need remote storage.** A 28-day query against a single Prometheus with 15 days of retention silently returns nonsense. Either shorten the window honestly or run Thanos/Mimir/Cortex. Recording rules that pre-aggregate the ratio keep those queries affordable.
 
-**Managed platforms trade control for convenience.** Datadog SLOs, Google Cloud Monitoring's SLO API, and Nobl9 give you UI, history, and reporting without maintaining rules — at the cost of provider lock-in and per-SLO pricing. A common hybrid: burn-rate paging in Prometheus (where your other alerts live) and executive reporting in the managed tool.
+**Managed platforms trade control for convenience.** Datadog SLOs, Google Cloud Monitoring's SLO API, and Nobl9 give you UI, history, and reporting without maintaining rules - at the cost of provider lock-in and per-SLO pricing. A common hybrid: burn-rate paging in Prometheus (where your other alerts live) and executive reporting in the managed tool.
 
 **Keep the SLO next to the service.** The definition belongs in the service repository, owned by the team, referenced from the service catalogue, and changed by pull request. SLOs edited only in a vendor UI drift from reality and have no review trail.
 
 ## Example
 
 ```yaml
-# sloth.yaml — one declarative definition; sloth generates rules and alerts
+# sloth.yaml - one declarative definition; sloth generates rules and alerts
 version: prometheus/v1
 service: checkout
 labels: { team: payments, tier: "1" }
@@ -62,8 +62,8 @@ promtool check rules rules/checkout-slo.yaml
 ## Interview tips
 
 - "Declare the SLO, generate the rules" is the answer; hand-maintained PromQL signals small-scale experience.
-- Raise the long-window retention problem — it is the mistake most teams hit at the 28-day mark.
-- Expect: "why not just use the vendor's SLO feature?" — fine for reporting, but keep the definition in Git and paging where your on-call already looks.
+- Raise the long-window retention problem - it is the mistake most teams hit at the 28-day mark.
+- Expect: "why not just use the vendor's SLO feature?" - fine for reporting, but keep the definition in Git and paging where your on-call already looks.
 
 ---
 

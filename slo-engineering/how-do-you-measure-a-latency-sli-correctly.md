@@ -11,13 +11,13 @@ tags:
 
 # How do you measure a latency SLI correctly?
 
-**Short answer:** Express latency as a ratio of requests faster than a threshold — "99% of checkout requests complete within 300ms" — rather than as an average or a percentile value. Threshold-based ratios are aggregatable, tie directly to an error budget, and avoid the arithmetic errors that come from averaging percentiles across instances.
+**Short answer:** Express latency as a ratio of requests faster than a threshold - "99% of checkout requests complete within 300ms" - rather than as an average or a percentile value. Threshold-based ratios are aggregatable, tie directly to an error budget, and avoid the arithmetic errors that come from averaging percentiles across instances.
 
 ## Detail
 
 **Averages hide the users who suffer.** A 120ms mean can contain a 4-second tail affecting 2% of requests. Percentiles are better, but a p99 _value_ as an SLI creates two problems: you cannot average p99 across instances or time buckets (the result is meaningless), and "p99 < 300ms" gives no natural error budget.
 
-**The good-events pattern.** Count requests under the threshold as "good" and divide by total. This composes correctly across instances, regions, and time, and it converts latency into exactly the same budget arithmetic as availability. In Prometheus, `histogram_quantile` on a bucket boundary is unnecessary — read the cumulative bucket directly.
+**The good-events pattern.** Count requests under the threshold as "good" and divide by total. This composes correctly across instances, regions, and time, and it converts latency into exactly the same budget arithmetic as availability. In Prometheus, `histogram_quantile` on a bucket boundary is unnecessary - read the cumulative bucket directly.
 
 **Choose the bucket boundary before you need it.** Native histograms aside, classic Prometheus histograms only resolve at defined bucket edges, so the SLI threshold must coincide with a bucket boundary. Add explicit buckets at your candidate thresholds (0.1, 0.25, 0.3, 0.5, 1, 2.5) when instrumenting, or you will be interpolating.
 
@@ -38,7 +38,7 @@ sum(rate(http_request_duration_seconds_count{job="checkout",code!~"5.."}[28d]))
 ```
 
 ```yaml
-# Instrument with buckets that match your thresholds — decide them up front
+# Instrument with buckets that match your thresholds - decide them up front
 histogram:
   name: http_request_duration_seconds
   buckets: [0.05, 0.1, 0.2, 0.3, 0.5, 1, 2.5, 5, 10]
@@ -46,7 +46,7 @@ histogram:
 
 ## Interview tips
 
-- Lead with "latency as a ratio, not a percentile value" — it is the distinguishing insight.
+- Lead with "latency as a ratio, not a percentile value" - it is the distinguishing insight.
 - Mention that percentiles cannot be averaged; interviewers use that as a probe.
 - Have an opinion on vantage point (client, edge, server) and on excluding failed and streaming requests.
 

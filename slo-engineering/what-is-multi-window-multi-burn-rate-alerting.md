@@ -11,7 +11,7 @@ tags:
 
 # What is multi-window multi-burn-rate alerting?
 
-**Short answer:** Instead of alerting when an error rate crosses a fixed threshold, you alert on how fast the error budget is being consumed. Two burn-rate conditions run in parallel — a fast one (page: a large fraction of the budget in hours) and a slow one (ticket: steady erosion over days) — and each requires both a long and a short window to fire, so alerts are sensitive without being flappy.
+**Short answer:** Instead of alerting when an error rate crosses a fixed threshold, you alert on how fast the error budget is being consumed. Two burn-rate conditions run in parallel - a fast one (page: a large fraction of the budget in hours) and a slow one (ticket: steady erosion over days) - and each requires both a long and a short window to fire, so alerts are sensitive without being flappy.
 
 ## Detail
 
@@ -30,7 +30,7 @@ tags:
 
 **What it fixes.** A static "error rate > 1%" threshold pages at 3am for a two-minute blip that consumed 0.1% of the budget, and stays silent during a 0.5% error rate that will burn the entire month. Burn-rate alerting ties the page to consequence: you are woken only when the budget is genuinely at risk.
 
-**Practical cautions.** Low-traffic services produce noisy ratios — either aggregate to a longer window, alert on absolute failure counts, or accept fewer, coarser alerts. Precompute the SLI ratio as a recording rule so alert expressions stay readable, and keep the ratio numerator and denominator consistent between the fast and slow rules.
+**Practical cautions.** Low-traffic services produce noisy ratios - either aggregate to a longer window, alert on absolute failure counts, or accept fewer, coarser alerts. Precompute the SLI ratio as a recording rule so alert expressions stay readable, and keep the ratio numerator and denominator consistent between the fast and slow rules.
 
 ## Example
 
@@ -55,13 +55,13 @@ groups:
         for: 2m
         labels: { severity: page }
         annotations:
-          summary: "Checkout burning error budget at 14.4x — 2% of the 30d budget gone"
+          summary: "Checkout burning error budget at 14.4x - 2% of the 30d budget gone"
 ```
 
 ## Interview tips
 
 - Define burn rate as a multiplier of the budget-exhausting rate; that one sentence carries the concept.
-- Explain the short window's purpose (fast reset, less flapping) — most candidates only mention the long one.
+- Explain the short window's purpose (fast reset, less flapping) - most candidates only mention the long one.
 - Expect: "what about a service with 10 requests a minute?" Say the ratio is too noisy and describe the alternatives.
 
 ---
