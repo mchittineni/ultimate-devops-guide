@@ -11,7 +11,7 @@ tags:
 
 The operating system under everything - commands, shell scripting, systemd, service management, and the filesystem hierarchy.
 
-**7 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 2 · 🔴 Advanced: 0
+**8 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 2 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -24,6 +24,7 @@ The operating system under everything - commands, shell scripting, systemd, serv
 | 45  | [What is Linux File System Hierarchy?](./what-is-linux-file-system-hierarchy.md)                                                                                       | 🟢 Beginner     |
 | 238 | [How do you troubleshoot SSH failures, high CPU, and disk space on Linux servers?](./how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md) | 🟢 Beginner     |
 | 265 | [How do you analyse logs and text files with grep, awk, and sed?](./how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed.md)                                   | 🟡 Intermediate |
+| 295 | [How do you debug a Linux performance problem from first principles?](./how-do-you-debug-a-linux-performance-problem-from-first-principles.md)                         | 🔴 Advanced     |
 
 ## What interviewers probe here
 
