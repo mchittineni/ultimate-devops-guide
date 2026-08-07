@@ -116,6 +116,12 @@ async def handle(req):
         if req.is_read:
             cached = cache.get(req.key, allow_stale=True)
             return cached or Response(200, body=DEFAULT_FALLBACK)
+        # For writes: check if downstream already committed before enqueueing.
+        # The idempotency key (req.id) prevents replay: the queue consumer and downstream
+        # both enforce it, and we check operation status before assuming failure.
+        existing = check_operation_status(req.id)
+        if existing:                          # downstream committed despite timeout
+            return existing                   # return the actual result, do not enqueue
         if durable_queue.enqueue(req):        # only claim acceptance once it is persisted
             return Response(202, headers={"Location": f"/status/{req.id}"})
         return Response(503, headers={"Retry-After": "5"})        # nothing durable: say so

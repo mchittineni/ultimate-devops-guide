@@ -80,10 +80,12 @@ transforms:
       # Explicit classification only - an event is audit because the emitter said so,
       # never because it happened to mention a user id.
       audit: '.log_class == "audit" || .log_class == "compliance"'
+      # General branch for events not classified as audit or compliance
+      general: '!(.log_class == "audit" || .log_class == "compliance")'
 
   sample_success:
     type: sample
-    inputs: [redact]
+    inputs: [split_audit.general]
     rate: 100 # keep 1%...
     exclude: '.level == "error" || .level == "warn" || exists(.error)' # ...but never errors
 
@@ -95,9 +97,11 @@ sinks:
     # labels only - the log body stays unindexed in object storage
   archive:
     type: aws_s3
-    inputs: [redact] # unsampled, compressed, cheap - operational replay, NOT audit retention
+    inputs: [split_audit.general] # unsampled, compressed, cheap - operational replay, NOT audit retention
     compression: zstd
     key_prefix: "logs/%Y/%m/%d/"
+    server_side_encryption: aws:kms
+    ssekms_key_id: "${GENERAL_KMS_KEY_ARN}"
     # 30-day lifecycle then expire: general events must not inherit audit retention,
     # which is what makes an audit bucket both expensive and legally risky.
 
@@ -106,8 +110,8 @@ sinks:
     inputs: [split_audit.audit] # only events explicitly classified as audit/compliance
     compression: zstd
     key_prefix: "audit/%Y/%m/%d/"
-    encryption: aws:kms
-    kms_key_id: "${AUDIT_KMS_KEY_ARN}" # separate CMK, separate key policy
+    server_side_encryption: aws:kms
+    ssekms_key_id: "${AUDIT_KMS_KEY_ARN}" # separate CMK, separate key policy
     # Bucket is provisioned with Object Lock in COMPLIANCE mode for the statutory
     # retention period (7 years here) and no lifecycle expiry inside it: nobody -
     # including the root account - can delete or overwrite an object before it expires.
