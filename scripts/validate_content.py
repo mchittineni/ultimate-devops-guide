@@ -151,7 +151,7 @@ def check_indexes(topics, errors: list[str]) -> None:
 def check_orphan_files(errors: list[str]) -> None:
     """Catch topic directories that exist on disk but are not registered, and bad filenames."""
     registered = set(topic_meta())
-    skip = {"scripts", ".git", ".github", "node_modules"}
+    skip = {"scripts", ".git", ".github", "node_modules", "DevOps-Interview-Guide"}
     for entry in sorted(p for p in REPO_ROOT.iterdir() if p.is_dir()):
         if entry.name in skip or entry.name.startswith("."):
             continue

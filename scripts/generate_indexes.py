@@ -41,6 +41,7 @@ GROUP_ORDER = [
     ("Reliability and Operations", "📈"),
     ("Security", "🔐"),
     ("Platform and Leadership", "🧭"),
+    ("Interview Prep", "🎤"),
 ]
 
 

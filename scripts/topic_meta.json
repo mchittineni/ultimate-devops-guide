@@ -378,5 +378,25 @@
       "Measuring adoption and developer outcomes rather than components shipped.",
       "Versioning the platform interface and automating consumer migrations."
     ]
+  },
+  "scripting-and-automation": {
+    "order": 39,
+    "group": "Foundations",
+    "description": "The scripting layer under every pipeline - defensive Bash for orchestration, and Python for cloud APIs, structured data, and the tooling Bash cannot carry.",
+    "study_notes": [
+      "What `set -euo pipefail` does, line by line.",
+      "Whether your script is safe to run twice.",
+      "When you stop writing Bash and reach for Python."
+    ]
+  },
+  "interview-experience": {
+    "order": 40,
+    "group": "Interview Prep",
+    "description": "How the interview itself works - the round structure, explaining your project, answering scenario questions, and the checklist of what actually gets asked.",
+    "study_notes": [
+      "A rehearsed 90-second walkthrough of your current project.",
+      "A justification for every technology choice you name.",
+      "A method for scenario questions that ends in prevention, not just a fix."
+    ]
   }
 }
