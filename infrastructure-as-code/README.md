@@ -9,7 +9,7 @@ tags:
 
 # Infrastructure as Code
 
-Declarative infrastructure with Terraform and Ansible — state, providers, idempotency, and where each tool belongs.
+Declarative infrastructure with Terraform and Ansible - state, providers, idempotency, and where each tool belongs.
 
 **5 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 2 · 🔴 Advanced: 0
 

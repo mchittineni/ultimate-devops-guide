@@ -19,13 +19,13 @@ tags:
 
 Core concepts:
 
-- **Inventory** — the hosts and groups to manage, static (INI/YAML) or dynamic (queried from a cloud API).
-- **Playbook** — an ordered list of plays; each play maps hosts to tasks.
-- **Task** — one invocation of a module, which should be idempotent.
-- **Module** — the unit of work (`apt`, `copy`, `template`, `service`, `user`, `kubernetes.core.k8s`); over 3,000 exist across collections.
-- **Role** — the reusable packaging format: tasks, handlers, templates, defaults, and variables in a conventional directory layout.
-- **Handler** — a task triggered only when something actually changed (restart a service after a config change).
-- **Ansible Vault** — encrypts sensitive variables at rest inside the repository.
+- **Inventory** - the hosts and groups to manage, static (INI/YAML) or dynamic (queried from a cloud API).
+- **Playbook** - an ordered list of plays; each play maps hosts to tasks.
+- **Task** - one invocation of a module, which should be idempotent.
+- **Module** - the unit of work (`apt`, `copy`, `template`, `service`, `user`, `kubernetes.core.k8s`); over 3,000 exist across collections.
+- **Role** - the reusable packaging format: tasks, handlers, templates, defaults, and variables in a conventional directory layout.
+- **Handler** - a task triggered only when something actually changed (restart a service after a config change).
+- **Ansible Vault** - encrypts sensitive variables at rest inside the repository.
 
 Ansible shines at configuration management, application deployment, and orchestrated multi-step operations (rolling restarts, patching runs). It can provision cloud resources, but Terraform is generally the better fit for that half of the problem.
 
@@ -70,7 +70,7 @@ ansible-playbook -i inventory/prod site.yml --check --diff   # dry run
 
 ## Interview tips
 
-- Idempotency and handlers are the concepts to demonstrate — a task that always reports `changed` is a bug.
+- Idempotency and handlers are the concepts to demonstrate - a task that always reports `changed` is a bug.
 - `--check --diff` for dry runs, and `serial:` for rolling updates without downtime.
 - Vault (or an external secrets manager) is the expected answer on secrets in playbooks.
 

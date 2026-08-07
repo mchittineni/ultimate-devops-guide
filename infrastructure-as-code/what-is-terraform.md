@@ -19,7 +19,7 @@ tags:
 
 **State** is the crux. `terraform.tfstate` maps configuration to real resource IDs. In a team it must live in a remote backend (S3 with DynamoDB locking, Terraform Cloud, GCS) so it is shared, locked during apply, and versioned. State contains sensitive values, so it must be encrypted and access-controlled.
 
-**Modules** package reusable groups of resources with inputs and outputs — the unit of abstraction that keeps large estates manageable.
+**Modules** package reusable groups of resources with inputs and outputs - the unit of abstraction that keeps large estates manageable.
 
 **Workspaces and directories** separate environments; most teams prefer separate state per environment with a shared module, rather than workspaces, for blast-radius reasons.
 

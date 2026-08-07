@@ -11,7 +11,7 @@ tags:
 
 # What are Terraform providers?
 
-**Short answer:** A provider is a plugin that teaches Terraform how to talk to an API — AWS, Azure, Kubernetes, GitHub, Datadog — exposing that platform's resources and data sources to HCL.
+**Short answer:** A provider is a plugin that teaches Terraform how to talk to an API - AWS, Azure, Kubernetes, GitHub, Datadog - exposing that platform's resources and data sources to HCL.
 
 ## Detail
 
@@ -19,15 +19,15 @@ Providers are what make Terraform universal. The core binary understands configu
 
 What a provider supplies:
 
-- **Resources** — things Terraform creates and owns (`aws_instance`, `kubernetes_deployment`).
-- **Data sources** — read-only lookups of things it does not own (`aws_ami`, `aws_caller_identity`).
-- **Provider configuration** — region, credentials, endpoints, default tags.
+- **Resources** - things Terraform creates and owns (`aws_instance`, `kubernetes_deployment`).
+- **Data sources** - read-only lookups of things it does not own (`aws_ami`, `aws_caller_identity`).
+- **Provider configuration** - region, credentials, endpoints, default tags.
 
-**Aliases** let you configure the same provider more than once — multiple regions or multiple accounts in a single configuration — and select one per resource with `provider = aws.eu`.
+**Aliases** let you configure the same provider more than once - multiple regions or multiple accounts in a single configuration - and select one per resource with `provider = aws.eu`.
 
 **Version constraints** matter. Providers evolve independently of Terraform; pin with `~>` and commit the `.terraform.lock.hcl` lock file so every engineer and every CI run resolves identical versions and checksums.
 
-Authentication should come from the environment — an assumed role, an OIDC token from CI, or a cloud SDK credential chain — never hardcoded keys in the provider block.
+Authentication should come from the environment - an assumed role, an OIDC token from CI, or a cloud SDK credential chain - never hardcoded keys in the provider block.
 
 ## Example
 
