@@ -11,17 +11,17 @@ tags:
 
 # What is Chaos Engineering?
 
-**Short answer:** Chaos engineering is the disciplined practice of running controlled experiments that inject failure into a system to test a hypothesis about its resilience — finding weaknesses before they cause an outage.
+**Short answer:** Chaos engineering is the disciplined practice of running controlled experiments that inject failure into a system to test a hypothesis about its resilience - finding weaknesses before they cause an outage.
 
 ## Detail
 
 **It is not "randomly breaking things."** It is the scientific method applied to reliability:
 
-1. **Define steady state** — a measurable indicator of normal health (order rate, p99 latency, error rate).
-2. **Form a hypothesis** — "if one availability zone becomes unreachable, error rate stays below 0.1% and p99 latency stays under 500 ms."
+1. **Define steady state** - a measurable indicator of normal health (order rate, p99 latency, error rate).
+2. **Form a hypothesis** - "if one availability zone becomes unreachable, error rate stays below 0.1% and p99 latency stays under 500 ms."
 3. **Design the experiment** with the smallest blast radius that tests the hypothesis, and a defined abort condition.
 4. **Run it**, starting in a non-production environment, then in production with limited scope and everyone watching.
-5. **Observe and analyse** — either the hypothesis holds (confidence gained) or it does not (a weakness found before customers found it).
+5. **Observe and analyse** - either the hypothesis holds (confidence gained) or it does not (a weakness found before customers found it).
 6. **Fix and repeat**, then automate the experiment as a regression test.
 
 **Failure modes to inject:** instance and pod termination, availability-zone loss, network latency and packet loss, dependency failure and timeout, DNS failure, resource exhaustion (CPU, memory, disk), clock skew, and certificate expiry.

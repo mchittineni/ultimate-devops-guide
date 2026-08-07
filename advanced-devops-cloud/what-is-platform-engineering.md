@@ -11,7 +11,7 @@ tags:
 
 # What is Platform Engineering?
 
-**Short answer:** Platform engineering builds and runs an internal developer platform — a curated, self-service layer over infrastructure — treating developers as customers and the platform as a product with a roadmap, users, and success metrics.
+**Short answer:** Platform engineering builds and runs an internal developer platform - a curated, self-service layer over infrastructure - treating developers as customers and the platform as a product with a roadmap, users, and success metrics.
 
 ## Detail
 
@@ -19,9 +19,9 @@ tags:
 
 **What an internal developer platform provides**
 
-- **Self-service provisioning** — a new service with pipeline, repository, monitoring, and environments in minutes, without a ticket.
-- **Golden paths** — opinionated, supported templates that encode security, observability, and deployment best practice by default.
-- **Abstraction with escape hatches** — sensible defaults for the 80%, with the ability to drop to raw configuration when genuinely needed.
+- **Self-service provisioning** - a new service with pipeline, repository, monitoring, and environments in minutes, without a ticket.
+- **Golden paths** - opinionated, supported templates that encode security, observability, and deployment best practice by default.
+- **Abstraction with escape hatches** - sensible defaults for the 80%, with the ability to drop to raw configuration when genuinely needed.
 - **Standardised CI/CD, secrets management, and observability** wired in automatically.
 - **A developer portal** (Backstage is the common choice) providing a service catalogue, documentation, scaffolding, and ownership information.
 
@@ -29,7 +29,7 @@ tags:
 
 **Metrics:** time from idea to first deployment, adoption rate of golden paths, developer satisfaction survey scores, and the DORA metrics of teams using the platform versus those that are not.
 
-**The anti-pattern** is the platform team as a gatekeeper — a ticket queue in front of infrastructure. That is the old operations silo with a new name.
+**The anti-pattern** is the platform team as a gatekeeper - a ticket queue in front of infrastructure. That is the old operations silo with a new name.
 
 ## Interview tips
 

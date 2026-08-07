@@ -11,15 +11,15 @@ tags:
 
 # What is FinOps?
 
-**Short answer:** FinOps is the operational discipline of bringing financial accountability to variable cloud spend — a collaboration between engineering, finance, and business to make cost a measurable, owned engineering attribute.
+**Short answer:** FinOps is the operational discipline of bringing financial accountability to variable cloud spend - a collaboration between engineering, finance, and business to make cost a measurable, owned engineering attribute.
 
 ## Detail
 
 **The three phases**, which run continuously per workload rather than sequentially:
 
-1. **Inform** — visibility and allocation. Tagging, showback dashboards, budgets, forecasts, and unit economics so every team can see what it spends.
-2. **Optimise** — right-sizing, commitment purchases, spot adoption, storage lifecycle, architectural change, and waste elimination.
-3. **Operate** — continuous governance: policies, anomaly alerting, regular review cadence, and cost as a factor in design decisions.
+1. **Inform** - visibility and allocation. Tagging, showback dashboards, budgets, forecasts, and unit economics so every team can see what it spends.
+2. **Optimise** - right-sizing, commitment purchases, spot adoption, storage lifecycle, architectural change, and waste elimination.
+3. **Operate** - continuous governance: policies, anomaly alerting, regular review cadence, and cost as a factor in design decisions.
 
 **Core principles** (from the FinOps Foundation): teams need to collaborate; everyone takes ownership of their cloud usage; a centralised team drives FinOps practice; reports should be accessible and timely; decisions are driven by the business value of cloud, not by cost alone; and take advantage of the variable cost model.
 

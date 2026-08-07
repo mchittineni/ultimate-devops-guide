@@ -11,7 +11,7 @@ tags:
 
 # What is Infrastructure Drift?
 
-**Short answer:** Infrastructure drift is divergence between the infrastructure described in code and the infrastructure actually running — usually caused by manual changes, external automation, or failed applies — undermining reproducibility and hiding risk.
+**Short answer:** Infrastructure drift is divergence between the infrastructure described in code and the infrastructure actually running - usually caused by manual changes, external automation, or failed applies - undermining reproducibility and hiding risk.
 
 ## Detail
 
@@ -23,7 +23,7 @@ tags:
 - Partially failed applies leaving resources half-configured.
 - Provider-side defaults that change between versions.
 
-**Why it matters.** Drift means your code no longer describes reality, so a future apply may revert a critical fix or destroy something unexpected. Disaster recovery rebuilds produce a subtly different environment. Security posture becomes unverifiable — the code says the bucket is private, the console says otherwise.
+**Why it matters.** Drift means your code no longer describes reality, so a future apply may revert a critical fix or destroy something unexpected. Disaster recovery rebuilds produce a subtly different environment. Security posture becomes unverifiable - the code says the bucket is private, the console says otherwise.
 
 **Detection**
 
@@ -34,7 +34,7 @@ tags:
 **Prevention and remediation**
 
 - Remove or tightly restrict console write access in production; make the pipeline the only path.
-- Automatic reconciliation where it is safe — Argo CD's `selfHeal`, or a scheduled re-apply.
+- Automatic reconciliation where it is safe - Argo CD's `selfHeal`, or a scheduled re-apply.
 - Use `ignore_changes` deliberately for fields legitimately managed elsewhere (autoscaled desired counts, tags applied by other systems).
 - Import genuinely-needed manual changes back into code (`terraform import`) rather than reverting blindly.
 - A break-glass process for emergencies that includes a mandatory follow-up to reconcile code with reality.
@@ -42,7 +42,7 @@ tags:
 ## Example
 
 ```bash
-# Scheduled drift check — fails CI when live infrastructure diverges from code
+# Scheduled drift check - fails CI when live infrastructure diverges from code
 terraform plan -detailed-exitcode -lock=false
 # exit 0 = no drift, 2 = drift detected, 1 = error
 ```
@@ -51,7 +51,7 @@ terraform plan -detailed-exitcode -lock=false
 
 - `-detailed-exitcode` on a schedule is a concrete, immediately usable answer.
 - Emphasise process alongside tooling: break-glass access with mandatory reconciliation afterwards.
-- Note that automatic reconciliation is not always safe — reverting a fix during an incident is a real risk.
+- Note that automatic reconciliation is not always safe - reverting a fix during an incident is a real risk.
 
 ---
 
