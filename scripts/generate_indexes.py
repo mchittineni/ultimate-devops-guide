@@ -30,6 +30,42 @@ DIFFICULTY_BADGE = {
     "Advanced": "🔴 Advanced",
 }
 
+# Themed sections for the root README, in display order. Each topic declares its
+# group in topic_meta.json; a topic whose group is unlisted falls into "Other".
+GROUP_ORDER = [
+    ("Foundations", "🧱"),
+    ("Containers and Kubernetes", "📦"),
+    ("Delivery and Automation", "🔁"),
+    ("Cloud Providers", "☁️"),
+    ("Architecture and Scale", "🏗️"),
+    ("Reliability and Operations", "📈"),
+    ("Security", "🔐"),
+    ("Platform and Leadership", "🧭"),
+]
+
+
+def grouped_topics(topics: list[Topic]) -> list[tuple[str, str, list[Topic]]]:
+    """Topics bucketed into the themed sections used by the root README."""
+    meta = topic_meta()
+    buckets: dict[str, list[Topic]] = {name: [] for name, _ in GROUP_ORDER}
+    for topic in topics:
+        group = str(meta.get(topic.directory, {}).get("group", "Other"))
+        buckets.setdefault(group, []).append(topic)
+    emoji = dict(GROUP_ORDER)
+    ordered = [name for name, _ in GROUP_ORDER] + [
+        name for name in buckets if name not in emoji
+    ]
+    return [
+        (name, emoji.get(name, "📚"), buckets[name]) for name in ordered if buckets.get(name)
+    ]
+
+
+def difficulty_counts(questions) -> dict[str, int]:
+    return {
+        level: sum(1 for q in questions if q.difficulty == level)
+        for level in ("Beginner", "Intermediate", "Advanced")
+    }
+
 
 def render_topic_readme(topic: Topic, _current: str | None = None) -> str:
     meta = topic_meta().get(topic.directory, {})
@@ -77,45 +113,67 @@ def render_topic_readme(topic: Topic, _current: str | None = None) -> str:
 
 
 def render_root_toc(topics: list[Topic]) -> str:
-    lines = ["| No. | Question | Difficulty |", "| --- | --- | --- |"]
-    for topic in topics:
-        lines.append(
-            f"| | **[{topic.title}](./{topic.directory}/README.md)** "
-            f"({len(topic.questions)}) | |"
-        )
-        for q in topic.questions:
-            lines.append(
-                f"| {q.id} | [{q.title}](./{topic.directory}/{q.filename}) | "
-                f"{DIFFICULTY_BADGE.get(q.difficulty, q.difficulty)} |"
-            )
-    return "\n".join(lines)
+    """Every question, as one collapsible block per topic under a themed heading.
+
+    Collapsed by default: 230+ rows in a single table is a wall of text, whereas
+    one ``<details>`` per topic lets a reader open only what they are studying.
+    """
+    lines: list[str] = []
+    for group, emoji, group_topics in grouped_topics(topics):
+        group_questions = all_questions(group_topics)
+        lines += [f"### {emoji} {group}", "", f"_{len(group_questions)} questions_", ""]
+        for topic in group_topics:
+            per = difficulty_counts(topic.questions)
+            lines += [
+                "<details>",
+                f"<summary><b>{topic.title}</b> · {len(topic.questions)} questions · "
+                f"🟢 {per['Beginner']} 🟡 {per['Intermediate']} 🔴 {per['Advanced']}</summary>",
+                "",
+                f"[Open the {topic.title} index →](./{topic.directory}/README.md)",
+                "",
+                "| No. | Question | Difficulty |",
+                "| --- | --- | --- |",
+            ]
+            for q in topic.questions:
+                lines.append(
+                    f"| {q.id} | [{q.title}](./{topic.directory}/{q.filename}) | "
+                    f"{DIFFICULTY_BADGE.get(q.difficulty, q.difficulty)} |"
+                )
+            if not topic.questions:
+                lines.append("| — | _No questions yet — contributions welcome._ | — |")
+            lines += ["", "</details>", ""]
+    return "\n".join(lines).strip()
 
 
 def render_stats(topics: list[Topic]) -> str:
     questions = all_questions(topics)
-    counts = {
-        level: sum(1 for q in questions if q.difficulty == level)
-        for level in ("Beginner", "Intermediate", "Advanced")
-    }
+    counts = difficulty_counts(questions)
     lines = [
         f"**{len(questions)} questions** across **{len(topics)} topics** — "
         f"🟢 {counts['Beginner']} Beginner · 🟡 {counts['Intermediate']} Intermediate · "
         f"🔴 {counts['Advanced']} Advanced",
         "",
-        "| Topic | Directory | Questions | 🟢 | 🟡 | 🔴 |",
-        "| --- | --- | --- | --- | --- | --- |",
     ]
-    for topic in topics:
-        per = {
-            level: sum(1 for q in topic.questions if q.difficulty == level)
-            for level in ("Beginner", "Intermediate", "Advanced")
-        }
-        lines.append(
-            f"| [{topic.title}](./{topic.directory}/README.md) | `{topic.directory}` | "
-            f"{len(topic.questions)} | {per['Beginner']} | {per['Intermediate']} | "
-            f"{per['Advanced']} |"
-        )
-    return "\n".join(lines)
+    meta = topic_meta()
+    for group, emoji, group_topics in grouped_topics(topics):
+        lines += [
+            f"### {emoji} {group}",
+            "",
+            "| Topic | Questions | 🟢 | 🟡 | 🔴 | What it covers |",
+            "| --- | --- | --- | --- | --- | --- |",
+        ]
+        for topic in group_topics:
+            per = difficulty_counts(topic.questions)
+            summary = str(meta.get(topic.directory, {}).get("description", "")).split(":", 1)
+            blurb = (summary[1] if len(summary) > 1 else summary[0]).strip()
+            blurb = blurb[:97].rsplit(" ", 1)[0] + "…" if len(blurb) > 100 else blurb
+            lines.append(
+                f"| **[{topic.title}](./{topic.directory}/README.md)** | "
+                f"{len(topic.questions)} | {per['Beginner']} | {per['Intermediate']} | "
+                f"{per['Advanced']} | {blurb} |"
+            )
+        lines.append("")
+    return "\n".join(lines).strip()
 
 
 def main() -> int:
