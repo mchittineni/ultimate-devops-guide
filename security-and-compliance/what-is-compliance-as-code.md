@@ -23,7 +23,7 @@ Traditional compliance is a point-in-time exercise: screenshots, spreadsheets, a
 - **Pipeline gates** - `conftest` or `checkov` evaluate Terraform plans and Kubernetes manifests before anything is applied. A non-compliant change fails the pull request.
 - **Admission control** - the cluster rejects non-compliant workloads at the API server, so the control holds even for changes that bypass CI.
 - **Continuous cloud posture checks** - AWS Config rules, Azure Policy, or Cloud Custodian evaluate live resources and can auto-remediate.
-- **Evidence generation** - every policy evaluation is logged, giving auditors a continuous, queryable record mapped to control IDs (SOC 2 CC6.1, PCI-DSS 3.4, and so on).
+- **Evidence generation** - every policy evaluation is logged, giving auditors a continuous, queryable record mapped to control IDs (SOC 2 CC6.1, PCI DSS v4.0.1 Req 3.5.1, and so on). Cite the current numbering - v3.2.1 retired in March 2024 and v4.x renumbered heavily, so the old "PCI-DSS 3.4" style reference dates an answer immediately.
 
 The cultural benefit is that requirements stop being a PDF nobody reads: they become failing tests with a clear message telling the engineer exactly what to change.
 
