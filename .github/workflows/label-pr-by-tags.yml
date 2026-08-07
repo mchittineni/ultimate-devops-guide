@@ -2,11 +2,16 @@ name: Label PR by Content Tags
 
 on:
   pull_request_target:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
 
 permissions:
   contents: read
   pull-requests: write
+  issues: write
 
 concurrency:
   group: label-pr-${{ github.event.pull_request.number }}
@@ -30,108 +35,220 @@ jobs:
           script: |
             const { owner, repo } = context.repo;
             const pr = context.payload.pull_request;
+
             const ignored = new Set(
-              process.env.IGNORED_TAGS.split(",").map(t => t.trim().toLowerCase()).filter(Boolean)
+              process.env.IGNORED_TAGS
+                .split(",")
+                .map(t => t.trim().toLowerCase())
+                .filter(Boolean)
             );
+
             const maxLabels = Number(process.env.MAX_LABELS);
             const marker = process.env.LABEL_MARKER;
             const color = process.env.LABEL_COLOR;
 
-            // GitHub label names are limited to 50 chars; keep the vocabulary tight
-            // so a malformed tag cannot create junk labels.
-            const sanitize = tag =>
-              tag.trim().toLowerCase().replace(/[^a-z0-9._-]/g, "-").replace(/^-+|-+$/g, "").slice(0, 50);
+            const sanitize = tag => {
+              const clean = tag
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-z0-9._-]/g, "-")
+                .replace(/^-+|-+$/g, "")
+                .slice(0, 45);
 
-            // Minimal frontmatter reader: only the `tags:` key, block or inline form.
-            // Not a YAML parser - it must never evaluate anything from the PR.
-            const parseTags = text => {
-              const fm = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-              if (!fm) return [];
-              const lines = fm[1].split(/\r?\n/);
-              const out = [];
-              for (let i = 0; i < lines.length; i++) {
-                const inline = lines[i].match(/^tags:\s*\[(.*)\]\s*$/);
-                if (inline) {
-                  out.push(...inline[1].split(",").map(t => t.replace(/['"]/g, "")));
-                  continue;
-                }
-                if (!/^tags:\s*$/.test(lines[i])) continue;
-                for (let j = i + 1; j < lines.length; j++) {
-                  const item = lines[j].match(/^\s+-\s*(.+?)\s*$/);
-                  if (!item) break;                       // dedent ends the block
-                  out.push(item[1].replace(/['"]/g, ""));
-                }
-              }
-              return out;
+              return clean ? `topic:${clean}` : null;
             };
 
-            const files = await github.paginate(github.rest.pulls.listFiles, {
-              owner, repo, pull_number: pr.number, per_page: 100,
-            });
-            const changed = files.filter(f => f.status !== "removed" && f.filename.endsWith(".md"));
+            const parseTags = text => {
+              // Added \s* to handle potential BOMs or leading newlines
+              const fm = text.match(/^\s*---\r?\n([\s\S]*?)\r?\n---/);
+
+              if (!fm) return [];
+
+              const lines = fm[1].split(/\r?\n/);
+              const tags = [];
+
+              for (let i = 0; i < lines.length; i++) {
+                const inline = lines[i].match(/^tags:\s*\[(.*)\]\s*$/);
+
+                if (inline) {
+                  tags.push(
+                    ...inline[1]
+                      .split(",")
+                      .map(t => t.replace(/['"]/g, ""))
+                  );
+                  continue;
+                }
+
+                if (!/^tags:\s*$/.test(lines[i])) {
+                  continue;
+                }
+
+                for (let j = i + 1; j < lines.length; j++) {
+                  const item = lines[j].match(/^\s+-\s*(.+?)\s*$/);
+                  if (!item) break;
+                  tags.push(item[1].replace(/['"]/g, ""));
+                }
+              }
+
+              return tags;
+            };
+
+            const files = await github.paginate(
+              github.rest.pulls.listFiles,
+              {
+                owner,
+                repo,
+                pull_number: pr.number,
+                per_page: 100
+              }
+            );
+
+            const changed = files.filter(
+              file =>
+                file.status !== "removed" &&
+                file.filename.endsWith(".md")
+            );
+
             if (changed.length === 0) {
-              core.info("No Markdown files changed - nothing to label.");
+              core.info("No Markdown files changed.");
               return;
             }
 
             const tags = new Set();
+
             for (const file of changed) {
-              let content;
               try {
-                // Read at the PR head SHA. Fork head commits live in this repo's
-                // object store via refs/pull/N/head, so this resolves for forks too.
-                const res = await github.rest.repos.getContent({
-                  owner, repo, path: file.filename, ref: pr.head.sha,
+                // Fix: Fetch content directly from the fork's repo context to avoid 404s
+                const response = await github.rest.repos.getContent({
+                  owner: pr.head.repo.owner.login,
+                  repo: pr.head.repo.name,
+                  path: file.filename,
+                  ref: pr.head.sha
                 });
-                if (Array.isArray(res.data) || !res.data.content) continue;
-                content = Buffer.from(res.data.content, "base64").toString("utf8");
-              } catch (err) {
-                core.warning(`Could not read ${file.filename}: ${err.message}`);
-                continue;
-              }
-              for (const raw of parseTags(content)) {
-                const tag = sanitize(raw);
-                if (tag && !ignored.has(tag)) tags.add(tag);
+
+                if (Array.isArray(response.data) || !response.data.content) {
+                  continue;
+                }
+
+                const content = Buffer.from(
+                  response.data.content,
+                  "base64"
+                ).toString("utf8");
+
+                for (const raw of parseTags(content)) {
+                  const lower = raw.trim().toLowerCase();
+                  if (ignored.has(lower)) continue;
+
+                  const label = sanitize(raw);
+                  if (label) tags.add(label);
+                }
+              } catch(error) {
+                core.warning(`Could not read ${file.filename}: ${error.message}`);
               }
             }
 
             const wanted = [...tags].sort();
-            if (wanted.length > maxLabels) {
-              core.notice(
-                `${wanted.length} tags found; applying the first ${maxLabels} alphabetically. ` +
-                `Skipped: ${wanted.slice(maxLabels).join(", ")}`
-              );
-            }
             const toApply = wanted.slice(0, maxLabels);
-            core.info(`Tags resolved from ${changed.length} file(s): ${wanted.join(", ") || "(none)"}`);
 
-            // Create any label that does not exist yet. 422 means it already does.
-            for (const name of toApply) {
+            core.info(`Applying labels: ${toApply.join(", ")}`);
+
+            for (const label of toApply) {
               try {
-                await github.rest.issues.createLabel({ owner, repo, name, color, description: marker });
-                core.info(`Created label "${name}"`);
-              } catch (err) {
-                if (err.status !== 422) throw err;
+                await github.rest.issues.createLabel({
+                  owner,
+                  repo,
+                  name: label,
+                  color,
+                  description: marker
+                });
+                core.info(`Created label ${label}`);
+              } catch(error) {
+                // 422 means the label already exists
+                if (error.status !== 422) throw error;
               }
             }
 
             if (toApply.length > 0) {
               await github.rest.issues.addLabels({
-                owner, repo, issue_number: pr.number, labels: toApply,
+                owner,
+                repo,
+                issue_number: pr.number,
+                labels: toApply
               });
             }
 
-            // Idempotency: drop labels this workflow applied on an earlier push that the
-            // current file set no longer justifies. Only labels carrying our marker
-            // description are touched, so hand-managed labels survive.
-            const current = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-              owner, repo, issue_number: pr.number, per_page: 100,
-            });
+            const current = await github.paginate(
+              github.rest.issues.listLabelsOnIssue,
+              {
+                owner,
+                repo,
+                issue_number: pr.number,
+                per_page: 100
+              }
+            );
+
             const keep = new Set(toApply);
+
             for (const label of current) {
-              if (label.description !== marker || keep.has(label.name)) continue;
+              if (label.description !== marker || keep.has(label.name)) {
+                continue;
+              }
+
               await github.rest.issues.removeLabel({
-                owner, repo, issue_number: pr.number, name: label.name,
+                owner,
+                repo,
+                issue_number: pr.number,
+                name: label.name
               });
-              core.info(`Removed stale label "${label.name}"`);
+              core.info(`Removed stale label ${label.name}`);
+            }
+
+            const commentMarker = "<!-- auto-label-summary -->";
+            
+            // Fix: Flushed left to prevent Markdown turning it into a <pre> block
+            const commentBody = `${commentMarker}
+
+            ## 🏷️ Automatic Content Labels
+            Labels were generated from Markdown frontmatter tags.
+            ### Applied Labels
+
+            ${
+              toApply.length > 0
+                ? toApply.map(l => `- \`${l}\``).join("\n")
+                : "- No tags detected"
+            }
+
+            ---
+            🤖 Automated by **Label PR by Content Tags workflow**
+            `.replace(/^[ \t]+/gm, ""); // Strips all leading indentation safely
+
+            const comments = await github.paginate(
+              github.rest.issues.listComments,
+              {
+                owner,
+                repo,
+                issue_number: pr.number
+              }
+            );
+
+            const existing = comments.find(
+              c => c.user.type === "Bot" && c.body.includes(commentMarker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body: commentBody
+              });
+              core.info("Updated existing PR comment.");
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: pr.number,
+                body: commentBody
+              });
+              core.info("Created PR comment.");
             }
