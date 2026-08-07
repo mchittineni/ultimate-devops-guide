@@ -25,7 +25,7 @@ Pods come and go with new IPs each time. A Service provides the fixed address in
 - **ExternalName** - a CNAME to an external DNS name; no proxying at all.
 - **Headless** (`clusterIP: None`) - no virtual IP; DNS returns pod IPs directly, which StatefulSets and client-side load balancing rely on.
 
-For HTTP, an **Ingress** or **Gateway API** resource typically sits in front, providing host/path routing and TLS termination across many Services from a single load balancer.
+For HTTP, an **Ingress** or **Gateway API** resource typically sits in front, providing host/path routing and TLS termination across many Services from a single load balancer. Know which way this is going: Ingress is feature-frozen, and **Gateway API is its successor** - role-oriented (cluster operators own the `Gateway`, app teams own the `HTTPRoute`), with header matching, traffic splitting, and cross-namespace routing expressed in the API instead of in controller-specific annotations. New clusters should start on Gateway API.
 
 ## Example
 
@@ -47,7 +47,7 @@ In-cluster DNS: `web.default.svc.cluster.local`, usually just `web` from the sam
 ## Interview tips
 
 - The label selector plus readiness probe is what makes traffic routing safe - say both.
-- Know why one LoadBalancer per service gets expensive, and how Ingress solves it.
+- Know why one LoadBalancer per service gets expensive, and how Ingress solves it - then say that Gateway API is the successor and Ingress is frozen.
 - Headless Services plus StatefulSets is a common follow-up for databases.
 
 ---
