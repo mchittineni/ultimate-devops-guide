@@ -1,10 +1,12 @@
 <div align="center">
 
-# ⚙️ The Ultimate DevOps Guide
+# ⚙️ Cloud, DevOps, Platform & SRE Guide
 
-**233 interview questions across 38 topics — answered to the depth an interviewer actually expects.**
+**233 questions across 38 topics — answered to the depth an interviewer actually expects.**
 
-Short answer you can say out loud · the detail and trade-offs behind it · a runnable example · the follow-ups to expect.
+Role tracks: **DevOps** (junior → senior) · **DevSecOps** · **SecOps** · **SRE** · **SLO** · **SLA** · **AWS** · **Azure** · **GCP** · **Cloud** · **Platform Engineering**
+
+Every answer gives you a short answer you can say out loud, the detail and trade-offs behind it, a runnable example, and the follow-ups to expect.
 
 [![Validate](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/validate-and-format.yml/badge.svg)](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/validate-and-format.yml)
 ![Questions](https://img.shields.io/badge/questions-233-blue)
@@ -22,7 +24,7 @@ Short answer you can say out loud · the detail and trade-offs behind it · a ru
 
 ## 🚀 Pick your role
 
-Ten tracks, each a reading order rather than a pile of links. Start at the left and work right.
+Twelve tracks, each a reading order rather than a pile of links. Start at the left and work right.
 
 | 🎯 Target role                | Read in this order                                                                                                                                                                                                                                                                       |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
