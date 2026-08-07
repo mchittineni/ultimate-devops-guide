@@ -11,17 +11,18 @@ tags:
 
 Designing systems that grow and stay up: scaling dimensions, load balancing, auto scaling, and recovery objectives.
 
-**5 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 0
+**6 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 2 · 🔴 Advanced: 0
 
 ## Questions
 
-| #   | Question                                                             | Difficulty      |
-| --- | -------------------------------------------------------------------- | --------------- |
-| 56  | [What is Scalability in DevOps?](./what-is-scalability-in-devops.md) | 🟢 Beginner     |
-| 57  | [What is High Availability?](./what-is-high-availability.md)         | 🟢 Beginner     |
-| 58  | [What is Load Balancing?](./what-is-load-balancing.md)               | 🟢 Beginner     |
-| 59  | [What is Auto Scaling?](./what-is-auto-scaling.md)                   | 🟢 Beginner     |
-| 60  | [What is Disaster Recovery?](./what-is-disaster-recovery.md)         | 🟡 Intermediate |
+| #   | Question                                                                                                                                           | Difficulty      |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 56  | [What is Scalability in DevOps?](./what-is-scalability-in-devops.md)                                                                               | 🟢 Beginner     |
+| 57  | [What is High Availability?](./what-is-high-availability.md)                                                                                       | 🟢 Beginner     |
+| 58  | [What is Load Balancing?](./what-is-load-balancing.md)                                                                                             | 🟢 Beginner     |
+| 59  | [What is Auto Scaling?](./what-is-auto-scaling.md)                                                                                                 | 🟢 Beginner     |
+| 60  | [What is Disaster Recovery?](./what-is-disaster-recovery.md)                                                                                       | 🟡 Intermediate |
+| 269 | [What is the difference between a layer 4 and a layer 7 load balancer?](./what-is-the-difference-between-a-layer-4-and-a-layer-7-load-balancer.md) | 🟡 Intermediate |
 
 ## What interviewers probe here
 
