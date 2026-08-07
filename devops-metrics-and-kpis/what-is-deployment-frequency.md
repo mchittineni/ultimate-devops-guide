@@ -11,7 +11,7 @@ tags:
 
 # What is Deployment Frequency?
 
-**Short answer:** Deployment frequency is how often an organisation successfully releases to production. It is the headline throughput metric, and a proxy for batch size — frequent deployment means small, low-risk changes.
+**Short answer:** Deployment frequency is how often an organisation successfully releases to production. It is the headline throughput metric, and a proxy for batch size - frequent deployment means small, low-risk changes.
 
 ## Detail
 
@@ -19,12 +19,12 @@ tags:
 
 | Performance level | Deployment frequency                     |
 | ----------------- | ---------------------------------------- |
-| Elite             | On demand — multiple deploys per day     |
+| Elite             | On demand - multiple deploys per day     |
 | High              | Between once per day and once per week   |
 | Medium            | Between once per week and once per month |
 | Low               | Fewer than once per month                |
 
-**Why it matters beyond speed.** Deployment frequency is really a measure of batch size and of how much friction sits between a developer and production. High frequency requires automated testing, automated deployment, trunk-based development, and low-risk release mechanics — so a high number is evidence that all of those exist.
+**Why it matters beyond speed.** Deployment frequency is really a measure of batch size and of how much friction sits between a developer and production. High frequency requires automated testing, automated deployment, trunk-based development, and low-risk release mechanics - so a high number is evidence that all of those exist.
 
 **What increases it**
 
@@ -43,7 +43,7 @@ tags:
 
 - Frame it as a proxy for batch size and delivery friction, not as a vanity number.
 - Name the practices that unlock it rather than just the target.
-- Mention measuring per service — aggregate figures hide the teams that are stuck.
+- Mention measuring per service - aggregate figures hide the teams that are stuck.
 
 ---
 
