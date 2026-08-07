@@ -22,7 +22,7 @@ tags:
 1. **Baseline and budget.** Measure current size, write rate, peak QPS, and largest table. State the RTO and RPO you are being held to, and the maximum acceptable write freeze. These numbers drive every later choice.
 2. **Prepare the target.** Same major version to start (upgrade later, separately), matching parameter groups, storage type sized for the _restore_ throughput, and the network path (VPN/Direct Connect/Interconnect) tested for sustained bandwidth - not ping.
 3. **Schema first, then constraints.** Create tables and primary keys; **drop or disable secondary indexes, foreign keys, and triggers for the bulk load**, then rebuild them afterwards. This is often the difference between a 4-hour and a 30-hour load.
-4. **Snapshot load.** `pg_dump`/`pg_basebackup`, `mydumper`, or the provider's service (DMS, Azure DMS, Database Migration Service). Record the exact LSN / GTID / binlog position of the snapshot - CDC must start from precisely there or you get silent data loss or duplicates.
+4. **Snapshot load.** `pg_dump`/`pg_basebackup`, `mydumper`, or the provider's service (DMS, Azure DMS, Database Migration Service). The dump and the CDC start position must describe the same instant - take the dump from the slot's exported snapshot (`pg_dump --snapshot=`, `mydumper` with the recorded GTID/binlog position), or let migration tooling coordinate the two for you. Any gap between them is silent data loss or duplicates.
 5. **CDC catch-up.** Start replication from that position and watch lag fall. Tables without a primary key will break most CDC tools; find them before you start (`pg_class`/`information_schema` query), not during.
 6. **Verify.** Row counts per table, checksums on a sampled or full basis (`pt-table-checksum`, or a hashed-aggregate query per table), sequence and identity high-water marks, and a read-only application test suite pointed at the target. Verification is the step teams skip and then regret.
 7. **Cut over.** Stop writes at the application edge (feature flag, or set the app to read-only), wait for lag to hit zero, promote the target, repoint the connection string, re-enable writes. Cut over via a **DNS CNAME or a proxy** (RDS Proxy, PgBouncer, ProxySQL) that you already use in production - not by editing config in twelve services.
@@ -33,9 +33,19 @@ tags:
 ## Example
 
 ```sql
--- Source (PostgreSQL): publication + a slot whose position anchors the snapshot.
+-- Source (PostgreSQL): publication, then a slot that EXPORTS the snapshot the dump must use.
+-- The dump and the CDC start position have to describe the same instant, or the rows written
+-- during the dump are either duplicated or lost. The SQL function
+-- pg_create_logical_replication_slot() does not export a usable snapshot - create the slot on
+-- a replication connection instead, which returns a snapshot name, and keep that connection
+-- open until the dump finishes.
 CREATE PUBLICATION migrate_pub FOR ALL TABLES;
-SELECT * FROM pg_create_logical_replication_slot('migrate_slot', 'pgoutput');
+
+--   psql "host=onprem-db dbname=app replication=database"
+--   CREATE_REPLICATION_SLOT migrate_slot LOGICAL pgoutput;
+--     -> slot_name | consistent_point (LSN) | snapshot_name  e.g. 00000003-00000002-1
+-- Then, in a second session, dump at exactly that snapshot:
+--   pg_dump --snapshot=00000003-00000002-1 -Fd -j8 -f /dump host=onprem-db dbname=app
 
 -- Tables with no primary key will silently break CDC. Find them first.
 SELECT c.relname FROM pg_class c
@@ -45,11 +55,19 @@ SELECT c.relname FROM pg_class c
 ```
 
 ```sql
--- Target: subscribe from the recorded position, then watch lag to zero.
+-- Target: restore the exported-snapshot dump FIRST, then attach CDC at the slot's
+-- consistent_point. copy_data = false is only safe because the dump came from that exact
+-- snapshot; the slot has been buffering every change since, so nothing at the boundary is
+-- duplicated or missed.
 CREATE SUBSCRIPTION migrate_sub
   CONNECTION 'host=onprem-db dbname=app user=repl'
   PUBLICATION migrate_pub
   WITH (copy_data = false, create_slot = false, slot_name = 'migrate_slot');
+
+-- If you would rather not hand-coordinate the two positions: let PostgreSQL do it with
+-- copy_data = true (it takes its own snapshot per table), or use tooling that coordinates
+-- snapshot and CDC position for you - AWS DMS full-load-plus-CDC, or Debezium's initial
+-- snapshot mode. Hand-coordination is only worth it for a parallel dump of a large database.
 
 -- Cutover gate: this must be ~0 before you unfreeze writes.
 SELECT slot_name, pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(), confirmed_flush_lsn)) AS lag
