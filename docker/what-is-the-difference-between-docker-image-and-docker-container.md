@@ -17,7 +17,7 @@ tags:
 
 An **image** is a stack of read-only layers plus metadata (entrypoint, environment, exposed ports). Each Dockerfile instruction that changes the filesystem creates a layer, identified by a content digest. Layers are shared: ten containers from the same image consume the image's disk space once.
 
-A **container** adds a writable layer on top of those read-only layers, using a copy-on-write filesystem. Writes inside a running container land in this layer, and it is deleted when the container is removed — which is why anything you need to keep belongs in a volume or an external datastore.
+A **container** adds a writable layer on top of those read-only layers, using a copy-on-write filesystem. Writes inside a running container land in this layer, and it is deleted when the container is removed - which is why anything you need to keep belongs in a volume or an external datastore.
 
 |           | Image                         | Container                          |
 | --------- | ----------------------------- | ---------------------------------- |
@@ -39,8 +39,8 @@ docker diff a                      # inspect a container's writable layer
 ## Interview tips
 
 - Use the class/object analogy, then immediately back it with copy-on-write layers.
-- Mention that data in the writable layer is lost on `docker rm` — it leads naturally into volumes.
-- A follow-up is often "why are my images so large?" — answer with layer caching and multi-stage builds.
+- Mention that data in the writable layer is lost on `docker rm` - it leads naturally into volumes.
+- A follow-up is often "why are my images so large?" - answer with layer caching and multi-stage builds.
 
 ---
 

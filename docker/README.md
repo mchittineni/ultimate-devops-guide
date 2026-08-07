@@ -9,7 +9,7 @@ tags:
 
 # Docker
 
-Container fundamentals — images versus containers, Dockerfile authoring, Compose, and the client/daemon architecture underneath `docker run`.
+Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the client/daemon architecture underneath `docker run`.
 
 **5 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 0
 

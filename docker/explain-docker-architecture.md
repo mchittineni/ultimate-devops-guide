@@ -15,17 +15,17 @@ tags:
 
 ## Detail
 
-**Docker client** — `docker` on the command line. It sends API requests over a Unix socket (`/var/run/docker.sock`) or TCP to a daemon, which may be on another host.
+**Docker client** - `docker` on the command line. It sends API requests over a Unix socket (`/var/run/docker.sock`) or TCP to a daemon, which may be on another host.
 
-**Docker daemon (`dockerd`)** — the long-running server. It handles API requests, builds images with BuildKit, manages networks and volumes, and delegates the actual container lifecycle downwards.
+**Docker daemon (`dockerd`)** - the long-running server. It handles API requests, builds images with BuildKit, manages networks and volumes, and delegates the actual container lifecycle downwards.
 
-**containerd** — the container runtime that supervises container lifecycle, image pulls, and storage. It is an independent CNCF project, which is why Kubernetes was able to drop the Docker shim and talk to containerd directly.
+**containerd** - the container runtime that supervises container lifecycle, image pulls, and storage. It is an independent CNCF project, which is why Kubernetes was able to drop the Docker shim and talk to containerd directly.
 
-**runc** — the low-level OCI runtime that actually creates the container: it sets up namespaces and cgroups and execs the process. One short-lived `runc` invocation per container start.
+**runc** - the low-level OCI runtime that actually creates the container: it sets up namespaces and cgroups and execs the process. One short-lived `runc` invocation per container start.
 
-**Registry** — Docker Hub, GHCR, ECR, or a private registry storing images by digest and tag.
+**Registry** - Docker Hub, GHCR, ECR, or a private registry storing images by digest and tag.
 
-**Objects** — images, containers, volumes, networks, and (in Swarm mode) services.
+**Objects** - images, containers, volumes, networks, and (in Swarm mode) services.
 
 The layered design matters: because `containerd` and `runc` implement OCI standards, images built by Docker run under Podman, CRI-O, or Kubernetes without change.
 

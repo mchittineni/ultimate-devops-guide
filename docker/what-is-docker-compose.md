@@ -11,7 +11,7 @@ tags:
 
 # What is Docker Compose?
 
-**Short answer:** Docker Compose defines and runs multi-container applications from a single YAML file, so an entire local stack — app, database, cache, queue — starts with `docker compose up`.
+**Short answer:** Docker Compose defines and runs multi-container applications from a single YAML file, so an entire local stack - app, database, cache, queue - starts with `docker compose up`.
 
 ## Detail
 
@@ -19,10 +19,10 @@ Compose is primarily a development and testing tool. It creates a dedicated netw
 
 Useful capabilities:
 
-- **Service discovery by name** — the app connects to `db:5432`, no IP addresses anywhere.
-- **`depends_on` with `condition: service_healthy`** — start the app only once the database passes its health check.
-- **Profiles** — optional services (say, a seed job or an observability stack) enabled per invocation.
-- **Override files** — `compose.override.yaml` layers local-only settings such as bind mounts and debug ports.
+- **Service discovery by name** - the app connects to `db:5432`, no IP addresses anywhere.
+- **`depends_on` with `condition: service_healthy`** - start the app only once the database passes its health check.
+- **Profiles** - optional services (say, a seed job or an observability stack) enabled per invocation.
+- **Override files** - `compose.override.yaml` layers local-only settings such as bind mounts and debug ports.
 
 For production orchestration, Kubernetes or a managed container service is the normal choice; Compose does not provide scheduling, self-healing across hosts, or rolling updates.
 
@@ -63,7 +63,7 @@ docker compose down -v      # -v also removes named volumes
 
 ## Interview tips
 
-- Say explicitly where Compose stops and Kubernetes starts — it shows you know the tool's scope.
+- Say explicitly where Compose stops and Kubernetes starts - it shows you know the tool's scope.
 - `depends_on` alone only waits for _start_, not readiness; the health-check condition is the correct answer.
 - Compose files are excellent for reproducible integration tests in CI.
 
