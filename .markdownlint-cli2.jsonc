@@ -23,8 +23,10 @@
     // so only flag duplicate headings that are actual siblings.
     "MD024": { "siblings_only": true },
 
-    // The README uses <details>/<summary> for the collapsible table of contents.
-    "MD033": { "allowed_elements": ["details", "summary", "br", "img"] },
+    // The README uses <details>/<summary> for its collapsible per-topic question
+    // lists, <div align="center"> for the header block, and <b> inside <summary>
+    // (Markdown emphasis is not parsed there).
+    "MD033": { "allowed_elements": ["details", "summary", "div", "b", "br", "img"] },
 
     // Question titles are questions, so headings end in "?".
     "MD026": { "punctuation": ".,;:!" },
