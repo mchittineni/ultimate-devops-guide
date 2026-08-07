@@ -34,7 +34,7 @@ tags:
 
 ```bash
 # SCA on the lock file, failing on fixable highs only
-docker run --rm -v "$PWD:/src" aquasec/trivy:0.55.0 fs /src \
+docker run --rm -v "$PWD:/src" aquasec/trivy:0.73.0 fs /src \
   --scanners vuln --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1
 
 # SAST with a tuned ruleset

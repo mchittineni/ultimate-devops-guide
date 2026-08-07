@@ -53,7 +53,7 @@ jobs:
         with: { fail-on-severity: high }
       - name: IaC scan
         run: |
-          docker run --rm -v "$PWD:/src" aquasec/trivy:0.55.0 \
+          docker run --rm -v "$PWD:/src" aquasec/trivy:0.73.0 \
             config /src --severity HIGH,CRITICAL --exit-code 1
 ```
 

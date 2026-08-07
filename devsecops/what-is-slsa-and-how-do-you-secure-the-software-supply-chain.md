@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**The levels (SLSA v1.0 Build track):**
+**The levels (SLSA v1.1 Build track).** v1.1 became the approved specification in April 2025; it kept v1.0's levels unchanged and tightened the language around isolation, hermeticity, and provenance authenticity. The Build track is the only stable track - Source, Dependencies, and Verification tracks are still in draft, with the Source track landing in the v1.2 line.
 
 | Level | Requirement                                                                                       |
 | ----- | ------------------------------------------------------------------------------------------------- |
@@ -46,7 +46,9 @@ kind: ClusterPolicy
 metadata:
   name: verify-slsa-provenance
 spec:
-  validationFailureAction: Enforce
+  # verifyImages rules fail closed by default - an image whose attestation cannot be
+  # verified is rejected. (Note: spec.validationFailureAction was deprecated in Kyverno 1.13;
+  # for validate rules the setting now lives at spec.rules[].validate.failureAction.)
   rules:
     - name: check-provenance
       match:

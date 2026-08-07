@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**Why CVSS alone fails.** CVSS is severity in the abstract, assigned once, ignoring your deployment. A CVSS 9.8 in a library you never call, on an internal batch job, is not the emergency that a CVSS 7.5 in your public API's request parser is. Most organisations that gate on "no highs" end up with thousands of exceptions and no signal.
+**Why CVSS alone fails.** CVSS is severity in the abstract, assigned once, ignoring your deployment. CVSS v4.0 improved this - it splits Base from Threat, Environmental, and Supplemental metrics precisely so you can re-score for your context - but almost nobody consumes anything beyond the Base score that the feed hands them, so the practical failure mode is unchanged. A CVSS 9.8 in a library you never call, on an internal batch job, is not the emergency that a CVSS 7.5 in your public API's request parser is. Most organisations that gate on "no highs" end up with thousands of exceptions and no signal.
 
 **The signals worth combining:**
 

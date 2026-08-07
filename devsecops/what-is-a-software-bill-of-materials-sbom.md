@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**Two formats matter.** SPDX (ISO/IEC 5962, license-and-compliance heritage) and CycloneDX (OWASP, security heritage, richer VEX support). Both are accepted by US federal guidance; pick one, generate it consistently, and convert when a customer demands the other.
+**Two formats matter.** SPDX (license-and-compliance heritage; SPDX 2.2.1 is ISO/IEC 5962:2021, and SPDX 3.0 added a profile-based model with Security, Build, AI, and Dataset profiles) and CycloneDX (OWASP, security heritage, richer VEX support; standardised as ECMA-424 and now covering CBOM for cryptography and AI/ML-BOM alongside plain SBOM). Both are accepted by US federal guidance; pick one, generate it consistently, and convert when a customer demands the other. Be ready for the follow-up that you will meet SPDX 2.2.1, 2.3, and 3.x in the wild and they are not capability-equivalent.
 
 **Generate at build time, from the build.** An SBOM produced by scanning source manifests misses what the base image contributes; one produced by scanning the final artifact captures the OS packages too. The reliable pattern is generating from the built image and attaching it to the image in the registry as an attestation, so the SBOM travels with the digest it describes.
 
@@ -23,7 +23,7 @@ tags:
 
 **VEX is the missing half.** An SBOM says "we contain library X 2.14". A VEX (Vulnerability Exploitability eXchange) document says "CVE-2021-44228 does not affect us because the vulnerable class is not on the classpath". Without VEX, every customer scan of your SBOM regenerates the same false positives and you answer them by hand.
 
-**Where it becomes an obligation.** US Executive Order 14028 and the resulting NIST guidance pushed SBOMs into federal procurement; the EU Cyber Resilience Act carries comparable expectations for products sold into the EU. If you sell software to enterprises or governments, customers will ask.
+**Where it becomes an obligation.** US Executive Order 14028 and the resulting NIST guidance pushed SBOMs into federal procurement; the EU Cyber Resilience Act carries comparable expectations for products sold into the EU, on a concrete clock: it entered into force in December 2024, the vulnerability and incident reporting obligations apply from **11 September 2026**, and the full requirements from **11 December 2027**. If you sell software to enterprises or governments, customers will ask.
 
 ## Example
 
