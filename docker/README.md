@@ -11,7 +11,7 @@ tags:
 
 Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the client/daemon architecture underneath `docker run`.
 
-**5 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 0
+**7 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 3 · 🔴 Advanced: 0
 
 ## Questions
 
@@ -22,6 +22,8 @@ Container fundamentals - images versus containers, Dockerfile authoring, Compose
 | 8   | [What is Dockerfile?](./what-is-dockerfile.md)                                                                                             | 🟢 Beginner     |
 | 9   | [What is Docker Compose?](./what-is-docker-compose.md)                                                                                     | 🟢 Beginner     |
 | 10  | [Explain Docker Architecture](./explain-docker-architecture.md)                                                                            | 🟡 Intermediate |
+| 252 | [What are Docker network types (Bridge, Host, Overlay, Macvlan)?](./what-are-docker-network-types-bridge-host-overlay-macvlan.md)          | 🟡 Intermediate |
+| 260 | [How do you reduce Docker image size and build time?](./how-do-you-reduce-docker-image-size-and-build-time.md)                             | 🟡 Intermediate |
 
 ## What interviewers probe here
 
