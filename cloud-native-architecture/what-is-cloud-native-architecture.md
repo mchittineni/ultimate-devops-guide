@@ -11,7 +11,7 @@ tags:
 
 # What is Cloud Native Architecture?
 
-**Short answer:** Cloud native architecture designs applications specifically for cloud environments — as loosely coupled, containerised, dynamically orchestrated services that are resilient, observable, and changed frequently through automation.
+**Short answer:** Cloud native architecture designs applications specifically for cloud environments - as loosely coupled, containerised, dynamically orchestrated services that are resilient, observable, and changed frequently through automation.
 
 ## Detail
 
@@ -24,13 +24,13 @@ The CNCF definition names the enabling technologies: containers, service meshes,
 - **Observability by default.** Structured logs, metrics, traces, and health endpoints are part of the definition of done.
 - **Immutability.** Deploy new versions by replacement, never by patching running instances.
 
-**The trade-off.** Cloud native buys independent scaling and deployment at the cost of distributed-systems complexity: network partitions, eventual consistency, distributed tracing, and far more operational surface. It is the right choice when you have many teams and a genuine need to deploy and scale independently — and the wrong choice for a small team with a modest application, where a well-built monolith on a managed platform wins.
+**The trade-off.** Cloud native buys independent scaling and deployment at the cost of distributed-systems complexity: network partitions, eventual consistency, distributed tracing, and far more operational surface. It is the right choice when you have many teams and a genuine need to deploy and scale independently - and the wrong choice for a small team with a modest application, where a well-built monolith on a managed platform wins.
 
 ## Interview tips
 
 - Lead with the principles; naming Kubernetes first is the weaker answer.
 - "Designed for failure" is the phrase that captures the mindset shift.
-- Show judgement by naming when a monolith is the better architecture — seniority is visible in restraint.
+- Show judgement by naming when a monolith is the better architecture - seniority is visible in restraint.
 
 ---
 

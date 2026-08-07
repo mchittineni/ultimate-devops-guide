@@ -19,17 +19,17 @@ tags:
 
 **Patterns**
 
-- **Publish/subscribe** — events broadcast to any number of subscribers.
-- **Event streaming** — a durable, replayable log (Kafka, Kinesis, Pub/Sub) where consumers track their own offset and can reprocess history.
-- **Event sourcing** — the sequence of events _is_ the source of truth; current state is derived by replaying them.
-- **CQRS** — separate write and read models, typically synchronised by events.
-- **Outbox pattern** — write the event to a table in the same transaction as the state change, then relay it, eliminating the dual-write problem.
+- **Publish/subscribe** - events broadcast to any number of subscribers.
+- **Event streaming** - a durable, replayable log (Kafka, Kinesis, Pub/Sub) where consumers track their own offset and can reprocess history.
+- **Event sourcing** - the sequence of events _is_ the source of truth; current state is derived by replaying them.
+- **CQRS** - separate write and read models, typically synchronised by events.
+- **Outbox pattern** - write the event to a table in the same transaction as the state change, then relay it, eliminating the dual-write problem.
 
 **Benefits:** loose coupling, independent scaling, natural resilience (the broker buffers while a consumer is down), replayability, and easy addition of new consumers.
 
 **Costs:** eventual consistency, harder end-to-end debugging, message ordering and duplicate handling (consumers must be idempotent), schema evolution across producers and consumers, and the operational weight of the broker itself.
 
-**Delivery semantics** matter: at-most-once, at-least-once (the common default — so design idempotent consumers), and effectively-once, which requires deduplication or transactional processing.
+**Delivery semantics** matter: at-most-once, at-least-once (the common default - so design idempotent consumers), and effectively-once, which requires deduplication or transactional processing.
 
 ## Example
 
@@ -51,7 +51,7 @@ tags:
 
 ## Interview tips
 
-- Idempotent consumers is the answer to at-least-once delivery — raise it before you are asked.
+- Idempotent consumers is the answer to at-least-once delivery - raise it before you are asked.
 - The outbox pattern is the standard solution to "how do you avoid updating the database and failing to publish?"
 - Mention schema registries and versioning; event contracts break teams silently otherwise.
 
