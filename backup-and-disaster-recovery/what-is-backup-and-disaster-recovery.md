@@ -26,7 +26,7 @@ tags:
 
 **What good looks like**
 
-- Backups are automated, monitored, and alert on failure — a silently failing backup job is the classic disaster.
+- Backups are automated, monitored, and alert on failure - a silently failing backup job is the classic disaster.
 - Retention matches business and regulatory need, with lifecycle transitions to cheaper storage.
 - Backups are encrypted in transit and at rest, and stored in a separate account/subscription with different credentials, so compromised production access cannot destroy them.
 - Object lock / immutability protects against ransomware.
@@ -36,7 +36,7 @@ The uncomfortable truth interviewers probe: most organisations have backups; far
 
 ## Interview tips
 
-- Say the 3-2-1 rule, then extend it with immutability — it shows current ransomware awareness.
+- Say the 3-2-1 rule, then extend it with immutability - it shows current ransomware awareness.
 - Volunteer a restore-testing cadence before being asked.
 - Note that replication is not backup: it faithfully replicates a deletion or corruption too.
 

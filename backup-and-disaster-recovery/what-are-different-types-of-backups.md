@@ -17,7 +17,7 @@ tags:
 
 | Type             | What it copies                         | Backup time            | Storage    | Restore complexity              |
 | ---------------- | -------------------------------------- | ---------------------- | ---------- | ------------------------------- |
-| Full             | All data                               | Longest                | Largest    | Simplest — one set              |
+| Full             | All data                               | Longest                | Largest    | Simplest - one set              |
 | Incremental      | Changes since last backup of any type  | Shortest               | Smallest   | Full + every increment in order |
 | Differential     | Changes since last full                | Medium                 | Medium     | Full + one differential         |
 | Synthetic full   | Server-side merge of full + increments | Short (no client load) | Full-sized | Simple                          |
@@ -28,10 +28,10 @@ tags:
 
 **Important qualifiers**
 
-- **Application-consistent vs crash-consistent.** A snapshot taken while a database is mid-write is crash-consistent — it may need recovery on restore. Application-consistent backups quiesce the application or use its native tooling (`pg_dump`, `mysqldump`, log shipping).
+- **Application-consistent vs crash-consistent.** A snapshot taken while a database is mid-write is crash-consistent - it may need recovery on restore. Application-consistent backups quiesce the application or use its native tooling (`pg_dump`, `mysqldump`, log shipping).
 - **Snapshots are not backups** when they live on the same storage system as the data. Losing the volume loses both. Copy them to an independent location.
 - **Point-in-time recovery** from continuous log archiving (WAL, binlog) is what lets you restore to the moment before a bad migration.
-- **Restore chain risk**: one corrupt incremental invalidates everything after it — which is why increments are verified, not assumed.
+- **Restore chain risk**: one corrupt incremental invalidates everything after it - which is why increments are verified, not assumed.
 
 ## Interview tips
 
