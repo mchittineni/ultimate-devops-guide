@@ -18,7 +18,7 @@ tags:
 **Delivery**
 
 - Trunk-based development with short-lived branches and small pull requests.
-- Continuous integration with a fast, trustworthy build — under ten minutes.
+- Continuous integration with a fast, trustworthy build - under ten minutes.
 - Build the artifact once, promote the same artifact through environments.
 - Automated deployment with automated rollback, and progressive delivery for risky changes.
 - Feature flags to separate deploy from release.
@@ -27,7 +27,7 @@ tags:
 
 - Everything in version control: application code, infrastructure, pipeline definitions, dashboards, alerts, and runbooks.
 - Infrastructure as code with peer-reviewed plans and policy scanning.
-- Immutable infrastructure — replace rather than patch.
+- Immutable infrastructure - replace rather than patch.
 - Environment parity so staging predicts production.
 
 **Quality and security**
@@ -51,7 +51,7 @@ tags:
 
 ## Interview tips
 
-- Group practices into themes rather than reciting a flat list — it reads as structured thinking.
+- Group practices into themes rather than reciting a flat list - it reads as structured thinking.
 - If asked to pick the highest-leverage practice, small batches with automated testing is a defensible answer.
 - Have one example of a practice you introduced, and what measurably changed.
 

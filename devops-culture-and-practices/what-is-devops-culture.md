@@ -11,17 +11,17 @@ tags:
 
 # What is DevOps Culture?
 
-**Short answer:** DevOps culture is the set of shared values that make the practices work — shared ownership of production, blamelessness, continuous learning, collaboration over handoffs, and treating operational quality as everyone's responsibility.
+**Short answer:** DevOps culture is the set of shared values that make the practices work - shared ownership of production, blamelessness, continuous learning, collaboration over handoffs, and treating operational quality as everyone's responsibility.
 
 ## Detail
 
 **The pillars**, often summarised as CALMS:
 
-- **Culture** — one team with one goal, not development throwing releases over a wall to operations.
-- **Automation** — remove manual toil so people work on problems worth human attention.
-- **Lean** — small batches, fast flow, limited work in progress, and relentless removal of waiting time.
-- **Measurement** — decisions from data: DORA metrics, SLOs, and telemetry from production.
-- **Sharing** — knowledge, tooling, and responsibility flow across team boundaries.
+- **Culture** - one team with one goal, not development throwing releases over a wall to operations.
+- **Automation** - remove manual toil so people work on problems worth human attention.
+- **Lean** - small batches, fast flow, limited work in progress, and relentless removal of waiting time.
+- **Measurement** - decisions from data: DORA metrics, SLOs, and telemetry from production.
+- **Sharing** - knowledge, tooling, and responsibility flow across team boundaries.
 
 **What it looks like day to day**
 

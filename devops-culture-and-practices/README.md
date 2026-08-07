@@ -9,7 +9,7 @@ tags:
 
 # DevOps Culture and Practices
 
-The human half of DevOps — shared ownership, blamelessness, knowledge sharing, and collaboration that survives incidents.
+The human half of DevOps - shared ownership, blamelessness, knowledge sharing, and collaboration that survives incidents.
 
 **5 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 0
 

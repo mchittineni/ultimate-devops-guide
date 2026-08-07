@@ -17,7 +17,7 @@ tags:
 
 **The reasoning.** People act rationally given their information, tools, incentives, and time pressure. When an engineer runs a command that causes an outage, the useful questions are: why was that command possible, why did nothing warn them, why was recovery slow, and why did the system trust a single action so completely? "Be more careful" prevents nothing.
 
-**What blamelessness is not.** It is not the absence of accountability. Teams remain accountable for improving the system, and individuals are still accountable for professional conduct. What is removed is _punishment for honest mistakes_ — because punishment produces concealment, and concealment produces repeated failures.
+**What blamelessness is not.** It is not the absence of accountability. Teams remain accountable for improving the system, and individuals are still accountable for professional conduct. What is removed is _punishment for honest mistakes_ - because punishment produces concealment, and concealment produces repeated failures.
 
 **How it shows up**
 
@@ -25,11 +25,11 @@ tags:
 - The person closest to the failure often writes the review, and is thanked for the detail.
 - Near misses are reported voluntarily, because there is no cost to doing so.
 - Language is neutral: "the deployment removed the config" rather than "Sam deleted the config."
-- Leadership models it — the first time a senior person publicly owns a mistake without consequence, the culture becomes real.
+- Leadership models it - the first time a senior person publicly owns a mistake without consequence, the culture becomes real.
 
 **The counterfactual trap.** Reviews that say "the engineer should have noticed" are blame in disguise. Hindsight makes the signal obvious in a way it never was at the time. Focus on what information was actually available.
 
-**Signals it is working:** more incidents reported (not fewer — reporting improves), voluntary disclosure of near misses, and post-mortem actions that change systems rather than adding process.
+**Signals it is working:** more incidents reported (not fewer - reporting improves), voluntary disclosure of near misses, and post-mortem actions that change systems rather than adding process.
 
 ## Interview tips
 

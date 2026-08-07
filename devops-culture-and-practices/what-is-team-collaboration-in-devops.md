@@ -11,7 +11,7 @@ tags:
 
 # What is Team Collaboration in DevOps?
 
-**Short answer:** Collaboration in DevOps means development, operations, security, and product working as one team towards shared outcomes — with joint ownership, shared tooling and visibility, and structures that remove handoffs rather than formalising them.
+**Short answer:** Collaboration in DevOps means development, operations, security, and product working as one team towards shared outcomes - with joint ownership, shared tooling and visibility, and structures that remove handoffs rather than formalising them.
 
 ## Detail
 
@@ -20,10 +20,10 @@ tags:
 **How collaboration is actually built**
 
 - **Shared goals and metrics.** If everyone is measured on DORA metrics and SLOs, incentives align automatically. This is the single most effective intervention.
-- **Cross-functional teams** owning a service end to end — build, deploy, run, and improve.
-- **Embedded specialists** — an SRE or security engineer working within a product team rather than reviewing from outside.
-- **Shared visibility** — the same dashboards, the same alerts, the same backlog. Not separate tools per function.
-- **Joint rituals** — planning that includes operational work, incident reviews attended by everyone involved, and architecture discussions open to operations early.
+- **Cross-functional teams** owning a service end to end - build, deploy, run, and improve.
+- **Embedded specialists** - an SRE or security engineer working within a product team rather than reviewing from outside.
+- **Shared visibility** - the same dashboards, the same alerts, the same backlog. Not separate tools per function.
+- **Joint rituals** - planning that includes operational work, incident reviews attended by everyone involved, and architecture discussions open to operations early.
 - **Enabling teams, not gatekeepers.** The platform team's job is to make the right path the easy path with self-service tooling, not to approve tickets.
 
 **Team Topologies** offers useful vocabulary here: stream-aligned teams delivering value, platform teams providing self-service capability, enabling teams spreading expertise, and complicated-subsystem teams. It emphasises minimising cognitive load and designing communication paths deliberately.
