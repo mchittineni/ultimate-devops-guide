@@ -17,7 +17,7 @@ tags:
 
 **Distributed** means each clone is a complete repository, not a working copy. You can commit, branch, diff, and inspect history with no network. A "central" repository is a convention, not a technical requirement.
 
-**The object model** is what makes Git predictable. A commit points to a tree (a snapshot of the directory), to its parents, and carries author, timestamp, and message. Every object is addressed by the SHA of its content, so history is tamper-evident — changing anything changes every subsequent hash. Branches are just movable pointers to commits, which is why branching is instant.
+**The object model** is what makes Git predictable. A commit points to a tree (a snapshot of the directory), to its parents, and carries author, timestamp, and message. Every object is addressed by the SHA of its content, so history is tamper-evident - changing anything changes every subsequent hash. Branches are just movable pointers to commits, which is why branching is instant.
 
 **The three areas:** working directory → staging area (index) → repository. `git add` moves changes to the index, `git commit` writes them to history.
 
@@ -39,7 +39,7 @@ Recovery commands worth knowing cold: `git reflog` (find any commit you "lost"),
 
 - The SHA-addressed object graph and "branches are pointers" are the answers that show real understanding.
 - `revert` versus `reset`: revert makes a new commit and is safe on shared history; reset rewrites and is not.
-- `git reflog` is the answer to "I destroyed my work" — almost nothing is truly lost for 90 days.
+- `git reflog` is the answer to "I destroyed my work" - almost nothing is truly lost for 90 days.
 
 ---
 

@@ -11,7 +11,7 @@ tags:
 
 # What is Git Branching Strategy?
 
-**Short answer:** A branching strategy is the team's agreement on how branches are created, merged, and released — the main options being trunk-based development, GitHub Flow, Git Flow, and release branching, chosen to match release cadence and risk.
+**Short answer:** A branching strategy is the team's agreement on how branches are created, merged, and released - the main options being trunk-based development, GitHub Flow, Git Flow, and release branching, chosen to match release cadence and risk.
 
 ## Detail
 
@@ -19,7 +19,7 @@ tags:
 
 **GitHub Flow.** A branch per change, a pull request for review, merge to `main`, deploy. Simple, well suited to web services with continuous deployment. Effectively trunk-based if branches stay short.
 
-**Git Flow.** Long-lived `main` and `develop`, plus `feature/*`, `release/*`, and `hotfix/*` branches. Designed for versioned software with scheduled releases and multiple supported versions. Heavy for continuous delivery — the author himself now suggests it is overkill for web apps.
+**Git Flow.** Long-lived `main` and `develop`, plus `feature/*`, `release/*`, and `hotfix/*` branches. Designed for versioned software with scheduled releases and multiple supported versions. Heavy for continuous delivery - the author himself now suggests it is overkill for web apps.
 
 **Release branching.** `main` plus a `release/x.y` branch per version, with fixes cherry-picked back. Standard for software shipped to customers who upgrade at their own pace.
 
@@ -30,7 +30,7 @@ Whatever the model, the practices that matter more than the diagram are: short-l
 ## Interview tips
 
 - The strongest answer explains the _criteria_ for choosing, not just the diagrams.
-- Long-lived branches are the real enemy — name merge hell and delayed integration feedback.
+- Long-lived branches are the real enemy - name merge hell and delayed integration feedback.
 - Feature flags are what let trunk-based development work with unfinished features.
 
 ---

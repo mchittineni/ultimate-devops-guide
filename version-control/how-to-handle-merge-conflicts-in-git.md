@@ -43,20 +43,20 @@ const timeout = 60;          # the incoming change
 >>>>>>> feature/timeouts
 ```
 
-Note that during a _rebase_ the sides are inverted relative to a merge — `HEAD` is the upstream branch. This trips people up constantly.
+Note that during a _rebase_ the sides are inverted relative to a merge - `HEAD` is the upstream branch. This trips people up constantly.
 
 **Useful tools**
 
 - `git checkout --ours <file>` / `--theirs <file>` when one side wins wholesale.
 - `git merge --abort` / `git rebase --abort` to get back to safety.
-- `git config rerere.enabled true` — Git remembers how you resolved a conflict and replays it, which is a large win during long rebases.
+- `git config rerere.enabled true` - Git remembers how you resolved a conflict and replays it, which is a large win during long rebases.
 - `git log --merge -p <file>` to see the commits from both sides that touched the file.
 
 **Prevention beats cure:** short-lived branches, frequent integration, small pull requests, agreed code formatting (so whitespace never conflicts), and avoiding wide refactors during a busy period.
 
 ## Interview tips
 
-- Always mention running the tests after resolving — a syntactically clean resolution can still be semantically wrong.
+- Always mention running the tests after resolving - a syntactically clean resolution can still be semantically wrong.
 - `rerere` is a detail that signals real day-to-day Git experience.
 - Frame prevention as the primary answer; conflict resolution is a symptom of long-lived branches.
 
