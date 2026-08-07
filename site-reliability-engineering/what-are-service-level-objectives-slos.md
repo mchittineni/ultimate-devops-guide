@@ -5,7 +5,7 @@ category: "Site Reliability Engineering (SRE)"
 difficulty: "Intermediate"
 tags:
   - devops
-  - site-reliability-engineering-sre
+  - site-reliability-engineering
   - interview-questions
 ---
 

@@ -5,7 +5,7 @@ category: "Site Reliability Engineering (SRE)"
 difficulty: "Beginner"
 tags:
   - devops
-  - site-reliability-engineering-sre
+  - site-reliability-engineering
   - interview-questions
 ---
 
