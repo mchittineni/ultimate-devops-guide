@@ -11,7 +11,7 @@ tags:
 
 # What is Bicep and how does it compare to ARM templates?
 
-**Short answer:** Bicep is a domain-specific language that transpiles to ARM JSON. Same engine, same API coverage, same deployment semantics — but far less verbose, with real modules, type checking, and automatic dependency inference. For Azure-only infrastructure it has effectively replaced hand-written ARM templates; Terraform remains the choice when you manage more than Azure.
+**Short answer:** Bicep is a domain-specific language that transpiles to ARM JSON. Same engine, same API coverage, same deployment semantics - but far less verbose, with real modules, type checking, and automatic dependency inference. For Azure-only infrastructure it has effectively replaced hand-written ARM templates; Terraform remains the choice when you manage more than Azure.
 
 ## Detail
 
@@ -20,7 +20,7 @@ tags:
 | Readability      | verbose, heavy expression syntax  | concise, IDE tooling and type checking |
 | Dependencies     | manual `dependsOn`                | inferred from references               |
 | Modularity       | nested/linked templates           | first-class `module` with registries   |
-| State            | none — Azure holds resource state | same                                   |
+| State            | none - Azure holds resource state | same                                   |
 | API coverage     | day-one                           | day-one (same resource providers)      |
 | Loops/conditions | awkward `copy` blocks             | `for` and `if` expressions             |
 
@@ -30,7 +30,7 @@ tags:
 
 **Modules and the registry.** A platform team publishes reviewed modules to an Azure Container Registry (`br:acme.azurecr.io/bicep/modules/webapp:1.2.0`), and application teams reference them by version. Microsoft's Azure Verified Modules provide a maintained, opinionated baseline that saves writing the common ones. This is the same "golden path" idea as Terraform modules or CDK constructs.
 
-**Deployment stacks are the newer capability worth naming:** a stack manages a set of resources as one unit with `denySettings` (blocking out-of-band changes) and a clean delete of everything the stack owns — closing the gap with Terraform's lifecycle management.
+**Deployment stacks are the newer capability worth naming:** a stack manages a set of resources as one unit with `denySettings` (blocking out-of-band changes) and a clean delete of everything the stack owns - closing the gap with Terraform's lifecycle management.
 
 **Choosing honestly.** Bicep wins on Azure-only estates, day-one API coverage, and no state to operate. Terraform wins when Azure is one of several providers, when you want the strongest plan/policy gate, or when the team's existing skills and modules are in HCL. Using both for the same resources is the mistake.
 
@@ -46,7 +46,7 @@ param location string = resourceGroup().location
 
 var tags = { environment: env, owner: 'platform', costCenter: 'cc-4471' }
 
-// Consume a versioned module from the shared registry — the golden path
+// Consume a versioned module from the shared registry - the golden path
 module plan 'br:acme.azurecr.io/bicep/modules/app-service-plan:1.4.0' = {
   name: 'plan-${env}'
   params: {
@@ -83,9 +83,9 @@ az deployment group what-if --resource-group rg-checkout-prod-weu \
 
 ## Interview tips
 
-- "Bicep transpiles to ARM — same engine, better authoring experience" is the one-line answer.
+- "Bicep transpiles to ARM - same engine, better authoring experience" is the one-line answer.
 - Incremental versus Complete mode is the trap; volunteering it shows you have deployed for real.
-- Expect: "Bicep or Terraform?" — decide by whether Azure is your only provider, and mention module registries either way.
+- Expect: "Bicep or Terraform?" - decide by whether Azure is your only provider, and mention module registries either way.
 
 ---
 

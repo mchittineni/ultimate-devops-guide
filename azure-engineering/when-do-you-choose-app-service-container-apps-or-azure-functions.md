@@ -22,15 +22,15 @@ tags:
 | Functions      | function app         | yes                                 | event handlers, glue, scheduled work      | execution duration limits, cold starts |
 | AKS            | cluster              | node-level                          | complex platforms, operators, portability | you operate and upgrade it             |
 
-**App Service earns its place with slots.** Deployment slots give you a warmed staging instance and an atomic swap, which is the simplest blue/green in Azure. It also handles TLS certificates, custom domains, authentication (Easy Auth), and VNet integration with minimal work. The cost model is the plan — you pay for reserved instances whether or not traffic arrives.
+**App Service earns its place with slots.** Deployment slots give you a warmed staging instance and an atomic swap, which is the simplest blue/green in Azure. It also handles TLS certificates, custom domains, authentication (Easy Auth), and VNet integration with minimal work. The cost model is the plan - you pay for reserved instances whether or not traffic arrives.
 
 **Container Apps is managed Kubernetes without the cluster.** It runs on AKS internally and exposes Dapr, KEDA-based scaling on queue length or custom metrics, revisions with traffic splitting for canaries, and scale to zero. Choose it when your service is a container, your scaling signal is an event source, and nobody wants to own cluster upgrades. Its constraint is exactly that: you cannot install operators or touch the Kubernetes API.
 
 **Functions and the plan question.** The Consumption plan scales to zero and bills per execution but suffers cold starts and has an execution timeout; Premium keeps warm instances with VNet integration and no practical timeout; the Flex Consumption plan is the newer option combining per-execution billing with VNet support and better cold-start behaviour. For latency-sensitive synchronous APIs, Consumption cold starts are usually disqualifying.
 
-**Cost reasoning.** Steady, predictable traffic favours reserved capacity (App Service plan, or AKS nodes with reservations). Spiky or intermittent traffic favours scale-to-zero (Container Apps, Functions). The comparison is per-workload, not global — most real estates mix all three, and the platform team's job is to make each path well-paved rather than to pick one winner.
+**Cost reasoning.** Steady, predictable traffic favours reserved capacity (App Service plan, or AKS nodes with reservations). Spiky or intermittent traffic favours scale-to-zero (Container Apps, Functions). The comparison is per-workload, not global - most real estates mix all three, and the platform team's job is to make each path well-paved rather than to pick one winner.
 
-**Migration paths matter for the recommendation.** A container running on Container Apps can move to AKS later with the same image and similar manifests; a Functions app with deep binding usage is harder to relocate. If long-term portability is a stated requirement, that argues for containers early — but do not pay Kubernetes' operational cost for a portability need nobody has scheduled.
+**Migration paths matter for the recommendation.** A container running on Container Apps can move to AKS later with the same image and similar manifests; a Functions app with deep binding usage is harder to relocate. If long-term portability is a stated requirement, that argues for containers early - but do not pay Kubernetes' operational cost for a portability need nobody has scheduled.
 
 ## Example
 
@@ -53,9 +53,9 @@ az containerapp ingress traffic set --name checkout --resource-group rg-checkout
 
 ## Interview tips
 
-- Answer with the decision criteria — event-driven versus long-running, scale-to-zero need, and whether you need the Kubernetes API.
+- Answer with the decision criteria - event-driven versus long-running, scale-to-zero need, and whether you need the Kubernetes API.
 - Naming KEDA behind Container Apps and Flex Consumption for Functions shows current knowledge.
-- Expect: "why not AKS for everything?" — operational cost, upgrade treadmill, and no business value unless you need the API.
+- Expect: "why not AKS for everything?" - operational cost, upgrade treadmill, and no business value unless you need the API.
 
 ---
 

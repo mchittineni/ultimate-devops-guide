@@ -17,11 +17,11 @@ tags:
 
 **Control plane and tiers.** The Free tier has no SLA; the Standard tier adds a financially backed uptime SLA and higher node limits; the Premium tier adds long-term support for a Kubernetes version. Node pools are yours: a `System` pool for platform components and `User` pools for workloads, so a noisy application cannot starve CoreDNS or the metrics server.
 
-**Workload identity is the important integration.** A Kubernetes service account is federated to an Entra managed identity, so a Pod obtains Azure tokens with no secret in the cluster. This replaced the deprecated pod-managed-identity (aad-pod-identity) approach, and it is the answer to "how does your Pod read from Key Vault?" — combined with the Secrets Store CSI driver to project secrets as files.
+**Workload identity is the important integration.** A Kubernetes service account is federated to an Entra managed identity, so a Pod obtains Azure tokens with no secret in the cluster. This replaced the deprecated pod-managed-identity (aad-pod-identity) approach, and it is the answer to "how does your Pod read from Key Vault?" - combined with the Secrets Store CSI driver to project secrets as files.
 
-**Networking model is a decision you cannot change later.** Azure CNI gives Pods real VNet IPs (routable, but consumes address space fast); Azure CNI Overlay gives Pods addresses from a separate overlay CIDR and conserves VNet space; kubenet is legacy. Choose the network policy engine at creation too — Cilium (Azure CNI powered by Cilium) is the current default recommendation and brings eBPF dataplane and network policy in one.
+**Networking model is a decision you cannot change later.** Azure CNI gives Pods real VNet IPs (routable, but consumes address space fast); Azure CNI Overlay gives Pods addresses from a separate overlay CIDR and conserves VNet space; kubenet is legacy. Choose the network policy engine at creation too - Cilium (Azure CNI powered by Cilium) is the current default recommendation and brings eBPF dataplane and network policy in one.
 
-**Cluster RBAC via Entra.** Enable Entra integration with Azure RBAC for Kubernetes authorisation, so `kubectl` access is granted through Azure role assignments and covered by Conditional Access and PIM — rather than by distributing a cluster admin kubeconfig, which is the pattern auditors object to. Disable local accounts to make it enforceable.
+**Cluster RBAC via Entra.** Enable Entra integration with Azure RBAC for Kubernetes authorisation, so `kubectl` access is granted through Azure role assignments and covered by Conditional Access and PIM - rather than by distributing a cluster admin kubeconfig, which is the pattern auditors object to. Disable local accounts to make it enforceable.
 
 **Upgrades are the recurring operational cost.** Kubernetes minor versions leave AKS support roughly every 12 months, so plan two to three upgrades a year: control plane first, then node pools (surge upgrade with `maxSurge`), with pod disruption budgets and `topologySpreadConstraints` in place so the drain does not cause an outage. Auto-upgrade channels plus planned maintenance windows automate the routine part.
 
@@ -75,7 +75,7 @@ spec:
 
 - Workload identity (not the deprecated pod identity) is the detail that dates your knowledge correctly.
 - Say that the network plugin choice is immutable and explain the IP-exhaustion trade-off.
-- Expect: "how do you handle upgrades?" — surge upgrades, PDBs, maintenance windows, and the roughly-annual version cadence.
+- Expect: "how do you handle upgrades?" - surge upgrades, PDBs, maintenance windows, and the roughly-annual version cadence.
 
 ---
 

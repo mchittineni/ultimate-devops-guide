@@ -28,7 +28,7 @@ Depth on Azure: the resource hierarchy, Entra ID and RBAC, VNet and private endp
 
 ## What interviewers probe here
 
-- Management groups, subscriptions, and resource groups — what each bounds.
+- Management groups, subscriptions, and resource groups - what each bounds.
 - Private endpoints and the private DNS configuration they depend on.
 - Azure Policy effects, and rolling out Deny without breaking teams.
 

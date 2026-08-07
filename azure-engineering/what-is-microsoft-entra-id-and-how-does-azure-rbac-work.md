@@ -11,13 +11,13 @@ tags:
 
 # What is Microsoft Entra ID and how does Azure RBAC work?
 
-**Short answer:** Entra ID (formerly Azure AD) is the identity provider — it authenticates users, groups, and workload identities. Azure RBAC is the authorisation layer that grants those identities permissions on Azure resources through role assignments scoped to a management group, subscription, resource group, or single resource. Entra roles govern the directory; Azure RBAC governs resources, and mixing them up is a common interview slip.
+**Short answer:** Entra ID (formerly Azure AD) is the identity provider - it authenticates users, groups, and workload identities. Azure RBAC is the authorisation layer that grants those identities permissions on Azure resources through role assignments scoped to a management group, subscription, resource group, or single resource. Entra roles govern the directory; Azure RBAC governs resources, and mixing them up is a common interview slip.
 
 ## Detail
 
-**A role assignment has three parts:** the security principal (user, group, service principal, or managed identity), the role definition (a set of allowed and denied operations), and the scope. Assignments inherit downward, and the effective permission is the union of all matching assignments — except that a `Deny` assignment (used by Azure Blueprints and managed apps) always wins.
+**A role assignment has three parts:** the security principal (user, group, service principal, or managed identity), the role definition (a set of allowed and denied operations), and the scope. Assignments inherit downward, and the effective permission is the union of all matching assignments - except that a `Deny` assignment (used by Azure Blueprints and managed apps) always wins.
 
-**Managed identities remove secrets.** A system-assigned managed identity is tied to one resource's lifecycle; a user-assigned identity is a standalone resource shared by several. Either way, the platform issues tokens through the instance metadata endpoint, so no credential exists in configuration. For CI/CD outside Azure, workload identity federation lets a GitHub Actions or GitLab OIDC token exchange for Azure tokens — the modern replacement for a service-principal secret.
+**Managed identities remove secrets.** A system-assigned managed identity is tied to one resource's lifecycle; a user-assigned identity is a standalone resource shared by several. Either way, the platform issues tokens through the instance metadata endpoint, so no credential exists in configuration. For CI/CD outside Azure, workload identity federation lets a GitHub Actions or GitLab OIDC token exchange for Azure tokens - the modern replacement for a service-principal secret.
 
 **Prefer built-in roles, then narrow custom ones.** Owner, Contributor, and Reader are the coarse trio; Contributor notably cannot grant access, which is why `User Access Administrator` exists separately. Custom roles matter when a team needs, say, restart-but-not-delete on virtual machines. Assign to groups, never to individuals, so joiner/leaver processes work.
 

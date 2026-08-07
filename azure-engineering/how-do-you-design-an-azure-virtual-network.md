@@ -17,15 +17,15 @@ tags:
 
 **Hub and spoke, and why peering shapes the design.** VNet peering is not transitive: two spokes peered to the same hub cannot reach each other unless you route through a network virtual appliance in the hub (user-defined routes) or connect them directly. Azure Virtual WAN automates this for large estates. Deciding early whether spoke-to-spoke traffic must be inspected determines whether you need Firewall in the hub at all.
 
-**Subnets and NSGs.** Subnets are per-tier (web, app, data), each with an NSG whose rules should reference application security groups or service tags (`Sql`, `AzureMonitor`, `Internet`) rather than raw CIDRs — service tags are maintained by Microsoft and survive IP changes. Some services require dedicated, delegated subnets (Azure Firewall, Bastion, gateway subnets, App Service integration), each with naming and minimum-size requirements, so leave room.
+**Subnets and NSGs.** Subnets are per-tier (web, app, data), each with an NSG whose rules should reference application security groups or service tags (`Sql`, `AzureMonitor`, `Internet`) rather than raw CIDRs - service tags are maintained by Microsoft and survive IP changes. Some services require dedicated, delegated subnets (Azure Firewall, Bastion, gateway subnets, App Service integration), each with naming and minimum-size requirements, so leave room.
 
-**Private endpoints are the main security decision.** By default PaaS services (Storage, SQL, Key Vault) have public endpoints. A private endpoint gives the service a private IP inside your VNet; combined with `publicNetworkAccess = Disabled` on the resource, this removes the internet path entirely. The catch is DNS: the resource's public FQDN must resolve to the private IP, which requires linked private DNS zones — misconfigured private DNS is the single most common cause of "the private endpoint does not work".
+**Private endpoints are the main security decision.** By default PaaS services (Storage, SQL, Key Vault) have public endpoints. A private endpoint gives the service a private IP inside your VNet; combined with `publicNetworkAccess = Disabled` on the resource, this removes the internet path entirely. The catch is DNS: the resource's public FQDN must resolve to the private IP, which requires linked private DNS zones - misconfigured private DNS is the single most common cause of "the private endpoint does not work".
 
 **Outbound internet access is changing.** Implicit outbound access for new VMs is being retired, so egress must be explicit: NAT gateway (simple, scalable SNAT), a load balancer's outbound rules, or routing through Azure Firewall for inspection and FQDN filtering. NAT gateway also solves SNAT port exhaustion, which is a real failure mode for chatty outbound workloads.
 
-**Address planning.** Non-overlapping RFC 1918 space across hubs, spokes, and on-premises, sized for growth — and for AKS, sized for the networking model you choose (Azure CNI consumes a VNet IP per Pod; overlay modes conserve address space). Azure reserves five addresses per subnet, so a /29 is smaller than it looks.
+**Address planning.** Non-overlapping RFC 1918 space across hubs, spokes, and on-premises, sized for growth - and for AKS, sized for the networking model you choose (Azure CNI consumes a VNet IP per Pod; overlay modes conserve address space). Azure reserves five addresses per subnet, so a /29 is smaller than it looks.
 
-**Observability.** VNet flow logs with Traffic Analytics, NSG rule hit counts, Connection Monitor for hybrid paths, and Network Watcher's next-hop and effective-rules tools — which are the fastest way to answer "why can this VM not reach that endpoint?" during an incident.
+**Observability.** VNet flow logs with Traffic Analytics, NSG rule hit counts, Connection Monitor for hybrid paths, and Network Watcher's next-hop and effective-rules tools - which are the fastest way to answer "why can this VM not reach that endpoint?" during an incident.
 
 ## Example
 
@@ -97,8 +97,8 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-11-01' = {
 ## Interview tips
 
 - Say "peering is not transitive" unprompted; it is the Azure networking fact interviewers check for.
-- Private endpoints plus linked private DNS zones — and naming DNS as the usual failure — signals hands-on experience.
-- Expect: "how does traffic leave?" — explicit NAT gateway or Firewall, and mention SNAT port exhaustion.
+- Private endpoints plus linked private DNS zones - and naming DNS as the usual failure - signals hands-on experience.
+- Expect: "how does traffic leave?" - explicit NAT gateway or Firewall, and mention SNAT port exhaustion.
 
 ---
 
