@@ -11,7 +11,7 @@ tags:
 
 # What is DevSecOps?
 
-**Short answer:** DevSecOps integrates security into every stage of the delivery pipeline rather than bolting it on at the end — making security a shared responsibility of the whole team, automated and continuous.
+**Short answer:** DevSecOps integrates security into every stage of the delivery pipeline rather than bolting it on at the end - making security a shared responsibility of the whole team, automated and continuous.
 
 ## Detail
 
@@ -19,15 +19,15 @@ The traditional model put a security review just before release, where findings 
 
 Where controls sit in the lifecycle:
 
-- **Plan** — threat modelling, abuse cases, security requirements in the story.
-- **Code** — secure coding standards, IDE linters, pre-commit secret scanning, peer review.
-- **Build** — SAST (static analysis), SCA (dependency CVE scanning), license checks, SBOM generation, image signing.
-- **Test** — DAST (dynamic scanning against a running app), API fuzzing, IaC policy scanning.
-- **Release** — signed artifacts, provenance attestations, admission control that rejects unsigned or vulnerable images.
-- **Operate** — runtime detection, vulnerability rescanning of deployed images, WAF, audit logging.
-- **Monitor** — anomaly detection, alerting, incident response, and feedback into the backlog.
+- **Plan** - threat modelling, abuse cases, security requirements in the story.
+- **Code** - secure coding standards, IDE linters, pre-commit secret scanning, peer review.
+- **Build** - SAST (static analysis), SCA (dependency CVE scanning), license checks, SBOM generation, image signing.
+- **Test** - DAST (dynamic scanning against a running app), API fuzzing, IaC policy scanning.
+- **Release** - signed artifacts, provenance attestations, admission control that rejects unsigned or vulnerable images.
+- **Operate** - runtime detection, vulnerability rescanning of deployed images, WAF, audit logging.
+- **Monitor** - anomaly detection, alerting, incident response, and feedback into the backlog.
 
-Two cultural points make it work: security findings become normal backlog items with owners and SLAs, not a separate spreadsheet; and gates must be tuned so that only high-confidence, high-severity findings break the build — otherwise teams route around them.
+Two cultural points make it work: security findings become normal backlog items with owners and SLAs, not a separate spreadsheet; and gates must be tuned so that only high-confidence, high-severity findings break the build - otherwise teams route around them.
 
 ## Example
 

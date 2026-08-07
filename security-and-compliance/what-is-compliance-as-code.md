@@ -19,11 +19,11 @@ Traditional compliance is a point-in-time exercise: screenshots, spreadsheets, a
 
 **How it is implemented:**
 
-- **Policy engines** — Open Policy Agent with Rego, or Kyverno for Kubernetes-native YAML policies. Policies evaluate resource definitions and return allow/deny with a reason.
-- **Pipeline gates** — `conftest` or `checkov` evaluate Terraform plans and Kubernetes manifests before anything is applied. A non-compliant change fails the pull request.
-- **Admission control** — the cluster rejects non-compliant workloads at the API server, so the control holds even for changes that bypass CI.
-- **Continuous cloud posture checks** — AWS Config rules, Azure Policy, or Cloud Custodian evaluate live resources and can auto-remediate.
-- **Evidence generation** — every policy evaluation is logged, giving auditors a continuous, queryable record mapped to control IDs (SOC 2 CC6.1, PCI-DSS 3.4, and so on).
+- **Policy engines** - Open Policy Agent with Rego, or Kyverno for Kubernetes-native YAML policies. Policies evaluate resource definitions and return allow/deny with a reason.
+- **Pipeline gates** - `conftest` or `checkov` evaluate Terraform plans and Kubernetes manifests before anything is applied. A non-compliant change fails the pull request.
+- **Admission control** - the cluster rejects non-compliant workloads at the API server, so the control holds even for changes that bypass CI.
+- **Continuous cloud posture checks** - AWS Config rules, Azure Policy, or Cloud Custodian evaluate live resources and can auto-remediate.
+- **Evidence generation** - every policy evaluation is logged, giving auditors a continuous, queryable record mapped to control IDs (SOC 2 CC6.1, PCI-DSS 3.4, and so on).
 
 The cultural benefit is that requirements stop being a PDF nobody reads: they become failing tests with a clear message telling the engineer exactly what to change.
 
@@ -46,7 +46,7 @@ conftest test terraform-plan.json --policy policy/   # gate in CI
 
 ## Interview tips
 
-- Map policies to named control IDs — that is what makes it _compliance_ rather than just linting.
+- Map policies to named control IDs - that is what makes it _compliance_ rather than just linting.
 - Explain defence in depth: the same rule in CI (fast feedback) and admission control (enforcement).
 - Note that auto-remediation needs care; start in audit mode, measure, then enforce.
 

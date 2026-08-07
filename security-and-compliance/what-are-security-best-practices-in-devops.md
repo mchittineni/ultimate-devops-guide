@@ -46,7 +46,7 @@ steps:
 
 ## Interview tips
 
-- Lead with secrets and identity — they are the source of most real breaches.
+- Lead with secrets and identity - they are the source of most real breaches.
 - "Treat CI/CD as production infrastructure" is a strong, senior-sounding point.
 - Pair every practice with how you would verify it is actually in place.
 

@@ -11,7 +11,7 @@ tags:
 
 # What is Infrastructure Security?
 
-**Short answer:** Infrastructure security is the protection of the compute, network, storage, and identity layers that applications run on — through least-privilege access, network segmentation, encryption, hardening, patching, and continuous monitoring.
+**Short answer:** Infrastructure security is the protection of the compute, network, storage, and identity layers that applications run on - through least-privilege access, network segmentation, encryption, hardening, patching, and continuous monitoring.
 
 ## Detail
 
@@ -53,7 +53,7 @@ resource "aws_security_group" "app" {
 
 ## Interview tips
 
-- Structure the answer by layer — identity, network, compute, data, detection — rather than listing controls randomly.
+- Structure the answer by layer - identity, network, compute, data, detection - rather than listing controls randomly.
 - Defence in depth and blast-radius reduction are the framing concepts.
 - Have an opinion on the highest-leverage control: in cloud it is nearly always IAM.
 
