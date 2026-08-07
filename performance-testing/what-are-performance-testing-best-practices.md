@@ -19,7 +19,7 @@ tags:
 
 - Derive targets from SLOs and real traffic patterns, not from guesses.
 - Model the workload from production logs: endpoint mix, payload sizes, think time, and the long tail of rare-but-slow operations.
-- Use production-shaped data volumes — a query that is fast against 1,000 rows may collapse at 100 million.
+- Use production-shaped data volumes - a query that is fast against 1,000 rows may collapse at 100 million.
 - Vary test data so you are not measuring cache hit rates.
 
 **Environment**
@@ -32,13 +32,13 @@ tags:
 
 - Change one variable per run.
 - Run each configuration multiple times; single runs are noisy.
-- Monitor the load generator's own CPU, memory, and network — a saturated client produces meaningless numbers.
+- Monitor the load generator's own CPU, memory, and network - a saturated client produces meaningless numbers.
 
 **Analysis**
 
 - Percentiles, not averages. Watch p95, p99, and max.
 - Correlate client-side latency with server-side metrics: CPU, GC pauses, thread and connection pool saturation, database locks.
-- Find the "knee" — the concurrency level at which latency starts rising faster than throughput. That is your real capacity.
+- Find the "knee" - the concurrency level at which latency starts rising faster than throughput. That is your real capacity.
 
 **Automation**
 
@@ -48,7 +48,7 @@ tags:
 ## Interview tips
 
 - The knee of the throughput/latency curve is a precise, senior way to define capacity.
-- Emphasise repeatability — a test you cannot reproduce cannot prove a fix worked.
+- Emphasise repeatability - a test you cannot reproduce cannot prove a fix worked.
 - Have a story about a bottleneck you found and what the fix actually was.
 
 ---

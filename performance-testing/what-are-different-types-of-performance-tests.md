@@ -25,7 +25,7 @@ tags:
 | **Scalability**          | Does throughput scale linearly with added instances?        | Stepped ramps      |
 | **Benchmark / baseline** | Has this release regressed against the last?                | Short, repeatable  |
 
-**What each catches.** Load tests validate capacity assumptions. Stress tests reveal failure modes — does the service shed load gracefully, or does it fall over and take the database with it? Spike tests expose autoscaling lag and cold-start behaviour. Soak tests catch the slow leaks that only appear after hours, and are the most frequently skipped and most valuable.
+**What each catches.** Load tests validate capacity assumptions. Stress tests reveal failure modes - does the service shed load gracefully, or does it fall over and take the database with it? Spike tests expose autoscaling lag and cold-start behaviour. Soak tests catch the slow leaks that only appear after hours, and are the most frequently skipped and most valuable.
 
 **In CI/CD**, a short benchmark test on every build catches regressions early; the long soak and full-scale load tests run nightly or before a major release.
 
@@ -33,7 +33,7 @@ Note the related but distinct disciplines: **capacity planning** uses these resu
 
 ## Interview tips
 
-- Be able to name the specific defect class each test type finds — that is the real question.
+- Be able to name the specific defect class each test type finds - that is the real question.
 - Soak testing for memory and connection leaks is the one most candidates omit.
 - Mention automated performance regression gates in the pipeline as the mature practice.
 

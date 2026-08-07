@@ -11,7 +11,7 @@ tags:
 
 # What are Performance Testing Tools?
 
-**Short answer:** k6 and Gatling for modern code-first load testing, JMeter for broad protocol support, Locust for Python-based scripting, and Vegeta or wrk for quick HTTP benchmarks — plus APM tooling to see what the system did under load.
+**Short answer:** k6 and Gatling for modern code-first load testing, JMeter for broad protocol support, Locust for Python-based scripting, and Vegeta or wrk for quick HTTP benchmarks - plus APM tooling to see what the system did under load.
 
 ## Detail
 
@@ -26,7 +26,7 @@ tags:
 
 **Choosing:** prefer a code-first tool that lives in Git and runs in CI. k6 is the common modern default for HTTP and gRPC services. JMeter still wins when you must test JDBC, JMS, or legacy protocols.
 
-**Do not test in a vacuum.** Pair the load generator with server-side observability — Prometheus/Grafana, an APM (Datadog, New Relic, Dynatrace), database performance insights, and profilers. The load tool tells you _that_ p99 rose; the APM tells you _why_.
+**Do not test in a vacuum.** Pair the load generator with server-side observability - Prometheus/Grafana, an APM (Datadog, New Relic, Dynatrace), database performance insights, and profilers. The load tool tells you _that_ p99 rose; the APM tells you _why_.
 
 ## Example
 
@@ -56,7 +56,7 @@ export default function () {
 
 ## Interview tips
 
-- Thresholds as pass/fail criteria are what make a load test usable in a pipeline — show that in the example.
+- Thresholds as pass/fail criteria are what make a load test usable in a pipeline - show that in the example.
 - Always mention pairing with server-side metrics and profiling.
 - Note that distributed load generation is needed once one machine cannot produce the target load.
 

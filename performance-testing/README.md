@@ -9,7 +9,7 @@ tags:
 
 # Performance Testing
 
-Load, stress, soak, and spike testing — how to design them, which tools to use, and how to read the results.
+Load, stress, soak, and spike testing - how to design them, which tools to use, and how to read the results.
 
 **5 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 2 · 🔴 Advanced: 0
 
