@@ -23,7 +23,7 @@ tags:
 - **Positive security (allowlist)** - define exactly what valid requests look like per endpoint. Stronger, but requires effort to build and maintain.
 - **Behavioural / ML** - anomaly scoring against a learned baseline; catches novel attacks with more false positives.
 
-**Typical capabilities:** OWASP Top 10 protection, rate limiting, bot management, geo-blocking, IP reputation, virtual patching (blocking exploitation of a known CVE while the real fix is developed), and request/response inspection with detailed logging.
+**Typical capabilities:** OWASP Top 10 protection (name the current edition - **OWASP Top 10:2025**, which added _A03 Software Supply Chain Failures_ and _A10 Mishandling of Exceptional Conditions_, moved _Security Misconfiguration_ up to A02, and folded SSRF into _A01 Broken Access Control_), rate limiting, bot management, geo-blocking, IP reputation, virtual patching (blocking exploitation of a known CVE while the real fix is developed), and request/response inspection with detailed logging.
 
 **Deployment:** cloud-managed at the CDN edge (AWS WAF, Cloudflare, Azure Front Door), reverse proxy (ModSecurity with NGINX), or embedded as a library or sidecar.
 
