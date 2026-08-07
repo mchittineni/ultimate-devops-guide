@@ -11,7 +11,7 @@ tags:
 
 # What are Incident Severity Levels?
 
-**Short answer:** Severity levels classify incidents by user impact, driving the response — who is paged, how fast, how often stakeholders are updated, and whether a post-mortem is mandatory. A typical scale runs SEV-1 (critical) to SEV-4 (minor).
+**Short answer:** Severity levels classify incidents by user impact, driving the response - who is paged, how fast, how often stakeholders are updated, and whether a post-mortem is mandatory. A typical scale runs SEV-1 (critical) to SEV-4 (minor).
 
 ## Detail
 
@@ -22,7 +22,7 @@ tags:
 | **SEV-3** | Minor degradation or a workaround exists                                      | Business hours, ticketed                               | Internal only                                            |
 | **SEV-4** | Cosmetic or low-impact issue                                                  | Backlog                                                | None                                                     |
 
-**Define by impact, not by cause.** "Database is down" is not a severity — "checkout is failing for all users" is. Cause-based severity leads to arguments; impact-based severity is assessable in seconds by whoever is paged.
+**Define by impact, not by cause.** "Database is down" is not a severity - "checkout is failing for all users" is. Cause-based severity leads to arguments; impact-based severity is assessable in seconds by whoever is paged.
 
 **Make the criteria concrete.** Include measurable triggers: error rate above X%, more than Y customers affected, any confirmed data loss, any suspected security breach. Ambiguity leads to under-declaring, which is the far more common failure.
 
@@ -34,7 +34,7 @@ tags:
 
 - Impact-based over cause-based classification is the key principle to state.
 - "Declare high, downgrade later" is the correct instinct and worth saying explicitly.
-- Tie each severity to concrete consequences — a severity that changes nothing is just a label.
+- Tie each severity to concrete consequences - a severity that changes nothing is just a label.
 
 ---
 
