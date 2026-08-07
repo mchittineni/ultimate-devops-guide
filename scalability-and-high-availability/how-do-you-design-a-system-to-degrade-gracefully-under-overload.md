@@ -35,17 +35,27 @@ tags:
 
 ```yaml
 # Edge: tiered rate limits, so shedding hits batch traffic before checkout.
+# Priority is assigned by us, never by the caller: the gateway strips any inbound X-Priority
+# and re-stamps it from the authenticated identity (service account / API-key tier) and the
+# route itself. Without the strip, any client can label itself "interactive" and walk past
+# the shedding tier - the header is a trust boundary, not a hint.
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata: { name: api }
 spec:
   rules:
-    - matches: [{ headers: [{ name: X-Priority, value: batch }] }]
+    - matches: [{ path: { value: /batch } }] # route metadata, not a client header
       filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set: [{ name: X-Priority, value: batch }] # overwrite whatever arrived
         - type: ExtensionRef
           extensionRef: { kind: RateLimitPolicy, name: batch-100rps } # shed first
     - matches: [{ path: { value: /checkout } }]
       filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set: [{ name: X-Priority, value: interactive }]
         - type: ExtensionRef
           extensionRef: { kind: RateLimitPolicy, name: interactive-5000rps } # protected
 ```
@@ -73,24 +83,44 @@ retry_policy:
 ```python
 # Service: deadline propagation, bounded queue, LIFO under pressure, priority shedding.
 MAX_INFLIGHT = 200          # concurrency, not rps - tracks the real resource
+HARD_CEILING = int(MAX_INFLIGHT * 1.25)
+
+# One semaphore is the admission controller. A read-then-act check on a counter races: under
+# load, N coroutines all read "199 inflight" and all proceed. Acquire, or be rejected.
+slots = asyncio.Semaphore(HARD_CEILING)
 
 async def handle(req):
     deadline = req.deadline or (now() + 1.0)
     if now() > deadline:                      # already stale: do no work at all
         return Response(504)
 
-    if inflight() >= MAX_INFLIGHT:
-        if req.priority in ("batch", "analytics"):
-            return Response(429, headers={"Retry-After": "30"})   # shed the bottom tier
-        if inflight() >= MAX_INFLIGHT * 1.25:                     # hard ceiling for everyone
-            return Response(503, headers={"Retry-After": "2"})
+    # Soft tier: advisory, so an approximate count is fine - shed the bottom priorities
+    # well before the hard ceiling. The ceiling itself must not be advisory.
+    if inflight() >= MAX_INFLIGHT and req.priority in ("batch", "analytics"):
+        return Response(429, headers={"Retry-After": "30"})       # shed the bottom tier
 
     try:
-        # never let a downstream call outlive our own deadline
-        return await downstream(req, timeout=max(0.05, deadline - now() - 0.02))
+        await asyncio.wait_for(slots.acquire(), timeout=0.005)    # non-blocking in practice
+    except asyncio.TimeoutError:                                  # hard ceiling for everyone
+        return Response(503, headers={"Retry-After": "2"})
+
+    try:
+        budget = deadline - now() - 0.02      # reserve 20 ms to write our own response
+        if budget <= 0:                       # no time left: never start a doomed call
+            return Response(504)
+        # never let a downstream call outlive our own deadline - no floor, the budget is the cap
+        return await downstream(req, timeout=budget)
     except (Timeout, CircuitOpen):
-        cached = cache.get(req.key, allow_stale=True)             # degrade, don't fail
-        return cached or Response(200, body=DEFAULT_FALLBACK)
+        # Degrading a READ to stale data is honest. Degrading a WRITE to a 200 is a lie:
+        # the caller stops retrying and the mutation is simply lost.
+        if req.is_read:
+            cached = cache.get(req.key, allow_stale=True)
+            return cached or Response(200, body=DEFAULT_FALLBACK)
+        if durable_queue.enqueue(req):        # only claim acceptance once it is persisted
+            return Response(202, headers={"Location": f"/status/{req.id}"})
+        return Response(503, headers={"Retry-After": "5"})        # nothing durable: say so
+    finally:
+        slots.release()                       # every path, including the 504 above
 ```
 
 ```promql
