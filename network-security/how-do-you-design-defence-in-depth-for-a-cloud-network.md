@@ -99,12 +99,19 @@ spec:
 
 ```yaml
 # The guardrail a team cannot override, and the drift alert for when one is added anyway.
-# SCP: deny removing flow logs or opening SSH to the world
+# SCP: deny removing flow logs, and deny security-group ingress edits outside network-admin.
+# Note: these EC2 actions cannot be conditioned on port or CIDR, so the SCP is a blunt
+# "only network-admin edits ingress" control - the SSH-to-0.0.0.0/0 case is caught by the
+# drift query below (and a Config rule), not by the policy condition.
 Statement:
   - Effect: Deny
-    Action: ["ec2:DeleteFlowLogs", "ec2:ModifyVpcAttribute"]
+    Action:
+      - "ec2:DeleteFlowLogs"
+      - "ec2:ModifyVpcAttribute"
+      - "ec2:AuthorizeSecurityGroupIngress"
+      - "ec2:ModifySecurityGroupRules"
     Resource: "*"
-    Condition: { StringNotEquals: { "aws:PrincipalArn": "arn:aws:iam::*:role/network-admin" } }
+    Condition: { ArnNotLike: { "aws:PrincipalArn": "arn:aws:iam::*:role/network-admin" } }
 ```
 
 ```bash
