@@ -11,7 +11,7 @@ tags:
 
 # What is Grafana?
 
-**Short answer:** Grafana is an open-source visualisation and dashboarding platform that queries many data sources — Prometheus, Loki, Elasticsearch, CloudWatch, SQL databases — and presents them in unified dashboards with alerting.
+**Short answer:** Grafana is an open-source visualisation and dashboarding platform that queries many data sources - Prometheus, Loki, Elasticsearch, CloudWatch, SQL databases - and presents them in unified dashboards with alerting.
 
 ## Detail
 
@@ -19,11 +19,11 @@ Grafana is deliberately storage-agnostic: it stores dashboards, not data. That m
 
 Capabilities that matter in practice:
 
-- **Templating with variables** — a `$namespace` or `$service` dropdown turns one dashboard into hundreds, and repeated rows generate a panel per instance.
-- **Unified alerting** — alert rules defined in Grafana across any data source, with notification policies routing to Slack, PagerDuty, or email.
-- **Dashboards as code** — JSON models provisioned from Git, or generated with Grafonnet/Terraform, so dashboards are reviewed and versioned like everything else.
-- **Exemplars and correlations** — jump from a latency spike on a graph directly to a matching trace.
-- **Annotations** — overlay deploys and incidents onto graphs, which makes "what changed?" answerable in seconds.
+- **Templating with variables** - a `$namespace` or `$service` dropdown turns one dashboard into hundreds, and repeated rows generate a panel per instance.
+- **Unified alerting** - alert rules defined in Grafana across any data source, with notification policies routing to Slack, PagerDuty, or email.
+- **Dashboards as code** - JSON models provisioned from Git, or generated with Grafonnet/Terraform, so dashboards are reviewed and versioned like everything else.
+- **Exemplars and correlations** - jump from a latency spike on a graph directly to a matching trace.
+- **Annotations** - overlay deploys and incidents onto graphs, which makes "what changed?" answerable in seconds.
 
 The wider Grafana stack pairs it with **Loki** (logs), **Tempo** (traces), **Mimir** (long-term metrics), and **Pyroscope** (profiles).
 

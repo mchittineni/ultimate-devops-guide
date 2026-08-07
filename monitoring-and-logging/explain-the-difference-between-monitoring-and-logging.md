@@ -29,12 +29,12 @@ Traces are the third pillar: they follow a single request across services and ex
 
 **The practical workflow** during an incident: an alert fires from a metric (error ratio above SLO), a dashboard narrows it to a service and version, traces identify the slow or failing dependency, and logs for those specific trace IDs reveal the exact cause.
 
-The connective tissue is correlation IDs — a trace ID propagated through headers and included in every log line and metric exemplar. Without it, you are searching by timestamp and hoping.
+The connective tissue is correlation IDs - a trace ID propagated through headers and included in every log line and metric exemplar. Without it, you are searching by timestamp and hoping.
 
 ## Interview tips
 
 - Mention the three pillars (metrics, logs, traces) and how you move between them.
-- Structured JSON logging with a trace ID is the single highest-value logging practice — say it.
+- Structured JSON logging with a trace ID is the single highest-value logging practice - say it.
 - Cost is a legitimate engineering concern: sample verbose logs, keep metrics for trends, keep logs short-lived.
 
 ---

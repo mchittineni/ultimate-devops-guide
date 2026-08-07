@@ -9,7 +9,7 @@ tags:
 
 # Monitoring and Logging
 
-Metrics, logs, and the toolchain — Prometheus, Grafana, and the ELK stack — plus the conceptual split between monitoring and logging.
+Metrics, logs, and the toolchain - Prometheus, Grafana, and the ELK stack - plus the conceptual split between monitoring and logging.
 
 **5 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 0
 

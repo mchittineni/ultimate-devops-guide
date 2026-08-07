@@ -17,7 +17,7 @@ tags:
 
 **Pull model.** Prometheus scrapes `/metrics` endpoints on a schedule rather than receiving pushes. This makes targets simple, makes "is the target up?" a free signal, and avoids a fan-in bottleneck. Short-lived batch jobs, which cannot be scraped, push to a Pushgateway instead.
 
-**Data model.** Every sample is a metric name plus a set of key/value labels, e.g. `http_requests_total{method="GET",status="200"}`. Labels are what make PromQL aggregation powerful — and high-cardinality labels (user IDs, request IDs) are the classic way to melt a Prometheus server.
+**Data model.** Every sample is a metric name plus a set of key/value labels, e.g. `http_requests_total{method="GET",status="200"}`. Labels are what make PromQL aggregation powerful - and high-cardinality labels (user IDs, request IDs) are the classic way to melt a Prometheus server.
 
 **Metric types:** counter (monotonic, use with `rate()`), gauge (goes up and down), histogram (bucketed observations, enables percentile estimation), and summary (client-side quantiles).
 
@@ -41,7 +41,7 @@ sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total
 ## Interview tips
 
 - Explain the pull model and why it is a deliberate design choice.
-- Cardinality is the top operational pitfall — mention it before you are asked.
+- Cardinality is the top operational pitfall - mention it before you are asked.
 - Prometheus is not durable long-term storage by itself; name Thanos/Mimir/Cortex for that.
 
 ---
