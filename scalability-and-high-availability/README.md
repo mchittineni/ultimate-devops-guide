@@ -11,7 +11,7 @@ tags:
 
 Designing systems that grow and stay up: scaling dimensions, load balancing, auto scaling, and recovery objectives.
 
-**6 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 2 · 🔴 Advanced: 0
+**7 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 2 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -23,6 +23,7 @@ Designing systems that grow and stay up: scaling dimensions, load balancing, aut
 | 59  | [What is Auto Scaling?](./what-is-auto-scaling.md)                                                                                                 | 🟢 Beginner     |
 | 60  | [What is Disaster Recovery?](./what-is-disaster-recovery.md)                                                                                       | 🟡 Intermediate |
 | 269 | [What is the difference between a layer 4 and a layer 7 load balancer?](./what-is-the-difference-between-a-layer-4-and-a-layer-7-load-balancer.md) | 🟡 Intermediate |
+| 300 | [How do you design a system to degrade gracefully under overload?](./how-do-you-design-a-system-to-degrade-gracefully-under-overload.md)           | 🔴 Advanced     |
 
 ## What interviewers probe here
 
