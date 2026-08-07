@@ -15,13 +15,13 @@ tags:
 
 ## Detail
 
-**The catalogue is the foundation and the hardest part.** Components, systems, APIs, resources, and groups are declared in `catalog-info.yaml` files discovered from repositories, so ownership lives next to the code. The value appears in every adjacent workflow — who owns this failing service, which services consume this API, which teams are affected by deprecating this database — and none of it works if the catalogue is incomplete or stale. Automated discovery plus a policy that unregistered services do not get platform features is how teams keep it honest.
+**The catalogue is the foundation and the hardest part.** Components, systems, APIs, resources, and groups are declared in `catalog-info.yaml` files discovered from repositories, so ownership lives next to the code. The value appears in every adjacent workflow - who owns this failing service, which services consume this API, which teams are affected by deprecating this database - and none of it works if the catalogue is incomplete or stale. Automated discovery plus a policy that unregistered services do not get platform features is how teams keep it honest.
 
 **Templates connect the portal to the golden path.** A template collects a few inputs and then executes actions: create the repository from a skeleton, register it in the catalogue, open the pull request wiring CI, provision infrastructure. This is the "create a new service" button that makes a portal feel like a platform rather than a directory.
 
-**Scorecards drive standards without mandates.** A tech-health or maturity plugin scores each component against checks — has an owner, has an SLO, on a supported base image, dependencies patched, runbook exists — and shows teams their gaps. Visibility plus ownership moves behaviour more effectively than blocking pipelines, and it gives leadership a real compliance picture.
+**Scorecards drive standards without mandates.** A tech-health or maturity plugin scores each component against checks - has an owner, has an SLO, on a supported base image, dependencies patched, runbook exists - and shows teams their gaps. Visibility plus ownership moves behaviour more effectively than blocking pipelines, and it gives leadership a real compliance picture.
 
-**Be honest about the cost.** Backstage is a TypeScript/React application that you fork, extend, deploy, and upgrade; keeping current with upstream releases and plugin churn is ongoing work, typically at least one dedicated engineer. Managed alternatives (Spotify Portal, Roadie, Red Hat Developer Hub) and competing products (Port, Cortex, OpsLevel) trade extensibility for lower maintenance — often the right call for a mid-sized organisation.
+**Be honest about the cost.** Backstage is a TypeScript/React application that you fork, extend, deploy, and upgrade; keeping current with upstream releases and plugin churn is ongoing work, typically at least one dedicated engineer. Managed alternatives (Spotify Portal, Roadie, Red Hat Developer Hub) and competing products (Port, Cortex, OpsLevel) trade extensibility for lower maintenance - often the right call for a mid-sized organisation.
 
 **A portal is not a platform.** A portal on top of ticket-driven operations is a nicer window onto the same delays. Build the self-service capabilities first, then a portal to surface them. Interviewers ask about Backstage partly to see whether you conflate the interface with the capability.
 
@@ -30,7 +30,7 @@ tags:
 ## Example
 
 ```yaml
-# catalog-info.yaml — ownership and relationships live next to the code
+# catalog-info.yaml - ownership and relationships live next to the code
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -54,9 +54,9 @@ spec:
 
 ## Interview tips
 
-- Name the four pillars — catalogue, templates, TechDocs, plugins — and say the catalogue is where the value and the difficulty both live.
+- Name the four pillars - catalogue, templates, TechDocs, plugins - and say the catalogue is where the value and the difficulty both live.
 - "A portal is not a platform" is the line that shows you understand the ordering of the work.
-- Expect: "would you build Backstage or buy a portal?" — weigh a dedicated engineer's cost against extensibility needs, and answer for the size of team in question.
+- Expect: "would you build Backstage or buy a portal?" - weigh a dedicated engineer's cost against extensibility needs, and answer for the size of team in question.
 
 ---
 

@@ -28,18 +28,18 @@ tags:
 
 **Time to first successful deploy is the single best onboarding proxy.** Measure it for a genuinely new engineer, from repository creation to production. It exposes gaps in documentation, permissions, and defaults that no other metric surfaces, and it is easy to explain to leadership.
 
-**Self-service completion rate makes the ticket problem visible.** Of attempts to provision something, what fraction completed without platform-team involvement? A falling rate points at a specific broken capability. Pair it with a count of platform support requests grouped by cause — each recurring cause is a design or documentation defect.
+**Self-service completion rate makes the ticket problem visible.** Of attempts to provision something, what fraction completed without platform-team involvement? A falling rate points at a specific broken capability. Pair it with a count of platform support requests grouped by cause - each recurring cause is a design or documentation defect.
 
 **Survey sparingly and act visibly.** A short quarterly survey (5–8 questions, one free-text "what slows you down most?") gets responses; a long one does not. The critical part is closing the loop: publish what you heard and what you changed, or response rates collapse. Frameworks such as SPACE and DevEx exist to keep the questions balanced across satisfaction, flow, and cognitive load.
 
-**Beware metrics that drive the wrong behaviour.** Deployment frequency alone rewards trivial deploys; MTTR alone rewards closing incidents rather than fixing causes; "tickets closed" rewards a service desk over automation. Always pair a speed metric with a stability metric — that pairing is the whole point of DORA.
+**Beware metrics that drive the wrong behaviour.** Deployment frequency alone rewards trivial deploys; MTTR alone rewards closing incidents rather than fixing causes; "tickets closed" rewards a service desk over automation. Always pair a speed metric with a stability metric - that pairing is the whole point of DORA.
 
 **Report in the language of the business** when talking to leadership: cycle time and change failure rate translate into shipping speed and incident cost; platform cost per team translates into efficiency. Reporting internal component delivery to an executive audience is how platform teams lose funding.
 
 ## Example
 
 ```text
-Platform scorecard — Q3 2026 (published to all engineering)
+Platform scorecard - Q3 2026 (published to all engineering)
 
 Delivery         deployment frequency     4.1/day/team   ▲ from 2.6
                  lead time (commit->prod) 22 min p50     ▲ from 51 min
@@ -66,7 +66,7 @@ for deploy debugging. Not done: secret rotation (moved to Q4, now top request).
 
 - Give the four layers rather than a list of metrics; the structure is what is being assessed.
 - "Adoption is the metric you cannot fake" and "always pair speed with stability" are the two lines to land.
-- Expect: "what would you do if adoption were low?" — treat it as product feedback, interview the teams routing around you, and fix the missing capability.
+- Expect: "what would you do if adoption were low?" - treat it as product feedback, interview the teams routing around you, and fix the missing capability.
 
 ---
 

@@ -25,7 +25,7 @@ tags:
 | Monitoring               | metrics, logs, traces, SLOs, cost visibility                        |
 | Security                 | identity, secrets, policy, image signing and verification           |
 
-**Self-service is the defining property.** If provisioning a database requires a ticket to the platform team, that capability is not part of the platform — it is a service desk. The test is: can a new engineer go from empty repository to a running service in production, with monitoring and an owner recorded, without a human approving each step?
+**Self-service is the defining property.** If provisioning a database requires a ticket to the platform team, that capability is not part of the platform - it is a service desk. The test is: can a new engineer go from empty repository to a running service in production, with monitoring and an owner recorded, without a human approving each step?
 
 **Golden paths, not mandates.** The platform provides a well-supported default path that is easier than doing it yourself; teams with genuine reasons can go around it and accept more responsibility. Platforms that enforce a single way create shadow platforms; platforms that are merely convenient get adopted voluntarily, which is the outcome you want.
 
@@ -39,7 +39,7 @@ tags:
 
 ```yaml
 # The developer-facing contract: a small, reviewable spec that yields a
-# running service, monitored, owned, and compliant — no tickets in between.
+# running service, monitored, owned, and compliant - no tickets in between.
 apiVersion: platform.acme.com/v1
 kind: Service
 metadata:
@@ -63,9 +63,9 @@ spec:
 
 ## Interview tips
 
-- Define it by self-service and by being a product with users — tool lists are the weak answer.
+- Define it by self-service and by being a product with users - tool lists are the weak answer.
 - "Golden paths, not mandates" and "abstractions must be escapable" are the two ideas that show maturity.
-- Expect: "when is an IDP not worth building?" — small organisations; recommend templates and a shared pipeline instead.
+- Expect: "when is an IDP not worth building?" - small organisations; recommend templates and a shared pipeline instead.
 
 ---
 

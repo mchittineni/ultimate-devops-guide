@@ -19,18 +19,18 @@ tags:
 
 **Adoption is voluntary or the signal is worthless.** If teams are compelled to use the platform, you cannot tell whether it is good. Mandates hide problems; voluntary adoption forces the platform to be genuinely better than the alternative. Where a mandate exists for compliance reasons, invest even harder in listening, because the usual feedback channel is closed.
 
-**Version the interface and deprecate on a published policy.** The platform's API — templates, CRDs, pipeline contracts, CLI — is a public interface with consumers. Semantic versioning, a stated support window, migration tooling for breaking changes, and a deprecation notice period. Breaking 40 teams' pipelines without notice destroys credibility permanently, and no amount of technical excellence recovers it.
+**Version the interface and deprecate on a published policy.** The platform's API - templates, CRDs, pipeline contracts, CLI - is a public interface with consumers. Semantic versioning, a stated support window, migration tooling for breaking changes, and a deprecation notice period. Breaking 40 teams' pipelines without notice destroys credibility permanently, and no amount of technical excellence recovers it.
 
-**Support is part of the product.** A staffed channel with a response expectation, a rota so it is not always the same person, office hours, and a documentation set that is treated as a deliverable rather than an afterthought. Every repeated question is a defect in either documentation or design — track them and fix the cause.
+**Support is part of the product.** A staffed channel with a response expectation, a rota so it is not always the same person, office hours, and a documentation set that is treated as a deliverable rather than an afterthought. Every repeated question is a defect in either documentation or design - track them and fix the cause.
 
 **Measure outcomes, not activity.** Lead time from commit to production, change failure rate, time to first successful deploy for a new service, self-service completion rate versus tickets, number of teams on the current supported version, developer satisfaction from a short recurring survey, and platform cost per team. DORA metrics plus a developer-experience survey is the usual pairing; "components delivered" is the vanity metric to avoid.
 
-**Team topology.** A platform team is a distinct type from a stream-aligned team: it owns a product, has a product manager or someone doing that job, and interacts with consumers through X-as-a-Service rather than by embedding. When adoption stalls, temporary enabling-team engagements — pairing with one team to migrate — usually beat writing more documentation.
+**Team topology.** A platform team is a distinct type from a stream-aligned team: it owns a product, has a product manager or someone doing that job, and interacts with consumers through X-as-a-Service rather than by embedding. When adoption stalls, temporary enabling-team engagements - pairing with one team to migrate - usually beat writing more documentation.
 
 ## Example
 
 ```text
-Platform quarterly review — the artefacts that make it a product
+Platform quarterly review - the artefacts that make it a product
 
 Users            42 services across 11 teams · 3 personas interviewed this quarter
 Top user pain    1. staging environments take 3 days   (roadmap: ephemeral envs)
@@ -49,9 +49,9 @@ Cost             $/ team / month published so teams can see their own consumptio
 
 ## Interview tips
 
-- Lead with users, roadmap, versioned interface, and adoption metrics — that framing is the answer.
+- Lead with users, roadmap, versioned interface, and adoption metrics - that framing is the answer.
 - "Voluntary adoption is the only honest signal" is a strong, opinionated line to deliver.
-- Expect: "how do you measure success?" — DORA outcomes plus adoption and satisfaction, explicitly rejecting output metrics.
+- Expect: "how do you measure success?" - DORA outcomes plus adoption and satisfaction, explicitly rejecting output metrics.
 
 ---
 

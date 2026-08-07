@@ -11,7 +11,7 @@ tags:
 
 # What is a golden path?
 
-**Short answer:** A golden path is the supported, opinionated route through the platform for a common task — creating a service, adding a database, shipping to production — where the default choices are already made, compliant, and maintained by the platform team. It is a recommendation made irresistible by being the easiest option, not a rule enforced by policy.
+**Short answer:** A golden path is the supported, opinionated route through the platform for a common task - creating a service, adding a database, shipping to production - where the default choices are already made, compliant, and maintained by the platform team. It is a recommendation made irresistible by being the easiest option, not a rule enforced by policy.
 
 ## Detail
 
@@ -19,9 +19,9 @@ tags:
 
 **Paths are per-use-case, not one grand template.** Typical set: HTTP service, event consumer, scheduled job, and data pipeline. Four well-maintained paths beat one configurable template with 40 flags, which nobody understands and the platform team cannot support.
 
-**Maintained means versioned.** Scaffolding that is copied once and diverges immediately provides value only on day one. The stronger pattern keeps the generated repository linked to a template version so updates can be pushed as pull requests — a base image bump, a new required security check — and adoption is measurable.
+**Maintained means versioned.** Scaffolding that is copied once and diverges immediately provides value only on day one. The stronger pattern keeps the generated repository linked to a template version so updates can be pushed as pull requests - a base image bump, a new required security check - and adoption is measurable.
 
-**Deviation is allowed and priced.** A team can leave the path when they have a real need; they then own what the platform was handling. Make that trade explicit ("off-path services do not get the platform SLO, automated compliance evidence, or upgrade support"), and track how many services are off-path — a rising number is feedback that the path is missing something.
+**Deviation is allowed and priced.** A team can leave the path when they have a real need; they then own what the platform was handling. Make that trade explicit ("off-path services do not get the platform SLO, automated compliance evidence, or upgrade support"), and track how many services are off-path - a rising number is feedback that the path is missing something.
 
 **Measure adoption honestly.** Percentage of new services created via the path, time from repository creation to first production deploy, and the share of services still on a supported template version. If teams route around the path, the diagnosis is that it is too rigid or too incomplete, not that they are undisciplined.
 
@@ -53,9 +53,9 @@ $ acme new service checkout --template http-service --owner team-payments
 
 ## Interview tips
 
-- Emphasise "easiest path, not mandated path" — mandate-first answers signal a platform teams resent.
+- Emphasise "easiest path, not mandated path" - mandate-first answers signal a platform teams resent.
 - The versioned-template-with-auto-PR detail is what distinguishes a maintained path from a one-time generator.
-- Expect: "what if a team wants something different?" — allow it, make the trade explicit, and treat the deviation as product feedback.
+- Expect: "what if a team wants something different?" - allow it, make the trade explicit, and treat the deviation as product feedback.
 
 ---
 

@@ -28,7 +28,7 @@ Building the internal platform as a product: IDPs, golden paths, Backstage, Cros
 
 ## What interviewers probe here
 
-- Golden paths that are chosen, not mandated — and escapable abstractions.
+- Golden paths that are chosen, not mandated - and escapable abstractions.
 - Measuring adoption and developer outcomes rather than components shipped.
 - Versioning the platform interface and automating consumer migrations.
 
