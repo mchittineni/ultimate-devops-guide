@@ -11,7 +11,7 @@ tags:
 
 # How do you manage services in Linux?
 
-**Short answer:** With `systemctl` on modern distributions — start, stop, restart, reload, enable, and disable units — plus `journalctl` for their logs, and unit files under `/etc/systemd/system` for configuration.
+**Short answer:** With `systemctl` on modern distributions - start, stop, restart, reload, enable, and disable units - plus `journalctl` for their logs, and unit files under `/etc/systemd/system` for configuration.
 
 ## Detail
 
@@ -52,13 +52,13 @@ journalctl -u nginx --since "1 hour ago" -p err
 journalctl -u nginx -b -1                   # previous boot
 ```
 
-Older systems use SysV init (`service nginx start`, `chkconfig`), and containers invert the model entirely — the orchestrator, not systemd, supervises the process.
+Older systems use SysV init (`service nginx start`, `chkconfig`), and containers invert the model entirely - the orchestrator, not systemd, supervises the process.
 
 ## Interview tips
 
 - `reload` versus `restart` is a common trap: reload preserves connections where the daemon supports it.
 - Drop-in overrides (`systemctl edit`) are the correct way to customise packaged units.
-- Mention `mask` — the answer when a service keeps coming back because something depends on it.
+- Mention `mask` - the answer when a service keeps coming back because something depends on it.
 
 ---
 

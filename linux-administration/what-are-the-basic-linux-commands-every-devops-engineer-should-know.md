@@ -57,7 +57,7 @@ chmod 640 /etc/app/secret.conf && chown app:app /etc/app/secret.conf
 
 ## Interview tips
 
-- Interviewers usually ask a scenario ("the disk is full, what do you do?") rather than a list — answer with the command sequence: `df -h` → `du -sh` → `lsof +L1`.
+- Interviewers usually ask a scenario ("the disk is full, what do you do?") rather than a list - answer with the command sequence: `df -h` → `du -sh` → `lsof +L1`.
 - Knowing `ss` rather than the deprecated `netstat`, and `journalctl` rather than tailing `/var/log/messages`, signals current experience.
 - Mention `set -euo pipefail` when the conversation turns to scripting.
 

@@ -9,7 +9,7 @@ tags:
 
 # Linux Administration
 
-The operating system under everything — commands, shell scripting, systemd, service management, and the filesystem hierarchy.
+The operating system under everything - commands, shell scripting, systemd, service management, and the filesystem hierarchy.
 
 **5 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 0
 

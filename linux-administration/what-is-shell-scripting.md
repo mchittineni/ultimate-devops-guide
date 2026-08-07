@@ -11,7 +11,7 @@ tags:
 
 # What is Shell Scripting?
 
-**Short answer:** Shell scripting is automating sequences of shell commands in a file so operational tasks are repeatable, reviewable, and runnable by anyone or anything — including CI pipelines and cron.
+**Short answer:** Shell scripting is automating sequences of shell commands in a file so operational tasks are repeatable, reviewable, and runnable by anyone or anything - including CI pipelines and cron.
 
 ## Detail
 
@@ -19,12 +19,12 @@ Shell remains the lingua franca of operations because it is present everywhere a
 
 **Safety essentials**
 
-- `set -euo pipefail` — exit on error, fail on undefined variables, and propagate failures through pipes. The single most important line in any bash script.
+- `set -euo pipefail` - exit on error, fail on undefined variables, and propagate failures through pipes. The single most important line in any bash script.
 - Quote every variable expansion: `"$var"`, `"${array[@]}"`. Unquoted variables break on spaces and glob characters.
 - `trap ... EXIT` for cleanup of temporary files and locks.
 - Check preconditions early and fail with a clear message.
 - Prefer `[[ ]]` over `[ ]` in bash, and `$( )` over backticks.
-- Run `shellcheck` in CI — it catches the majority of real bugs.
+- Run `shellcheck` in CI - it catches the majority of real bugs.
 
 **When to stop.** Once a script needs data structures, complex error handling, or unit tests, move to Python or Go. Roughly, past 200 lines shell becomes a liability.
 
@@ -65,7 +65,7 @@ main "$@"
 ## Interview tips
 
 - Say `set -euo pipefail` unprompted; its absence is the most common bug in production scripts.
-- Writing to a temp file then `mv` (an atomic rename) avoids half-written artifacts — a nice detail.
+- Writing to a temp file then `mv` (an atomic rename) avoids half-written artifacts - a nice detail.
 - Have a clear threshold for when you would rewrite the script in a real language.
 
 ---

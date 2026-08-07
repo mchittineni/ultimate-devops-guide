@@ -11,17 +11,17 @@ tags:
 
 # What is systemd?
 
-**Short answer:** systemd is the init system and service manager on most modern Linux distributions — PID 1. It starts the system, supervises services with dependency-aware parallel startup, and provides logging, timers, resource control, and sandboxing.
+**Short answer:** systemd is the init system and service manager on most modern Linux distributions - PID 1. It starts the system, supervises services with dependency-aware parallel startup, and provides logging, timers, resource control, and sandboxing.
 
 ## Detail
 
 systemd manages **units**, each a declarative file:
 
-- `.service` — a daemon or one-shot process.
-- `.socket` — socket activation; systemd holds the listening socket and starts the service on first connection.
-- `.timer` — a cron replacement with calendar or monotonic schedules, randomised delays, and catch-up for missed runs.
-- `.target` — a grouping/synchronisation point (`multi-user.target` replaces runlevels).
-- `.mount`, `.path`, `.slice` — filesystems, path watches, and cgroup resource groups.
+- `.service` - a daemon or one-shot process.
+- `.socket` - socket activation; systemd holds the listening socket and starts the service on first connection.
+- `.timer` - a cron replacement with calendar or monotonic schedules, randomised delays, and catch-up for missed runs.
+- `.target` - a grouping/synchronisation point (`multi-user.target` replaces runlevels).
+- `.mount`, `.path`, `.slice` - filesystems, path watches, and cgroup resource groups.
 
 Why it matters operationally: services get automatic restart policies, cgroup-based resource limits, and strong sandboxing options (`ProtectSystem`, `PrivateTmp`, `NoNewPrivileges`, `CapabilityBoundingSet`) that harden a daemon without touching its code. `journald` captures stdout/stderr with structured metadata, queryable by unit, boot, priority, and time.
 
@@ -66,7 +66,7 @@ journalctl -u myapp -f
 ## Interview tips
 
 - `daemon-reload` after editing a unit file is the detail people forget.
-- Timers versus cron: timers give you logging, dependencies, and randomised delays — a better answer for scheduled work on a modern host.
+- Timers versus cron: timers give you logging, dependencies, and randomised delays - a better answer for scheduled work on a modern host.
 - The sandboxing directives are a strong security answer for hardening legacy daemons.
 
 ---

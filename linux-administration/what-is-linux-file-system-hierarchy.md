@@ -11,7 +11,7 @@ tags:
 
 # What is Linux File System Hierarchy?
 
-**Short answer:** The Filesystem Hierarchy Standard defines a single tree rooted at `/`, with each top-level directory having a defined purpose — `/etc` for configuration, `/var` for variable data, `/usr` for programs, `/proc` and `/sys` for kernel interfaces.
+**Short answer:** The Filesystem Hierarchy Standard defines a single tree rooted at `/`, with each top-level directory having a defined purpose - `/etc` for configuration, `/var` for variable data, `/usr` for programs, `/proc` and `/sys` for kernel interfaces.
 
 ## Detail
 
@@ -21,7 +21,7 @@ tags:
 | `/bin`, `/sbin`  | Essential user and system binaries (usually symlinks into `/usr` now) |
 | `/boot`          | Kernel, initramfs, bootloader configuration                           |
 | `/dev`           | Device nodes                                                          |
-| `/etc`           | Host-specific configuration — never binaries                          |
+| `/etc`           | Host-specific configuration - never binaries                          |
 | `/home`          | User home directories                                                 |
 | `/lib`, `/lib64` | Shared libraries and kernel modules                                   |
 | `/mnt`, `/media` | Temporary and removable mounts                                        |
@@ -35,7 +35,7 @@ tags:
 | `/usr`           | Read-only user programs, libraries, and docs                          |
 | `/var`           | Variable data: logs, caches, spools, databases                        |
 
-Two directories earn special attention operationally. `/var` is where disks fill — logs and container layers live there, so it is often a separate filesystem. `/proc` is where you read live process state: `/proc/<pid>/limits`, `/proc/<pid>/fd`, `/proc/meminfo`, `/proc/loadavg`.
+Two directories earn special attention operationally. `/var` is where disks fill - logs and container layers live there, so it is often a separate filesystem. `/proc` is where you read live process state: `/proc/<pid>/limits`, `/proc/<pid>/fd`, `/proc/meminfo`, `/proc/loadavg`.
 
 ## Example
 
@@ -49,7 +49,7 @@ findmnt -t ext4,xfs                         # what is mounted where
 ## Interview tips
 
 - Know why `/var` gets its own filesystem, and what you do when it fills.
-- `/proc` questions are common in troubleshooting rounds — be able to name three useful files.
+- `/proc` questions are common in troubleshooting rounds - be able to name three useful files.
 - Mention that `/etc` holding only configuration is what makes a host's state easy to back up and review.
 
 ---
