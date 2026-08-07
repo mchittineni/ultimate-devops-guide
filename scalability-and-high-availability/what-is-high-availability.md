@@ -29,12 +29,12 @@ Each nine costs materially more. The right target comes from what the business l
 
 **Techniques**
 
-- **Redundancy** — N+1 or N+2 instances, across availability zones. Active-active (all serving) or active-passive (standby ready).
-- **Load balancing with health checks** — unhealthy instances are removed from rotation automatically.
-- **Failover** — automatic promotion of a replica when a primary fails; database managed services do this in tens of seconds.
-- **Graceful degradation** — shed non-essential features rather than failing entirely (serve cached content, disable recommendations).
-- **Resilience patterns** — timeouts, retries with exponential backoff and jitter, circuit breakers, bulkheads.
-- **No single points of failure** — including in the "boring" layers: DNS, certificates, the deployment pipeline, and the monitoring system itself.
+- **Redundancy** - N+1 or N+2 instances, across availability zones. Active-active (all serving) or active-passive (standby ready).
+- **Load balancing with health checks** - unhealthy instances are removed from rotation automatically.
+- **Failover** - automatic promotion of a replica when a primary fails; database managed services do this in tens of seconds.
+- **Graceful degradation** - shed non-essential features rather than failing entirely (serve cached content, disable recommendations).
+- **Resilience patterns** - timeouts, retries with exponential backoff and jitter, circuit breakers, bulkheads.
+- **No single points of failure** - including in the "boring" layers: DNS, certificates, the deployment pipeline, and the monitoring system itself.
 
 **HA is not DR.** High availability handles component failure within an environment, typically automatically and in seconds. Disaster recovery handles the loss of an entire site or region, typically with a documented procedure and a much longer RTO.
 
@@ -42,7 +42,7 @@ Each nine costs materially more. The right target comes from what the business l
 
 - Know the nines table well enough to reason about it out loud.
 - Always mention that dependencies (DNS, certs, third-party APIs) are part of your availability.
-- Distinguish HA from DR clearly — it is a frequently tested distinction.
+- Distinguish HA from DR clearly - it is a frequently tested distinction.
 
 ---
 

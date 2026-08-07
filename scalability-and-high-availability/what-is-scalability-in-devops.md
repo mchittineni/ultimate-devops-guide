@@ -11,20 +11,20 @@ tags:
 
 # What is Scalability in DevOps?
 
-**Short answer:** Scalability is a system's ability to handle increased load by adding resources — vertically (a bigger machine) or horizontally (more machines) — ideally automatically and without redesign.
+**Short answer:** Scalability is a system's ability to handle increased load by adding resources - vertically (a bigger machine) or horizontally (more machines) - ideally automatically and without redesign.
 
 ## Detail
 
-**Vertical scaling (scale up)** — more CPU, memory, or IOPS on one machine. Simple, no application changes, but bounded by the largest instance available, usually requires a restart, and leaves a single point of failure.
+**Vertical scaling (scale up)** - more CPU, memory, or IOPS on one machine. Simple, no application changes, but bounded by the largest instance available, usually requires a restart, and leaves a single point of failure.
 
-**Horizontal scaling (scale out)** — more instances behind a load balancer. Effectively unbounded, improves availability, and enables rolling deploys — but requires the application to be stateless or to externalise state, and introduces distributed-systems concerns.
+**Horizontal scaling (scale out)** - more instances behind a load balancer. Effectively unbounded, improves availability, and enables rolling deploys - but requires the application to be stateless or to externalise state, and introduces distributed-systems concerns.
 
 **What makes horizontal scaling possible**
 
-- **Statelessness** — no session or user data in instance memory or local disk; push it to Redis, a database, or a signed token.
-- **Externalised configuration** — instances are interchangeable.
-- **Idempotent operations** — safe retries when a request is routed to a different instance.
-- **Shared-nothing design** — instances do not coordinate directly.
+- **Statelessness** - no session or user data in instance memory or local disk; push it to Redis, a database, or a signed token.
+- **Externalised configuration** - instances are interchangeable.
+- **Idempotent operations** - safe retries when a request is routed to a different instance.
+- **Shared-nothing design** - instances do not coordinate directly.
 
 **Where scaling actually stops.** Application tiers scale easily; the database is usually the bottleneck. The progression is: read replicas → caching → connection pooling → partitioning/sharding → a different storage engine for the hot path.
 
@@ -51,7 +51,7 @@ spec:
 
 ## Interview tips
 
-- State the vertical/horizontal trade-off, then immediately move to what makes horizontal scaling possible — statelessness is the key insight.
+- State the vertical/horizontal trade-off, then immediately move to what makes horizontal scaling possible - statelessness is the key insight.
 - Name the database as the usual bottleneck; it is the follow-up question in most interviews.
 - Distinguish scalability (can grow) from elasticity (grows and shrinks automatically).
 
