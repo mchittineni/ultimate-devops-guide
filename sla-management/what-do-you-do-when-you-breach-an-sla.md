@@ -15,13 +15,13 @@ tags:
 
 ## Detail
 
-**Facts first, in contractual terms.** Compute availability exactly as the SLA defines it — the right vantage point, the right sample interval, the right window, per region or tenant. Internal dashboards often use a different definition and will give a different number; presenting a figure you cannot reproduce from contractual measurement is how disputes escalate.
+**Facts first, in contractual terms.** Compute availability exactly as the SLA defines it - the right vantage point, the right sample interval, the right window, per region or tenant. Internal dashboards often use a different definition and will give a different number; presenting a figure you cannot reproduce from contractual measurement is how disputes escalate.
 
 **Notify before the customer notices.** Proactive disclosure with the credit already applied is the difference between a renewal conversation and an escalation to your CEO. It also removes the incentive to argue about measurement: you conceded the breach yourself.
 
 **Separate the commercial response from the engineering response.** Commercially: credits, an account-team conversation, and for repeat breaches often a written improvement plan with milestones the customer can hold you to. Technically: a post-incident review naming contributing factors, and remediation items that are scheduled work rather than aspirations. Customers have learned to distrust "we will improve monitoring".
 
-**Then fix the systemic issue.** A breach means your internal SLO buffer was insufficient, the failure mode was undetected, or the dependency graph is weaker than the promise. Concretely: revisit the SLO buffer, add the missing detection, reduce blast radius so the next occurrence affects fewer tenants, and — if the target genuinely exceeds what the architecture can deliver — say so and renegotiate rather than breaching quarterly.
+**Then fix the systemic issue.** A breach means your internal SLO buffer was insufficient, the failure mode was undetected, or the dependency graph is weaker than the promise. Concretely: revisit the SLO buffer, add the missing detection, reduce blast radius so the next occurrence affects fewer tenants, and - if the target genuinely exceeds what the architecture can deliver - say so and renegotiate rather than breaching quarterly.
 
 **Repeat breaches change the contract.** Most enterprise SLAs grant termination for cause after a defined pattern (for example, three breaches in a rolling twelve months). Track your breach history against those clauses; that history, not a single incident, is what determines contractual risk.
 
@@ -30,7 +30,7 @@ tags:
 ## Example
 
 ```text
-Breach response checklist — run in this order
+Breach response checklist - run in this order
 
 1. Compute availability per the contract (region, tenant, sample interval, window)
 2. Identify affected customers with evidence retained for the full claim window
@@ -45,7 +45,7 @@ Breach response checklist — run in this order
 
 - "Notify proactively and apply the credit before it is claimed" is the answer that shows maturity.
 - Naming the termination-for-cause pattern shows you understand the contractual stakes beyond credits.
-- Expect: "the month is already breached — does more downtime matter?" Say yes, explain rolling windows, and name the trust cost.
+- Expect: "the month is already breached - does more downtime matter?" Say yes, explain rolling windows, and name the trust cost.
 
 ---
 

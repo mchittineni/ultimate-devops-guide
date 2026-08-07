@@ -29,7 +29,7 @@ The commercial side of reliability: SLA versus SLO versus OLA, downtime and comp
 
 - Allowed downtime per target, and composite availability across dependencies.
 - Why measurement definitions and exclusions cause more disputes than the number.
-- What you do — commercially and technically — when you breach.
+- What you do - commercially and technically - when you breach.
 
 ---
 

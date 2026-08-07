@@ -17,7 +17,7 @@ tags:
 
 | Term | Audience             | Contains                                            | Consequence of breach               |
 | ---- | -------------------- | --------------------------------------------------- | ----------------------------------- |
-| SLI  | engineering          | a metric definition and vantage point               | none — it is just a number          |
+| SLI  | engineering          | a metric definition and vantage point               | none - it is just a number          |
 | SLO  | engineering, product | target + window + error budget                      | error budget policy actions         |
 | SLA  | customer, legal      | promise + measurement method + credits + exclusions | service credits, termination rights |
 | OLA  | internal teams       | what a supporting team owes                         | escalation, internal remediation    |
@@ -28,7 +28,7 @@ tags:
 
 **OLAs are what make SLAs real.** A 99.95% customer promise depends on the platform team's cluster availability, the data team's pipeline freshness, and the vendor's uptime. Each supporting commitment should be written down; otherwise the customer-facing team has made a promise nobody upstream has agreed to.
 
-**Not everything needs an SLA.** Internal services usually have SLOs only. Adding contractual language internally creates adversarial behaviour without improving reliability — the useful internal artefacts are the SLO and the error budget policy.
+**Not everything needs an SLA.** Internal services usually have SLOs only. Adding contractual language internally creates adversarial behaviour without improving reliability - the useful internal artefacts are the SLO and the error budget policy.
 
 ## Example
 
@@ -46,9 +46,9 @@ OLA  platform team: 99.99% Kubernetes API and node capacity
 
 ## Interview tips
 
-- Lead with "SLA has a consequence, SLO does not" — that is the distinction being tested.
+- Lead with "SLA has a consequence, SLO does not" - that is the distinction being tested.
 - Volunteer the SLO-stricter-than-SLA buffer; few candidates mention it and it demonstrates real practice.
-- Expect: "should internal services have SLAs?" — no, SLOs plus an error budget policy; explain why contracts internally backfire.
+- Expect: "should internal services have SLAs?" - no, SLOs plus an error budget policy; explain why contracts internally backfire.
 
 ---
 

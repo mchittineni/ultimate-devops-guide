@@ -11,7 +11,7 @@ tags:
 
 # How do service credits work?
 
-**Short answer:** A service credit is a percentage of the affected period's fees refunded when measured availability falls below the committed tier — typically 10% for a small miss, rising to 25–100% for severe ones, capped at the monthly fee, and usually claimable only if the customer files within a stated window. They are the standard remedy precisely because they are bounded and predictable.
+**Short answer:** A service credit is a percentage of the affected period's fees refunded when measured availability falls below the committed tier - typically 10% for a small miss, rising to 25–100% for severe ones, capped at the monthly fee, and usually claimable only if the customer files within a stated window. They are the standard remedy precisely because they are bounded and predictable.
 
 ## Detail
 
@@ -25,7 +25,7 @@ tags:
 
 **Credits are a cap on liability, not compensation.** A customer whose business lost six figures during your outage receives a percentage of one month's subscription. That asymmetry is intentional and is why credits alone rarely satisfy enterprise buyers, who instead negotiate termination rights after repeated breaches, higher caps, or (rarely) direct damages.
 
-**Claim-based versus automatic.** Most vendors require the customer to file a claim with supporting detail within 30 days; some large providers apply credits automatically. Claim-based schemes mean many breaches are never claimed — engineering should still count them internally, because "no claim" is not "no breach".
+**Claim-based versus automatic.** Most vendors require the customer to file a claim with supporting detail within 30 days; some large providers apply credits automatically. Claim-based schemes mean many breaches are never claimed - engineering should still count them internally, because "no claim" is not "no breach".
 
 **Terms that materially change exposure:** whether credits are the "sole and exclusive remedy" (usual, and important), whether they apply per affected service or to the whole invoice, whether unclaimed credits expire, whether repeated breaches unlock termination for cause, and whether credits are cash or future-service value.
 
@@ -50,9 +50,9 @@ Unaffected regions: no credit. Being able to prove this saved ~78% of the exposu
 
 ## Interview tips
 
-- Name the typical tiers and the "sole and exclusive remedy" clause — it shows commercial literacy.
+- Name the typical tiers and the "sole and exclusive remedy" clause - it shows commercial literacy.
 - The strongest engineering point: per-tenant/per-region measurement limits exposure, so blast-radius reduction has a direct financial return.
-- Expect: "was it a breach if nobody claimed?" — yes, and you should track it internally regardless.
+- Expect: "was it a breach if nobody claimed?" - yes, and you should track it internally regardless.
 
 ---
 
