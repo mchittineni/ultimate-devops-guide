@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**Design the schema first — keep it small.** Every additional mandatory tag reduces compliance. A workable minimum:
+**Design the schema first - keep it small.** Every additional mandatory tag reduces compliance. A workable minimum:
 
 | Tag           | Purpose            | Example                          |
 | ------------- | ------------------ | -------------------------------- |
@@ -25,13 +25,13 @@ tags:
 | `CostCenter`  | Finance allocation | `CC-4471`                        |
 | `ManagedBy`   | Provenance         | `terraform`                      |
 
-Agree on case and allowed values, and document them — `Env=prod` and `environment=Production` will not aggregate together.
+Agree on case and allowed values, and document them - `Env=prod` and `environment=Production` will not aggregate together.
 
 **Enforce automatically**
 
-- **IaC defaults** — `default_tags` in the AWS Terraform provider, or a shared module that injects tags; this covers the majority with no per-resource effort.
-- **Policy as code** — AWS Service Control Policies or Tag Policies, Azure Policy `deny` or `modify` effects, or OPA in the pipeline to reject untagged resources.
-- **Remediation** — periodic jobs that report or auto-tag stragglers from account or resource-group defaults.
+- **IaC defaults** - `default_tags` in the AWS Terraform provider, or a shared module that injects tags; this covers the majority with no per-resource effort.
+- **Policy as code** - AWS Service Control Policies or Tag Policies, Azure Policy `deny` or `modify` effects, or OPA in the pipeline to reject untagged resources.
+- **Remediation** - periodic jobs that report or auto-tag stragglers from account or resource-group defaults.
 
 **Then use them.** Activate cost-allocation tags in the billing console (untagged historical data cannot be backfilled), build per-team and per-environment cost dashboards, set budgets with alerts per owner, and publish a monthly showback or chargeback report.
 
@@ -42,7 +42,7 @@ Agree on case and allowed values, and document them — `Env=prod` and `environm
 ## Interview tips
 
 - "Enforce in IaC, verify with policy, report the gap" is the three-part answer.
-- Mention that cost-allocation tags apply going forward only — a genuinely useful practical detail.
+- Mention that cost-allocation tags apply going forward only - a genuinely useful practical detail.
 - Untagged-spend percentage as a tracked KPI shows you have run this programme, not just designed it.
 
 ---

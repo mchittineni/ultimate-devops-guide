@@ -11,7 +11,7 @@ tags:
 
 # What is Spot Instance pricing?
 
-**Short answer:** Spot instances sell a cloud provider's spare capacity at up to 90% off on-demand, on the condition that it can be reclaimed with a short warning — typically two minutes — making it ideal for interruptible workloads.
+**Short answer:** Spot instances sell a cloud provider's spare capacity at up to 90% off on-demand, on the condition that it can be reclaimed with a short warning - typically two minutes - making it ideal for interruptible workloads.
 
 ## Detail
 
@@ -21,7 +21,7 @@ tags:
 
 **Designing for interruption**
 
-- Spread across many instance types and availability zones — diversification is the single biggest reliability factor, since each pool is reclaimed independently.
+- Spread across many instance types and availability zones - diversification is the single biggest reliability factor, since each pool is reclaimed independently.
 - Handle the interruption notice: drain connections, checkpoint work, deregister from the load balancer.
 - Mix capacity types: a base of on-demand or reserved capacity plus a spot layer for elasticity.
 - On Kubernetes, run spot node groups with taints and tolerations, use PodDisruptionBudgets, and let Karpenter or the Cluster Autoscaler consolidate. The AWS Node Termination Handler cordons and drains on the interruption signal.
@@ -51,7 +51,7 @@ spec:
 ## Interview tips
 
 - Instance-type and AZ diversification is the answer to "how do you make spot reliable?"
-- Describe what your application does in the two-minute window — that is the practical test.
+- Describe what your application does in the two-minute window - that is the practical test.
 - The mature pattern is a blended fleet: reserved baseline, on-demand buffer, spot for burst.
 
 ---
