@@ -11,7 +11,7 @@ tags:
 
 # What is a Service in Kubernetes?
 
-**Short answer:** A Service is a stable network endpoint — a virtual IP and DNS name — that load-balances traffic to a dynamic set of pods selected by labels, insulating clients from pod churn.
+**Short answer:** A Service is a stable network endpoint - a virtual IP and DNS name - that load-balances traffic to a dynamic set of pods selected by labels, insulating clients from pod churn.
 
 ## Detail
 
@@ -19,11 +19,11 @@ Pods come and go with new IPs each time. A Service provides the fixed address in
 
 **Types:**
 
-- **ClusterIP** (default) — a virtual IP reachable only inside the cluster. The building block for internal service-to-service traffic.
-- **NodePort** — allocates a port (30000–32767) on every node that forwards to the Service. Mostly a primitive for other layers.
-- **LoadBalancer** — asks the cloud provider for an external load balancer pointing at the Service. The usual way to expose something publicly on a managed cluster.
-- **ExternalName** — a CNAME to an external DNS name; no proxying at all.
-- **Headless** (`clusterIP: None`) — no virtual IP; DNS returns pod IPs directly, which StatefulSets and client-side load balancing rely on.
+- **ClusterIP** (default) - a virtual IP reachable only inside the cluster. The building block for internal service-to-service traffic.
+- **NodePort** - allocates a port (30000–32767) on every node that forwards to the Service. Mostly a primitive for other layers.
+- **LoadBalancer** - asks the cloud provider for an external load balancer pointing at the Service. The usual way to expose something publicly on a managed cluster.
+- **ExternalName** - a CNAME to an external DNS name; no proxying at all.
+- **Headless** (`clusterIP: None`) - no virtual IP; DNS returns pod IPs directly, which StatefulSets and client-side load balancing rely on.
 
 For HTTP, an **Ingress** or **Gateway API** resource typically sits in front, providing host/path routing and TLS termination across many Services from a single load balancer.
 
@@ -46,7 +46,7 @@ In-cluster DNS: `web.default.svc.cluster.local`, usually just `web` from the sam
 
 ## Interview tips
 
-- The label selector plus readiness probe is what makes traffic routing safe — say both.
+- The label selector plus readiness probe is what makes traffic routing safe - say both.
 - Know why one LoadBalancer per service gets expensive, and how Ingress solves it.
 - Headless Services plus StatefulSets is a common follow-up for databases.
 
