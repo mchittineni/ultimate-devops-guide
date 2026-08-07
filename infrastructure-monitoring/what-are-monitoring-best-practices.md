@@ -19,7 +19,7 @@ tags:
 
 - Start from user-visible outcomes and SLOs, then add the supporting resource signals.
 - Use **RED** (Rate, Errors, Duration) for services and **USE** (Utilisation, Saturation, Errors) for resources.
-- Include business metrics — a drop in orders per minute is often the fastest, clearest outage signal you have.
+- Include business metrics - a drop in orders per minute is often the fastest, clearest outage signal you have.
 
 **Alerting**
 
@@ -33,14 +33,14 @@ tags:
 
 - One purpose per dashboard: a service overview answering "is it healthy?" in five seconds, with drill-downs beneath.
 - Consistent layout across services so responders do not relearn each one.
-- Annotate deploys and incidents — "what changed?" is the first question in every investigation.
+- Annotate deploys and incidents - "what changed?" is the first question in every investigation.
 
 **Operational hygiene**
 
 - Monitoring configuration (dashboards, alert rules, recording rules) lives in Git and is deployed by pipeline.
 - Control metric cardinality; unbounded labels are the most common cause of a monitoring system falling over.
 - Set retention deliberately, and downsample old data for long-term trends.
-- Monitor the monitoring — a dead-man's-switch alert that fires when the pipeline goes quiet.
+- Monitor the monitoring - a dead-man's-switch alert that fires when the pipeline goes quiet.
 
 ## Interview tips
 

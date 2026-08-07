@@ -11,7 +11,7 @@ tags:
 
 # What are Monitoring Tools?
 
-**Short answer:** Prometheus with Grafana is the open-source standard for metrics; ELK/OpenSearch or Loki for logs; Jaeger or Tempo for traces; and Datadog, New Relic, or Dynatrace as commercial all-in-one platforms — plus the cloud providers' native offerings.
+**Short answer:** Prometheus with Grafana is the open-source standard for metrics; ELK/OpenSearch or Loki for logs; Jaeger or Tempo for traces; and Datadog, New Relic, or Dynatrace as commercial all-in-one platforms - plus the cloud providers' native offerings.
 
 ## Detail
 
@@ -25,16 +25,16 @@ tags:
 | Synthetic / RUM | Blackbox exporter, Checkly                 | Datadog Synthetics, Pingdom                   |
 | Profiling       | Pyroscope, Parca                           | Datadog Profiler                              |
 
-**OpenTelemetry** is the important development: a vendor-neutral standard for instrumenting applications and shipping metrics, logs, and traces. Instrumenting with OTel means you can change backends without re-instrumenting — which is the strongest defence against observability vendor lock-in and the default recommendation for new work.
+**OpenTelemetry** is the important development: a vendor-neutral standard for instrumenting applications and shipping metrics, logs, and traces. Instrumenting with OTel means you can change backends without re-instrumenting - which is the strongest defence against observability vendor lock-in and the default recommendation for new work.
 
 **Choosing.** Weigh cost at your data volume (commercial platforms are excellent and become extremely expensive at scale), the operational burden of self-hosting, existing team skills, ecosystem fit (Prometheus is native to Kubernetes), and long-term retention needs.
 
-A very common pattern: Prometheus and Grafana for metrics and dashboards, Loki for logs, Tempo or Jaeger for traces, all instrumented via OpenTelemetry, with PagerDuty for on-call — self-hosted, portable, and cost-predictable.
+A very common pattern: Prometheus and Grafana for metrics and dashboards, Loki for logs, Tempo or Jaeger for traces, all instrumented via OpenTelemetry, with PagerDuty for on-call - self-hosted, portable, and cost-predictable.
 
 ## Interview tips
 
 - Lead with OpenTelemetry; it is the answer that shows current thinking rather than tool trivia.
-- Be ready to discuss cost — observability spend rivalling infrastructure spend is a real and common problem.
+- Be ready to discuss cost - observability spend rivalling infrastructure spend is a real and common problem.
 - Have a reasoned opinion on build-versus-buy rather than a favourite tool.
 
 ---
