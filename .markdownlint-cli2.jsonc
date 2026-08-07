@@ -11,7 +11,7 @@
     "MD041": false,
 
     // ...and that frontmatter carries a `title`, which markdownlint would otherwise
-    // count as the document's h1 — making the real `# <id>. <title>` heading look
+    // count as the document's h1 - making the real `# <id>. <title>` heading look
     // like a duplicate. Empty pattern disables frontmatter title detection.
     "MD025": { "front_matter_title": "" },
 

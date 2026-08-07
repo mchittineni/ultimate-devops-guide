@@ -4,11 +4,11 @@ Thanks for helping improve this collection. Corrections, deeper answers, and new
 
 ## What makes a good contribution
 
-The bar here is **an answer that would land well in a real interview** — not a definition copied from documentation. Concretely:
+The bar here is **an answer that would land well in a real interview** - not a definition copied from documentation. Concretely:
 
 - Explain the mechanism, not just the name. "Kubernetes reconciles desired state" beats "Kubernetes is an orchestrator."
 - Include a trade-off or a limitation. Answers with no downsides read as rehearsed.
-- Show a real example — a command, a manifest, a snippet you have actually run.
+- Show a real example - a command, a manifest, a snippet you have actually run.
 - Say what the interviewer is likely to ask next.
 
 ## Adding or editing a question
@@ -19,7 +19,7 @@ The bar here is **an answer that would land well in a real interview** — not a
 topic-slug/question-title-slug.md
 ```
 
-- **No numeric prefixes** on directories or filenames — they are pure slugs.
+- **No numeric prefixes** on directories or filenames - they are pure slugs.
 - The slug **must** match the title: lowercase, non-alphanumerics collapsed to `-`, `&` becomes `and`. `validate_content.py` enforces this, and will tell you the expected slug if you get it wrong.
 - Ordering lives in metadata, not filenames: `id` in each question's frontmatter, and `order` in `scripts/topic_meta.json` for topics.
 
@@ -54,7 +54,7 @@ tags:
 
 ## Detail
 
-The substance — mechanisms, trade-offs, vocabulary.
+The substance - mechanisms, trade-offs, vocabulary.
 
 ## Example
 
@@ -77,14 +77,14 @@ The `# <title>` heading must match the frontmatter exactly.
 
 ### 4. Regenerate indexes and validate
 
-Topic READMEs and the root README's table of contents are **generated**. Never edit them by hand — your change will be overwritten and CI will fail.
+Topic READMEs and the root README's table of contents are **generated**. Never edit them by hand - your change will be overwritten and CI will fail.
 
 ```bash
 python3 scripts/generate_indexes.py     # rewrite all indexes from the question files
 python3 scripts/validate_content.py     # frontmatter, naming, links, index freshness
 ```
 
-Both are stdlib-only Python 3.11+ — nothing to install.
+Both are stdlib-only Python 3.11+ - nothing to install.
 
 Then run the two Markdown checks CI runs. Neither needs a `package.json`; `npx` fetches them on demand:
 
@@ -97,9 +97,9 @@ Run the generator _before_ Prettier. The generator emits compact tables and Pret
 
 A few linter conventions worth knowing, all deliberate and encoded in `.markdownlint-cli2.jsonc`:
 
-- **Bold lead-ins** (`**Trade-offs**`) are used to label a paragraph inside a section without adding it to the heading outline — `MD036` is disabled for this.
+- **Bold lead-ins** (`**Trade-offs**`) are used to label a paragraph inside a section without adding it to the heading outline - `MD036` is disabled for this.
 - **Every code fence needs a language.** Use `text` for ASCII diagrams and plain output.
-- **Line length is unlimited** (`MD013` off) — write one paragraph per line and let the editor wrap.
+- **Line length is unlimited** (`MD013` off) - write one paragraph per line and let the editor wrap.
 
 ### 5. Open the pull request
 
@@ -109,7 +109,7 @@ Fill in the [pull request template](./.github/pull_request_template.md). CI runs
 
 1. Create `topic-slug/` (no number).
 2. Add an entry to `scripts/topic_meta.json` with an `order` (where it appears in the indexes), a `description`, and a few `study_notes` (the "What interviewers probe here" bullets). A directory that is not registered here fails validation.
-3. Create `topic-slug/README.md` with frontmatter containing the topic `title` — the generator reads the display name from there, then rewrites the rest of the file.
+3. Create `topic-slug/README.md` with frontmatter containing the topic `title` - the generator reads the display name from there, then rewrites the rest of the file.
 4. Add your question files, then run the generator and validator.
 
 ## Style

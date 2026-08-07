@@ -2,7 +2,7 @@
 
 # ⚙️ Cloud, DevOps, Platform & SRE Guide
 
-**233 questions across 38 topics — answered to the depth an interviewer actually expects.**
+**233 questions across 38 topics - answered to the depth an interviewer actually expects.**
 
 Role tracks: **DevOps** (junior → senior) · **DevSecOps** · **SecOps** · **SRE** · **SLO** · **SLA** · **AWS** · **Azure** · **GCP** · **Cloud** · **Platform Engineering**
 
@@ -49,38 +49,38 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 
 <!-- STATS:START -->
 
-**233 questions** across **38 topics** — 🟢 81 Beginner · 🟡 117 Intermediate · 🔴 35 Advanced
+**233 questions** across **38 topics** - 🟢 81 Beginner · 🟡 117 Intermediate · 🔴 35 Advanced
 
 ### 🧱 Foundations
 
 | Topic                                                        | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                   |
 | ------------------------------------------------------------ | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------ |
 | **[Core DevOps Concepts](./core-devops-concepts/README.md)** | 5         | 4   | 1   | 0   | what DevOps actually changes, why it exists, and how CI, continuous delivery, and continuous…    |
-| **[Linux Administration](./linux-administration/README.md)** | 5         | 4   | 1   | 0   | The operating system under everything — commands, shell scripting, systemd, service management,… |
+| **[Linux Administration](./linux-administration/README.md)** | 5         | 4   | 1   | 0   | The operating system under everything - commands, shell scripting, systemd, service management,… |
 | **[Version Control](./version-control/README.md)**           | 5         | 2   | 3   | 0   | Git mechanics and the branching models teams actually argue about, including how to resolve…     |
 
 ### 📦 Containers and Kubernetes
 
 | Topic                                                                                | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                   |
 | ------------------------------------------------------------------------------------ | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------ |
-| **[Docker](./docker/README.md)**                                                     | 5         | 4   | 1   | 0   | Container fundamentals — images versus containers, Dockerfile authoring, Compose, and the…       |
+| **[Docker](./docker/README.md)**                                                     | 5         | 4   | 1   | 0   | Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the…       |
 | **[Kubernetes](./kubernetes/README.md)**                                             | 5         | 3   | 2   | 0   | The control plane, the workload objects you touch daily, and the networking abstractions that…   |
-| **[Container Orchestration Advanced](./container-orchestration-advanced/README.md)** | 5         | 0   | 2   | 3   | Beyond Deployments — StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime… |
+| **[Container Orchestration Advanced](./container-orchestration-advanced/README.md)** | 5         | 0   | 2   | 3   | Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime… |
 
 ### 🔁 Delivery and Automation
 
 | Topic                                                                      | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                      |
 | -------------------------------------------------------------------------- | --------- | --- | --- | --- | --------------------------------------------------------------------------------------------------- |
 | **[CI/CD](./cicd/README.md)**                                              | 5         | 2   | 3   | 0   | Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deployment distinction…   |
-| **[Infrastructure as Code](./infrastructure-as-code/README.md)**           | 5         | 3   | 2   | 0   | Declarative infrastructure with Terraform and Ansible — state, providers, idempotency, and where…   |
-| **[Configuration Management](./configuration-management/README.md)**       | 5         | 1   | 4   | 0   | Keeping fleets consistent with Puppet, Chef, Ansible, and Salt — push versus pull, agent versus…    |
+| **[Infrastructure as Code](./infrastructure-as-code/README.md)**           | 5         | 3   | 2   | 0   | Declarative infrastructure with Terraform and Ansible - state, providers, idempotency, and where…   |
+| **[Configuration Management](./configuration-management/README.md)**       | 5         | 1   | 4   | 0   | Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pull, agent versus…    |
 | **[DevOps Tools and Automation](./devops-tools-and-automation/README.md)** | 5         | 1   | 4   | 0   | GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to ship without downtime. |
 
 ### ☁️ Cloud Providers
 
 | Topic                                                              | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                    |
 | ------------------------------------------------------------------ | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------- |
-| **[Cloud Platforms](./cloud-platforms/README.md)**                 | 5         | 5   | 0   | 0   | Cloud service models and the three major providers — enough breadth to discuss AWS, Azure, and…   |
+| **[Cloud Platforms](./cloud-platforms/README.md)**                 | 5         | 5   | 0   | 0   | Cloud service models and the three major providers - enough breadth to discuss AWS, Azure, and…   |
 | **[Cloud Cost Optimization](./cloud-cost-optimization/README.md)** | 5         | 2   | 3   | 0   | Reserved and spot capacity, tagging discipline, and the reports that turn a cloud bill into…      |
 | **[Cloud Migration](./cloud-migration/README.md)**                 | 5         | 1   | 4   | 0   | Assessment, the 6 Rs, application modernization, and the tooling that moves workloads without…    |
 | **[AWS Engineering](./aws-engineering/README.md)**                 | 8         | 0   | 5   | 3   | VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage… |
@@ -94,7 +94,7 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 | -------------------------------------------------------------------------------------- | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------ |
 | **[Scalability and High Availability](./scalability-and-high-availability/README.md)** | 5         | 4   | 1   | 0   | scaling dimensions, load balancing, auto scaling, and recovery objectives.                       |
 | **[Cloud Native Architecture](./cloud-native-architecture/README.md)**                 | 5         | 0   | 4   | 1   | Microservices, service mesh, event-driven design, and the Twelve-Factor principles that make…    |
-| **[Performance Testing](./performance-testing/README.md)**                             | 5         | 3   | 2   | 0   | Load, stress, soak, and spike testing — how to design them, which tools to use, and how to read… |
+| **[Performance Testing](./performance-testing/README.md)**                             | 5         | 3   | 2   | 0   | Load, stress, soak, and spike testing - how to design them, which tools to use, and how to read… |
 | **[API Gateway and Service Mesh](./api-gateway-and-service-mesh/README.md)**           | 5         | 3   | 2   | 0   | gateway responsibilities, security, rate limiting, and documentation as a first-class artifact.  |
 | **[Serverless Architecture](./serverless-architecture/README.md)**                     | 5         | 4   | 1   | 0   | Functions as a service, the operational model behind them, and the design patterns that keep…    |
 | **[Database Management in DevOps](./database-management-in-devops/README.md)**         | 5         | 0   | 4   | 1   | version control, migration tooling, backup strategy, and performance tuning.                     |
@@ -103,7 +103,7 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 
 | Topic                                                                              | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                       |
 | ---------------------------------------------------------------------------------- | --------- | --- | --- | --- | ---------------------------------------------------------------------------------------------------- |
-| **[Monitoring and Logging](./monitoring-and-logging/README.md)**                   | 5         | 4   | 1   | 0   | Metrics, logs, and the toolchain — Prometheus, Grafana, and the ELK stack — plus the conceptual…     |
+| **[Monitoring and Logging](./monitoring-and-logging/README.md)**                   | 5         | 4   | 1   | 0   | Metrics, logs, and the toolchain - Prometheus, Grafana, and the ELK stack - plus the conceptual…     |
 | **[Backup and Disaster Recovery](./backup-and-disaster-recovery/README.md)**       | 5         | 4   | 1   | 0   | Backup types, RPO/RTO targets, business continuity planning, and the discipline of testing restores. |
 | **[Site Reliability Engineering (SRE)](./site-reliability-engineering/README.md)** | 9         | 1   | 6   | 2   | SLIs, SLOs, error budgets, and the systematic elimination of toil.                                   |
 | **[DevOps Metrics and KPIs](./devops-metrics-and-kpis/README.md)**                 | 5         | 3   | 2   | 0   | The four DORA metrics and the measurement habits that keep them honest.                              |
@@ -117,7 +117,7 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 | Topic                                                              | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                    |
 | ------------------------------------------------------------------ | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------- |
 | **[Security and Compliance](./security-and-compliance/README.md)** | 5         | 1   | 3   | 1   | DevSecOps practice, infrastructure and container hardening, and compliance expressed as code.     |
-| **[Network Security](./network-security/README.md)**               | 5         | 2   | 3   | 0   | Zero trust, TLS, web application firewalls, and segmentation — the controls that protect traffic… |
+| **[Network Security](./network-security/README.md)**               | 5         | 2   | 3   | 0   | Zero trust, TLS, web application firewalls, and segmentation - the controls that protect traffic… |
 | **[DevSecOps](./devsecops/README.md)**                             | 8         | 0   | 6   | 2   | scanning layers, SBOMs and supply-chain provenance, image signing, secretless pipelines, and…     |
 | **[SecOps and Threat Detection](./secops/README.md)**              | 8         | 2   | 4   | 2   | SOC workflow, SIEM and normalisation, detection engineering, MITRE ATT&CK coverage, threat…       |
 
@@ -125,7 +125,7 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 
 | Topic                                                                        | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                    |
 | ---------------------------------------------------------------------------- | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------- |
-| **[DevOps Culture and Practices](./devops-culture-and-practices/README.md)** | 5         | 4   | 1   | 0   | The human half of DevOps — shared ownership, blamelessness, knowledge sharing, and collaboration… |
+| **[DevOps Culture and Practices](./devops-culture-and-practices/README.md)** | 5         | 4   | 1   | 0   | The human half of DevOps - shared ownership, blamelessness, knowledge sharing, and collaboration… |
 | **[Advanced DevOps & Cloud](./advanced-devops-cloud/README.md)**             | 20        | 5   | 8   | 7   | platform engineering, FinOps, policy as code, chaos engineering, observability, and progressive…  |
 | **[Platform Engineering](./platform-engineering/README.md)**                 | 8         | 0   | 4   | 4   | IDPs, golden paths, Backstage, Crossplane, self-service environments, adoption metrics, and safe… |
 
@@ -135,7 +135,7 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 
 ## 📋 All questions
 
-Every question in the repository, collapsed by topic — open only the ones you are studying.
+Every question in the repository, collapsed by topic - open only the ones you are studying.
 
 <!-- TOC:START -->
 
@@ -795,7 +795,7 @@ Every answer follows the same four beats, so you can read one section deep or al
 | Section            | What it gives you                                                                                             |
 | ------------------ | ------------------------------------------------------------------------------------------------------------- |
 | **Short answer**   | Two or three sentences you could say out loud. Start here.                                                    |
-| **Detail**         | The substance — mechanisms, trade-offs, and the vocabulary that signals experience.                           |
+| **Detail**         | The substance - mechanisms, trade-offs, and the vocabulary that signals experience.                           |
 | **Example**        | Real commands, YAML, or code you can run and adapt.                                                           |
 | **Interview tips** | The follow-up questions, the common traps, and the points that separate a strong answer from a memorised one. |
 
@@ -803,9 +803,9 @@ Difficulty is marked 🟢 Beginner · 🟡 Intermediate · 🔴 Advanced.
 
 **Three ways to work through it:**
 
-- **Preparing for a specific role** — take the track from [Pick your role](#-pick-your-role), and read each topic README's "What interviewers probe here" before its questions.
-- **Broad revision** — read the short answers across a topic, then go deep only where you hesitate.
-- **Obsidian / note vault** — every file carries YAML frontmatter (`title`, `id`, `category`, `difficulty`, `tags`), so the whole repository can be dropped into a vault and browsed by tag.
+- **Preparing for a specific role** - take the track from [Pick your role](#-pick-your-role), and read each topic README's "What interviewers probe here" before its questions.
+- **Broad revision** - read the short answers across a topic, then go deep only where you hesitate.
+- **Obsidian / note vault** - every file carries YAML frontmatter (`title`, `id`, `category`, `difficulty`, `tags`), so the whole repository can be dropped into a vault and browsed by tag.
 
 ---
 
@@ -826,10 +826,10 @@ Difficulty is marked 🟢 Beginner · 🟡 Intermediate · 🔴 Advanced.
     └── validate-and-format.yml     # runs validation + Prettier on every PR
 ```
 
-Directories and filenames carry **no numeric prefixes** — they are pure slugs. Ordering comes from two places instead:
+Directories and filenames carry **no numeric prefixes** - they are pure slugs. Ordering comes from two places instead:
 
-- **Topic order** — the `order` field in `scripts/topic_meta.json`, which is also the registry of which directories count as topics.
-- **Question order** — the `id` field in each question's frontmatter, unique across the repository.
+- **Topic order** - the `order` field in `scripts/topic_meta.json`, which is also the registry of which directories count as topics.
+- **Question order** - the `id` field in each question's frontmatter, unique across the repository.
 
 Renaming or reordering is therefore a metadata edit, not a mass file rename.
 
@@ -855,7 +855,7 @@ python3 scripts/generate_indexes.py     # rewrite all indexes
 python3 scripts/validate_content.py     # verify frontmatter, naming, links, index freshness
 ```
 
-Both are stdlib-only Python 3.11+ — no dependencies to install. CI runs the same commands and fails the pull request on drift.
+Both are stdlib-only Python 3.11+ - no dependencies to install. CI runs the same commands and fails the pull request on drift.
 
 ---
 
