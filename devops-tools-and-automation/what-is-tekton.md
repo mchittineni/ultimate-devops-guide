@@ -11,18 +11,18 @@ tags:
 
 # What is Tekton?
 
-**Short answer:** Tekton is a Kubernetes-native CI/CD framework where pipelines are custom resources — Tasks, Pipelines, and their Runs — so builds execute as pods in the cluster and are managed with the same tooling as any other Kubernetes workload.
+**Short answer:** Tekton is a Kubernetes-native CI/CD framework where pipelines are custom resources - Tasks, Pipelines, and their Runs - so builds execute as pods in the cluster and are managed with the same tooling as any other Kubernetes workload.
 
 ## Detail
 
 **Resource model**
 
-- **Step** — a single container execution.
-- **Task** — an ordered set of steps that run in one pod, sharing a workspace.
-- **Pipeline** — a graph of Tasks with parameters, results passed between them, and `runAfter` ordering or implicit parallelism.
-- **TaskRun / PipelineRun** — an execution instance, with its own logs and status.
-- **Workspace** — shared storage (PVC, ConfigMap, Secret, or emptyDir) mounted across Tasks.
-- **Triggers** — EventListener, TriggerBinding, and TriggerTemplate turn a webhook into a PipelineRun.
+- **Step** - a single container execution.
+- **Task** - an ordered set of steps that run in one pod, sharing a workspace.
+- **Pipeline** - a graph of Tasks with parameters, results passed between them, and `runAfter` ordering or implicit parallelism.
+- **TaskRun / PipelineRun** - an execution instance, with its own logs and status.
+- **Workspace** - shared storage (PVC, ConfigMap, Secret, or emptyDir) mounted across Tasks.
+- **Triggers** - EventListener, TriggerBinding, and TriggerTemplate turn a webhook into a PipelineRun.
 
 **Why Kubernetes-native matters.** Pipelines are YAML in Git, versioned and reviewed. Executions are pods, so they use existing cluster autoscaling, RBAC, network policy, node selection, and monitoring. There is no separate CI server to operate, patch, and scale. Tekton Hub provides reusable Tasks (git-clone, kaniko, buildah, ko).
 
