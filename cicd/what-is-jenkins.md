@@ -15,16 +15,16 @@ tags:
 
 ## Detail
 
-Jenkins runs a controller that schedules work onto agents — static VMs, Docker containers, or dynamically provisioned Kubernetes pods. Its longevity comes from two things: it runs anywhere, including fully on-premises behind a firewall, and its ~1,800 plugins integrate with essentially every tool an enterprise already owns.
+Jenkins runs a controller that schedules work onto agents - static VMs, Docker containers, or dynamically provisioned Kubernetes pods. Its longevity comes from two things: it runs anywhere, including fully on-premises behind a firewall, and its ~1,800 plugins integrate with essentially every tool an enterprise already owns.
 
 Modern Jenkins practice:
 
-- **Pipeline as code** — a `Jenkinsfile` in the repository, versioned with the app rather than clicked into the UI.
-- **Declarative syntax** — a structured `pipeline { }` block, easier to read and validate than the older scripted Groovy.
-- **Multibranch pipelines** — automatically discover branches and pull requests and run the pipeline for each.
-- **Shared libraries** — common pipeline logic factored out and reused across hundreds of repositories.
-- **Kubernetes plugin** — spin up a fresh agent pod per build, so builds are isolated and the fleet scales to zero.
-- **Configuration as Code (JCasC)** — the controller's own configuration expressed in YAML.
+- **Pipeline as code** - a `Jenkinsfile` in the repository, versioned with the app rather than clicked into the UI.
+- **Declarative syntax** - a structured `pipeline { }` block, easier to read and validate than the older scripted Groovy.
+- **Multibranch pipelines** - automatically discover branches and pull requests and run the pipeline for each.
+- **Shared libraries** - common pipeline logic factored out and reused across hundreds of repositories.
+- **Kubernetes plugin** - spin up a fresh agent pod per build, so builds are isolated and the fleet scales to zero.
+- **Configuration as Code (JCasC)** - the controller's own configuration expressed in YAML.
 
 The trade-off versus hosted options like GitHub Actions or GitLab CI is that you operate Jenkins yourself: upgrades, plugin compatibility, agent capacity, and security hardening are your responsibility.
 

@@ -17,15 +17,15 @@ tags:
 
 The pipeline encodes your definition of "ready to ship" in executable form. A typical shape:
 
-1. **Source** — a push or pull request triggers the run.
-2. **Build** — compile, resolve dependencies, produce an artifact.
-3. **Test** — unit tests first (seconds), then integration and contract tests.
-4. **Static analysis and security** — linting, SAST, dependency CVE scanning, secret detection, IaC policy checks.
-5. **Package** — build a container image or archive, tag it with the commit SHA, push to a registry.
-6. **Deploy to staging** — using the same automation as production.
-7. **Acceptance / performance tests** — end-to-end and load checks.
-8. **Deploy to production** — automatically, or after approval.
-9. **Post-deploy verification** — smoke tests and error-rate monitoring, with automatic rollback.
+1. **Source** - a push or pull request triggers the run.
+2. **Build** - compile, resolve dependencies, produce an artifact.
+3. **Test** - unit tests first (seconds), then integration and contract tests.
+4. **Static analysis and security** - linting, SAST, dependency CVE scanning, secret detection, IaC policy checks.
+5. **Package** - build a container image or archive, tag it with the commit SHA, push to a registry.
+6. **Deploy to staging** - using the same automation as production.
+7. **Acceptance / performance tests** - end-to-end and load checks.
+8. **Deploy to production** - automatically, or after approval.
+9. **Post-deploy verification** - smoke tests and error-rate monitoring, with automatic rollback.
 
 Design principles that separate good pipelines from slow ones: fail fast (cheap checks first), build the artifact once and promote it, keep total feedback under ten minutes for CI, make every run reproducible, and never let secrets live in the pipeline definition.
 
@@ -64,7 +64,7 @@ jobs:
 ## Interview tips
 
 - Describe a pipeline you actually built, stage by stage, with the runtime of each stage.
-- Mention what fails the build and what only warns — that distinction shows operational judgement.
+- Mention what fails the build and what only warns - that distinction shows operational judgement.
 - Have an answer for pipeline speed: caching, parallel jobs, test splitting, and selective builds in a monorepo.
 
 ---

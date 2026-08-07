@@ -15,18 +15,18 @@ tags:
 
 ## Detail
 
-**Declarative vs scripted.** Declarative pipelines use a fixed `pipeline { agent … stages { … } }` structure with validation and clear error messages — the default recommendation. Scripted pipelines are raw Groovy, offering full programmatic control for unusual cases.
+**Declarative vs scripted.** Declarative pipelines use a fixed `pipeline { agent … stages { … } }` structure with validation and clear error messages - the default recommendation. Scripted pipelines are raw Groovy, offering full programmatic control for unusual cases.
 
 **Key constructs:**
 
-- `agent` — where the pipeline or a stage runs (any node, a label, a Docker image, a Kubernetes pod template).
-- `stages` / `steps` — the logical phases and the commands inside them.
-- `environment` — variables at pipeline or stage scope, including credential bindings.
-- `when` — conditional stage execution (branch, tag, changeset, expression).
-- `parallel` — run stages concurrently to cut wall-clock time.
-- `input` — pause for human approval, typically before production.
-- `post` — `always` / `success` / `failure` / `unstable` blocks for reporting and cleanup.
-- `options` — timeouts, retry, build retention, concurrency control.
+- `agent` - where the pipeline or a stage runs (any node, a label, a Docker image, a Kubernetes pod template).
+- `stages` / `steps` - the logical phases and the commands inside them.
+- `environment` - variables at pipeline or stage scope, including credential bindings.
+- `when` - conditional stage execution (branch, tag, changeset, expression).
+- `parallel` - run stages concurrently to cut wall-clock time.
+- `input` - pause for human approval, typically before production.
+- `post` - `always` / `success` / `failure` / `unstable` blocks for reporting and cleanup.
+- `options` - timeouts, retry, build retention, concurrency control.
 
 **Durability:** pipeline state is checkpointed, so a controller restart mid-build resumes rather than losing the run.
 

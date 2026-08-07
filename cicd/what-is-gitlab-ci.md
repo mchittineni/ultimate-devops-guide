@@ -19,13 +19,13 @@ Its advantage is integration: source control, merge requests, container registry
 
 Core concepts:
 
-- **Stages and jobs** — jobs in the same stage run in parallel; stages run in order. `needs:` creates a directed acyclic graph so a job starts as soon as its own dependencies finish rather than waiting for the whole stage.
-- **Runners** — shared, group, or project-specific executors using the Docker, Kubernetes, shell, or Docker Machine executor.
-- **Artifacts and cache** — artifacts pass build outputs between jobs and are exposed in the UI; cache speeds up dependency installation.
-- **Rules** — `rules:if` / `changes` control when a job runs, replacing the older `only/except`.
-- **Environments** — track what version is deployed where, with review apps per merge request and one-click rollback.
-- **CI/CD variables** — masked and protected, optionally sourced from an external secrets manager via OIDC.
-- **Templates** — `include:` remote or project templates for reuse; built-in templates cover SAST, dependency scanning, DAST, and container scanning.
+- **Stages and jobs** - jobs in the same stage run in parallel; stages run in order. `needs:` creates a directed acyclic graph so a job starts as soon as its own dependencies finish rather than waiting for the whole stage.
+- **Runners** - shared, group, or project-specific executors using the Docker, Kubernetes, shell, or Docker Machine executor.
+- **Artifacts and cache** - artifacts pass build outputs between jobs and are exposed in the UI; cache speeds up dependency installation.
+- **Rules** - `rules:if` / `changes` control when a job runs, replacing the older `only/except`.
+- **Environments** - track what version is deployed where, with review apps per merge request and one-click rollback.
+- **CI/CD variables** - masked and protected, optionally sourced from an external secrets manager via OIDC.
+- **Templates** - `include:` remote or project templates for reuse; built-in templates cover SAST, dependency scanning, DAST, and container scanning.
 
 ## Example
 
@@ -71,7 +71,7 @@ include:
 ## Interview tips
 
 - `needs:` for DAG pipelines is the modern answer to speeding up GitLab CI.
-- Review apps — a live environment per merge request — are a strong differentiator worth naming.
+- Review apps - a live environment per merge request - are a strong differentiator worth naming.
 - Know how to avoid long-lived cloud credentials by using GitLab's OIDC token with AWS/GCP.
 
 ---
