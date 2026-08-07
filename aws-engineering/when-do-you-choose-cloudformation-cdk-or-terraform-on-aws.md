@@ -11,7 +11,7 @@ tags:
 
 # When do you choose CloudFormation, CDK, or Terraform on AWS?
 
-**Short answer:** Terraform when you manage more than AWS or want one workflow across providers; CDK when your team is strongest in a programming language and wants abstraction over CloudFormation; raw CloudFormation when you need zero extra tooling, AWS-managed state, or you are shipping Service Catalog products. All three are defensible — the wrong answer is using more than one for the same resources.
+**Short answer:** Terraform when you manage more than AWS or want one workflow across providers; CDK when your team is strongest in a programming language and wants abstraction over CloudFormation; raw CloudFormation when you need zero extra tooling, AWS-managed state, or you are shipping Service Catalog products. All three are defensible - the wrong answer is using more than one for the same resources.
 
 ## Detail
 
@@ -26,13 +26,13 @@ tags:
 
 **CDK's real advantage is abstraction, not the language.** Constructs let a platform team publish an opinionated, reviewed `SecureBucket` or `StandardService` that encodes tagging, encryption, logging, and alarms, so application teams get compliant infrastructure by default. Its costs are a synth step, a nested-stack model that can be hard to debug, and the ease of writing imperative logic that makes the resulting infrastructure difficult to reason about.
 
-**Terraform's advantage is the plan and the ecosystem.** `terraform plan` is the clearest preview of the three and underpins policy-as-code gates; providers cover AWS plus Datadog, GitHub, Kubernetes, and the rest of the toolchain in one graph. Its costs are state management (remote backend, locking, blast radius of a corrupted state file) and the licence change in 2023 that moved Terraform to BUSL and produced the OpenTofu fork — a question worth being able to discuss neutrally.
+**Terraform's advantage is the plan and the ecosystem.** `terraform plan` is the clearest preview of the three and underpins policy-as-code gates; providers cover AWS plus Datadog, GitHub, Kubernetes, and the rest of the toolchain in one graph. Its costs are state management (remote backend, locking, blast radius of a corrupted state file) and the licence change in 2023 that moved Terraform to BUSL and produced the OpenTofu fork - a question worth being able to discuss neutrally.
 
 **CloudFormation's advantage is that it is the substrate.** No state to manage, native rollback, StackSets for multi-account deployment, and support for new services on launch day. It is verbose, and loops and conditionals are painful, which is exactly the gap CDK fills.
 
 **What actually matters more than the choice:** modules or constructs reviewed by a platform team; a remote backend with locking and per-environment isolation; plan output posted to the pull request; policy-as-code over the plan; and no manual console changes. A team with Terraform and no plan gate is worse off than a team with CloudFormation and a disciplined pipeline.
 
-**Migration is possible in both directions** — Terraform's `import` blocks, CloudFormation's resource import, and CDK's `CfnInclude` — but it is real work. The strongest interview answer names the criteria and then says which one you would standardise on and why, rather than describing all three as equally good.
+**Migration is possible in both directions** - Terraform's `import` blocks, CloudFormation's resource import, and CDK's `CfnInclude` - but it is real work. The strongest interview answer names the criteria and then says which one you would standardise on and why, rather than describing all three as equally good.
 
 ## Example
 
@@ -73,9 +73,9 @@ export class SecureBucket extends Construct {
 
 ## Interview tips
 
-- Give selection criteria, then commit to a recommendation — "it depends" without a conclusion is the weak answer.
+- Give selection criteria, then commit to a recommendation - "it depends" without a conclusion is the weak answer.
 - Mention the BUSL licence change and OpenTofu factually; interviewers use it to see whether you follow the ecosystem.
-- Expect: "how do you stop console changes?" — drift detection, plan gates in CI, and IAM that denies humans write access in production.
+- Expect: "how do you stop console changes?" - drift detection, plan gates in CI, and IAM that denies humans write access in production.
 
 ---
 

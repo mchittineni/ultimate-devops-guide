@@ -11,19 +11,19 @@ tags:
 
 # How does AWS IAM evaluate a request?
 
-**Short answer:** Deny by default; an explicit `Deny` anywhere wins; otherwise the request needs an `Allow` and must survive every applicable boundary — Organizations SCPs, the identity policy, any resource policy, permission boundaries, and session policies. Cross-account access is the special case: it requires an `Allow` on both sides.
+**Short answer:** Deny by default; an explicit `Deny` anywhere wins; otherwise the request needs an `Allow` and must survive every applicable boundary - Organizations SCPs, the identity policy, any resource policy, permission boundaries, and session policies. Cross-account access is the special case: it requires an `Allow` on both sides.
 
 ## Detail
 
 **Evaluation order, simplified but accurate enough to explain:**
 
 1. Collect all applicable policies: SCPs (and resource control policies), identity-based policies, resource-based policies, permission boundaries, session policies.
-2. If any explicit `Deny` matches — decision is deny, immediately.
+2. If any explicit `Deny` matches - decision is deny, immediately.
 3. SCPs must allow the action (they only filter; they never grant).
 4. Then an `Allow` must exist in an identity policy or a resource policy. Permission boundaries and session policies act as intersections: they cap what the identity policy can grant.
 5. Otherwise: implicit deny.
 
-**The mental model is intersection, not union.** Adding a policy can only ever grant within what the surrounding boundaries already permit. This is why an administrator with `AdministratorAccess` still cannot act if an SCP denies the action — a fact that surprises people during incidents.
+**The mental model is intersection, not union.** Adding a policy can only ever grant within what the surrounding boundaries already permit. This is why an administrator with `AdministratorAccess` still cannot act if an SCP denies the action - a fact that surprises people during incidents.
 
 **Cross-account needs both sides.** For account B's role to read a bucket in account A, account A's bucket policy must allow the principal _and_ account B's identity policy must allow the action. One side alone is insufficient. This symmetry is the most commonly missed detail in interviews.
 
@@ -65,8 +65,8 @@ tags:
 ## Interview tips
 
 - "Explicit deny wins, SCPs filter but never grant, cross-account needs both sides" covers most of what is being probed.
-- Describe boundaries as an intersection — it explains permission boundaries and session policies in one sentence.
-- Expect: "how would you prove this role is least privilege?" — Access Analyzer policy generation from CloudTrail, plus last-accessed data.
+- Describe boundaries as an intersection - it explains permission boundaries and session policies in one sentence.
+- Expect: "how would you prove this role is least privilege?" - Access Analyzer policy generation from CloudTrail, plus last-accessed data.
 
 ---
 

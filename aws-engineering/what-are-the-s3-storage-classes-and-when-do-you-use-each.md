@@ -25,9 +25,9 @@ tags:
 | Glacier Flexible     | archives, minutes-to-hours retrieval     | 90-day minimum, retrieval jobs             |
 | Glacier Deep Archive | compliance retention, 12-hour retrieval  | 180-day minimum, most expensive to restore |
 
-**Minimum duration charges are the trap.** Moving an object to Standard-IA and deleting it after a week bills 30 days; Deep Archive bills 180. Lifecycle rules that transition objects too early routinely increase cost. Also note that each transition is a request charge — transitioning millions of tiny objects can cost more than the storage saved, which is why small objects should often be aggregated rather than tiered.
+**Minimum duration charges are the trap.** Moving an object to Standard-IA and deleting it after a week bills 30 days; Deep Archive bills 180. Lifecycle rules that transition objects too early routinely increase cost. Also note that each transition is a request charge - transitioning millions of tiny objects can cost more than the storage saved, which is why small objects should often be aggregated rather than tiered.
 
-**Durability versus availability.** 11 nines of durability is a design property of replication within the region and is not a promise that your bucket is reachable — the availability SLA is separate and lower. And durability does not protect against deletion: versioning, MFA delete or bucket policies denying delete, Object Lock for compliance retention, and cross-region replication for regional loss are the actual protections. "S3 is durable, so we do not need backups" is a wrong answer.
+**Durability versus availability.** 11 nines of durability is a design property of replication within the region and is not a promise that your bucket is reachable - the availability SLA is separate and lower. And durability does not protect against deletion: versioning, MFA delete or bucket policies denying delete, Object Lock for compliance retention, and cross-region replication for regional loss are the actual protections. "S3 is durable, so we do not need backups" is a wrong answer.
 
 **Intelligent-Tiering is the sane default for unknown patterns.** It moves objects between frequent, infrequent, and (optionally) archive tiers automatically with no retrieval fees between the instant-access tiers, charging a small monitoring fee per object. For large objects with unpredictable access it is usually cheaper than guessing; for millions of tiny objects the monitoring fee can dominate.
 
@@ -62,7 +62,7 @@ tags:
 
 ## Interview tips
 
-- Frame the classes along one axis — access frequency versus retrieval cost — rather than listing them.
+- Frame the classes along one axis - access frequency versus retrieval cost - rather than listing them.
 - Minimum-duration charges and the incomplete-multipart cleanup rule are the two details that mark real bill-owning experience.
 - Push back firmly on "durability means we do not need backups": versioning, Object Lock, and replication protect against deletion; durability does not.
 

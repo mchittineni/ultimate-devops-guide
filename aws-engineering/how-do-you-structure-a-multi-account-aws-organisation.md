@@ -23,13 +23,13 @@ tags:
 | -------------- | ---------------------------------------------------------------------------- |
 | Security       | log archive, audit/security tooling, incident response                       |
 | Infrastructure | shared networking (Transit Gateway), shared CI, shared registries            |
-| Workloads      | nested per-environment OUs: prod, staging, dev — one account per app per env |
+| Workloads      | nested per-environment OUs: prod, staging, dev - one account per app per env |
 | Sandbox        | time-limited experimentation accounts with hard budget caps                  |
 | Suspended      | quarantine OU with a deny-all SCP for compromised accounts                   |
 
-The management (payer) account holds nothing but Organizations, billing, and the automation that provisions accounts — no workloads, tightly restricted access.
+The management (payer) account holds nothing but Organizations, billing, and the automation that provisions accounts - no workloads, tightly restricted access.
 
-**SCPs are guardrails, not permissions.** They filter what any principal in the account may do, including administrators. Typical set: deny leaving the organisation, deny disabling CloudTrail/GuardDuty/Config, deny unapproved regions, deny root user actions, deny deletion of security-tooling roles. Keep them broad and stable — SCPs debugged during an incident are painful because the error messages are indirect.
+**SCPs are guardrails, not permissions.** They filter what any principal in the account may do, including administrators. Typical set: deny leaving the organisation, deny disabling CloudTrail/GuardDuty/Config, deny unapproved regions, deny root user actions, deny deletion of security-tooling roles. Keep them broad and stable - SCPs debugged during an incident are painful because the error messages are indirect.
 
 **Centralise what must be tamper-proof and auditable:** an organisation CloudTrail delivering to an S3 bucket in the log-archive account (which no workload account can write to or delete from), Config aggregation, GuardDuty and Security Hub delegated administration, and a central Access Analyzer. Attackers with account-level admin should still be unable to erase the evidence.
 
@@ -77,9 +77,9 @@ The management (payer) account holds nothing but Organizations, billing, and the
 
 ## Interview tips
 
-- Lead with "the account is the blast-radius boundary" — it justifies everything else.
+- Lead with "the account is the blast-radius boundary" - it justifies everything else.
 - Naming the log-archive account that workload accounts cannot write to shows you think about an attacker with admin.
-- Expect: "how do you stop an engineer spinning up GPUs in an unapproved region?" — a region-deny SCP plus budgets in the account baseline.
+- Expect: "how do you stop an engineer spinning up GPUs in an unapproved region?" - a region-deny SCP plus budgets in the account baseline.
 
 ---
 
