@@ -11,7 +11,7 @@ tags:
 
 Zero trust, TLS, web application firewalls, and segmentation - the controls that protect traffic in and between clouds.
 
-**6 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 4 · 🔴 Advanced: 0
+**7 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -23,6 +23,7 @@ Zero trust, TLS, web application firewalls, and segmentation - the controls that
 | 119 | [What is a Web Application Firewall (WAF)?](./what-is-a-web-application-firewall-waf.md)                                           | 🟢 Beginner     |
 | 120 | [What is Network Segmentation?](./what-is-network-segmentation.md)                                                                 | 🟡 Intermediate |
 | 270 | [What happens when a user opens your application in a browser?](./what-happens-when-a-user-opens-your-application-in-a-browser.md) | 🟡 Intermediate |
+| 297 | [How do you design defence in depth for a cloud network?](./how-do-you-design-defence-in-depth-for-a-cloud-network.md)             | 🔴 Advanced     |
 
 ## What interviewers probe here
 
