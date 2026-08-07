@@ -15,15 +15,15 @@ tags:
 
 ## Detail
 
-**IaaS — Infrastructure as a Service.** Raw compute, storage, and networking: EC2, Azure VMs, Compute Engine. You own the operating system, patching, runtime, and everything above. Maximum control, maximum operational burden.
+**IaaS - Infrastructure as a Service.** Raw compute, storage, and networking: EC2, Azure VMs, Compute Engine. You own the operating system, patching, runtime, and everything above. Maximum control, maximum operational burden.
 
-**PaaS — Platform as a Service.** A managed runtime: App Service, Elastic Beanstalk, Cloud Run, Heroku. You deploy code; the provider handles OS, scaling, and patching. Less control, far less toil.
+**PaaS - Platform as a Service.** A managed runtime: App Service, Elastic Beanstalk, Cloud Run, Heroku. You deploy code; the provider handles OS, scaling, and patching. Less control, far less toil.
 
-**SaaS — Software as a Service.** Finished applications: Microsoft 365, Salesforce, Datadog. You configure and use; you own only your data and access control.
+**SaaS - Software as a Service.** Finished applications: Microsoft 365, Salesforce, Datadog. You configure and use; you own only your data and access control.
 
-**FaaS / serverless.** Lambda, Azure Functions, Cloud Functions — event-driven functions, scale to zero, billed per invocation and duration.
+**FaaS / serverless.** Lambda, Azure Functions, Cloud Functions - event-driven functions, scale to zero, billed per invocation and duration.
 
-**CaaS — Containers as a Service.** ECS, AKS, GKE: you supply container images, the platform schedules them.
+**CaaS - Containers as a Service.** ECS, AKS, GKE: you supply container images, the platform schedules them.
 
 Who manages what:
 
@@ -37,9 +37,9 @@ Who manages what:
 
 ## Interview tips
 
-- Draw or describe that responsibility table — it answers the question and the shared-responsibility follow-up at once.
+- Draw or describe that responsibility table - it answers the question and the shared-responsibility follow-up at once.
 - Give a concrete example of each from a platform you have used.
-- Good closing judgement: "use the highest-level service that meets the requirement" — it minimises undifferentiated work.
+- Good closing judgement: "use the highest-level service that meets the requirement" - it minimises undifferentiated work.
 
 ---
 

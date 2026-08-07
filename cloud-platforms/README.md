@@ -9,7 +9,7 @@ tags:
 
 # Cloud Platforms
 
-Cloud service models and the three major providers — enough breadth to discuss AWS, Azure, and GCP comparatively.
+Cloud service models and the three major providers - enough breadth to discuss AWS, Azure, and GCP comparatively.
 
 **5 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 0 · 🔴 Advanced: 0
 

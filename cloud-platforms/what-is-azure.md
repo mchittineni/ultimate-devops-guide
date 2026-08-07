@@ -31,7 +31,7 @@ Core services and their AWS analogues:
 | Monitoring           | Azure Monitor + Log Analytics | CloudWatch            |
 | Secrets              | Key Vault                     | Secrets Manager + KMS |
 
-Azure organises resources hierarchically: **management groups → subscriptions → resource groups → resources**. Resource groups are a genuine lifecycle boundary — you can deploy, tag, and delete a whole group together, which has no direct AWS equivalent.
+Azure organises resources hierarchically: **management groups → subscriptions → resource groups → resources**. Resource groups are a genuine lifecycle boundary - you can deploy, tag, and delete a whole group together, which has no direct AWS equivalent.
 
 **Azure Policy** enforces governance rules (allowed regions, required tags, denied SKUs) across subscriptions, and is the usual answer for compliance at scale. **Managed identities** give a VM or app a rotating identity in Entra ID so code never handles credentials.
 
