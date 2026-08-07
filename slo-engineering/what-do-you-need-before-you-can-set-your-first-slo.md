@@ -56,21 +56,39 @@ The four prerequisites, filled in
 
 ```promql
 # The SLI as a query. Note what is excluded, and that latency counts fast requests.
-# Availability
-sum(rate(http_requests_total{route="/checkout", code!~"5..", synthetic!="true"}[28d]))
-  /
-sum(rate(http_requests_total{route="/checkout", synthetic!="true"}[28d]))
+#
+# Define "valid request" ONCE and paste it into every numerator and denominator, unchanged.
+# A filter that appears on only one side of a ratio is the classic SLI bug: it divides one
+# population by a different one, and the number quietly stops meaning anything.
+#   VALID := route="/checkout", route!~"/healthz|/readyz|/metrics",
+#            synthetic!="true", user_agent!~"(?i).*(bot|crawler|spider).*"
+# (The health-check exclusion is redundant while route is pinned - keep it anyway, because
+#  the day someone widens this to route=~"/api/.*" it is the filter they will forget.)
 
-# Latency: the fraction under the threshold - not an average
-sum(rate(http_request_duration_seconds_bucket{route="/checkout", le="0.8"}[28d]))
+# Availability - VALID on both sides, only code!~"5.." differs
+sum(rate(http_requests_total{route="/checkout", route!~"/healthz|/readyz|/metrics",
+    synthetic!="true", user_agent!~"(?i).*(bot|crawler|spider).*", code!~"5.."}[28d]))
   /
-sum(rate(http_request_duration_seconds_count{route="/checkout"}[28d]))
+sum(rate(http_requests_total{route="/checkout", route!~"/healthz|/readyz|/metrics",
+    synthetic!="true", user_agent!~"(?i).*(bot|crawler|spider).*"}[28d]))
 
-# Error budget remaining, as a fraction - the number the team actually watches
-1 - (
-  (1 - 0.996)                                    # allowed failure fraction
-    - (1 - <availability_query>)
-) / (1 - 0.996)
+# Latency: the fraction under the threshold - not an average.
+# The _count denominator takes the same VALID selector as the _bucket numerator; only le= differs.
+sum(rate(http_request_duration_seconds_bucket{route="/checkout", route!~"/healthz|/readyz|/metrics",
+    synthetic!="true", user_agent!~"(?i).*(bot|crawler|spider).*", le="0.8"}[28d]))
+  /
+sum(rate(http_request_duration_seconds_count{route="/checkout", route!~"/healthz|/readyz|/metrics",
+    synthetic!="true", user_agent!~"(?i).*(bot|crawler|spider).*"}[28d]))
+
+# Error budget REMAINING, as a fraction of the budget - the number the team actually watches.
+# 1.0 = untouched, 0 = exhausted. clamp_min stops an overspent budget going negative.
+clamp_min(
+  (
+    (1 - 0.996)                                  # allowed failure fraction
+      - (1 - <availability_query>)               # observed failure fraction
+  ) / (1 - 0.996),
+  0
+)
 ```
 
 | Target | Allowed downtime / 30 days | What it implies                                  |
