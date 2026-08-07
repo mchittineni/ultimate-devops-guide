@@ -11,17 +11,18 @@ tags:
 
 Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime interface.
 
-**5 questions** · 🟢 Beginner: 0 · 🟡 Intermediate: 2 · 🔴 Advanced: 3
+**6 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 2 · 🔴 Advanced: 3
 
 ## Questions
 
-| #   | Question                                                                                   | Difficulty      |
-| --- | ------------------------------------------------------------------------------------------ | --------------- |
-| 81  | [What are StatefulSets in Kubernetes?](./what-are-statefulsets-in-kubernetes.md)           | 🔴 Advanced     |
-| 82  | [What are DaemonSets in Kubernetes?](./what-are-daemonsets-in-kubernetes.md)               | 🟡 Intermediate |
-| 83  | [What is Helm?](./what-is-helm.md)                                                         | 🟡 Intermediate |
-| 84  | [What is Istio?](./what-is-istio.md)                                                       | 🔴 Advanced     |
-| 85  | [What is Container Runtime Interface (CRI)?](./what-is-container-runtime-interface-cri.md) | 🔴 Advanced     |
+| #   | Question                                                                                                               | Difficulty      |
+| --- | ---------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 81  | [What are StatefulSets in Kubernetes?](./what-are-statefulsets-in-kubernetes.md)                                       | 🔴 Advanced     |
+| 82  | [What are DaemonSets in Kubernetes?](./what-are-daemonsets-in-kubernetes.md)                                           | 🟡 Intermediate |
+| 83  | [What is Helm?](./what-is-helm.md)                                                                                     | 🟡 Intermediate |
+| 84  | [What is Istio?](./what-is-istio.md)                                                                                   | 🔴 Advanced     |
+| 85  | [What is Container Runtime Interface (CRI)?](./what-is-container-runtime-interface-cri.md)                             | 🔴 Advanced     |
+| 284 | [What is container orchestration and why do you need it?](./what-is-container-orchestration-and-why-do-you-need-it.md) | 🟢 Beginner     |
 
 ## What interviewers probe here
 
