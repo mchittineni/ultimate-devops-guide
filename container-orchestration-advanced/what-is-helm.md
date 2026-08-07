@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**Why it exists.** Deploying an application usually means a Deployment, Service, Ingress, ConfigMap, ServiceAccount, HPA, and PodDisruptionBudget — repeated per environment with small differences. Helm turns that into one templated chart plus a values file per environment.
+**Why it exists.** Deploying an application usually means a Deployment, Service, Ingress, ConfigMap, ServiceAccount, HPA, and PodDisruptionBudget - repeated per environment with small differences. Helm turns that into one templated chart plus a values file per environment.
 
 **Structure**
 
@@ -33,7 +33,7 @@ mychart/
 
 **Useful features:** `--atomic` (roll back automatically if the upgrade fails), `--wait` (block until resources are Ready), hooks (`pre-install`, `post-upgrade`) for migrations, `helm template` to render locally for inspection or GitOps, `helm lint`, and `helm test`.
 
-**Criticism worth knowing.** Go templating over YAML is error-prone for complex logic, which is why alternatives exist — Kustomize (overlay patching, no templating), Timoni, and cdk8s. Many teams use Helm to consume third-party charts and Kustomize for their own applications.
+**Criticism worth knowing.** Go templating over YAML is error-prone for complex logic, which is why alternatives exist - Kustomize (overlay patching, no templating), Timoni, and cdk8s. Many teams use Helm to consume third-party charts and Kustomize for their own applications.
 
 ## Example
 

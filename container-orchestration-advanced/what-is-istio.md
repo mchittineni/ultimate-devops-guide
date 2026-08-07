@@ -15,20 +15,20 @@ tags:
 
 ## Detail
 
-**Architecture.** `istiod` is the control plane — it handles service discovery, configuration distribution, and certificate issuance. The data plane is Envoy, injected as a sidecar into each pod (or, in **ambient mode**, run as a per-node ztunnel plus optional waypoint proxies, removing per-pod sidecars).
+**Architecture.** `istiod` is the control plane - it handles service discovery, configuration distribution, and certificate issuance. The data plane is Envoy, injected as a sidecar into each pod (or, in **ambient mode**, run as a per-node ztunnel plus optional waypoint proxies, removing per-pod sidecars).
 
 **Core APIs**
 
-- **VirtualService** — routing rules: weighted splits, header matching, rewrites, timeouts, retries, fault injection.
-- **DestinationRule** — what happens after routing: subsets, load-balancing policy, connection pool limits, outlier detection (ejecting unhealthy endpoints), and TLS settings.
-- **Gateway** — ingress and egress at the mesh edge.
-- **PeerAuthentication** — enforce strict mTLS.
-- **AuthorizationPolicy** — allow/deny rules by source identity, namespace, method, or path.
-- **ServiceEntry** / **Sidecar** — external services, and scoping proxy configuration to reduce memory.
+- **VirtualService** - routing rules: weighted splits, header matching, rewrites, timeouts, retries, fault injection.
+- **DestinationRule** - what happens after routing: subsets, load-balancing policy, connection pool limits, outlier detection (ejecting unhealthy endpoints), and TLS settings.
+- **Gateway** - ingress and egress at the mesh edge.
+- **PeerAuthentication** - enforce strict mTLS.
+- **AuthorizationPolicy** - allow/deny rules by source identity, namespace, method, or path.
+- **ServiceEntry** / **Sidecar** - external services, and scoping proxy configuration to reduce memory.
 
 **What it buys you:** automatic mTLS with rotating SPIFFE identities, progressive delivery through traffic weighting (the foundation for Argo Rollouts and Flagger), consistent golden-signal metrics for every service, and fault injection for resilience testing.
 
-**What it costs:** meaningful CPU and memory overhead, added latency, a complex control plane to upgrade, and a steep debugging curve — `istioctl analyze` and `proxy-config` become essential tools.
+**What it costs:** meaningful CPU and memory overhead, added latency, a complex control plane to upgrade, and a steep debugging curve - `istioctl analyze` and `proxy-config` become essential tools.
 
 ## Example
 
@@ -53,7 +53,7 @@ spec:
 ## Interview tips
 
 - Naming the four or five main CRDs and what each controls demonstrates hands-on use.
-- Ambient mode is the current answer to the sidecar overhead criticism — worth knowing.
+- Ambient mode is the current answer to the sidecar overhead criticism - worth knowing.
 - Compare with Linkerd (simpler, lighter, less featureful) to show you evaluated options.
 
 ---

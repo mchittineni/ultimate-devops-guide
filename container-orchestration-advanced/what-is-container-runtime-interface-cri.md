@@ -11,7 +11,7 @@ tags:
 
 # What is Container Runtime Interface (CRI)?
 
-**Short answer:** The Container Runtime Interface is the gRPC API through which the kubelet talks to a container runtime. It decoupled Kubernetes from Docker, allowing any compliant runtime — containerd, CRI-O — to be plugged in.
+**Short answer:** The Container Runtime Interface is the gRPC API through which the kubelet talks to a container runtime. It decoupled Kubernetes from Docker, allowing any compliant runtime - containerd, CRI-O - to be plugged in.
 
 ## Detail
 
@@ -27,10 +27,10 @@ kubelet ──CRI (gRPC)──▶ containerd / CRI-O ──OCI runtime spec─�
 
 **Runtime options**
 
-- **containerd** — the default on most managed Kubernetes services; also underpins Docker itself.
-- **CRI-O** — purpose-built for Kubernetes, the default in OpenShift.
-- **gVisor** — a user-space kernel providing stronger isolation for untrusted workloads.
-- **Kata Containers** — lightweight VMs per pod for hardware-level isolation.
+- **containerd** - the default on most managed Kubernetes services; also underpins Docker itself.
+- **CRI-O** - purpose-built for Kubernetes, the default in OpenShift.
+- **gVisor** - a user-space kernel providing stronger isolation for untrusted workloads.
+- **Kata Containers** - lightweight VMs per pod for hardware-level isolation.
 
 **RuntimeClass** lets you select different runtimes per workload, so untrusted tenant code can run under gVisor while trusted services use runc.
 

@@ -9,7 +9,7 @@ tags:
 
 # Container Orchestration Advanced
 
-Beyond Deployments — StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime interface.
+Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime interface.
 
 **5 questions** · 🟢 Beginner: 0 · 🟡 Intermediate: 2 · 🔴 Advanced: 3
 

@@ -11,7 +11,7 @@ tags:
 
 # What are StatefulSets in Kubernetes?
 
-**Short answer:** A StatefulSet manages pods that need stable identity — a predictable name, stable network hostname, and their own persistent storage that survives rescheduling — making it the workload type for databases and other stateful systems.
+**Short answer:** A StatefulSet manages pods that need stable identity - a predictable name, stable network hostname, and their own persistent storage that survives rescheduling - making it the workload type for databases and other stateful systems.
 
 ## Detail
 
@@ -23,7 +23,7 @@ tags:
 - **Ordered operations.** Pods are created 0, 1, 2 and terminated in reverse; each waits for the previous to be Ready. `podManagementPolicy: Parallel` disables this when ordering is unnecessary.
 - **Ordered, controlled rollouts** with `partition` for staged canary updates of the set.
 
-**Important caveats.** Deleting a StatefulSet does not delete its PVCs — deliberate, so data is not lost by accident, but it means manual cleanup. Scaling down leaves the volumes behind. And a StatefulSet gives you _identity_, not clustering: replication, leader election, and failover are still the application's job, which is why operators exist for databases.
+**Important caveats.** Deleting a StatefulSet does not delete its PVCs - deliberate, so data is not lost by accident, but it means manual cleanup. Scaling down leaves the volumes behind. And a StatefulSet gives you _identity_, not clustering: replication, leader election, and failover are still the application's job, which is why operators exist for databases.
 
 ## Example
 
@@ -54,7 +54,7 @@ spec:
 
 ## Interview tips
 
-- The headless Service requirement is the detail people forget — mention it unprompted.
+- The headless Service requirement is the detail people forget - mention it unprompted.
 - "PVCs are not deleted with the StatefulSet" is a favourite follow-up.
 - A strong closing point: for production databases, prefer a managed service or a mature operator over a hand-rolled StatefulSet.
 
