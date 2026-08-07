@@ -73,6 +73,14 @@ transforms:
       .authorization = null
       .message = replace(string!(.message), r'Bearer [A-Za-z0-9._-]+', "Bearer [REDACTED]")
 
+  split_audit:
+    type: route
+    inputs: [redact]
+    route:
+      # Explicit classification only - an event is audit because the emitter said so,
+      # never because it happened to mention a user id.
+      audit: '.log_class == "audit" || .log_class == "compliance"'
+
   sample_success:
     type: sample
     inputs: [redact]
@@ -87,9 +95,23 @@ sinks:
     # labels only - the log body stays unindexed in object storage
   archive:
     type: aws_s3
-    inputs: [redact] # unsampled, compressed, cheap, for audit
+    inputs: [redact] # unsampled, compressed, cheap - operational replay, NOT audit retention
     compression: zstd
     key_prefix: "logs/%Y/%m/%d/"
+    # 30-day lifecycle then expire: general events must not inherit audit retention,
+    # which is what makes an audit bucket both expensive and legally risky.
+
+  audit_archive:
+    type: aws_s3
+    inputs: [split_audit.audit] # only events explicitly classified as audit/compliance
+    compression: zstd
+    key_prefix: "audit/%Y/%m/%d/"
+    encryption: aws:kms
+    kms_key_id: "${AUDIT_KMS_KEY_ARN}" # separate CMK, separate key policy
+    # Bucket is provisioned with Object Lock in COMPLIANCE mode for the statutory
+    # retention period (7 years here) and no lifecycle expiry inside it: nobody -
+    # including the root account - can delete or overwrite an object before it expires.
+    # Deletion after expiry is a documented, ticketed job, not a lifecycle rule.
 ```
 
 ```yaml
