@@ -22,7 +22,7 @@ tags:
 | IAST      | agent in app    | test execution | exploitable paths with stack traces               | language-specific, runtime overhead  |
 | SCA       | manifest / lock | PR + build     | vulnerable and abandoned dependencies, licenses   | says nothing about your own code     |
 
-**SCA finds most of what actually gets exploited.** The majority of an application's code is third-party. Prefer scanners that read the lock file (exact resolved versions) and, better, ones that flag whether the vulnerable function is actually reachable from your code — reachability analysis is what turns 400 findings into the 12 that matter.
+**SCA finds most of what actually gets exploited.** The majority of an application's code is third-party. Prefer scanners that read the lock file (exact resolved versions) and, better, ones that flag whether the vulnerable function is actually reachable from your code - reachability analysis is what turns 400 findings into the 12 that matter.
 
 **SAST's cost is triage, not licensing.** Tune the ruleset to your stack, suppress with inline annotations that require a reason, and measure the false-positive rate. An untuned scanner teaches developers to ignore security output.
 
@@ -45,7 +45,7 @@ semgrep --config p/owasp-top-ten --config ./.semgrep/rules \
 ## Interview tips
 
 - The clean one-liner is white-box (SAST) versus black-box (DAST) versus grey-box (IAST), with SCA orthogonal to all three.
-- Mention `--ignore-unfixed` and reachability analysis — both show you have fought signal-to-noise in practice.
+- Mention `--ignore-unfixed` and reachability analysis - both show you have fought signal-to-noise in practice.
 - Common trap: claiming SAST would have caught Log4Shell. That was a dependency issue, so SCA plus an SBOM is the answer.
 
 ---

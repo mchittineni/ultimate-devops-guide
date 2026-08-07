@@ -17,13 +17,13 @@ tags:
 
 **The hierarchy, best to worst:**
 
-1. **Workload identity federation** — CI presents an OIDC token; AWS/Azure/GCP returns credentials valid for minutes. No stored secret.
-2. **Dynamic secrets** — Vault generates a database credential per job with a short lease and revokes it after.
-3. **Secrets manager with pinned scope** — a stored value fetched at run time, scoped to one environment and one pipeline.
-4. **CI platform secret variables** — acceptable, but shared broadly and easy to expose to forks.
-5. **Committed to the repository, plaintext in the log** — the incident you will be asked about.
+1. **Workload identity federation** - CI presents an OIDC token; AWS/Azure/GCP returns credentials valid for minutes. No stored secret.
+2. **Dynamic secrets** - Vault generates a database credential per job with a short lease and revokes it after.
+3. **Secrets manager with pinned scope** - a stored value fetched at run time, scoped to one environment and one pipeline.
+4. **CI platform secret variables** - acceptable, but shared broadly and easy to expose to forks.
+5. **Committed to the repository, plaintext in the log** - the incident you will be asked about.
 
-**Fork pull requests are the classic leak.** A workflow triggered by a fork must not receive secrets. In GitHub Actions, `pull_request` withholds them by default and `pull_request_target` does not — the latter combined with checking out the fork's code is a well-known privilege-escalation pattern. Split the pipeline: untrusted code runs without credentials; anything needing secrets runs after review, from the trusted branch.
+**Fork pull requests are the classic leak.** A workflow triggered by a fork must not receive secrets. In GitHub Actions, `pull_request` withholds them by default and `pull_request_target` does not - the latter combined with checking out the fork's code is a well-known privilege-escalation pattern. Split the pipeline: untrusted code runs without credentials; anything needing secrets runs after review, from the trusted branch.
 
 **Assume the log is public.** Mask values, never `echo` them, avoid `set -x` around them, and remember that a secret passed as a command-line argument appears in process listings. Multi-line secrets and base64 blobs often defeat automatic masking.
 
@@ -61,9 +61,9 @@ condition {
 
 ## Interview tips
 
-- Lead with "remove the secret entirely via OIDC federation" — it reframes the question and is what modern teams do.
+- Lead with "remove the secret entirely via OIDC federation" - it reframes the question and is what modern teams do.
 - The `sub` condition pinning repo and ref is the detail that proves you have configured this rather than read about it.
-- Expect the fork/`pull_request_target` question, and "what do you do after a leak?" — rotate first, forensics second.
+- Expect the fork/`pull_request_target` question, and "what do you do after a leak?" - rotate first, forensics second.
 
 ---
 

@@ -11,7 +11,7 @@ tags:
 
 # What is a Software Bill of Materials (SBOM)?
 
-**Short answer:** An SBOM is a machine-readable inventory of every component in a build — direct and transitive dependencies, versions, and licenses — emitted in a standard format (SPDX or CycloneDX). Its value is answering "are we affected?" in minutes when the next Log4Shell lands, instead of grepping repositories for a week.
+**Short answer:** An SBOM is a machine-readable inventory of every component in a build - direct and transitive dependencies, versions, and licenses - emitted in a standard format (SPDX or CycloneDX). Its value is answering "are we affected?" in minutes when the next Log4Shell lands, instead of grepping repositories for a week.
 
 ## Detail
 
@@ -34,7 +34,7 @@ syft registry:ghcr.io/acme/api@sha256:1f4b... -o cyclonedx-json > sbom.json
 cosign attest --predicate sbom.json --type cyclonedx \
   ghcr.io/acme/api@sha256:1f4b...
 
-# Later: "are we affected by this CVE?" — answered from the stored SBOM, no rebuild
+# Later: "are we affected by this CVE?" - answered from the stored SBOM, no rebuild
 grype sbom:sbom.json --fail-on high
 ```
 
@@ -42,7 +42,7 @@ grype sbom:sbom.json --fail-on high
 
 - Lead with the incident-response use case; "compliance asked for it" is the weaker answer.
 - Naming VEX, and digest-keyed storage, separates people who have generated SBOMs from people who have used them.
-- Expect: "who consumes it?" — your own vulnerability management, plus customers' procurement and their scanners.
+- Expect: "who consumes it?" - your own vulnerability management, plus customers' procurement and their scanners.
 
 ---
 

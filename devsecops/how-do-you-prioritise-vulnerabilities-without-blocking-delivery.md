@@ -27,7 +27,7 @@ tags:
 | Exposure         | Internet-facing? Handles untrusted input?    | your own asset inventory      |
 | Fix availability | Is there a patched version?                  | advisory / `--ignore-unfixed` |
 
-**Publish SLAs and measure them.** For example: KEV or actively exploited — 48 hours; critical and reachable and exposed — 7 days; high — 30 days; everything else — next dependency-bump cycle. What matters is that the numbers are agreed with engineering leadership and that you report attainment, not that they are aggressive.
+**Publish SLAs and measure them.** For example: KEV or actively exploited - 48 hours; critical and reachable and exposed - 7 days; high - 30 days; everything else - next dependency-bump cycle. What matters is that the numbers are agreed with engineering leadership and that you report attainment, not that they are aggressive.
 
 **Automate the boring 80%.** Most findings are fixed by a patch-version bump. Renovate or Dependabot with automerge for patch updates and a green test suite removes the majority of the queue without a human decision. Reserve triage effort for major-version bumps and unfixable findings.
 
@@ -51,7 +51,7 @@ python3 rank.py findings.json --kev kev.json --epss epss.csv --top 20
 
 - Naming KEV and EPSS immediately signals current practice; CVSS-only answers read as dated.
 - "Gate on new findings, SLA the backlog" is the sentence that shows you have kept a pipeline usable.
-- Expect: "a critical with no patch, shipping tomorrow — what do you do?" Answer with compensating control, time-boxed risk acceptance, and who signs it.
+- Expect: "a critical with no patch, shipping tomorrow - what do you do?" Answer with compensating control, time-boxed risk acceptance, and who signs it.
 
 ---
 

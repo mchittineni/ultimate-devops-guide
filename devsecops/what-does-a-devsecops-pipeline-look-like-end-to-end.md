@@ -23,7 +23,7 @@ tags:
 | Pull request | SAST, SCA/dependency review, IaC scan, license check                 | new high/critical, license deny  |
 | Build        | image vulnerability scan, SBOM generation, provenance attestation    | critical with a fix available    |
 | Pre-deploy   | signature verification, policy admission (OPA/Kyverno), config drift | unsigned or non-compliant object |
-| Runtime      | behavioural detection, CSPM, audit logging                           | n/a — alerts, not gates          |
+| Runtime      | behavioural detection, CSPM, audit logging                           | n/a - alerts, not gates          |
 
 **Fail the build on new findings, not total findings.** A gate that fails on the existing backlog gets disabled within a week. Compare against a baseline: block what this change introduces, and burn the backlog down on a separate track with its own SLA per severity.
 
@@ -34,7 +34,7 @@ tags:
 ## Example
 
 ```yaml
-# .github/workflows/security.yml — PR-time gates, failing only on new criticals
+# .github/workflows/security.yml - PR-time gates, failing only on new criticals
 name: security
 on: [pull_request]
 permissions:
@@ -61,7 +61,7 @@ jobs:
 
 - Name the gates in order and say which ones block. "Security is everyone's responsibility" without a pipeline is not an answer.
 - The baseline/new-findings distinction and expiring waivers are the two details that show you have run this in a real team.
-- Expect the follow-up: "what do you do when the critical has no fix?" — compensating control, documented risk acceptance, and a tracked ticket.
+- Expect the follow-up: "what do you do when the critical has no fix?" - compensating control, documented risk acceptance, and a tracked ticket.
 
 ---
 

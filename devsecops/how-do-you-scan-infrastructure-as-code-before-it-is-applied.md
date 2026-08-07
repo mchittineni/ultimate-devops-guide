@@ -19,9 +19,9 @@ tags:
 
 **What the rules should cover.** Public storage buckets and unrestricted security groups are table stakes. The rules that pay for themselves are organisation-specific: mandatory tags (owner, cost-centre, data-classification), approved regions, encryption with customer-managed keys, no IAM wildcards, no public IPs on database subnets, instance types from an approved list.
 
-**Detect destructive changes, not just insecure ones.** A plan that deletes a database or replaces a stateful resource deserves a distinct, louder gate than a lint warning — for example, requiring a second approval when the plan contains `delete` on any resource of a protected type.
+**Detect destructive changes, not just insecure ones.** A plan that deletes a database or replaces a stateful resource deserves a distinct, louder gate than a lint warning - for example, requiring a second approval when the plan contains `delete` on any resource of a protected type.
 
-**Close the loop at run time.** Pre-apply scanning cannot catch a console change. Pair it with drift detection and a CSPM/Config-rules layer evaluating live resources against the same policy set — ideally the same Rego, so there is one definition of "compliant".
+**Close the loop at run time.** Pre-apply scanning cannot catch a console change. Pair it with drift detection and a CSPM/Config-rules layer evaluating live resources against the same policy set - ideally the same Rego, so there is one definition of "compliant".
 
 **Keep the failure actionable.** Output the file, line, rule ID, and remediation. Suppressions live inline (`#checkov:skip=CKV_AWS_18:access logs go to the central account`) with a reason, so reviewers see the justification in the diff.
 
@@ -38,7 +38,7 @@ conftest test --policy ./policy tf.json
 ```
 
 ```rego
-# policy/tags.rego — every taggable resource must carry an owner
+# policy/tags.rego - every taggable resource must carry an owner
 package main
 
 required := {"owner", "cost_center", "data_classification"}
@@ -57,8 +57,8 @@ deny contains msg if {
 ## Interview tips
 
 - The plan-versus-template distinction is the point interviewers are probing; lead with it.
-- Mention one org-specific rule you have written — it separates "I enabled a scanner" from "I own the guardrails".
-- Follow-up to expect: "how do you stop someone changing it in the console?" — drift detection plus the same policy evaluated against live state, and SCPs/Azure Policy denying it outright.
+- Mention one org-specific rule you have written - it separates "I enabled a scanner" from "I own the guardrails".
+- Follow-up to expect: "how do you stop someone changing it in the console?" - drift detection plus the same policy evaluated against live state, and SCPs/Azure Policy denying it outright.
 
 ---
 
