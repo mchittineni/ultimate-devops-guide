@@ -11,7 +11,7 @@ tags:
 
 # What is a Web Application Firewall (WAF)?
 
-**Short answer:** A WAF inspects HTTP/HTTPS traffic at layer 7 and blocks malicious requests — SQL injection, cross-site scripting, path traversal, bot abuse — before they reach the application, complementing rather than replacing secure coding.
+**Short answer:** A WAF inspects HTTP/HTTPS traffic at layer 7 and blocks malicious requests - SQL injection, cross-site scripting, path traversal, bot abuse - before they reach the application, complementing rather than replacing secure coding.
 
 ## Detail
 
@@ -19,15 +19,15 @@ tags:
 
 **Detection models**
 
-- **Negative security (blocklist)** — signatures for known attack patterns. The OWASP Core Rule Set is the standard open ruleset. Easy to deploy, imperfect coverage.
-- **Positive security (allowlist)** — define exactly what valid requests look like per endpoint. Stronger, but requires effort to build and maintain.
-- **Behavioural / ML** — anomaly scoring against a learned baseline; catches novel attacks with more false positives.
+- **Negative security (blocklist)** - signatures for known attack patterns. The OWASP Core Rule Set is the standard open ruleset. Easy to deploy, imperfect coverage.
+- **Positive security (allowlist)** - define exactly what valid requests look like per endpoint. Stronger, but requires effort to build and maintain.
+- **Behavioural / ML** - anomaly scoring against a learned baseline; catches novel attacks with more false positives.
 
 **Typical capabilities:** OWASP Top 10 protection, rate limiting, bot management, geo-blocking, IP reputation, virtual patching (blocking exploitation of a known CVE while the real fix is developed), and request/response inspection with detailed logging.
 
 **Deployment:** cloud-managed at the CDN edge (AWS WAF, Cloudflare, Azure Front Door), reverse proxy (ModSecurity with NGINX), or embedded as a library or sidecar.
 
-**Operating one well.** Always start in **detection/count mode**, review what would have been blocked against real traffic, tune out false positives, then enforce. Blocking on day one will break legitimate users — file uploads, rich-text content, and API payloads trip generic rules constantly. Monitor blocked-request rates and review them; a WAF nobody looks at is theatre.
+**Operating one well.** Always start in **detection/count mode**, review what would have been blocked against real traffic, tune out false positives, then enforce. Blocking on day one will break legitimate users - file uploads, rich-text content, and API payloads trip generic rules constantly. Monitor blocked-request rates and review them; a WAF nobody looks at is theatre.
 
 ## Example
 

@@ -9,7 +9,7 @@ tags:
 
 # Network Security
 
-Zero trust, TLS, web application firewalls, and segmentation — the controls that protect traffic in and between clouds.
+Zero trust, TLS, web application firewalls, and segmentation - the controls that protect traffic in and between clouds.
 
 **5 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 3 · 🔴 Advanced: 0
 

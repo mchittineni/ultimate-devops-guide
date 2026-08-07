@@ -17,16 +17,16 @@ tags:
 
 **What it provides**
 
-- **Confidentiality** — traffic is encrypted with a symmetric key negotiated per session.
-- **Integrity** — an authenticated cipher detects tampering.
-- **Authentication** — the certificate proves the server is who it claims, validated against a trusted certificate authority chain. Client certificates authenticate the caller too (mutual TLS).
+- **Confidentiality** - traffic is encrypted with a symmetric key negotiated per session.
+- **Integrity** - an authenticated cipher detects tampering.
+- **Authentication** - the certificate proves the server is who it claims, validated against a trusted certificate authority chain. Client certificates authenticate the caller too (mutual TLS).
 
 **The handshake (TLS 1.3, simplified)**
 
 1. Client sends `ClientHello` with supported cipher suites and a key share.
 2. Server responds with `ServerHello`, its chosen cipher, its key share, and its certificate chain.
 3. Both derive the same shared secret via Diffie-Hellman; the client verifies the certificate chain, expiry, hostname, and revocation status.
-4. Encrypted application data flows — in TLS 1.3 this takes one round trip, and zero with session resumption.
+4. Encrypted application data flows - in TLS 1.3 this takes one round trip, and zero with session resumption.
 
 **Versions.** SSL 2.0/3.0 and TLS 1.0/1.1 are deprecated and insecure. TLS 1.2 is the minimum acceptable; TLS 1.3 is faster and removes legacy cipher suites entirely.
 
@@ -35,7 +35,7 @@ tags:
 - **Certificate expiry** is a leading cause of outages. Automate issuance and renewal (Let's Encrypt with ACME, cert-manager in Kubernetes, ACM in AWS) and _monitor days-to-expiry as a metric with an alert_.
 - **Perfect forward secrecy** via ephemeral key exchange, so a future key compromise cannot decrypt past traffic.
 - **HSTS** to force HTTPS, and redirect all HTTP traffic.
-- **Termination point** — at the load balancer, re-encrypted to the backend, or passed through. Internal traffic should also be encrypted.
+- **Termination point** - at the load balancer, re-encrypted to the backend, or passed through. Internal traffic should also be encrypted.
 
 ## Example
 
