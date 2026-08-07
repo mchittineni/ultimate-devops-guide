@@ -2,6 +2,7 @@ name: Label PR by Content Tags
 
 on:
   pull_request_target:
+    branches: [main]
     types:
       - opened
       - synchronize
@@ -26,11 +27,13 @@ env:
 jobs:
   label:
     name: Sync labels from frontmatter tags
+    # Forks of this repo inherit the workflow but not its label vocabulary; skip there.
+    if: github.repository == 'mchittineni/ultimate-devops-guide'
     runs-on: ubuntu-latest
 
     steps:
       - name: Apply labels
-        uses: actions/github-script@v8
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         with:
           script: |
             const { owner, repo } = context.repo;
