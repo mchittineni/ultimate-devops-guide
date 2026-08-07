@@ -11,7 +11,7 @@ tags:
 
 # What is API Documentation?
 
-**Short answer:** API documentation describes how to use an API — endpoints, parameters, schemas, authentication, errors, and examples — and is most valuable when generated from a machine-readable specification such as OpenAPI so it cannot drift from the implementation.
+**Short answer:** API documentation describes how to use an API - endpoints, parameters, schemas, authentication, errors, and examples - and is most valuable when generated from a machine-readable specification such as OpenAPI so it cannot drift from the implementation.
 
 ## Detail
 
@@ -20,16 +20,16 @@ tags:
 **What complete documentation includes**
 
 - Every endpoint with method, path, parameters, and request/response schemas.
-- **Authentication** — how to obtain and present credentials, with a working example.
-- **Error responses** — status codes, error body shape, and what the client should do about each.
+- **Authentication** - how to obtain and present credentials, with a working example.
+- **Error responses** - status codes, error body shape, and what the client should do about each.
 - **Rate limits** and pagination conventions.
-- **Working examples** — copy-pasteable `curl` commands with realistic values.
-- **Versioning and deprecation policy** — how changes are communicated and how long old versions live.
+- **Working examples** - copy-pasteable `curl` commands with realistic values.
+- **Versioning and deprecation policy** - how changes are communicated and how long old versions live.
 - **Changelog.**
 
 **Keeping it honest.** Documentation drifts the moment it is written by hand separately from the code. Defences: generate the spec from code annotations or generate code from the spec; validate live requests against the schema in CI; run contract tests (Pact, Schemathesis) that fail the build when implementation and spec diverge; and publish the docs automatically from the pipeline.
 
-**Beyond reference docs**, good API programmes include a getting-started guide, common workflow tutorials, and an interactive console — reference documentation alone rarely gets a developer to their first successful call.
+**Beyond reference docs**, good API programmes include a getting-started guide, common workflow tutorials, and an interactive console - reference documentation alone rarely gets a developer to their first successful call.
 
 ## Example
 
@@ -60,7 +60,7 @@ paths:
 ## Interview tips
 
 - Spec-first with generated artifacts is the answer that shows engineering maturity.
-- Contract testing in CI is how you prove docs and implementation agree — mention it.
+- Contract testing in CI is how you prove docs and implementation agree - mention it.
 - Note that error documentation is the most commonly missing and most needed section.
 
 ---

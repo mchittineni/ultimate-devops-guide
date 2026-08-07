@@ -17,15 +17,15 @@ tags:
 
 **Algorithms**
 
-- **Fixed window** — count per calendar minute. Simple, but allows a burst of 2× the limit across a window boundary.
-- **Sliding window log** — exact, stores timestamps, memory-hungry.
-- **Sliding window counter** — weighted blend of the current and previous window; the common production compromise.
-- **Token bucket** — tokens refill at a steady rate up to a bucket size; permits controlled bursts. The most widely used.
-- **Leaky bucket** — requests drain at a fixed rate, smoothing traffic entirely.
+- **Fixed window** - count per calendar minute. Simple, but allows a burst of 2× the limit across a window boundary.
+- **Sliding window log** - exact, stores timestamps, memory-hungry.
+- **Sliding window counter** - weighted blend of the current and previous window; the common production compromise.
+- **Token bucket** - tokens refill at a steady rate up to a bucket size; permits controlled bursts. The most widely used.
+- **Leaky bucket** - requests drain at a fixed rate, smoothing traffic entirely.
 
 **Dimensions to limit by:** API key or user, IP address, endpoint (an expensive report endpoint deserves a tighter limit than a health check), and tenant or plan tier.
 
-**Distributed enforcement.** With multiple gateway instances, counters must be shared — usually Redis with atomic increments, or a local counter with periodic synchronisation for higher throughput and slightly softer accuracy.
+**Distributed enforcement.** With multiple gateway instances, counters must be shared - usually Redis with atomic increments, or a local counter with periodic synchronisation for higher throughput and slightly softer accuracy.
 
 **Client contract.** Communicate limits so clients can behave well:
 

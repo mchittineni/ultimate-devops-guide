@@ -17,7 +17,7 @@ tags:
 
 **For the platform**
 
-- **One place for policy.** Authentication, rate limiting, CORS, and TLS are configured once rather than reimplemented in every service — and can be updated for everything at once.
+- **One place for policy.** Authentication, rate limiting, CORS, and TLS are configured once rather than reimplemented in every service - and can be updated for everything at once.
 - **Consistent observability.** Every request gets logged, measured, and trace-initiated identically, regardless of what language the backend is written in.
 - **Reduced attack surface.** Backends live in private networks; only the gateway is exposed, and it can apply WAF rules and request validation.
 
@@ -37,7 +37,7 @@ tags:
 
 ## Interview tips
 
-- Frame the benefits as "cross-cutting concerns solved once" — that is the conceptual core.
+- Frame the benefits as "cross-cutting concerns solved once" - that is the conceptual core.
 - Response aggregation for mobile clients is a concrete, memorable example.
 - Balance the answer with the costs; a purely positive answer sounds rehearsed.
 
