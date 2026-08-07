@@ -11,7 +11,7 @@ tags:
 
 Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deployment distinction interviewers love to test.
 
-**5 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 3 · 🔴 Advanced: 0
+**7 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -22,6 +22,8 @@ Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deploy
 | 18  | [What are Jenkins Pipelines?](./what-are-jenkins-pipelines.md)                                                                                                     | 🟡 Intermediate |
 | 19  | [What is GitLab CI?](./what-is-gitlab-ci.md)                                                                                                                       | 🟡 Intermediate |
 | 20  | [What is the difference between Continuous Delivery and Continuous Deployment?](./what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md) | 🟡 Intermediate |
+| 237 | [How do you prevent and handle secret leaks in CI/CD pipelines?](./how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)                               | 🟡 Intermediate |
+| 268 | [How do you use Jenkins shared libraries?](./how-do-you-use-jenkins-shared-libraries.md)                                                                           | 🔴 Advanced     |
 
 ## What interviewers probe here
 
