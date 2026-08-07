@@ -11,17 +11,18 @@ tags:
 
 GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to ship without downtime.
 
-**5 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 4 · 🔴 Advanced: 0
+**6 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
 
 ## Questions
 
-| #   | Question                                                                     | Difficulty      |
-| --- | ---------------------------------------------------------------------------- | --------------- |
-| 86  | [What is Infrastructure Automation?](./what-is-infrastructure-automation.md) | 🟢 Beginner     |
-| 87  | [What is GitOps?](./what-is-gitops.md)                                       | 🟡 Intermediate |
-| 88  | [What is ArgoCD?](./what-is-argocd.md)                                       | 🟡 Intermediate |
-| 89  | [What is Tekton?](./what-is-tekton.md)                                       | 🟡 Intermediate |
-| 90  | [What are Deployment Strategies?](./what-are-deployment-strategies.md)       | 🟡 Intermediate |
+| #   | Question                                                                                                         | Difficulty      |
+| --- | ---------------------------------------------------------------------------------------------------------------- | --------------- |
+| 86  | [What is Infrastructure Automation?](./what-is-infrastructure-automation.md)                                     | 🟢 Beginner     |
+| 87  | [What is GitOps?](./what-is-gitops.md)                                                                           | 🟡 Intermediate |
+| 88  | [What is ArgoCD?](./what-is-argocd.md)                                                                           | 🟡 Intermediate |
+| 89  | [What is Tekton?](./what-is-tekton.md)                                                                           | 🟡 Intermediate |
+| 90  | [What are Deployment Strategies?](./what-are-deployment-strategies.md)                                           | 🟡 Intermediate |
+| 289 | [How do you consolidate a sprawling DevOps toolchain?](./how-do-you-consolidate-a-sprawling-devops-toolchain.md) | 🔴 Advanced     |
 
 ## What interviewers probe here
 
