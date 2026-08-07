@@ -11,7 +11,7 @@ tags:
 
 Depth on AWS: VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage classes, highly available databases, multi-account organisations, and IaC choices.
 
-**12 questions** · 🟢 Beginner: 0 · 🟡 Intermediate: 8 · 🔴 Advanced: 4
+**13 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 8 · 🔴 Advanced: 4
 
 ## Questions
 
@@ -29,6 +29,7 @@ Depth on AWS: VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling w
 | 247 | [How do you secure pod access to AWS resources using EKS Pod Identity or IRSA?](./how-do-you-secure-pod-access-to-aws-resources-using-eks-pod-identity-or-irsa.md)             | 🟡 Intermediate |
 | 248 | [How do you build a CI/CD pipeline using AWS CodePipeline, CodeBuild, and CodeDeploy?](./how-do-you-build-a-ci-cd-pipeline-using-aws-codepipeline-codebuild-and-codedeploy.md) | 🟡 Intermediate |
 | 249 | [How do you architect an end-to-end production DevOps project on AWS?](./how-do-you-architect-an-end-to-end-production-devops-project-on-aws.md)                               | 🔴 Advanced     |
+| 277 | [What are the core AWS services a DevOps engineer uses daily?](./what-are-the-core-aws-services-a-devops-engineer-uses-daily.md)                                               | 🟢 Beginner     |
 
 ## What interviewers probe here
 
