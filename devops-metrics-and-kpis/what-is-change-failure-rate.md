@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**Calculation:** `failed changes / total changes × 100`. Elite teams sit between 0 and 15%; low performers can exceed 40%.
+**Calculation:** `failed changes / total changes × 100`. The strongest teams sit in the low single digits - recent DORA reporting puts the top band near 5% - while low performers can exceed 40%. (DORA retired the elite/high/medium/low tiers in the 2025 report, so treat these as a scale rather than a grade.)
 
 **Defining "failure" is the hard part** - and it must be defined once, written down, and applied consistently:
 

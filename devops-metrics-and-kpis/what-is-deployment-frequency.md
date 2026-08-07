@@ -24,6 +24,8 @@ tags:
 | Medium            | Between once per week and once per month |
 | Low               | Fewer than once per month                |
 
+These labels come from the report years that published performance tiers; the 2025 State of DevOps report retired the elite/high/medium/low ranking in favour of seven team archetypes. Use the bands as a scale for orienting yourself, not as a grade.
+
 **Why it matters beyond speed.** Deployment frequency is really a measure of batch size and of how much friction sits between a developer and production. High frequency requires automated testing, automated deployment, trunk-based development, and low-risk release mechanics - so a high number is evidence that all of those exist.
 
 **What increases it**

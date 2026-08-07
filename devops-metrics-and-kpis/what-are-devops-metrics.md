@@ -17,14 +17,16 @@ tags:
 
 **The four DORA metrics**
 
-| Metric                          | Definition                                | Elite performance               |
+| Metric                          | Definition                                | Top-band performance            |
 | ------------------------------- | ----------------------------------------- | ------------------------------- |
 | Deployment frequency            | How often you deploy to production        | On demand, multiple times a day |
-| Lead time for changes           | Commit to running in production           | Less than one hour              |
-| Change failure rate             | Percentage of deploys causing degradation | 0–15%                           |
+| Lead time for changes           | Commit to running in production           | Less than one day               |
+| Change failure rate             | Percentage of deploys causing degradation | Roughly 5%                      |
 | Failed deployment recovery time | Time to restore after a failed change     | Less than one hour              |
 
 Two measure **throughput**, two measure **stability** - and the central DORA finding is that they rise together. Teams that deploy more often also fail less, because small changes are safer. A fifth metric, **reliability** (operational performance against SLOs), was later added.
+
+**Know that the tiers were retired.** DORA renamed "time to restore service" to _failed deployment recovery time_, and the 2025 State of DevOps report abandoned the elite/high/medium/low ranking entirely, replacing it with seven team archetypes that pair delivery performance with human factors - burnout, friction, and perceived product value. The numbers above are still a useful scale for orienting yourself; they are no longer a league table you get placed in.
 
 **Complementary measures**
 

@@ -11,11 +11,13 @@ tags:
 
 # What is Lead Time for Changes?
 
-**Short answer:** Lead time for changes is the elapsed time from code commit to that code running successfully in production. It measures the efficiency of the delivery pipeline, and elite teams keep it under an hour.
+**Short answer:** Lead time for changes is the elapsed time from code commit to that code running successfully in production. It measures the efficiency of the delivery pipeline, and the strongest teams keep it under a day.
 
 ## Detail
 
-**The DORA bands:** elite is less than one hour, high is one day to one week, medium is one week to one month, low is more than one month.
+**The DORA bands, and the health warning that goes with them.** In the reports that published performance tiers, the top band was less than one day, high was one day to one week, medium was one week to one month, and low was more than one month. Quote them as a rough scale, not gospel: the cut-offs moved between report years (the top band was under one hour in the 2021–22 reports and under one day from 2023), and the 2025 State of DevOps report **dropped the elite/high/medium/low ranking altogether** in favour of seven team archetypes that combine delivery performance with human factors like burnout and friction. An interviewer who tracks DORA will be more impressed that you know the tiers were retired than that you can recite a threshold.
+
+Treat your own trend as the real benchmark - lead time falling quarter over quarter beats hitting somebody else's number once.
 
 **Note the boundaries.** DORA measures commit → production, deliberately excluding the time a request spent in the backlog. The broader business measure - idea to production - is usually called _cycle time_ or _time to value_, and is worth tracking separately; a one-hour lead time behind a three-month backlog queue is not fast delivery.
 
