@@ -170,7 +170,7 @@
       "Making cost visible to the teams that create it."
     ]
   },
-  "site-reliability-engineering-sre": {
+  "site-reliability-engineering": {
     "order": 20,
     "description": "Google's operational model: SLIs, SLOs, error budgets, and the systematic elimination of toil.",
     "study_notes": [
@@ -258,6 +258,87 @@
       "Treating the internal platform as a product with users.",
       "Designing a chaos experiment with a hypothesis and a blast radius.",
       "Automating governance so policy is enforced, not asked for."
+    ]
+  },
+  "devsecops": {
+    "order": 30,
+    "description": "Security built into the delivery pipeline: scanning layers, SBOMs and supply-chain provenance, image signing, secretless pipelines, and vulnerability triage that does not stall delivery.",
+    "study_notes": [
+      "Which gates block a build, and how you handle the existing backlog.",
+      "SBOM, provenance, and signature verification that fails closed.",
+      "Ranking vulnerabilities by exploitability and exposure, not CVSS alone."
+    ]
+  },
+  "secops": {
+    "order": 31,
+    "description": "Security operations for engineers: SOC workflow, SIEM and normalisation, detection engineering, MITRE ATT&CK coverage, threat hunting, and security incident response.",
+    "study_notes": [
+      "Detecting behaviour rather than artifacts, and validating the detection.",
+      "Preserving evidence before containment during a security incident.",
+      "Which telemetry you would onboard first, and why identity logs come top."
+    ]
+  },
+  "slo-engineering": {
+    "order": 32,
+    "description": "The engineering practice behind SLOs: choosing targets, burn-rate alerting, correct latency SLIs, error budget policies, and SLOs for batch, async, and third-party dependencies.",
+    "study_notes": [
+      "Multi-window multi-burn-rate alerting, and why the short window exists.",
+      "Latency as a threshold ratio rather than a percentile value.",
+      "Owning the SLO even when the failing dependency is not yours."
+    ]
+  },
+  "sla-management": {
+    "order": 33,
+    "description": "The commercial side of reliability: SLA versus SLO versus OLA, downtime and composite availability arithmetic, contract clauses, service credits, reporting, and breach response.",
+    "study_notes": [
+      "Allowed downtime per target, and composite availability across dependencies.",
+      "Why measurement definitions and exclusions cause more disputes than the number.",
+      "What you do — commercially and technically — when you breach."
+    ]
+  },
+  "aws-engineering": {
+    "order": 34,
+    "description": "Depth on AWS: VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage classes, highly available databases, multi-account organisations, and IaC choices.",
+    "study_notes": [
+      "How IAM evaluates a request, including SCPs and cross-account access.",
+      "Why the account is the blast-radius boundary.",
+      "Making an application survive a database failover."
+    ]
+  },
+  "azure-engineering": {
+    "order": 35,
+    "description": "Depth on Azure: the resource hierarchy, Entra ID and RBAC, VNet and private endpoint design, AKS, Bicep, Azure Policy and landing zones, Azure Monitor with KQL, and the compute options.",
+    "study_notes": [
+      "Management groups, subscriptions, and resource groups — what each bounds.",
+      "Private endpoints and the private DNS configuration they depend on.",
+      "Azure Policy effects, and rolling out Deny without breaking teams."
+    ]
+  },
+  "gcp-engineering": {
+    "order": 36,
+    "description": "Depth on Google Cloud: resource hierarchy and org policies, IAM without service-account keys, the global VPC, GKE Standard versus Autopilot, Cloud Run, Cloud Operations, IaC, and the data services.",
+    "study_notes": [
+      "Why a global VPC changes multi-region design.",
+      "Workload Identity Federation instead of service-account keys.",
+      "Choosing between Cloud SQL, Spanner, and BigQuery by requirement."
+    ]
+  },
+  "cloud-engineering": {
+    "order": 37,
+    "description": "Provider-neutral cloud engineering: landing zones, hybrid connectivity, least-privilege identity, multi-region resilience, multi-cloud trade-offs, DNS and global routing, and cross-provider service mapping.",
+    "study_notes": [
+      "Right-sizing a landing zone instead of copying the enterprise template.",
+      "Recovery objectives first, then the cheapest pattern that meets them.",
+      "Translating fluently between AWS, Azure, and GCP — including where it breaks."
+    ]
+  },
+  "platform-engineering": {
+    "order": 38,
+    "description": "Building the internal platform as a product: IDPs, golden paths, Backstage, Crossplane, self-service environments, adoption metrics, and safe rollout of breaking platform changes.",
+    "study_notes": [
+      "Golden paths that are chosen, not mandated — and escapable abstractions.",
+      "Measuring adoption and developer outcomes rather than components shipped.",
+      "Versioning the platform interface and automating consumer migrations."
     ]
   }
 }
