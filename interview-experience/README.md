@@ -11,7 +11,7 @@ tags:
 
 How the interview itself works - the round structure, explaining your project, answering scenario questions, and the checklist of what actually gets asked.
 
-**5 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 0
+**6 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -22,6 +22,7 @@ How the interview itself works - the round structure, explaining your project, a
 | 273 | [How do you answer scenario-based troubleshooting questions?](./how-do-you-answer-scenario-based-troubleshooting-questions.md)       | 🟡 Intermediate |
 | 274 | [What are the most frequently asked DevOps interview questions?](./what-are-the-most-frequently-asked-devops-interview-questions.md) | 🟢 Beginner     |
 | 275 | [What questions should you ask your interviewer?](./what-questions-should-you-ask-your-interviewer.md)                               | 🟢 Beginner     |
+| 294 | [How do you handle a DevOps system design round?](./how-do-you-handle-a-devops-system-design-round.md)                               | 🔴 Advanced     |
 
 ## What interviewers probe here
 
