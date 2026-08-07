@@ -11,17 +11,18 @@ tags:
 
 Host and platform monitoring, APM, log management, and the practices that keep dashboards and alerts useful.
 
-**5 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 3 · 🔴 Advanced: 0
+**6 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 3 · 🔴 Advanced: 1
 
 ## Questions
 
-| #   | Question                                                                                       | Difficulty      |
-| --- | ---------------------------------------------------------------------------------------------- | --------------- |
-| 131 | [What is Infrastructure Monitoring?](./what-is-infrastructure-monitoring.md)                   | 🟢 Beginner     |
-| 132 | [What are Monitoring Tools?](./what-are-monitoring-tools.md)                                   | 🟢 Beginner     |
-| 133 | [What are Monitoring Best Practices?](./what-are-monitoring-best-practices.md)                 | 🟡 Intermediate |
-| 134 | [What is Application Performance Monitoring?](./what-is-application-performance-monitoring.md) | 🟡 Intermediate |
-| 135 | [What is Log Management?](./what-is-log-management.md)                                         | 🟡 Intermediate |
+| #   | Question                                                                                                                                       | Difficulty      |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 131 | [What is Infrastructure Monitoring?](./what-is-infrastructure-monitoring.md)                                                                   | 🟢 Beginner     |
+| 132 | [What are Monitoring Tools?](./what-are-monitoring-tools.md)                                                                                   | 🟢 Beginner     |
+| 133 | [What are Monitoring Best Practices?](./what-are-monitoring-best-practices.md)                                                                 | 🟡 Intermediate |
+| 134 | [What is Application Performance Monitoring?](./what-is-application-performance-monitoring.md)                                                 | 🟡 Intermediate |
+| 135 | [What is Log Management?](./what-is-log-management.md)                                                                                         | 🟡 Intermediate |
+| 293 | [How do you control metric cardinality and monitoring cost at scale?](./how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale.md) | 🔴 Advanced     |
 
 ## What interviewers probe here
 
