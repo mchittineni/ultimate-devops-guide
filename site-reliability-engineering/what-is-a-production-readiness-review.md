@@ -32,18 +32,18 @@ tags:
 
 **Do it early, not at the launch gate.** A review two weeks before launch finds problems that require architectural change and cannot be fixed in time, so it either delays the launch or gets waived. A lightweight review at design time plus a verification pass before traffic is the pattern that actually improves services.
 
-**Verify, do not ask.** "Do you have backups?" invites a yes. "Show me the last restore test" produces evidence. The strongest reviews trigger the failure in a staging environment — kill the primary database, block the dependency — and watch what the alerts and dashboards actually do.
+**Verify, do not ask.** "Do you have backups?" invites a yes. "Show me the last restore test" produces evidence. The strongest reviews trigger the failure in a staging environment - kill the primary database, block the dependency - and watch what the alerts and dashboards actually do.
 
-**Automate the mechanical parts.** Whether an SLO exists, whether alerts are wired, whether the catalogue lists an owner and a runbook, whether the base image is supported, whether backups are configured — all of that can be a scorecard computed from the catalogue and monitoring APIs. Then the human review spends its time on failure modes and dependencies, which is where judgement is needed.
+**Automate the mechanical parts.** Whether an SLO exists, whether alerts are wired, whether the catalogue lists an owner and a runbook, whether the base image is supported, whether backups are configured - all of that can be a scorecard computed from the catalogue and monitoring APIs. Then the human review spends its time on failure modes and dependencies, which is where judgement is needed.
 
 **Tie it to the support model.** In Google's original formulation, a PRR is what a service must pass for SRE to take on its on-call burden, and SRE can hand a service back if it degrades. Even without a separate SRE team, making the review the entry condition for tier-1 support and platform-provided reliability features gives it teeth without making it bureaucratic.
 
-**Reviews are not one-off.** Services drift: dependencies change, traffic grows, the runbook goes stale. Re-review tier-1 services annually, and after any incident that revealed a gap the review should have caught — that feedback loop is what keeps the checklist relevant rather than ritual.
+**Reviews are not one-off.** Services drift: dependencies change, traffic grows, the runbook goes stale. Re-review tier-1 services annually, and after any incident that revealed a gap the review should have caught - that feedback loop is what keeps the checklist relevant rather than ritual.
 
 ## Example
 
 ```text
-PRR — checkout v2 — verdict: CONDITIONAL GO
+PRR - checkout v2 - verdict: CONDITIONAL GO
 
 PASS   owner team-payments; on-call rotation staffed 24/7
 PASS   SLO 99.9% availability, 99% < 300 ms; error budget policy signed off
@@ -61,9 +61,9 @@ degradation for provider timeouts. Re-review in 2 weeks; capacity item tracked f
 
 ## Interview tips
 
-- Frame it as design-time collaboration plus a verification pass — pure gatekeeping is the answer that reads badly.
+- Frame it as design-time collaboration plus a verification pass - pure gatekeeping is the answer that reads badly.
 - "Ask for evidence, not assurances" and automating the mechanical checks are the two strong points.
-- Expect: "what if the team refuses?" — tie support and platform features to it, escalate on risk, and never silently accept an unowned service.
+- Expect: "what if the team refuses?" - tie support and platform features to it, escalate on risk, and never silently accept an unowned service.
 
 ---
 

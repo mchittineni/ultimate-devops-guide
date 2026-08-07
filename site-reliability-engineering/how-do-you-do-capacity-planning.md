@@ -17,7 +17,7 @@ tags:
 
 **Find the demand-to-resource ratio empirically.** Load test until latency degrades to find the per-instance saturation point, then express capacity as "one instance serves N requests per second at p99 < 300ms". Without that number, capacity planning is guesswork dressed in spreadsheets. Re-measure after significant releases, because efficiency changes.
 
-**Provision for peak, not average.** Daily peak-to-mean ratios of 3–5× are typical; seasonal businesses see far more. Then add headroom on top: enough to lose a failure domain (with three AZs, each must be able to absorb 50% more load), plus growth during your provisioning lead time. GPU capacity, dedicated circuits, and reserved database classes have lead times measured in weeks — quota increases are the version of this that catches people out most often.
+**Provision for peak, not average.** Daily peak-to-mean ratios of 3–5× are typical; seasonal businesses see far more. Then add headroom on top: enough to lose a failure domain (with three AZs, each must be able to absorb 50% more load), plus growth during your provisioning lead time. GPU capacity, dedicated circuits, and reserved database classes have lead times measured in weeks - quota increases are the version of this that catches people out most often.
 
 **Quotas are capacity.** Cloud accounts have per-region limits on instances, IP addresses, load balancers, and API rate. A scaling event that hits a quota fails exactly like a shortage of hardware. Capacity planning must include a quota review with headroom, requested well before the traffic event.
 
@@ -25,12 +25,12 @@ tags:
 
 **Model the whole chain.** Extra application instances often just move the bottleneck to database connections, a queue's consumer throughput, or a NAT gateway's port allocation. A capacity model that covers only compute is why "we scaled up and it got worse" happens.
 
-**Tie it to cost and to the error budget.** Headroom costs money; too little costs reliability. State the trade-off explicitly — "we hold 40% headroom, which costs $X per month and covers an AZ loss at peak" — and revisit quarterly with actual traffic. Load-test results plus a documented model are also what let you answer a product launch question in minutes rather than weeks.
+**Tie it to cost and to the error budget.** Headroom costs money; too little costs reliability. State the trade-off explicitly - "we hold 40% headroom, which costs $X per month and covers an AZ loss at peak" - and revisit quarterly with actual traffic. Load-test results plus a documented model are also what let you answer a product launch question in minutes rather than weeks.
 
 ## Example
 
 ```text
-Capacity model — checkout, Black Friday
+Capacity model - checkout, Black Friday
 
 Measured (load test, 2026-09)
   1 pod  = 850 rps at p99 240 ms   (saturates ~1,000 rps)
@@ -57,7 +57,7 @@ Verify: replay 33,800 rps against staging with production-shaped data before the
 
 - Start from the measured demand-per-resource ratio; anyone can multiply, the measurement is the skill.
 - "Autoscaling is not capacity planning" plus the quota point are the two things interviewers listen for.
-- Expect: "you scaled the app and it got slower" — the bottleneck moved downstream; describe modelling the whole chain.
+- Expect: "you scaled the app and it got slower" - the bottleneck moved downstream; describe modelling the whole chain.
 
 ---
 
