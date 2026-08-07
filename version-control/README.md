@@ -11,7 +11,7 @@ tags:
 
 Git mechanics and the branching models teams actually argue about, including how to resolve conflicts calmly.
 
-**8 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 5 · 🔴 Advanced: 0
+**9 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 5 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -25,6 +25,7 @@ Git mechanics and the branching models teams actually argue about, including how
 | 254 | [How do you use Git hooks for automated linting, testing, and commit validation?](./how-do-you-use-git-hooks-for-automated-linting-testing-and-commit-validation.md) | 🟢 Beginner     |
 | 263 | [What is the difference between git merge, rebase, and cherry-pick?](./what-is-the-difference-between-git-merge-rebase-and-cherry-pick.md)                           | 🟡 Intermediate |
 | 264 | [How do you undo changes in Git safely?](./how-do-you-undo-changes-in-git-safely.md)                                                                                 | 🟡 Intermediate |
+| 305 | [How do you recover from a bad Git history rewrite?](./how-do-you-recover-from-a-bad-git-history-rewrite.md)                                                         | 🔴 Advanced     |
 
 ## What interviewers probe here
 
