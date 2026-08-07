@@ -29,7 +29,7 @@ tags:
 **Practical points**
 
 - Rehearse the cutover more than once. Test launches are cheap; a failed cutover is not.
-- For very large datasets, physical transfer appliances beat the network — calculate transfer time honestly before committing.
+- For very large datasets, physical transfer appliances beat the network - calculate transfer time honestly before committing.
 - Heterogeneous database migrations (Oracle to PostgreSQL) need schema conversion tooling _plus_ substantial application testing; the tools convert schema and data, not application SQL semantics.
 - Use Terraform for the target environment so what you build during migration is reproducible afterwards.
 
