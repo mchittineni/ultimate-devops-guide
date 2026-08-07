@@ -15,15 +15,15 @@ tags:
 
 ## Detail
 
-**Roles come in three kinds.** Basic (`Owner`, `Editor`, `Viewer`) are legacy, extremely broad, and should not appear in a modern project. Predefined roles are per-service and reasonably scoped — start here. Custom roles are for when a predefined role is still too broad, at the cost of maintaining them as Google adds permissions.
+**Roles come in three kinds.** Basic (`Owner`, `Editor`, `Viewer`) are legacy, extremely broad, and should not appear in a modern project. Predefined roles are per-service and reasonably scoped - start here. Custom roles are for when a predefined role is still too broad, at the cost of maintaining them as Google adds permissions.
 
 **Grant to groups, at the smallest useful scope.** Bindings on individuals do not survive team changes. Bindings at the organisation node apply everywhere, which is why an `Editor` grant there is effectively production admin. Most real grants belong at the project, or on a single resource (a bucket, a topic, a Cloud Run service) where the API supports resource-level policies.
 
 **Service accounts are identities, and their keys are the problem.** A JSON service-account key is a long-lived credential that has been at the root of many GCP incidents. Prefer: attached service accounts for workloads inside GCP (a VM, a Cloud Run service, a GKE Pod), Workload Identity for GKE Pods, and Workload Identity Federation for anything outside GCP (GitHub Actions, AWS workloads, on-premises). Enforce it with the `disableServiceAccountKeyCreation` org policy so the insecure path is unavailable rather than merely discouraged.
 
-**Impersonation instead of keys for humans and automation.** `--impersonate-service-account` mints a short-lived token, requiring `roles/iam.serviceAccountTokenCreator` on the target. This keeps an audit trail of _which human_ acted as the service account — much better than a shared key in a secrets manager.
+**Impersonation instead of keys for humans and automation.** `--impersonate-service-account` mints a short-lived token, requiring `roles/iam.serviceAccountTokenCreator` on the target. This keeps an audit trail of _which human_ acted as the service account - much better than a shared key in a secrets manager.
 
-**Conditions and Deny policies for finer control.** IAM Conditions add constraints on request attributes (resource name prefix, time of day, `request.time` expiry) — for example, temporary elevated access that expires automatically. IAM Deny policies block permissions regardless of grants and evaluate before allows, which is the equivalent of an AWS SCP-style guardrail.
+**Conditions and Deny policies for finer control.** IAM Conditions add constraints on request attributes (resource name prefix, time of day, `request.time` expiry) - for example, temporary elevated access that expires automatically. IAM Deny policies block permissions regardless of grants and evaluate before allows, which is the equivalent of an AWS SCP-style guardrail.
 
 **Verify with tooling, not assumption.** Policy Troubleshooter explains why a specific principal can or cannot do something; Policy Analyzer answers "who can access this resource?"; Recommender proposes role reductions based on 90 days of observed usage. Those recommendations are the fastest route from `Editor` sprawl to least privilege.
 
@@ -58,7 +58,7 @@ gcloud projects add-iam-policy-binding payments-prod \
 
 - "Additive grants, inherited downward, no implicit deny below" is the model to state first.
 - Service-account keys are the trap: say you disable their creation by org policy and use federation or impersonation.
-- Expect: "how would you prove least privilege?" — IAM Recommender over 90 days of usage, plus Policy Analyzer.
+- Expect: "how would you prove least privilege?" - IAM Recommender over 90 days of usage, plus Policy Analyzer.
 
 ---
 

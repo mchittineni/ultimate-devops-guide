@@ -11,7 +11,7 @@ tags:
 
 # When do you use BigQuery, Cloud SQL, or Spanner?
 
-**Short answer:** Cloud SQL is managed PostgreSQL/MySQL/SQL Server for ordinary transactional workloads that fit on one primary. Spanner is a horizontally scalable, strongly consistent relational database for workloads that outgrow a single writer or need multi-region writes. BigQuery is an analytical warehouse — columnar, separated storage and compute, priced per query or per slot — and is not a transactional database.
+**Short answer:** Cloud SQL is managed PostgreSQL/MySQL/SQL Server for ordinary transactional workloads that fit on one primary. Spanner is a horizontally scalable, strongly consistent relational database for workloads that outgrow a single writer or need multi-region writes. BigQuery is an analytical warehouse - columnar, separated storage and compute, priced per query or per slot - and is not a transactional database.
 
 ## Detail
 
@@ -23,9 +23,9 @@ tags:
 | Key-value at massive scale, time series                           | Bigtable  | not relational, but the honest answer sometimes |
 | Document model, mobile sync                                       | Firestore | per-document consistency, offline clients       |
 
-**Cloud SQL's ceiling is a single writer.** Read replicas scale reads; write throughput does not scale horizontally. High availability is a regional standby with failover in the tens of seconds, so applications still need retry and connection handling. Cloud SQL Enterprise Plus raises the performance and HA ceiling, and Cloud SQL Auth Proxy or Private Service Connect keeps access private. Plan for maintenance windows — managed does not mean invisible.
+**Cloud SQL's ceiling is a single writer.** Read replicas scale reads; write throughput does not scale horizontally. High availability is a regional standby with failover in the tens of seconds, so applications still need retry and connection handling. Cloud SQL Enterprise Plus raises the performance and HA ceiling, and Cloud SQL Auth Proxy or Private Service Connect keeps access private. Plan for maintenance windows - managed does not mean invisible.
 
-**Spanner's price is design discipline.** You get horizontal scale with external consistency (TrueTime), but schema and key design decide whether you succeed: monotonically increasing keys create hotspots, so use UUIDs or bit-reversed sequences; interleaved tables co-locate parent and child rows for efficient joins. It is not a drop-in PostgreSQL replacement even with the PostgreSQL interface, and its cost floor is much higher than Cloud SQL's — choose it for a scale or consistency requirement you can name.
+**Spanner's price is design discipline.** You get horizontal scale with external consistency (TrueTime), but schema and key design decide whether you succeed: monotonically increasing keys create hotspots, so use UUIDs or bit-reversed sequences; interleaved tables co-locate parent and child rows for efficient joins. It is not a drop-in PostgreSQL replacement even with the PostgreSQL interface, and its cost floor is much higher than Cloud SQL's - choose it for a scale or consistency requirement you can name.
 
 **BigQuery is analytics, not OLTP.** No indexes or point updates in the transactional sense; partitioning and clustering are how you keep scans small. Cost control is the operational discipline: always filter on the partition column, avoid `SELECT *`, set custom quotas per project, and choose between on-demand (per TB scanned) and capacity/slot reservations once volume is predictable. Materialised views and BI Engine handle repeated dashboard queries.
 
@@ -70,9 +70,9 @@ CREATE TABLE Orders (
 
 ## Interview tips
 
-- Answer by requirement — single-writer OLTP, global consistency, or analytical scan — rather than listing products.
+- Answer by requirement - single-writer OLTP, global consistency, or analytical scan - rather than listing products.
 - `require_partition_filter` and the Spanner hotspot point are the two details that show production experience.
-- Expect: "why not BigQuery for the application database?" — no point lookups at OLTP latency or cost, and no transactional semantics for that pattern.
+- Expect: "why not BigQuery for the application database?" - no point lookups at OLTP latency or cost, and no transactional semantics for that pattern.
 
 ---
 
