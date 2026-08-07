@@ -11,7 +11,7 @@ tags:
 
 Building the internal platform as a product: IDPs, golden paths, Backstage, Crossplane, self-service environments, adoption metrics, and safe rollout of breaking platform changes.
 
-**13 questions** · 🟢 Beginner: 0 · 🟡 Intermediate: 5 · 🔴 Advanced: 8
+**14 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 5 · 🔴 Advanced: 8
 
 ## Questions
 
@@ -30,6 +30,7 @@ Building the internal platform as a product: IDPs, golden paths, Backstage, Cros
 | 242 | [How do you monitor AI/LLM applications for latency, GPU metrics, and token costs?](./how-do-you-monitor-ai-llm-applications-for-latency-gpu-metrics-and-token-costs.md)         | 🟡 Intermediate |
 | 243 | [How do you design a production MLOps pipeline using Ray or Kubeflow?](./how-do-you-design-a-production-mlops-pipeline-using-ray-or-kubeflow.md)                                 | 🔴 Advanced     |
 | 245 | [How do you deploy and scale Vector Databases in Kubernetes for RAG applications?](./how-do-you-deploy-and-scale-vector-databases-in-kubernetes-for-rag-applications.md)         | 🔴 Advanced     |
+| 299 | [What does a platform engineer actually do day to day?](./what-does-a-platform-engineer-actually-do-day-to-day.md)                                                               | 🟢 Beginner     |
 
 ## What interviewers probe here
 
