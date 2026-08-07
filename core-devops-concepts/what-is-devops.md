@@ -19,9 +19,9 @@ DevOps emerged as a response to the "wall of confusion" between development team
 
 Three things make it real in practice:
 
-- **Culture** — shared ownership of production. The team that builds a service also runs it, carries the pager for it, and feels the cost of its defects.
-- **Automation** — the path to production is code: builds, tests, infrastructure provisioning, deployment, and rollback all run without a human typing commands.
-- **Measurement and feedback** — telemetry from production flows back into planning. Deployment frequency, lead time, change failure rate, and time to restore are tracked and acted on.
+- **Culture** - shared ownership of production. The team that builds a service also runs it, carries the pager for it, and feels the cost of its defects.
+- **Automation** - the path to production is code: builds, tests, infrastructure provisioning, deployment, and rollback all run without a human typing commands.
+- **Measurement and feedback** - telemetry from production flows back into planning. Deployment frequency, lead time, change failure rate, and time to restore are tracked and acted on.
 
 DevOps is not a job title, a tool, or a team you can buy. A "DevOps team" that sits between dev and ops has usually just rebuilt the wall one office further along.
 
@@ -39,7 +39,7 @@ A concrete before/after for a single change:
 ## Interview tips
 
 - Define it without naming a single tool first, then mention tools as implementation detail.
-- Anchor the answer in the four DORA metrics — it shows you think in outcomes.
+- Anchor the answer in the four DORA metrics - it shows you think in outcomes.
 - Have one story ready about a cultural change you made, not just a pipeline you built.
 
 ---

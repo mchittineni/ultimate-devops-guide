@@ -15,13 +15,13 @@ tags:
 
 ## Detail
 
-CI exists to kill integration pain. When branches live for weeks, merging them is a project in itself. When everyone integrates to `main` daily, conflicts are small and defects surface within minutes of being introduced — while the author still has full context.
+CI exists to kill integration pain. When branches live for weeks, merging them is a project in itself. When everyone integrates to `main` daily, conflicts are small and defects surface within minutes of being introduced - while the author still has full context.
 
 The practice has hard requirements that tools alone do not provide:
 
 1. A single shared mainline that everyone merges into frequently.
 2. Every commit triggers an automated build plus a fast test suite.
-3. The build is fast — ten minutes is a common ceiling, because a slow pipeline gets ignored.
+3. The build is fast - ten minutes is a common ceiling, because a slow pipeline gets ignored.
 4. A broken build is the team's top priority; nobody builds on top of red.
 5. Tests are trustworthy. Flaky tests destroy CI faster than no tests.
 
@@ -53,7 +53,7 @@ jobs:
 
 - If asked "do you do CI?", the real question is how long branches live and how fast the build is.
 - Mention trunk-based development as the branching model that makes CI genuine.
-- Know what you do about flaky tests — quarantine, retry budgets, and a fix deadline.
+- Know what you do about flaky tests - quarantine, retry budgets, and a fix deadline.
 
 ---
 

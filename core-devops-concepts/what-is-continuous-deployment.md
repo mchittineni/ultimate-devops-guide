@@ -19,11 +19,11 @@ Continuous Deployment is the same pipeline as continuous delivery, minus the but
 
 What it demands:
 
-- **Comprehensive automated testing** — unit, integration, contract, and smoke tests you genuinely trust.
-- **Progressive delivery** — canary releases or blue/green deployments so a bad change reaches 1% of traffic, not 100%.
-- **Automated verification and rollback** — the pipeline watches error rate and latency after deploy and reverts on its own if the release fails its health criteria.
-- **Feature flags** — decoupling _deploy_ from _release_ so unfinished work can ship dark and be enabled separately.
-- **Strong observability** — you cannot auto-rollback on signals you do not collect.
+- **Comprehensive automated testing** - unit, integration, contract, and smoke tests you genuinely trust.
+- **Progressive delivery** - canary releases or blue/green deployments so a bad change reaches 1% of traffic, not 100%.
+- **Automated verification and rollback** - the pipeline watches error rate and latency after deploy and reverts on its own if the release fails its health criteria.
+- **Feature flags** - decoupling _deploy_ from _release_ so unfinished work can ship dark and be enabled separately.
+- **Strong observability** - you cannot auto-rollback on signals you do not collect.
 
 It is not right for everyone. Regulated environments, on-premises software shipped to customers, and mobile app store releases often stop at continuous delivery deliberately.
 
@@ -47,7 +47,7 @@ strategy:
 
 - Say plainly that the prerequisite is test and observability maturity, not a tool.
 - Feature flags are the answer to "how do you ship unfinished work continuously?"
-- Have a view on when _not_ to use it — that judgement reads as senior.
+- Have a view on when _not_ to use it - that judgement reads as senior.
 
 ---
 
