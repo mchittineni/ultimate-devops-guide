@@ -15,9 +15,9 @@ tags:
 
 ## Detail
 
-**Distinguish the shapes.** _Multi-cloud by workload_ — different applications on different providers, each using native services (common, sensible, arises naturally from acquisitions and team preference). _Portable multi-cloud_ — the same workload able to run anywhere, usually via Kubernetes and self-hosted data stores. _Active-active across providers_ — the same workload serving traffic from both simultaneously. The cost and difficulty rise steeply along that list, and interviews often conflate them.
+**Distinguish the shapes.** _Multi-cloud by workload_ - different applications on different providers, each using native services (common, sensible, arises naturally from acquisitions and team preference). _Portable multi-cloud_ - the same workload able to run anywhere, usually via Kubernetes and self-hosted data stores. _Active-active across providers_ - the same workload serving traffic from both simultaneously. The cost and difficulty rise steeply along that list, and interviews often conflate them.
 
-**The lock-in argument, examined honestly.** Real lock-in lives in data gravity and operational skill, not in APIs. Avoiding a managed database to stay portable means running that database yourself — trading provider dependency for operational burden and, usually, worse reliability. The cost of portability is paid every day; the benefit is realised rarely, if ever. That framing, delivered calmly, is what senior interviewers want to hear.
+**The lock-in argument, examined honestly.** Real lock-in lives in data gravity and operational skill, not in APIs. Avoiding a managed database to stay portable means running that database yourself - trading provider dependency for operational burden and, usually, worse reliability. The cost of portability is paid every day; the benefit is realised rarely, if ever. That framing, delivered calmly, is what senior interviewers want to hear.
 
 **What genuinely justifies it:** a customer or regulator requiring a specific provider or sovereign region; a differentiated service you need (a particular AI stack, a specific analytics product); demonstrated concentration risk that a board has mandated reducing; acquisition reality; or serious negotiating leverage at large committed spend.
 
@@ -28,7 +28,7 @@ tags:
 - **Security surface.** Two identity models, two audit-log pipelines, two posture-management tools, twice the guardrails to maintain and keep consistent.
 - **Tooling.** IaC, CI/CD, observability, and cost management must span both, and abstractions leak.
 
-**What to standardise if you do it.** Identity federated to one provider; one IaC tool and one CI/CD system; one observability stack (OpenTelemetry helps); one policy-as-code language; containers as the deployment unit; and consistent tagging so cost is comparable. Keep the _control_ plane consistent and let the _data_ plane be native — that is the pragmatic middle path.
+**What to standardise if you do it.** Identity federated to one provider; one IaC tool and one CI/CD system; one observability stack (OpenTelemetry helps); one policy-as-code language; containers as the deployment unit; and consistent tagging so cost is comparable. Keep the _control_ plane consistent and let the _data_ plane be native - that is the pragmatic middle path.
 
 **Hybrid is not multi-cloud.** Retaining a data centre alongside one cloud is a different problem, dominated by connectivity, latency, and lifecycle of owned hardware. Be precise about which one is being asked about.
 
@@ -57,7 +57,7 @@ Requirement claimed: "board mandated reducing concentration risk"
 
 - Ask what problem multi-cloud is solving before answering; unqualified enthusiasm reads as inexperience.
 - "Lock-in is data gravity and skills, not APIs" is the line that carries the argument.
-- Expect: "how would you make an application portable?" — containers, OpenTelemetry, one IaC tool, native data services with an honest migration plan, not a self-hosted everything.
+- Expect: "how would you make an application portable?" - containers, OpenTelemetry, one IaC tool, native data services with an honest migration plan, not a self-hosted everything.
 
 ---
 

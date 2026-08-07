@@ -11,7 +11,7 @@ tags:
 
 # What is a cloud landing zone?
 
-**Short answer:** A landing zone is the pre-built, governed foundation that workloads land in: account or project structure, identity and access, network topology, logging and security baselines, guardrail policies, and cost controls — all provisioned as code. Its purpose is that the tenth team to arrive gets the same compliant starting point as the first, without asking anyone.
+**Short answer:** A landing zone is the pre-built, governed foundation that workloads land in: account or project structure, identity and access, network topology, logging and security baselines, guardrail policies, and cost controls - all provisioned as code. Its purpose is that the tenth team to arrive gets the same compliant starting point as the first, without asking anyone.
 
 ## Detail
 
@@ -32,7 +32,7 @@ tags:
 
 **The vending machine is the part teams undervalue.** A landing zone that requires a ticket and a human to create an account has not solved the problem. The valuable artefact is a self-service pipeline: request an environment, get an account/project with identity, network, logging, budgets, policies, and a catalogue entry attached, in minutes and fully audited.
 
-**Guardrails must be preventive, not just detective.** Detective controls tell you afterwards that someone created a public database; preventive controls (deny policies at the organisation level) stop it. A good landing zone uses both — preventive for the small set of rules you are certain about, detective for the long tail.
+**Guardrails must be preventive, not just detective.** Detective controls tell you afterwards that someone created a public database; preventive controls (deny policies at the organisation level) stop it. A good landing zone uses both - preventive for the small set of rules you are certain about, detective for the long tail.
 
 **Day two is where landing zones fail.** Policies drift, accounts are created outside the factory, exceptions accumulate, and the accelerator's own version falls behind. Treat the landing zone as a product with a version, a changelog, a rollout process for policy changes (audit first, then enforce), and periodic reconciliation that finds unbaselined accounts.
 
@@ -41,7 +41,7 @@ tags:
 ## Example
 
 ```text
-Minimum viable landing zone — deliberately small, still governed
+Minimum viable landing zone - deliberately small, still governed
 
 Tenancy      management + security/log-archive + shared-services + per-workload envs
 Identity     IdP SSO -> groups -> roles; break-glass account with MFA in a safe
@@ -59,7 +59,7 @@ Expand only when a real requirement appears. Every guardrail must have an owner.
 
 - Define it as "the governed foundation, provisioned as code, that every workload lands in" and then list the areas.
 - The self-service vending machine and preventive-versus-detective distinction are the strongest points to make.
-- Expect: "how big should it be?" — right-size it; describing the enterprise version for a five-person team is the trap.
+- Expect: "how big should it be?" - right-size it; describing the enterprise version for a five-person team is the trap.
 
 ---
 

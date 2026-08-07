@@ -11,7 +11,7 @@ tags:
 
 # How do the core services of AWS, Azure, and GCP map to each other?
 
-**Short answer:** Most primitives map closely — compute, object storage, managed Kubernetes, IAM, and monitoring exist everywhere with different names. The mappings that are _not_ one-to-one are the interesting ones: GCP's VPC is global while AWS and Azure networks are regional, Azure adds resource groups and a management-group layer above subscriptions, and each provider's serverless and data services differ in semantics as well as naming.
+**Short answer:** Most primitives map closely - compute, object storage, managed Kubernetes, IAM, and monitoring exist everywhere with different names. The mappings that are _not_ one-to-one are the interesting ones: GCP's VPC is global while AWS and Azure networks are regional, Azure adds resource groups and a management-group layer above subscriptions, and each provider's serverless and data services differ in semantics as well as naming.
 
 ## Detail
 
@@ -42,7 +42,7 @@ tags:
 | IaC (native)            | CloudFormation / CDK       | Bicep / ARM                     | (Terraform; DM deprecated)       |
 | Threat detection        | GuardDuty + Security Hub   | Defender for Cloud              | Security Command Center          |
 
-**Where the mapping breaks down — worth stating explicitly:**
+**Where the mapping breaks down - worth stating explicitly:**
 
 - **Networking scope.** A GCP VPC is global with regional subnets; AWS VPCs and Azure VNets are regional and need peering or transit to join. This changes multi-region designs materially.
 - **Resource groups.** Azure's resource group is a lifecycle container with no AWS or GCP equivalent; people coming from AWS routinely misuse it as an environment boundary.
@@ -52,9 +52,9 @@ tags:
 
 ## Interview tips
 
-- Being able to translate fluently between providers is a genuine hiring signal — practise the top dozen mappings.
+- Being able to translate fluently between providers is a genuine hiring signal - practise the top dozen mappings.
 - Score points by naming where the mapping _fails_ (global VPC, resource groups, IAM models) rather than reciting the table.
-- Expect: "you know AWS, could you work on GCP?" — answer with the primitives that transfer and the specific differences you would need to learn.
+- Expect: "you know AWS, could you work on GCP?" - answer with the primitives that transfer and the specific differences you would need to learn.
 
 ---
 

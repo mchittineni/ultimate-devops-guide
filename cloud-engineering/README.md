@@ -29,7 +29,7 @@ Provider-neutral cloud engineering: landing zones, hybrid connectivity, least-pr
 
 - Right-sizing a landing zone instead of copying the enterprise template.
 - Recovery objectives first, then the cheapest pattern that meets them.
-- Translating fluently between AWS, Azure, and GCP — including where it breaks.
+- Translating fluently between AWS, Azure, and GCP - including where it breaks.
 
 ---
 
