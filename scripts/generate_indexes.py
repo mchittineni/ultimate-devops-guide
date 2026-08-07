@@ -102,7 +102,7 @@ def render_topic_readme(topic: Topic, _current: str | None = None) -> str:
             f"{DIFFICULTY_BADGE.get(q.difficulty, q.difficulty)} |"
         )
     if not topic.questions:
-        lines.append("| — | _No questions yet — contributions welcome._ | — |")
+        lines.append("| - | _No questions yet - contributions welcome._ | - |")
 
     if meta.get("study_notes"):
         lines += ["", "## What interviewers probe here", ""]
@@ -140,7 +140,7 @@ def render_root_toc(topics: list[Topic]) -> str:
                     f"{DIFFICULTY_BADGE.get(q.difficulty, q.difficulty)} |"
                 )
             if not topic.questions:
-                lines.append("| — | _No questions yet — contributions welcome._ | — |")
+                lines.append("| - | _No questions yet - contributions welcome._ | - |")
             lines += ["", "</details>", ""]
     return "\n".join(lines).strip()
 
@@ -149,7 +149,7 @@ def render_stats(topics: list[Topic]) -> str:
     questions = all_questions(topics)
     counts = difficulty_counts(questions)
     lines = [
-        f"**{len(questions)} questions** across **{len(topics)} topics** — "
+        f"**{len(questions)} questions** across **{len(topics)} topics** - "
         f"🟢 {counts['Beginner']} Beginner · 🟡 {counts['Intermediate']} Intermediate · "
         f"🔴 {counts['Advanced']} Advanced",
         "",

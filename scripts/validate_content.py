@@ -106,7 +106,7 @@ def check_questions(topics, errors: list[str]) -> None:
                     continue
                 if line.startswith("    ") and not line.strip().startswith(("-", "*", "|")):
                     errors.append(
-                        f"{rel}: 4-space indented prose renders as a code block — de-indent it"
+                        f"{rel}: 4-space indented prose renders as a code block - de-indent it"
                     )
                     break
 
@@ -137,14 +137,14 @@ def check_indexes(topics, errors: list[str]) -> None:
         current = readme.read_text(encoding="utf-8")
         if normalize_markdown(render_topic_readme(topic, current)) != normalize_markdown(current):
             errors.append(
-                f"{topic.directory}/README.md: stale — run `python3 scripts/generate_indexes.py`"
+                f"{topic.directory}/README.md: stale - run `python3 scripts/generate_indexes.py`"
             )
 
     root = normalize_markdown((REPO_ROOT / "README.md").read_text(encoding="utf-8"))
     for marker, payload in (("TOC", render_root_toc(topics)), ("STATS", render_stats(topics))):
         if normalize_markdown(payload) not in root:
             errors.append(
-                f"README.md: {marker} block is stale — run `python3 scripts/generate_indexes.py`"
+                f"README.md: {marker} block is stale - run `python3 scripts/generate_indexes.py`"
             )
 
 

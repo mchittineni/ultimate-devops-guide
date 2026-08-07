@@ -12,7 +12,7 @@
   "docker": {
     "order": 2,
     "group": "Containers and Kubernetes",
-    "description": "Container fundamentals — images versus containers, Dockerfile authoring, Compose, and the client/daemon architecture underneath `docker run`.",
+    "description": "Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the client/daemon architecture underneath `docker run`.",
     "study_notes": [
       "Image layers, the build cache, and how to keep images small.",
       "Why a container is not a virtual machine.",
@@ -42,7 +42,7 @@
   "cloud-platforms": {
     "order": 5,
     "group": "Cloud Providers",
-    "description": "Cloud service models and the three major providers — enough breadth to discuss AWS, Azure, and GCP comparatively.",
+    "description": "Cloud service models and the three major providers - enough breadth to discuss AWS, Azure, and GCP comparatively.",
     "study_notes": [
       "IaaS / PaaS / SaaS boundaries and the shared responsibility model.",
       "Equivalent services across AWS, Azure, and GCP.",
@@ -52,7 +52,7 @@
   "infrastructure-as-code": {
     "order": 6,
     "group": "Delivery and Automation",
-    "description": "Declarative infrastructure with Terraform and Ansible — state, providers, idempotency, and where each tool belongs.",
+    "description": "Declarative infrastructure with Terraform and Ansible - state, providers, idempotency, and where each tool belongs.",
     "study_notes": [
       "Provisioning versus configuration management.",
       "How you manage Terraform state safely in a team.",
@@ -62,7 +62,7 @@
   "monitoring-and-logging": {
     "order": 7,
     "group": "Reliability and Operations",
-    "description": "Metrics, logs, and the toolchain — Prometheus, Grafana, and the ELK stack — plus the conceptual split between monitoring and logging.",
+    "description": "Metrics, logs, and the toolchain - Prometheus, Grafana, and the ELK stack - plus the conceptual split between monitoring and logging.",
     "study_notes": [
       "Pull versus push metric collection.",
       "What you alert on versus what you only dashboard.",
@@ -82,7 +82,7 @@
   "linux-administration": {
     "order": 9,
     "group": "Foundations",
-    "description": "The operating system under everything — commands, shell scripting, systemd, service management, and the filesystem hierarchy.",
+    "description": "The operating system under everything - commands, shell scripting, systemd, service management, and the filesystem hierarchy.",
     "study_notes": [
       "Diagnosing a slow or full host from the shell alone.",
       "Writing a safe, idempotent shell script.",
@@ -102,7 +102,7 @@
   "configuration-management": {
     "order": 11,
     "group": "Delivery and Automation",
-    "description": "Keeping fleets consistent with Puppet, Chef, Ansible, and Salt — push versus pull, agent versus agentless.",
+    "description": "Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pull, agent versus agentless.",
     "study_notes": [
       "Desired state, drift, and convergence.",
       "Trade-offs between the major tools.",
@@ -142,7 +142,7 @@
   "performance-testing": {
     "order": 15,
     "group": "Architecture and Scale",
-    "description": "Load, stress, soak, and spike testing — how to design them, which tools to use, and how to read the results.",
+    "description": "Load, stress, soak, and spike testing - how to design them, which tools to use, and how to read the results.",
     "study_notes": [
       "Percentiles versus averages when reporting latency.",
       "How you build a realistic workload model.",
@@ -162,7 +162,7 @@
   "container-orchestration-advanced": {
     "order": 17,
     "group": "Containers and Kubernetes",
-    "description": "Beyond Deployments — StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime interface.",
+    "description": "Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime interface.",
     "study_notes": [
       "Why stateful workloads need stable identity and storage.",
       "How Helm templating and releases work, including rollback.",
@@ -232,7 +232,7 @@
   "network-security": {
     "order": 24,
     "group": "Security",
-    "description": "Zero trust, TLS, web application firewalls, and segmentation — the controls that protect traffic in and between clouds.",
+    "description": "Zero trust, TLS, web application firewalls, and segmentation - the controls that protect traffic in and between clouds.",
     "study_notes": [
       "The TLS handshake and what certificate validation proves.",
       "Zero trust as an architecture, not a product.",
@@ -252,7 +252,7 @@
   "devops-culture-and-practices": {
     "order": 26,
     "group": "Platform and Leadership",
-    "description": "The human half of DevOps — shared ownership, blamelessness, knowledge sharing, and collaboration that survives incidents.",
+    "description": "The human half of DevOps - shared ownership, blamelessness, knowledge sharing, and collaboration that survives incidents.",
     "study_notes": [
       "How you would change a team that treats operations as someone else's job.",
       "Making a post-incident review genuinely blameless.",
@@ -326,7 +326,7 @@
     "study_notes": [
       "Allowed downtime per target, and composite availability across dependencies.",
       "Why measurement definitions and exclusions cause more disputes than the number.",
-      "What you do — commercially and technically — when you breach."
+      "What you do - commercially and technically - when you breach."
     ]
   },
   "aws-engineering": {
@@ -344,7 +344,7 @@
     "group": "Cloud Providers",
     "description": "Depth on Azure: the resource hierarchy, Entra ID and RBAC, VNet and private endpoint design, AKS, Bicep, Azure Policy and landing zones, Azure Monitor with KQL, and the compute options.",
     "study_notes": [
-      "Management groups, subscriptions, and resource groups — what each bounds.",
+      "Management groups, subscriptions, and resource groups - what each bounds.",
       "Private endpoints and the private DNS configuration they depend on.",
       "Azure Policy effects, and rolling out Deny without breaking teams."
     ]
@@ -366,7 +366,7 @@
     "study_notes": [
       "Right-sizing a landing zone instead of copying the enterprise template.",
       "Recovery objectives first, then the cheapest pattern that meets them.",
-      "Translating fluently between AWS, Azure, and GCP — including where it breaks."
+      "Translating fluently between AWS, Azure, and GCP - including where it breaks."
     ]
   },
   "platform-engineering": {
@@ -374,7 +374,7 @@
     "group": "Platform and Leadership",
     "description": "Building the internal platform as a product: IDPs, golden paths, Backstage, Crossplane, self-service environments, adoption metrics, and safe rollout of breaking platform changes.",
     "study_notes": [
-      "Golden paths that are chosen, not mandated — and escapable abstractions.",
+      "Golden paths that are chosen, not mandated - and escapable abstractions.",
       "Measuring adoption and developer outcomes rather than components shipped.",
       "Versioning the platform interface and automating consumer migrations."
     ]

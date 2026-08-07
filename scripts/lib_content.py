@@ -6,7 +6,7 @@ Ordering and topic membership come from ``topic_meta.json``, not from filenames.
 Indexes (topic READMEs and the root table of contents) are generated from these
 files, never hand-edited, so the two can never drift apart.
 
-Stdlib only — no third-party YAML parser is required for the small, strict
+Stdlib only - no third-party YAML parser is required for the small, strict
 frontmatter subset used here.
 """
 
@@ -61,7 +61,7 @@ class Topic:
 def topic_meta() -> dict:
     """Registry of topic directories: order, description, and study notes.
 
-    This file — not a numeric filename prefix — defines which directories are
+    This file - not a numeric filename prefix - defines which directories are
     topics and the order they appear in every generated index.
     """
     return json.loads(TOPIC_META_PATH.read_text(encoding="utf-8"))
@@ -175,5 +175,5 @@ def replace_block(text: str, marker: str, payload: str) -> str:
     # Blank lines around the markers keep the output stable under Prettier.
     block = f"{start}\n\n{payload.strip()}\n\n{end}"
     if not pattern.search(text):
-        raise SystemExit(f"marker {marker} not found — cannot generate index")
+        raise SystemExit(f"marker {marker} not found - cannot generate index")
     return pattern.sub(lambda _: block, text, count=1)
