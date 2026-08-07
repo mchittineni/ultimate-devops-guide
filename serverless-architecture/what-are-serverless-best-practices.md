@@ -17,10 +17,10 @@ tags:
 
 **Function design**
 
-- One function, one responsibility — easier to reason about, secure, and scale.
+- One function, one responsibility - easier to reason about, secure, and scale.
 - Keep the deployment package small; large dependency trees lengthen cold starts.
 - Initialise SDK clients, database connections, and configuration in the global scope so warm invocations reuse them.
-- Make handlers **idempotent** — retries are guaranteed to happen eventually, so use an idempotency key and a conditional write.
+- Make handlers **idempotent** - retries are guaranteed to happen eventually, so use an idempotency key and a conditional write.
 
 **Performance**
 
@@ -48,7 +48,7 @@ tags:
 
 ## Interview tips
 
-- Connection limits to relational databases is the classic serverless failure — mention reserved concurrency or RDS Proxy.
+- Connection limits to relational databases is the classic serverless failure - mention reserved concurrency or RDS Proxy.
 - Idempotency is non-negotiable and interviewers listen for it.
 - Global-scope initialisation is the single easiest performance win; it is a good concrete detail.
 

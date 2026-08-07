@@ -11,17 +11,17 @@ tags:
 
 # What is AWS Lambda?
 
-**Short answer:** AWS Lambda is Amazon's function-as-a-service platform. You upload code as a zip or container image, configure memory and a trigger, and AWS runs it on demand — scaling automatically and billing per millisecond of execution.
+**Short answer:** AWS Lambda is Amazon's function-as-a-service platform. You upload code as a zip or container image, configure memory and a trigger, and AWS runs it on demand - scaling automatically and billing per millisecond of execution.
 
 ## Detail
 
-**Execution model.** An event invokes a handler function. Lambda provisions an execution environment (a Firecracker microVM), runs the initialisation code, then the handler. The environment is reused for subsequent invocations while warm, which is why global-scope initialisation — database clients, SDK objects — should sit outside the handler.
+**Execution model.** An event invokes a handler function. Lambda provisions an execution environment (a Firecracker microVM), runs the initialisation code, then the handler. The environment is reused for subsequent invocations while warm, which is why global-scope initialisation - database clients, SDK objects - should sit outside the handler.
 
 **Configuration that matters**
 
-- **Memory** (128 MB to 10 GB) also determines CPU allocation proportionally. Increasing memory often _reduces_ cost by finishing faster — worth measuring with a tuning tool.
-- **Timeout** — up to 15 minutes.
-- **Concurrency** — reserved concurrency guarantees capacity and caps blast radius; provisioned concurrency keeps environments warm to eliminate cold starts.
+- **Memory** (128 MB to 10 GB) also determines CPU allocation proportionally. Increasing memory often _reduces_ cost by finishing faster - worth measuring with a tuning tool.
+- **Timeout** - up to 15 minutes.
+- **Concurrency** - reserved concurrency guarantees capacity and caps blast radius; provisioned concurrency keeps environments warm to eliminate cold starts.
 - **Layers** for shared dependencies, and container images up to 10 GB for large runtimes.
 - **VPC attachment** for private resources (now with much-improved cold-start behaviour via Hyperplane ENIs).
 
@@ -46,7 +46,7 @@ def handler(event, context):
 
 ## Interview tips
 
-- Initialising clients outside the handler is the most common practical optimisation — mention it.
+- Initialising clients outside the handler is the most common practical optimisation - mention it.
 - Memory tuning affecting CPU (and therefore cost) surprises people; it is a strong detail.
 - Idempotency, DLQs, and retry behaviour show you have run Lambda in production, not just deployed a demo.
 

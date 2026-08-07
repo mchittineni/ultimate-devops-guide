@@ -35,7 +35,7 @@ tags:
 
 ## Interview tips
 
-- Position FaaS as a subset of serverless — serverless also covers databases, queues, and containers.
+- Position FaaS as a subset of serverless - serverless also covers databases, queues, and containers.
 - Cloudflare Workers' isolate model is a good example of how cold starts are being engineered away.
 - Knative or OpenFaaS is the answer if asked about FaaS without vendor lock-in.
 
