@@ -11,17 +11,18 @@ tags:
 
 The human half of DevOps - shared ownership, blamelessness, knowledge sharing, and collaboration that survives incidents.
 
-**5 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 0
+**6 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 1
 
 ## Questions
 
-| #   | Question                                                                           | Difficulty      |
-| --- | ---------------------------------------------------------------------------------- | --------------- |
-| 126 | [What is DevOps Culture?](./what-is-devops-culture.md)                             | 🟢 Beginner     |
-| 127 | [What are DevOps Best Practices?](./what-are-devops-best-practices.md)             | 🟢 Beginner     |
-| 128 | [What is Blameless Culture?](./what-is-blameless-culture.md)                       | 🟡 Intermediate |
-| 129 | [What is Knowledge Sharing in DevOps?](./what-is-knowledge-sharing-in-devops.md)   | 🟢 Beginner     |
-| 130 | [What is Team Collaboration in DevOps?](./what-is-team-collaboration-in-devops.md) | 🟢 Beginner     |
+| #   | Question                                                                                                     | Difficulty      |
+| --- | ------------------------------------------------------------------------------------------------------------ | --------------- |
+| 126 | [What is DevOps Culture?](./what-is-devops-culture.md)                                                       | 🟢 Beginner     |
+| 127 | [What are DevOps Best Practices?](./what-are-devops-best-practices.md)                                       | 🟢 Beginner     |
+| 128 | [What is Blameless Culture?](./what-is-blameless-culture.md)                                                 | 🟡 Intermediate |
+| 129 | [What is Knowledge Sharing in DevOps?](./what-is-knowledge-sharing-in-devops.md)                             | 🟢 Beginner     |
+| 130 | [What is Team Collaboration in DevOps?](./what-is-team-collaboration-in-devops.md)                           | 🟢 Beginner     |
+| 287 | [How do you scale DevOps culture across many teams?](./how-do-you-scale-devops-culture-across-many-teams.md) | 🔴 Advanced     |
 
 ## What interviewers probe here
 
