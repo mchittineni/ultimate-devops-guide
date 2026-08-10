@@ -11,7 +11,7 @@ tags:
 
 Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deployment distinction interviewers love to test.
 
-**14 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 10 · 🔴 Advanced: 2
+**20 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 14 · 🔴 Advanced: 4
 
 ## Questions
 
@@ -31,6 +31,12 @@ Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deploy
 | 400 | [How do you design CI/CD for a microservices architecture?](./how-do-you-design-ci-cd-for-a-microservices-architecture.md)                                                     | 🔴 Advanced     |
 | 401 | [How do you keep dependencies up to date without breaking the build?](./how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)                                 | 🟡 Intermediate |
 | 402 | [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](./how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md) | 🟡 Intermediate |
+| 454 | [What is the difference between a declarative and a scripted Jenkins pipeline?](./what-is-the-difference-between-a-declarative-and-a-scripted-jenkins-pipeline.md)             | 🟡 Intermediate |
+| 455 | [How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?](./how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md)            | 🟡 Intermediate |
+| 456 | [How do you run and secure a Jenkins controller in production?](./how-do-you-run-and-secure-a-jenkins-controller-in-production.md)                                             | 🔴 Advanced     |
+| 457 | [How do you write an efficient and secure GitHub Actions workflow?](./how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)                                     | 🟡 Intermediate |
+| 458 | [How do you integrate SonarQube and quality gates into a pipeline?](./how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)                                     | 🟡 Intermediate |
+| 459 | [How do you scale CI/CD across many services and teams?](./how-do-you-scale-ci-cd-across-many-services-and-teams.md)                                                           | 🔴 Advanced     |
 
 ## What interviewers probe here
 
