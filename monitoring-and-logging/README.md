@@ -11,19 +11,21 @@ tags:
 
 Metrics, logs, and the toolchain - Prometheus, Grafana, and the ELK stack - plus the conceptual split between monitoring and logging.
 
-**7 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 2 · 🔴 Advanced: 1
+**9 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
 
 ## Questions
 
-| #   | Question                                                                                                                                         | Difficulty      |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| 31  | [What is monitoring in DevOps?](./what-is-monitoring-in-devops.md)                                                                               | 🟢 Beginner     |
-| 32  | [What is ELK Stack?](./what-is-elk-stack.md)                                                                                                     | 🟡 Intermediate |
-| 33  | [What is Prometheus?](./what-is-prometheus.md)                                                                                                   | 🟢 Beginner     |
-| 34  | [What is Grafana?](./what-is-grafana.md)                                                                                                         | 🟢 Beginner     |
-| 35  | [Explain the difference between monitoring and logging](./explain-the-difference-between-monitoring-and-logging.md)                              | 🟢 Beginner     |
-| 253 | [How do you write effective PromQL queries and Alertmanager rules?](./how-do-you-write-effective-promql-queries-and-alertmanager-rules.md)       | 🟡 Intermediate |
-| 296 | [How do you design a logging pipeline that stays affordable at scale?](./how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale.md) | 🔴 Advanced     |
+| #   | Question                                                                                                                                              | Difficulty      |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 31  | [What is monitoring in DevOps?](./what-is-monitoring-in-devops.md)                                                                                    | 🟢 Beginner     |
+| 32  | [What is ELK Stack?](./what-is-elk-stack.md)                                                                                                          | 🟡 Intermediate |
+| 33  | [What is Prometheus?](./what-is-prometheus.md)                                                                                                        | 🟢 Beginner     |
+| 34  | [What is Grafana?](./what-is-grafana.md)                                                                                                              | 🟢 Beginner     |
+| 35  | [Explain the difference between monitoring and logging](./explain-the-difference-between-monitoring-and-logging.md)                                   | 🟢 Beginner     |
+| 253 | [How do you write effective PromQL queries and Alertmanager rules?](./how-do-you-write-effective-promql-queries-and-alertmanager-rules.md)            | 🟡 Intermediate |
+| 296 | [How do you design a logging pipeline that stays affordable at scale?](./how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale.md)      | 🔴 Advanced     |
+| 500 | [How does Prometheus collect metrics, and what components sit around it?](./how-does-prometheus-collect-metrics-and-what-components-sit-around-it.md) | 🟡 Intermediate |
+| 501 | [How do the ELK and EFK stacks fit together?](./how-do-the-elk-and-efk-stacks-fit-together.md)                                                        | 🟡 Intermediate |
 
 ## What interviewers probe here
 
