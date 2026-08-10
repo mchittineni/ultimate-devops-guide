@@ -392,11 +392,12 @@
   "interview-experience": {
     "order": 40,
     "group": "Interview Prep",
-    "description": "How the interview itself works - the round structure, explaining your project, answering scenario questions, and the checklist of what actually gets asked.",
+    "description": "How the interview itself works - the round structure, explaining your project, answering scenario questions, and the company-by-company record of what was actually asked across 85 employers.",
     "study_notes": [
       "A rehearsed 90-second walkthrough of your current project.",
       "A justification for every technology choice you name.",
-      "A method for scenario questions that ends in prevention, not just a fix."
+      "A method for scenario questions that ends in prevention, not just a fix.",
+      "The specific questions your target company has actually asked before."
     ]
   }
 }
