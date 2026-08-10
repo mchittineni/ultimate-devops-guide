@@ -11,7 +11,7 @@ tags:
 
 Provider-neutral cloud engineering: landing zones, hybrid connectivity, least-privilege identity, multi-region resilience, multi-cloud trade-offs, DNS and global routing, and cross-provider service mapping.
 
-**7 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 3 · 🔴 Advanced: 3
+**8 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 4 · 🔴 Advanced: 3
 
 ## Questions
 
@@ -24,6 +24,7 @@ Provider-neutral cloud engineering: landing zones, hybrid connectivity, least-pr
 | 219 | [What are the real trade-offs of multi-cloud?](./what-are-the-real-trade-offs-of-multi-cloud.md)                                           | 🔴 Advanced     |
 | 220 | [How do you manage DNS and global traffic routing?](./how-do-you-manage-dns-and-global-traffic-routing.md)                                 | 🟡 Intermediate |
 | 221 | [How do the core services of AWS, Azure, and GCP map to each other?](./how-do-the-core-services-of-aws-azure-and-gcp-map-to-each-other.md) | 🟢 Beginner     |
+| 435 | [How do you troubleshoot a DNS problem in production?](./how-do-you-troubleshoot-a-dns-problem-in-production.md)                           | 🟡 Intermediate |
 
 ## What interviewers probe here
 
