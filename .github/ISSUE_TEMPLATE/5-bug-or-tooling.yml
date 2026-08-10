@@ -1,0 +1,63 @@
+name: 🔧 Broken link, rendering, or tooling problem
+description: Something in the repository is broken - a dead link, a bad table, a failing script, or a CI check that is wrong.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For content that is *wrong*, use the **Fix or improve an answer** template instead. This one is for things that are broken rather than incorrect.
+
+        **Do not use this template for security issues** - committed credentials, workflow injection, or malicious example code go through [private reporting](https://github.com/mchittineni/ultimate-devops-guide/security/advisories/new).
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is broken?
+      options:
+        - Broken or wrong link
+        - Markdown renders incorrectly (table, list, code fence, emoji)
+        - Generated index is wrong or out of date
+        - "scripts/generate_indexes.py or validate_content.py fails or misbehaves"
+        - CI workflow failure or false positive
+        - Issue or pull request template problem
+        - Something else
+    validations:
+      required: true
+
+  - type: input
+    id: where
+    attributes:
+      label: Where?
+      description: File path, URL, or workflow run link.
+      placeholder: docker/what-is-dockerfile.md - the link to ../cicd/what-is-jenkins.md 404s
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect, and what happened instead?
+      placeholder: |
+        Expected: validate_content.py passes on a clean checkout.
+        Actual: reports "heading text does not match frontmatter title" for a file whose title contains an ampersand.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Commands and output
+      description: Paste the command you ran and the full output. For rendering problems, a screenshot plus the source snippet is ideal.
+      render: shell
+    validations:
+      required: false
+
+  - type: input
+    id: env
+    attributes:
+      label: Environment (tooling issues only)
+      description: Python version, Node version, operating system - the tooling targets Python 3.11+ and Prettier 3.
+      placeholder: Python 3.13.1, Node 24.3.0, macOS 15.3
+    validations:
+      required: false

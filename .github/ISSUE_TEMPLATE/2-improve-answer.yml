@@ -1,0 +1,71 @@
+name: 📝 Fix or improve an answer
+description: An answer is wrong, out of date, incomplete, or shallower than an interview needs.
+title: "[answer] "
+labels: ["improve-answer"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Corrections are the most valuable contribution here - a wrong answer costs somebody an interview. Please be specific about what is wrong and, where you can, link a source.
+
+  - type: input
+    id: file
+    attributes:
+      label: Which file?
+      description: The repository path, or paste the file's URL.
+      placeholder: kubernetes/how-does-rbac-work-in-kubernetes.md
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem is it?
+      options:
+        - Factually wrong
+        - Out of date (behaviour, version, or deprecated feature)
+        - Incomplete - missing the part an interviewer actually probes
+        - Misleading emphasis or a bad recommendation
+        - Broken or non-working example
+        - Wording, typo, or formatting
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong?
+      description: Quote the sentence or code line, then say what is incorrect about it.
+      placeholder: |
+        The answer says a ClusterRoleBinding grants access only in the namespace it is created in. A ClusterRoleBinding is cluster-scoped; the namespaced case is a RoleBinding referencing a ClusterRole.
+    validations:
+      required: true
+
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should it say instead?
+      description: Your proposed wording, or the mechanism as you understand it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Source or reproduction
+      description: A link to upstream documentation, a release note, or the command output that demonstrates it. This is what makes a correction quick to merge.
+      placeholder: |
+        kubectl auth can-i --as=system:serviceaccount:dev:builder get pods -n prod
+        -> yes   (with the ClusterRoleBinding in place, which contradicts the current text)
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I am reporting a problem with the content, not a vulnerability in a third-party tool the answer describes.
+          required: true
+        - label: I am willing to open a pull request for this (optional, but say so and it is yours).
+          required: false

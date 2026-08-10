@@ -1,0 +1,90 @@
+name: 🎤 Share an interview experience
+description: Report the questions a company actually asked, so the company file can be added or extended.
+title: "[interview] Company - Role"
+labels: ["interview-experience"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        These reports are the backbone of the [Interview Experience](https://github.com/mchittineni/ultimate-devops-guide/tree/main/interview-experience) section. Questions are rephrased for clarity before they are published, and grouped by theme.
+
+        **Three rules, from the [Code of Conduct](https://github.com/mchittineni/ultimate-devops-guide/blob/main/CODE_OF_CONDUCT.md):** do not name or describe the interviewer, do not post anything covered by an NDA (including take-home assignments and their solutions), and do not include screenshots of emails, chats, or scheduling tools. Share the technical substance only.
+
+  - type: input
+    id: company
+    attributes:
+      label: Company
+      description: Leave blank if you would rather it were filed as unattributed - those still get published, grouped by role.
+      placeholder: Acme Cloud Services
+    validations:
+      required: false
+
+  - type: input
+    id: role
+    attributes:
+      label: Role as advertised
+      description: Used to title the file, so the exact wording matters - "SRE", "Cloud Platform Engineer", and "DevOps Tech Lead" produce different titles.
+      placeholder: Senior Site Reliability Engineer
+    validations:
+      required: true
+
+  - type: input
+    id: experience
+    attributes:
+      label: Years of experience targeted
+      placeholder: 5-8 years
+    validations:
+      required: false
+
+  - type: dropdown
+    id: round
+    attributes:
+      label: Which round was this?
+      options:
+        - Recruiter or HR screen
+        - Technical screen (first round)
+        - Deep technical / hands-on round
+        - System design or architecture round
+        - Scenario and troubleshooting round
+        - Managerial or hiring-manager round
+        - Behavioural / culture round
+        - Multiple rounds (described below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: questions
+    attributes:
+      label: The questions
+      description: One per line, as close to how they were asked as you can recall. Rough phrasing is fine - clarity is added during editing. Note follow-ups as indented lines.
+      placeholder: |
+        - How would you debug a pod stuck in CrashLoopBackOff?
+          - What does exit code 137 tell you?
+        - Difference between a StatefulSet and a Deployment?
+        - Write a Terraform module for an S3 bucket with versioning
+        - Scenario: the pipeline deploys, then checkout starts returning 500s. Walk me through it.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: format
+    attributes:
+      label: Format and anything worth knowing
+      description: Duration, whether it was live coding or a whiteboard, whether a laptop and internet were allowed, how much weight sat on the project discussion, how the round was weighted overall.
+      placeholder: |
+        60 minutes, shared editor, no internet. Roughly half the time went on my own project and why I chose each tool.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: I have not named, described, or identified any interviewer, recruiter, or other candidate.
+          required: true
+        - label: Nothing here is covered by an NDA, and I have not included a take-home assignment, its solution, or any internal document.
+          required: true
+        - label: These are questions I was asked personally, or was told about directly - not copied from another site or repository.
+          required: true

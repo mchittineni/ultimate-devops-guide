@@ -1,0 +1,69 @@
+name: 📁 Propose a new topic
+description: A subject area the 40 existing topics cannot hold.
+title: "[topic] "
+labels: ["new-topic"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A new topic is a bigger change than a new question: it needs a directory, an entry in `scripts/topic_meta.json` with an order and study notes, a generated README, and enough questions to justify existing. Please check first whether the subject fits an existing topic - a single question about eBPF belongs in Linux Administration, not in a new topic.
+
+  - type: input
+    id: name
+    attributes:
+      label: Proposed topic name
+      description: The display title. The directory slug is derived from it.
+      placeholder: Data Engineering for DevOps
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: What does it cover, and what does it deliberately not cover?
+      description: The boundary matters more than the name - it is what stops the topic overlapping the neighbouring ones.
+      placeholder: |
+        Covers: orchestration (Airflow/Dagster), pipeline SLAs, data quality gates in CI, warehouse cost control.
+        Does not cover: the databases themselves (Database Management in DevOps) or streaming architecture (Cloud Native Architecture).
+    validations:
+      required: true
+
+  - type: textarea
+    id: questions
+    attributes:
+      label: At least five questions it would hold
+      description: A topic with fewer than five real interview questions should be questions inside an existing topic instead.
+      placeholder: |
+        1. How do you test a data pipeline in CI?
+        2. What does an SLA look like for a nightly batch job?
+        3. How do you detect and alert on data quality regressions?
+        4. How do you manage schema evolution across producers and consumers?
+        5. How do you control warehouse query cost?
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: overlap
+    attributes:
+      label: Which existing topics does it overlap, and why is a split better?
+      description: Name the closest existing topics and explain why the content does not belong there.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: group
+    attributes:
+      label: Which group should it sit in?
+      description: Topics are grouped in the root table of contents. Pick the nearest fit.
+      options:
+        - Foundations
+        - Containers and Kubernetes
+        - Automation and Delivery
+        - Cloud
+        - Security
+        - Reliability and Operations
+        - Advanced and Specialised
+        - Not sure
+    validations:
+      required: false

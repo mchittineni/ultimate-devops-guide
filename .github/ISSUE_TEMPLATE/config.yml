@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Contributing guide
+    url: https://github.com/mchittineni/ultimate-devops-guide/blob/main/CONTRIBUTING.md
+    about: File format, frontmatter schema, and the two commands to run before opening a pull request. Read this first if you plan to send the change yourself.
+  - name: 🔒 Report a security problem
+    url: https://github.com/mchittineni/ultimate-devops-guide/security/advisories/new
+    about: Committed credentials, workflow injection, or malicious example code. Never open a public issue for these.
+  - name: 🤝 Code of Conduct
+    url: https://github.com/mchittineni/ultimate-devops-guide/blob/main/CODE_OF_CONDUCT.md
+    about: Expected behaviour, plus the rules on interviewer privacy, NDAs, and plagiarism that apply to interview write-ups.
