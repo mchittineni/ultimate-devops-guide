@@ -11,7 +11,7 @@ tags:
 
 Declarative infrastructure with Terraform and Ansible - state, providers, idempotency, and where each tool belongs.
 
-**10 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 5 · 🔴 Advanced: 2
+**16 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 8 · 🔴 Advanced: 4
 
 ## Questions
 
@@ -27,6 +27,12 @@ Declarative infrastructure with Terraform and Ansible - state, providers, idempo
 | 262 | [How do you recover a lost or corrupted Terraform state file?](./how-do-you-recover-a-lost-or-corrupted-terraform-state-file.md)                                 | 🔴 Advanced     |
 | 421 | [What is immutable infrastructure and how do you adopt it?](./what-is-immutable-infrastructure-and-how-do-you-adopt-it.md)                                       | 🟡 Intermediate |
 | 422 | [How do you structure Terraform code for multiple environments and providers?](./how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md) | 🔴 Advanced     |
+| 462 | [What do terraform init, plan, apply, and refresh actually do?](./what-do-terraform-init-plan-apply-and-refresh-actually-do.md)                                  | 🟢 Beginner     |
+| 463 | [How do you write and structure a reusable Terraform module?](./how-do-you-write-and-structure-a-reusable-terraform-module.md)                                   | 🟡 Intermediate |
+| 464 | [What is the difference between count and for_each in Terraform?](./what-is-the-difference-between-count-and-for-each-in-terraform.md)                           | 🟡 Intermediate |
+| 465 | [How do you stop Terraform from destroying or recreating a resource?](./how-do-you-stop-terraform-from-destroying-or-recreating-a-resource.md)                   | 🔴 Advanced     |
+| 466 | [How do you run Terraform through a CI/CD pipeline?](./how-do-you-run-terraform-through-a-ci-cd-pipeline.md)                                                     | 🔴 Advanced     |
+| 467 | [What are Terraform provisioners and when should you avoid them?](./what-are-terraform-provisioners-and-when-should-you-avoid-them.md)                           | 🟡 Intermediate |
 
 ## What interviewers probe here
 
