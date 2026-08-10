@@ -11,7 +11,7 @@ tags:
 
 Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime interface.
 
-**10 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 3 · 🔴 Advanced: 6
+**14 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 4 · 🔴 Advanced: 9
 
 ## Questions
 
@@ -27,6 +27,10 @@ Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the co
 | 412 | [How do you troubleshoot a failed Helm release?](./how-do-you-troubleshoot-a-failed-helm-release.md)                                                 | 🟡 Intermediate |
 | 413 | [How do you run and scale a stateful application on Kubernetes?](./how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)                 | 🔴 Advanced     |
 | 414 | [How do you run an application across multiple Kubernetes clusters?](./how-do-you-run-an-application-across-multiple-kubernetes-clusters.md)         | 🔴 Advanced     |
+| 450 | [What is inside a Helm chart, and how do you customise one?](./what-is-inside-a-helm-chart-and-how-do-you-customise-one.md)                          | 🟡 Intermediate |
+| 451 | [How do you back up and restore a Kubernetes cluster?](./how-do-you-back-up-and-restore-a-kubernetes-cluster.md)                                     | 🔴 Advanced     |
+| 452 | [What are CustomResourceDefinitions and operators in Kubernetes?](./what-are-customresourcedefinitions-and-operators-in-kubernetes.md)               | 🔴 Advanced     |
+| 453 | [How do you run a multi-tenant Kubernetes cluster?](./how-do-you-run-a-multi-tenant-kubernetes-cluster.md)                                           | 🔴 Advanced     |
 
 ## What interviewers probe here
 
