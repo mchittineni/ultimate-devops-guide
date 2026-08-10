@@ -11,7 +11,7 @@ tags:
 
 Host and platform monitoring, APM, log management, and the practices that keep dashboards and alerts useful.
 
-**6 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 3 · 🔴 Advanced: 1
+**7 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -23,6 +23,7 @@ Host and platform monitoring, APM, log management, and the practices that keep d
 | 134 | [What is Application Performance Monitoring?](./what-is-application-performance-monitoring.md)                                                 | 🟡 Intermediate |
 | 135 | [What is Log Management?](./what-is-log-management.md)                                                                                         | 🟡 Intermediate |
 | 293 | [How do you control metric cardinality and monitoring cost at scale?](./how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale.md) | 🔴 Advanced     |
+| 433 | [How do you add monitoring to an application that has none?](./how-do-you-add-monitoring-to-an-application-that-has-none.md)                   | 🟡 Intermediate |
 
 ## What interviewers probe here
 
