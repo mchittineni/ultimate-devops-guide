@@ -11,7 +11,7 @@ tags:
 
 The control plane, the workload objects you touch daily, and the networking abstractions that make Pods reachable.
 
-**19 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 13 · 🔴 Advanced: 3
+**27 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 18 · 🔴 Advanced: 6
 
 ## Questions
 
@@ -36,6 +36,14 @@ The control plane, the workload objects you touch daily, and the networking abst
 | 408 | [How do you troubleshoot a Kubernetes Job or CronJob that never completes?](./how-do-you-troubleshoot-a-kubernetes-job-or-cronjob-that-never-completes.md)                        | 🟡 Intermediate |
 | 409 | [How do you handle node pressure and Pod evictions in Kubernetes?](./how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md)                                          | 🔴 Advanced     |
 | 410 | [How do you perform and roll back a rolling update in Kubernetes?](./how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes.md)                                          | 🟡 Intermediate |
+| 442 | [What is the difference between a ConfigMap and a Secret in Kubernetes?](./what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)                              | 🟡 Intermediate |
+| 443 | [How does persistent storage work in Kubernetes?](./how-does-persistent-storage-work-in-kubernetes.md)                                                                            | 🟡 Intermediate |
+| 444 | [How do requests, limits, and QoS classes work in Kubernetes?](./how-do-requests-limits-and-qos-classes-work-in-kubernetes.md)                                                    | 🟡 Intermediate |
+| 445 | [What are init containers and sidecar containers in Kubernetes?](./what-are-init-containers-and-sidecar-containers-in-kubernetes.md)                                              | 🟡 Intermediate |
+| 446 | [What is a PodDisruptionBudget and when do you need one?](./what-is-a-poddisruptionbudget-and-when-do-you-need-one.md)                                                            | 🔴 Advanced     |
+| 447 | [How does Pod networking and service discovery work in Kubernetes?](./how-does-pod-networking-and-service-discovery-work-in-kubernetes.md)                                        | 🔴 Advanced     |
+| 448 | [What happens when a Kubernetes control-plane node or etcd fails?](./what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md)                                          | 🔴 Advanced     |
+| 449 | [How do you troubleshoot a Kubernetes node that is NotReady?](./how-do-you-troubleshoot-a-kubernetes-node-that-is-notready.md)                                                    | 🟡 Intermediate |
 
 ## What interviewers probe here
 
