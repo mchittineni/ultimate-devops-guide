@@ -11,7 +11,7 @@ tags:
 
 Microservices, service mesh, event-driven design, and the Twelve-Factor principles that make apps portable.
 
-**7 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 4 · 🔴 Advanced: 2
+**8 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 4 · 🔴 Advanced: 3
 
 ## Questions
 
@@ -24,6 +24,7 @@ Microservices, service mesh, event-driven design, and the Twelve-Factor principl
 | 70  | [What are the 12-Factor App principles?](./what-are-the-12-factor-app-principles.md)                                                               | 🟡 Intermediate |
 | 280 | [What is the difference between a monolith and microservices?](./what-is-the-difference-between-a-monolith-and-microservices.md)                   | 🟢 Beginner     |
 | 426 | [How do you troubleshoot high latency in a microservices architecture?](./how-do-you-troubleshoot-high-latency-in-a-microservices-architecture.md) | 🔴 Advanced     |
+| 505 | [How do you design a secure, highly available three-tier architecture?](./how-do-you-design-a-secure-highly-available-three-tier-architecture.md)  | 🔴 Advanced     |
 
 ## What interviewers probe here
 
