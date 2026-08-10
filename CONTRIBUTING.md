@@ -2,6 +2,10 @@
 
 Thanks for helping improve this collection. Corrections, deeper answers, and new questions are all welcome.
 
+Participation is covered by the [Code of Conduct](./CODE_OF_CONDUCT.md) - which also carries the three rules specific to this project: **share questions, never people** (no naming or describing interviewers), **respect confidentiality** (nothing under NDA, no take-home assignments or their solutions), and **no plagiarism** (write answers in your own words, link sources rather than copying them). Security problems - a committed credential, a workflow vulnerability, or malicious example code - go through the [Security Policy](./SECURITY.md) privately, never a public issue.
+
+If you would rather suggest than write, the [issue templates](./.github/ISSUE_TEMPLATE/) cover a new question, a correction to an existing answer, an interview experience, a new topic, and broken links or tooling.
+
 ## What makes a good contribution
 
 The bar here is **an answer that would land well in a real interview** - not a definition copied from documentation. Concretely:
