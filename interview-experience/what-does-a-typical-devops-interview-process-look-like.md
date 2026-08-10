@@ -52,7 +52,6 @@ TYPICAL 5-ROUND PROCESS  (mid/senior DevOps, ~2 weeks)
   Day 11  Managerial ............... 45 min   ownership, incidents, conflict, mentoring
   Day 13  HR ....................... 25 min   compensation, start date
 
-
 WHAT GETS TESTED, BY ROLE SHAPE
 
   Service company / consultancy      Product company / SRE
@@ -61,7 +60,6 @@ WHAT GETS TESTED, BY ROLE SHAPE
   "What is X?" / "How do you do X?"  "Why X over Y?" / "What breaks at scale?"
   Tool-by-tool sweep                 Incident + SLO + capacity reasoning
   Client-facing communication        Blast radius and failure modes
-
 
 UNIVERSAL CORE — asked regardless of the job description
 

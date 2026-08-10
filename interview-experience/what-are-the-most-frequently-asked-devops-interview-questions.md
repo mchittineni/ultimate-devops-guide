@@ -117,7 +117,6 @@ TWO-WEEK REVISION PLAN
     Day 13  Hands-on: write a Dockerfile, a pipeline, a TF module — by hand
     Day 14  Prepare "why did you choose X?" for every choice in your project
 
-
 SELF-CHECK — can you answer each in 2-4 sentences, with a trade-off?
 
   [ ] What is the Terraform state file for, and what if it is deleted?

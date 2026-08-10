@@ -81,7 +81,6 @@ BY ROUND — pick 2-3 that the conversation has not already answered
     "How is on-call compensated?"
     "What's the range for this level?"
 
-
 WHAT THE ANSWERS TELL YOU
 
   "We deploy every two weeks, with a CAB approval"
