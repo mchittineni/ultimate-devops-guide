@@ -11,7 +11,7 @@ tags:
 
 Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pull, agent versus agentless.
 
-**6 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
+**7 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 5 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -23,6 +23,7 @@ Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pul
 | 54  | [What is Salt (SaltStack)?](./what-is-salt-saltstack.md)                                                                     | 🟡 Intermediate |
 | 55  | [Compare different Configuration Management tools](./compare-different-configuration-management-tools.md)                    | 🟡 Intermediate |
 | 283 | [How do you run Ansible at scale across thousands of hosts?](./how-do-you-run-ansible-at-scale-across-thousands-of-hosts.md) | 🔴 Advanced     |
+| 430 | [How do you patch hundreds of servers safely?](./how-do-you-patch-hundreds-of-servers-safely.md)                             | 🟡 Intermediate |
 
 ## What interviewers probe here
 
