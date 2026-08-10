@@ -2,16 +2,16 @@
 
 # ⚙️ Cloud, DevOps, Platform & SRE Guide
 
-**436 questions across 40 topics - answered to the depth an interviewer actually expects.**
+**507 questions across 40 topics - answered to the depth an interviewer actually expects.**
 
 Role tracks: **DevOps** (junior → senior) · **DevSecOps** · **SecOps** · **SRE** · **SLO** · **SLA** · **AWS** · **Azure** · **GCP** · **Cloud** · **Platform Engineering**
 
 Every answer gives you a short answer you can say out loud, the detail and trade-offs behind it, a runnable example, and the follow-ups to expect.
 
 [![Validate](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/validate-and-format.yml/badge.svg)](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/validate-and-format.yml)
-![Questions](https://img.shields.io/badge/questions-436-blue)
+![Questions](https://img.shields.io/badge/questions-507-blue)
 ![Topics](https://img.shields.io/badge/topics-40-blueviolet)
-![Difficulty](https://img.shields.io/badge/difficulty-🟢%2096%20·%20🟡%20193%20·%20🔴%20147-lightgrey)
+![Difficulty](https://img.shields.io/badge/difficulty-🟢%20110%20·%20🟡%20233%20·%20🔴%20164-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 [Pick your role](#-pick-your-role) · [Browse topics](#-browse-all-topics) · [All questions](#-all-questions) · [How answers are structured](#-how-answers-are-structured) · [Contributing](./CONTRIBUTING.md)
@@ -52,43 +52,43 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 
 <!-- STATS:START -->
 
-**436 questions** across **40 topics** - 🟢 96 Beginner · 🟡 193 Intermediate · 🔴 147 Advanced
+**507 questions** across **40 topics** - 🟢 110 Beginner · 🟡 233 Intermediate · 🔴 164 Advanced
 
 ### 🧱 Foundations
 
 | Topic                                                                | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                   |
 | -------------------------------------------------------------------- | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------ |
 | **[Core DevOps Concepts](./core-devops-concepts/README.md)**         | 6         | 4   | 1   | 1   | what DevOps actually changes, why it exists, and how CI, continuous delivery, and continuous…    |
-| **[Linux Administration](./linux-administration/README.md)**         | 8         | 5   | 2   | 1   | The operating system under everything - commands, shell scripting, systemd, service management,… |
-| **[Version Control](./version-control/README.md)**                   | 9         | 3   | 5   | 1   | Git mechanics and the branching models teams actually argue about, including how to resolve…     |
-| **[Scripting and Automation](./scripting-and-automation/README.md)** | 4         | 1   | 2   | 1   | The scripting layer under every pipeline - defensive Bash for orchestration, and Python for…     |
+| **[Linux Administration](./linux-administration/README.md)**         | 13        | 7   | 5   | 1   | The operating system under everything - commands, shell scripting, systemd, service management,… |
+| **[Version Control](./version-control/README.md)**                   | 10        | 4   | 5   | 1   | Git mechanics and the branching models teams actually argue about, including how to resolve…     |
+| **[Scripting and Automation](./scripting-and-automation/README.md)** | 6         | 1   | 4   | 1   | The scripting layer under every pipeline - defensive Bash for orchestration, and Python for…     |
 
 ### 📦 Containers and Kubernetes
 
 | Topic                                                                                | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                   |
 | ------------------------------------------------------------------------------------ | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------ |
-| **[Docker](./docker/README.md)**                                                     | 10        | 4   | 5   | 1   | Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the…       |
-| **[Kubernetes](./kubernetes/README.md)**                                             | 19        | 3   | 13  | 3   | The control plane, the workload objects you touch daily, and the networking abstractions that…   |
-| **[Container Orchestration Advanced](./container-orchestration-advanced/README.md)** | 10        | 1   | 3   | 6   | Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime… |
+| **[Docker](./docker/README.md)**                                                     | 15        | 6   | 7   | 2   | Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the…       |
+| **[Kubernetes](./kubernetes/README.md)**                                             | 27        | 3   | 18  | 6   | The control plane, the workload objects you touch daily, and the networking abstractions that…   |
+| **[Container Orchestration Advanced](./container-orchestration-advanced/README.md)** | 14        | 1   | 4   | 9   | Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime… |
 
 ### 🔁 Delivery and Automation
 
 | Topic                                                                      | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                      |
 | -------------------------------------------------------------------------- | --------- | --- | --- | --- | --------------------------------------------------------------------------------------------------- |
-| **[CI/CD](./cicd/README.md)**                                              | 14        | 2   | 10  | 2   | Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deployment distinction…   |
-| **[Infrastructure as Code](./infrastructure-as-code/README.md)**           | 10        | 3   | 5   | 2   | Declarative infrastructure with Terraform and Ansible - state, providers, idempotency, and where…   |
-| **[Configuration Management](./configuration-management/README.md)**       | 7         | 1   | 5   | 1   | Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pull, agent versus…    |
-| **[DevOps Tools and Automation](./devops-tools-and-automation/README.md)** | 7         | 1   | 5   | 1   | GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to ship without downtime. |
+| **[CI/CD](./cicd/README.md)**                                              | 20        | 2   | 14  | 4   | Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deployment distinction…   |
+| **[Infrastructure as Code](./infrastructure-as-code/README.md)**           | 16        | 4   | 8   | 4   | Declarative infrastructure with Terraform and Ansible - state, providers, idempotency, and where…   |
+| **[Configuration Management](./configuration-management/README.md)**       | 11        | 1   | 9   | 1   | Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pull, agent versus…    |
+| **[DevOps Tools and Automation](./devops-tools-and-automation/README.md)** | 9         | 2   | 6   | 1   | GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to ship without downtime. |
 
 ### ☁️ Cloud Providers
 
 | Topic                                                              | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                    |
 | ------------------------------------------------------------------ | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------- |
 | **[Cloud Platforms](./cloud-platforms/README.md)**                 | 7         | 5   | 1   | 1   | Cloud service models and the three major providers - enough breadth to discuss AWS, Azure, and…   |
-| **[Cloud Cost Optimization](./cloud-cost-optimization/README.md)** | 7         | 2   | 4   | 1   | Reserved and spot capacity, tagging discipline, and the reports that turn a cloud bill into…      |
+| **[Cloud Cost Optimization](./cloud-cost-optimization/README.md)** | 8         | 2   | 5   | 1   | Reserved and spot capacity, tagging discipline, and the reports that turn a cloud bill into…      |
 | **[Cloud Migration](./cloud-migration/README.md)**                 | 8         | 1   | 4   | 3   | Assessment, the 6 Rs, application modernization, and the tooling that moves workloads without…    |
-| **[AWS Engineering](./aws-engineering/README.md)**                 | 13        | 1   | 8   | 4   | VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage… |
-| **[Azure Engineering](./azure-engineering/README.md)**             | 9         | 1   | 6   | 2   | the resource hierarchy, Entra ID and RBAC, VNet and private endpoint design, AKS, Bicep, Azure…   |
+| **[AWS Engineering](./aws-engineering/README.md)**                 | 26        | 6   | 13  | 7   | VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage… |
+| **[Azure Engineering](./azure-engineering/README.md)**             | 13        | 1   | 10  | 2   | the resource hierarchy, Entra ID and RBAC, VNet and private endpoint design, AKS, Bicep, Azure…   |
 | **[GCP Engineering](./gcp-engineering/README.md)**                 | 9         | 1   | 7   | 1   | resource hierarchy and org policies, IAM without service-account keys, the global VPC, GKE…       |
 | **[Cloud Engineering](./cloud-engineering/README.md)**             | 8         | 1   | 4   | 3   | landing zones, hybrid connectivity, least-privilege identity, multi-region resilience,…           |
 
@@ -97,9 +97,9 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 | Topic                                                                                  | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                   |
 | -------------------------------------------------------------------------------------- | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------ |
 | **[Scalability and High Availability](./scalability-and-high-availability/README.md)** | 9         | 4   | 2   | 3   | scaling dimensions, load balancing, auto scaling, and recovery objectives.                       |
-| **[Cloud Native Architecture](./cloud-native-architecture/README.md)**                 | 7         | 1   | 4   | 2   | Microservices, service mesh, event-driven design, and the Twelve-Factor principles that make…    |
+| **[Cloud Native Architecture](./cloud-native-architecture/README.md)**                 | 8         | 1   | 4   | 3   | Microservices, service mesh, event-driven design, and the Twelve-Factor principles that make…    |
 | **[Performance Testing](./performance-testing/README.md)**                             | 6         | 3   | 2   | 1   | Load, stress, soak, and spike testing - how to design them, which tools to use, and how to read… |
-| **[API Gateway and Service Mesh](./api-gateway-and-service-mesh/README.md)**           | 7         | 3   | 2   | 2   | gateway responsibilities, security, rate limiting, and documentation as a first-class artifact.  |
+| **[API Gateway and Service Mesh](./api-gateway-and-service-mesh/README.md)**           | 8         | 3   | 3   | 2   | gateway responsibilities, security, rate limiting, and documentation as a first-class artifact.  |
 | **[Serverless Architecture](./serverless-architecture/README.md)**                     | 8         | 4   | 3   | 1   | Functions as a service, the operational model behind them, and the design patterns that keep…    |
 | **[Database Management in DevOps](./database-management-in-devops/README.md)**         | 8         | 1   | 4   | 3   | version control, migration tooling, backup strategy, and performance tuning.                     |
 
@@ -107,7 +107,7 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 
 | Topic                                                                              | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                       |
 | ---------------------------------------------------------------------------------- | --------- | --- | --- | --- | ---------------------------------------------------------------------------------------------------- |
-| **[Monitoring and Logging](./monitoring-and-logging/README.md)**                   | 7         | 4   | 2   | 1   | Metrics, logs, and the toolchain - Prometheus, Grafana, and the ELK stack - plus the conceptual…     |
+| **[Monitoring and Logging](./monitoring-and-logging/README.md)**                   | 9         | 4   | 4   | 1   | Metrics, logs, and the toolchain - Prometheus, Grafana, and the ELK stack - plus the conceptual…     |
 | **[Backup and Disaster Recovery](./backup-and-disaster-recovery/README.md)**       | 7         | 4   | 2   | 1   | Backup types, RPO/RTO targets, business continuity planning, and the discipline of testing restores. |
 | **[Site Reliability Engineering (SRE)](./site-reliability-engineering/README.md)** | 9         | 1   | 6   | 2   | SLIs, SLOs, error budgets, and the systematic elimination of toil.                                   |
 | **[DevOps Metrics and KPIs](./devops-metrics-and-kpis/README.md)**                 | 6         | 3   | 2   | 1   | The four DORA metrics and the measurement habits that keep them honest.                              |
@@ -121,8 +121,8 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 | Topic                                                              | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                    |
 | ------------------------------------------------------------------ | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------- |
 | **[Security and Compliance](./security-and-compliance/README.md)** | 6         | 1   | 3   | 2   | DevSecOps practice, infrastructure and container hardening, and compliance expressed as code.     |
-| **[Network Security](./network-security/README.md)**               | 7         | 2   | 4   | 1   | Zero trust, TLS, web application firewalls, and segmentation - the controls that protect traffic… |
-| **[DevSecOps](./devsecops/README.md)**                             | 11        | 1   | 7   | 3   | scanning layers, SBOMs and supply-chain provenance, image signing, secretless pipelines, and…     |
+| **[Network Security](./network-security/README.md)**               | 12        | 4   | 6   | 2   | Zero trust, TLS, web application firewalls, and segmentation - the controls that protect traffic… |
+| **[DevSecOps](./devsecops/README.md)**                             | 12        | 1   | 7   | 4   | scanning layers, SBOMs and supply-chain provenance, image signing, secretless pipelines, and…     |
 | **[SecOps and Threat Detection](./secops/README.md)**              | 8         | 2   | 4   | 2   | SOC workflow, SIEM and normalisation, detection engineering, MITRE ATT&CK coverage, threat…       |
 
 ### 🧭 Platform and Leadership
@@ -151,7 +151,7 @@ Every question in the repository, collapsed by topic - open only the ones you ar
 
 ### 🧱 Foundations
 
-_27 questions_
+_35 questions_
 
 <details>
 <summary><b>Core DevOps Concepts</b> · 6 questions · 🟢 4 🟡 1 🔴 1</summary>
@@ -170,7 +170,7 @@ _27 questions_
 </details>
 
 <details>
-<summary><b>Linux Administration</b> · 8 questions · 🟢 5 🟡 2 🔴 1</summary>
+<summary><b>Linux Administration</b> · 13 questions · 🟢 7 🟡 5 🔴 1</summary>
 
 [Open the Linux Administration index →](./linux-administration/README.md)
 
@@ -184,11 +184,16 @@ _27 questions_
 | 238 | [How do you troubleshoot SSH failures, high CPU, and disk space on Linux servers?](./linux-administration/how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md) | 🟢 Beginner     |
 | 265 | [How do you analyse logs and text files with grep, awk, and sed?](./linux-administration/how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed.md)                                   | 🟡 Intermediate |
 | 295 | [How do you debug a Linux performance problem from first principles?](./linux-administration/how-do-you-debug-a-linux-performance-problem-from-first-principles.md)                         | 🔴 Advanced     |
+| 494 | [What is the difference between a hard link and a soft link?](./linux-administration/what-is-the-difference-between-a-hard-link-and-a-soft-link.md)                                         | 🟢 Beginner     |
+| 495 | [Walk through the Linux boot process](./linux-administration/walk-through-the-linux-boot-process.md)                                                                                        | 🟡 Intermediate |
+| 496 | [How do you manage disks, filesystems, and LVM on Linux?](./linux-administration/how-do-you-manage-disks-filesystems-and-lvm-on-linux.md)                                                   | 🟡 Intermediate |
+| 497 | [How do you schedule work with cron and systemd timers?](./linux-administration/how-do-you-schedule-work-with-cron-and-systemd-timers.md)                                                   | 🟢 Beginner     |
+| 498 | [How do you inspect and manage Linux processes, signals, and resource limits?](./linux-administration/how-do-you-inspect-and-manage-linux-processes-signals-and-resource-limits.md)         | 🟡 Intermediate |
 
 </details>
 
 <details>
-<summary><b>Version Control</b> · 9 questions · 🟢 3 🟡 5 🔴 1</summary>
+<summary><b>Version Control</b> · 10 questions · 🟢 4 🟡 5 🔴 1</summary>
 
 [Open the Version Control index →](./version-control/README.md)
 
@@ -203,11 +208,12 @@ _27 questions_
 | 263 | [What is the difference between git merge, rebase, and cherry-pick?](./version-control/what-is-the-difference-between-git-merge-rebase-and-cherry-pick.md)                           | 🟡 Intermediate |
 | 264 | [How do you undo changes in Git safely?](./version-control/how-do-you-undo-changes-in-git-safely.md)                                                                                 | 🟡 Intermediate |
 | 305 | [How do you recover from a bad Git history rewrite?](./version-control/how-do-you-recover-from-a-bad-git-history-rewrite.md)                                                         | 🔴 Advanced     |
+| 499 | [What is the difference between git fetch, git pull, and git clone?](./version-control/what-is-the-difference-between-git-fetch-git-pull-and-git-clone.md)                           | 🟢 Beginner     |
 
 </details>
 
 <details>
-<summary><b>Scripting and Automation</b> · 4 questions · 🟢 1 🟡 2 🔴 1</summary>
+<summary><b>Scripting and Automation</b> · 6 questions · 🟢 1 🟡 4 🔴 1</summary>
 
 [Open the Scripting and Automation index →](./scripting-and-automation/README.md)
 
@@ -217,35 +223,42 @@ _27 questions_
 | 267 | [What do you use Python for as a DevOps engineer?](./scripting-and-automation/what-do-you-use-python-for-as-a-devops-engineer.md)                                             | 🟡 Intermediate |
 | 301 | [When do you use Bash and when do you use Python?](./scripting-and-automation/when-do-you-use-bash-and-when-do-you-use-python.md)                                             | 🟢 Beginner     |
 | 302 | [How do you turn a pile of ad hoc scripts into maintainable automation?](./scripting-and-automation/how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation.md) | 🔴 Advanced     |
+| 502 | [What Bash scripting exercises come up in DevOps interviews?](./scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md)                       | 🟡 Intermediate |
+| 503 | [What Python exercises come up in DevOps interviews?](./scripting-and-automation/what-python-exercises-come-up-in-devops-interviews.md)                                       | 🟡 Intermediate |
 
 </details>
 
 ### 📦 Containers and Kubernetes
 
-_39 questions_
+_56 questions_
 
 <details>
-<summary><b>Docker</b> · 10 questions · 🟢 4 🟡 5 🔴 1</summary>
+<summary><b>Docker</b> · 15 questions · 🟢 6 🟡 7 🔴 2</summary>
 
 [Open the Docker index →](./docker/README.md)
 
-| No. | Question                                                                                                                                            | Difficulty      |
-| --- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 6   | [What is Docker?](./docker/what-is-docker.md)                                                                                                       | 🟢 Beginner     |
-| 7   | [What is the difference between Docker Image and Docker Container?](./docker/what-is-the-difference-between-docker-image-and-docker-container.md)   | 🟢 Beginner     |
-| 8   | [What is Dockerfile?](./docker/what-is-dockerfile.md)                                                                                               | 🟢 Beginner     |
-| 9   | [What is Docker Compose?](./docker/what-is-docker-compose.md)                                                                                       | 🟢 Beginner     |
-| 10  | [Explain Docker Architecture](./docker/explain-docker-architecture.md)                                                                              | 🟡 Intermediate |
-| 252 | [What are Docker network types (Bridge, Host, Overlay, Macvlan)?](./docker/what-are-docker-network-types-bridge-host-overlay-macvlan.md)            | 🟡 Intermediate |
-| 260 | [How do you reduce Docker image size and build time?](./docker/how-do-you-reduce-docker-image-size-and-build-time.md)                               | 🟡 Intermediate |
-| 291 | [How do namespaces, cgroups, and capabilities isolate a container?](./docker/how-do-namespaces-cgroups-and-capabilities-isolate-a-container.md)     | 🔴 Advanced     |
-| 415 | [How do you troubleshoot Docker networking between containers?](./docker/how-do-you-troubleshoot-docker-networking-between-containers.md)           | 🟡 Intermediate |
-| 416 | [Why does a container fail to start with a permission denied error?](./docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md) | 🟡 Intermediate |
+| No. | Question                                                                                                                                                                  | Difficulty      |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 6   | [What is Docker?](./docker/what-is-docker.md)                                                                                                                             | 🟢 Beginner     |
+| 7   | [What is the difference between Docker Image and Docker Container?](./docker/what-is-the-difference-between-docker-image-and-docker-container.md)                         | 🟢 Beginner     |
+| 8   | [What is Dockerfile?](./docker/what-is-dockerfile.md)                                                                                                                     | 🟢 Beginner     |
+| 9   | [What is Docker Compose?](./docker/what-is-docker-compose.md)                                                                                                             | 🟢 Beginner     |
+| 10  | [Explain Docker Architecture](./docker/explain-docker-architecture.md)                                                                                                    | 🟡 Intermediate |
+| 252 | [What are Docker network types (Bridge, Host, Overlay, Macvlan)?](./docker/what-are-docker-network-types-bridge-host-overlay-macvlan.md)                                  | 🟡 Intermediate |
+| 260 | [How do you reduce Docker image size and build time?](./docker/how-do-you-reduce-docker-image-size-and-build-time.md)                                                     | 🟡 Intermediate |
+| 291 | [How do namespaces, cgroups, and capabilities isolate a container?](./docker/how-do-namespaces-cgroups-and-capabilities-isolate-a-container.md)                           | 🔴 Advanced     |
+| 415 | [How do you troubleshoot Docker networking between containers?](./docker/how-do-you-troubleshoot-docker-networking-between-containers.md)                                 | 🟡 Intermediate |
+| 416 | [Why does a container fail to start with a permission denied error?](./docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)                       | 🟡 Intermediate |
+| 437 | [What is the difference between CMD and ENTRYPOINT in a Dockerfile?](./docker/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile.md)                       | 🟡 Intermediate |
+| 438 | [What is the difference between the COPY and ADD instructions in a Dockerfile?](./docker/what-is-the-difference-between-the-copy-and-add-instructions-in-a-dockerfile.md) | 🟢 Beginner     |
+| 439 | [How does Docker layer caching work?](./docker/how-does-docker-layer-caching-work.md)                                                                                     | 🟡 Intermediate |
+| 440 | [What is the difference between a bind mount and a volume in Docker?](./docker/what-is-the-difference-between-a-bind-mount-and-a-volume-in-docker.md)                     | 🟢 Beginner     |
+| 441 | [How do you harden a container image and a Dockerfile?](./docker/how-do-you-harden-a-container-image-and-a-dockerfile.md)                                                 | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Kubernetes</b> · 19 questions · 🟢 3 🟡 13 🔴 3</summary>
+<summary><b>Kubernetes</b> · 27 questions · 🟢 3 🟡 18 🔴 6</summary>
 
 [Open the Kubernetes index →](./kubernetes/README.md)
 
@@ -270,11 +283,19 @@ _39 questions_
 | 408 | [How do you troubleshoot a Kubernetes Job or CronJob that never completes?](./kubernetes/how-do-you-troubleshoot-a-kubernetes-job-or-cronjob-that-never-completes.md)                        | 🟡 Intermediate |
 | 409 | [How do you handle node pressure and Pod evictions in Kubernetes?](./kubernetes/how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md)                                          | 🔴 Advanced     |
 | 410 | [How do you perform and roll back a rolling update in Kubernetes?](./kubernetes/how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes.md)                                          | 🟡 Intermediate |
+| 442 | [What is the difference between a ConfigMap and a Secret in Kubernetes?](./kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)                              | 🟡 Intermediate |
+| 443 | [How does persistent storage work in Kubernetes?](./kubernetes/how-does-persistent-storage-work-in-kubernetes.md)                                                                            | 🟡 Intermediate |
+| 444 | [How do requests, limits, and QoS classes work in Kubernetes?](./kubernetes/how-do-requests-limits-and-qos-classes-work-in-kubernetes.md)                                                    | 🟡 Intermediate |
+| 445 | [What are init containers and sidecar containers in Kubernetes?](./kubernetes/what-are-init-containers-and-sidecar-containers-in-kubernetes.md)                                              | 🟡 Intermediate |
+| 446 | [What is a PodDisruptionBudget and when do you need one?](./kubernetes/what-is-a-poddisruptionbudget-and-when-do-you-need-one.md)                                                            | 🔴 Advanced     |
+| 447 | [How does Pod networking and service discovery work in Kubernetes?](./kubernetes/how-does-pod-networking-and-service-discovery-work-in-kubernetes.md)                                        | 🔴 Advanced     |
+| 448 | [What happens when a Kubernetes control-plane node or etcd fails?](./kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md)                                          | 🔴 Advanced     |
+| 449 | [How do you troubleshoot a Kubernetes node that is NotReady?](./kubernetes/how-do-you-troubleshoot-a-kubernetes-node-that-is-notready.md)                                                    | 🟡 Intermediate |
 
 </details>
 
 <details>
-<summary><b>Container Orchestration Advanced</b> · 10 questions · 🟢 1 🟡 3 🔴 6</summary>
+<summary><b>Container Orchestration Advanced</b> · 14 questions · 🟢 1 🟡 4 🔴 9</summary>
 
 [Open the Container Orchestration Advanced index →](./container-orchestration-advanced/README.md)
 
@@ -290,15 +311,19 @@ _39 questions_
 | 412 | [How do you troubleshoot a failed Helm release?](./container-orchestration-advanced/how-do-you-troubleshoot-a-failed-helm-release.md)                                                 | 🟡 Intermediate |
 | 413 | [How do you run and scale a stateful application on Kubernetes?](./container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)                 | 🔴 Advanced     |
 | 414 | [How do you run an application across multiple Kubernetes clusters?](./container-orchestration-advanced/how-do-you-run-an-application-across-multiple-kubernetes-clusters.md)         | 🔴 Advanced     |
+| 450 | [What is inside a Helm chart, and how do you customise one?](./container-orchestration-advanced/what-is-inside-a-helm-chart-and-how-do-you-customise-one.md)                          | 🟡 Intermediate |
+| 451 | [How do you back up and restore a Kubernetes cluster?](./container-orchestration-advanced/how-do-you-back-up-and-restore-a-kubernetes-cluster.md)                                     | 🔴 Advanced     |
+| 452 | [What are CustomResourceDefinitions and operators in Kubernetes?](./container-orchestration-advanced/what-are-customresourcedefinitions-and-operators-in-kubernetes.md)               | 🔴 Advanced     |
+| 453 | [How do you run a multi-tenant Kubernetes cluster?](./container-orchestration-advanced/how-do-you-run-a-multi-tenant-kubernetes-cluster.md)                                           | 🔴 Advanced     |
 
 </details>
 
 ### 🔁 Delivery and Automation
 
-_38 questions_
+_56 questions_
 
 <details>
-<summary><b>CI/CD</b> · 14 questions · 🟢 2 🟡 10 🔴 2</summary>
+<summary><b>CI/CD</b> · 20 questions · 🟢 2 🟡 14 🔴 4</summary>
 
 [Open the CI/CD index →](./cicd/README.md)
 
@@ -318,11 +343,17 @@ _38 questions_
 | 400 | [How do you design CI/CD for a microservices architecture?](./cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)                                                     | 🔴 Advanced     |
 | 401 | [How do you keep dependencies up to date without breaking the build?](./cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)                                 | 🟡 Intermediate |
 | 402 | [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](./cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md) | 🟡 Intermediate |
+| 454 | [What is the difference between a declarative and a scripted Jenkins pipeline?](./cicd/what-is-the-difference-between-a-declarative-and-a-scripted-jenkins-pipeline.md)             | 🟡 Intermediate |
+| 455 | [How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?](./cicd/how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md)            | 🟡 Intermediate |
+| 456 | [How do you run and secure a Jenkins controller in production?](./cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)                                             | 🔴 Advanced     |
+| 457 | [How do you write an efficient and secure GitHub Actions workflow?](./cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)                                     | 🟡 Intermediate |
+| 458 | [How do you integrate SonarQube and quality gates into a pipeline?](./cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)                                     | 🟡 Intermediate |
+| 459 | [How do you scale CI/CD across many services and teams?](./cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)                                                           | 🔴 Advanced     |
 
 </details>
 
 <details>
-<summary><b>Infrastructure as Code</b> · 10 questions · 🟢 3 🟡 5 🔴 2</summary>
+<summary><b>Infrastructure as Code</b> · 16 questions · 🟢 4 🟡 8 🔴 4</summary>
 
 [Open the Infrastructure as Code index →](./infrastructure-as-code/README.md)
 
@@ -338,28 +369,38 @@ _38 questions_
 | 262 | [How do you recover a lost or corrupted Terraform state file?](./infrastructure-as-code/how-do-you-recover-a-lost-or-corrupted-terraform-state-file.md)                                 | 🔴 Advanced     |
 | 421 | [What is immutable infrastructure and how do you adopt it?](./infrastructure-as-code/what-is-immutable-infrastructure-and-how-do-you-adopt-it.md)                                       | 🟡 Intermediate |
 | 422 | [How do you structure Terraform code for multiple environments and providers?](./infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md) | 🔴 Advanced     |
+| 462 | [What do terraform init, plan, apply, and refresh actually do?](./infrastructure-as-code/what-do-terraform-init-plan-apply-and-refresh-actually-do.md)                                  | 🟢 Beginner     |
+| 463 | [How do you write and structure a reusable Terraform module?](./infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)                                   | 🟡 Intermediate |
+| 464 | [What is the difference between count and for_each in Terraform?](./infrastructure-as-code/what-is-the-difference-between-count-and-for-each-in-terraform.md)                           | 🟡 Intermediate |
+| 465 | [How do you stop Terraform from destroying or recreating a resource?](./infrastructure-as-code/how-do-you-stop-terraform-from-destroying-or-recreating-a-resource.md)                   | 🔴 Advanced     |
+| 466 | [How do you run Terraform through a CI/CD pipeline?](./infrastructure-as-code/how-do-you-run-terraform-through-a-ci-cd-pipeline.md)                                                     | 🔴 Advanced     |
+| 467 | [What are Terraform provisioners and when should you avoid them?](./infrastructure-as-code/what-are-terraform-provisioners-and-when-should-you-avoid-them.md)                           | 🟡 Intermediate |
 
 </details>
 
 <details>
-<summary><b>Configuration Management</b> · 7 questions · 🟢 1 🟡 5 🔴 1</summary>
+<summary><b>Configuration Management</b> · 11 questions · 🟢 1 🟡 9 🔴 1</summary>
 
 [Open the Configuration Management index →](./configuration-management/README.md)
 
-| No. | Question                                                                                                                                              | Difficulty      |
-| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 51  | [What is Configuration Management?](./configuration-management/what-is-configuration-management.md)                                                   | 🟢 Beginner     |
-| 52  | [What is Puppet?](./configuration-management/what-is-puppet.md)                                                                                       | 🟡 Intermediate |
-| 53  | [What is Chef?](./configuration-management/what-is-chef.md)                                                                                           | 🟡 Intermediate |
-| 54  | [What is Salt (SaltStack)?](./configuration-management/what-is-salt-saltstack.md)                                                                     | 🟡 Intermediate |
-| 55  | [Compare different Configuration Management tools](./configuration-management/compare-different-configuration-management-tools.md)                    | 🟡 Intermediate |
-| 283 | [How do you run Ansible at scale across thousands of hosts?](./configuration-management/how-do-you-run-ansible-at-scale-across-thousands-of-hosts.md) | 🔴 Advanced     |
-| 430 | [How do you patch hundreds of servers safely?](./configuration-management/how-do-you-patch-hundreds-of-servers-safely.md)                             | 🟡 Intermediate |
+| No. | Question                                                                                                                                                                          | Difficulty      |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 51  | [What is Configuration Management?](./configuration-management/what-is-configuration-management.md)                                                                               | 🟢 Beginner     |
+| 52  | [What is Puppet?](./configuration-management/what-is-puppet.md)                                                                                                                   | 🟡 Intermediate |
+| 53  | [What is Chef?](./configuration-management/what-is-chef.md)                                                                                                                       | 🟡 Intermediate |
+| 54  | [What is Salt (SaltStack)?](./configuration-management/what-is-salt-saltstack.md)                                                                                                 | 🟡 Intermediate |
+| 55  | [Compare different Configuration Management tools](./configuration-management/compare-different-configuration-management-tools.md)                                                | 🟡 Intermediate |
+| 283 | [How do you run Ansible at scale across thousands of hosts?](./configuration-management/how-do-you-run-ansible-at-scale-across-thousands-of-hosts.md)                             | 🔴 Advanced     |
+| 430 | [How do you patch hundreds of servers safely?](./configuration-management/how-do-you-patch-hundreds-of-servers-safely.md)                                                         | 🟡 Intermediate |
+| 468 | [How do you structure an Ansible role and share it through Galaxy?](./configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md)               | 🟡 Intermediate |
+| 469 | [How do you manage Ansible inventories and variables across environments?](./configuration-management/how-do-you-manage-ansible-inventories-and-variables-across-environments.md) | 🟡 Intermediate |
+| 470 | [How do you handle secrets in Ansible with Vault?](./configuration-management/how-do-you-handle-secrets-in-ansible-with-vault.md)                                                 | 🟡 Intermediate |
+| 471 | [How do you debug and safely test an Ansible playbook?](./configuration-management/how-do-you-debug-and-safely-test-an-ansible-playbook.md)                                       | 🟡 Intermediate |
 
 </details>
 
 <details>
-<summary><b>DevOps Tools and Automation</b> · 7 questions · 🟢 1 🟡 5 🔴 1</summary>
+<summary><b>DevOps Tools and Automation</b> · 9 questions · 🟢 2 🟡 6 🔴 1</summary>
 
 [Open the DevOps Tools and Automation index →](./devops-tools-and-automation/README.md)
 
@@ -372,12 +413,14 @@ _38 questions_
 | 90  | [What are Deployment Strategies?](./devops-tools-and-automation/what-are-deployment-strategies.md)                                                             | 🟡 Intermediate |
 | 289 | [How do you consolidate a sprawling DevOps toolchain?](./devops-tools-and-automation/how-do-you-consolidate-a-sprawling-devops-toolchain.md)                   | 🔴 Advanced     |
 | 428 | [How do you troubleshoot a GitOps pipeline that will not sync?](./devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md) | 🟡 Intermediate |
+| 460 | [How do you manage build artefacts with Nexus or Artifactory?](./devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)   | 🟡 Intermediate |
+| 461 | [What do you need to know about Maven as a DevOps engineer?](./devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)       | 🟢 Beginner     |
 
 </details>
 
 ### ☁️ Cloud Providers
 
-_61 questions_
+_79 questions_
 
 <details>
 <summary><b>Cloud Platforms</b> · 7 questions · 🟢 5 🟡 1 🔴 1</summary>
@@ -397,7 +440,7 @@ _61 questions_
 </details>
 
 <details>
-<summary><b>Cloud Cost Optimization</b> · 7 questions · 🟢 2 🟡 4 🔴 1</summary>
+<summary><b>Cloud Cost Optimization</b> · 8 questions · 🟢 2 🟡 5 🔴 1</summary>
 
 [Open the Cloud Cost Optimization index →](./cloud-cost-optimization/README.md)
 
@@ -410,6 +453,7 @@ _61 questions_
 | 95  | [What are cost allocation reports?](./cloud-cost-optimization/what-are-cost-allocation-reports.md)                                                                                                         | 🟡 Intermediate |
 | 246 | [How do you implement real-time Kubernetes cost monitoring using OpenCost or Kubecost?](./cloud-cost-optimization/how-do-you-implement-real-time-kubernetes-cost-monitoring-using-opencost-or-kubecost.md) | 🟡 Intermediate |
 | 278 | [How do you cut a cloud bill without hurting reliability?](./cloud-cost-optimization/how-do-you-cut-a-cloud-bill-without-hurting-reliability.md)                                                           | 🔴 Advanced     |
+| 506 | [How do you investigate a sudden spike in your cloud bill?](./cloud-cost-optimization/how-do-you-investigate-a-sudden-spike-in-your-cloud-bill.md)                                                         | 🟡 Intermediate |
 
 </details>
 
@@ -432,44 +476,61 @@ _61 questions_
 </details>
 
 <details>
-<summary><b>AWS Engineering</b> · 13 questions · 🟢 1 🟡 8 🔴 4</summary>
+<summary><b>AWS Engineering</b> · 26 questions · 🟢 6 🟡 13 🔴 7</summary>
 
 [Open the AWS Engineering index →](./aws-engineering/README.md)
 
-| No. | Question                                                                                                                                                                                       | Difficulty      |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 191 | [How do you design a production-ready VPC on AWS?](./aws-engineering/how-do-you-design-a-production-ready-vpc-on-aws.md)                                                                       | 🟡 Intermediate |
-| 192 | [How does AWS IAM evaluate a request?](./aws-engineering/how-does-aws-iam-evaluate-a-request.md)                                                                                               | 🔴 Advanced     |
-| 193 | [What is the difference between ECS, EKS, and Fargate?](./aws-engineering/what-is-the-difference-between-ecs-eks-and-fargate.md)                                                               | 🟡 Intermediate |
-| 194 | [How do Auto Scaling groups and load balancers work together on AWS?](./aws-engineering/how-do-auto-scaling-groups-and-load-balancers-work-together-on-aws.md)                                 | 🟡 Intermediate |
-| 195 | [What are the S3 storage classes and when do you use each?](./aws-engineering/what-are-the-s3-storage-classes-and-when-do-you-use-each.md)                                                     | 🟡 Intermediate |
-| 196 | [How do you run a highly available database on AWS?](./aws-engineering/how-do-you-run-a-highly-available-database-on-aws.md)                                                                   | 🔴 Advanced     |
-| 197 | [How do you structure a multi-account AWS organisation?](./aws-engineering/how-do-you-structure-a-multi-account-aws-organisation.md)                                                           | 🔴 Advanced     |
-| 198 | [When do you choose CloudFormation, CDK, or Terraform on AWS?](./aws-engineering/when-do-you-choose-cloudformation-cdk-or-terraform-on-aws.md)                                                 | 🟡 Intermediate |
-| 236 | [How do you automate EC2 log shipping to S3 with IAM boundaries and CloudWatch?](./aws-engineering/how-do-you-automate-ec2-log-shipping-to-s3-with-iam-boundaries-and-cloudwatch.md)           | 🟡 Intermediate |
-| 247 | [How do you secure pod access to AWS resources using EKS Pod Identity or IRSA?](./aws-engineering/how-do-you-secure-pod-access-to-aws-resources-using-eks-pod-identity-or-irsa.md)             | 🟡 Intermediate |
-| 248 | [How do you build a CI/CD pipeline using AWS CodePipeline, CodeBuild, and CodeDeploy?](./aws-engineering/how-do-you-build-a-ci-cd-pipeline-using-aws-codepipeline-codebuild-and-codedeploy.md) | 🟡 Intermediate |
-| 249 | [How do you architect an end-to-end production DevOps project on AWS?](./aws-engineering/how-do-you-architect-an-end-to-end-production-devops-project-on-aws.md)                               | 🔴 Advanced     |
-| 277 | [What are the core AWS services a DevOps engineer uses daily?](./aws-engineering/what-are-the-core-aws-services-a-devops-engineer-uses-daily.md)                                               | 🟢 Beginner     |
+| No. | Question                                                                                                                                                                                           | Difficulty      |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 191 | [How do you design a production-ready VPC on AWS?](./aws-engineering/how-do-you-design-a-production-ready-vpc-on-aws.md)                                                                           | 🟡 Intermediate |
+| 192 | [How does AWS IAM evaluate a request?](./aws-engineering/how-does-aws-iam-evaluate-a-request.md)                                                                                                   | 🔴 Advanced     |
+| 193 | [What is the difference between ECS, EKS, and Fargate?](./aws-engineering/what-is-the-difference-between-ecs-eks-and-fargate.md)                                                                   | 🟡 Intermediate |
+| 194 | [How do Auto Scaling groups and load balancers work together on AWS?](./aws-engineering/how-do-auto-scaling-groups-and-load-balancers-work-together-on-aws.md)                                     | 🟡 Intermediate |
+| 195 | [What are the S3 storage classes and when do you use each?](./aws-engineering/what-are-the-s3-storage-classes-and-when-do-you-use-each.md)                                                         | 🟡 Intermediate |
+| 196 | [How do you run a highly available database on AWS?](./aws-engineering/how-do-you-run-a-highly-available-database-on-aws.md)                                                                       | 🔴 Advanced     |
+| 197 | [How do you structure a multi-account AWS organisation?](./aws-engineering/how-do-you-structure-a-multi-account-aws-organisation.md)                                                               | 🔴 Advanced     |
+| 198 | [When do you choose CloudFormation, CDK, or Terraform on AWS?](./aws-engineering/when-do-you-choose-cloudformation-cdk-or-terraform-on-aws.md)                                                     | 🟡 Intermediate |
+| 236 | [How do you automate EC2 log shipping to S3 with IAM boundaries and CloudWatch?](./aws-engineering/how-do-you-automate-ec2-log-shipping-to-s3-with-iam-boundaries-and-cloudwatch.md)               | 🟡 Intermediate |
+| 247 | [How do you secure pod access to AWS resources using EKS Pod Identity or IRSA?](./aws-engineering/how-do-you-secure-pod-access-to-aws-resources-using-eks-pod-identity-or-irsa.md)                 | 🟡 Intermediate |
+| 248 | [How do you build a CI/CD pipeline using AWS CodePipeline, CodeBuild, and CodeDeploy?](./aws-engineering/how-do-you-build-a-ci-cd-pipeline-using-aws-codepipeline-codebuild-and-codedeploy.md)     | 🟡 Intermediate |
+| 249 | [How do you architect an end-to-end production DevOps project on AWS?](./aws-engineering/how-do-you-architect-an-end-to-end-production-devops-project-on-aws.md)                                   | 🔴 Advanced     |
+| 277 | [What are the core AWS services a DevOps engineer uses daily?](./aws-engineering/what-are-the-core-aws-services-a-devops-engineer-uses-daily.md)                                                   | 🟢 Beginner     |
+| 472 | [What is the difference between a security group and a network ACL?](./aws-engineering/what-is-the-difference-between-a-security-group-and-a-network-acl.md)                                       | 🟢 Beginner     |
+| 473 | [How does a private subnet reach the internet?](./aws-engineering/how-does-a-private-subnet-reach-the-internet.md)                                                                                 | 🟢 Beginner     |
+| 474 | [What are VPC endpoints, and when do you use a gateway versus an interface endpoint?](./aws-engineering/what-are-vpc-endpoints-and-when-do-you-use-a-gateway-versus-an-interface-endpoint.md)      | 🟡 Intermediate |
+| 475 | [How do you connect many VPCs — peering, Transit Gateway, or PrivateLink?](./aws-engineering/how-do-you-connect-many-vpcs-peering-transit-gateway-or-privatelink.md)                               | 🔴 Advanced     |
+| 476 | [How do you access an instance in a private subnet without SSH keys or a bastion host?](./aws-engineering/how-do-you-access-an-instance-in-a-private-subnet-without-ssh-keys-or-a-bastion-host.md) | 🟡 Intermediate |
+| 477 | [How do you authenticate to AWS without long-lived access keys?](./aws-engineering/how-do-you-authenticate-to-aws-without-long-lived-access-keys.md)                                               | 🔴 Advanced     |
+| 478 | [How do you secure and manage the lifecycle of an S3 bucket?](./aws-engineering/how-do-you-secure-and-manage-the-lifecycle-of-an-s3-bucket.md)                                                     | 🟡 Intermediate |
+| 479 | [How do you choose between EBS, EFS, and S3?](./aws-engineering/how-do-you-choose-between-ebs-efs-and-s3.md)                                                                                       | 🟢 Beginner     |
+| 480 | [How do you upgrade, scale, and resize an RDS instance without downtime?](./aws-engineering/how-do-you-upgrade-scale-and-resize-an-rds-instance-without-downtime.md)                               | 🔴 Advanced     |
+| 481 | [What are the DNS record types, and how do you delegate a domain?](./aws-engineering/what-are-the-dns-record-types-and-how-do-you-delegate-a-domain.md)                                            | 🟢 Beginner     |
+| 482 | [How do you configure Auto Scaling group policies, health checks, and instance refresh?](./aws-engineering/how-do-you-configure-auto-scaling-group-policies-health-checks-and-instance-refresh.md) | 🟡 Intermediate |
+| 483 | [What is the difference between CloudWatch, CloudTrail, and AWS Config?](./aws-engineering/what-is-the-difference-between-cloudwatch-cloudtrail-and-aws-config.md)                                 | 🟢 Beginner     |
+| 484 | [How do you run a service on Amazon ECS?](./aws-engineering/how-do-you-run-a-service-on-amazon-ecs.md)                                                                                             | 🟡 Intermediate |
 
 </details>
 
 <details>
-<summary><b>Azure Engineering</b> · 9 questions · 🟢 1 🟡 6 🔴 2</summary>
+<summary><b>Azure Engineering</b> · 13 questions · 🟢 1 🟡 10 🔴 2</summary>
 
 [Open the Azure Engineering index →](./azure-engineering/README.md)
 
-| No. | Question                                                                                                                                                               | Difficulty      |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 199 | [How is the Azure resource hierarchy organised?](./azure-engineering/how-is-the-azure-resource-hierarchy-organised.md)                                                 | 🟢 Beginner     |
-| 200 | [What is Microsoft Entra ID and how does Azure RBAC work?](./azure-engineering/what-is-microsoft-entra-id-and-how-does-azure-rbac-work.md)                             | 🟡 Intermediate |
-| 201 | [How do you design an Azure virtual network?](./azure-engineering/how-do-you-design-an-azure-virtual-network.md)                                                       | 🟡 Intermediate |
-| 202 | [What is Azure Kubernetes Service (AKS)?](./azure-engineering/what-is-azure-kubernetes-service-aks.md)                                                                 | 🟡 Intermediate |
-| 203 | [What is Bicep and how does it compare to ARM templates?](./azure-engineering/what-is-bicep-and-how-does-it-compare-to-arm-templates.md)                               | 🟡 Intermediate |
-| 204 | [What is Azure Policy and how do landing zones use it?](./azure-engineering/what-is-azure-policy-and-how-do-landing-zones-use-it.md)                                   | 🔴 Advanced     |
-| 205 | [How do you monitor Azure with Azure Monitor and KQL?](./azure-engineering/how-do-you-monitor-azure-with-azure-monitor-and-kql.md)                                     | 🟡 Intermediate |
-| 206 | [When do you choose App Service, Container Apps, or Azure Functions?](./azure-engineering/when-do-you-choose-app-service-container-apps-or-azure-functions.md)         | 🟡 Intermediate |
-| 250 | [How do you architect an end-to-end production DevOps project on Azure?](./azure-engineering/how-do-you-architect-an-end-to-end-production-devops-project-on-azure.md) | 🔴 Advanced     |
+| No. | Question                                                                                                                                                                                                                 | Difficulty      |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
+| 199 | [How is the Azure resource hierarchy organised?](./azure-engineering/how-is-the-azure-resource-hierarchy-organised.md)                                                                                                   | 🟢 Beginner     |
+| 200 | [What is Microsoft Entra ID and how does Azure RBAC work?](./azure-engineering/what-is-microsoft-entra-id-and-how-does-azure-rbac-work.md)                                                                               | 🟡 Intermediate |
+| 201 | [How do you design an Azure virtual network?](./azure-engineering/how-do-you-design-an-azure-virtual-network.md)                                                                                                         | 🟡 Intermediate |
+| 202 | [What is Azure Kubernetes Service (AKS)?](./azure-engineering/what-is-azure-kubernetes-service-aks.md)                                                                                                                   | 🟡 Intermediate |
+| 203 | [What is Bicep and how does it compare to ARM templates?](./azure-engineering/what-is-bicep-and-how-does-it-compare-to-arm-templates.md)                                                                                 | 🟡 Intermediate |
+| 204 | [What is Azure Policy and how do landing zones use it?](./azure-engineering/what-is-azure-policy-and-how-do-landing-zones-use-it.md)                                                                                     | 🔴 Advanced     |
+| 205 | [How do you monitor Azure with Azure Monitor and KQL?](./azure-engineering/how-do-you-monitor-azure-with-azure-monitor-and-kql.md)                                                                                       | 🟡 Intermediate |
+| 206 | [When do you choose App Service, Container Apps, or Azure Functions?](./azure-engineering/when-do-you-choose-app-service-container-apps-or-azure-functions.md)                                                           | 🟡 Intermediate |
+| 250 | [How do you architect an end-to-end production DevOps project on Azure?](./azure-engineering/how-do-you-architect-an-end-to-end-production-devops-project-on-azure.md)                                                   | 🔴 Advanced     |
+| 485 | [How do you build a CI/CD pipeline in Azure DevOps?](./azure-engineering/how-do-you-build-a-ci-cd-pipeline-in-azure-devops.md)                                                                                           | 🟡 Intermediate |
+| 486 | [How do you consume Azure Key Vault secrets from AKS and Azure Pipelines?](./azure-engineering/how-do-you-consume-azure-key-vault-secrets-from-aks-and-azure-pipelines.md)                                               | 🟡 Intermediate |
+| 487 | [How do you choose between Azure Load Balancer, Application Gateway, and Front Door?](./azure-engineering/how-do-you-choose-between-azure-load-balancer-application-gateway-and-front-door.md)                           | 🟡 Intermediate |
+| 488 | [What is the difference between a managed identity, a service principal, and an app registration?](./azure-engineering/what-is-the-difference-between-a-managed-identity-a-service-principal-and-an-app-registration.md) | 🟡 Intermediate |
 
 </details>
 
@@ -512,7 +573,7 @@ _61 questions_
 
 ### 🏗️ Architecture and Scale
 
-_45 questions_
+_47 questions_
 
 <details>
 <summary><b>Scalability and High Availability</b> · 9 questions · 🟢 4 🟡 2 🔴 3</summary>
@@ -534,7 +595,7 @@ _45 questions_
 </details>
 
 <details>
-<summary><b>Cloud Native Architecture</b> · 7 questions · 🟢 1 🟡 4 🔴 2</summary>
+<summary><b>Cloud Native Architecture</b> · 8 questions · 🟢 1 🟡 4 🔴 3</summary>
 
 [Open the Cloud Native Architecture index →](./cloud-native-architecture/README.md)
 
@@ -547,6 +608,7 @@ _45 questions_
 | 70  | [What are the 12-Factor App principles?](./cloud-native-architecture/what-are-the-12-factor-app-principles.md)                                                               | 🟡 Intermediate |
 | 280 | [What is the difference between a monolith and microservices?](./cloud-native-architecture/what-is-the-difference-between-a-monolith-and-microservices.md)                   | 🟢 Beginner     |
 | 426 | [How do you troubleshoot high latency in a microservices architecture?](./cloud-native-architecture/how-do-you-troubleshoot-high-latency-in-a-microservices-architecture.md) | 🔴 Advanced     |
+| 505 | [How do you design a secure, highly available three-tier architecture?](./cloud-native-architecture/how-do-you-design-a-secure-highly-available-three-tier-architecture.md)  | 🔴 Advanced     |
 
 </details>
 
@@ -567,19 +629,20 @@ _45 questions_
 </details>
 
 <details>
-<summary><b>API Gateway and Service Mesh</b> · 7 questions · 🟢 3 🟡 2 🔴 2</summary>
+<summary><b>API Gateway and Service Mesh</b> · 8 questions · 🟢 3 🟡 3 🔴 2</summary>
 
 [Open the API Gateway and Service Mesh index →](./api-gateway-and-service-mesh/README.md)
 
-| No. | Question                                                                                                                                                                                      | Difficulty      |
-| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 76  | [What is an API Gateway?](./api-gateway-and-service-mesh/what-is-an-api-gateway.md)                                                                                                           | 🟡 Intermediate |
-| 77  | [What are the benefits of using API Gateway?](./api-gateway-and-service-mesh/what-are-the-benefits-of-using-api-gateway.md)                                                                   | 🟢 Beginner     |
-| 78  | [What is API Security?](./api-gateway-and-service-mesh/what-is-api-security.md)                                                                                                               | 🟡 Intermediate |
-| 79  | [What is Rate Limiting?](./api-gateway-and-service-mesh/what-is-rate-limiting.md)                                                                                                             | 🟢 Beginner     |
-| 80  | [What is API Documentation?](./api-gateway-and-service-mesh/what-is-api-documentation.md)                                                                                                     | 🟢 Beginner     |
-| 276 | [How do you run a service mesh in production without the sidecar tax?](./api-gateway-and-service-mesh/how-do-you-run-a-service-mesh-in-production-without-the-sidecar-tax.md)                 | 🔴 Advanced     |
-| 427 | [How do you debug a service mesh that is breaking service-to-service traffic?](./api-gateway-and-service-mesh/how-do-you-debug-a-service-mesh-that-is-breaking-service-to-service-traffic.md) | 🔴 Advanced     |
+| No. | Question                                                                                                                                                                                                 | Difficulty      |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 76  | [What is an API Gateway?](./api-gateway-and-service-mesh/what-is-an-api-gateway.md)                                                                                                                      | 🟡 Intermediate |
+| 77  | [What are the benefits of using API Gateway?](./api-gateway-and-service-mesh/what-are-the-benefits-of-using-api-gateway.md)                                                                              | 🟢 Beginner     |
+| 78  | [What is API Security?](./api-gateway-and-service-mesh/what-is-api-security.md)                                                                                                                          | 🟡 Intermediate |
+| 79  | [What is Rate Limiting?](./api-gateway-and-service-mesh/what-is-rate-limiting.md)                                                                                                                        | 🟢 Beginner     |
+| 80  | [What is API Documentation?](./api-gateway-and-service-mesh/what-is-api-documentation.md)                                                                                                                | 🟢 Beginner     |
+| 276 | [How do you run a service mesh in production without the sidecar tax?](./api-gateway-and-service-mesh/how-do-you-run-a-service-mesh-in-production-without-the-sidecar-tax.md)                            | 🔴 Advanced     |
+| 427 | [How do you debug a service mesh that is breaking service-to-service traffic?](./api-gateway-and-service-mesh/how-do-you-debug-a-service-mesh-that-is-breaking-service-to-service-traffic.md)            | 🔴 Advanced     |
+| 507 | [What do the common HTTP status codes mean, and how do you debug a 502, 503, or 504?](./api-gateway-and-service-mesh/what-do-the-common-http-status-codes-mean-and-how-do-you-debug-a-502-503-or-504.md) | 🟡 Intermediate |
 
 </details>
 
@@ -621,22 +684,24 @@ _45 questions_
 
 ### 📈 Reliability and Operations
 
-_58 questions_
+_60 questions_
 
 <details>
-<summary><b>Monitoring and Logging</b> · 7 questions · 🟢 4 🟡 2 🔴 1</summary>
+<summary><b>Monitoring and Logging</b> · 9 questions · 🟢 4 🟡 4 🔴 1</summary>
 
 [Open the Monitoring and Logging index →](./monitoring-and-logging/README.md)
 
-| No. | Question                                                                                                                                                                | Difficulty      |
-| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 31  | [What is monitoring in DevOps?](./monitoring-and-logging/what-is-monitoring-in-devops.md)                                                                               | 🟢 Beginner     |
-| 32  | [What is ELK Stack?](./monitoring-and-logging/what-is-elk-stack.md)                                                                                                     | 🟡 Intermediate |
-| 33  | [What is Prometheus?](./monitoring-and-logging/what-is-prometheus.md)                                                                                                   | 🟢 Beginner     |
-| 34  | [What is Grafana?](./monitoring-and-logging/what-is-grafana.md)                                                                                                         | 🟢 Beginner     |
-| 35  | [Explain the difference between monitoring and logging](./monitoring-and-logging/explain-the-difference-between-monitoring-and-logging.md)                              | 🟢 Beginner     |
-| 253 | [How do you write effective PromQL queries and Alertmanager rules?](./monitoring-and-logging/how-do-you-write-effective-promql-queries-and-alertmanager-rules.md)       | 🟡 Intermediate |
-| 296 | [How do you design a logging pipeline that stays affordable at scale?](./monitoring-and-logging/how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale.md) | 🔴 Advanced     |
+| No. | Question                                                                                                                                                                     | Difficulty      |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 31  | [What is monitoring in DevOps?](./monitoring-and-logging/what-is-monitoring-in-devops.md)                                                                                    | 🟢 Beginner     |
+| 32  | [What is ELK Stack?](./monitoring-and-logging/what-is-elk-stack.md)                                                                                                          | 🟡 Intermediate |
+| 33  | [What is Prometheus?](./monitoring-and-logging/what-is-prometheus.md)                                                                                                        | 🟢 Beginner     |
+| 34  | [What is Grafana?](./monitoring-and-logging/what-is-grafana.md)                                                                                                              | 🟢 Beginner     |
+| 35  | [Explain the difference between monitoring and logging](./monitoring-and-logging/explain-the-difference-between-monitoring-and-logging.md)                                   | 🟢 Beginner     |
+| 253 | [How do you write effective PromQL queries and Alertmanager rules?](./monitoring-and-logging/how-do-you-write-effective-promql-queries-and-alertmanager-rules.md)            | 🟡 Intermediate |
+| 296 | [How do you design a logging pipeline that stays affordable at scale?](./monitoring-and-logging/how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale.md)      | 🔴 Advanced     |
+| 500 | [How does Prometheus collect metrics, and what components sit around it?](./monitoring-and-logging/how-does-prometheus-collect-metrics-and-what-components-sit-around-it.md) | 🟡 Intermediate |
+| 501 | [How do the ELK and EFK stacks fit together?](./monitoring-and-logging/how-do-the-elk-and-efk-stacks-fit-together.md)                                                        | 🟡 Intermediate |
 
 </details>
 
@@ -763,7 +828,7 @@ _58 questions_
 
 ### 🔐 Security
 
-_32 questions_
+_38 questions_
 
 <details>
 <summary><b>Security and Compliance</b> · 6 questions · 🟢 1 🟡 3 🔴 2</summary>
@@ -782,24 +847,29 @@ _32 questions_
 </details>
 
 <details>
-<summary><b>Network Security</b> · 7 questions · 🟢 2 🟡 4 🔴 1</summary>
+<summary><b>Network Security</b> · 12 questions · 🟢 4 🟡 6 🔴 2</summary>
 
 [Open the Network Security index →](./network-security/README.md)
 
-| No. | Question                                                                                                                                            | Difficulty      |
-| --- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 116 | [What is Network Security in DevOps?](./network-security/what-is-network-security-in-devops.md)                                                     | 🟡 Intermediate |
-| 117 | [What is Zero Trust Security?](./network-security/what-is-zero-trust-security.md)                                                                   | 🟡 Intermediate |
-| 118 | [What is SSL/TLS?](./network-security/what-is-ssl-tls.md)                                                                                           | 🟢 Beginner     |
-| 119 | [What is a Web Application Firewall (WAF)?](./network-security/what-is-a-web-application-firewall-waf.md)                                           | 🟢 Beginner     |
-| 120 | [What is Network Segmentation?](./network-security/what-is-network-segmentation.md)                                                                 | 🟡 Intermediate |
-| 270 | [What happens when a user opens your application in a browser?](./network-security/what-happens-when-a-user-opens-your-application-in-a-browser.md) | 🟡 Intermediate |
-| 297 | [How do you design defence in depth for a cloud network?](./network-security/how-do-you-design-defence-in-depth-for-a-cloud-network.md)             | 🔴 Advanced     |
+| No. | Question                                                                                                                                                                              | Difficulty      |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 116 | [What is Network Security in DevOps?](./network-security/what-is-network-security-in-devops.md)                                                                                       | 🟡 Intermediate |
+| 117 | [What is Zero Trust Security?](./network-security/what-is-zero-trust-security.md)                                                                                                     | 🟡 Intermediate |
+| 118 | [What is SSL/TLS?](./network-security/what-is-ssl-tls.md)                                                                                                                             | 🟢 Beginner     |
+| 119 | [What is a Web Application Firewall (WAF)?](./network-security/what-is-a-web-application-firewall-waf.md)                                                                             | 🟢 Beginner     |
+| 120 | [What is Network Segmentation?](./network-security/what-is-network-segmentation.md)                                                                                                   | 🟡 Intermediate |
+| 270 | [What happens when a user opens your application in a browser?](./network-security/what-happens-when-a-user-opens-your-application-in-a-browser.md)                                   | 🟡 Intermediate |
+| 297 | [How do you design defence in depth for a cloud network?](./network-security/how-do-you-design-defence-in-depth-for-a-cloud-network.md)                                               | 🔴 Advanced     |
+| 489 | [What is the OSI model, and what is the difference between TCP and UDP?](./network-security/what-is-the-osi-model-and-what-is-the-difference-between-tcp-and-udp.md)                  | 🟢 Beginner     |
+| 490 | [How do you plan CIDR ranges and subnets?](./network-security/how-do-you-plan-cidr-ranges-and-subnets.md)                                                                             | 🟡 Intermediate |
+| 491 | [How do you manage TLS certificates in production?](./network-security/how-do-you-manage-tls-certificates-in-production.md)                                                           | 🟡 Intermediate |
+| 492 | [How do you protect a public web application against the OWASP Top 10 and DDoS?](./network-security/how-do-you-protect-a-public-web-application-against-the-owasp-top-10-and-ddos.md) | 🔴 Advanced     |
+| 493 | [What is the difference between a reverse proxy and a forward proxy?](./network-security/what-is-the-difference-between-a-reverse-proxy-and-a-forward-proxy.md)                       | 🟢 Beginner     |
 
 </details>
 
 <details>
-<summary><b>DevSecOps</b> · 11 questions · 🟢 1 🟡 7 🔴 3</summary>
+<summary><b>DevSecOps</b> · 12 questions · 🟢 1 🟡 7 🔴 4</summary>
 
 [Open the DevSecOps index →](./devsecops/README.md)
 
@@ -816,6 +886,7 @@ _32 questions_
 | 244 | [How do you enforce Kubernetes admission control with Kyverno or OPA Gatekeeper?](./devsecops/how-do-you-enforce-kubernetes-admission-control-with-kyverno-or-opa-gatekeeper.md) | 🟡 Intermediate |
 | 290 | [What does shift left security mean?](./devsecops/what-does-shift-left-security-mean.md)                                                                                         | 🟢 Beginner     |
 | 429 | [How do you rotate secrets without downtime?](./devsecops/how-do-you-rotate-secrets-without-downtime.md)                                                                         | 🔴 Advanced     |
+| 504 | [How do you manage Kubernetes secrets in a GitOps workflow?](./devsecops/how-do-you-manage-kubernetes-secrets-in-a-gitops-workflow.md)                                           | 🔴 Advanced     |
 
 </details>
 
@@ -1112,7 +1183,6 @@ Special thanks and heartfelt gratitude to the creators and maintainers of the fo
 - **[bregman-arie/devops-exercises](https://github.com/bregman-arie/devops-exercises)** – Extensive collection of DevOps exercises, diagrams, and practical questions.
 - **[tikam02/devops-guide](https://github.com/tikam02/devops-guide)** – Practical guide for DevOps configurations, cheat sheets, and systems management.
 - **[NotHarshhaa/AWS-GCP-Azure-Cloud-Projects-Workshop](https://github.com/NotHarshhaa/AWS-GCP-Azure-Cloud-Projects-Workshop)** – Hands-on multi-cloud architecture projects and workshop guides.
-- **[NotHarshhaa/ai-platform-engineering-handbook](https://github.com/NotHarshhaa/ai-platform-engineering-handbook)** – Production-grade AI Platform Engineering, MLOps, and GPU infrastructure patterns.
 - **[NotHarshhaa/DevOps-Projects](https://github.com/NotHarshhaa/DevOps-Projects)** – Practical real-world DevOps project blueprints and automation pipelines.
 - **[NotHarshhaa/DevOps-Interview-Questions](https://github.com/NotHarshhaa/DevOps-Interview-Questions)** – Collection of 1100+ DevOps interview questions with detailed answers and solutions.
 - **[iam-veeramalla/devops-interview-preparation-guide](https://github.com/iam-veeramalla/devops-interview-preparation-guide)** – Detailed interview preparation guide and practical scenario breakdowns.
