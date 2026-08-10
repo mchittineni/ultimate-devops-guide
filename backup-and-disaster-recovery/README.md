@@ -11,7 +11,7 @@ tags:
 
 Backup types, RPO/RTO targets, business continuity planning, and the discipline of testing restores.
 
-**6 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 1 · 🔴 Advanced: 1
+**7 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 2 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -23,6 +23,7 @@ Backup types, RPO/RTO targets, business continuity planning, and the discipline 
 | 64  | [What is Business Continuity Planning?](./what-is-business-continuity-planning.md)                                                                         | 🟡 Intermediate |
 | 65  | [What are backup best practices?](./what-are-backup-best-practices.md)                                                                                     | 🟢 Beginner     |
 | 239 | [How do you execute a Disaster Recovery failover with minimal RTO and RPO?](./how-do-you-execute-a-disaster-recovery-failover-with-minimal-rto-and-rpo.md) | 🔴 Advanced     |
+| 436 | [How do you verify that your backups can actually be restored?](./how-do-you-verify-that-your-backups-can-actually-be-restored.md)                         | 🟡 Intermediate |
 
 ## What interviewers probe here
 
