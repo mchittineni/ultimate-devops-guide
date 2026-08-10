@@ -11,7 +11,7 @@ tags:
 
 Reserved and spot capacity, tagging discipline, and the reports that turn a cloud bill into accountable engineering work.
 
-**7 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
+**8 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 5 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -24,6 +24,7 @@ Reserved and spot capacity, tagging discipline, and the reports that turn a clou
 | 95  | [What are cost allocation reports?](./what-are-cost-allocation-reports.md)                                                                                                         | 🟡 Intermediate |
 | 246 | [How do you implement real-time Kubernetes cost monitoring using OpenCost or Kubecost?](./how-do-you-implement-real-time-kubernetes-cost-monitoring-using-opencost-or-kubecost.md) | 🟡 Intermediate |
 | 278 | [How do you cut a cloud bill without hurting reliability?](./how-do-you-cut-a-cloud-bill-without-hurting-reliability.md)                                                           | 🔴 Advanced     |
+| 506 | [How do you investigate a sudden spike in your cloud bill?](./how-do-you-investigate-a-sudden-spike-in-your-cloud-bill.md)                                                         | 🟡 Intermediate |
 
 ## What interviewers probe here
 
