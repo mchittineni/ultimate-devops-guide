@@ -11,7 +11,7 @@ tags:
 
 GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to ship without downtime.
 
-**7 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 5 · 🔴 Advanced: 1
+**9 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 6 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -24,6 +24,8 @@ GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to shi
 | 90  | [What are Deployment Strategies?](./what-are-deployment-strategies.md)                                                             | 🟡 Intermediate |
 | 289 | [How do you consolidate a sprawling DevOps toolchain?](./how-do-you-consolidate-a-sprawling-devops-toolchain.md)                   | 🔴 Advanced     |
 | 428 | [How do you troubleshoot a GitOps pipeline that will not sync?](./how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md) | 🟡 Intermediate |
+| 460 | [How do you manage build artefacts with Nexus or Artifactory?](./how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)   | 🟡 Intermediate |
+| 461 | [What do you need to know about Maven as a DevOps engineer?](./what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)       | 🟢 Beginner     |
 
 ## What interviewers probe here
 
