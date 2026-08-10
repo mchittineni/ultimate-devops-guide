@@ -11,7 +11,7 @@ tags:
 
 Assessment, the 6 Rs, application modernization, and the tooling that moves workloads without surprises.
 
-**6 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
+**8 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 4 · 🔴 Advanced: 3
 
 ## Questions
 
@@ -23,6 +23,8 @@ Assessment, the 6 Rs, application modernization, and the tooling that moves work
 | 139 | [What is Application Modernization?](./what-is-application-modernization.md)                                                                                         | 🟡 Intermediate |
 | 140 | [What are Cloud Migration Tools?](./what-are-cloud-migration-tools.md)                                                                                               | 🟡 Intermediate |
 | 279 | [How do you migrate a production database to the cloud with near-zero downtime?](./how-do-you-migrate-a-production-database-to-the-cloud-with-near-zero-downtime.md) | 🔴 Advanced     |
+| 431 | [How do you containerise a legacy application and move it to Kubernetes?](./how-do-you-containerise-a-legacy-application-and-move-it-to-kubernetes.md)               | 🔴 Advanced     |
+| 432 | [How do you migrate a Kubernetes cluster to another cloud provider?](./how-do-you-migrate-a-kubernetes-cluster-to-another-cloud-provider.md)                         | 🔴 Advanced     |
 
 ## What interviewers probe here
 
