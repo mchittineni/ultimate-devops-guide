@@ -123,11 +123,13 @@ ALTER TABLE users DROP COLUMN name;                 -- metadata-only in PostgreS
 - Be willing to say some changes need a maintenance window, and describe read-only degraded mode as the way to shrink the impact. Honesty beats absolutism here. See [what is database DevOps](./what-is-database-devops.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
