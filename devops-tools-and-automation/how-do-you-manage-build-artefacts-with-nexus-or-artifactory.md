@@ -142,11 +142,13 @@ curl -s -u "$U:$T" "https://nexus.example.com/service/rest/v1/status/check" | jq
 - Mention operational reality: storage growth needs retention policies and GC, and backups must cover blobs and metadata together. See [how do you consolidate a sprawling DevOps toolchain](./how-do-you-consolidate-a-sprawling-devops-toolchain.md), [what is a Software Bill of Materials](../devsecops/what-is-a-software-bill-of-materials-sbom.md), [signing and verifying container images](../devsecops/how-do-you-sign-and-verify-container-images.md), and [promoting a release across dev, staging, and production](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
