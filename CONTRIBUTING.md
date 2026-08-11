@@ -84,11 +84,13 @@ The `# <title>` heading must match the frontmatter exactly.
 Topic READMEs and the root README's table of contents are **generated**. Never edit them by hand - your change will be overwritten and CI will fail.
 
 ```bash
-python3 scripts/generate_indexes.py     # rewrite all indexes from the question files
-python3 scripts/validate_content.py     # frontmatter, naming, links, index freshness
+python3 scripts/generate_indexes.py        # rewrite all indexes from the question files
+python3 scripts/build_knowledge_graph.py   # regenerate 3D knowledge graph (docs/index.html)
+python3 scripts/inject_wikilinks.py        # inject cross-topic [[wikilinks]]
+python3 scripts/validate_content.py        # frontmatter, naming, links, index freshness
 ```
 
-Both are stdlib-only Python 3.11+ - nothing to install.
+All are stdlib-only Python 3.11+ - nothing to install.
 
 Then run the two Markdown checks CI runs. Neither needs a `package.json`; `npx` fetches them on demand:
 

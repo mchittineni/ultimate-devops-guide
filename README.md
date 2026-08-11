@@ -9,16 +9,29 @@ Role tracks: **DevOps** (junior → senior) · **DevSecOps** · **SecOps** · **
 Every answer gives you a short answer you can say out loud, the detail and trade-offs behind it, a runnable example, and the follow-ups to expect.
 
 [![Validate](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/validate-and-format.yml/badge.svg)](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/validate-and-format.yml)
+[![Deploy Knowledge Graph](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/knowledge-graph.yml/badge.svg)](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/knowledge-graph.yml)
 ![Questions](https://img.shields.io/badge/questions-507-blue)
 ![Topics](https://img.shields.io/badge/topics-40-blueviolet)
 ![Difficulty](https://img.shields.io/badge/difficulty-🟢%20110%20·%20🟡%20233%20·%20🔴%20164-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-[Pick your role](#-pick-your-role) · [Browse topics](#-browse-all-topics) · [All questions](#-all-questions) · [How answers are structured](#-how-answers-are-structured) · [Contributing](./CONTRIBUTING.md)
+[🌐 3D Knowledge Graph](https://mchittineni.github.io/ultimate-devops-guide/) · [Pick your role](#-pick-your-role) · [Browse topics](#-browse-all-topics) · [All questions](#-all-questions) · [How answers are structured](#-how-answers-are-structured) · [Contributing](./CONTRIBUTING.md)
 
 ⭐ Star the project if it helps you land the role.
 
 </div>
+
+---
+
+## 🌐 3D DevOps Knowledge Graph
+
+Explore the entire repository visually through our **Interactive 3D Telemetry Graph** deployed on GitHub Pages:
+
+👉 **[Launch Interactive 3D Knowledge Graph](https://mchittineni.github.io/ultimate-devops-guide/)**
+
+- **Visual Infrastructure Mapping**: Explore relationship edges connecting all 500+ questions across 40 topics.
+- **Cross-Topic Concept Wikilinks**: Discover cross-cutting concepts between Docker, Kubernetes, CI/CD, IaC, and SRE.
+- **Filterable Telemetry**: Filter nodes live by difficulty, domain group, or specific keywords.
 
 ---
 
