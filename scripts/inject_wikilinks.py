@@ -192,10 +192,11 @@ def main():
         end_marker = "<!-- END GENERATED RELATED TOPICS -->"
 
         # Build the generated section with markers
+        # Blank lines around the markers keep the block Prettier-clean.
         generated_block = (
-            f"{begin_marker}\n"
+            f"{begin_marker}\n\n"
             f"## Related Concepts\n\n"
-            + "\n".join(wikilink_items) + "\n"
+            + "\n".join(wikilink_items) + "\n\n"
             f"{end_marker}"
         )
 
