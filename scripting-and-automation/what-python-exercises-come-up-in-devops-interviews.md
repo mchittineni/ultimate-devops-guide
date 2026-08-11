@@ -345,11 +345,13 @@ def pods(namespace: str) -> str:
 - Always pass subprocess arguments as a list, and say why: building a command string from an input value hands control of the shell to whoever supplied it. See [what do you use Python for as a DevOps engineer](./what-do-you-use-python-for-as-a-devops-engineer.md), [when do you use Bash and when do you use Python](./when-do-you-use-bash-and-when-do-you-use-python.md), [what Bash scripting exercises come up in DevOps interviews](./what-bash-scripting-exercises-come-up-in-devops-interviews.md), and [turning a pile of ad hoc scripts into maintainable automation](./how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you schedule work with cron and systemd timers?]] (`#497`): [How do you schedule work with cron and systemd timers?](../linux-administration/how-do-you-schedule-work-with-cron-and-systemd-timers.md)
 - [[How do you troubleshoot SSH failures, high CPU, and disk space on Linux servers?]] (`#238`): [How do you troubleshoot SSH failures, high CPU, and disk space on Linux servers?](../linux-administration/how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md)
 - [[How do you analyse logs and text files with grep, awk, and sed?]] (`#265`): [How do you analyse logs and text files with grep, awk, and sed?](../linux-administration/how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

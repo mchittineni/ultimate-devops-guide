@@ -119,11 +119,13 @@ if __name__ == "__main__":
 - If you are not strong in Python, say so and describe what you _have_ automated. Claiming fluency and then failing a shallow-copy question is worse than an honest boundary.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you schedule work with cron and systemd timers?]] (`#497`): [How do you schedule work with cron and systemd timers?](../linux-administration/how-do-you-schedule-work-with-cron-and-systemd-timers.md)
 - [[What is Shell Scripting?]] (`#42`): [What is Shell Scripting?](../linux-administration/what-is-shell-scripting.md)
 - [[What is Linux File System Hierarchy?]] (`#45`): [What is Linux File System Hierarchy?](../linux-administration/what-is-linux-file-system-hierarchy.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -142,11 +142,13 @@ shellcheck scripts/*.sh                                              # the cheap
 - Finish by naming the limit: reconciliation belongs in Terraform or a controller, and multi-step stateful workflows belong in a workflow engine. Knowing when to delete the script entirely is the senior answer.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you schedule work with cron and systemd timers?]] (`#497`): [How do you schedule work with cron and systemd timers?](../linux-administration/how-do-you-schedule-work-with-cron-and-systemd-timers.md)
 - [[What is Shell Scripting?]] (`#42`): [What is Shell Scripting?](../linux-administration/what-is-shell-scripting.md)
 - [[What is Linux File System Hierarchy?]] (`#45`): [What is Linux File System Hierarchy?](../linux-administration/what-is-linux-file-system-hierarchy.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
