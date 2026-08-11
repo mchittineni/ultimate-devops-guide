@@ -42,11 +42,13 @@ Azure organises resources hierarchically: **management groups → subscriptions 
 - If the role is hybrid-cloud, mention Azure Arc for managing on-premises and other-cloud resources.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design a production-ready VPC on AWS?]] (`#191`): [How do you design a production-ready VPC on AWS?](../aws-engineering/how-do-you-design-a-production-ready-vpc-on-aws.md)
 - [[What is the difference between ECS, EKS, and Fargate?]] (`#193`): [What is the difference between ECS, EKS, and Fargate?](../aws-engineering/what-is-the-difference-between-ecs-eks-and-fargate.md)
 - [[What are the S3 storage classes and when do you use each?]] (`#195`): [What are the S3 storage classes and when do you use each?](../aws-engineering/what-are-the-s3-storage-classes-and-when-do-you-use-each.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

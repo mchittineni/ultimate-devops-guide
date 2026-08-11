@@ -42,11 +42,13 @@ Who manages what:
 - Good closing judgement: "use the highest-level service that meets the requirement" - it minimises undifferentiated work.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design a production-ready VPC on AWS?]] (`#191`): [How do you design a production-ready VPC on AWS?](../aws-engineering/how-do-you-design-a-production-ready-vpc-on-aws.md)
 - [[What is the difference between ECS, EKS, and Fargate?]] (`#193`): [What is the difference between ECS, EKS, and Fargate?](../aws-engineering/what-is-the-difference-between-ecs-eks-and-fargate.md)
 - [[How do you run a highly available database on AWS?]] (`#196`): [How do you run a highly available database on AWS?](../aws-engineering/how-do-you-run-a-highly-available-database-on-aws.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
