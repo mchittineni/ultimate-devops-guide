@@ -90,11 +90,13 @@ jobs:
 - Tie it to the metric: pipeline pass rate on `main` and change failure rate. See [what is change failure rate](../devops-metrics-and-kpis/what-is-change-failure-rate.md) and [what is blameless culture](../devops-culture-and-practices/what-is-blameless-culture.md) for the cultural half of the answer.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
 - [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
 - [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

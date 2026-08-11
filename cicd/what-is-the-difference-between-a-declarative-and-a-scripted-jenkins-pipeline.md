@@ -154,11 +154,13 @@ buildJavaService(
 - Land on shared libraries as the way to get scripted flexibility without unmaintainable `Jenkinsfile`s. See [what are Jenkins Pipelines](./what-are-jenkins-pipelines.md), [how do you use Jenkins shared libraries](./how-do-you-use-jenkins-shared-libraries.md), [how do you trigger a pipeline](./how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md), and [running and securing a Jenkins controller in production](./how-do-you-run-and-secure-a-jenkins-controller-in-production.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
 - [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
 - [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

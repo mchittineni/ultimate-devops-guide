@@ -83,11 +83,13 @@ externalSecrets:
 - Have an opinion on environment count. "We had seven long-lived environments and cut to three plus ephemeral PR environments" is a strong, real answer. See [what are deployment strategies](../devops-tools-and-automation/what-are-deployment-strategies.md) and [continuous delivery versus continuous deployment](./what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
 - [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

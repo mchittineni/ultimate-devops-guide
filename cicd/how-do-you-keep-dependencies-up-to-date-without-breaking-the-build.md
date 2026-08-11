@@ -89,11 +89,13 @@ npm ci && npm test                # frozen lockfile: exactly what CI will instal
 - Tie it to security posture with SBOM plus SCA, and to [what is the difference between SAST, DAST, IAST, and SCA](../devsecops/what-is-the-difference-between-sast-dast-iast-and-sca.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
 - [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -108,11 +108,13 @@ Per-service pipeline (the same shape for all 50, from one template)
 - Have the compatibility story ready for the follow-up "what breaks during a rollout?" - two versions live at once, so schema and event changes must be additive. See [what are microservices](../cloud-native-architecture/what-are-microservices.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
 - [[What is Infrastructure Automation?]] (`#86`): [What is Infrastructure Automation?](../devops-tools-and-automation/what-is-infrastructure-automation.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

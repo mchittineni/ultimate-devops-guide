@@ -168,11 +168,13 @@ jobs:
 - Warn against self-hosted runners on public repositories and recommend ephemeral runners. See [how do you prevent and handle secret leaks in CI/CD pipelines](./how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md), [what is GitHub Actions](../advanced-devops-cloud/what-is-github-actions.md), [how do you trigger a pipeline](./how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md), [speeding up a slow pipeline](./how-do-you-speed-up-a-slow-ci-cd-pipeline.md), and [authenticating to AWS without long-lived access keys](../aws-engineering/how-do-you-authenticate-to-aws-without-long-lived-access-keys.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
 - [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
 - [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
