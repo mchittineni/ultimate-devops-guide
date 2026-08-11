@@ -45,11 +45,13 @@ tags:
 - Mention regulatory notification deadlines for security incidents; it shows breadth beyond the technical.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
 - [[What is Docker?]] (`#6`): [What is Docker?](../docker/what-is-docker.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

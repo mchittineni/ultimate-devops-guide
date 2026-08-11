@@ -49,11 +49,13 @@ trace_id=b7e1  ├─ gateway            240ms
 - Adding business attributes to spans is what elevates tracing from debugging to product insight.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
