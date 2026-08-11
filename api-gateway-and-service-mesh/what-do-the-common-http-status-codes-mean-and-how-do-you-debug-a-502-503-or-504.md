@@ -194,11 +194,13 @@ The timeout ladder - get this wrong and you generate your own 504s
 - For "deployment succeeded but I get a 404", say it is routing rather than the workload - ingress host/path rules, path rewriting, `targetPort`, and the app's base path - and note that you can tell a proxy 404 from an application 404 by the response headers. See [what is an API gateway](./what-is-an-api-gateway.md), [debugging a Kubernetes Ingress that is not routing traffic](../kubernetes/how-do-you-debug-a-kubernetes-ingress-that-is-not-routing-traffic.md), [troubleshooting a load balancer returning 5xx errors](../scalability-and-high-availability/how-do-you-troubleshoot-a-load-balancer-returning-5xx-errors-or-sending-traffic-unevenly.md), [troubleshooting high latency in a microservices architecture](../cloud-native-architecture/how-do-you-troubleshoot-high-latency-in-a-microservices-architecture.md), and [a Service that has no endpoints](../kubernetes/how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

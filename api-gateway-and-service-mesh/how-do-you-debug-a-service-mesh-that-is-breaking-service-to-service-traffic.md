@@ -141,11 +141,13 @@ spec:
 - Close with `outlierDetection` and circuit-breaker limits as things you tune rather than disable, and note that `503 UO` means your own connection-pool limits, not the backend. See [what is a service mesh](../cloud-native-architecture/what-is-service-mesh.md) and [what is Istio](../container-orchestration-advanced/what-is-istio.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
