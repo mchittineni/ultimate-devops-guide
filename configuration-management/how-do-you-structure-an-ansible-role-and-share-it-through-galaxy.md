@@ -186,11 +186,13 @@ ansible-galaxy install -r requirements.yml -p roles/ --force
 - Close on Molecule with an idempotence scenario plus `ansible-lint` in CI - very few candidates mention testing roles at all. See [what is Ansible](../infrastructure-as-code/what-is-ansible.md), [managing Ansible inventories and variables across environments](./how-do-you-manage-ansible-inventories-and-variables-across-environments.md), [debugging and safely testing a playbook](./how-do-you-debug-and-safely-test-an-ansible-playbook.md), and [running Ansible at scale](./how-do-you-run-ansible-at-scale-across-thousands-of-hosts.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

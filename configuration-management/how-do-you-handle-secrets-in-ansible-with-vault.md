@@ -183,11 +183,13 @@ ansible-playbook site.yml --check --diff -i inventories/prod     # --diff can pr
 - Mention that secrets are decrypted on the control node in memory, and that writing them to a managed host needs restrictive file modes and ownership. See [managing Ansible inventories and variables](./how-do-you-manage-ansible-inventories-and-variables-across-environments.md), [managing secrets in CI/CD pipelines](../devsecops/how-do-you-manage-secrets-in-ci-cd-pipelines.md), [rotating secrets without downtime](../devsecops/how-do-you-rotate-secrets-without-downtime.md), and [preventing secret leaks in pipelines](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

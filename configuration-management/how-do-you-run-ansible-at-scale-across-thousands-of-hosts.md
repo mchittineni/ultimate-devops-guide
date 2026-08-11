@@ -114,11 +114,13 @@ ANSIBLE_STRATEGY=free ansible-playbook patch.yml   # independent hosts, no batch
 - Have the variable-precedence trap ready - a value set in the wrong layer that made staging and prod diverge. It is a universally recognised war story.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
