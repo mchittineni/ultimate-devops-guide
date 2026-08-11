@@ -40,11 +40,13 @@ tags:
 - Be able to name when serverless is the _wrong_ answer: steady high-volume compute, long-running jobs, and latency-critical paths.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[What is Docker Compose?]] (`#9`): [What is Docker Compose?](../docker/what-is-docker-compose.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
