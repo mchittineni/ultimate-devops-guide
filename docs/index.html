@@ -363,7 +363,6 @@
     #graph {
       width: 100%;
       height: 100vh;
-      /* dvh tracks the collapsing mobile URL bar; vh above is the fallback. */
       height: 100dvh;
     }
 
@@ -400,7 +399,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /* 44px meets the iOS touch target and WCAG 2.2 (2.5.8) minimum. */
       width: 44px;
       height: 44px;
       padding: 0;
@@ -456,10 +454,7 @@
       font-weight: 600;
       text-transform: uppercase;
       color: var(--tag-general-fg);
-      /* Fallback first for engines without color-mix (pre-2023). */
       background: var(--result-bg);
-      /* Tint derives from the variant's own colour, so each data-attribute
-         below only needs to set `color`. */
       background: color-mix(in srgb, currentColor calc(var(--tag-alpha) * 100%), transparent);
     }
     .card-tag[data-kind="topic"] { color: var(--tag-topic-fg); }
@@ -574,8 +569,6 @@
       }
       #info-card {
         width: 100%;
-        /* min-height:0 lets this flex child actually shrink and scroll
-           instead of pushing the zoom buttons off-screen. */
         min-height: 0;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
@@ -31353,8 +31346,6 @@
       light: {
         bg: '#eef2f7',
         link: 'rgba(51, 65, 85, 0.45)',
-        // Only slightly above dark: with 3.3k edges, a heavier value turns the
-        // whole field into a blue mesh and the nodes stop reading.
         linkOpacity: 0.4,
         dim: 'rgba(148, 163, 184, 0.55)',
         hit: '#0369a1'
