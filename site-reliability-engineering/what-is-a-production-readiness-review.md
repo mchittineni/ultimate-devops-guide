@@ -66,11 +66,13 @@ degradation for provider timeouts. Re-review in 2 weeks; capacity item tracked f
 - Expect: "what if the team refuses?" - tie support and platform features to it, escalate on risk, and never silently accept an unowned service.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you choose an SLO target?]] (`#177`): [How do you choose an SLO target?](../slo-engineering/how-do-you-choose-an-slo-target.md)
 - [[What is multi-window multi-burn-rate alerting?]] (`#178`): [What is multi-window multi-burn-rate alerting?](../slo-engineering/what-is-multi-window-multi-burn-rate-alerting.md)
 - [[How do you define SLOs for batch and asynchronous workloads?]] (`#181`): [How do you define SLOs for batch and asynchronous workloads?](../slo-engineering/how-do-you-define-slos-for-batch-and-asynchronous-workloads.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

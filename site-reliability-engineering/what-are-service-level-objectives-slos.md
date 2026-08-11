@@ -51,11 +51,13 @@ sum(rate(http_requests_total{job="api",status!~"5.."}[28d]))
 - Emphasise measuring from the user's perspective; infrastructure-based SLOs are the common mistake.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you choose an SLO target?]] (`#177`): [How do you choose an SLO target?](../slo-engineering/how-do-you-choose-an-slo-target.md)
 - [[What is multi-window multi-burn-rate alerting?]] (`#178`): [What is multi-window multi-burn-rate alerting?](../slo-engineering/what-is-multi-window-multi-burn-rate-alerting.md)
 - [[How do you measure a latency SLI correctly?]] (`#179`): [How do you measure a latency SLI correctly?](../slo-engineering/how-do-you-measure-a-latency-sli-correctly.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
