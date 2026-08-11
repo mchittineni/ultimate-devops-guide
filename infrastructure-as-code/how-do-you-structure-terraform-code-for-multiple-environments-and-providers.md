@@ -156,11 +156,13 @@ module "eks_dr" {
 - Close on the diff between environment variable files being your best drift documentation - it is a practical detail that shows you have operated this, not just designed it.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you structure an Ansible role and share it through Galaxy?]] (`#468`): [How do you structure an Ansible role and share it through Galaxy?](../configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md)
 - [[How do you manage Ansible inventories and variables across environments?]] (`#469`): [How do you manage Ansible inventories and variables across environments?](../configuration-management/how-do-you-manage-ansible-inventories-and-variables-across-environments.md)
 - [[What is a cloud landing zone?]] (`#215`): [What is a cloud landing zone?](../cloud-engineering/what-is-a-cloud-landing-zone.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

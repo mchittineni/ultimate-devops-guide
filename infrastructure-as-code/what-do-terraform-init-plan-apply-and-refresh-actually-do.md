@@ -142,11 +142,13 @@ terraform state list | wc -l             # a huge number explains a slow refresh
 - Know `TF_LOG=DEBUG` for debug output and `-target` as break-glass only. See [what is Terraform](./what-is-terraform.md), [managing Terraform state safely in a team](./how-do-you-manage-terraform-state-safely-in-a-team.md), [what is infrastructure drift](../advanced-devops-cloud/what-is-infrastructure-drift.md), and [stopping Terraform from destroying or recreating a resource](./how-do-you-stop-terraform-from-destroying-or-recreating-a-resource.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you structure an Ansible role and share it through Galaxy?]] (`#468`): [How do you structure an Ansible role and share it through Galaxy?](../configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md)
 - [[What is Puppet?]] (`#52`): [What is Puppet?](../configuration-management/what-is-puppet.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

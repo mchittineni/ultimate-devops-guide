@@ -205,11 +205,13 @@ esac
 - If the pipeline is slow, diagnose it: state size, backend distance, plugin cache, and planning only the components a change touches. Name Atlantis, Terraform Cloud, or Spacelift as ready-made options. See [managing Terraform state safely in a team](./how-do-you-manage-terraform-state-safely-in-a-team.md), [structuring Terraform code for multiple environments and providers](./how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md), [scanning IaC before it is applied](../devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md), and [authenticating to AWS without long-lived access keys](../aws-engineering/how-do-you-authenticate-to-aws-without-long-lived-access-keys.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
 - [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

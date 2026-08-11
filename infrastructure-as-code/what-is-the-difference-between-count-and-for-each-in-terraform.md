@@ -166,11 +166,13 @@ terraform state list | grep aws_instance   # verify the new addresses
 - If asked how to migrate from `count` to `for_each`, name `moved` blocks or `terraform state mv`, and say the plan must show no changes afterwards. That single sentence demonstrates you have done a real migration. See [writing and structuring a reusable Terraform module](./how-do-you-write-and-structure-a-reusable-terraform-module.md), [stopping Terraform from destroying or recreating a resource](./how-do-you-stop-terraform-from-destroying-or-recreating-a-resource.md), and [managing Terraform state safely in a team](./how-do-you-manage-terraform-state-safely-in-a-team.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you structure an Ansible role and share it through Galaxy?]] (`#468`): [How do you structure an Ansible role and share it through Galaxy?](../configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md)
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[What is Configuration Management?]] (`#51`): [What is Configuration Management?](../configuration-management/what-is-configuration-management.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
