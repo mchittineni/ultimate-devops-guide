@@ -78,11 +78,13 @@ spec:
 - Expect: "how do you handle upgrades?" - surge upgrades, PDBs, maintenance windows, and the roughly-annual version cadence.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
 - [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
 - [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -146,11 +146,13 @@ az monitor activity-log list --caller "$APP_ID" --start-time "$(date -u -d '-7 d
 - Close by mapping to AWS (instance profile / task role / IRSA, and OIDC role trust) and GCP (attached service account, Workload Identity Federation) so it is clear you understand federation as a pattern. See [what is Microsoft Entra ID and how does Azure RBAC work](./what-is-microsoft-entra-id-and-how-does-azure-rbac-work.md), [how is the Azure resource hierarchy organised](./how-is-the-azure-resource-hierarchy-organised.md), [authenticating to AWS without long-lived access keys](../aws-engineering/how-do-you-authenticate-to-aws-without-long-lived-access-keys.md), and [designing least-privilege identity in the cloud](../cloud-engineering/how-do-you-design-least-privilege-identity-in-the-cloud.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
 - [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
 - [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

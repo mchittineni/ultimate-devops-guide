@@ -186,11 +186,13 @@ steps:
 - Close by mapping the pattern to AWS (IRSA / Pod Identity) and GCP (Workload Identity) to show you understand federation rather than one product. See [what is Azure Kubernetes Service (AKS)](./what-is-azure-kubernetes-service-aks.md), [what is Microsoft Entra ID and how does Azure RBAC work](./what-is-microsoft-entra-id-and-how-does-azure-rbac-work.md), [ConfigMaps and Secrets in Kubernetes](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md), and [rotating secrets without downtime](../devsecops/how-do-you-rotate-secrets-without-downtime.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
 - [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
 - [[What are the main components of Kubernetes architecture?]] (`#12`): [What are the main components of Kubernetes architecture?](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

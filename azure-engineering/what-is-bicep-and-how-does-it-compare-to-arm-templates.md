@@ -88,11 +88,13 @@ az deployment group what-if --resource-group rg-checkout-prod-weu \
 - Expect: "Bicep or Terraform?" - decide by whether Azure is your only provider, and mention module registries either way.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
 - [[What are the different types of cloud services?]] (`#25`): [What are the different types of cloud services?](../cloud-platforms/what-are-the-different-types-of-cloud-services.md)
 - [[How do you choose a cloud provider for a new workload?]] (`#281`): [How do you choose a cloud provider for a new workload?](../cloud-platforms/how-do-you-choose-a-cloud-provider-for-a-new-workload.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

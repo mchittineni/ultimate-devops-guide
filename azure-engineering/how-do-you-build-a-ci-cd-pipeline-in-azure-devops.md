@@ -233,11 +233,13 @@ az devops invoke --area distributedtask --resource environmentdeploymentrecords 
 - For fifty applications, answer with a shared, versioned template repository consumed via `extends`, and mention that an `extends` template can enforce steps a consumer cannot remove. See [how do you scale CI/CD across many services and teams](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md), [consuming Azure Key Vault secrets from AKS and Azure Pipelines](./how-do-you-consume-azure-key-vault-secrets-from-aks-and-azure-pipelines.md), [architecting an end-to-end production DevOps project on Azure](./how-do-you-architect-an-end-to-end-production-devops-project-on-azure.md), and [promoting a release across dev, staging, and production](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
 - [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
 - [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
