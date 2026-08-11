@@ -61,11 +61,13 @@ gcloud projects add-iam-policy-binding payments-prod \
 - Expect: "how would you prove least privilege?" - IAM Recommender over 90 days of usage, plus Policy Analyzer.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
 - [[How do you connect an on-premises network to the cloud?]] (`#216`): [How do you connect an on-premises network to the cloud?](../cloud-engineering/how-do-you-connect-an-on-premises-network-to-the-cloud.md)
 - [[How do you design least-privilege identity in the cloud?]] (`#217`): [How do you design least-privilege identity in the cloud?](../cloud-engineering/how-do-you-design-least-privilege-identity-in-the-cloud.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

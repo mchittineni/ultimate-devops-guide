@@ -56,11 +56,13 @@ gcloud run services update-traffic checkout --region=europe-west1 \
 - Expect: "Cloud Run or GKE?" - Cloud Run unless you need the Kubernetes API, operators, or host-level access.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
 - [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
 - [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
