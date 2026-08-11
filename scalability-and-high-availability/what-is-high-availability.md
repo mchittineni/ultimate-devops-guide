@@ -45,11 +45,13 @@ Each nine costs materially more. The right target comes from what the business l
 - Distinguish HA from DR clearly - it is a frequently tested distinction.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
