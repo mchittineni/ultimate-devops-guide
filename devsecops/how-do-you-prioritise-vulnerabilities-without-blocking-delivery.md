@@ -54,11 +54,13 @@ python3 rank.py findings.json --kev kev.json --epss epss.csv --top 20
 - Expect: "a critical with no patch, shipping tomorrow - what do you do?" Answer with compensating control, time-boxed risk acceptance, and who signs it.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -66,11 +66,13 @@ condition {
 - Expect the fork/`pull_request_target` question, and "what do you do after a leak?" - rotate first, forensics second.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you harden a container image and a Dockerfile?]] (`#441`): [How do you harden a container image and a Dockerfile?](../docker/how-do-you-harden-a-container-image-and-a-dockerfile.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
