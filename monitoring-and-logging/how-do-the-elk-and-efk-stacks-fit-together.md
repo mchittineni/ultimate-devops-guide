@@ -213,11 +213,13 @@ curl -s 'http://es:9200/_cat/indices/.kibana*?v'               # Kibana's own ob
 - Mention Loki and the OpenTelemetry Collector as the modern alternatives, and be able to say when a label-indexed store beats a full inverted index on cost. See [what is ELK stack](./what-is-elk-stack.md), [designing a logging pipeline that stays affordable at scale](./how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale.md), [what is log management](../infrastructure-monitoring/what-is-log-management.md), and [adding monitoring to an application that has none](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 - [[What is Infrastructure Monitoring?]] (`#131`): [What is Infrastructure Monitoring?](../infrastructure-monitoring/what-is-infrastructure-monitoring.md)
 - [[What is Log Management?]] (`#135`): [What is Log Management?](../infrastructure-monitoring/what-is-log-management.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

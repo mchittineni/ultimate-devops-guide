@@ -154,11 +154,13 @@ processors:
 - Mention buffering, back pressure, and the deliberate drop policy. "What happens when the backend is down" is a standard follow-up.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 - [[What is Log Management?]] (`#135`): [What is Log Management?](../infrastructure-monitoring/what-is-log-management.md)
 - [[How do you control metric cardinality and monitoring cost at scale?]] (`#293`): [How do you control metric cardinality and monitoring cost at scale?](../infrastructure-monitoring/how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

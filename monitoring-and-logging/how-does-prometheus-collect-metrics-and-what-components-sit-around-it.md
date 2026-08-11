@@ -189,11 +189,13 @@ curl -s http://alertmanager:9093/api/v2/silences | jq '.[] | {matchers, endsAt, 
 - For "how do you set it up?", say kube-prometheus-stack plus `ServiceMonitor`s and `PrometheusRule`s as code, rather than describing a manual install. That answers the question and shows you think in platforms. See [what is Prometheus](./what-is-prometheus.md), [writing effective PromQL queries and Alertmanager rules](./how-do-you-write-effective-promql-queries-and-alertmanager-rules.md), [designing alerts that page a human](../site-reliability-engineering/how-do-you-design-alerts-that-page-a-human.md), and [controlling metric cardinality and monitoring cost at scale](../infrastructure-monitoring/how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 - [[What is Infrastructure Monitoring?]] (`#131`): [What is Infrastructure Monitoring?](../infrastructure-monitoring/what-is-infrastructure-monitoring.md)
 - [[What are Monitoring Tools?]] (`#132`): [What are Monitoring Tools?](../infrastructure-monitoring/what-are-monitoring-tools.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -45,11 +45,13 @@ sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total
 - Prometheus is not durable long-term storage by itself; name Thanos/Mimir/Cortex for that.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 - [[What is Infrastructure Monitoring?]] (`#131`): [What is Infrastructure Monitoring?](../infrastructure-monitoring/what-is-infrastructure-monitoring.md)
 - [[What are Monitoring Tools?]] (`#132`): [What are Monitoring Tools?](../infrastructure-monitoring/what-are-monitoring-tools.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -113,11 +113,13 @@ receivers:
 - Mention **Inhibition rules** in Alertmanager: they prevent alert storms during major outages, keeping on-call engineers focused on root causes rather than secondary symptoms.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 - [[What are Monitoring Tools?]] (`#132`): [What are Monitoring Tools?](../infrastructure-monitoring/what-are-monitoring-tools.md)
 - [[What are Monitoring Best Practices?]] (`#133`): [What are Monitoring Best Practices?](../infrastructure-monitoring/what-are-monitoring-best-practices.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
