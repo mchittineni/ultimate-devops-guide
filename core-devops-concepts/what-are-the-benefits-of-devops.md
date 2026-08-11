@@ -34,11 +34,13 @@ tags:
 - Be honest about costs: tooling investment, upskilling, and the discipline of test automation.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
 - [[What is GitLab CI?]] (`#19`): [What is GitLab CI?](../cicd/what-is-gitlab-ci.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
