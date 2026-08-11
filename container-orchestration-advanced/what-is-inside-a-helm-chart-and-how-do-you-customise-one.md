@@ -168,11 +168,13 @@ helm rollback payments 7 -n prod --wait
 - Give a balanced Helm-versus-Kustomize answer rather than a preference. See [what is Helm](./what-is-helm.md), [troubleshooting a failed Helm release](./how-do-you-troubleshoot-a-failed-helm-release.md), [what is ArgoCD](../devops-tools-and-automation/what-is-argocd.md), and [ConfigMaps and Secrets](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
 - [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

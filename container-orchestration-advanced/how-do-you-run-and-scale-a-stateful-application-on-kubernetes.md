@@ -135,11 +135,13 @@ kubectl get pvc -n data                               # PVCs remain by design - 
 - Finish with the architectural question: should this be managed instead? A candidate who can justify running data in Kubernetes _and_ knows when not to is the one who gets hired. See [what are StatefulSets in Kubernetes](./what-are-statefulsets-in-kubernetes.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

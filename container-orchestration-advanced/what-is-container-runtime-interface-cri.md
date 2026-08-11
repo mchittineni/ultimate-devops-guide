@@ -62,11 +62,13 @@ crictl ps            # the CRI-level equivalent of docker ps, on a node
 - RuntimeClass with gVisor or Kata is the answer to "how do you run untrusted workloads?"
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -161,11 +161,13 @@ kubectl get pods -A -o json | jq -r '.items[] | [.metadata.labels.tenant,
 - Say you roll new admission policies in audit mode first. Enforcing a policy across a live estate without an audit pass is a self-inflicted outage. See [how does RBAC work in Kubernetes](../kubernetes/how-does-rbac-work-in-kubernetes.md), [requests, limits, and QoS classes](../kubernetes/how-do-requests-limits-and-qos-classes-work-in-kubernetes.md), [NetworkPolicies](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md), [admission control with Kyverno or OPA Gatekeeper](../devsecops/how-do-you-enforce-kubernetes-admission-control-with-kyverno-or-opa-gatekeeper.md), and [self-service environments for developers](../platform-engineering/how-do-you-provide-self-service-environments-to-developers.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -140,11 +140,13 @@ Restore runbook - rehearsed quarterly, RTO measured not estimated
 - Close on rehearsal: describe the ordered runbook, say how often you test it, and give a measured RTO. "We restore one namespace monthly and rebuild a cluster annually" is the answer that ends the question. See [what is backup and disaster recovery](../backup-and-disaster-recovery/what-is-backup-and-disaster-recovery.md), [verifying that your backups can actually be restored](../backup-and-disaster-recovery/how-do-you-verify-that-your-backups-can-actually-be-restored.md), [executing a DR failover](../backup-and-disaster-recovery/how-do-you-execute-a-disaster-recovery-failover-with-minimal-rto-and-rpo.md), and [what happens when a control-plane node or etcd fails](../kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
