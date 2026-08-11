@@ -128,11 +128,13 @@ The change-management habit that prevents most DNS incidents
 - Close on records as code, and the specific trap of fixing a record in the console during an incident so the next Terraform apply reverts it. That detail lands because everyone has seen it happen. See [what happens when a user opens your application in a browser](../network-security/what-happens-when-a-user-opens-your-application-in-a-browser.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
