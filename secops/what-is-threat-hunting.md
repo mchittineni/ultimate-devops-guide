@@ -48,11 +48,13 @@ ORDER BY calls DESC;
 - Expect: "how is this different from monitoring?" - monitoring answers known questions automatically; hunting asks new ones and then automates them.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
 - [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

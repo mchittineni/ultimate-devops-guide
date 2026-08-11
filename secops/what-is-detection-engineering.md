@@ -55,11 +55,13 @@ stratus detonate aws.execution.ec2-user-data
 - Expect: "how do you know what you cannot see?" - ATT&CK coverage mapping, and treating telemetry gaps as platform work.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
 - [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
