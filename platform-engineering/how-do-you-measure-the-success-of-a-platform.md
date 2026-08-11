@@ -69,11 +69,13 @@ for deploy debugging. Not done: secret rotation (moved to Q4, now top request).
 - Expect: "what would you do if adoption were low?" - treat it as product feedback, interview the teams routing around you, and fix the missing capability.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
 - [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
 - [[What is Ansible?]] (`#28`): [What is Ansible?](../infrastructure-as-code/what-is-ansible.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

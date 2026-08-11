@@ -113,11 +113,13 @@ sum(increase(DCGM_FI_DEV_XID_ERRORS[5m])) by (pod, gpu)
 - Explain how **AI FinOps** operates: tracking token usage at the API Gateway level (e.g. Kong, Ambassador, or LiteLLM Proxy) allows enforcing per-team rate limits and cost budgets.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
 - [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
 - [[What is Service Mesh?]] (`#68`): [What is Service Mesh?](../cloud-native-architecture/what-is-service-mesh.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

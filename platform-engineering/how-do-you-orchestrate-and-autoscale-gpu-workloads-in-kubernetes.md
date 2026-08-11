@@ -107,11 +107,13 @@ data:
 - Emphasize node provisioning with **Karpenter**: Karpenter handles heterogeneous GPU instance constraints much faster than legacy Cluster Autoscaler.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
 - [[What is Infrastructure as Code?]] (`#26`): [What is Infrastructure as Code?](../infrastructure-as-code/what-is-infrastructure-as-code.md)
 - [[What is Ansible?]] (`#28`): [What is Ansible?](../infrastructure-as-code/what-is-ansible.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
