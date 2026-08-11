@@ -195,6 +195,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       color: #e2e8f0;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       overflow: hidden;
+      -webkit-text-size-adjust: 100%;
     }}
     
     /* Header Panel */
@@ -358,8 +359,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }}
 
     #graph {{
-      width: 100vw;
+      width: 100%;
       height: 100vh;
+      /* dvh tracks the collapsing mobile URL bar; vh above is the fallback. */
+      height: 100dvh;
     }}
 
     /* Floating Inspector Card */
@@ -442,6 +445,106 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .close-btn:hover {{
       background: #1e293b;
       color: #f1f5f9;
+    }}
+
+    /* ---------------------------------------------------------------
+       Mobile / narrow viewports.
+
+       Both panels are fixed-position overlays on a full-bleed canvas,
+       so on a small screen they grow into each other: the header grows
+       downward as search results populate while the info card grows
+       upward from the bottom. Capping the header at 40dvh from the top
+       and the card at 45dvh from the bottom leaves a 15dvh gutter, so
+       they can never meet no matter how much content either holds.
+       --------------------------------------------------------------- */
+    @media (max-width: 768px) {{
+      #header {{
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        max-width: none;
+        max-height: 40dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        padding: 14px 16px;
+      }}
+      /* Decorative on a small screen; the graph itself is the explanation. */
+      #header > p {{
+        display: none;
+      }}
+      h1 {{
+        font-size: 1.05rem;
+      }}
+      /* Must be >= 16px or iOS Safari zooms the whole page on focus. */
+      .search-box input {{
+        font-size: 16px;
+        padding: 10px 12px 10px 34px;
+      }}
+      #search-results {{
+        max-height: 34vh;
+      }}
+      /* WCAG 2.2 target size (2.5.8) + comfortable thumb target. */
+      #search-results button {{
+        min-height: 44px;
+        font-size: 0.85rem;
+      }}
+
+      #info-card {{
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-height: 45dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        padding: 16px;
+      }}
+      .card-actions {{
+        flex-wrap: wrap;
+      }}
+      #card-link, .close-btn {{
+        min-height: 44px;
+        align-items: center;
+        display: inline-flex;
+      }}
+    }}
+
+    /* Landscape phones: vertical space is the binding constraint, so drop
+       everything non-essential rather than shrinking both panels further. */
+    @media (max-height: 500px) and (orientation: landscape) {{
+      #header {{
+        max-height: 60dvh;
+        max-width: 320px;
+        right: auto;
+      }}
+      #header > p, .legend, .stats-bar {{
+        display: none;
+      }}
+      #info-card {{
+        max-height: 60dvh;
+        left: auto;
+        width: 320px;
+      }}
+    }}
+
+    /* 3d-force-graph injects a "Left-click: rotate, Mouse-wheel: zoom" hint.
+       It describes controls that do not exist on a touch device, and it sits
+       under the info card at the bottom edge. Drop it where there is no mouse. */
+    @media (hover: none) and (pointer: coarse) {{
+      .scene-nav-info {{
+        display: none;
+      }}
+    }}
+
+    @media (prefers-reduced-motion: reduce) {{
+      #info-card {{
+        animation: none;
+      }}
+      #card-link:hover {{
+        transform: none;
+      }}
     }}
   </style>
 </head>
