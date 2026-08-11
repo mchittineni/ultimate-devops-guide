@@ -112,11 +112,13 @@ docker buildx build --progress=plain . 2>&1 | grep -E "CACHED|=> \["
 - Push back gently on "fewer layers is better": the real goals are cache-hit rate and total content, not layer count. See [reducing Docker image size and build time](./how-do-you-reduce-docker-image-size-and-build-time.md), [COPY versus ADD](./what-is-the-difference-between-the-copy-and-add-instructions-in-a-dockerfile.md), and [speeding up a slow CI/CD pipeline](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is inside a Helm chart, and how do you customise one?]] (`#450`): [What is inside a Helm chart, and how do you customise one?](../container-orchestration-advanced/what-is-inside-a-helm-chart-and-how-do-you-customise-one.md)
 - [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
 - [[What are the main components of Kubernetes architecture?]] (`#12`): [What are the main components of Kubernetes architecture?](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

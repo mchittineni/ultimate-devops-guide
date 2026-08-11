@@ -99,11 +99,13 @@ resources:
 - Finish with the boundary: shared kernel means untrusted workloads need a VM or gVisor. Knowing when process isolation is insufficient is the senior signal.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is Kubernetes?]] (`#11`): [What is Kubernetes?](../kubernetes/what-is-kubernetes.md)
 - [[How do liveness, readiness, and startup probes differ?]] (`#255`): [How do liveness, readiness, and startup probes differ?](../kubernetes/how-do-liveness-readiness-and-startup-probes-differ.md)
 - [[How do you control which node a Pod runs on?]] (`#256`): [How do you control which node a Pod runs on?](../kubernetes/how-do-you-control-which-node-a-pod-runs-on.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

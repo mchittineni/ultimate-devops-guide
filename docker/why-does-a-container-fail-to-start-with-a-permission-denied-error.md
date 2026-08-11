@@ -128,11 +128,13 @@ spec:
 - If asked why images run as non-root at all, connect it to container escape risk and Pod Security Admission rather than treating it as a formality. See [how do you reduce Docker image size and build time](./how-do-you-reduce-docker-image-size-and-build-time.md) for the adjacent build-hygiene answer.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
 - [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
 - [[How do you troubleshoot a Kubernetes node that is NotReady?]] (`#449`): [How do you troubleshoot a Kubernetes node that is NotReady?](../kubernetes/how-do-you-troubleshoot-a-kubernetes-node-that-is-notready.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

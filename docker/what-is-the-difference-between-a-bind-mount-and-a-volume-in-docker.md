@@ -105,11 +105,13 @@ docker volume prune                    # DESTRUCTIVE: deletes unused volumes
 - Close by mapping to Kubernetes - `hostPath` ≈ bind mount, `emptyDir` ≈ anonymous volume, PVC ≈ named volume with a driver. See [how does persistent storage work in Kubernetes](../kubernetes/how-does-persistent-storage-work-in-kubernetes.md) and [Docker architecture](./explain-docker-architecture.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What are the main components of Kubernetes architecture?]] (`#12`): [What are the main components of Kubernetes architecture?](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)
 - [[What is a Service in Kubernetes?]] (`#14`): [What is a Service in Kubernetes?](../kubernetes/what-is-a-service-in-kubernetes.md)
 - [[How does RBAC work in Kubernetes?]] (`#257`): [How does RBAC work in Kubernetes?](../kubernetes/how-does-rbac-work-in-kubernetes.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
