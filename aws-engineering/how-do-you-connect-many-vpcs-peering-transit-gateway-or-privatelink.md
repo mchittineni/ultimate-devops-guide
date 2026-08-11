@@ -163,11 +163,13 @@ aws ec2 create-network-insights-path --source i-0abc --destination i-0def \
 - Add appliance mode for stateful inspection and per-AZ attachments for cost and latency - both are details only practitioners mention. See [what are VPC endpoints](./what-are-vpc-endpoints-and-when-do-you-use-a-gateway-versus-an-interface-endpoint.md), [structuring a multi-account AWS organisation](./how-do-you-structure-a-multi-account-aws-organisation.md), [connecting an on-premises network to the cloud](../cloud-engineering/how-do-you-connect-an-on-premises-network-to-the-cloud.md), and [designing a production-ready VPC](./how-do-you-design-a-production-ready-vpc-on-aws.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you connect an on-premises network to the cloud?]] (`#216`): [How do you connect an on-premises network to the cloud?](../cloud-engineering/how-do-you-connect-an-on-premises-network-to-the-cloud.md)
 - [[How do you manage DNS and global traffic routing?]] (`#220`): [How do you manage DNS and global traffic routing?](../cloud-engineering/how-do-you-manage-dns-and-global-traffic-routing.md)
 - [[How do you troubleshoot a DNS problem in production?]] (`#435`): [How do you troubleshoot a DNS problem in production?](../cloud-engineering/how-do-you-troubleshoot-a-dns-problem-in-production.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

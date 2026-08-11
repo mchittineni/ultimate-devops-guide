@@ -82,11 +82,13 @@ The management (payer) account holds nothing but Organizations, billing, and the
 - Expect: "how do you stop an engineer spinning up GPUs in an unapproved region?" - a region-deny SCP plus budgets in the account baseline.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
 - [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
 - [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

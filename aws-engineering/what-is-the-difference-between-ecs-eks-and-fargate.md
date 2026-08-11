@@ -67,11 +67,13 @@ tags:
 - Expect: "when would you not choose Kubernetes?" - answer honestly; recommending EKS unconditionally reads as inexperience.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
 - [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
 - [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

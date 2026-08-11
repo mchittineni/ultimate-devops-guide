@@ -201,11 +201,13 @@ aws ecs execute-command --cluster prod --task "$TASK_ARN" \
 - Give a fair ECS-versus-EKS answer: ECS for lowest operational burden on AWS, EKS for the Kubernetes ecosystem and portability. See [what is the difference between ECS, EKS, and Fargate](./what-is-the-difference-between-ecs-eks-and-fargate.md), [building a CI/CD pipeline with CodePipeline, CodeBuild, and CodeDeploy](./how-do-you-build-a-ci-cd-pipeline-using-aws-codepipeline-codebuild-and-codedeploy.md), [what are deployment strategies](../devops-tools-and-automation/what-are-deployment-strategies.md), and [what are VPC endpoints](./what-are-vpc-endpoints-and-when-do-you-use-a-gateway-versus-an-interface-endpoint.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
 - [[How does persistent storage work in Kubernetes?]] (`#443`): [How does persistent storage work in Kubernetes?](../kubernetes/how-does-persistent-storage-work-in-kubernetes.md)
 - [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -67,11 +67,13 @@ tags:
 - Push back firmly on "durability means we do not need backups": versioning, Object Lock, and replication protect against deletion; durability does not.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
 - [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
 - [[How do you design least-privilege identity in the cloud?]] (`#217`): [How do you design least-privilege identity in the cloud?](../cloud-engineering/how-do-you-design-least-privilege-identity-in-the-cloud.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

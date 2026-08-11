@@ -205,11 +205,13 @@ aws cloudwatch list-metrics --namespace CWAgent --metric-name mem_used_percent
 - Mention mixed instances with Spot and `capacity-optimized` allocation as a real cost lever, with the interruption-handling caveat. And for "instances should replace themselves when they fail", answer ASG with min=max=1 plus health checks and an immutable AMI. See [how do Auto Scaling groups and load balancers work together on AWS](./how-do-auto-scaling-groups-and-load-balancers-work-together-on-aws.md), [why did your autoscaling not kick in during a traffic spike](../scalability-and-high-availability/why-did-your-autoscaling-not-kick-in-during-a-traffic-spike.md), [what is immutable infrastructure](../infrastructure-as-code/what-is-immutable-infrastructure-and-how-do-you-adopt-it.md), and [troubleshooting a load balancer returning 5xx errors](../scalability-and-high-availability/how-do-you-troubleshoot-a-load-balancer-returning-5xx-errors-or-sending-traffic-unevenly.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do requests, limits, and QoS classes work in Kubernetes?]] (`#444`): [How do requests, limits, and QoS classes work in Kubernetes?](../kubernetes/how-do-requests-limits-and-qos-classes-work-in-kubernetes.md)
 - [[What happens when a Kubernetes control-plane node or etcd fails?]] (`#448`): [What happens when a Kubernetes control-plane node or etcd fails?](../kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md)
 - [[How do you troubleshoot a DNS problem in production?]] (`#435`): [How do you troubleshoot a DNS problem in production?](../cloud-engineering/how-do-you-troubleshoot-a-dns-problem-in-production.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -175,11 +175,13 @@ aws cloudwatch get-metric-statistics --namespace AWS/NATGateway \
 - Close with PrivateLink for your own services as the answer to overlapping CIDRs where peering or Transit Gateway is not an option. See [how does a private subnet reach the internet](./how-does-a-private-subnet-reach-the-internet.md), [connecting many VPCs](./how-do-you-connect-many-vpcs-peering-transit-gateway-or-privatelink.md), [designing a production-ready VPC](./how-do-you-design-a-production-ready-vpc-on-aws.md), and [cutting a cloud bill without hurting reliability](../cloud-cost-optimization/how-do-you-cut-a-cloud-bill-without-hurting-reliability.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you debug DNS resolution failures inside a Kubernetes cluster?]] (`#404`): [How do you debug DNS resolution failures inside a Kubernetes cluster?](../kubernetes/how-do-you-debug-dns-resolution-failures-inside-a-kubernetes-cluster.md)
 - [[How do requests, limits, and QoS classes work in Kubernetes?]] (`#444`): [How do requests, limits, and QoS classes work in Kubernetes?](../kubernetes/how-do-requests-limits-and-qos-classes-work-in-kubernetes.md)
 - [[How does Pod networking and service discovery work in Kubernetes?]] (`#447`): [How does Pod networking and service discovery work in Kubernetes?](../kubernetes/how-does-pod-networking-and-service-discovery-work-in-kubernetes.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

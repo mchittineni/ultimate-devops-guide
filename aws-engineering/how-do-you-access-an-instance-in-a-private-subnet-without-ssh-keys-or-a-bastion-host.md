@@ -184,11 +184,13 @@ nslookup ssmmessages.eu-west-1.amazonaws.com    # 3. private IP => endpoint reac
 - Finish with the design position: no `key_name`, no inbound rules, interactive access as an audited exception, and frequent shell access treated as a signal of missing automation or observability. See [how does a private subnet reach the internet](./how-does-a-private-subnet-reach-the-internet.md), [what are VPC endpoints](./what-are-vpc-endpoints-and-when-do-you-use-a-gateway-versus-an-interface-endpoint.md), [troubleshooting SSH failures on Linux](../linux-administration/how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md), and [designing least-privilege identity in the cloud](../cloud-engineering/how-do-you-design-least-privilege-identity-in-the-cloud.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
 - [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
 - [[How do you troubleshoot a Kubernetes node that is NotReady?]] (`#449`): [How do you troubleshoot a Kubernetes node that is NotReady?](../kubernetes/how-do-you-troubleshoot-a-kubernetes-node-that-is-notready.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

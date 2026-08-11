@@ -78,11 +78,13 @@ export class SecureBucket extends Construct {
 - Expect: "how do you stop console changes?" - drift detection, plan gates in CI, and IAM that denies humans write access in production.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What are the different types of cloud services?]] (`#25`): [What are the different types of cloud services?](../cloud-platforms/what-are-the-different-types-of-cloud-services.md)
 - [[How do you choose a cloud provider for a new workload?]] (`#281`): [How do you choose a cloud provider for a new workload?](../cloud-platforms/how-do-you-choose-a-cloud-provider-for-a-new-workload.md)
 - [[What is a cloud landing zone?]] (`#215`): [What is a cloud landing zone?](../cloud-engineering/what-is-a-cloud-landing-zone.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

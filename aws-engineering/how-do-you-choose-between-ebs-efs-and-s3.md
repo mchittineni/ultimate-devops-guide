@@ -146,11 +146,13 @@ spec:
 - Say explicitly that S3 is not a filesystem - no appends, rename is copy-and-delete, no locking - and that mounting it does not change that. Then round out the answer with instance store (ephemeral, fastest) and FSx (SMB/Lustre) for the lift-and-shift cases. See [what are the S3 storage classes](./what-are-the-s3-storage-classes-and-when-do-you-use-each.md), [securing and managing the lifecycle of an S3 bucket](./how-do-you-secure-and-manage-the-lifecycle-of-an-s3-bucket.md), [how does persistent storage work in Kubernetes](../kubernetes/how-does-persistent-storage-work-in-kubernetes.md), and [containerising a legacy application](../cloud-migration/how-do-you-containerise-a-legacy-application-and-move-it-to-kubernetes.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
 - [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
 - [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

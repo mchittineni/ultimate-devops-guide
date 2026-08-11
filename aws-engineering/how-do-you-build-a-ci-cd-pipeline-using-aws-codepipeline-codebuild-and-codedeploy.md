@@ -91,11 +91,13 @@ Hooks:
 - Mention security best practices: grant CodeBuild and CodeDeploy minimal IAM service roles, storing secrets in AWS Secrets Manager or Parameter Store (`/aws/reference/secretsmanager/secret_name`).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
 - [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
 - [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

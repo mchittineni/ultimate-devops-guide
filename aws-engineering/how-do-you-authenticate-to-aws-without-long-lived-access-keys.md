@@ -215,11 +215,13 @@ aws configure list | grep token
 - Cover the migration honestly: credential report, SCP denying `iam:CreateAccessKey`, deactivate-before-delete, secret scanning, and GuardDuty for credentials used from unexpected locations. Then say why keys appear in the first place - the keyless path was inconvenient - and fix that with `aws sso login` profiles. See [how does AWS IAM evaluate a request](./how-does-aws-iam-evaluate-a-request.md), [securing Pod access to AWS resources with EKS Pod Identity or IRSA](./how-do-you-secure-pod-access-to-aws-resources-using-eks-pod-identity-or-irsa.md), [designing least-privilege identity in the cloud](../cloud-engineering/how-do-you-design-least-privilege-identity-in-the-cloud.md), and [running Terraform through a CI/CD pipeline](../infrastructure-as-code/how-do-you-run-terraform-through-a-ci-cd-pipeline.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
 - [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
 - [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
