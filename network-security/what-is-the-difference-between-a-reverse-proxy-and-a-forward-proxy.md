@@ -174,11 +174,13 @@ curl -isS -X OPTIONS https://api.example.com/v2/orders \
 - If transparent proxying comes up, mention that intercepting TLS requires a CA on every client, with the privacy and operational cost that implies. See [what happens when a user opens your application in a browser](./what-happens-when-a-user-opens-your-application-in-a-browser.md), [what is an API gateway](../api-gateway-and-service-mesh/what-is-an-api-gateway.md), [designing defence in depth for a cloud network](./how-do-you-design-defence-in-depth-for-a-cloud-network.md), and [how do Kubernetes NetworkPolicies work](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
 - [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -135,11 +135,13 @@ aws ec2 describe-instances \
 - Finish on drift: policy-as-code, SCPs, and an exposure scan. "The control was on the diagram, not in the account" is the sentence that lands.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
