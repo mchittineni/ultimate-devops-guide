@@ -90,6 +90,14 @@ docker inspect -f 'ENTRYPOINT={{.Config.Entrypoint}} CMD={{.Config.Cmd}}' img
 - Have the `exec "$@"` entrypoint-script pattern ready; it is the answer to "how do you run setup before your app starts without breaking signal handling?"
 - The classic follow-up is the port mismatch: "the image `EXPOSE`s 8080 but the app listens on 9090". `EXPOSE` is documentation only - what matters is `-p`/`--publish` mapping and what the process actually binds. See [what is Dockerfile](./what-is-dockerfile.md) and [reducing Docker image size and build time](./how-do-you-reduce-docker-image-size-and-build-time.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Kubernetes?]] (`#11`): [What is Kubernetes?](../kubernetes/what-is-kubernetes.md)
+- [[What are the main components of Kubernetes architecture?]] (`#12`): [What are the main components of Kubernetes architecture?](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)
+- [[What is a Service in Kubernetes?]] (`#14`): [What is a Service in Kubernetes?](../kubernetes/what-is-a-service-in-kubernetes.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Docker](./README.md) · [All topics](../README.md)

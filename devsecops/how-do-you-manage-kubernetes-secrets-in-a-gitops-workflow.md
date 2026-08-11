@@ -178,6 +178,14 @@ kubectl rollout restart deploy/payments -n prod
 - Bring up the GitOps-specific failure modes unprompted: Argo CD self-heal fighting an operator-managed Secret (`ignoreDifferences`), sync ordering so the operator exists first, and the **bootstrap** chicken-and-egg for the operator's own credential.
 - Close with enforcement rather than intention: `gitleaks` in pre-commit and CI, a check that fails on a committed `kind: Secret` with values, and the rule that a leaked credential is rotated **first** and cleaned from history second. See [how do you manage secrets in CI/CD pipelines](./how-do-you-manage-secrets-in-ci-cd-pipelines.md), [rotating secrets without downtime](./how-do-you-rotate-secrets-without-downtime.md), [ConfigMaps and Secrets in Kubernetes](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md), [what is GitOps](../devops-tools-and-automation/what-is-gitops.md), and [troubleshooting a GitOps pipeline that will not sync](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to DevSecOps](./README.md) · [All topics](../README.md)

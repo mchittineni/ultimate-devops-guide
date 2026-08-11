@@ -66,6 +66,14 @@ TWO KINDS OF "LIFECYCLE" IN ONE ROUND
 - Provisioners should come with HashiCorp's own framing: `local-exec`, `remote-exec`, and `file` exist as a last resort because they break the declarative model — they are not tracked in state, have no meaningful retry semantics, and require network reachability from wherever Terraform runs. Say you prefer `user_data`, a baked image, or a configuration-management tool, and that reaching for a provisioner is usually a signal the design should change.
 - Optum is a healthcare organisation, so wherever it fits naturally, add the compliance angle — encryption with customer-managed keys, audit trails, and data-retention rules driven by regulation rather than convenience. It costs one sentence and it lands.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

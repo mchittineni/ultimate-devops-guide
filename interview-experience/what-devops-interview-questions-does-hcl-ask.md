@@ -139,6 +139,14 @@ WHAT MAKES HCL DIFFERENT
 - Merge conflict resolution "in how many ways" wants a list: edit the file by hand and mark it resolved, take one side wholesale with `--ours` or `--theirs`, use a merge tool, abort and rebase instead, or reset and redo the work. Add that prevention — small commits, short-lived branches, frequent integration — is the real answer. See [handling merge conflicts](../version-control/how-to-handle-merge-conflicts-in-git.md).
 - `tail -n 10 file.log` for the last ten lines, and mention `tail -f` for following and `less +G` for navigating a huge file without loading it. See [analysing logs with grep, awk, and sed](../linux-administration/how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

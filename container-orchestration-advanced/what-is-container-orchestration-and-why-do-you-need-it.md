@@ -103,6 +103,14 @@ kubectl rollout undo deploy/api                # and the rollback
 - Mention that resource `requests` are what the scheduler reads. It is a small detail that lands well.
 - If asked "when would you not use Kubernetes?", say three containers on one host, a single-team app, or no capacity to operate a cluster. Honesty scores here.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Container Orchestration Advanced](./README.md) · [All topics](../README.md)

@@ -83,6 +83,14 @@ sum by (team) (increase(pages_total[7d]))                            # operation
 - "You build it, you run it" must come with authority to change things. Say that explicitly - it is the difference between ownership and blame.
 - Distinguish the small set of things that should be uniform guardrails from everything that should be opt-in. And be ready to say what you need from leadership: funded slack for improvement work.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you deal with flaky tests in a CI pipeline?]] (`#398`): [How do you deal with flaky tests in a CI pipeline?](../cicd/how-do-you-deal-with-flaky-tests-in-a-ci-pipeline.md)
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to DevOps Culture and Practices](./README.md) · [All topics](../README.md)

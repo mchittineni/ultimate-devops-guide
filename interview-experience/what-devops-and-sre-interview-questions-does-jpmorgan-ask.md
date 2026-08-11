@@ -156,6 +156,14 @@ JPMORGAN'S SIGNATURE
 - Two candles measuring 45 minutes: light candle A at both ends and candle B at one end simultaneously. A burns out in 30 minutes; at that instant light B's second end, and B's remaining 30 minutes of material burns in 15. Total 45. Say the reasoning aloud — burning from both ends halves the time.
 - Set 1 mixes application development into a DevOps interview, which is normal at JPMorgan. If Spring Boot, Java streams, and Kafka are outside your experience, say so cleanly and pivot to what you do own — but expect the platform half of the round to carry more weight for a DevOps title.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+- [[How do you do capacity planning?]] (`#230`): [How do you do capacity planning?](../site-reliability-engineering/how-do-you-do-capacity-planning.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

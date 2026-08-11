@@ -61,6 +61,14 @@ STORAGE-WEIGHTED, WHICH IS UNUSUAL
 - The database-before-frontend question has a Compose answer and a better answer, and you should give both. In Compose, `depends_on` alone only orders _starting_, not _readiness_ — so the correct form is `depends_on` with `condition: service_healthy` plus a `healthcheck` on the database. In Kubernetes there is no dependency ordering between Pods at all, so the mechanisms are an init container that blocks until the database answers, or simply an application that retries its connection with backoff. Then say the principle: ordering is a fragile guarantee, so the robust design is a frontend that tolerates the database being briefly unavailable, because it will be — during a database restart, long after startup. See [what Docker Compose is](../docker/what-is-docker-compose.md).
 - For a payments organisation, volunteer the operational detail on stateful storage: `ReclaimPolicy: Retain` so a deleted PVC does not delete the data, volume snapshots before an upgrade, and access modes — `ReadWriteOnce` binding a volume to one node, which is the constraint that surprises people when a Pod cannot reschedule. See [StatefulSets](../container-orchestration-advanced/what-are-statefulsets-in-kubernetes.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[How do you prevent and handle secret leaks in CI/CD pipelines?]] (`#237`): [How do you prevent and handle secret leaks in CI/CD pipelines?](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

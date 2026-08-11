@@ -62,6 +62,14 @@ A SHORT DEFINITIONS ROUND
 - On the state file, cover four things: what it holds (the mapping from configuration addresses to real resource IDs, plus attributes and dependency metadata), why it exists (so Terraform can compute a diff between desired and actual), where it belongs (a remote backend that is encrypted, versioned, and lockable), and the risk (it can contain secrets such as generated passwords in plain text). Add that locking is what prevents two concurrent applies from corrupting it, and that versioning is what lets you recover from a bad write. See [managing Terraform state safely in a team](../infrastructure-as-code/how-do-you-manage-terraform-state-safely-in-a-team.md) and [recovering a lost or corrupted state file](../infrastructure-as-code/how-do-you-recover-a-lost-or-corrupted-terraform-state-file.md).
 - In a seven-question round each answer is worth roughly 14%, so do not give one-line replies — but also do not ramble. The pattern that works is definition, then mechanism, then one consequence or trade-off, then stop and let them follow up. Volunteering the adjacent detail (user-defined bridges for DNS, why a Deployment plus PVC breaks at scale, why provisioners are a last resort) is what turns a definitions screen into a strong impression.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

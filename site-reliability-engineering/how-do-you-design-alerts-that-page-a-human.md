@@ -63,6 +63,14 @@ groups:
 - Give a target for pages per shift and say that deleting a non-actionable alert is a valid fix.
 - Expect: "what would you do with an alert that fires weekly and is never real?" - delete or retune it, and say so without hedging.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you choose an SLO target?]] (`#177`): [How do you choose an SLO target?](../slo-engineering/how-do-you-choose-an-slo-target.md)
+- [[What is multi-window multi-burn-rate alerting?]] (`#178`): [What is multi-window multi-burn-rate alerting?](../slo-engineering/what-is-multi-window-multi-burn-rate-alerting.md)
+- [[How do you measure a latency SLI correctly?]] (`#179`): [How do you measure a latency SLI correctly?](../slo-engineering/how-do-you-measure-a-latency-sli-correctly.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Site Reliability Engineering (SRE)](./README.md) · [All topics](../README.md)

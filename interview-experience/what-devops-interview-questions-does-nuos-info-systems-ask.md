@@ -93,6 +93,14 @@ THE STANDOUT QUESTION
 - The AWS-plus-Azure question wants one process, not two: a single IaC tool with per-provider modules, one identity source federated to both clouds, a common tagging and naming standard enforced by policy in each, centralised logging and cost reporting across both, and one pipeline pattern. Then say the honest trade-off — a genuinely cloud-agnostic layer costs you the best managed services on each side, so most teams standardise the _process_ and accept provider-specific implementations. See [the real trade-offs of multi-cloud](../cloud-engineering/what-are-the-real-trade-offs-of-multi-cloud.md).
 - The Node.js multi-stage Dockerfile has three specific things they asked for. Build stage: `npm ci` from the lockfile for reproducibility, then build. Runtime stage: copy only `dist` and production `node_modules`, on a slim or distroless base, running as a non-root user. And on secrets: never `ARG` or `ENV` a token, because it persists in the image history — use BuildKit's `--mount=type=secret` so it exists only during that build step, and add a `.dockerignore` covering `.env`, `.git`, and local `node_modules`. See [reducing Docker image size and build time](../docker/how-do-you-reduce-docker-image-size-and-build-time.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?]] (`#455`): [How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?](../cicd/how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

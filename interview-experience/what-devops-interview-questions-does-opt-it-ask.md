@@ -100,6 +100,14 @@ ENTRYPOINT ["java","-XX:MaxRAMPercentage=75","-jar","/app/app.jar"]
 - "What did you learn at your previous company?" should not be a list of tools. Pick one habit or judgement you gained — reading logs before changing anything, writing the runbook before the automation, insisting on a rollback plan — and give the incident that taught it.
 - The round ends with "any questions", which is scored even though it feels like a formality. Ask something that only someone who has done the work would ask: how deployments reach production, who is on call, what the biggest source of toil is. See [what questions you should ask your interviewer](./what-questions-should-you-ask-your-interviewer.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

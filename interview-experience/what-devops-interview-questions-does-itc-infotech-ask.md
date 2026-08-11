@@ -61,6 +61,14 @@ SHORT ROUND, NO FILLER
 - For the EKS Terraform module, describe the interface rather than reciting resources: inputs for cluster name, Kubernetes version, VPC and subnet IDs, node group definitions with instance types and scaling bounds, and add-on versions; outputs for cluster endpoint, certificate authority data, and OIDC issuer URL. Then name what the module must handle — the cluster IAM role and node role, security groups, the OIDC provider for IRSA, and the `aws-auth` mapping or access entries. Say whether you would write it yourself or use the community `terraform-aws-eks` module, and justify the choice; interviewers respect "I would not rebuild a well-maintained module" when it comes with a reason. See [what Terraform is](../infrastructure-as-code/what-is-terraform.md).
 - With only six questions, each answer carries roughly 17% of the round. Do not give short answers here — take each one to a design decision and a trade-off, and expect follow-ups rather than a new topic.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What is the difference between SRE, DevOps, and Platform Engineering?]] (`#232`): [What is the difference between SRE, DevOps, and Platform Engineering?](../site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md)
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

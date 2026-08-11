@@ -85,8 +85,8 @@ Topic READMEs and the root README's table of contents are **generated**. Never e
 
 ```bash
 python3 scripts/generate_indexes.py        # rewrite all indexes from the question files
-python3 scripts/build_knowledge_graph.py   # regenerate 3D knowledge graph (docs/index.html)
 python3 scripts/inject_wikilinks.py        # inject cross-topic [[wikilinks]]
+python3 scripts/build_knowledge_graph.py   # regenerate 3D knowledge graph (docs/index.html)
 python3 scripts/validate_content.py        # frontmatter, naming, links, index freshness
 ```
 

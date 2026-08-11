@@ -60,6 +60,14 @@ gcloud compute routers nats create nat-euw1 --router=rtr-euw1 --region=europe-we
 - Firewall rules targeting service accounts rather than tags is the security-savvy detail.
 - Expect: "how do many teams share a network?" - Shared VPC with host and service projects, and note peering is non-transitive.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
+- [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
+- [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to GCP Engineering](./README.md) · [All topics](../README.md)

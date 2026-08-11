@@ -206,6 +206,14 @@ printf 'errors: %d, warnings: %d\n' \
 - For the PCI-DSS pipeline, structure the answer as controls rather than tools: separation of duties with mandatory review, signed commits, SAST and SCA gates, image scanning and signing, immutable artefacts with provenance, no production access from developer laptops, full audit trail of who deployed what, and segregated cardholder-data environments. See [what a DevSecOps pipeline looks like end to end](../devsecops/what-does-a-devsecops-pipeline-look-like-end-to-end.md) and [SLSA and securing the software supply chain](../devsecops/what-is-slsa-and-how-do-you-secure-the-software-supply-chain.md).
 - PodDisruptionBudgets appear in both this round and several others in this collection. Define one crisply — `minAvailable` or `maxUnavailable` constraining _voluntary_ disruptions such as drains and upgrades, with no effect on a node crashing — and say that a badly set PDB can block a node drain indefinitely. See [autoscaling workloads and nodes](../kubernetes/how-do-you-autoscale-workloads-and-nodes-in-kubernetes.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

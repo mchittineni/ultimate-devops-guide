@@ -114,6 +114,14 @@ other    = [s for s in items if not s.startswith(("a", "b"))]  # ['vca']
 - Chaining Jenkins pipelines is answered with a `build job:` step at the end of A (with `wait: false` if you do not want to block), or the Parameterized Trigger plugin, and the better modern answer is an event or webhook so the coupling is explicit. See [Jenkins pipelines](../cicd/what-are-jenkins-pipelines.md).
 - Connection draining — deregistration delay on AWS, drain on Azure — lets in-flight requests finish before a target is removed. Tie it to Kubernetes: `preStop` hooks and `terminationGracePeriodSeconds` do the same job for Pods. That cross-mapping is a strong finish. See [deployment strategies](../devops-tools-and-automation/what-are-deployment-strategies.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

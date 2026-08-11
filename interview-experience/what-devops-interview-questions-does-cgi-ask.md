@@ -90,6 +90,14 @@ ENTRYPOINT ["/app"]
 - For logs that stopped, check the boring causes first and say so: the filesystem is full, the log file was rotated and the process still holds the old descriptor, permissions changed, the log level was raised, or the collector rather than the database is what actually broke. Distinguishing "nothing is writing logs" from "logs are written but not shipped" is the key move. See [troubleshooting SSH failures, high CPU, and disk space](../linux-administration/how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md).
 - In the multi-stage Dockerfile, say out loud why each line is where it is: dependency manifests copied before source so the layer caches, a build stage discarded at the end, a minimal non-root runtime image. That commentary is the actual answer. See [what a Dockerfile is](../docker/what-is-dockerfile.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+- [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

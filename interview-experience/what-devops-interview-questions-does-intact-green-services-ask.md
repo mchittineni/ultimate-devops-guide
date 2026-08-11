@@ -81,6 +81,14 @@ THE TWO QUESTIONS WITH A HIDDEN CATCH
 - Multibranch advantages: a job is created automatically for every branch and pull request from the `Jenkinsfile` in that branch, jobs disappear when branches are deleted, each branch gets isolated builds so feature work is validated before merge, and pipeline configuration is versioned with the code it builds. That last point — configuration travelling with the branch — is the strongest single advantage.
 - Pipeline types: declarative and scripted as the two syntaxes, plus multibranch and organisation-folder as job types, and freestyle as the legacy non-pipeline option. Say you default to declarative.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

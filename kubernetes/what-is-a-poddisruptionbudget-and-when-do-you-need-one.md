@@ -132,6 +132,14 @@ kubectl drain ip-10-0-3-14 --ignore-daemonsets --delete-emptydir-data
 - Mention `status.disruptionsAllowed` as the pre-upgrade check, and `unhealthyPodEvictionPolicy: AlwaysAllow` as the fix for drains blocked by already-broken Pods. Both are recent and specific.
 - If they ask what to do when a drain is blocked: wait, temporarily scale up, or repair the unhealthy replica - never `--force`, which bypasses the budget you deliberately set. See [upgrading a production Kubernetes cluster with zero downtime](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md), [node pressure and Pod evictions](./how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md), and [rolling updates and rollback](./how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you upgrade a production Kubernetes cluster with zero downtime?]] (`#411`): [How do you upgrade a production Kubernetes cluster with zero downtime?](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md)
+- [[How do you run and scale a stateful application on Kubernetes?]] (`#413`): [How do you run and scale a stateful application on Kubernetes?](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)
+- [[How do you run an application across multiple Kubernetes clusters?]] (`#414`): [How do you run an application across multiple Kubernetes clusters?](../container-orchestration-advanced/how-do-you-run-an-application-across-multiple-kubernetes-clusters.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Kubernetes](./README.md) · [All topics](../README.md)

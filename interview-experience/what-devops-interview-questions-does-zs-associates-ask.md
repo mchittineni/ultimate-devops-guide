@@ -120,6 +120,14 @@ THE STANDOUT TOPIC
 - For the EKS module structure, describe the interface rather than listing resources: inputs for cluster name, Kubernetes version, VPC and subnet IDs, node pool or Karpenter configuration, add-on versions, and access entries; outputs for the cluster endpoint, certificate authority data, and the OIDC issuer URL — that last one being essential because every IRSA role depends on it. Internally the module owns the cluster, its IAM roles, security groups, the OIDC provider, and managed add-ons. Say whether you would write it or use the well-maintained community module, and justify the choice; "I would not rebuild a module thousands of people test for me" is a perfectly strong answer when it comes with a reason. See [what Terraform is](../infrastructure-as-code/what-is-terraform.md).
 - The estate questions at the end — how many clusters, how many nodes, how CI/CD is organised — are calibration checks. Have exact numbers ready, because a vague answer here retroactively weakens the confident technical answers that preceded it.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

@@ -122,6 +122,14 @@ resource "aws_subnet" "this" {
 - The launch-traffic question wants preparation, not reaction: load test to a known ceiling beforehand, pre-scale ahead of the launch rather than relying on reactive autoscaling, put a CDN in front of static and cacheable content, add caching and connection pooling at the data tier, protect with rate limiting, and have a graceful-degradation path — shed non-essential features rather than failing entirely. Say that autoscaling alone loses the first few minutes, which is exactly when a launch spike arrives. See [designing a system to degrade gracefully under overload](../scalability-and-high-availability/how-do-you-design-a-system-to-degrade-gracefully-under-overload.md) and [auto-scaling](../scalability-and-high-availability/what-is-auto-scaling.md).
 - Bringing a manual resource under management is `terraform import`, or better, an `import` block in configuration so the operation is planned and reviewable. Note that import populates state but does not write the HCL — you still author the resource block to match, and `terraform plan` showing no changes is how you prove you got it right. See [importing existing cloud infrastructure into Terraform](../infrastructure-as-code/how-do-you-import-existing-cloud-infrastructure-into-terraform.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

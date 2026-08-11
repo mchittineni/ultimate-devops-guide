@@ -95,6 +95,14 @@ metrics:
 - Mention the fifth DORA metric (reliability) and add operational load plus a DevEx survey. It shows you know throughput metrics alone hide burnout.
 - Say that definitions are the hard part and that you publish the query. Anyone who has run a metrics program has had the "our lead time is different from yours" argument.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you deal with flaky tests in a CI pipeline?]] (`#398`): [How do you deal with flaky tests in a CI pipeline?](../cicd/how-do-you-deal-with-flaky-tests-in-a-ci-pipeline.md)
+- [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+- [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to DevOps Metrics and KPIs](./README.md) · [All topics](../README.md)

@@ -50,6 +50,14 @@ OLA  platform team: 99.99% Kubernetes API and node capacity
 - Volunteer the SLO-stricter-than-SLA buffer; few candidates mention it and it demonstrates real practice.
 - Expect: "should internal services have SLAs?" - no, SLOs plus an error budget policy; explain why contracts internally backfire.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SLA Management](./README.md) · [All topics](../README.md)

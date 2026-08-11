@@ -113,6 +113,14 @@ spec:
 - Say that batch work must be idempotent because evictions and retries will re-run it - and that "resume from where it stopped" is a design requirement, not a nice-to-have.
 - Close on alerting: a failed nightly job discovered a week later is the actual production risk. See [how do you write effective PromQL queries and Alertmanager rules](../monitoring-and-logging/how-do-you-write-effective-promql-queries-and-alertmanager-rules.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How does Prometheus collect metrics, and what components sit around it?]] (`#500`): [How does Prometheus collect metrics, and what components sit around it?](../monitoring-and-logging/how-does-prometheus-collect-metrics-and-what-components-sit-around-it.md)
+- [[How do the ELK and EFK stacks fit together?]] (`#501`): [How do the ELK and EFK stacks fit together?](../monitoring-and-logging/how-do-the-elk-and-efk-stacks-fit-together.md)
+- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Kubernetes](./README.md) · [All topics](../README.md)

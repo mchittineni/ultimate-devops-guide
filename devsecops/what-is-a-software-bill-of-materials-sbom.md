@@ -44,6 +44,14 @@ grype sbom:sbom.json --fail-on high
 - Naming VEX, and digest-keyed storage, separates people who have generated SBOMs from people who have used them.
 - Expect: "who consumes it?" - your own vulnerability management, plus customers' procurement and their scanners.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you harden a container image and a Dockerfile?]] (`#441`): [How do you harden a container image and a Dockerfile?](../docker/how-do-you-harden-a-container-image-and-a-dockerfile.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+- [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to DevSecOps](./README.md) · [All topics](../README.md)

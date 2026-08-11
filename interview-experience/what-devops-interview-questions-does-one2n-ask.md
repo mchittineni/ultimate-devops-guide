@@ -84,6 +84,14 @@ THE FORMAT IS THE TEST
 - On the database choice, do not name a product before naming the requirement. Ask about the access pattern, consistency needs, and expected scale, then choose — a managed relational database for transactional integrity, adding read replicas and caching before considering sharding. Say that you would use the managed service rather than running the database in the cluster unless there is a specific reason. See [running a highly available database on AWS](../aws-engineering/how-do-you-run-a-highly-available-database-on-aws.md).
 - Because the whole round is one escalating conversation, manage it deliberately: state your assumptions and constraints up front (scale, budget, team size, compliance), sketch the design, and then say which parts you would build first and which you would defer. Interviewers here reward "here is what I would not build yet, and why" as much as the design itself.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you deal with flaky tests in a CI pipeline?]] (`#398`): [How do you deal with flaky tests in a CI pipeline?](../cicd/how-do-you-deal-with-flaky-tests-in-a-ci-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

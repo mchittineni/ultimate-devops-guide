@@ -109,6 +109,14 @@ istioctl upgrade --revision canary-1-24  # revisioned control plane, one namespa
 - Have a control-plane failure story: proxies keep last-known-good config, so the failure surfaces on the next deploy. Alerting on config convergence is the senior detail.
 - Be willing to say "we did not need a mesh" for a small estate. Knowing when the answer is a gateway plus a library is a strength, not a gap.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to API Gateway and Service Mesh](./README.md) · [All topics](../README.md)

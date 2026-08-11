@@ -44,6 +44,14 @@ tags:
 - "Eliminate, then automate, then delegate to self-service" is a good escalation order.
 - Have a concrete example: what toil you measured, what you automated, and how many hours a week it returned.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you choose an SLO target?]] (`#177`): [How do you choose an SLO target?](../slo-engineering/how-do-you-choose-an-slo-target.md)
+- [[How do you measure a latency SLI correctly?]] (`#179`): [How do you measure a latency SLI correctly?](../slo-engineering/how-do-you-measure-a-latency-sli-correctly.md)
+- [[How do you define SLOs for batch and asynchronous workloads?]] (`#181`): [How do you define SLOs for batch and asynchronous workloads?](../slo-engineering/how-do-you-define-slos-for-batch-and-asynchronous-workloads.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Site Reliability Engineering (SRE)](./README.md) · [All topics](../README.md)

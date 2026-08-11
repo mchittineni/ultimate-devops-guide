@@ -56,6 +56,14 @@ tags:
 - Score points by naming where the mapping _fails_ (global VPC, resource groups, IAM models) rather than reciting the table.
 - Expect: "you know AWS, could you work on GCP?" - answer with the primitives that transfer and the specific differences you would need to learn.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Engineering](./README.md) · [All topics](../README.md)

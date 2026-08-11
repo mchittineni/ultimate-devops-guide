@@ -36,6 +36,14 @@ tags:
 - Mention monitoring the load generator itself - testing your own client's limits is a classic mistake.
 - Tie targets to SLOs so the test has a pass/fail meaning rather than producing a number nobody acts on.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you prevent and handle secret leaks in CI/CD pipelines?]] (`#237`): [How do you prevent and handle secret leaks in CI/CD pipelines?](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)
+- [[Explain Docker Architecture]] (`#10`): [Explain Docker Architecture](../docker/explain-docker-architecture.md)
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Performance Testing](./README.md) · [All topics](../README.md)

@@ -163,6 +163,14 @@ cat /proc/4412/oom_score /proc/4412/oom_score_adj
 - Use `nice`/`ionice` to make backups yield, and say it is a courtesy, not isolation - cgroups are how you enforce.
 - If asked to inspect processes without `ps` or `top`, answer `/proc` and explain that `ps` is just a reader of it. See [how do you debug a Linux performance problem from first principles](./how-do-you-debug-a-linux-performance-problem-from-first-principles.md), [troubleshooting SSH failures, high CPU, and disk space](./how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md), [how do namespaces, cgroups, and capabilities isolate a container](../docker/how-do-namespaces-cgroups-and-capabilities-isolate-a-container.md), and [requests, limits, and QoS classes in Kubernetes](../kubernetes/how-do-requests-limits-and-qos-classes-work-in-kubernetes.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you patch hundreds of servers safely?]] (`#430`): [How do you patch hundreds of servers safely?](../configuration-management/how-do-you-patch-hundreds-of-servers-safely.md)
+- [[What Bash scripting exercises come up in DevOps interviews?]] (`#502`): [What Bash scripting exercises come up in DevOps interviews?](../scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md)
+- [[How do you write a production-grade Bash script?]] (`#266`): [How do you write a production-grade Bash script?](../scripting-and-automation/how-do-you-write-a-production-grade-bash-script.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Linux Administration](./README.md) · [All topics](../README.md)

@@ -280,6 +280,14 @@ env -i /bin/bash --noprofile --norc ./cleanup.sh -n /tmp/test   # reproduce cron
 - Mention `flock` for anything on a schedule, `mktemp` plus a `trap` for temporary files, and an explicit `PATH` because cron's environment is nearly empty.
 - Say `shellcheck` runs in CI, and say where you would stop using Bash - once you need JSON, data structures, or API error handling, it is Python. Recognising the boundary is a senior signal. See [how do you write a production-grade Bash script](./how-do-you-write-a-production-grade-bash-script.md), [analysing logs with grep, awk, and sed](../linux-administration/how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed.md), [scheduling work with cron and systemd timers](../linux-administration/how-do-you-schedule-work-with-cron-and-systemd-timers.md), and [what Python exercises come up in DevOps interviews](./what-python-exercises-come-up-in-devops-interviews.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you schedule work with cron and systemd timers?]] (`#497`): [How do you schedule work with cron and systemd timers?](../linux-administration/how-do-you-schedule-work-with-cron-and-systemd-timers.md)
+- [[What are the basic Linux commands every DevOps engineer should know?]] (`#41`): [What are the basic Linux commands every DevOps engineer should know?](../linux-administration/what-are-the-basic-linux-commands-every-devops-engineer-should-know.md)
+- [[What is Shell Scripting?]] (`#42`): [What is Shell Scripting?](../linux-administration/what-is-shell-scripting.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Scripting and Automation](./README.md) · [All topics](../README.md)

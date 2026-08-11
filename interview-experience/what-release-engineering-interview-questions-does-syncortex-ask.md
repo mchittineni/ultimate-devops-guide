@@ -75,6 +75,14 @@ A COMPACT ROUND WITH TWO PRECISE ANSWERS
 - Multi-region Terraform is a provider-alias question at its core: declare aliased providers per region and pass the right one into each module with `providers = { aws = aws.eu_west_1 }`, since a module inherits only the default provider otherwise. Then the structural points: keep per-region state separate so one region's apply cannot break another, factor region-agnostic infrastructure into modules invoked once per region, use `for_each` over a region map rather than copy-pasting blocks, and remember that some resources are global — IAM, Route 53, CloudFront, and ACM certificates for CloudFront must live in `us-east-1`. That global-resource caveat is the detail that marks experience. See [what are Terraform providers](../infrastructure-as-code/what-are-terraform-providers.md) and [designing for multi-region resilience](../cloud-engineering/how-do-you-design-for-multi-region-resilience.md).
 - For a release engineering role specifically, tie the Ansible and Terraform answers back to release safety wherever it fits naturally: `block`/`rescue` gives a change an automatic rollback path, `prevent_destroy` and approval gates stop a release from destroying state, and admission control stops an unapproved artefact reaching production. That framing is what distinguishes a release engineer from a general automation engineer.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

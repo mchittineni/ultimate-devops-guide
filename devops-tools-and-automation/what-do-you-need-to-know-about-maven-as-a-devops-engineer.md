@@ -153,6 +153,14 @@ ENTRYPOINT ["java","-jar","/app/api.jar"]
 - For "what happens during a build - how does it fetch dependencies?", walk local repository → configured remote → your Nexus/Artifactory mirror, and note that `settings.xml` (not the POM) holds the mirror and credentials.
 - Volunteer the CI optimisations: cache `~/.m2` keyed on the POMs, `-B`, `-T 1C`, `-pl -am` for multi-module, and go-offline for hermetic builds. See [how do you manage build artefacts with Nexus or Artifactory](./how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md), [speeding up a slow CI/CD pipeline](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md), [integrating SonarQube and quality gates](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md), and [how does Docker layer caching work](../docker/how-does-docker-layer-caching-work.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to DevOps Tools and Automation](./README.md) · [All topics](../README.md)

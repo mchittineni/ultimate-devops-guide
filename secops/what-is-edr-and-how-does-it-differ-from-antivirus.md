@@ -37,6 +37,14 @@ tags:
 - Mention eBPF sensors and container attribution - it shows you have deployed this on modern infrastructure, not just laptops.
 - Expect: "do you need EDR if hosts are immutable and short-lived?" - yes for detection and forensics, but response shifts to rebuild.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[What is Docker Compose?]] (`#9`): [What is Docker Compose?](../docker/what-is-docker-compose.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SecOps and Threat Detection](./README.md) · [All topics](../README.md)

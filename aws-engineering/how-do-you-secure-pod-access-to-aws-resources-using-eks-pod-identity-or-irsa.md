@@ -119,6 +119,14 @@ aws eks create-pod-identity-association \
 - Explain the security flaw of node-level IAM roles (Instance Profiles): every pod on the node inherits the node's IAM permissions unless IRSA or Pod Identity is enforced.
 - Mention `sts:AssumeRoleWithWebIdentity` for IRSA vs `sts:AssumeRole` with `sts:TagSession` for EKS Pod Identity.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
+- [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+- [[What is a cloud landing zone?]] (`#215`): [What is a cloud landing zone?](../cloud-engineering/what-is-a-cloud-landing-zone.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to AWS Engineering](./README.md) · [All topics](../README.md)

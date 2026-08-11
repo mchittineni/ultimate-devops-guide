@@ -23,7 +23,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 
 from lib_content import REPO_ROOT, all_questions, load_topics, topic_meta
 
-LINK_RE = re.compile(r"\[[^\]]*\]\((\.[^)\s]+)\)")
+LINK_RE = re.compile(r"\[[^\]]*\]\(([^:)\s][^)\s]*)\)")
 WIKILINK_RE = re.compile(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]")
 
 DIFFICULTY_COLORS = {
@@ -181,8 +181,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DevOps & Cloud Engineering Knowledge Graph</title>
-  <script src="https://unpkg.com/3d-force-graph"></script>
-  <script src="https://unpkg.com/three"></script>
+  <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js" integrity="sha384-VtdJaz1xZGHT8M0kFHTWHmJYQy7SQAE5n6vNkXQGKKCCRR5H1R6jPjOCJEfNjTmn" crossorigin="anonymous"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
 
@@ -280,6 +279,48 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       transform: translateY(-50%);
       color: #64748b;
       font-size: 0.85rem;
+    }}
+
+    /* Search Results List */
+    #search-results {{
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      display: none;
+    }}
+    #search-results.visible {{
+      display: block;
+    }}
+    #search-results ul {{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }}
+    #search-results li {{
+      margin: 0;
+      padding: 0;
+    }}
+    #search-results button {{
+      width: 100%;
+      text-align: left;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 6px 10px;
+      margin-bottom: 3px;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }}
+    #search-results button:hover {{
+      background: rgba(6, 182, 212, 0.2);
+      border-color: #06b6d4;
+    }}
+    #search-results button:focus {{
+      outline: 2px solid #06b6d4;
+      outline-offset: -1px;
     }}
 
     /* Legend */
@@ -415,6 +456,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <input type="text" id="search-input" placeholder="Filter questions or topics (e.g. docker, kubernetes)...">
     </div>
 
+    <div id="search-results" role="region" aria-label="Search results">
+      <ul id="search-results-list"></ul>
+    </div>
+
     <div class="legend">
       <div class="legend-item"><span class="dot" style="background:#06b6d4"></span> Topic Hub</div>
       <div class="legend-item"><span class="dot" style="background:#10b981"></span> Beginner</div>
@@ -456,6 +501,50 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     const cardTitle = document.getElementById('card-title');
     const cardDesc = document.getElementById('card-desc');
     const cardLink = document.getElementById('card-link');
+    const searchResults = document.getElementById('search-results');
+    const searchResultsList = document.getElementById('search-results-list');
+
+    // Node click handler (shared for graph clicks and list item activation)
+    function handleNodeActivation(node) {{
+      if (!node) return;
+
+      const distance = 120;
+      const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+      Graph.cameraPosition(
+        {{ x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }},
+        node,
+        2000
+      );
+
+      if (node.type === 'topic') {{
+        cardType.innerText = 'TOPIC HUB';
+        cardType.style.background = 'rgba(6, 182, 212, 0.25)';
+        cardType.style.color = '#22d3ee';
+        cardDifficulty.innerText = node.section || 'DOMAIN';
+        cardDifficulty.style.background = 'rgba(139, 92, 246, 0.25)';
+        cardDifficulty.style.color = '#c084fc';
+      }} else {{
+        cardType.innerText = 'QUESTION';
+        cardType.style.background = 'rgba(59, 130, 246, 0.25)';
+        cardType.style.color = '#60a5fa';
+        cardDifficulty.innerText = (node.difficulty || 'GENERAL').toUpperCase();
+
+        const diffColors = {{
+          'Beginner': {{ bg: 'rgba(16,185,129,0.25)', fg: '#34d399' }},
+          'Intermediate': {{ bg: 'rgba(245,158,11,0.25)', fg: '#fbbf24' }},
+          'Advanced': {{ bg: 'rgba(239,68,68,0.25)', fg: '#f87171' }}
+        }};
+        const colors = diffColors[node.difficulty] || {{ bg: 'rgba(148,163,184,0.25)', fg: '#cbd5e1' }};
+        cardDifficulty.style.background = colors.bg;
+        cardDifficulty.style.color = colors.fg;
+      }}
+
+      cardTitle.innerText = node.label;
+      cardDesc.innerText = `Domain: ${{node.section || node.category || 'DevOps Platform'}}\\nCategory: ${{node.category || 'Topic Index'}}\\nNode Type: ${{node.type}}`;
+      cardLink.href = `https://github.com/mchittineni/ultimate-devops-guide/blob/main/${{node.url.replace('./', '')}}`;
+      card.style.display = 'block';
+      card.focus();
+    }}
 
     const Graph = ForceGraph3D()
       (document.getElementById('graph'))
@@ -474,62 +563,69 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         .onNodeHover(node => {{
           document.body.style.cursor = node ? 'pointer' : 'default';
         }})
-        .onNodeClick(node => {{
-          if (node) {{
-            const distance = 120;
-            const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
-            Graph.cameraPosition(
-              {{ x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }},
-              node,
-              2000
-            );
+        .onNodeClick(handleNodeActivation);
 
-            if (node.type === 'topic') {{
-              cardType.innerText = 'TOPIC HUB';
-              cardType.style.background = 'rgba(6, 182, 212, 0.25)';
-              cardType.style.color = '#22d3ee';
-              cardDifficulty.innerText = node.section || 'DOMAIN';
-              cardDifficulty.style.background = 'rgba(139, 92, 246, 0.25)';
-              cardDifficulty.style.color = '#c084fc';
-            }} else {{
-              cardType.innerText = 'QUESTION';
-              cardType.style.background = 'rgba(59, 130, 246, 0.25)';
-              cardType.style.color = '#60a5fa';
-              cardDifficulty.innerText = (node.difficulty || 'GENERAL').toUpperCase();
-              
-              const diffColors = {{
-                'Beginner': {{ bg: 'rgba(16,185,129,0.25)', fg: '#34d399' }},
-                'Intermediate': {{ bg: 'rgba(245,158,11,0.25)', fg: '#fbbf24' }},
-                'Advanced': {{ bg: 'rgba(239,68,68,0.25)', fg: '#f87171' }}
-              }};
-              const colors = diffColors[node.difficulty] || {{ bg: 'rgba(148,163,184,0.25)', fg: '#cbd5e1' }};
-              cardDifficulty.style.background = colors.bg;
-              cardDifficulty.style.color = colors.fg;
-            }}
+    // Helper function to check if node matches query
+    function nodeMatchesQuery(node, query) {{
+      const label = (node.label || '').toLowerCase();
+      const cat = (node.category || '').toLowerCase();
+      const sec = (node.section || '').toLowerCase();
+      const diff = (node.difficulty || '').toLowerCase();
 
-            cardTitle.innerText = node.label;
-            cardDesc.innerText = `Domain: ${{node.section || node.category || 'DevOps Platform'}}\\nCategory: ${{node.category || 'Topic Index'}}\\nNode Type: ${{node.type}}`;
-            cardLink.href = `https://github.com/mchittineni/ultimate-devops-guide/blob/main/${{node.url.replace('./', '')}}`;
-            card.style.display = 'block';
-          }}
-        }});
+      // Check tags array
+      let tagsMatch = false;
+      if (Array.isArray(node.tags)) {{
+        tagsMatch = node.tags.some(tag => (tag || '').toLowerCase().includes(query));
+      }} else if (typeof node.tags === 'string') {{
+        tagsMatch = node.tags.toLowerCase().includes(query);
+      }}
+
+      return label.includes(query) || cat.includes(query) || sec.includes(query) || diff.includes(query) || tagsMatch;
+    }}
 
     // Live search filter
     document.getElementById('search-input').addEventListener('input', (e) => {{
       const query = e.target.value.strip ? e.target.value.strip().toLowerCase() : e.target.value.toLowerCase().trim();
       if (!query) {{
         Graph.nodeColor(node => node.color);
+        searchResults.classList.remove('visible');
+        searchResultsList.innerHTML = '';
         return;
       }}
+
+      // Filter matching nodes
+      const matchingNodes = gData.nodes.filter(node => nodeMatchesQuery(node, query));
+
+      // Update graph colors
       Graph.nodeColor(node => {{
-        const label = (node.label || '').toLowerCase();
-        const cat = (node.category || '').toLowerCase();
-        const sec = (node.section || '').toLowerCase();
-        if (label.includes(query) || cat.includes(query) || sec.includes(query)) {{
+        if (nodeMatchesQuery(node, query)) {{
           return '#38bdf8'; // Highlight cyan
         }}
         return 'rgba(51, 65, 85, 0.25)'; // Dim unmatched
       }});
+
+      // Populate accessible search results list
+      searchResultsList.innerHTML = '';
+      if (matchingNodes.length > 0) {{
+        matchingNodes.slice(0, 20).forEach(node => {{
+          const li = document.createElement('li');
+          const btn = document.createElement('button');
+          btn.textContent = node.label;
+          btn.setAttribute('type', 'button');
+          btn.addEventListener('click', () => handleNodeActivation(node));
+          btn.addEventListener('keydown', (evt) => {{
+            if (evt.key === 'Enter' || evt.key === ' ') {{
+              evt.preventDefault();
+              handleNodeActivation(node);
+            }}
+          }});
+          li.appendChild(btn);
+          searchResultsList.appendChild(li);
+        }});
+        searchResults.classList.add('visible');
+      }} else {{
+        searchResults.classList.remove('visible');
+      }}
     }});
 
     // Physics Tuning
@@ -550,7 +646,11 @@ def main() -> int:
     output_path = REPO_ROOT / args.output
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    html_content = HTML_TEMPLATE.format(graph_json=json.dumps(graph_data, indent=2))
+    # Escape HTML-significant characters in JSON to prevent script breakout
+    json_str = json.dumps(graph_data, indent=2)
+    json_str = json_str.replace('<', r'\u003c').replace('>', r'\u003e').replace('&', r'\u0026')
+
+    html_content = HTML_TEMPLATE.format(graph_json=json_str)
     output_path.write_text(html_content, encoding="utf-8")
 
     print(f"Successfully generated DevOps Knowledge Graph UI at: {output_path}")

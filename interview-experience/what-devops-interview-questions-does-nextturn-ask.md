@@ -103,6 +103,14 @@ THE NODE QUESTION IS ASKED THREE TIMES
 - Terraform and Ansible together is best answered as a division of labour rather than a competition: Terraform provisions and owns the lifecycle of infrastructure declaratively with state; Ansible configures what runs on it, and is procedural and stateless. In practice Terraform creates the instances and Ansible configures them — or, better, you bake an image and skip in-place configuration entirely. See [Ansible versus Terraform](../infrastructure-as-code/what-is-the-difference-between-ansible-and-terraform.md).
 - The disk-usage script is a small task with room to show judgement: use `shutil.disk_usage()` from the standard library rather than shelling out to `df`, take the threshold and path as arguments or environment variables, exit with a non-zero status so a scheduler notices, and send the alert to a webhook or SNS rather than SMTP. Add that you would prefer this to be a Prometheus alert rule on node-exporter's filesystem metrics, and that a threshold on _projected time to full_ beats a fixed percentage — 90% on a 10 TB volume is not the same as 90% on a 20 GB one. See [what you use Python for as a DevOps engineer](../scripting-and-automation/what-do-you-use-python-for-as-a-devops-engineer.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

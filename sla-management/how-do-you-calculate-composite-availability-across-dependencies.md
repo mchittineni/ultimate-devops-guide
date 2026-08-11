@@ -54,6 +54,14 @@ serial(0.9999, 0.9999, parallel(0.9995), parallel(0.9995), 0.9999)  # ~99.97%
 - Volunteer the correlated-failure caveat; that is what separates an engineer from a spreadsheet.
 - The strong close: "the cheapest additional nine usually comes from making a dependency optional, not from adding replicas."
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SLA Management](./README.md) · [All topics](../README.md)

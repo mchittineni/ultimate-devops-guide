@@ -130,6 +130,14 @@ spec:
 - The process-count script is a one-liner with a subtlety: `ps -u ubuntu --no-headers | wc -l` counts processes for that user, and `pgrep -u ubuntu -c` is cleaner. Mention that `ps aux | grep ubuntu | wc -l` is the wrong answer because it matches the grep itself and any command line containing the string. Naming that pitfall is the point of the question. See [basic Linux commands](../linux-administration/what-are-the-basic-linux-commands-every-devops-engineer-should-know.md).
 - "Current Jenkins version" is a genuine check on whether you operate the tool or only consume it. Know your controller's version, whether you are on the LTS line, and when you last upgraded plugins — a candidate who says "we are on a recent LTS and upgrade plugins monthly" sounds like an owner.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

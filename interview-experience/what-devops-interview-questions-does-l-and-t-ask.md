@@ -93,6 +93,14 @@ NOTE THE ABSENCE
 - `git checkout` is worth answering with the modern split: it historically did two unrelated jobs — switching branches and restoring files — which is why Git added `git switch` and `git restore`. Mentioning that shows you keep current. See [git merge, rebase, and cherry-pick](../version-control/what-is-the-difference-between-git-merge-rebase-and-cherry-pick.md) and [handling merge conflicts](../version-control/how-to-handle-merge-conflicts-in-git.md).
 - Branching strategy is asked twice in this round. Pick the model you have actually used, name it, and say how a hotfix reaches production and how branches map to environments. See [Git branching strategy](../version-control/what-is-git-branching-strategy.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

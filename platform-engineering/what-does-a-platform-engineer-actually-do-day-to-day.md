@@ -87,6 +87,14 @@ $ platform new service --name checkout --language go --database postgres
 - Be ready to name real coding work (Go, Python, controllers, CLIs). Platform engineering is a software role, not only a configuration one.
 - Have one concrete reusable thing you built and how many teams used it. Adoption numbers beat descriptions.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
+- [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
+- [[What is Infrastructure as Code?]] (`#26`): [What is Infrastructure as Code?](../infrastructure-as-code/what-is-infrastructure-as-code.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Platform Engineering](./README.md) · [All topics](../README.md)

@@ -90,6 +90,14 @@ THE THREAD TO PULL
 - TCP versus UDP should end in a use case, not just "reliable versus unreliable": TCP for HTTP and databases, UDP for DNS, streaming, and metrics where a lost datagram is cheaper than a retransmit delay. See [network security in DevOps](../network-security/what-is-network-security-in-devops.md).
 - Have two production incidents ready, ideally one where your first hypothesis was wrong. Interviewers at SRE level use the incident answer to check whether you reason from evidence or from memory. See [post-mortem analysis](../incident-management/what-is-post-mortem-analysis.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[What is the difference between SRE, DevOps, and Platform Engineering?]] (`#232`): [What is the difference between SRE, DevOps, and Platform Engineering?](../site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

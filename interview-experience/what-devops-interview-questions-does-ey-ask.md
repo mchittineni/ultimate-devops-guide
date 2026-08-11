@@ -114,6 +114,14 @@ UNUSUAL FOR A DEVOPS ROUND
 - On Docker's purpose, do not define containers. Answer with the problem it solves: consistent, isolated, reproducible runtime packaging so the same artefact runs identically from a laptop to production, with far less overhead than a VM because it shares the host kernel. See [what Docker is](../docker/what-is-docker.md) and [image versus container](../docker/what-is-the-difference-between-docker-image-and-docker-container.md).
 - Helm deployment commands: `helm install <release> <chart> -f values-prod.yaml`, or `helm upgrade --install` for idempotency, with `--atomic` and `--timeout` so a failed release rolls back automatically. Naming `--atomic` signals production use. See [what Helm is](../container-orchestration-advanced/what-is-helm.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

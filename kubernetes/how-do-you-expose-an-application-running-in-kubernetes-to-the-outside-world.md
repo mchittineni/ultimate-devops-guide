@@ -114,6 +114,14 @@ kubectl describe ingress api                   # controller events explain 404s 
 - A frequent scenario: "an Ingress returns 404 / the certificate is not issued." Answer with `kubectl describe ingress`, then check the EndpointSlice actually has backends and that the readiness probe is passing.
 - If asked about `targetPort` being omitted on a Service - it defaults to the value of `port`.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[How do you upgrade a production Kubernetes cluster with zero downtime?]] (`#411`): [How do you upgrade a production Kubernetes cluster with zero downtime?](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md)
+- [[How do you troubleshoot a failed Helm release?]] (`#412`): [How do you troubleshoot a failed Helm release?](../container-orchestration-advanced/how-do-you-troubleshoot-a-failed-helm-release.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Kubernetes](./README.md) · [All topics](../README.md)

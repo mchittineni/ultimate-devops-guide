@@ -92,6 +92,14 @@ Sample JSON cost allocation output:
 - Highlight **Idle Cost Allocation**: explain that if a node has 16 CPU cores but pods only request 8 cores, OpenCost attributes the remaining 8 idle cores to cost-center metrics.
 - Discuss **Resource Efficiency Ratio**: $\frac{\text{Actual Usage}}{\text{Requested Resources}}$. An efficiency ratio below 0.3 indicates severe over-provisioning and wasted cloud spend.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What is GitLab CI?]] (`#19`): [What is GitLab CI?](../cicd/what-is-gitlab-ci.md)
+- [[How do you prevent and handle secret leaks in CI/CD pipelines?]] (`#237`): [How do you prevent and handle secret leaks in CI/CD pipelines?](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Cost Optimization](./README.md) · [All topics](../README.md)

@@ -82,6 +82,14 @@ THE QUESTION WITH A SINGLE CORRECT MECHANISM
 - The Terraform per-environment variables question wants a concrete layout: `terraform.tfvars` per environment or `-var-file=envs/prod.tfvars`, environment-specific values committed for non-sensitive settings, secrets injected at run time from a secret manager as `TF_VAR_*` or fetched by a data source, and separate state per environment. Say that a secret read via a data source still lands in state in plain text, which is why state must be encrypted — that detail is what makes the answer credible. See [managing Terraform state safely in a team](../infrastructure-as-code/how-do-you-manage-terraform-state-safely-in-a-team.md).
 - HTTP versus HTTPS should go past "one is encrypted": HTTPS is HTTP over TLS, so it provides confidentiality, integrity, and _server authentication_ via a certificate chain — that third property is the one candidates omit. Add that HTTP/2 and HTTP/3 effectively require TLS, and that browsers now treat plain HTTP as insecure. Pair it with the browser-DNS question, which is the full request path. See [what SSL/TLS is](../network-security/what-is-ssl-tls.md) and [what happens when a user opens your application in a browser](../network-security/what-happens-when-a-user-opens-your-application-in-a-browser.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
+- [[What is the difference between SRE, DevOps, and Platform Engineering?]] (`#232`): [What is the difference between SRE, DevOps, and Platform Engineering?](../site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

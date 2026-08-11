@@ -102,6 +102,14 @@ Dockerfile
 - Volunteer `--chown` and `--from=` - both come up as follow-ups, and `--from` leads naturally into multi-stage builds.
 - Expect the pivot to caching: "which lines invalidate the cache?" Answer with manifests-first ordering and `.dockerignore`. See [how does Docker layer caching work](./how-does-docker-layer-caching-work.md) and [reducing Docker image size and build time](./how-do-you-reduce-docker-image-size-and-build-time.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[Explain the difference between Docker Swarm and Kubernetes]] (`#15`): [Explain the difference between Docker Swarm and Kubernetes](../kubernetes/explain-the-difference-between-docker-swarm-and-kubernetes.md)
+- [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
+- [[How does persistent storage work in Kubernetes?]] (`#443`): [How does persistent storage work in Kubernetes?](../kubernetes/how-does-persistent-storage-work-in-kubernetes.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Docker](./README.md) · [All topics](../README.md)

@@ -59,6 +59,14 @@ module "vpc" {
 - EKS IP exhaustion with the VPC CNI is the practical war story worth naming.
 - Expect: "security groups or NACLs?" - security groups referencing security groups, with NACLs as a coarse guardrail only.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
+- [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
+- [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to AWS Engineering](./README.md) · [All topics](../README.md)

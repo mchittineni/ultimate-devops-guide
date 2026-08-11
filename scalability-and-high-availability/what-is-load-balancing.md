@@ -60,6 +60,14 @@ server {
 - Deep versus shallow health checks is a great detail to raise unprompted.
 - Connection draining during deployments is what turns load balancing into zero-downtime deployment.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you reduce Docker image size and build time?]] (`#260`): [How do you reduce Docker image size and build time?](../docker/how-do-you-reduce-docker-image-size-and-build-time.md)
+- [[How do you prevent and handle secret leaks in CI/CD pipelines?]] (`#237`): [How do you prevent and handle secret leaks in CI/CD pipelines?](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Scalability and High Availability](./README.md) · [All topics](../README.md)

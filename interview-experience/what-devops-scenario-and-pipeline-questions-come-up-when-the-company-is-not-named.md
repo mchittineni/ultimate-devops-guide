@@ -321,6 +321,14 @@ WHAT THESE ROUNDS TEST THAT ROUNDS 1-8 DO NOT
 - A zombie process is one that has exited but whose exit status has not been reaped by its parent, so it holds a process-table entry and shows as `Z` in `ps`. It consumes no CPU or memory, and you cannot kill it — you have to make the parent call `wait()`, or kill the parent so `init` adopts and reaps it. Add that many zombies indicate a buggy parent, and that this is exactly why the pause container in a Kubernetes Pod acts as PID 1 to reap orphans. See [basic Linux commands](../linux-administration/what-are-the-basic-linux-commands-every-devops-engineer-should-know.md).
 - The nginx-ingress-controller deprecation question is current and worth knowing: the community ingress-nginx project has entered maintenance-only status, so the alternatives to name are the Gateway API implementations — Envoy Gateway, Istio's gateway, Cilium's, and Traefik — plus cloud-native controllers such as the AWS Load Balancer Controller and Application Gateway Ingress Controller on Azure. Say that Gateway API is the successor to Ingress and that a migration is the real answer, not just swapping controllers.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
+- [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

@@ -118,6 +118,14 @@ spec:
 - Highlight **Model Registry & Reproducibility**: emphasize logging code Git commit SHA, dataset version/hash, hyperparameters, and environment docker image to ensure 100% reproducible model builds.
 - Explain **Feature Stores**: centralize feature engineering logic so training pipelines and low-latency inference services share consistent data features without skew.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
+- [[What is Infrastructure as Code?]] (`#26`): [What is Infrastructure as Code?](../infrastructure-as-code/what-is-infrastructure-as-code.md)
+- [[What is Ansible?]] (`#28`): [What is Ansible?](../infrastructure-as-code/what-is-ansible.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Platform Engineering](./README.md) · [All topics](../README.md)

@@ -80,6 +80,14 @@ aws rds restore-db-instance-to-point-in-time \
 - Mention connection pooling and the replicas × pool-size arithmetic. It is a real outage cause that few candidates volunteer.
 - Have five database metrics ready. Replication lag and long-running transactions are the two that signal genuine hands-on time.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Database Management in DevOps](./README.md) · [All topics](../README.md)

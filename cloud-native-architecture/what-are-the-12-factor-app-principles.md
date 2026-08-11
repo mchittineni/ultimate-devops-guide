@@ -38,6 +38,14 @@ Common additions for modern services: expose health endpoints, emit telemetry (m
 - Connect each factor to a Kubernetes behaviour (disposability ↔ pod eviction, logs ↔ `kubectl logs`) to show applied understanding.
 - Note that factor 10 (dev/prod parity) is what containers and IaC finally made achievable.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Native Architecture](./README.md) · [All topics](../README.md)

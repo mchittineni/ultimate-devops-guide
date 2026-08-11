@@ -123,6 +123,14 @@ THE HARDEST ROUND IN THIS COLLECTION
 - The Jenkins N-commits trigger is a small practical question: there is no built-in "after N commits" trigger, so you either poll on a schedule and let the build accumulate several commits, or use a webhook plus a script that counts commits since the last successful build and exits early below the threshold, or gate on a changeset condition in the pipeline. Say plainly that batching builds is usually the wrong instinct — it delays feedback and makes bisecting a failure harder — and that the legitimate use case is an expensive job such as a nightly integration suite. Being willing to challenge the requirement is the better answer.
 - For the EC2-at-80%-CPU Terraform question, correct the framing: Terraform is declarative and does not react to metrics at runtime. The right implementation is a CloudWatch alarm on `CPUUtilization` at 80% triggering an Auto Scaling policy — all of which you _define_ in Terraform — with the "copy the image from S3" part handled by `user_data` or a baked AMI rather than by Terraform at scale-out time. Saying "Terraform declares the alarm and the scaling policy; the cloud does the reacting" is the answer. See [auto-scaling](../scalability-and-high-availability/what-is-auto-scaling.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

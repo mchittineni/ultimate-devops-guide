@@ -79,6 +79,14 @@ Channel #inc-2026-08-07-checkout-errors   (one channel of record)
 - Close on the artifacts: timeline captured live, blameless review scheduled, follow-ups with owners and dates before people disperse.
 - Have a real incident ready in this structure, and be honest about what went wrong in your handling of it. The self-critique is usually what earns the mark.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Incident Management](./README.md) · [All topics](../README.md)

@@ -88,6 +88,14 @@ ORACLE ASKS "EXPLAIN ALL THE COMPONENTS"
 - For the cron expression, give the five fields in order — minute, hour, day of month, month, day of week — with a worked example such as `0 2 * * *` for 02:00 daily, and mention that a Kubernetes `CronJob` uses the same syntax plus `concurrencyPolicy` and `startingDeadlineSeconds`. Say that `systemd` timers are the modern alternative on a host because they log to the journal and handle missed runs. See [basic Linux commands](../linux-administration/what-are-the-basic-linux-commands-every-devops-engineer-should-know.md).
 - "Which Kubernetes resources do you know?" is a breadth question, so group them rather than listing at random — workloads, networking, configuration, storage, access control, and operations — and then name the ones you have actually authored. Grouping reads as understanding; a flat list reads as recall.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

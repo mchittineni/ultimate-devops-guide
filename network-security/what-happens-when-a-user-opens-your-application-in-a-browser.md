@@ -83,6 +83,14 @@ kubectl logs -l app=api --tail=100 --since=10m
 - If the role is security-leaning, expect the branch into TLS specifics - handshake steps, SNI, certificate chain validation, and HSTS.
 - If it is Kubernetes-leaning, expect the branch into Service → EndpointSlice → Pod and why a failing readiness probe produces a 503.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Network Security](./README.md) · [All topics](../README.md)

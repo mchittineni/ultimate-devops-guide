@@ -135,6 +135,14 @@ groups:
 - Have an answer for the legacy edge cases - hosts without agents, applications you cannot rebuild (parse logs, add an exporter sidecar), and hybrid on-premises plus cloud with consistent labels in one backend.
 - Close on cost: retention and cardinality decided up front, because an observability bill is the usual reason these projects get reversed. See [how do you control metric cardinality and monitoring cost at scale](./how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Infrastructure Monitoring](./README.md) · [All topics](../README.md)

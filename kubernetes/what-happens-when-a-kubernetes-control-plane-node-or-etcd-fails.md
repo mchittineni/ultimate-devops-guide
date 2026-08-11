@@ -116,6 +116,14 @@ Alerts that catch this before users do
 - Have the worker-node counterpart ready: `NotReady` after ~40 s, eviction and rescheduling after the ~5 minute toleration, which explains recovery time.
 - Close on preparation, not theory: three control-plane nodes across AZs, scheduled etcd snapshots stored off-cluster, a **rehearsed** restore, and certificate-expiry monitoring. See [how do you back up and restore a Kubernetes cluster](../container-orchestration-advanced/how-do-you-back-up-and-restore-a-kubernetes-cluster.md), [the main components of Kubernetes architecture](./what-are-the-main-components-of-kubernetes-architecture.md), [troubleshooting a node that is NotReady](./how-do-you-troubleshoot-a-kubernetes-node-that-is-notready.md), and [executing a disaster recovery failover](../backup-and-disaster-recovery/how-do-you-execute-a-disaster-recovery-failover-with-minimal-rto-and-rpo.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you upgrade a production Kubernetes cluster with zero downtime?]] (`#411`): [How do you upgrade a production Kubernetes cluster with zero downtime?](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md)
+- [[How do you run and scale a stateful application on Kubernetes?]] (`#413`): [How do you run and scale a stateful application on Kubernetes?](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)
+- [[How do you run an application across multiple Kubernetes clusters?]] (`#414`): [How do you run an application across multiple Kubernetes clusters?](../container-orchestration-advanced/how-do-you-run-an-application-across-multiple-kubernetes-clusters.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Kubernetes](./README.md) · [All topics](../README.md)

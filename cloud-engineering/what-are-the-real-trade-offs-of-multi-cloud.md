@@ -59,6 +59,14 @@ Requirement claimed: "board mandated reducing concentration risk"
 - "Lock-in is data gravity and skills, not APIs" is the line that carries the argument.
 - Expect: "how would you make an application portable?" - containers, OpenTelemetry, one IaC tool, native data services with an honest migration plan, not a self-hosted everything.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Engineering](./README.md) · [All topics](../README.md)

@@ -56,6 +56,14 @@ curl -sI --tlsv1.3 https://example.com | head -1
 - Naming `X25519MLKEM768` and "harvest now, decrypt later" shows you have kept current; being clear that it protects key exchange and not certificate signatures shows you actually understand it.
 - Be precise: TLS authenticates the _server_ by default; mutual TLS is required to authenticate the client.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Network Security](./README.md) · [All topics](../README.md)

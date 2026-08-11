@@ -131,6 +131,14 @@ Resources:
 - Be measured about cold starts: mitigate on the user-facing path, and be willing to say a container service is the better choice for steady latency-critical traffic.
 - Close on cost and blast radius - per-invocation billing, billing alarms, and never letting a function write to the bucket that triggers it. The recursive-trigger story is a well-known failure.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Serverless Architecture](./README.md) · [All topics](../README.md)

@@ -32,6 +32,14 @@ The CNCF definition names the enabling technologies: containers, service meshes,
 - "Designed for failure" is the phrase that captures the mindset shift.
 - Show judgement by naming when a monolith is the better architecture - seniority is visible in restraint.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Native Architecture](./README.md) · [All topics](../README.md)

@@ -127,6 +127,14 @@ resource "aws_lb_target_group" "api" {
 - Mention `deregistration_delay` and `slow_start` as the deploy-time settings that stop rolling deployments producing 5xx blips.
 - Close on prevention: load-balancer configuration in Terraform, access logs always on, dashboards that split the two 5xx families, and alerting on ratio rather than count.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
+- [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Scalability and High Availability](./README.md) · [All topics](../README.md)

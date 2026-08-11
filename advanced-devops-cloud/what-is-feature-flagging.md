@@ -46,6 +46,14 @@ return enabled ? newCheckout(cart) : legacyCheckout(cart); // default false = sa
 - Flag debt and expiry dates is the operational reality most candidates omit.
 - A safe default when the flag service is unreachable is a small detail that shows production thinking.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Advanced DevOps & Cloud](./README.md) · [All topics](../README.md)

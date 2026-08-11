@@ -61,6 +61,14 @@ THE SHORTEST FULL ROUND IN THIS COLLECTION
 - "The role of continuous integration" invites a textbook answer, so give the _purpose_ rather than the mechanics: CI exists to keep the main branch continuously in a known-good, releasable state by having every developer integrate small changes frequently and having an automated build plus test suite verify each one — so integration problems surface in minutes rather than at the end of a release cycle. Then name what makes it real: it must be fast enough that people wait for it, it must be trusted (a flaky suite trains people to ignore red builds), and it must actually block the merge through branch protection. Say that CI is about _feedback speed_, and that CD is a separate question about what happens after the build is green. See [what a CI/CD pipeline is](../cicd/what-is-ci-cd-pipeline.md) and [continuous delivery versus continuous deployment](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md).
 - In a six-question round every answer carries roughly 17%, so the pattern that wins is: definition in one sentence, mechanism in one more, then one trade-off or consequence, then stop. Do not pad — but do volunteer the adjacent detail (alias records, `stash -u`, why horizontal scaling needs statelessness), because with so few questions that is the only way to show depth. See [what are the most frequently asked DevOps interview questions](./what-are-the-most-frequently-asked-devops-interview-questions.md) for the wider recall checklist these six are drawn from.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
+- [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

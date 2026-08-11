@@ -177,6 +177,14 @@ aws route53 list-hosted-zones --query "HostedZones[?Name=='example.com.'].[Id,Co
 - If routing policies come up, name them and then make the key point: DNS does not notice failures by itself - **health checks** are what stop a dead address being handed out.
 - Add the certificate links - ACM's DNS validation CNAME must stay in place for renewals, CAA restricts which CAs may issue, and a wildcard covers one level only. See [managing DNS and global traffic routing](../cloud-engineering/how-do-you-manage-dns-and-global-traffic-routing.md), [troubleshooting a DNS problem in production](../cloud-engineering/how-do-you-troubleshoot-a-dns-problem-in-production.md), [managing TLS certificates in production](../network-security/how-do-you-manage-tls-certificates-in-production.md), and [what happens when a user opens your application in a browser](../network-security/what-happens-when-a-user-opens-your-application-in-a-browser.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a DNS problem in production?]] (`#435`): [How do you troubleshoot a DNS problem in production?](../cloud-engineering/how-do-you-troubleshoot-a-dns-problem-in-production.md)
+- [[What is a cloud landing zone?]] (`#215`): [What is a cloud landing zone?](../cloud-engineering/what-is-a-cloud-landing-zone.md)
+- [[How do you manage DNS and global traffic routing?]] (`#220`): [How do you manage DNS and global traffic routing?](../cloud-engineering/how-do-you-manage-dns-and-global-traffic-routing.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to AWS Engineering](./README.md) · [All topics](../README.md)

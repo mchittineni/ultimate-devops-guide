@@ -128,6 +128,14 @@ kubectl describe node | grep -A6 "Allocated resources"
 - Do the node arithmetic out loud if they give you numbers - sum the **requests** against allocatable, not the limits, and remember system reserved.
 - Close on cost: over-requesting is why clusters sit at low utilisation while the bill grows, and VPA in recommendation mode is how you fix it with data. See [autoscaling workloads and nodes in Kubernetes](./how-do-you-autoscale-workloads-and-nodes-in-kubernetes.md), [node pressure and Pod evictions](./how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md), [Pod stuck in Pending or CrashLoopBackOff](./how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff.md), and [cutting a cloud bill without hurting reliability](../cloud-cost-optimization/how-do-you-cut-a-cloud-bill-without-hurting-reliability.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you upgrade a production Kubernetes cluster with zero downtime?]] (`#411`): [How do you upgrade a production Kubernetes cluster with zero downtime?](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md)
+- [[How do you run and scale a stateful application on Kubernetes?]] (`#413`): [How do you run and scale a stateful application on Kubernetes?](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)
+- [[How do you run an application across multiple Kubernetes clusters?]] (`#414`): [How do you run an application across multiple Kubernetes clusters?](../container-orchestration-advanced/how-do-you-run-an-application-across-multiple-kubernetes-clusters.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Kubernetes](./README.md) · [All topics](../README.md)

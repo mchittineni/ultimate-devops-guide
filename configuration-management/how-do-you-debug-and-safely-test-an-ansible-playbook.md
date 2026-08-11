@@ -183,6 +183,14 @@ molecule test            # the whole cycle, including destroy - what CI runs
 - Diagnose "yum: command not found" as wrong-module-for-OS, missing interpreter, or a `PATH`/`become` issue, and recommend `ansible.builtin.package`.
 - Mention the task debugger (`debugger: on_failed`) and Molecule's idempotence scenario - both are things most candidates have never used. See [structuring an Ansible role](./how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md), [managing inventories and variables](./how-do-you-manage-ansible-inventories-and-variables-across-environments.md), [running Ansible at scale](./how-do-you-run-ansible-at-scale-across-thousands-of-hosts.md), and [what is Ansible](../infrastructure-as-code/what-is-ansible.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Configuration Management](./README.md) · [All topics](../README.md)

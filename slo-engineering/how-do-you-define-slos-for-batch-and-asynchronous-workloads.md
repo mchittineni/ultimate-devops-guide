@@ -56,6 +56,14 @@ max(kafka_consumergroup_lag_seconds{group="fulfilment"})
 - "Consumer lag in seconds, not messages" is a small detail that reliably impresses.
 - Expect: "a nightly job failed once - did you breach?" Work the event-count arithmetic out loud; it is the real test.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SLO Engineering](./README.md) · [All topics](../README.md)

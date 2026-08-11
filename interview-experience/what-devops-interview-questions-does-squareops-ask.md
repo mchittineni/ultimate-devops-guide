@@ -303,6 +303,14 @@ WHAT MAKES THIS ROUND DIFFERENT
 - Round 1's opening two questions are ownership probes disguised as architecture questions — "which part do _you_ personally manage", "do _you_ handle IAM and RBAC". Answer precisely about your own scope and do not inflate it, because every subsequent follow-up will test the claim. Saying "I owned the EKS layer and the pipelines; another team owned the network baseline" is far stronger than an implied "everything", which collapses two follow-ups later.
 - For the cost question, come with numbers: what you measured, which levers you pulled — right-sizing from observed usage, Savings Plans for the steady baseline, Spot for interruptible work, storage lifecycle rules, deleting orphaned volumes and idle load balancers, cutting log retention — and the resulting percentage. The follow-up about ALB pricing tells you they want cost fluency at the line-item level, not slogans. See [cloud cost optimisation](../cloud-cost-optimization/what-is-cloud-cost-optimization.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

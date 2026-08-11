@@ -135,6 +135,14 @@ jobs:
 - Note the destructive-update trap - renaming a stateful resource can delete it - and that stateful resources often belong in a separate, slower-changing stack.
 - Close on what you watch after deploy: errors, throttles, duration, DLQ depth, and alarms wired to the rollback rather than a person on a dashboard. See [what are serverless best practices](./what-are-serverless-best-practices.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Serverless Architecture](./README.md) · [All topics](../README.md)

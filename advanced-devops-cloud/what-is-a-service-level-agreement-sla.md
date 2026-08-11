@@ -42,6 +42,14 @@ tags:
 - Note that service credits rarely compensate the actual business loss - SLAs are not insurance.
 - The measurement definition and exclusions matter more than the percentage; saying so shows commercial awareness.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What are Jenkins Pipelines?]] (`#18`): [What are Jenkins Pipelines?](../cicd/what-are-jenkins-pipelines.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Advanced DevOps & Cloud](./README.md) · [All topics](../README.md)

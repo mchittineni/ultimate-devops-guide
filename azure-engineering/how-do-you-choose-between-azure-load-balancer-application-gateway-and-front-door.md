@@ -208,6 +208,14 @@ openssl s_client -connect www.example.com:443 -servername www.example.com </dev/
 - Say WAF goes into **Detection** mode first. Deploying straight to Prevention against a live application causes an outage.
 - For the 404/502-with-healthy-backends scenario, walk the layers in order - listener host match, path rule, real backend health with the probe's own host and status match, backend HTTP settings, NSG/subnet reachability, then rewriting - and name diagnostic logs plus a KQL query as how you would actually find it. See [how do you design an Azure virtual network](./how-do-you-design-an-azure-virtual-network.md), [what is Azure Kubernetes Service (AKS)](./what-is-azure-kubernetes-service-aks.md), [what is a layer 4 versus a layer 7 load balancer](../scalability-and-high-availability/what-is-the-difference-between-a-layer-4-and-a-layer-7-load-balancer.md), and [protecting a public web application against the OWASP Top 10 and DDoS](../network-security/how-do-you-protect-a-public-web-application-against-the-owasp-top-10-and-ddos.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a DNS problem in production?]] (`#435`): [How do you troubleshoot a DNS problem in production?](../cloud-engineering/how-do-you-troubleshoot-a-dns-problem-in-production.md)
+- [[How do you debug a Kubernetes Ingress that is not routing traffic?]] (`#406`): [How do you debug a Kubernetes Ingress that is not routing traffic?](../kubernetes/how-do-you-debug-a-kubernetes-ingress-that-is-not-routing-traffic.md)
+- [[What happens when a Kubernetes control-plane node or etcd fails?]] (`#448`): [What happens when a Kubernetes control-plane node or etcd fails?](../kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Azure Engineering](./README.md) · [All topics](../README.md)

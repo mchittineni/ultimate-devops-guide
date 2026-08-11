@@ -67,6 +67,14 @@ jobs:
 - Pinning actions to a SHA is a supply-chain detail that distinguishes serious users.
 - Environments with required reviewers is how approval gates are done properly - not a manual step in a script.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Advanced DevOps & Cloud](./README.md) · [All topics](../README.md)

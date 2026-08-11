@@ -54,6 +54,14 @@ Unaffected regions: no credit. Being able to prove this saved ~78% of the exposu
 - The strongest engineering point: per-tenant/per-region measurement limits exposure, so blast-radius reduction has a direct financial return.
 - Expect: "was it a breach if nobody claimed?" - yes, and you should track it internally regardless.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SLA Management](./README.md) · [All topics](../README.md)

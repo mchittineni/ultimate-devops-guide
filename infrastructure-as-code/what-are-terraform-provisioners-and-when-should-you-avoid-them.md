@@ -178,6 +178,14 @@ TF_LOG=DEBUG terraform apply 2>&1 | grep -A5 remote-exec   # see what the script
 - Be balanced rather than dogmatic. Name the uses you would accept: local glue for the next stage, destroy-time graceful cleanup, and appliances with no cloud-init.
 - If asked about the difference between a **provider** and a **provisioner**: a provider is the plugin that implements resources and talks to an API declaratively; a provisioner is an imperative escape hatch attached to a resource's lifecycle. They are unrelated despite the similar name, and interviewers use the pair as a trap. See [what are Terraform providers](./what-are-terraform-providers.md), [what is immutable infrastructure](./what-is-immutable-infrastructure-and-how-do-you-adopt-it.md), [Ansible versus Terraform](./what-is-the-difference-between-ansible-and-terraform.md), and [what do terraform init, plan, apply, and refresh actually do](./what-do-terraform-init-plan-apply-and-refresh-actually-do.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you structure an Ansible role and share it through Galaxy?]] (`#468`): [How do you structure an Ansible role and share it through Galaxy?](../configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md)
+- [[What is Salt (SaltStack)?]] (`#54`): [What is Salt (SaltStack)?](../configuration-management/what-is-salt-saltstack.md)
+- [[How do you handle secrets in Ansible with Vault?]] (`#470`): [How do you handle secrets in Ansible with Vault?](../configuration-management/how-do-you-handle-secrets-in-ansible-with-vault.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Infrastructure as Code](./README.md) · [All topics](../README.md)

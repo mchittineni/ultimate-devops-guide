@@ -76,6 +76,14 @@ securityContext:
 - Service discovery should cover both halves: DNS through CoreDNS resolving `service.namespace.svc.cluster.local`, and the Service-to-Endpoints mapping that kube-proxy programs into iptables or IPVS rules. Add headless Services for StatefulSet Pod-level addressing. See [what a Service is in Kubernetes](../kubernetes/what-is-a-service-in-kubernetes.md) and [StatefulSets](../container-orchestration-advanced/what-are-statefulsets-in-kubernetes.md).
 - Leap seconds matter because a repeated or skipped second breaks monotonic-time assumptions: timers fire twice, distributed leases and certificate validity get confused, and some kernels have historically hung. The expected mitigation is NTP leap smearing rather than a step adjustment. Being aware of the failure mode is enough at this level.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you do capacity planning?]] (`#230`): [How do you do capacity planning?](../site-reliability-engineering/how-do-you-do-capacity-planning.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[What are Service Level Objectives (SLOs)?]] (`#97`): [What are Service Level Objectives (SLOs)?](../site-reliability-engineering/what-are-service-level-objectives-slos.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

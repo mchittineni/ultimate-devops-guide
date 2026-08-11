@@ -126,6 +126,14 @@ ASKED TWICE
 - Zero downtime and deployment strategies are asked as separate questions, so do not merge them. Strategies: recreate, rolling, blue-green, canary, and A/B. Zero downtime is the _set of properties_ that makes any of them safe — readiness probes gating traffic, `maxUnavailable: 0`, connection draining, `preStop` hooks, backward-compatible database changes, and idempotent, retryable requests. See [deployment strategies](../devops-tools-and-automation/what-are-deployment-strategies.md).
 - Client-environment connectivity should name the options and the decision: site-to-site VPN for cost and speed of setup, Direct Connect for predictable bandwidth and regulated traffic, PrivateLink if you only need to expose or consume one service, and Transit Gateway if many VPCs are involved. Flag overlapping CIDRs as the practical blocker. See [connecting an on-premises network to the cloud](../cloud-engineering/how-do-you-connect-an-on-premises-network-to-the-cloud.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

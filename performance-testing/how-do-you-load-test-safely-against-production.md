@@ -113,6 +113,14 @@ aws elbv2 deregister-targets --target-group-arn $TG --targets Id=i-0abc  # one A
 - Name the reason production testing exists at all: data volume, cache state, real dependency behaviour, noisy neighbours - things staging cannot fake.
 - Finish with the deliverables, especially autoscaling scale-up latency, and say that results must change a configuration to have been worth it.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Performance Testing](./README.md) · [All topics](../README.md)

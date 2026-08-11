@@ -136,6 +136,14 @@ A JUNIOR ROUND THAT ASKS YOU TO WRITE
 - On "explain a CI/CD pipeline", give a real stage-by-stage flow rather than the acronyms: commit triggers build, unit tests, static analysis, dependency and image scanning, image built once and tagged with the Git SHA, pushed to a registry, deployed automatically to dev, smoke tests, then promotion to higher environments behind an approval. Say the principle that makes it correct — build once and promote the same artefact, changing only configuration — because rebuilding per environment means you never tested what you shipped. See [what a CI/CD pipeline is](../cicd/what-is-ci-cd-pipeline.md) and [continuous delivery versus continuous deployment](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md).
 - At two years of experience the interviewer is calibrating breadth and honesty, not depth. Where you have not used something, say so and describe the nearest thing you have done — inventing experience invites a follow-up you cannot answer, and this round has enough questions that one honest gap costs very little.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

@@ -104,6 +104,14 @@ kubectl logs deploy/api --since=15m | jq -r 'select(.level=="error") | .msg' | s
 - Mention `jq` for structured logs. Reaching for `awk` on JSON when `jq` exists reads as dated.
 - Know that `sed -i` differs between GNU and BSD/macOS. It is a small detail that signals real command-line time.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What Bash scripting exercises come up in DevOps interviews?]] (`#502`): [What Bash scripting exercises come up in DevOps interviews?](../scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md)
+- [[How do you patch hundreds of servers safely?]] (`#430`): [How do you patch hundreds of servers safely?](../configuration-management/how-do-you-patch-hundreds-of-servers-safely.md)
+- [[How do you write a production-grade Bash script?]] (`#266`): [How do you write a production-grade Bash script?](../scripting-and-automation/how-do-you-write-a-production-grade-bash-script.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Linux Administration](./README.md) · [All topics](../README.md)

@@ -67,6 +67,14 @@ A SMALL ROUND WITH ONE UNUSUAL QUESTION
 - The MongoDB-dump question is ambiguously worded, so say so and answer both readings — that is stronger than guessing. If they mean the _dump artefact_ is too large: `mongodump --gzip` compresses it, `--collection` and `--query` let you export a subset, and `--excludeCollection` skips large ephemeral collections such as logs or sessions; then archive it to object storage with a lifecycle rule rather than keeping it on a volume. If they mean freeing space _in the database_: deleting documents does not return disk to the operating system, because WiredTiger keeps the space for reuse — you need `compact` on a collection, or a resync of a replica-set member, and the safe production pattern is a rolling initial-sync of secondaries rather than compacting the primary. Also check for oversized indexes and TTL indexes for automatic expiry. Naming that deletes-do-not-reclaim-disk behaviour is what makes this answer stand out.
 - With only seven questions, each carries roughly 14% of the round, so extend every answer into its operational consequence and invite the follow-up. The PDB and upgrade questions in particular are two halves of one story — linking them explicitly shows joined-up knowledge rather than recall.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

@@ -84,6 +84,14 @@ kubectl get endpointslices -l kubernetes.io/service-name=api   # who is receivin
 - Volunteering the anti-pattern - liveness probes that check the database - marks you as someone who has actually operated this.
 - Mention `preStop` plus readiness-on-`SIGTERM` when asked about zero-downtime rollouts; probes and graceful shutdown are the same conversation.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a failed Helm release?]] (`#412`): [How do you troubleshoot a failed Helm release?](../container-orchestration-advanced/how-do-you-troubleshoot-a-failed-helm-release.md)
+- [[How do you run and scale a stateful application on Kubernetes?]] (`#413`): [How do you run and scale a stateful application on Kubernetes?](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)
+- [[How do you back up and restore a Kubernetes cluster?]] (`#451`): [How do you back up and restore a Kubernetes cluster?](../container-orchestration-advanced/how-do-you-back-up-and-restore-a-kubernetes-cluster.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Kubernetes](./README.md) · [All topics](../README.md)

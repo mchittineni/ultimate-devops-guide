@@ -98,6 +98,14 @@ THE INTERVIEWER'S TECHNIQUE
 - Custom resources should be framed as extending the API: a CustomResourceDefinition registers a new kind so `kubectl get <yourkind>` works and the object is stored in etcd like any built-in, and a controller or operator then watches it and reconciles reality to match. Say that the CRD alone does nothing without a controller — that is the point people miss.
 - Prometheus monitoring of a cluster should name the components rather than just the product: kube-state-metrics for object state, node-exporter for host metrics, cAdvisor via the kubelet for container metrics, service discovery to find targets, Alertmanager for routing, and Thanos or Mimir if you need long retention. See [what Prometheus is](../monitoring-and-logging/what-is-prometheus.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

@@ -76,6 +76,14 @@ THE QUESTION THAT DECIDES THE ROUND
 - Lambda cold start needs the mechanism then the mitigations: the cold start is the time to provision an execution environment, download and initialise the runtime and your package, and run any code outside the handler — so it affects the first invocation and every scale-out, not steady state. Mitigations in order of effectiveness: provisioned concurrency for predictable latency, SnapStart for Java, a smaller deployment package with fewer dependencies, moving SDK client construction and connection setup outside the handler so it is reused across invocations, and avoiding VPC attachment unless private resources genuinely require it. Tie it back to the payment-gateway question — an intermittent external-API failure that only happens on the first request after idle is very often a cold-start timeout.
 - Blue-green should be answered with purpose, mechanism, and the switch-back path, since they asked for all three. Purpose: eliminate deployment risk by bringing a complete second environment up, validating it, then cutting traffic over in one atomic step — so rollback is instant rather than another deployment. Mechanism for switching: in Kubernetes, patch the Service's label selector from `version: blue` to `version: green`; on AWS, change the ALB listener rule's target group or shift the weighted forward action. Switching _back_ is the same operation in reverse, which is only possible because you kept the old version running — so say that you keep blue warm for a defined soak window before tearing it down, and that the constraint that usually rules blue-green out is a shared database schema that must satisfy both versions at once. See [deployment strategies](../devops-tools-and-automation/what-are-deployment-strategies.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

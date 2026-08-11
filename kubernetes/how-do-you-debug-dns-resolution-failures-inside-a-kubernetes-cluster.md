@@ -89,6 +89,14 @@ spec:
 - Show the isolation move: `dig @<clusterIP>` bypasses the Pod's resolver, so a working direct query proves the problem is `resolv.conf`, not CoreDNS.
 - Close on the observability you would add: alert on CoreDNS `SERVFAIL` rate and p99 latency, because DNS failures usually surface as unexplained application timeouts. See [how do you write effective PromQL queries and Alertmanager rules](../monitoring-and-logging/how-do-you-write-effective-promql-queries-and-alertmanager-rules.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run a multi-tenant Kubernetes cluster?]] (`#453`): [How do you run a multi-tenant Kubernetes cluster?](../container-orchestration-advanced/how-do-you-run-a-multi-tenant-kubernetes-cluster.md)
+- [[How does Prometheus collect metrics, and what components sit around it?]] (`#500`): [How does Prometheus collect metrics, and what components sit around it?](../monitoring-and-logging/how-does-prometheus-collect-metrics-and-what-components-sit-around-it.md)
+- [[How do the ELK and EFK stacks fit together?]] (`#501`): [How do the ELK and EFK stacks fit together?](../monitoring-and-logging/how-do-the-elk-and-efk-stacks-fit-together.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Kubernetes](./README.md) · [All topics](../README.md)

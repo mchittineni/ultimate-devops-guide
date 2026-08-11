@@ -86,6 +86,14 @@ THE UNUSUAL PAIR
 - On the Terraform EC2 writing task, the marks are for hygiene rather than the resource block: declare `variable "instance_type"` and `variable "region"` with types, descriptions, and sensible defaults; pass the region to the provider; look the AMI up with a `data "aws_ami"` block rather than hardcoding an ID that is region-specific; and add tags. Mentioning that an AMI ID is not portable across regions — which is exactly why the `region` variable makes a hardcoded AMI a bug — is the detail that shows you have done this for real.
 - Blue-green should be answered with purpose, the switch mechanism, and the constraint: two complete environments, validate the idle one, then cut over atomically — the Service label selector in Kubernetes, or the ALB listener rule's target group on AWS — keeping the old version warm so rollback is a switch rather than a deployment. The constraint that usually rules it out is a shared database schema that must satisfy both versions simultaneously, which is why expand-and-contract migrations matter. See [deployment strategies](../devops-tools-and-automation/what-are-deployment-strategies.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

@@ -100,6 +100,14 @@ spec:
 - Always mention starting new policies in **Audit mode** before moving to **Enforce mode** to prevent accidental pipeline downtime.
 - Explain admission controller mechanics: `ValidatingWebhookConfiguration` (blocks or allows) runs after `MutatingWebhookConfiguration` (modifies requests defaults).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[How do you harden a container image and a Dockerfile?]] (`#441`): [How do you harden a container image and a Dockerfile?](../docker/how-do-you-harden-a-container-image-and-a-dockerfile.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to DevSecOps](./README.md) · [All topics](../README.md)

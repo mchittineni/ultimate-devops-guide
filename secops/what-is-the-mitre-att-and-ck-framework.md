@@ -48,6 +48,14 @@ T1530      Data from Cloud Storage Object     ← mass GetObject on a data bucke
 - Mention the Containers and Identity Provider matrices; it shows you have looked past the generic Enterprise view.
 - Be honest about the coverage-percentage trap: weighted, telemetry-aware coverage beats a green heat map.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SecOps and Threat Detection](./README.md) · [All topics](../README.md)

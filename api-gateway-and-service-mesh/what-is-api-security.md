@@ -48,6 +48,14 @@ plugins:
 - Distinguish authentication from authorisation cleanly and early.
 - Mention API inventory and schema validation; both indicate real-world experience.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What is GitLab CI?]] (`#19`): [What is GitLab CI?](../cicd/what-is-gitlab-ci.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to API Gateway and Service Mesh](./README.md) · [All topics](../README.md)

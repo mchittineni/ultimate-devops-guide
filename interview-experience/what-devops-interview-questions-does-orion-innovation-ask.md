@@ -80,6 +80,14 @@ THE ONE-WORD ANSWER QUESTION
 - The DNS block is four short questions, so answer them tightly and add the operational rules. An A record maps a hostname to an IPv4 address, and its value _is_ that address — with AAAA doing the same for IPv6. A CNAME aliases one name to another name, and the two rules that matter are that it cannot coexist with other records at the same name and cannot sit at a zone apex, which is why providers offer alias or ANAME records for the bare domain. An MX record routes mail for a domain to named mail servers, with a preference number where lower wins — and note that an MX value must be a hostname, never an IP address. That last detail is a good discriminator. See [managing DNS and global traffic routing](../cloud-engineering/how-do-you-manage-dns-and-global-traffic-routing.md).
 - Jenkins secrets should be answered as a hierarchy. Baseline: the Credentials plugin with folder-scoped credentials, consumed via `withCredentials` so values are masked in the log. Better: Jenkins fetches from an external store — Key Vault, Vault, or Secrets Manager — at run time, so nothing is stored on the controller. Best: no stored credential at all, using OIDC federation to the cloud provider for short-lived tokens. Then name the classic leak: interpolating a secret inside a double-quoted Groovy string puts it in the build log, so use single quotes and let the shell expand it. See [managing secrets in CI/CD pipelines](../devsecops/how-do-you-manage-secrets-in-ci-cd-pipelines.md) and [preventing and handling secret leaks in CI/CD](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

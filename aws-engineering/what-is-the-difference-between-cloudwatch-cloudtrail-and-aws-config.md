@@ -163,6 +163,14 @@ aws configservice select-resource-config \
 - Tell the incident narrative rather than three definitions - alarm, log query, CloudTrail lookup, Config diff, then the preventive control. It reads as experience.
 - Close on cost: set retention on every log group, restrict Config's recorded resource types, and enable data events selectively. Unbounded log retention is the classic surprise bill. See [what is monitoring in DevOps](../monitoring-and-logging/what-is-monitoring-in-devops.md), [designing a logging pipeline that stays affordable at scale](../monitoring-and-logging/how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale.md), [automating compliance checks](../security-and-compliance/how-do-you-automate-compliance-checks-for-pci-dss-soc-2-hipaa-and-gdpr.md), and [what is infrastructure drift](../advanced-devops-cloud/what-is-infrastructure-drift.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
+- [[How do you debug DNS resolution failures inside a Kubernetes cluster?]] (`#404`): [How do you debug DNS resolution failures inside a Kubernetes cluster?](../kubernetes/how-do-you-debug-dns-resolution-failures-inside-a-kubernetes-cluster.md)
+- [[How do you troubleshoot a Kubernetes Job or CronJob that never completes?]] (`#408`): [How do you troubleshoot a Kubernetes Job or CronJob that never completes?](../kubernetes/how-do-you-troubleshoot-a-kubernetes-job-or-cronjob-that-never-completes.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to AWS Engineering](./README.md) · [All topics](../README.md)

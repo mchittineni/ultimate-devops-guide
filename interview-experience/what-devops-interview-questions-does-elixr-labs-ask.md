@@ -102,6 +102,14 @@ THE INTERVIEWER'S TECHNIQUE
 - Hub-and-spoke deserves the _why_ as well as the shape: shared services — firewall, gateways, DNS, jump hosts — live once in the hub, spokes peer to it for isolation per workload or environment, and transit between spokes goes through the hub where it can be inspected. Mention that spoke-to-spoke peering does not transit by default, which is why the hub needs a firewall or route server. See [network segmentation](../network-security/what-is-network-segmentation.md).
 - The DR question in an Azure context should name mechanisms, not just RTO and RPO: Site Recovery for VM replication and failover, geo-redundant or read-access geo-redundant storage, paired-region deployment, and Traffic Manager or Front Door to redirect traffic. Say whether you have actually failed over or only tested a plan on paper — honesty here reads better than an overstated claim. See [disaster recovery](../scalability-and-high-availability/what-is-disaster-recovery.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

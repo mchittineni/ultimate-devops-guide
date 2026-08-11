@@ -136,6 +136,14 @@ TCS'S DISTINCTIVE TOPIC
 - `terraform drift` is not a command, so correct it: `terraform plan` reveals drift, and `plan -refresh-only` (with `apply -refresh-only`) is the purpose-built way to detect and reconcile it — the old `terraform refresh` being deprecated in its favour. Terraform Cloud has a managed drift-detection feature, which may be what the interviewer means. See [managing Terraform state safely in a team](../infrastructure-as-code/how-do-you-manage-terraform-state-safely-in-a-team.md).
 - On Linux, `df -h /mount/point` gives space on a mount, and `df -i` gives inode usage — mention the inode variant, because a filesystem can be half empty and still unable to create files. File permissions are read, write, and execute for user, group, and other, expressed octally, plus the special bits (setuid, setgid, sticky) and ACLs. See [Linux filesystem hierarchy](../linux-administration/what-is-linux-file-system-hierarchy.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

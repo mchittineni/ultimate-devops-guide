@@ -55,6 +55,14 @@ budget_minutes(99.99, 365)    # 52.56 minutes per year
 - Ask which window and which definition (time or request) before answering - that question is itself the signal.
 - Expect: "can you offer 99.99% on top of three 99.9% dependencies?" - no, not serially; the answer is redundancy or degradation.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SLA Management](./README.md) · [All topics](../README.md)

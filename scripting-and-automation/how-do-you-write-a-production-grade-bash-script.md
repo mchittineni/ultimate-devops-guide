@@ -120,6 +120,14 @@ bash -x promote.sh --env staging --image api:1.4.0   # trace execution
 - Be willing to say Bash is the wrong tool past a certain point. Interviewers respect the boundary more than a 600-line Bash program.
 - If asked to write something live - "back up a directory to S3", "delete files older than 7 days" - narrate the guard rails first, then the logic.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you schedule work with cron and systemd timers?]] (`#497`): [How do you schedule work with cron and systemd timers?](../linux-administration/how-do-you-schedule-work-with-cron-and-systemd-timers.md)
+- [[What are the basic Linux commands every DevOps engineer should know?]] (`#41`): [What are the basic Linux commands every DevOps engineer should know?](../linux-administration/what-are-the-basic-linux-commands-every-devops-engineer-should-know.md)
+- [[What is Shell Scripting?]] (`#42`): [What is Shell Scripting?](../linux-administration/what-is-shell-scripting.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Scripting and Automation](./README.md) · [All topics](../README.md)

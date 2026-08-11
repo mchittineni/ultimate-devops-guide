@@ -50,6 +50,14 @@ conftest test terraform-plan.json --policy policy/   # gate in CI
 - Explain defence in depth: the same rule in CI (fast feedback) and admission control (enforcement).
 - Note that auto-remediation needs care; start in audit mode, measure, then enforce.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you manage TLS certificates in production?]] (`#491`): [How do you manage TLS certificates in production?](../network-security/how-do-you-manage-tls-certificates-in-production.md)
+- [[What does a DevSecOps pipeline look like end to end?]] (`#161`): [What does a DevSecOps pipeline look like end to end?](../devsecops/what-does-a-devsecops-pipeline-look-like-end-to-end.md)
+- [[What is the difference between SAST, DAST, IAST, and SCA?]] (`#162`): [What is the difference between SAST, DAST, IAST, and SCA?](../devsecops/what-is-the-difference-between-sast-dast-iast-and-sca.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Security and Compliance](./README.md) · [All topics](../README.md)

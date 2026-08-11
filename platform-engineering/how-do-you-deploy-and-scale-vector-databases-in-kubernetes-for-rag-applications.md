@@ -111,6 +111,14 @@ for res in results:
 - Differentiate **Milvus** (disaggregated cloud-native architecture for billion-scale vectors) from **pgvector** (lightweight extension for existing Postgres databases).
 - Highlight **hybrid search**: combining dense vector embeddings (semantic search) with sparse keyword search (BM25) to maximize RAG retrieval accuracy.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
+- [[How do you import existing cloud infrastructure into Terraform?]] (`#235`): [How do you import existing cloud infrastructure into Terraform?](../infrastructure-as-code/how-do-you-import-existing-cloud-infrastructure-into-terraform.md)
+- [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Platform Engineering](./README.md) · [All topics](../README.md)

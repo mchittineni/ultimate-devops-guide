@@ -35,6 +35,14 @@ The **shared responsibility model** is the concept interviewers probe: the provi
 - Cloud is not automatically cheaper - it is elastic. Steady, predictable load can be cheaper on-premises.
 - Mention the trade-offs: vendor lock-in, egress costs, and the operational cost of doing it badly.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design a production-ready VPC on AWS?]] (`#191`): [How do you design a production-ready VPC on AWS?](../aws-engineering/how-do-you-design-a-production-ready-vpc-on-aws.md)
+- [[How do you structure a multi-account AWS organisation?]] (`#197`): [How do you structure a multi-account AWS organisation?](../aws-engineering/how-do-you-structure-a-multi-account-aws-organisation.md)
+- [[How do you secure pod access to AWS resources using EKS Pod Identity or IRSA?]] (`#247`): [How do you secure pod access to AWS resources using EKS Pod Identity or IRSA?](../aws-engineering/how-do-you-secure-pod-access-to-aws-resources-using-eks-pod-identity-or-irsa.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Platforms](./README.md) · [All topics](../README.md)

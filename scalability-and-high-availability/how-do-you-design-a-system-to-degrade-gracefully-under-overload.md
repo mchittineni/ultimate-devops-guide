@@ -152,6 +152,14 @@ histogram_quantile(0.99, sum by (le) (rate(request_duration_seconds_bucket[5m]))
 - Bounded queues, deadline propagation, and dropping stale work (LIFO under load) are all worth naming - unbounded queues are the classic mistake.
 - Finish with verification: load test past the knee, inject failure, and confirm the system recovers when load drops without a restart.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Scalability and High Availability](./README.md) · [All topics](../README.md)

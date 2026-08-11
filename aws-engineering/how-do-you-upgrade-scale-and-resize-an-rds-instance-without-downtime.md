@@ -180,6 +180,14 @@ aws cloudwatch get-metric-statistics --namespace AWS/RDS --metric-name FreeStora
 - For major upgrades, name **blue/green deployments**, the lack of rollback, and the pre-flight work (extensions, deprecated syntax, plan regressions on a restored snapshot).
 - For storage at 95%, give the immediate online action (autoscaling or increase), the investigation (bloat, WAL/binlog retention, unvacuumed tables), and the two constraints - you cannot shrink, and there is a cooldown. See [running a highly available database on AWS](./how-do-you-run-a-highly-available-database-on-aws.md), [troubleshooting a database that is slow or timing out](../database-management-in-devops/how-do-you-troubleshoot-a-database-that-is-slow-or-timing-out-under-load.md), [changing a production schema without downtime](../database-management-in-devops/how-do-you-change-a-production-database-schema-without-downtime.md), and [migrating a production database to the cloud](../cloud-migration/how-do-you-migrate-a-production-database-to-the-cloud-with-near-zero-downtime.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
+- [[What is a PodDisruptionBudget and when do you need one?]] (`#446`): [What is a PodDisruptionBudget and when do you need one?](../kubernetes/what-is-a-poddisruptionbudget-and-when-do-you-need-one.md)
+- [[What happens when a Kubernetes control-plane node or etcd fails?]] (`#448`): [What happens when a Kubernetes control-plane node or etcd fails?](../kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to AWS Engineering](./README.md) · [All topics](../README.md)

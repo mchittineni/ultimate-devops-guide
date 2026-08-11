@@ -95,6 +95,14 @@ done
 - Name at least three real failure modes: replication slot filling the source disk, un-advanced sequences, missing primary keys, collation-driven index differences, target connection limits.
 - Insist on a mechanism for the write freeze (flag or read-only mode) rather than a process. "We asked people not to write" is not an answer at this level.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Migration](./README.md) · [All topics](../README.md)

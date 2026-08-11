@@ -90,6 +90,14 @@ WHAT ROUND 2 IS ACTUALLY DOING
 - The "recent challenge" question is a chance to look senior, so pick something with a real trade-off and a resolution — resistance to a quality gate, a migration that had to happen with no downtime, a cost overrun — and describe what you changed and what you learned rather than blaming a tool or a colleague.
 - On the third-cloud question, be straightforwardly honest. Claiming GCP experience you do not have invites an immediate follow-up you cannot answer; saying "Azure and AWS in production, GCP only through personal projects" costs nothing and builds credibility for everything else you claimed. See [how the core services of AWS, Azure, and GCP map to each other](../cloud-engineering/how-do-the-core-services-of-aws-azure-and-gcp-map-to-each-other.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

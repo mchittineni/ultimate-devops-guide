@@ -80,6 +80,14 @@ steps:
 - Say that the answer is _not_ "make CI more like my laptop" but "make both come from one declared image". Reference [what a Dockerfile is](../docker/what-is-dockerfile.md) and [what is configuration management](../configuration-management/what-is-configuration-management.md).
 - Add the guardrail: a fresh-clone-in-clean-container job on every pull request, so drift fails at review rather than at release.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
+- [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
+- [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to CI/CD](./README.md) · [All topics](../README.md)

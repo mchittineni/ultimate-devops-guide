@@ -79,6 +79,14 @@ A SMALL ROUND WHERE FOUR QUESTIONS ARE THE SAME QUESTION
 - The REST API question exists because the role is 30% development, so answer it as an engineer rather than reciting an acronym: an architectural style over HTTP where resources are identified by URIs and manipulated with the standard methods, communication is stateless so each request carries everything needed, and responses are cacheable. Then give the substance that shows you have built and operated one: correct method semantics and idempotency — `GET`, `PUT`, and `DELETE` idempotent, `POST` not, which is why a retried `POST` needs an idempotency key; meaningful status codes (`200`, `201`, `204`, `400`, `401`, `403`, `404`, `409`, `429`, `500`, `503`); versioning so you can evolve without breaking clients; pagination and rate limiting; and authentication with OAuth 2.0 bearer tokens or mTLS. Contrast briefly with gRPC and GraphQL to show you know when REST is not the right choice. See [what a web application firewall is](../network-security/what-is-a-web-application-firewall-waf.md) for the operational side of exposing one.
 - With ten questions and four of them overlapping, the risk in this round is sounding repetitive. Decide in advance which detail belongs to which question — sequence and governance for onboarding, integration architecture for the many-tools question, syntax and templating for how you write pipelines, and a concrete narrative for the walkthrough — so each answer adds something new.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+- [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

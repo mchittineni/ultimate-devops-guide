@@ -40,6 +40,14 @@ At the cluster level, the pod autoscaler needs the **Cluster Autoscaler** or Kar
 - Mention flapping and stabilisation windows; they are the practical failure mode.
 - Note the downstream effect: scaling the app tier can overwhelm the database connection pool.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Scalability and High Availability](./README.md) · [All topics](../README.md)

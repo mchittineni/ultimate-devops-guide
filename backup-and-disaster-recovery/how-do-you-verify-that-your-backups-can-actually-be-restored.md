@@ -150,6 +150,14 @@ groups:
 - Distinguish data verification from a DR game day: the former tests technology, the latter tests runbooks, permissions, DNS, and people. Interviewers want to hear you have done the second.
 - Close on alerting for **staleness** as well as failure, because a verification job that quietly stopped is indistinguishable from a passing one until the day it matters. See [what is business continuity planning](./what-is-business-continuity-planning.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+- [[How do you take a monthly release process to daily deployments?]] (`#285`): [How do you take a monthly release process to daily deployments?](../core-devops-concepts/how-do-you-take-a-monthly-release-process-to-daily-deployments.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Backup and Disaster Recovery](./README.md) · [All topics](../README.md)

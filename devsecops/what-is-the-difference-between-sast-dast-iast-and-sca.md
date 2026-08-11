@@ -48,6 +48,14 @@ semgrep --config p/owasp-top-ten --config ./.semgrep/rules \
 - Mention `--ignore-unfixed` and reachability analysis - both show you have fought signal-to-noise in practice.
 - Common trap: claiming SAST would have caught Log4Shell. That was a dependency issue, so SCA plus an SBOM is the answer.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+- [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to DevSecOps](./README.md) · [All topics](../README.md)

@@ -91,6 +91,14 @@ jobs:
 - Flag the anti-pattern of fixing slowness by retrying or deleting tests, and handle flakiness as its own problem: see [how do you deal with flaky tests in a CI pipeline](./how-do-you-deal-with-flaky-tests-in-a-ci-pipeline.md).
 - Close on cost: autoscaled ephemeral agents plus artefact expiry usually cut both the wait and the bill. See [how do you cut a cloud bill without hurting reliability](../cloud-cost-optimization/how-do-you-cut-a-cloud-bill-without-hurting-reliability.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
+- [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
+- [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to CI/CD](./README.md) · [All topics](../README.md)

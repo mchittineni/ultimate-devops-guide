@@ -89,6 +89,14 @@ Fluent Bit configuration on EC2 instance (`/etc/fluent-bit/fluent-bit.conf`):
 - Discuss **S3 Lifecycle rules**: move logs from S3 Standard to S3 Infrequent Access (IA) after 30 days, Glacier Flexible Retrieval after 90 days, and expire/delete after retention requirements (e.g., 365 days).
 - Address high-volume log cost management: gzip compression, buffering before writing to S3, and avoiding writing micro-batches to save on S3 `PutObject` API call costs.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
+- [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+- [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to AWS Engineering](./README.md) · [All topics](../README.md)

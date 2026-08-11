@@ -46,6 +46,14 @@ Result: 99.93% measured, no user complaints in the two worst weeks
 - Say explicitly that 100% is the wrong target and explain why - no budget means no ability to ship.
 - Strong follow-up to anticipate: "your dependency is 99.9%, can you promise 99.99%?" - not without redundancy or graceful degradation, and the maths should be your reply.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SLO Engineering](./README.md) · [All topics](../README.md)

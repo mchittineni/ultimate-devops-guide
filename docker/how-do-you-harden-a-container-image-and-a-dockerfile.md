@@ -138,6 +138,14 @@ docker history --no-trunc registry.example.com/api:1.9.0
 - Say that signing only matters with admission enforcement, and name Kyverno or Gatekeeper. See [how do you sign and verify container images](../devsecops/how-do-you-sign-and-verify-container-images.md), [Kubernetes admission control with Kyverno or OPA Gatekeeper](../devsecops/how-do-you-enforce-kubernetes-admission-control-with-kyverno-or-opa-gatekeeper.md), [prioritising vulnerabilities without blocking delivery](../devsecops/how-do-you-prioritise-vulnerabilities-without-blocking-delivery.md), and [namespaces, cgroups, and capabilities](./how-do-namespaces-cgroups-and-capabilities-isolate-a-container.md).
 - If asked how to fix a CVE in a running container, refuse the in-place upgrade and describe rebuild-rescan-redeploy plus compensating controls when the fix is genuinely far off.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
+- [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
+- [[What does a DevSecOps pipeline look like end to end?]] (`#161`): [What does a DevSecOps pipeline look like end to end?](../devsecops/what-does-a-devsecops-pipeline-look-like-end-to-end.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Docker](./README.md) · [All topics](../README.md)

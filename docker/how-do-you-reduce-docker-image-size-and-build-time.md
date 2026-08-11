@@ -95,6 +95,14 @@ docker buildx build \
 - If asked about build _time_ specifically, separate the two levers: cache ordering (avoid rebuilding) and cache transport (`--cache-from` in CI, where every runner starts cold).
 - Mention `.dockerignore` unprompted. Interviewers notice when candidates forget the build context.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the main components of Kubernetes architecture?]] (`#12`): [What are the main components of Kubernetes architecture?](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)
+- [[What is a Service in Kubernetes?]] (`#14`): [What is a Service in Kubernetes?](../kubernetes/what-is-a-service-in-kubernetes.md)
+- [[How does RBAC work in Kubernetes?]] (`#257`): [How does RBAC work in Kubernetes?](../kubernetes/how-does-rbac-work-in-kubernetes.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Docker](./README.md) · [All topics](../README.md)

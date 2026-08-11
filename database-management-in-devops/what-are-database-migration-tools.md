@@ -37,6 +37,14 @@ tags:
 - For very large tables, name `gh-ost` or `pt-online-schema-change` - it signals real scale experience.
 - Explain where migrations run in the deployment sequence, and how you prevent two pods running them at once.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Database Management in DevOps](./README.md) · [All topics](../README.md)

@@ -110,6 +110,14 @@ kubectl -n prod logs -l app=checkout --since=2m | grep -c ' 5[0-9][0-9] '
 - Frame the review around time-to-detect and time-to-mitigate, and prefer one automated gate over several human reminders.
 - Have a real story with numbers - what broke, how long, what you changed afterwards - and be willing to say what you would do differently. That self-critique is usually what earns the mark. See [what is an incident response plan](./what-is-an-incident-response-plan.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Incident Management](./README.md) · [All topics](../README.md)

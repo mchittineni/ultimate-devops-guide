@@ -122,6 +122,14 @@ kubectl debug -it api-7f4c2b --image=nicolaka/netshoot --target=api
 - Mention the resource-request rule (`max(init) vs sum(app)`) if sizing comes up; it explains a Pod that will not schedule for no obvious reason.
 - Push back thoughtfully on sidecar sprawl: a DaemonSet log collector or direct `/metrics` exposure is usually cheaper than a sidecar per Pod, and name the "sidecar tax". See [what is a sidecar pattern](../advanced-devops-cloud/what-is-a-sidecar-pattern.md), [running a service mesh in production without the sidecar tax](../api-gateway-and-service-mesh/how-do-you-run-a-service-mesh-in-production-without-the-sidecar-tax.md), [troubleshooting a Job or CronJob that never completes](./how-do-you-troubleshoot-a-kubernetes-job-or-cronjob-that-never-completes.md), and [what are DaemonSets in Kubernetes](../container-orchestration-advanced/what-are-daemonsets-in-kubernetes.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[How do you run and scale a stateful application on Kubernetes?]] (`#413`): [How do you run and scale a stateful application on Kubernetes?](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)
+- [[What are CustomResourceDefinitions and operators in Kubernetes?]] (`#452`): [What are CustomResourceDefinitions and operators in Kubernetes?](../container-orchestration-advanced/what-are-customresourcedefinitions-and-operators-in-kubernetes.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Kubernetes](./README.md) · [All topics](../README.md)

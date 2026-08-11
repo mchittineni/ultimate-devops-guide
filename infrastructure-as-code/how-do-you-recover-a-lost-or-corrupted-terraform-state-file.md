@@ -99,6 +99,14 @@ terraform force-unlock 1a2b3c4d-5e6f-7890-abcd-ef1234567890
 - Close by turning it into prevention: versioned encrypted bucket, locking, split state, and no local state in production. That reframes a recovery question as a design answer.
 - Do not confuse a stuck lock with corruption. Knowing `force-unlock` - and that using it on a live apply causes the corruption - is a good senior signal.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you structure an Ansible role and share it through Galaxy?]] (`#468`): [How do you structure an Ansible role and share it through Galaxy?](../configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md)
+- [[What is Configuration Management?]] (`#51`): [What is Configuration Management?](../configuration-management/what-is-configuration-management.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Infrastructure as Code](./README.md) · [All topics](../README.md)

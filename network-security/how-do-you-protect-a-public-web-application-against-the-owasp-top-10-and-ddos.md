@@ -207,6 +207,14 @@ curl -s -o /dev/null -w '%{http_code}\n' "https://app.example.com/?q=1%27%20OR%2
 - Insist on **detection mode first** and tuning with real traffic, and explain the consequence of not doing it - a false-positive outage, after which the WAF gets disabled forever.
 - Mention the free wins: HSTS, CSP as the real XSS mitigation, secure cookies, deliberate CORS, and an API gateway doing authentication and quotas before traffic reaches the service. Then say the pipeline catches the classes the WAF cannot see. See [what is a web application firewall (WAF)](./what-is-a-web-application-firewall-waf.md), [designing defence in depth for a cloud network](./how-do-you-design-defence-in-depth-for-a-cloud-network.md), [what is API security](../api-gateway-and-service-mesh/what-is-api-security.md), [what is rate limiting](../api-gateway-and-service-mesh/what-is-rate-limiting.md), and [designing a system to degrade gracefully under overload](../scalability-and-high-availability/how-do-you-design-a-system-to-degrade-gracefully-under-overload.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[How do you harden a container image and a Dockerfile?]] (`#441`): [How do you harden a container image and a Dockerfile?](../docker/how-do-you-harden-a-container-image-and-a-dockerfile.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Network Security](./README.md) · [All topics](../README.md)

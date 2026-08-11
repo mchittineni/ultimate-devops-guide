@@ -58,6 +58,14 @@ Test quarterly: fail circuit #1, confirm convergence and no asymmetric drops
 - Non-overlapping address planning and hybrid DNS are the two failures that cause the most real pain - mention both.
 - Expect: "is a dedicated circuit encrypted?" - no; add IPsec/MACsec or rely on application-layer TLS.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Engineering](./README.md) · [All topics](../README.md)

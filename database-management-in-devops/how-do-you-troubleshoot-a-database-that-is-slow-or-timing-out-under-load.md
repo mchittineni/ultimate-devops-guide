@@ -108,6 +108,14 @@ The pool-exhaustion shape - why "the database is slow" was wrong
 - Know the limits of the popular answers - read replicas do not help writes and add lag; caching needs an invalidation story; sharding changes the application.
 - Close on the leading indicators you would alert on, and on load testing with production-shaped data because plans change with cardinality.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Database Management in DevOps](./README.md) · [All topics](../README.md)

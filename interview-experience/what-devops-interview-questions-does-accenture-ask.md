@@ -67,6 +67,14 @@ WHAT THIS ROUND IS REALLY TESTING
 - All-tiers-private is answered with a public-facing load balancer or ingress in public subnets, targets in private ones, and NAT only for egress. Draw the traffic path rather than listing services. See [designing a production-ready VPC](../aws-engineering/how-do-you-design-a-production-ready-vpc-on-aws.md).
 - S3 is a regional service outside your VPC, reached over the public endpoint via NAT or an internet gateway, or privately through a gateway VPC endpoint. The interviewer is fishing for the endpoint. See [core AWS services](../aws-engineering/what-are-the-core-aws-services-a-devops-engineer-uses-daily.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

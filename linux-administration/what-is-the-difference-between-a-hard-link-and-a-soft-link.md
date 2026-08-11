@@ -126,6 +126,14 @@ namei -l    /opt/app/current/VERSION   # every component's type and permissions
 - Mention `cp -a` versus `cp -r` for preserving links, and `find -xtype l` for dangling symlinks. Small, practical, and they signal you have cleaned up a real filesystem.
 - If Kubernetes comes up, note that mounted ConfigMaps and Secrets are directories of symlinks into a versioned directory, which is how atomic updates work - and why `subPath` mounts never refresh. That connects a Linux fundamental to a container problem, which is exactly the kind of link interviewers reward. See [what is Linux File System Hierarchy](./what-is-linux-file-system-hierarchy.md), [basic Linux commands every DevOps engineer should know](./what-are-the-basic-linux-commands-every-devops-engineer-should-know.md), and [how do you manage disks, filesystems, and LVM on Linux](./how-do-you-manage-disks-filesystems-and-lvm-on-linux.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What Bash scripting exercises come up in DevOps interviews?]] (`#502`): [What Bash scripting exercises come up in DevOps interviews?](../scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md)
+- [[How to handle merge conflicts in Git?]] (`#50`): [How to handle merge conflicts in Git?](../version-control/how-to-handle-merge-conflicts-in-git.md)
+- [[What is the difference between git merge, rebase, and cherry-pick?]] (`#263`): [What is the difference between git merge, rebase, and cherry-pick?](../version-control/what-is-the-difference-between-git-merge-rebase-and-cherry-pick.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Linux Administration](./README.md) · [All topics](../README.md)

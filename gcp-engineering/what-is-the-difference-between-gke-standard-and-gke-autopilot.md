@@ -77,6 +77,14 @@ spec:
 - Say that Autopilot blocks privileged Pods and node SSH, and give an example of a workload that therefore needs Standard.
 - Expect: "which would you pick?" - Autopilot as the default for ordinary services, Standard where the exceptions apply.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+- [[What are the different types of cloud services?]] (`#25`): [What are the different types of cloud services?](../cloud-platforms/what-are-the-different-types-of-cloud-services.md)
+- [[How do you choose a cloud provider for a new workload?]] (`#281`): [How do you choose a cloud provider for a new workload?](../cloud-platforms/how-do-you-choose-a-cloud-provider-for-a-new-workload.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to GCP Engineering](./README.md) · [All topics](../README.md)

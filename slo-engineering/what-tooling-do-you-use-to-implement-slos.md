@@ -65,6 +65,14 @@ promtool check rules rules/checkout-slo.yaml
 - Raise the long-window retention problem - it is the mistake most teams hit at the 28-day mark.
 - Expect: "why not just use the vendor's SLO feature?" - fine for reporting, but keep the definition in Git and paging where your on-call already looks.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SLO Engineering](./README.md) · [All topics](../README.md)

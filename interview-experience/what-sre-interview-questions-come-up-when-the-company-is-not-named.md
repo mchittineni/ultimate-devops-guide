@@ -60,6 +60,14 @@ A SHORT, OPEN-ENDED ROUND
 - For "how you build a CI/CD pipeline", give one pipeline you actually own, stage by stage, and name the gates: build once and produce an immutable artefact tagged by Git SHA, run unit tests and static analysis, scan dependencies and the image, push to a registry, deploy to a lower environment automatically, then promote _the same artefact_ upward with an approval before production. Say that rebuilding per environment means you never tested what you shipped. See [what a CI/CD pipeline is](../cicd/what-is-ci-cd-pipeline.md) and [continuous delivery versus continuous deployment](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md).
 - Nothing in this round asks about SLIs, SLOs, error budgets, or incident response — which is unusual for an SRE title and suggests a platform-operations role wearing an SRE label. Volunteer the reliability framing anyway where it fits naturally: when asked about monitoring, mention that you alert on user-facing symptoms and error-budget burn rather than raw CPU thresholds. It costs one sentence and reframes you as an SRE rather than an operator. See [designing alerts that page a human](../site-reliability-engineering/how-do-you-design-alerts-that-page-a-human.md) and [error budgets](../site-reliability-engineering/what-is-error-budget.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

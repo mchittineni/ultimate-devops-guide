@@ -83,6 +83,14 @@ THE ROUND IS BUILT AROUND ONE THEME
 - The base-image and patching questions are one answer, and the key idea is that you do not patch running containers — you rebuild. Say: pin base images by digest rather than a floating tag so builds are reproducible, rebuild on a schedule _and_ on upstream advisories so patched layers are picked up, use minimal or distroless bases so there is little to patch, scan in CI with Trivy or Grype and gate on severity plus reachability, maintain a small set of approved golden base images that application teams inherit, sign images and enforce provenance with admission control, and generate an SBOM so you can answer "are we affected" without rebuilding everything. For hosts, the equivalent is immutable infrastructure — bake a new AMI and roll the nodes rather than patching in place. See [prioritising vulnerabilities without blocking delivery](../devsecops/how-do-you-prioritise-vulnerabilities-without-blocking-delivery.md) and [signing and verifying container images](../devsecops/how-do-you-sign-and-verify-container-images.md).
 - Git submodules should come with the caveat, because the honest answer is more useful than the definition. A submodule embeds another repository at a pinned commit inside your tree, which is how you vendor a shared library or share IaC modules while keeping histories separate. But say the operational cost: clones need `--recurse-submodules`, contributors routinely forget to update the pointer, CI must initialise them, and a detached-HEAD submodule is a common source of confusion — which is why many teams prefer a package registry, a Terraform module registry, or a monorepo instead. Naming that trade-off is what an eight-year candidate is expected to do. See [what Git is](../version-control/what-is-git.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

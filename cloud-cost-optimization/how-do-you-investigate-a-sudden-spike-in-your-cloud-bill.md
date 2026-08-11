@@ -172,6 +172,14 @@ curl -s 'localhost:9003/allocation?window=7d&aggregate=namespace' \
 - Finish on prevention: budgets on **forecast** as well as actual, anomaly detection, SCPs restricting unused regions and expensive instance families, non-production scheduled to zero, and per-team cost reports - because the people who can fix a query are the ones who need to see the number.
 - State the guard rail: cost reduction must not silently trade away reliability or compliance retention. Make that trade-off explicit. See [how do you cut a cloud bill without hurting reliability](./how-do-you-cut-a-cloud-bill-without-hurting-reliability.md), [how to implement cost tagging strategy](./how-to-implement-cost-tagging-strategy.md), [real-time Kubernetes cost monitoring with OpenCost or Kubecost](./how-do-you-implement-real-time-kubernetes-cost-monitoring-using-opencost-or-kubecost.md), [what is FinOps](../advanced-devops-cloud/what-is-finops.md), and [what are VPC endpoints](../aws-engineering/what-are-vpc-endpoints-and-when-do-you-use-a-gateway-versus-an-interface-endpoint.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[How do you deal with flaky tests in a CI pipeline?]] (`#398`): [How do you deal with flaky tests in a CI pipeline?](../cicd/how-do-you-deal-with-flaky-tests-in-a-ci-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Cost Optimization](./README.md) · [All topics](../README.md)

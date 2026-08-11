@@ -89,6 +89,14 @@ pipeline {
 - For the local-to-remote sequence, give it in order and say what each step does to which store: `git status`, `git add <file>` to stage, `git commit -m` to write the object, `git pull --rebase` to integrate remote work, then `git push`. Volunteering the `pull` before the `push` shows you have hit a rejected push before. See [handling merge conflicts](../version-control/how-to-handle-merge-conflicts-in-git.md).
 - On the Terraform state file, cover what it stores (the mapping from configuration to real resource IDs plus attributes), where it belongs (remote backend, encrypted, versioned), why locking matters, and that it may contain secrets in plain text. See [managing Terraform state safely in a team](../infrastructure-as-code/how-do-you-manage-terraform-state-safely-in-a-team.md) and [recovering a lost or corrupted state file](../infrastructure-as-code/how-do-you-recover-a-lost-or-corrupted-terraform-state-file.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?]] (`#455`): [How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?](../cicd/how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

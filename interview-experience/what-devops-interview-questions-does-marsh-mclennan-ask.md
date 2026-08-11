@@ -101,6 +101,14 @@ jobs:
 - The merge-versus-rebase worked example is a whiteboard question, so structure it: with `main` at commits A-B-C and `feature` branched at B with commits D-E, a merge creates a new commit M with two parents, preserving the true history and the branch shape; a rebase replays D and E as new commits D' and E' on top of C, giving a linear history but different commit hashes. Then say the rule — never rebase a branch other people have pulled — and when you would choose each: rebase to tidy your own feature branch before review, merge to integrate into a shared branch. See [git merge, rebase, and cherry-pick](../version-control/what-is-the-difference-between-git-merge-rebase-and-cherry-pick.md).
 - Image size reduction should be prioritised, not listed: multi-stage build so compilers and dev dependencies never ship, a minimal base image such as Alpine or distroless, cleaning package caches within the same `RUN` layer, a `.dockerignore` to keep the build context small, and copying only the built artefact. Say you would run `docker history` to find the fat layer before guessing.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

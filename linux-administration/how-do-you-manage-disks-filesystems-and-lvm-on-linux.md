@@ -145,6 +145,14 @@ umount /data && xfs_repair /dev/vg0/data   # only on an UNMOUNTED device
 - Always mount by **UUID** with **`nofail`** and a device timeout, and say `mount -a` before rebooting. It is the same habit that prevents the most common boot failure.
 - For splitting workloads, choose separate cloud volumes in the cloud and LVM on bare metal, and mention XFS project quotas as the lighter alternative. See [what is Linux File System Hierarchy](./what-is-linux-file-system-hierarchy.md), [walk through the Linux boot process](./walk-through-the-linux-boot-process.md), [troubleshooting SSH failures, high CPU, and disk space](./how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md), and [choosing between EBS, EFS, and S3](../aws-engineering/how-do-you-choose-between-ebs-efs-and-s3.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What Bash scripting exercises come up in DevOps interviews?]] (`#502`): [What Bash scripting exercises come up in DevOps interviews?](../scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md)
+- [[How do you patch hundreds of servers safely?]] (`#430`): [How do you patch hundreds of servers safely?](../configuration-management/how-do-you-patch-hundreds-of-servers-safely.md)
+- [[How do you turn a pile of ad hoc scripts into maintainable automation?]] (`#302`): [How do you turn a pile of ad hoc scripts into maintainable automation?](../scripting-and-automation/how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Linux Administration](./README.md) · [All topics](../README.md)

@@ -184,6 +184,14 @@ The alert that prevents the incident - from an EXTERNAL probe, not from the CA's
 - For internal traffic, say a public CA cannot issue for cluster-internal names, so use a private CA or a service mesh with short-lived automatically-rotated workload certificates - and name the mesh trade-off honestly.
 - Add the hygiene items that show breadth: CAA records, keys never in Git, an inventory generated from the estate, an explicitly pinned TLS policy at 1.2 minimum, and automating the `.csr`/`.cer`/`.pfx` workflow out of existence. See [what is SSL/TLS](./what-is-ssl-tls.md), [what happens when a user opens your application in a browser](./what-happens-when-a-user-opens-your-application-in-a-browser.md), [choosing between Azure Load Balancer, Application Gateway, and Front Door](../azure-engineering/how-do-you-choose-between-azure-load-balancer-application-gateway-and-front-door.md), and [rotating secrets without downtime](../devsecops/how-do-you-rotate-secrets-without-downtime.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you harden a container image and a Dockerfile?]] (`#441`): [How do you harden a container image and a Dockerfile?](../docker/how-do-you-harden-a-container-image-and-a-dockerfile.md)
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Network Security](./README.md) · [All topics](../README.md)

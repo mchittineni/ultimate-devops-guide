@@ -161,6 +161,14 @@ kubectl patch pgc orders-db -n payments -p '{"metadata":{"finalizers":null}}' --
 - Know the Helm CRD lifecycle gap (`crds/` is install-once) and that deleting a CRD deletes all its instances. Both are operational scars worth showing.
 - If asked how you would run a shell script before every container starts, note that this is an init container's job, not an operator's - and an operator would be the tool if you needed it enforced across every workload, via a mutating webhook. See [what is inside a Helm chart](./what-is-inside-a-helm-chart-and-how-do-you-customise-one.md), [running a multi-tenant Kubernetes cluster](./how-do-you-run-a-multi-tenant-kubernetes-cluster.md), [Kubernetes admission control with Kyverno or OPA Gatekeeper](../devsecops/how-do-you-enforce-kubernetes-admission-control-with-kyverno-or-opa-gatekeeper.md), and [what is Crossplane and how does it compare to Terraform](../platform-engineering/what-is-crossplane-and-how-does-it-compare-to-terraform.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
+- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Container Orchestration Advanced](./README.md) · [All topics](../README.md)

@@ -154,6 +154,14 @@ gh workflow run api.yml -f environment=staging      # GitHub Actions equivalent
 - Volunteer filtering as the other half of the answer: branch and path filters for monorepos, concurrency groups so overlapping pushes do not run overlapping deploys, and `[skip ci]` plus ignoring bot commits to avoid trigger loops.
 - Raise the fork-PR security boundary - `pull_request` versus `pull_request_target`, secrets never exposed to untrusted code. Very few candidates bring this up unprompted and it matters. See [how do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue](./how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md), [declarative versus scripted pipelines](./what-is-the-difference-between-a-declarative-and-a-scripted-jenkins-pipeline.md), [writing an efficient and secure GitHub Actions workflow](./how-do-you-write-an-efficient-and-secure-github-actions-workflow.md), and [scaling CI/CD across many services and teams](./how-do-you-scale-ci-cd-across-many-services-and-teams.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
+- [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
+- [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to CI/CD](./README.md) · [All topics](../README.md)

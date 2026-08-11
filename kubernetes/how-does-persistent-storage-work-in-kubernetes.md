@@ -145,6 +145,14 @@ kubectl patch pv pvc-9f2c8b1d -p '{"spec":{"claimRef":null}}'
 - Mention volume expansion (grow only, never shrink) and snapshot-to-PVC restore as the clone path.
 - Close with quotas per namespace and class for multi-tenant clusters. See [how do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim](./how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md), [what are StatefulSets in Kubernetes](../container-orchestration-advanced/what-are-statefulsets-in-kubernetes.md), [running and scaling a stateful application on Kubernetes](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md), and [how do you back up and restore a Kubernetes cluster](../container-orchestration-advanced/how-do-you-back-up-and-restore-a-kubernetes-cluster.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and scale a stateful application on Kubernetes?]] (`#413`): [How do you run and scale a stateful application on Kubernetes?](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)
+- [[How do you upgrade a production Kubernetes cluster with zero downtime?]] (`#411`): [How do you upgrade a production Kubernetes cluster with zero downtime?](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md)
+- [[What is inside a Helm chart, and how do you customise one?]] (`#450`): [What is inside a Helm chart, and how do you customise one?](../container-orchestration-advanced/what-is-inside-a-helm-chart-and-how-do-you-customise-one.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Kubernetes](./README.md) · [All topics](../README.md)

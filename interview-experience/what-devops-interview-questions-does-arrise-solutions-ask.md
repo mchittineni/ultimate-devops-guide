@@ -101,6 +101,14 @@ THE PATTERN
 - Both TLS questions want the handshake mechanism, not "it encrypts traffic": certificate presented and validated against a trusted CA chain, hostname checked, key agreement, then symmetric encryption for the session. See [what SSL/TLS is](../network-security/what-is-ssl-tls.md).
 - kube-proxy does not communicate with nodes; it runs _on_ each node, watches Services and EndpointSlices from the API server, and programs iptables or IPVS rules locally. Correcting the premise politely is a strong signal. See [main components of Kubernetes architecture](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

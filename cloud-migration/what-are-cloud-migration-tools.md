@@ -39,6 +39,14 @@ tags:
 - "Rehearse the cutover repeatedly" is the practical advice that shows you have done one.
 - Note that heterogeneous database migration is an application project, not a tooling exercise.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[How do you prevent and handle secret leaks in CI/CD pipelines?]] (`#237`): [How do you prevent and handle secret leaks in CI/CD pipelines?](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)
+- [[What is Docker?]] (`#6`): [What is Docker?](../docker/what-is-docker.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Migration](./README.md) · [All topics](../README.md)

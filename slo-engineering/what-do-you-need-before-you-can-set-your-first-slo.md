@@ -108,6 +108,14 @@ clamp_min(
 - Mention excluding health checks, bots, and synthetic traffic from the denominator. It shows you have computed one for real.
 - Close on the error budget policy. An SLO without an agreed consequence is just a dashboard, and saying so demonstrates you understand the purpose.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SLO Engineering](./README.md) · [All topics](../README.md)

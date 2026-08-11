@@ -157,6 +157,14 @@ WIPRO'S RANGE IS THE WIDEST HERE
 - The dual-target deployment question — same file into Kubernetes and on-premises — is best answered by separating the artefact from the delivery: build one versioned artefact, then deliver it two ways from the same source of truth. For Kubernetes, a ConfigMap or a mounted volume rendered from a Helm value or a Git-tracked manifest; for on-premises, an Ansible role or a pull-based agent inside that network so no inbound access is needed. Say that the file's content must come from one place — a repository or a config service — or the two environments will drift, which is the actual risk the question is probing.
 - The multi-lingual stakeholder question is a genuine communication question, so answer it seriously: write short, plain sentences and avoid idiom and abbreviation; lead with the decision or ask rather than burying it; use structure — numbered points, explicit owners, explicit dates in unambiguous format; confirm understanding by restating agreed actions in a summary rather than assuming; and move anything complex or contentious to a call, then follow up in writing. Say that you never rely on tone to carry meaning across a language barrier.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

@@ -90,6 +90,14 @@ repos:
 - Explain why running `git rm secret.txt` in a subsequent commit is insufficient: the secret remains in `.git` packfiles and commit history.
 - Mention automated key rotation pipelines and immediate audit logging (e.g., CloudTrail events) as part of incident response.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
+- [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
+- [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to CI/CD](./README.md) · [All topics](../README.md)

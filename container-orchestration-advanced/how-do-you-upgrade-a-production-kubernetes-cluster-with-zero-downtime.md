@@ -116,6 +116,14 @@ spec:
 - Mention add-on and webhook compatibility, and that a broken admission webhook blocks all writes - a failure mode people only learn once.
 - Close with the strategy: upgrade small and often, or move to immutable clusters and turn upgrades into deployments. See [what is container orchestration and why do you need it](./what-is-container-orchestration-and-why-do-you-need-it.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Container Orchestration Advanced](./README.md) · [All topics](../README.md)

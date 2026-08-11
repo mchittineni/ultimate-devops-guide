@@ -54,6 +54,14 @@ pg_basebackup -D /backup/base -Ft -z -Xs -P
 - "Replication is not backup" is a line worth saying out loud.
 - Close with restore testing and the measured restore time - it is the most credible evidence.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Database Management in DevOps](./README.md) · [All topics](../README.md)

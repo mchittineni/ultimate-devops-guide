@@ -82,6 +82,14 @@ WHAT MAKES THIS AN MLOPS ROUND, NOT A DEVOPS ONE
 - The Terraform-for-ML question wants the ML-specific resources, not a generic VPC answer: the model registry and artefact buckets with versioning and encryption, ECR repositories, the training and inference IAM roles, the endpoint or serving infrastructure with autoscaling, GPU node groups or instance types with the right quotas, VPC endpoints so training data never traverses the internet, and KMS keys for data at rest. Say you would keep environments in separate state and expose the model version as a variable so promotion is a configuration change, not a code change. See [what Terraform is](../infrastructure-as-code/what-is-terraform.md).
 - Moodys is a ratings and analytics business, so lineage and auditability carry weight. Wherever you can, add the sentence that a given prediction can be traced back to a specific model version, training dataset, and code commit — that reproducibility claim is what a regulated financial employer is listening for.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

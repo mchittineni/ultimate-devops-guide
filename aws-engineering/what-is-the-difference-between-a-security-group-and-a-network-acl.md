@@ -156,6 +156,14 @@ aws ec2 describe-security-groups --query \
 - If asked "do I need a NACL when I already have a security group?", say usually not for access control, and name the three genuine cases: explicit deny, subnet-wide guardrail for defence in depth or compliance, and isolating a sensitive subnet.
 - Close with debugging: VPC Flow Logs plus Reachability Analyzer, which names the blocking component instead of leaving you to guess. See [designing a production-ready VPC on AWS](./how-do-you-design-a-production-ready-vpc-on-aws.md), [how does a private subnet reach the internet](./how-does-a-private-subnet-reach-the-internet.md), [defence in depth for a cloud network](../network-security/how-do-you-design-defence-in-depth-for-a-cloud-network.md), and [what is network segmentation](../network-security/what-is-network-segmentation.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you debug DNS resolution failures inside a Kubernetes cluster?]] (`#404`): [How do you debug DNS resolution failures inside a Kubernetes cluster?](../kubernetes/how-do-you-debug-dns-resolution-failures-inside-a-kubernetes-cluster.md)
+- [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
+- [[How do you debug a Kubernetes Ingress that is not routing traffic?]] (`#406`): [How do you debug a Kubernetes Ingress that is not routing traffic?](../kubernetes/how-do-you-debug-a-kubernetes-ingress-that-is-not-routing-traffic.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to AWS Engineering](./README.md) · [All topics](../README.md)

@@ -101,6 +101,14 @@ CVE-2026-12345 exp:2026-10-01 # dev-only dependency, not in the runtime image - 
 - Volunteer the noise problem and the fixes: diff-scoped scanning, block only on high/critical with a fix, expiring suppressions, keep it fast.
 - Close by saying shift left does not remove pen testing, threat modelling, or runtime detection. Claiming it replaces them is the trap.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to DevSecOps](./README.md) · [All topics](../README.md)

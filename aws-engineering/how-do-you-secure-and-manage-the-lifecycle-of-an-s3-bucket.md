@@ -209,6 +209,14 @@ aws accessanalyzer list-findings --analyzer-arn "$ANALYZER"   # unintended publi
 - For static websites, give the private-bucket-plus-CloudFront-with-OAC pattern rather than the legacy public website endpoint.
 - Have the "policy allows but access is denied" checklist ready: explicit deny, SCP, permissions boundary, KMS key policy, missing bucket-level ARN, or a source condition. See [what are the S3 storage classes](./what-are-the-s3-storage-classes-and-when-do-you-use-each.md), [how does AWS IAM evaluate a request](./how-does-aws-iam-evaluate-a-request.md), [what are VPC endpoints](./what-are-vpc-endpoints-and-when-do-you-use-a-gateway-versus-an-interface-endpoint.md), and [choosing between EBS, EFS, and S3](./how-do-you-choose-between-ebs-efs-and-s3.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
+- [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
+- [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to AWS Engineering](./README.md) · [All topics](../README.md)

@@ -110,6 +110,14 @@ curl http://vllm-llama3.ai-platform.svc.cluster.local:8000/v1/chat/completions \
 - Highlight model weight loading strategies: downloading weights on container boot creates 15-minute start times; using persistent storage or OCI artifacts dramatically reduces cold start latency.
 - Mention **OpenAI Protocol compatibility**: engines like vLLM expose OpenAI-compatible REST endpoints (`/v1/chat/completions`), simplifying frontend API integration.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
+- [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
+- [[What is Infrastructure as Code?]] (`#26`): [What is Infrastructure as Code?](../infrastructure-as-code/what-is-infrastructure-as-code.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Platform Engineering](./README.md) · [All topics](../README.md)

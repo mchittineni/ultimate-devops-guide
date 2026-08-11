@@ -137,6 +137,14 @@ CONSISTENT ACROSS BOTH
 - For the boto3 script, use a filtered `describe_instances` call with both `instance-state-name` set to `running` and `tag:Environment` set to `PROD` so the filtering happens server-side, and paginate. Filtering in Python after fetching everything is the answer that loses marks. See [what you use Python for as a DevOps engineer](../scripting-and-automation/what-do-you-use-python-for-as-a-devops-engineer.md).
 - Cluster backup means etcd snapshots for self-managed control planes and a tool such as Velero for namespaced resources plus persistent volumes. Say which one covers what, since they are not interchangeable. See [what disaster recovery is](../scalability-and-high-availability/what-is-disaster-recovery.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

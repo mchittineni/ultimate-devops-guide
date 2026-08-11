@@ -96,6 +96,14 @@ spec:
 - For TLS, mention the fake certificate as the tell, the same-namespace secret requirement, and the cert-manager chain (`Certificate` → `CertificateRequest` → `Order` → `Challenge`).
 - Close with the bypass tests (`port-forward`, `curl` from inside the controller Pod, `--resolve`) - taking layers away is more convincing than reading YAML harder. See [how do you expose an application running in Kubernetes to the outside world](./how-do-you-expose-an-application-running-in-kubernetes-to-the-outside-world.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run a multi-tenant Kubernetes cluster?]] (`#453`): [How do you run a multi-tenant Kubernetes cluster?](../container-orchestration-advanced/how-do-you-run-a-multi-tenant-kubernetes-cluster.md)
+- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[How do you run an application across multiple Kubernetes clusters?]] (`#414`): [How do you run an application across multiple Kubernetes clusters?](../container-orchestration-advanced/how-do-you-run-an-application-across-multiple-kubernetes-clusters.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Kubernetes](./README.md) · [All topics](../README.md)

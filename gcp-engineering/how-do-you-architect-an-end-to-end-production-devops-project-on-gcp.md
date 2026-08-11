@@ -109,6 +109,14 @@ resource "google_container_cluster" "primary" {
 - Highlight **GCP Workload Identity Federation**: explain why downloading JSON service account keys is anti-pattern on GCP and how Workload Identity exchanges short-lived tokens.
 - Emphasize **GKE Autopilot**: explain how Autopilot shifts node management, OS upgrades, and bin-packing responsibilities to Google SREs while enforcing strict security defaults out of the box.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
+- [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
+- [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to GCP Engineering](./README.md) · [All topics](../README.md)

@@ -98,6 +98,14 @@ A TECH LEAD ROUND THAT STAYS HANDS-ON
 - List versus tuple in Python is a two-line answer with one consequence worth adding: lists are mutable and tuples immutable, which is why a tuple can be a dictionary key or a set member and a list cannot, and why tuples are slightly faster and safer as fixed records. For reversing a string, give the idiomatic `s[::-1]` and then a loop version, and say which you would ship — interviewers often follow up by banning slicing, so having the manual version ready costs nothing. See [what you use Python for as a DevOps engineer](../scripting-and-automation/what-do-you-use-python-for-as-a-devops-engineer.md).
 - One thing to notice about this round: it is titled Tech Lead but contains no questions about people, delivery, estimation, or architecture ownership. That gap is an opportunity — where an answer naturally allows it, add the lead framing: how you would standardise the Helm chart across teams, why you would put Terraform behind a pipeline rather than trusting discipline, or how you would document the ECS traffic path for on-call. It costs a sentence and it is the only signal in the round that you can operate at lead level.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

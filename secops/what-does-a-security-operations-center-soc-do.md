@@ -31,6 +31,14 @@ tags:
 - Naming MTTD/MTTC and detection coverage shows you think about SOC effectiveness, not just staffing.
 - Good follow-up to be ready for: "what telemetry would you onboard first?" - identity provider and cloud audit logs, because almost every cloud incident is visible there.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SecOps and Threat Detection](./README.md) · [All topics](../README.md)

@@ -78,6 +78,14 @@ module "vpc" {
 - State splitting (foundation / network / workload) is the answer to "how do you keep plans safe and fast?".
 - Expect: "how does Terraform authenticate?" - Workload Identity Federation and impersonation, never a JSON key.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
+- [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+- [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to GCP Engineering](./README.md) · [All topics](../README.md)

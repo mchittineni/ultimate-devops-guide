@@ -159,6 +159,14 @@ git log --since="3 days ago" --author="alice" -- services/api/
 - Know `--mirror` for host-to-host migration with full history, and `fetch --prune` for the dead-remote-branch problem.
 - Distinguish `A..B` from `A...B` when asked about diffing two commits or reviewing a branch, and use `--force-with-lease` rather than `--force` if force-pushing comes up. See [what is Git](./what-is-git.md), [git merge, rebase, and cherry-pick](./what-is-the-difference-between-git-merge-rebase-and-cherry-pick.md), [how do you undo changes in Git safely](./how-do-you-undo-changes-in-git-safely.md), and [recovering from a bad Git history rewrite](./how-do-you-recover-from-a-bad-git-history-rewrite.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
+- [[How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?]] (`#455`): [How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?](../cicd/how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Version Control](./README.md) · [All topics](../README.md)

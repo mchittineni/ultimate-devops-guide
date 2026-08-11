@@ -96,6 +96,14 @@ THE ONE ODD QUESTION
 - Disaster recovery should lead with the two numbers and then a named tier: RPO is tolerable data loss, RTO is tolerable time to recover, and the patterns are backup-and-restore, pilot light, warm standby, and active-active in ascending cost and descending RTO. Then the three points that make the answer credible: replication is **not** backup, because a deletion replicates too — so you need an immutable copy; traffic redirection needs health-checked DNS or a global load balancer; and an untested plan does not count, so a restore rehearsal is the only proof. On Azure specifically, name Site Recovery, geo-redundant storage, paired regions, and Traffic Manager or Front Door. See [disaster recovery](../scalability-and-high-availability/what-is-disaster-recovery.md).
 - Ingress should be defined as an API object that routes external HTTP and HTTPS traffic to Services by host and path, with TLS termination — plus the crucial point that the object does nothing without an **ingress controller** running in the cluster to implement it, selected via `ingressClassName`. Add that the Gateway API is its successor, since the community ingress-nginx project is now maintenance-only. See [exposing an application in Kubernetes](../kubernetes/how-do-you-expose-an-application-running-in-kubernetes-to-the-outside-world.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

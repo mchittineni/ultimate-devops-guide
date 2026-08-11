@@ -48,6 +48,14 @@ Timeline discipline - every entry timestamped in UTC, source noted
 - Mention the 72-hour GDPR notification window and that the legal determination is not engineering's call.
 - Expect: "the attacker still has access, do you cut them off now?" - a judgement call between stopping damage and losing visibility, made by the commander with legal input, not unilaterally.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SecOps and Threat Detection](./README.md) · [All topics](../README.md)

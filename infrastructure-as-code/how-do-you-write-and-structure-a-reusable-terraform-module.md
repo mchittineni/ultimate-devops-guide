@@ -218,6 +218,14 @@ terraform init -upgrade && terraform plan   # read the plan for -/+ replacements
 - Prefer `for_each` over `count` in module examples and be ready to say why (stable keys versus index shifting).
 - Mention testing and docs generation - `terraform test`/Terratest against `examples/`, `tflint`, `checkov`, `terraform-docs` in a pre-commit hook - and semver where a major version means "this may replace resources". See [structuring Terraform code for multiple environments and providers](./how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md), [count versus for_each](./what-is-the-difference-between-count-and-for-each-in-terraform.md), [what are Terraform providers](./what-are-terraform-providers.md), and [scanning IaC before it is applied](../devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you structure an Ansible role and share it through Galaxy?]] (`#468`): [How do you structure an Ansible role and share it through Galaxy?](../configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Infrastructure as Code](./README.md) · [All topics](../README.md)

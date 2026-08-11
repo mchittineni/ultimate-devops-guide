@@ -37,6 +37,14 @@ A very common pattern: Prometheus and Grafana for metrics and dashboards, Loki f
 - Be ready to discuss cost - observability spend rivalling infrastructure spend is a real and common problem.
 - Have a reasoned opinion on build-versus-buy rather than a favourite tool.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What is GitLab CI?]] (`#19`): [What is GitLab CI?](../cicd/what-is-gitlab-ci.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Infrastructure Monitoring](./README.md) · [All topics](../README.md)

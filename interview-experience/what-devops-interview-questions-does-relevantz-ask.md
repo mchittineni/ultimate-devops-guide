@@ -97,6 +97,14 @@ RelevantZ — DevOps Engineer (5 YOE), reported round
 - `kubectl exec -it <pod> -- /bin/sh` (or `bash`) is how you get a shell, with `-c <container>` for a multi-container Pod. Add the modern alternative for images with no shell: `kubectl debug -it <pod> --image=busybox --target=<container>` attaches an ephemeral container. For the troubleshooting-commands question, group them by intent — `get`/`describe`/`get events` for state, `logs --previous` for a crashed container, `top` for usage, `auth can-i` for permissions, `rollout status`/`undo` for deployments, `port-forward` to test a Service directly — and say which you reach for first. See [troubleshooting a Pod stuck in Pending or CrashLoopBackOff](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff.md).
 - Cost optimisation and backup strategy are both "which have you used" questions, so bring specifics with numbers: reserved instances or savings plans for the steady baseline, spot for interruptible work, right-sizing from observed metrics, auto-shutdown on non-production, storage lifecycle tiering, and cutting log ingestion — plus what you actually saved. For backups, name the 3-2-1 principle updated for cloud, grandfather-father-son retention, and the fact that a restore rehearsal is the only proof a backup works. See [cloud cost optimisation](../cloud-cost-optimization/what-is-cloud-cost-optimization.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?]] (`#455`): [How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?](../cicd/how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

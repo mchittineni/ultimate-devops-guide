@@ -93,6 +93,14 @@ THE PATTERN TO NOTICE
 - When describing Helm, cover `Chart.yaml`, `values.yaml`, the `templates/` directory, `_helpers.tpl`, and how you override values per environment; then say whether you use `helm upgrade --install` from CI or a GitOps controller. See [what Helm is](../container-orchestration-advanced/what-is-helm.md) and [Argo CD](../devops-tools-and-automation/what-is-argocd.md).
 - Practise writing `aws_vpc`, `aws_subnet`, `aws_internet_gateway`, and `aws_route_table` from memory. Being asked to write it live, out of an SRE conversation, is a fluency test rather than a design test. See [what Terraform is](../infrastructure-as-code/what-is-terraform.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Site Reliability Engineering?]] (`#96`): [What is Site Reliability Engineering?](../site-reliability-engineering/what-is-site-reliability-engineering.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you design alerts that page a human?]] (`#233`): [How do you design alerts that page a human?](../site-reliability-engineering/how-do-you-design-alerts-that-page-a-human.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

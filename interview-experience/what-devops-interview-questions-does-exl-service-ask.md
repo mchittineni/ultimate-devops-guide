@@ -122,6 +122,14 @@ THE TWO STANDOUT QUESTIONS
 - The full ingress request path is a set piece worth rehearsing end to end: DNS resolution, the external load balancer, the ingress controller Pod, TLS termination, host and path rule matching, the Service, EndpointSlice selection, kube-proxy or the CNI dataplane, and finally the container port. There is a related walkthrough at [what happens when a user opens your application in a browser](../network-security/what-happens-when-a-user-opens-your-application-in-a-browser.md).
 - Be honest about Databricks and Hadoop if they are outside your experience — this is an analytics-services company probing for adjacency, and a confident "no, but here is the closest thing I have run" is better than an invented answer.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

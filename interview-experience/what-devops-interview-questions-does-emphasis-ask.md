@@ -100,6 +100,14 @@ DIFFICULTY SPLIT
 - For serverless design around Lambda, do not just define Lambda. Describe the architecture — an event source such as API Gateway, S3, or a queue; the function; downstream state in DynamoDB or RDS Proxy; and the constraints that shape the design: cold starts, the execution time limit, concurrency limits, and why you need RDS Proxy if a function talks to a relational database. Those constraints are the real answer.
 - NACL versus security group appears in nearly every round in this collection. Keep the four contrasts ready — stateless versus stateful, ordered numbered rules versus an evaluated set, allow-and-deny versus allow-only, subnet versus network interface. See [network segmentation](../network-security/what-is-network-segmentation.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+- [[How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?]] (`#455`): [How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?](../cicd/how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

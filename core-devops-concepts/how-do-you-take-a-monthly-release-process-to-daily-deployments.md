@@ -87,6 +87,14 @@ gh pr list --state merged --limit 200 --json mergedAt,createdAt \
 - Address the change-advisory board directly: replace the manual gate with pipeline evidence rather than arguing it away. This shows you have worked in a regulated environment.
 - Acknowledge the human side - QA role changes, on-call fear - and answer it with data rather than enthusiasm.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Core DevOps Concepts](./README.md) · [All topics](../README.md)

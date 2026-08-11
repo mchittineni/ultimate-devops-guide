@@ -110,6 +110,14 @@ A PRECISION ROUND
 - Context switching is `kubectl config use-context <name>`, with `get-contexts` to list and `--namespace` or `set-context --current --namespace=` to change the default namespace. Define a context properly: a named tuple of cluster, user, and namespace in `kubeconfig` — so switching context switches which cluster you are talking to _and_ as whom, which is exactly why a mis-set context is how people apply to the wrong cluster. Mention `kubectx` and `kubens`, and that a distinct prompt colour per environment is a cheap safeguard.
 - The three cluster-operations questions — how many clusters, which version, have you upgraded — are calibration checks. Have exact numbers and a real upgrade story ready; vagueness here undercuts every technical answer that follows.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

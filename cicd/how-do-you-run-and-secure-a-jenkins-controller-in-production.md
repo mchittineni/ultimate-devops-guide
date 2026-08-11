@@ -151,6 +151,14 @@ curl -s -u "$U:$T" https://jenkins.example.com/updateCenter/api/json?tree=jobs\[
 - Cover patching explicitly - LTS line, monthly plugin updates, remove unused plugins - because plugin CVEs are the realistic attack path.
 - Be honest that Jenkins OSS has no active-active HA and describe fast, rehearsed recovery instead. See [how do you prevent and handle secret leaks in CI/CD pipelines](./how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md), [troubleshooting a Jenkins pipeline that never starts](./how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md), [Jenkins shared libraries](./how-do-you-use-jenkins-shared-libraries.md), and [what is Jenkins](./what-is-jenkins.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
+- [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
+- [[What does a DevSecOps pipeline look like end to end?]] (`#161`): [What does a DevSecOps pipeline look like end to end?](../devsecops/what-does-a-devsecops-pipeline-look-like-end-to-end.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to CI/CD](./README.md) · [All topics](../README.md)

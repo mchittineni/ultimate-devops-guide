@@ -90,6 +90,14 @@ Hooks:
 - Highlight **ECS Blue/Green deployment with AWS CodeDeploy & AWS CodePipeline**: explain how CodeDeploy creates a new ECS task set, routes test traffic to a test listener port, executes a validation Lambda hook, and shifts ALB production traffic dynamically.
 - Mention security best practices: grant CodeBuild and CodeDeploy minimal IAM service roles, storing secrets in AWS Secrets Manager or Parameter Store (`/aws/reference/secretsmanager/secret_name`).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
+- [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+- [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to AWS Engineering](./README.md) · [All topics](../README.md)

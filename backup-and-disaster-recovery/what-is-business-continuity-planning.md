@@ -36,6 +36,14 @@ For a DevOps engineer, the practical contributions are: keeping the dependency m
 - Name the BIA as the source of RTO/RPO targets.
 - The best practical point: store the plan and credentials somewhere that survives the outage the plan is for.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Backup and Disaster Recovery](./README.md) · [All topics](../README.md)

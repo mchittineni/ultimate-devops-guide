@@ -117,6 +117,14 @@ The two workflows, side by side
 - Mention removing interactive SSH (or making it audited break-glass) as the change that makes it real. Process alone does not survive an incident at 3 a.m.
 - Connect it to drift: immutability makes drift structurally impossible, whereas mutable infrastructure can only detect and remediate it. See [what is infrastructure drift](../advanced-devops-cloud/what-is-infrastructure-drift.md) and [what is infrastructure as code](./what-is-infrastructure-as-code.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you structure an Ansible role and share it through Galaxy?]] (`#468`): [How do you structure an Ansible role and share it through Galaxy?](../configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md)
+- [[How do you manage Ansible inventories and variables across environments?]] (`#469`): [How do you manage Ansible inventories and variables across environments?](../configuration-management/how-do-you-manage-ansible-inventories-and-variables-across-environments.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Infrastructure as Code](./README.md) · [All topics](../README.md)

@@ -89,6 +89,14 @@ df -h /var/lib/jenkins /tmp && java -version
 - If asked about high availability, be precise: Jenkins controllers are active/passive, so the answer is fast rebuild plus backed-up `$JENKINS_HOME`, ephemeral agents, and configuration as code - not "run three replicas".
 - Close on prevention: alert on queue time and offline agents, and keep `pollSCM` as a cheap safety net for a lost webhook. See [what is Jenkins](./what-is-jenkins.md) and [what are Jenkins pipelines](./what-are-jenkins-pipelines.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
+- [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
+- [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to CI/CD](./README.md) · [All topics](../README.md)

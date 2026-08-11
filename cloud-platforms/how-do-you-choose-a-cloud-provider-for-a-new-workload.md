@@ -71,6 +71,14 @@ module "cloud_glue" {
 - Distinguish reversibility from portability. Full portability is a cost most teams should decline.
 - Expect the follow-up "so when _is_ multi-cloud right?" Have an answer ready: acquisitions, a hard customer or regulatory requirement, or one specific service you cannot get elsewhere.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you design a production-ready VPC on AWS?]] (`#191`): [How do you design a production-ready VPC on AWS?](../aws-engineering/how-do-you-design-a-production-ready-vpc-on-aws.md)
+- [[What is the difference between ECS, EKS, and Fargate?]] (`#193`): [What is the difference between ECS, EKS, and Fargate?](../aws-engineering/what-is-the-difference-between-ecs-eks-and-fargate.md)
+- [[How do Auto Scaling groups and load balancers work together on AWS?]] (`#194`): [How do Auto Scaling groups and load balancers work together on AWS?](../aws-engineering/how-do-auto-scaling-groups-and-load-balancers-work-together-on-aws.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Platforms](./README.md) · [All topics](../README.md)

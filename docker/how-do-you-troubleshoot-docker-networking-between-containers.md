@@ -111,6 +111,14 @@ networks:
 - Have one host-layer cause ready - a firewall reload flushing Docker's iptables chains is the classic - and the overlay MTU symptom if the interviewer moves to multi-host.
 - Close on `depends_on` not meaning ready, and healthchecks plus client-side retries as the correct fix.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you troubleshoot a Kubernetes Service that has no endpoints?]] (`#403`): [How do you troubleshoot a Kubernetes Service that has no endpoints?](../kubernetes/how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints.md)
+- [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
+- [[How does Pod networking and service discovery work in Kubernetes?]] (`#447`): [How does Pod networking and service discovery work in Kubernetes?](../kubernetes/how-does-pod-networking-and-service-discovery-work-in-kubernetes.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Docker](./README.md) · [All topics](../README.md)

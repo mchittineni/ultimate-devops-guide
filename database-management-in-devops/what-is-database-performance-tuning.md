@@ -52,6 +52,14 @@ CREATE INDEX CONCURRENTLY idx_orders_customer_created
 - N+1 queries and connection pooling are the two highest-yield practical fixes - name both.
 - Mention that every index is a write cost; unqualified "add an index" is a junior answer.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[How do you take a monthly release process to daily deployments?]] (`#285`): [How do you take a monthly release process to daily deployments?](../core-devops-concepts/how-do-you-take-a-monthly-release-process-to-daily-deployments.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Database Management in DevOps](./README.md) · [All topics](../README.md)

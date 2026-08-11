@@ -58,6 +58,14 @@ spec:
 - Multiply resource requests by node count when discussing cost - it shows scale awareness.
 - Contrast with a Deployment: DaemonSet replica count is derived from the node count, not declared.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Container Orchestration Advanced](./README.md) · [All topics](../README.md)

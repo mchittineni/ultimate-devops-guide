@@ -57,6 +57,14 @@ az containerapp ingress traffic set --name checkout --resource-group rg-checkout
 - Naming KEDA behind Container Apps and Flex Consumption for Functions shows current knowledge.
 - Expect: "why not AKS for everything?" - operational cost, upgrade treadmill, and no business value unless you need the API.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
+- [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+- [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Azure Engineering](./README.md) · [All topics](../README.md)

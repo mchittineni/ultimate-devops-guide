@@ -55,6 +55,14 @@ az role assignment create \
 - Managed identities and workload identity federation are the answers to every "how do you avoid secrets?" follow-up.
 - Mention PIM plus Conditional Access for human access, and Azure Policy for what RBAC cannot express.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
+- [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
+- [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Azure Engineering](./README.md) · [All topics](../README.md)

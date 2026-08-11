@@ -63,6 +63,14 @@ steps:
 - Raise the false-positive multiplier yourself - it is the risk interviewers want to hear you name.
 - Expect: "would you auto-disable a user account?" - only with a precise detection, a reversible action, an audit trail, and a documented unlock path.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to SecOps and Threat Detection](./README.md) · [All topics](../README.md)

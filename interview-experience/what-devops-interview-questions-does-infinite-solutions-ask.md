@@ -55,6 +55,14 @@ THE SHORTEST ROUND IN THIS COLLECTION
 - Anticipate the follow-up that always comes after ingress setup: what to check when an Ingress exists but nobody can reach the application. Have the ordered list ready — DNS resolves to the load balancer, controller Pods running, the Ingress object has an address, `ingressClassName` matches, the backend Service has non-empty Endpoints, ports line up, and the TLS secret exists in the right namespace. Empty Endpoints is the most common cause. See [what a Service is in Kubernetes](../kubernetes/what-is-a-service-in-kubernetes.md).
 - In a three-question round, silence is your enemy. Volunteer the adjacent detail — mention Velero's schedule and retention when asked about backup, mention cert-manager when asked about ingress — because the interviewer has little else to grade you on.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[How do you take a monthly release process to daily deployments?]] (`#285`): [How do you take a monthly release process to daily deployments?](../core-devops-concepts/how-do-you-take-a-monthly-release-process-to-daily-deployments.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

@@ -152,6 +152,14 @@ aws cloudwatch get-metric-statistics --namespace AWS/NATGateway \
 - For inbound to private subnets, draw the path: Route 53 → public ALB → private targets → data tier, with security groups chained by reference. Then add SSM Session Manager and PrivateLink as the non-NAT inbound answers.
 - Mention the egress-only internet gateway for IPv6 - there is no NAT in IPv6, and few candidates know the equivalent. See [designing a production-ready VPC on AWS](./how-do-you-design-a-production-ready-vpc-on-aws.md), [security groups versus network ACLs](./what-is-the-difference-between-a-security-group-and-a-network-acl.md), [accessing an instance in a private subnet without SSH keys or a bastion](./how-do-you-access-an-instance-in-a-private-subnet-without-ssh-keys-or-a-bastion-host.md), and [designing a secure, highly available three-tier architecture](../cloud-native-architecture/how-do-you-design-a-secure-highly-available-three-tier-architecture.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How does Pod networking and service discovery work in Kubernetes?]] (`#447`): [How does Pod networking and service discovery work in Kubernetes?](../kubernetes/how-does-pod-networking-and-service-discovery-work-in-kubernetes.md)
+- [[How do you troubleshoot a Kubernetes Service that has no endpoints?]] (`#403`): [How do you troubleshoot a Kubernetes Service that has no endpoints?](../kubernetes/how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints.md)
+- [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to AWS Engineering](./README.md) · [All topics](../README.md)

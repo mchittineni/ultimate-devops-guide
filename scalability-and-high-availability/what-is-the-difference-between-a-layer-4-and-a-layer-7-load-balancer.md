@@ -124,6 +124,14 @@ resource "aws_lb_listener" "mqtt" {
 - Expect a follow-up connecting this to Kubernetes: a `LoadBalancer` Service is layer 4, an Ingress or Gateway is layer 7.
 - Least-outstanding-requests over round robin is a good detail if algorithms come up - round robin keeps feeding a slow backend.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Scalability and High Availability](./README.md) · [All topics](../README.md)

@@ -40,6 +40,14 @@ Infrastructure monitoring is necessary but not sufficient: it tells you a node i
 - Predictive alerting ("will fill in four hours") over static thresholds is a mature practice.
 - Container CPU throttling as the metric that matters is a strong Kubernetes-specific detail.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Infrastructure Monitoring](./README.md) · [All topics](../README.md)

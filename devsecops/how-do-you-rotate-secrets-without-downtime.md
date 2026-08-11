@@ -128,6 +128,14 @@ spec:
 - Push toward eliminating long-lived secrets - dynamic database credentials, IRSA/Workload Identity, OIDC federation in CI - and note that this converts rotation from a project into a property of the platform.
 - Mention the inventory problem honestly: rotation fails most often because nobody knows the complete list of consumers. Owner plus consumer list per secret is the unglamorous prerequisite. See [what does a DevSecOps pipeline look like end to end](./what-does-a-devsecops-pipeline-look-like-end-to-end.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+- [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to DevSecOps](./README.md) · [All topics](../README.md)

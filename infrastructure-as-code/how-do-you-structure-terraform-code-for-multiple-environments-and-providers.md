@@ -155,6 +155,14 @@ module "eks_dr" {
 - Mention pinning: Terraform version, provider versions, module tags, and a committed lock file. Then `plan -out` reviewed and `apply` of that exact plan.
 - Close on the diff between environment variable files being your best drift documentation - it is a practical detail that shows you have operated this, not just designed it.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you structure an Ansible role and share it through Galaxy?]] (`#468`): [How do you structure an Ansible role and share it through Galaxy?](../configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md)
+- [[How do you manage Ansible inventories and variables across environments?]] (`#469`): [How do you manage Ansible inventories and variables across environments?](../configuration-management/how-do-you-manage-ansible-inventories-and-variables-across-environments.md)
+- [[What is a cloud landing zone?]] (`#215`): [What is a cloud landing zone?](../cloud-engineering/what-is-a-cloud-landing-zone.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Infrastructure as Code](./README.md) · [All topics](../README.md)

@@ -105,6 +105,14 @@ THE QUESTION THAT DEFINES SET 1
 - For AWS security policies, give layered controls rather than a list of services: identity through federated short-lived credentials with no long-lived keys, guardrails through service control policies and permission boundaries, network isolation with private subnets and VPC endpoints, encryption with customer-managed KMS keys, detection with CloudTrail, GuardDuty, and Config, and least privilege generated from observed activity with Access Analyzer. See [least-privilege identity in the cloud](../cloud-engineering/how-do-you-design-least-privilege-identity-in-the-cloud.md).
 - The migration question wants a narrative with a decision in it: what you assessed, which of the migration patterns you chose per workload — rehost, replatform, refactor — how you moved the data and cut over, and what you would do differently. See [connecting an on-premises network to the cloud](../cloud-engineering/how-do-you-connect-an-on-premises-network-to-the-cloud.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

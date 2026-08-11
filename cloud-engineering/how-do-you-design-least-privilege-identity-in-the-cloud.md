@@ -61,6 +61,14 @@ Derivation
 - "Derive the policy from audit logs" is the answer that separates practitioners from policy theorists.
 - Expect: "what about emergencies?" - a designed, alerted, reviewed break-glass path, not weakening the guardrails.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Engineering](./README.md) · [All topics](../README.md)

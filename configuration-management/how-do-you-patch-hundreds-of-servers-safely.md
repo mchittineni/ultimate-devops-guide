@@ -135,6 +135,14 @@ aws ec2 create-snapshot --volume-id vol-0abc ...   # take this BEFORE patching
 - Volunteer the immutable alternative and why it is better where the workload allows: replacing an instance is a deployment with a known rollback, whereas patching mutates state and can half-fail.
 - Close on cadence and prioritisation: frequent small patch runs beat quarterly big ones, and urgency comes from exploitability and exposure rather than CVE counts. See [how do you manage services in Linux](../linux-administration/how-do-you-manage-services-in-linux.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
+- [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Configuration Management](./README.md) · [All topics](../README.md)

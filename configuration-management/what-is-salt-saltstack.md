@@ -60,6 +60,14 @@ salt -G 'os:Ubuntu' state.apply nginx    # target by grain
 - Pillar is the secrets answer; grains are facts, not secrets.
 - Be ready to say why most teams still pick Ansible: simplicity and ubiquity beat raw speed for typical fleet sizes.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Configuration Management](./README.md) · [All topics](../README.md)

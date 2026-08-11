@@ -55,6 +55,14 @@ AzureActivity
 - "Filter on TimeGenerated first" is the KQL performance answer; be ready to write a small query on a whiteboard.
 - Expect: "how do you guarantee every resource sends logs?" - a `DeployIfNotExists` Azure Policy, not a checklist.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
+- [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+- [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Azure Engineering](./README.md) · [All topics](../README.md)

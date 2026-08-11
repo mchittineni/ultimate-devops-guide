@@ -76,6 +76,14 @@ resource "aws_route53_record" "caa" {
 - Recommend an anycast global load balancer when the RTO requirement is seconds - DNS is the coarse tool.
 - Expect: "what is subdomain takeover?" - a dangling CNAME to a deprovisioned resource that an attacker can claim; monitor for it.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Cloud Engineering](./README.md) · [All topics](../README.md)

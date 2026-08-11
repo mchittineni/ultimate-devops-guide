@@ -185,6 +185,14 @@ terraform show -json tfplan | jq -e '
 - Distinguish `-/+` from `+/-` and use it to answer the brief-downtime scenario: an apparently in-place change forced replacement, destroy happened before create, and `create_before_destroy` (plus traffic shifting) is the fix.
 - Layer provider-side protection over Terraform-side, and add the process controls: separate state per environment, reviewed saved plans, a policy check that fails unexpected deletions, and no destroy stage in the production pipeline. See [what do terraform init, plan, apply, and refresh actually do](./what-do-terraform-init-plan-apply-and-refresh-actually-do.md), [managing Terraform state safely in a team](./how-do-you-manage-terraform-state-safely-in-a-team.md), [importing existing infrastructure](./how-do-you-import-existing-cloud-infrastructure-into-terraform.md), and [count versus for_each](./what-is-the-difference-between-count-and-for-each-in-terraform.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you handle secrets in Ansible with Vault?]] (`#470`): [How do you handle secrets in Ansible with Vault?](../configuration-management/how-do-you-handle-secrets-in-ansible-with-vault.md)
+- [[How do you structure an Ansible role and share it through Galaxy?]] (`#468`): [How do you structure an Ansible role and share it through Galaxy?](../configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Infrastructure as Code](./README.md) · [All topics](../README.md)

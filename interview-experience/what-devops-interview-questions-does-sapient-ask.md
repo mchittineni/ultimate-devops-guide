@@ -91,6 +91,14 @@ THE QUESTION THAT IS A TRAP
 - Securing sensitive data on EBS should list layered controls: encryption at rest with a customer-managed KMS key — enabled by default account-wide if you set it — encryption in transit for anything crossing the network, snapshots inherit encryption and their sharing must be controlled, IAM restricting who can attach or snapshot the volume, deletion protection and lifecycle policies for snapshots, and no public snapshot sharing. Add that the filesystem should be encrypted-at-rest _and_ the data encrypted at the application layer if the sensitivity warrants defence in depth.
 - EBS versus EFS in Kubernetes is really an access-modes question: EBS is block storage attached to one node at a time, so it supports `ReadWriteOnce` and is provisioned per Pod by the EBS CSI driver — which is why a StatefulSet replica keeps its own volume, and why a Pod can be stuck `Pending` if rescheduled to a different zone. EFS is a network filesystem supporting `ReadWriteMany`, so many Pods across zones can mount it simultaneously, at higher latency and cost. Say the rule: EBS for per-replica databases, EFS when several Pods must write the same data. See [StatefulSets](../container-orchestration-advanced/what-are-statefulsets-in-kubernetes.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
+- [[What is the difference between SRE, DevOps, and Platform Engineering?]] (`#232`): [What is the difference between SRE, DevOps, and Platform Engineering?](../site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

@@ -113,6 +113,14 @@ spec:
 - Mention the GitOps conflict (a `replicas` field in Git fighting the HPA every sync). It is a real and very common bug.
 - Close with the bottleneck check: scaling the stateless tier into a saturated database makes the outage worse. See [what is auto scaling](./what-is-auto-scaling.md) and [how do you autoscale workloads and nodes in Kubernetes](../kubernetes/how-do-you-autoscale-workloads-and-nodes-in-kubernetes.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Scalability and High Availability](./README.md) · [All topics](../README.md)

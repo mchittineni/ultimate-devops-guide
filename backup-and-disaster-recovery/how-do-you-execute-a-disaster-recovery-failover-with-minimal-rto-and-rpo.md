@@ -95,6 +95,14 @@ aws rds failover-global-cluster \
 - Explain the trade-offs: Active-Active provides zero downtime but introduces split-brain risks, data consistency complexity, and doubled infrastructure costs.
 - Emphasize regular **Game Days** (Chaos Engineering / simulated region outages) to validate that automated failover runbooks actually work when real outages occur.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Backup and Disaster Recovery](./README.md) · [All topics](../README.md)

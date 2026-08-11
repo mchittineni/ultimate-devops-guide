@@ -114,6 +114,14 @@ stages:
 - SonarQube: static analysis for bugs, vulnerabilities, code smells, coverage, and duplication, enforced as a quality gate that fails the build. Add that gating on _new_ code rather than the whole legacy baseline is what makes it adoptable. See [what shift-left security means](../devsecops/what-does-shift-left-security-mean.md).
 - The automation-scripts question is an invitation, not a yes-or-no. Have one concrete example ready with the outcome — a script that cleaned up untagged resources, rotated logs, or generated a report — including roughly how much time it saved. See [turning ad-hoc scripts into maintainable automation](../scripting-and-automation/how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation.md).
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)

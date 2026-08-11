@@ -33,6 +33,14 @@ The wider Grafana stack pairs it with **Loki** (logs), **Tempo** (traces), **Mim
 - A good dashboard design principle: top row answers "is it healthy?" in five seconds; detail lives below.
 - Deploy annotations are a cheap, high-value practice worth mentioning.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
+- [[What are Monitoring Tools?]] (`#132`): [What are Monitoring Tools?](../infrastructure-monitoring/what-are-monitoring-tools.md)
+- [[What are Monitoring Best Practices?]] (`#133`): [What are Monitoring Best Practices?](../infrastructure-monitoring/what-are-monitoring-best-practices.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Monitoring and Logging](./README.md) · [All topics](../README.md)

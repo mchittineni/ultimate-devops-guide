@@ -84,6 +84,14 @@ A DIAGNOSTIC-LEANING ROUND
 - The Docker Swarm question is a currency check. Answer honestly, and if you have used it, note where it is genuinely reasonable — a small fixed deployment where Kubernetes would be overkill — while acknowledging that Kubernetes has effectively won on ecosystem and hiring. Being able to say "Swarm is simpler and adequate here, Kubernetes is the default" shows judgement rather than fashion. See [what container orchestration is and why you need it](../container-orchestration-advanced/what-is-container-orchestration-and-why-do-you-need-it.md).
 - With ten and a half years of total experience but four to five in DevOps, expect the opening question to probe how you transitioned. Frame the earlier experience as an asset — application, infrastructure, or support background that makes you better at the platform work — rather than as time to explain away.
 
+<!-- BEGIN GENERATED RELATED TOPICS -->
+## Related Concepts
+
+- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+<!-- END GENERATED RELATED TOPICS -->
+
 ---
 
 [⬅ Back to Interview Experience](./README.md) · [All topics](../README.md)
