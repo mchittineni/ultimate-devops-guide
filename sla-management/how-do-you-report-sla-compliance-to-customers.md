@@ -49,11 +49,13 @@ Excluded: 2026-02-02 01:00-02:00 UTC announced maintenance (notified 2026-01-24)
 - Expect: "the customer's numbers disagree with yours" - explain vantage points, keep raw data, and concede when their evidence is sound.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

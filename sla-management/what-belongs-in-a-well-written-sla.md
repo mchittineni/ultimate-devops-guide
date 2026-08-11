@@ -43,11 +43,13 @@ tags:
 - Expect: "sales wants 99.99% - what do you say?" Reference measured history, the dependency ceiling, what it would cost to reach, and offer a tiered alternative rather than a flat refusal.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

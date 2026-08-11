@@ -48,11 +48,13 @@ Breach response checklist - run in this order
 - Expect: "the month is already breached - does more downtime matter?" Say yes, explain rolling windows, and name the trust cost.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
