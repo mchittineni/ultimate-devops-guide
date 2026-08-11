@@ -188,11 +188,13 @@ crontab -l -u backup                                  # per-user crontabs are ea
 - Close with the modern equivalents: a Kubernetes `CronJob` with `concurrencyPolicy: Forbid`, or EventBridge Scheduler invoking Lambda/ECS so there is no cron host to lose. See [what is systemd](./what-is-systemd.md), [how do you manage services in Linux](./how-do-you-manage-services-in-linux.md), [writing a production-grade Bash script](../scripting-and-automation/how-do-you-write-a-production-grade-bash-script.md), and [troubleshooting a Kubernetes Job or CronJob that never completes](../kubernetes/how-do-you-troubleshoot-a-kubernetes-job-or-cronjob-that-never-completes.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What Bash scripting exercises come up in DevOps interviews?]] (`#502`): [What Bash scripting exercises come up in DevOps interviews?](../scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md)
 - [[How do you patch hundreds of servers safely?]] (`#430`): [How do you patch hundreds of servers safely?](../configuration-management/how-do-you-patch-hundreds-of-servers-safely.md)
 - [[What do you use Python for as a DevOps engineer?]] (`#267`): [What do you use Python for as a DevOps engineer?](../scripting-and-automation/what-do-you-use-python-for-as-a-devops-engineer.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

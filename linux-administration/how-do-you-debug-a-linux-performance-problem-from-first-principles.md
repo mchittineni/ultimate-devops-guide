@@ -105,11 +105,13 @@ sar -q -s 09:00:00 -e 10:00:00              # run queue during last week's incid
 - Insist on a baseline and on changing one variable at a time. Then tell a real story where the cause was boring: a full disk, a cron job, or a retry loop.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you patch hundreds of servers safely?]] (`#430`): [How do you patch hundreds of servers safely?](../configuration-management/how-do-you-patch-hundreds-of-servers-safely.md)
 - [[What Bash scripting exercises come up in DevOps interviews?]] (`#502`): [What Bash scripting exercises come up in DevOps interviews?](../scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md)
 - [[How do you write a production-grade Bash script?]] (`#266`): [How do you write a production-grade Bash script?](../scripting-and-automation/how-do-you-write-a-production-grade-bash-script.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -144,11 +144,13 @@ curl -s -H "X-aws-ec2-metadata-token: $(curl -sX PUT \
 - Close on boot time: `systemd-analyze blame`, avoiding unnecessary `network-online.target` waits, and baking the image so instances boot ready - which links to autoscaling and health-check grace periods. See [what is systemd](./what-is-systemd.md), [how do you manage services in Linux](./how-do-you-manage-services-in-linux.md), [how do you manage disks, filesystems, and LVM on Linux](./how-do-you-manage-disks-filesystems-and-lvm-on-linux.md), and [troubleshooting SSH failures, high CPU, and disk space](./how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you patch hundreds of servers safely?]] (`#430`): [How do you patch hundreds of servers safely?](../configuration-management/how-do-you-patch-hundreds-of-servers-safely.md)
 - [[What Bash scripting exercises come up in DevOps interviews?]] (`#502`): [What Bash scripting exercises come up in DevOps interviews?](../scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md)
 - [[How do you turn a pile of ad hoc scripts into maintainable automation?]] (`#302`): [How do you turn a pile of ad hoc scripts into maintainable automation?](../scripting-and-automation/how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
