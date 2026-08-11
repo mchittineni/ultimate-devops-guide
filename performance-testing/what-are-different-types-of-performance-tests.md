@@ -38,11 +38,13 @@ Note the related but distinct disciplines: **capacity planning** uses these resu
 - Mention automated performance regression gates in the pipeline as the mature practice.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
