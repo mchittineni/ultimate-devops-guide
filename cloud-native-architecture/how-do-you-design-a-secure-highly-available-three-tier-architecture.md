@@ -192,11 +192,13 @@ Failure walk-through - answer this before you are asked
 - Be deliberate about multi-region: multi-AZ covers AZ failure and most SLAs; multi-region roughly doubles cost, so ask for the RTO/RPO first. See [designing a production-ready VPC on AWS](../aws-engineering/how-do-you-design-a-production-ready-vpc-on-aws.md), [security groups versus network ACLs](../aws-engineering/what-is-the-difference-between-a-security-group-and-a-network-acl.md), [how do you design for multi-region resilience](../cloud-engineering/how-do-you-design-for-multi-region-resilience.md), [designing a system to degrade gracefully under overload](../scalability-and-high-availability/how-do-you-design-a-system-to-degrade-gracefully-under-overload.md), and [what happens when a user opens your application in a browser](../network-security/what-happens-when-a-user-opens-your-application-in-a-browser.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

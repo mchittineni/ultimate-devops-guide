@@ -103,11 +103,13 @@ histogram_quantile(0.99, sum by (le) (rate(db_pool_wait_seconds_bucket[5m])))
 - Close with how you keep it fixed: a latency SLO with an error budget, per-route p99 alerts, and a fan-out budget metric. See [what are microservices](./what-are-microservices.md) and [what is the difference between a monolith and microservices](./what-is-the-difference-between-a-monolith-and-microservices.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
