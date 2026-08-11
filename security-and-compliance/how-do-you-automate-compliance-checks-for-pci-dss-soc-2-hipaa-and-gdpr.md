@@ -145,11 +145,13 @@ aws s3api put-object-lock-configuration --bucket acme-audit-evidence \
 - Be explicit that risk assessments, vendor agreements, tested incident-response plans, and training records are not automatable. Claiming full automation reads as inexperience. See [what are security best practices in DevOps](./what-are-security-best-practices-in-devops.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you manage TLS certificates in production?]] (`#491`): [How do you manage TLS certificates in production?](../network-security/how-do-you-manage-tls-certificates-in-production.md)
 - [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
 - [[What does a DevSecOps pipeline look like end to end?]] (`#161`): [What does a DevSecOps pipeline look like end to end?](../devsecops/what-does-a-devsecops-pipeline-look-like-end-to-end.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
