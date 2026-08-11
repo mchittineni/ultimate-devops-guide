@@ -153,11 +153,13 @@ spec:
 - Have the "two Pods cannot communicate, no errors anywhere" checklist ready, and lead with NetworkPolicy plus the missing DNS egress rule - it is the most common cause and the one people miss. See [how do Kubernetes NetworkPolicies work](./how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md), [debugging DNS resolution failures inside a cluster](./how-do-you-debug-dns-resolution-failures-inside-a-kubernetes-cluster.md), [a Service that has no endpoints](./how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints.md), and [exposing an application to the outside world](./how-do-you-expose-an-application-running-in-kubernetes-to-the-outside-world.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run a multi-tenant Kubernetes cluster?]] (`#453`): [How do you run a multi-tenant Kubernetes cluster?](../container-orchestration-advanced/how-do-you-run-a-multi-tenant-kubernetes-cluster.md)
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[How do you troubleshoot a failed Helm release?]] (`#412`): [How do you troubleshoot a failed Helm release?](../container-orchestration-advanced/how-do-you-troubleshoot-a-failed-helm-release.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

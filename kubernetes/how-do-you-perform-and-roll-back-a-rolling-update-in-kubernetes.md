@@ -126,11 +126,13 @@ kubectl rollout undo deployment/checkout --to-revision=7
 - Close by naming the limits of rolling updates - no traffic shifting, no automated verdict - and when you would reach for canary or blue/green instead.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot a failed Helm release?]] (`#412`): [How do you troubleshoot a failed Helm release?](../container-orchestration-advanced/how-do-you-troubleshoot-a-failed-helm-release.md)
 - [[How do you run and scale a stateful application on Kubernetes?]] (`#413`): [How do you run and scale a stateful application on Kubernetes?](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)
 - [[How do you back up and restore a Kubernetes cluster?]] (`#451`): [How do you back up and restore a Kubernetes cluster?](../container-orchestration-advanced/how-do-you-back-up-and-restore-a-kubernetes-cluster.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

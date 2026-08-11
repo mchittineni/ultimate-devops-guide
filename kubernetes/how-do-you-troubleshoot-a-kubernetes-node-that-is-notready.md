@@ -134,11 +134,13 @@ kubectl get csr | grep -i pending                       # kubelet serving certs 
 - For a node that will not join, pivot to bootstrap causes: token/cert, connectivity to the API endpoint, IAM mapping, version skew, subnet IP exhaustion, cloud-init logs. See [node pressure and Pod evictions](./how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md), [what happens when a control-plane node or etcd fails](./what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md), [troubleshooting SSH failures, high CPU, and disk space on Linux](../linux-administration/how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md), and [what is a PodDisruptionBudget](./what-is-a-poddisruptionbudget-and-when-do-you-need-one.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[How do you upgrade a production Kubernetes cluster with zero downtime?]] (`#411`): [How do you upgrade a production Kubernetes cluster with zero downtime?](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

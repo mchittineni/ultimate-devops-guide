@@ -144,11 +144,13 @@ spec:
 - If GitOps comes up, say Secrets never go into Git in plaintext - SOPS, Sealed Secrets, or the External Secrets Operator. See [how do you manage Kubernetes secrets in a GitOps workflow](../devsecops/how-do-you-manage-kubernetes-secrets-in-a-gitops-workflow.md), [how do you manage secrets in CI/CD pipelines](../devsecops/how-do-you-manage-secrets-in-ci-cd-pipelines.md), [how do you rotate secrets without downtime](../devsecops/how-do-you-rotate-secrets-without-downtime.md), and [how does RBAC work in Kubernetes](./how-does-rbac-work-in-kubernetes.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
 - [[How do you harden a container image and a Dockerfile?]] (`#441`): [How do you harden a container image and a Dockerfile?](../docker/how-do-you-harden-a-container-image-and-a-dockerfile.md)
 - [[How do you run and scale a stateful application on Kubernetes?]] (`#413`): [How do you run and scale a stateful application on Kubernetes?](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
