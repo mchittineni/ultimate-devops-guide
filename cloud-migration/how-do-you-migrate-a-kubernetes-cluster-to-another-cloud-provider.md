@@ -129,11 +129,13 @@ Cutover: weighted DNS, both clusters live, old one warm
 - Close on the strategic point: this procedure is identical to an immutable cluster upgrade and to a DR rebuild, so the durable deliverable is the repeatable path - and be honest that migration costs months and dual-running spend. See [what is cloud migration](./what-is-cloud-migration.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
