@@ -24,6 +24,6 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for the full format.
 - [ ] **Heading** is `# <title>` and matches the frontmatter exactly.
 - [ ] **Answer structure** follows Short answer → Detail → Example → Interview tips.
 - [ ] **New topic only**: registered in `scripts/topic_meta.json` with an `order`, `description`, and `study_notes`.
-- [ ] Ran `python3 scripts/generate_indexes.py` (indexes are generated - do not hand-edit topic READMEs or the root TOC).
+- [ ] Ran `python3 scripts/generate_indexes.py` and `python3 scripts/build_knowledge_graph.py` (indexes and graph HTML are generated - do not hand-edit topic READMEs, graph HTML, or the root TOC).
 - [ ] Ran `python3 scripts/validate_content.py` and it passed.
 - [ ] Content is accurate, and any code examples actually work.
