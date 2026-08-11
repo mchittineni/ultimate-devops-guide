@@ -121,11 +121,13 @@ THE STANDOUT TOPIC
 - The estate questions at the end — how many clusters, how many nodes, how CI/CD is organised — are calibration checks. Have exact numbers ready, because a vague answer here retroactively weakens the confident technical answers that preceded it.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -126,11 +126,13 @@ TWO CLOUDS, TWO STYLES
 - Retrieving a secret in Python is `boto3.client("secretsmanager").get_secret_value(SecretId=...)`, parsing `SecretString` as JSON — and the details that matter are caching the value rather than calling on every request (the AWS Secrets Manager caching library or the Lambda extension), using an IAM role rather than keys, and that protection comes from KMS encryption plus a resource policy plus rotation with a Lambda rotation function. Say that a secret fetched into memory should never be logged. See [managing secrets in CI/CD pipelines](../devsecops/how-do-you-manage-secrets-in-ci-cd-pipelines.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What is Site Reliability Engineering?]] (`#96`): [What is Site Reliability Engineering?](../site-reliability-engineering/what-is-site-reliability-engineering.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

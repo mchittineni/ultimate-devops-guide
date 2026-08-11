@@ -215,11 +215,13 @@ spec:
 - Round 4 asks you to _execute_ the scripts, so practise typing them, not describing them. `sed -i 's/old/new/g' file` for find-and-replace, `grep -m1 'pattern' file` for the first matching line, and `find . -type f -mmin +300 -mmin -1440` for the modified-more-than-5-hours-but-today window — noting `-mmin` is minutes, which is what makes that constraint expressible. See [writing a production-grade Bash script](../scripting-and-automation/how-do-you-write-a-production-grade-bash-script.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

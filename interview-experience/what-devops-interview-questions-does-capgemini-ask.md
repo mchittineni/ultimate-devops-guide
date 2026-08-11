@@ -147,11 +147,13 @@ THE OUTLIER
 - MySQL reaching Key Vault privately is a private-endpoint question: a private endpoint for Key Vault inside the VNet, private DNS zone resolution so the vault's hostname resolves to the private address, and the vault firewall set to deny public access. The Azure equivalent of a VPC endpoint. See [defence in depth for a cloud network](../network-security/how-do-you-design-defence-in-depth-for-a-cloud-network.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
 - [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

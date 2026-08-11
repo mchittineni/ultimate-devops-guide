@@ -92,11 +92,13 @@ TWO QUESTIONS ARE GARBLED IN THE SOURCE
 - For the scripting question, have one script ready you can walk through end to end — what problem it solved, how it handles failure, and how it is scheduled. Mention `set -euo pipefail` for Bash or argument parsing and non-zero exit codes for Python; interviewers listen for whether your scripts fail loudly or silently. See [writing a production-grade Bash script](../scripting-and-automation/how-do-you-write-a-production-grade-bash-script.md) and [when to use Bash and when to use Python](../scripting-and-automation/when-do-you-use-bash-and-when-do-you-use-python.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

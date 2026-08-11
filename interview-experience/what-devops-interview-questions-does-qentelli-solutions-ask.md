@@ -98,11 +98,13 @@ find "$SRC" -xdev -type f -name '*.log' -mtime +7 -delete
 - Security group versus NACL appears in almost every round in this collection, so have the four contrasts ready — stateful versus stateless, allow-only versus allow-and-deny, evaluated as a set versus in numbered order, attached to a network interface versus a subnet — and finish with the consequence: you cannot block a single hostile IP with a security group, which is precisely why NACLs exist. See [network segmentation](../network-security/what-is-network-segmentation.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

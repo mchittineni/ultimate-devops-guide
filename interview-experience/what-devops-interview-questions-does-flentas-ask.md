@@ -132,11 +132,13 @@ THE PACKING PUZZLE — worked through
 - "Did you get unexpected changes on apply?" is an invitation to talk about drift honestly. Name a real cause — a console edit, a provider upgrade changing a default, an auto-generated tag, or a field the API normalises — and say how you handled it with `ignore_changes` or by importing reality into state. See [managing Terraform state safely in a team](../infrastructure-as-code/how-do-you-manage-terraform-state-safely-in-a-team.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

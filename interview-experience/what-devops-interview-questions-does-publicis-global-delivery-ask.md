@@ -68,11 +68,13 @@ A SMALL ROUND WITH ONE UNUSUAL QUESTION
 - With only seven questions, each carries roughly 14% of the round, so extend every answer into its operational consequence and invite the follow-up. The PDB and upgrade questions in particular are two halves of one story — linking them explicitly shows joined-up knowledge rather than recall.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

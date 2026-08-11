@@ -88,11 +88,13 @@ THE ONLY GCP-WEIGHTED ROUND IN THIS COLLECTION
 - GCP bucket cost reduction maps onto the same ideas as S3 but with GCP names: lifecycle rules transitioning to Nearline, Coldline, and Archive; Autoclass when the access pattern is unpredictable; deleting noncurrent object versions; aborting incomplete multipart uploads; choosing regional over multi-region storage when you do not need geo-redundancy; and watching egress, which is frequently the larger line item. See [cloud cost optimisation](../cloud-cost-optimization/what-is-cloud-cost-optimization.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
 - [[What is the difference between SRE, DevOps, and Platform Engineering?]] (`#232`): [What is the difference between SRE, DevOps, and Platform Engineering?](../site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md)
 - [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

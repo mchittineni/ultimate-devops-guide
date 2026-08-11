@@ -85,11 +85,13 @@ THE FORMAT IS THE TEST
 - Because the whole round is one escalating conversation, manage it deliberately: state your assumptions and constraints up front (scale, budget, team size, compliance), sketch the design, and then say which parts you would build first and which you would defer. Interviewers here reward "here is what I would not build yet, and why" as much as the design itself.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you deal with flaky tests in a CI pipeline?]] (`#398`): [How do you deal with flaky tests in a CI pipeline?](../cicd/how-do-you-deal-with-flaky-tests-in-a-ci-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

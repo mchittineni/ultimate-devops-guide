@@ -61,11 +61,13 @@ A SHORT, OPEN-ENDED ROUND
 - Nothing in this round asks about SLIs, SLOs, error budgets, or incident response — which is unusual for an SRE title and suggests a platform-operations role wearing an SRE label. Volunteer the reliability framing anyway where it fits naturally: when asked about monitoring, mention that you alert on user-facing symptoms and error-budget burn rather than raw CPU thresholds. It costs one sentence and reframes you as an SRE rather than an operator. See [designing alerts that page a human](../site-reliability-engineering/how-do-you-design-alerts-that-page-a-human.md) and [error budgets](../site-reliability-engineering/what-is-error-budget.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

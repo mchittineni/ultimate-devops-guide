@@ -207,11 +207,13 @@ printf 'errors: %d, warnings: %d\n' \
 - PodDisruptionBudgets appear in both this round and several others in this collection. Define one crisply — `minAvailable` or `maxUnavailable` constraining _voluntary_ disruptions such as drains and upgrades, with no effect on a node crashing — and say that a badly set PDB can block a node drain indefinitely. See [autoscaling workloads and nodes](../kubernetes/how-do-you-autoscale-workloads-and-nodes-in-kubernetes.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

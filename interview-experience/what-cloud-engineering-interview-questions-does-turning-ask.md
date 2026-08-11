@@ -77,11 +77,13 @@ THE QUESTION THAT DECIDES THE ROUND
 - Blue-green should be answered with purpose, mechanism, and the switch-back path, since they asked for all three. Purpose: eliminate deployment risk by bringing a complete second environment up, validating it, then cutting traffic over in one atomic step — so rollback is instant rather than another deployment. Mechanism for switching: in Kubernetes, patch the Service's label selector from `version: blue` to `version: green`; on AWS, change the ALB listener rule's target group or shift the weighted forward action. Switching _back_ is the same operation in reverse, which is only possible because you kept the old version running — so say that you keep blue warm for a defined soak window before tearing it down, and that the constraint that usually rules blue-green out is a shared database schema that must satisfy both versions at once. See [deployment strategies](../devops-tools-and-automation/what-are-deployment-strategies.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

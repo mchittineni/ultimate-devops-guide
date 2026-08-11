@@ -94,11 +94,13 @@ NOTE THE ABSENCE
 - Branching strategy is asked twice in this round. Pick the model you have actually used, name it, and say how a hotfix reaches production and how branches map to environments. See [Git branching strategy](../version-control/what-is-git-branching-strategy.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

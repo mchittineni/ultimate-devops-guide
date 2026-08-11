@@ -82,11 +82,13 @@ THE TWO QUESTIONS WITH A HIDDEN CATCH
 - Pipeline types: declarative and scripted as the two syntaxes, plus multibranch and organisation-folder as job types, and freestyle as the legacy non-pipeline option. Say you default to declarative.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
 - [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

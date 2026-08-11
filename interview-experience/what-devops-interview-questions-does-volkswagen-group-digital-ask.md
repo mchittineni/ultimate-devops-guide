@@ -80,11 +80,13 @@ A SMALL ROUND WHERE FOUR QUESTIONS ARE THE SAME QUESTION
 - With ten questions and four of them overlapping, the risk in this round is sounding repetitive. Decide in advance which detail belongs to which question — sequence and governance for onboarding, integration architecture for the many-tools question, syntax and templating for how you write pipelines, and a concrete narrative for the walkthrough — so each answer adds something new.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
 - [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -84,11 +84,13 @@ THE ROUND IS BUILT AROUND ONE THEME
 - Git submodules should come with the caveat, because the honest answer is more useful than the definition. A submodule embeds another repository at a pinned commit inside your tree, which is how you vendor a shared library or share IaC modules while keeping histories separate. But say the operational cost: clones need `--recurse-submodules`, contributors routinely forget to update the pointer, CI must initialise them, and a detached-HEAD submodule is a common source of confusion — which is why many teams prefer a package registry, a Terraform module registry, or a monorepo instead. Naming that trade-off is what an eight-year candidate is expected to do. See [what Git is](../version-control/what-is-git.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -103,11 +103,13 @@ STAR, BUT WITH THE PROPORTIONS RIGHT
 - Two related pages in this guide are worth reading alongside this set: [how to explain your DevOps project in an interview](./how-do-you-explain-your-devops-project-in-an-interview.md) and [answering scenario-based troubleshooting questions](./how-do-you-answer-scenario-based-troubleshooting-questions.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you deal with flaky tests in a CI pipeline?]] (`#398`): [How do you deal with flaky tests in a CI pipeline?](../cicd/how-do-you-deal-with-flaky-tests-in-a-ci-pipeline.md)
 - [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

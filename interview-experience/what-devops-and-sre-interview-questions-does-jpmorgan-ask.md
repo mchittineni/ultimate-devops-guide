@@ -157,11 +157,13 @@ JPMORGAN'S SIGNATURE
 - Set 1 mixes application development into a DevOps interview, which is normal at JPMorgan. If Spring Boot, Java streams, and Kafka are outside your experience, say so cleanly and pivot to what you do own — but expect the platform half of the round to carry more weight for a DevOps title.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
 - [[How do you do capacity planning?]] (`#230`): [How do you do capacity planning?](../site-reliability-engineering/how-do-you-do-capacity-planning.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -158,11 +158,13 @@ WIPRO'S RANGE IS THE WIDEST HERE
 - The multi-lingual stakeholder question is a genuine communication question, so answer it seriously: write short, plain sentences and avoid idiom and abbreviation; lead with the decision or ask rather than burying it; use structure — numbered points, explicit owners, explicit dates in unambiguous format; confirm understanding by restating agreed actions in a summary rather than assuming; and move anything complex or contentious to a call, then follow up in writing. Say that you never rely on tone to carry meaning across a language barrier.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -106,11 +106,13 @@ THE QUESTION THAT DEFINES SET 1
 - The migration question wants a narrative with a decision in it: what you assessed, which of the migration patterns you chose per workload — rehost, replatform, refactor — how you moved the data and cut over, and what you would do differently. See [connecting an on-premises network to the cloud](../cloud-engineering/how-do-you-connect-an-on-premises-network-to-the-cloud.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

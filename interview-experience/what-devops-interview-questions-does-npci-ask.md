@@ -62,11 +62,13 @@ STORAGE-WEIGHTED, WHICH IS UNUSUAL
 - For a payments organisation, volunteer the operational detail on stateful storage: `ReclaimPolicy: Retain` so a deleted PVC does not delete the data, volume snapshots before an upgrade, and access modes — `ReadWriteOnce` binding a volume to one node, which is the constraint that surprises people when a Pod cannot reschedule. See [StatefulSets](../container-orchestration-advanced/what-are-statefulsets-in-kubernetes.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[How do you prevent and handle secret leaks in CI/CD pipelines?]] (`#237`): [How do you prevent and handle secret leaks in CI/CD pipelines?](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -79,11 +79,13 @@ blkid /dev/nvme1n1                     # -> add the UUID line to /etc/fstab
 - The Java question is a fit check for an automotive engineering organisation, not a coding test. Answer honestly and pivot to the languages you do use and what you build with them. See [when to use Bash and when to use Python](../scripting-and-automation/when-do-you-use-bash-and-when-do-you-use-python.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
 - [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

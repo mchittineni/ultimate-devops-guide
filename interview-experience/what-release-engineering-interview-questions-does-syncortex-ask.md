@@ -76,11 +76,13 @@ A COMPACT ROUND WITH TWO PRECISE ANSWERS
 - For a release engineering role specifically, tie the Ansible and Terraform answers back to release safety wherever it fits naturally: `block`/`rescue` gives a change an automatic rollback path, `prevent_destroy` and approval gates stop a release from destroying state, and admission control stops an unapproved artefact reaching production. That framing is what distinguishes a release engineer from a general automation engineer.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

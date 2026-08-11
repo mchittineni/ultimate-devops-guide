@@ -97,11 +97,13 @@ THE ONE ODD QUESTION
 - Ingress should be defined as an API object that routes external HTTP and HTTPS traffic to Services by host and path, with TLS termination — plus the crucial point that the object does nothing without an **ingress controller** running in the cluster to implement it, selected via `ingressClassName`. Add that the Gateway API is its successor, since the community ingress-nginx project is now maintenance-only. See [exposing an application in Kubernetes](../kubernetes/how-do-you-expose-an-application-running-in-kubernetes-to-the-outside-world.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
 - [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

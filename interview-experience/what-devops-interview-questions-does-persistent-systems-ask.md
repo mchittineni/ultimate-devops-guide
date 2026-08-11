@@ -136,11 +136,13 @@ PERSISTENT ASKS "WHICH EDITION?"
 - Athena is serverless SQL over data in S3 using a schema in the Glue catalogue, priced per terabyte scanned — so the answer worth giving includes the cost lever: partition the data and use columnar Parquet, because that is what makes queries cheap. It is also the standard answer for querying VPC Flow Logs and CloudTrail at rest. See [S3 storage classes](../aws-engineering/what-are-the-s3-storage-classes-and-when-do-you-use-each.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
 - [[How do you integrate SonarQube and quality gates into a pipeline?]] (`#458`): [How do you integrate SonarQube and quality gates into a pipeline?](../cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

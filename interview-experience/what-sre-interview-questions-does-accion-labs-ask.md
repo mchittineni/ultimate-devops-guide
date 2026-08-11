@@ -86,11 +86,13 @@ SENIORITY SIGNAL
 - Ansible and Terraform in the same round usually leads to "why both?". Prepare the configuration-versus-provisioning distinction. See [Ansible versus Terraform](../infrastructure-as-code/what-is-the-difference-between-ansible-and-terraform.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is the difference between SRE, DevOps, and Platform Engineering?]] (`#232`): [What is the difference between SRE, DevOps, and Platform Engineering?](../site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[What is a production readiness review?]] (`#231`): [What is a production readiness review?](../site-reliability-engineering/what-is-a-production-readiness-review.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

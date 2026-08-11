@@ -99,11 +99,13 @@ NOTE THE CLOUD SWITCH
 - The Azure Terraform build is graded on structure as much as correctness: one resource group, a VNet with non-overlapping subnet CIDRs, NSGs that keep the database tier unreachable from the internet, and public IPs only on the load balancer and Bastion — never on the application VMs. Note in passing that username-and-password VM authentication was requested but SSH keys are the production choice. See [what Terraform is](../infrastructure-as-code/what-is-terraform.md) and [network segmentation](../network-security/what-is-network-segmentation.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
 - [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
 - [[How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?]] (`#455`): [How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?](../cicd/how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

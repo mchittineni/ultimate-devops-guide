@@ -101,11 +101,13 @@ ls /proc/<pid>/fd | wc -l      # how many descriptors it is really holding
 - Hard versus soft link needs the consequences, not just the definition: a hard link is a second directory entry pointing at the same inode, so it cannot cross filesystems or link a directory, and the data survives until the last link is gone; a symlink stores a path, can cross filesystems and point at directories, and dangles if the target moves. `ln -s target linkname` creates the symlink — note that omitting `-s` gives you a hard link, which is the trap in the pair. See [Linux filesystem hierarchy](../linux-administration/what-is-linux-file-system-hierarchy.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[What is the difference between SRE, DevOps, and Platform Engineering?]] (`#232`): [What is the difference between SRE, DevOps, and Platform Engineering?](../site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md)
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

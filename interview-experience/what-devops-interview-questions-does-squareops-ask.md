@@ -304,11 +304,13 @@ WHAT MAKES THIS ROUND DIFFERENT
 - For the cost question, come with numbers: what you measured, which levers you pulled — right-sizing from observed usage, Savings Plans for the steady baseline, Spot for interruptible work, storage lifecycle rules, deleting orphaned volumes and idle load balancers, cutting log retention — and the resulting percentage. The follow-up about ALB pricing tells you they want cost fluency at the line-item level, not slogans. See [cloud cost optimisation](../cloud-cost-optimization/what-is-cloud-cost-optimization.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

@@ -62,11 +62,13 @@ THE SHORTEST FULL ROUND IN THIS COLLECTION
 - In a six-question round every answer carries roughly 17%, so the pattern that wins is: definition in one sentence, mechanism in one more, then one trade-off or consequence, then stop. Do not pad — but do volunteer the adjacent detail (alias records, `stash -u`, why horizontal scaling needs statelessness), because with so few questions that is the only way to show depth. See [what are the most frequently asked DevOps interview questions](./what-are-the-most-frequently-asked-devops-interview-questions.md) for the wider recall checklist these six are drawn from.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
 - [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

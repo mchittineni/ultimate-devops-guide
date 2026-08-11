@@ -129,11 +129,13 @@ THREE DIFFERENT INTERVIEWS, THREE DIFFERENT BARS
 - Docker versus Docker Compose versus Kubernetes is a scope ladder: Docker runs one container, Compose declaratively runs a multi-container application on **one host** for local development, and Kubernetes orchestrates containers across a **cluster** with scheduling, self-healing, scaling, and rolling updates. Say that Compose is a development tool that does not replace an orchestrator, and that the natural progression is Compose locally and Kubernetes in production from the same images. See [what Docker Compose is](../docker/what-is-docker-compose.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
 - [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
 - [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

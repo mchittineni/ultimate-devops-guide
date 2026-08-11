@@ -85,11 +85,13 @@ PICKING AN SLI — the shape of a good answer
 - The DNS question is the only fundamentals question, and in an observability-heavy round it is best answered with the full request path — resolver cache, recursive resolution, TCP, TLS, load balancer, application, response, render — then a sentence on where you would observe each hop. There is a full walkthrough at [what happens when a user opens your application in a browser](../network-security/what-happens-when-a-user-opens-your-application-in-a-browser.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is the difference between SRE, DevOps, and Platform Engineering?]] (`#232`): [What is the difference between SRE, DevOps, and Platform Engineering?](../site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md)
 - [[What is Site Reliability Engineering?]] (`#96`): [What is Site Reliability Engineering?](../site-reliability-engineering/what-is-site-reliability-engineering.md)
 - [[What are Service Level Objectives (SLOs)?]] (`#97`): [What are Service Level Objectives (SLOs)?](../site-reliability-engineering/what-are-service-level-objectives-slos.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

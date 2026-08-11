@@ -150,11 +150,13 @@ resource "aws_s3_bucket_lifecycle_configuration" "tfstate" {
 - "How do you handle it when a Pod dies" is deliberately open. Say that a Pod dying is normal and the platform handles it — the controller reconciles the replica count, the scheduler places a replacement, and readiness gates traffic — then pivot to what _you_ do: read the exit code and previous logs to find out why, check whether it was `OOMKilled`, and fix the cause rather than the symptom. See [troubleshooting a Pod stuck in Pending or CrashLoopBackOff](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff.md) and [how probes differ](../kubernetes/how-do-liveness-readiness-and-startup-probes-differ.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---

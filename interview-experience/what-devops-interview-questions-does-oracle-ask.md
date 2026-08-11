@@ -89,11 +89,13 @@ ORACLE ASKS "EXPLAIN ALL THE COMPONENTS"
 - "Which Kubernetes resources do you know?" is a breadth question, so group them rather than listing at random — workloads, networking, configuration, storage, access control, and operations — and then name the ones you have actually authored. Grouping reads as understanding; a flat list reads as recall.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
