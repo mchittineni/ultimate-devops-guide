@@ -93,11 +93,13 @@ Sample JSON cost allocation output:
 - Discuss **Resource Efficiency Ratio**: $\frac{\text{Actual Usage}}{\text{Requested Resources}}$. An efficiency ratio below 0.3 indicates severe over-provisioning and wasted cloud spend.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
+
 ## Related Concepts
 
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
 - [[What is GitLab CI?]] (`#19`): [What is GitLab CI?](../cicd/what-is-gitlab-ci.md)
 - [[How do you prevent and handle secret leaks in CI/CD pipelines?]] (`#237`): [How do you prevent and handle secret leaks in CI/CD pipelines?](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)
+
 <!-- END GENERATED RELATED TOPICS -->
 
 ---
