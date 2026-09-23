@@ -20,22 +20,22 @@ tags:
 
 ### The metrics that matter, and what each one really tells you
 
-| Metric                            | Meaning                                                    | Alert on                                                          |
-| --------------------------------- | ---------------------------------------------------------- | ----------------------------------------------------------------- |
-| `Errors` / `Invocations`          | Handler raised or timed out                                | Error rate against an SLO, not an absolute count                  |
-| `Throttles`                       | Rejected - concurrency limit or account quota hit          | Any sustained non-zero. This is capacity, not code                |
-| `Duration` p50 / p99 / max        | Execution time excluding queue time                        | p99 within ~70% of the timeout, so you see it before it fails     |
-| `ConcurrentExecutions`            | Simultaneous instances                                     | Approaching the reserved or account limit                         |
-| `DeadLetterErrors` / DLQ depth    | Async events that failed every retry                       | Any message. This is silent data loss                             |
-| `IteratorAge` (streams)           | How stale the record being processed is                    | Growing trend - the consumer is falling behind and will lose data |
-| `ProvisionedConcurrencySpillover` | Traffic beyond warm capacity, so cold starts are happening | Non-zero when latency matters                                     |
-| Init duration (from logs/traces)  | Cold-start cost                                            | Track separately; do not let it hide inside p99                   |
+| Metric                                       | Meaning                                                    | Alert on                                                          |
+| -------------------------------------------- | ---------------------------------------------------------- | ----------------------------------------------------------------- |
+| `Errors` / `Invocations`                     | Handler raised or timed out                                | Error rate against an SLO, not an absolute count                  |
+| `Throttles`                                  | Rejected - concurrency limit or account quota hit          | Any sustained non-zero. This is capacity, not code                |
+| `Duration` p50 / p99 / max                   | Execution time excluding queue time                        | p99 within ~70% of the timeout, so you see it before it fails     |
+| `ConcurrentExecutions`                       | Simultaneous instances                                     | Approaching the reserved or account limit                         |
+| `DeadLetterErrors` / DLQ depth               | Async events that failed every retry                       | Any message. This is silent data loss                             |
+| `IteratorAge` (streams)                      | How stale the record being processed is                    | Growing trend - the consumer is falling behind and will lose data |
+| `ProvisionedConcurrencySpilloverInvocations` | Traffic beyond warm capacity, so cold starts are happening | Non-zero when latency matters                                     |
+| Init duration (from logs/traces)             | Cold-start cost                                            | Track separately; do not let it hide inside p99                   |
 
 The two most valuable are **`Throttles`** and **DLQ depth**, precisely because neither looks like an error in the application's own logs.
 
 ### Logging: structured, correlated, and sampled
 
-- **Emit JSON**, one object per event, with the request ID, a business correlation ID, the function name and version, and the cold-start flag. Text logs are useless at this volume because you can only find anything by querying fields.
+- **Emit JSON**, one object per event - Lambda's native JSON log format (`LoggingConfig: { LogFormat: JSON }`) plus application and system log-level controls does much of this without a library - with the request ID, a business correlation ID, the function name and version, and the cold-start flag. Text logs are useless at this volume because you can only find anything by querying fields.
 - **Propagate a correlation ID across every hop** - API Gateway → function → queue message attribute → next function → database. Without it, a single user journey through six services cannot be reassembled. This is the single highest-value practice in serverless debugging.
 - **Never log the payload blindly** - serverless makes it trivially easy to log PII and card data into an unbounded log store.
 - **Control cost.** Log volume is a real line item: set retention (7-30 days for verbose logs, longer for audit), sample debug logs, and consider export to cheap storage for analysis. See [how do you design a logging pipeline that stays affordable at scale](../monitoring-and-logging/how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale.md).

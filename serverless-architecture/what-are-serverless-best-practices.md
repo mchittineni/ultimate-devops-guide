@@ -38,13 +38,45 @@ tags:
 **Security**
 
 - One IAM role per function, scoped to exactly the resources it touches.
-- Secrets from Secrets Manager or Parameter Store, cached in the execution environment, never in environment variables in plaintext.
+- Secrets from Secrets Manager or Parameter Store (the AWS Parameters and Secrets Lambda extension caches them), held in the execution environment, never in environment variables in plaintext.
 - Validate all event input; events from a queue are still untrusted data.
 
 **Operations**
 
 - Structured JSON logs with a correlation ID, distributed tracing, and alarms on errors, throttles, and duration percentiles.
 - Deploy with IaC (SAM, CDK, Serverless Framework, Terraform) and use aliases with weighted routing for canary releases.
+
+## Example
+
+```yaml
+# SAM: the practices above, applied to one function
+Resources:
+  ResizeImage:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.13
+      Architectures: [arm64] # Graviton: usually cheaper per GB-second
+      Handler: app.handler
+      MemorySize: 1024 # tuned with a power-tuning run, not guessed
+      Timeout: 30
+      ReservedConcurrentExecutions: 50 # protects downstream systems
+      Tracing: Active
+      LoggingConfig: { LogFormat: JSON, ApplicationLogLevel: INFO }
+      Environment:
+        Variables:
+          SECRET_ARN: !Ref ApiKeySecret # fetch + cache at init; never the secret itself
+      Policies: # one narrow role per function
+        - S3ReadPolicy: { BucketName: !Ref Uploads }
+        - S3CrudPolicy: { BucketName: !Ref Thumbnails } # a DIFFERENT bucket: no recursive trigger
+        - AWSSecretsManagerGetSecretValuePolicy: { SecretArn: !Ref ApiKeySecret }
+      EventInvokeConfig:
+        MaximumRetryAttempts: 2
+        DestinationConfig: { OnFailure: { Type: SQS, Destination: !GetAtt ResizeFailures.Arn } }
+      Events:
+        Upload:
+          Type: S3
+          Properties: { Bucket: !Ref Uploads, Events: s3:ObjectCreated:* }
+```
 
 ## Interview tips
 

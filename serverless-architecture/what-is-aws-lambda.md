@@ -22,8 +22,10 @@ tags:
 - **Memory** (128 MB to 10 GB) also determines CPU allocation proportionally. Increasing memory often _reduces_ cost by finishing faster - worth measuring with a tuning tool.
 - **Timeout** - up to 15 minutes.
 - **Concurrency** - reserved concurrency guarantees capacity and caps blast radius; provisioned concurrency keeps environments warm to eliminate cold starts.
-- **Layers** for shared dependencies, and container images up to 10 GB for large runtimes.
+- **Layers** for shared dependencies, and container images up to 10 GB for large runtimes; `x86_64` or `arm64` (Graviton) architectures.
 - **VPC attachment** for private resources (now with much-improved cold-start behaviour via Hyperplane ENIs).
+
+**Recent additions worth knowing:** SnapStart (Java, Python, .NET) for faster cold starts, billed init duration for all functions since August 2025, Lambda Managed Instances (functions on EC2 capacity for steady workloads), and durable functions for long-running, checkpointed workflows.
 
 **Common triggers:** API Gateway or Function URLs (HTTP), SQS and Kinesis (streams), S3 events, EventBridge (schedules and events), DynamoDB Streams, and Step Functions.
 
@@ -38,10 +40,14 @@ import json, os, boto3
 table = boto3.resource("dynamodb").Table(os.environ["TABLE_NAME"])
 
 def handler(event, context):
+    failures = []
     for record in event["Records"]:                 # SQS batch
-        body = json.loads(record["body"])
-        table.put_item(Item={"id": body["id"], "payload": body})  # idempotent write
-    return {"statusCode": 200}
+        try:
+            body = json.loads(record["body"])
+            table.put_item(Item={"id": body["id"], "payload": body})  # same id -> same item: idempotent
+        except Exception:
+            failures.append({"itemIdentifier": record["messageId"]})
+    return {"batchItemFailures": failures}          # needs ReportBatchItemFailures on the trigger
 ```
 
 ## Interview tips
@@ -56,7 +62,7 @@ def handler(event, context):
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
