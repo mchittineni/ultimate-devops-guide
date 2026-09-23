@@ -30,6 +30,19 @@ tags:
 
 **What each level triggers** should be automatic and documented: paging policy, communication cadence, whether a status page update is required, whether an incident commander is assigned, and whether a post-mortem is mandatory (usually SEV-1 and SEV-2 always).
 
+## Example
+
+```text
+Classifying three real events with an impact-based scale
+
+"Checkout returns 500 for all EU customers"          -> SEV-1  (core journey, many users)
+"Search results 3x slower, still working"            -> SEV-2 if widespread, else SEV-3
+"Admin CSV export fails; manual workaround exists"    -> SEV-3  (internal, workaround)
+
+Note what is NOT a severity input: "the database is down" - classify the user impact
+it causes, and upgrade or downgrade as that impact becomes clear.
+```
+
 ## Interview tips
 
 - Impact-based over cause-based classification is the key principle to state.
@@ -40,9 +53,9 @@ tags:
 
 ## Related Concepts
 
+- [[What is progressive delivery and how does it differ from traditional deployment strategies?]] (`#509`): [What is progressive delivery and how does it differ from traditional deployment strategies?](../core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
-- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

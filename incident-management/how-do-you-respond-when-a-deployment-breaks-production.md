@@ -87,7 +87,7 @@ Follow-ups (owner, date - not "be more careful"):
 curl -XPOST "$FLAGS/api/flags/new-checkout-flow" -d '{"enabled":false}'   # seconds
 
 aws lambda update-alias --function-name checkout --name live \
-  --routing-config '{}' --function-version 41                # drop the canary weight
+  --function-version 41 --routing-config '{"AdditionalVersionWeights":{}}'  # drop the canary weight
 
 kubectl rollout undo deployment/checkout -n prod            # imperative clusters
 kubectl rollout status deployment/checkout -n prod --timeout=5m
@@ -116,7 +116,7 @@ kubectl -n prod logs -l app=checkout --since=2m | grep -c ' 5[0-9][0-9] '
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
