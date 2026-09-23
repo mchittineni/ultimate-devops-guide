@@ -25,6 +25,22 @@ tags:
 
 **Alert fatigue is the failure mode.** A queue no one can clear is functionally the same as no SOC. Tune or delete rules that produce mostly false positives, and treat "this detection is unactionable" as a valid reason to remove it.
 
+## Example
+
+```sql
+-- Measure the SOC, not the analysts: time to detect, triage, and contain per severity
+SELECT severity,
+       count(*)                                                   AS incidents,
+       percentile_cont(0.5) WITHIN GROUP (ORDER BY detected_at  - first_malicious_at) AS p50_time_to_detect,
+       percentile_cont(0.5) WITHIN GROUP (ORDER BY triaged_at   - detected_at)        AS p50_time_to_triage,
+       percentile_cont(0.5) WITHIN GROUP (ORDER BY contained_at - detected_at)        AS p50_time_to_contain,
+       avg(CASE WHEN disposition = 'false_positive' THEN 1 ELSE 0 END)                AS false_positive_rate
+FROM   soc_cases
+WHERE  created_at > now() - INTERVAL '90 days'
+GROUP  BY severity
+ORDER  BY severity;
+```
+
 ## Interview tips
 
 - Describe the tiers and the escalation path - vague "monitors for threats" answers land poorly.

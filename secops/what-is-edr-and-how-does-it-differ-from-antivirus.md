@@ -31,6 +31,20 @@ tags:
 
 **Operational costs to name honestly:** agent CPU and memory overhead, kernel compatibility testing in your image pipeline, telemetry egress and retention cost, and the analyst time to triage what it finds. An unmonitored EDR is a compliance checkbox, not a control.
 
+## Example
+
+```sql
+-- osquery: the kind of behavioural question EDR telemetry answers and antivirus cannot
+-- "Which shells were started by a web server process?"
+SELECT p.pid, p.name, p.cmdline, parent.name AS parent_name, p.start_time
+FROM   processes AS p
+JOIN   processes AS parent ON p.parent = parent.pid
+WHERE  p.name IN ('sh', 'bash', 'dash')
+  AND  parent.name IN ('nginx', 'httpd', 'java', 'node');
+```
+
+Nothing in that result is a "bad file" - `sh` and `nginx` are legitimate binaries - which is exactly why signature-based antivirus misses it and a behavioural rule over process lineage catches it.
+
 ## Interview tips
 
 - The signature-versus-behaviour one-liner is the answer; add "and it retains telemetry for investigation".
@@ -41,9 +55,9 @@ tags:
 
 ## Related Concepts
 
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
+- [[What is progressive delivery and how does it differ from traditional deployment strategies?]] (`#509`): [What is progressive delivery and how does it differ from traditional deployment strategies?](../core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
-- [[What is Docker Compose?]] (`#9`): [What is Docker Compose?](../docker/what-is-docker-compose.md)
-- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
