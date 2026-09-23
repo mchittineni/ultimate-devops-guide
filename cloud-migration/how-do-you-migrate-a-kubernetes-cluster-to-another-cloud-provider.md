@@ -44,7 +44,7 @@ An honest answer names these before reaching for a tool, because "we ran Velero 
 4. **Move the data.** The part with real risk, handled per system:
    - **Databases**: replicate with the engine's own replication or a change-data-capture tool, then cut over with a short freeze. See [how do you migrate a production database to the cloud with near-zero downtime](./how-do-you-migrate-a-production-database-to-the-cloud-with-near-zero-downtime.md).
    - **Object storage**: bulk copy, then a delta sync, then dual-write or a redirect until the cutover.
-   - **PersistentVolumes**: Velero with a file-level backup (Restic/Kopia) can restore into a different provider's storage class, because volume snapshots themselves are not portable. For large or busy volumes, prefer the application's own replication (add a replica in the new cluster and let it stream) over copying files.
+   - **PersistentVolumes**: Velero with a file-level backup (the Kopia uploader; the older Restic path is deprecated) can restore into a different provider's storage class, because volume snapshots themselves are not portable. For large or busy volumes, prefer the application's own replication (add a replica in the new cluster and let it stream) over copying files.
    - Anything cached or reproducible - do not migrate it, rebuild it.
 5. **Rewire the provider-specific edges** in the new cluster's overlay: storage classes, ingress annotations, workload identity bindings, registry pull configuration, secret store, and DNS-controller configuration.
 6. **Test properly before any traffic moves.** Full smoke and integration suites, a load test at production volume, a failure drill (kill a node, kill a zone), and a check that every external dependency accepts calls from the new egress addresses. The IP allow-list problem is the classic late surprise: partners and payment providers often filter on source IP.
@@ -72,7 +72,7 @@ kubectl get pvc -A -o custom-columns='NS:.metadata.namespace,NAME:.metadata.name
 # 2. Cluster objects + file-level PV data (snapshots are NOT portable across clouds)
 velero install --provider aws --bucket migration-bucket --use-node-agent
 velero backup create pre-migration --include-namespaces prod,data \
-  --default-volumes-to-fs-backup                # Kopia/Restic: restorable elsewhere
+  --default-volumes-to-fs-backup                # file-level (Kopia): restorable elsewhere
 velero backup describe pre-migration --details
 
 # 3. On the target cluster: restore, remapping storage classes as you go
@@ -122,7 +122,7 @@ Cutover: weighted DNS, both clusters live, old one warm
 - Say "rebuild, do not migrate" in the first sentence. Anyone proposing to move a control plane between clouds has misunderstood what a cluster is.
 - The strongest structural point: if the manifests live in Git and a GitOps controller applies them, migrating stateless workloads is registering a cluster - so the real work is data plus provider-specific edges.
 - Enumerate the provider-specific list (storage classes, LB/Ingress annotations, workload identity, CNI and IP model, add-ons, registry, secrets, node images). This is what interviewers are actually testing.
-- Be precise that volume snapshots are not portable, so PV data needs file-level backup (Velero with Kopia/Restic) or, better, the application's own replication into the new cluster.
+- Be precise that volume snapshots are not portable, so PV data needs file-level backup (Velero's Kopia-based file-system backup) or, better, the application's own replication into the new cluster.
 - Mention keeping the same `StorageClass` **name** across clusters with different provisioners - a small trick that keeps PVCs portable.
 - The partner IP allow-list surprise is an excellent detail: new cluster, new egress addresses, and a third party silently rejecting you at cutover.
 - Describe the gradual weighted cutover with both clusters live and the old one warm as the rollback, rather than a big-bang switch.
@@ -132,9 +132,9 @@ Cutover: weighted DNS, both clusters live, old one warm
 
 ## Related Concepts
 
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
+- [[What are ephemeral preview environments and how do you manage their lifecycle and cleanup?]] (`#535`): [What are ephemeral preview environments and how do you manage their lifecycle and cleanup?](../cicd/what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup.md)
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
-- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
-- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

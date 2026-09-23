@@ -30,6 +30,34 @@ tags:
 
 **Landing zone first.** Building the security, network, and account foundations before the first workload arrives is what prevents years of remediation later.
 
+**Trade-off.** Moving fast (rehost to hit a data-centre exit date) and moving well (modernising as you go) pull in opposite directions; most programmes do the former for the bulk and the latter selectively, then fund an optimisation phase so the bill does not simply reflect the old architecture.
+
+## Example
+
+```hcl
+# Landing-zone guardrail before any workload arrives: an SCP that blocks unapproved
+# regions for every account in the migration OU.
+resource "aws_organizations_policy" "region_guardrail" {
+  name = "deny-unapproved-regions"
+  type = "SERVICE_CONTROL_POLICY"
+  content = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Sid       = "DenyOutsideApprovedRegions"
+      Effect    = "Deny"
+      NotAction = ["iam:*", "organizations:*", "sts:*", "support:*", "cloudfront:*", "route53:*"]
+      Resource  = "*"
+      Condition = { StringNotEquals = { "aws:RequestedRegion" = ["eu-west-1", "eu-west-2"] } }
+    }]
+  })
+}
+
+resource "aws_organizations_policy_attachment" "migration_ou" {
+  policy_id = aws_organizations_policy.region_guardrail.id
+  target_id = var.migration_ou_id
+}
+```
+
 ## Interview tips
 
 - "Landing zone before workloads" is the piece of sequencing advice that signals real programme experience.
