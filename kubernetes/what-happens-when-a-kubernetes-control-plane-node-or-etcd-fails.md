@@ -62,7 +62,7 @@ Two more etcd realities worth naming:
 3. **Monitor the control plane itself**: `apiserver_request_duration_seconds`, `apiserver_current_inflight_requests`, `etcd_disk_wal_fsync_duration_seconds`, `etcd_server_has_leader`, leader-change counters, and certificate expiry. Expired control-plane certificates are a self-inflicted outage that looks identical to a node failure.
 4. **Protect the API server** with Priority and Fairness (APF) so one runaway client cannot starve kubelets, and keep `--max-requests-inflight` sane.
 5. **Design workloads not to need the control plane** during an incident: readiness-gated Services, no in-cluster dependency on the API for the request path, PDBs and spread so a single node loss is absorbed.
-6. **Know your worker-side failure story too**: if a _worker_ node dies, the node controller marks it `NotReady` after `node-monitor-grace-period` (~40 s), then Pods get evicted after `tolerationSeconds` (~5 min by default) and rescheduled - which is why a Pod can take five minutes to come back after a node failure, and why that number is a tunable.
+6. **Know your worker-side failure story too**: if a _worker_ node dies, the node controller marks it `NotReady` after `node-monitor-grace-period` (50 s by default since 1.32), then Pods get evicted after `tolerationSeconds` (~5 min by default) and rescheduled - which is why a Pod can take five minutes to come back after a node failure, and why that number is a tunable.
 
 ## Example
 
@@ -113,7 +113,7 @@ Alerts that catch this before users do
 - Do the quorum arithmetic out loud. Three nodes tolerate one failure, five tolerate two, four are worse than three. Losing two of three makes etcd read-only.
 - Mention that etcd is fsync-bound and that slow disks cause leader churn - "the cluster feels slow, nothing has crashed" is a real scenario and few candidates can explain it.
 - If asked whether you can write to etcd directly: technically yes with `etcdctl`, and you should never do it - it bypasses validation, admission, and the resource version machinery, and it is how people corrupt a cluster.
-- Have the worker-node counterpart ready: `NotReady` after ~40 s, eviction and rescheduling after the ~5 minute toleration, which explains recovery time.
+- Have the worker-node counterpart ready: `NotReady` after ~50 s, eviction and rescheduling after the ~5 minute toleration, which explains recovery time.
 - Close on preparation, not theory: three control-plane nodes across AZs, scheduled etcd snapshots stored off-cluster, a **rehearsed** restore, and certificate-expiry monitoring. See [how do you back up and restore a Kubernetes cluster](../container-orchestration-advanced/how-do-you-back-up-and-restore-a-kubernetes-cluster.md), [the main components of Kubernetes architecture](./what-are-the-main-components-of-kubernetes-architecture.md), [troubleshooting a node that is NotReady](./how-do-you-troubleshoot-a-kubernetes-node-that-is-notready.md), and [executing a disaster recovery failover](../backup-and-disaster-recovery/how-do-you-execute-a-disaster-recovery-failover-with-minimal-rto-and-rpo.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

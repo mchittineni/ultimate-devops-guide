@@ -19,7 +19,7 @@ tags:
 
 ### 1. Troubleshooting `Pending` Pods
 
-A pod is stuck in `Pending` when the Kubernetes scheduler cannot find a node that satisfies its requirements.
+A pod is stuck in `Pending` when the Kubernetes scheduler cannot find a node that satisfies its requirements (or, after scheduling, while images pull and volumes attach). The scheduler states its reason in the Pod's events, one clause per filter that rejected nodes - for example `0/6 nodes are available: 3 Insufficient cpu, 2 node(s) had untolerated taint {dedicated: gpu}, 1 node(s) didn't match Pod's node affinity/selector.` Read that message before guessing; if a cluster autoscaler is installed, its `NotTriggerScaleUp` event explains why it did not add a node either.
 
 - **Resource Constraints:** Check if cluster nodes have available CPU or Memory matching the pod's `resources.requests`.
 - **Taints and Tolerations:** Check if nodes are tainted (e.g. `node.kubernetes.io/unschedulable` or custom node taints) without matching tolerations in the Pod spec.
@@ -29,11 +29,12 @@ A pod is stuck in `Pending` when the Kubernetes scheduler cannot find a node tha
 
 ### 2. Troubleshooting `CrashLoopBackOff` Pods
 
-A pod in `CrashLoopBackOff` is continuously starting, failing, and restarting with exponential backoff delay.
+A pod in `CrashLoopBackOff` is continuously starting, failing, and restarting with exponential backoff delay (10 s, doubling up to a five-minute cap, reset after the container runs cleanly for ten minutes). `CrashLoopBackOff` is not the error itself - it is the kubelet waiting between restarts - so the cause is always in the previous container's exit code and logs.
 
 - **Application Crash / Misconfiguration:** Inspect standard output and standard error logs. If the container restarted, run `kubectl logs <pod-name> -c <container-name> --previous` to see the exit logs from the killed instance.
 - **OOMKilled (Exit Code 137):** Container process exceeded its `resources.limits.memory` and was terminated by the Linux OOM killer. Check `kubectl describe pod <pod-name>` under `Last State`.
-- **Failing Liveness / Readiness Probes:** Misconfigured HTTP endpoints, port mismatches, or tight probe timeouts causing Kubernetes to kill healthy starting containers.
+- **Failing Liveness or Startup Probes:** Misconfigured HTTP endpoints, port mismatches, or tight probe timeouts cause the kubelet to kill containers that were merely slow to start. A failing **readiness** probe does not restart anything - it only removes the Pod from Service endpoints - so it produces a `Running` but `0/1 Ready` Pod, not a crash loop.
+- **Exit codes:** `1` or another small number is the application's own failure; `137` is SIGKILL (OOM kill or a liveness-probe kill - `Reason` in `Last State` says which); `139` is a segfault; `126`/`127` mean the entrypoint is not executable or not found, usually a wrong `command` or an image built for another CPU architecture (`exec format error`).
 - **Missing Environment Variables or Secrets:** The application fails at startup due to missing configuration, database connection strings, or unmounted Secret objects.
 
 ## Example
@@ -57,7 +58,7 @@ kubectl get pvc -n production
 
 Checking for OOMKilled state in describe output:
 
-```yaml
+```text
 Last State:     Terminated
   Reason:       OOMKilled
   Exit Code:    137
@@ -70,6 +71,8 @@ Last State:     Terminated
 - Always mention starting with `kubectl describe pod` to read the `Events` section — that immediately reveals if the scheduler failed or if a probe triggered a restart.
 - Explain the distinction between `resources.requests` (used by scheduler for node placement) and `resources.limits` (enforced by cgroups, causing OOMKilled if memory limit is breached).
 - Note that `kubectl logs --previous` is critical because standard `kubectl logs` might return empty if the container just restarted.
+- Know the trade-off in the fix: raising memory limits or loosening probes stops the loop, but if the real cause is a leak or a hung dependency you have only slowed it down. Confirm the cause from the exit code and logs before changing the manifest.
+- If the container exits too fast to inspect, `kubectl debug <pod> -it --copy-to=debug --container=<name> -- sh` starts a copy with a shell as the command, so you can poke at the filesystem and environment.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

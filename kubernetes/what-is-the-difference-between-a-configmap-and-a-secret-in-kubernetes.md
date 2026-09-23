@@ -32,11 +32,11 @@ Both are namespace-scoped, so a Pod cannot reference one in another namespace - 
 
 ### Environment variable or mounted file - and why the answer is usually file
 
-|                   | Env var (`envFrom` / `valueFrom`)                                                           | Volume mount                                                                                                                        |
-| ----------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Updates on change | **Never** - fixed at Pod start, needs a restart                                             | Yes - kubelet refreshes the file (roughly on its sync period, ~1 min; instant for `subPath`… **no**, `subPath` mounts never update) |
-| Leak surface      | Visible in `/proc/<pid>/environ`, child processes, crash dumps, and many logging frameworks | Readable only at the mounted path                                                                                                   |
-| Suits             | Small scalars, 12-factor apps                                                               | Certificates, config files, anything multi-line                                                                                     |
+|                   | Env var (`envFrom` / `valueFrom`)                                                           | Volume mount                                                                                                                      |
+| ----------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Updates on change | **Never** - fixed at Pod start, needs a restart                                             | Yes - kubelet refreshes the file (within its sync period plus cache TTL, typically about a minute); `subPath` mounts never update |
+| Leak surface      | Visible in `/proc/<pid>/environ`, child processes, crash dumps, and many logging frameworks | Readable only at the mounted path                                                                                                 |
+| Suits             | Small scalars, 12-factor apps                                                               | Certificates, config files, anything multi-line                                                                                   |
 
 For secrets, prefer files. For config, either is fine, but if you want configuration reload without a restart you need the volume form **and** an application that watches the file.
 
@@ -50,7 +50,7 @@ This is the question behind the question. A ConfigMap edit does not restart anyt
 
 ### Making Secrets genuinely secret
 
-- **Encryption at rest**: `EncryptionConfiguration` on the API server with `aescbc`/`secretbox` or, better, a **KMS provider** (AWS KMS, Azure Key Vault, GCP KMS) so the key is not on the control-plane host. Without this, etcd holds your secrets in plaintext - on managed clusters check whether the provider has enabled it (EKS supports KMS envelope encryption; GKE and AKS have equivalents).
+- **Encryption at rest**: `EncryptionConfiguration` on the API server with a local provider (`secretbox` or `aesgcm`; `aescbc` is no longer recommended) or, better, a **KMS v2 provider** (AWS KMS, Azure Key Vault, Google Cloud KMS, HashiCorp Vault via a plugin) so the key is not on the control-plane host. Without this, etcd holds your secrets in plaintext. On managed clusters check what the provider does: EKS envelope-encrypts all Kubernetes API data by default on current versions and lets you supply your own KMS key, while GKE and AKS offer application-layer or KMS encryption with a customer-managed key.
 - **RBAC**: `get`/`list` on secrets in a namespace is equivalent to reading every credential in it. Never grant it broadly; audit for wildcards. Also disable `automountServiceAccountToken` where the workload does not call the API.
 - **External secret managers**: keep the source of truth in Vault, AWS Secrets Manager, or Azure Key Vault and project it in - via the **External Secrets Operator** (syncs into a Secret), the **Secrets Store CSI driver** (mounts directly, optionally without creating a Secret object), or a Vault agent sidecar. This is what gives you rotation, audit trails, and per-request policy.
 - **Never commit a Secret manifest to Git.** With GitOps use SOPS or Sealed Secrets so the repository holds ciphertext only.
@@ -122,7 +122,7 @@ grep -n "resources:" -A6 /etc/kubernetes/enc/enc.yaml
 
 ```yaml
 # The production pattern: source of truth outside the cluster
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1 # v1beta1 is no longer served from ESO v0.17
 kind: ExternalSecret
 metadata: { name: api-secrets }
 spec:

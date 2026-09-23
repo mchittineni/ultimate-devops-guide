@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-Pods come and go with new IPs each time. A Service provides the fixed address in front of them. The Endpoints (or EndpointSlice) controller keeps the backend list in sync with the pods matching the selector _and_ passing their readiness probes; kube-proxy programmes the data path.
+Pods come and go with new IPs each time. A Service provides the fixed address in front of them. The EndpointSlice controller keeps the backend list in sync with the pods matching the selector _and_ passing their readiness probes (the older `Endpoints` API is deprecated since Kubernetes 1.33 but still populated for compatibility); kube-proxy, or an eBPF replacement such as Cilium, watches those slices and programmes the data path on every node. The trade-off of this design is that a ClusterIP is a layer-4 construct: it balances connections, not requests, so long-lived HTTP/2 or gRPC connections can pin to one backend - which is where client-side balancing through a headless Service, or a mesh, comes in.
 
 **Types:**
 
@@ -55,8 +55,8 @@ In-cluster DNS: `web.default.svc.cluster.local`, usually just `web` from the sam
 ## Related Concepts
 
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[How do you upgrade a production Kubernetes cluster with zero downtime?]] (`#411`): [How do you upgrade a production Kubernetes cluster with zero downtime?](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md)
 - [[How do you troubleshoot a failed Helm release?]] (`#412`): [How do you troubleshoot a failed Helm release?](../container-orchestration-advanced/how-do-you-troubleshoot-a-failed-helm-release.md)
-- [[How do you run and scale a stateful application on Kubernetes?]] (`#413`): [How do you run and scale a stateful application on Kubernetes?](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

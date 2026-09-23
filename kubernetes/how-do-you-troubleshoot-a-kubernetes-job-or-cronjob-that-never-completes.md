@@ -13,7 +13,7 @@ tags:
 
 # How do you troubleshoot a Kubernetes Job or CronJob that never completes?
 
-**Short answer:** A Job "hangs" for one of four reasons, and the Pod's state tells you which: **the Pod never started** (unschedulable, image pull, PVC pending - the Job is not at fault), **the process is genuinely blocked** (waiting on a lock, a query, a network call with no timeout), **the process exited but the Pod never terminated** (a sidecar or service-mesh proxy still running, so the Pod stays `NotReady` for ever), or **the Job is silently retrying** (`restartPolicy: OnFailure` with a `backoffLimit` you never set, so it fails and restarts indefinitely from the outside). The two settings that prevent all of this are `activeDeadlineSeconds` and `backoffLimit`, and every Job you write should have both.
+**Short answer:** A Job "hangs" for one of four reasons, and the Pod's state tells you which: **the Pod never started** (unschedulable, image pull, PVC pending - the Job is not at fault), **the process is genuinely blocked** (waiting on a lock, a query, a network call with no timeout), **the process exited but the Pod never terminated** (a sidecar or service-mesh proxy still running, so the Pod stays `NotReady` for ever), or **the Job is silently retrying** (`restartPolicy: OnFailure` with the default `backoffLimit` of 6 and an exponential back-off capped at six minutes, so from the outside it looks like one long run). The two settings that prevent all of this are `activeDeadlineSeconds` and `backoffLimit`, and every Job you write should have both.
 
 ## Detail
 
@@ -21,7 +21,7 @@ tags:
 
 A Job counts a Pod as successful when its containers exit 0 and completes when `.spec.completions` successes are recorded. Two consequences catch people:
 
-- **A sidecar that never exits keeps the Pod running.** A service-mesh proxy, a log shipper, or a cloud SQL proxy in the same Pod means the Pod never reaches `Succeeded`, so the Job never completes even though your work finished. The fixes: use the **native sidecar** support (an init container with `restartPolicy: Always`, stable since Kubernetes 1.29) so the kubelet stops it once the main container exits; exclude the Job from mesh injection with an annotation; or have the main container signal the sidecar to quit.
+- **A sidecar that never exits keeps the Pod running.** A service-mesh proxy, a log shipper, or a cloud SQL proxy in the same Pod means the Pod never reaches `Succeeded`, so the Job never completes even though your work finished. The fixes: use the **native sidecar** support (an init container with `restartPolicy: Always`, on by default since Kubernetes 1.29 and GA in 1.33) so the kubelet stops it once the main container exits; exclude the Job from mesh injection with an annotation; or have the main container signal the sidecar to quit.
 - **`restartPolicy` inside a Job is only `Never` or `OnFailure`.** With `OnFailure` the kubelet restarts the container in place, which can look like a job that runs for ever with no new Pods. With `Never` a failure creates a new Pod, so you can see the history - which is why `Never` plus a `backoffLimit` is usually easier to operate.
 
 ### The diagnostic sequence
@@ -43,7 +43,7 @@ A Job counts a Pod as successful when its containers exit 0 and completes when `
 
 ### Writing Jobs that cannot hang
 
-Set `activeDeadlineSeconds` so the Job is killed rather than running for ever; set `backoffLimit` so failures stop retrying; add `ttlSecondsAfterFinished` so completed Jobs clean themselves up; make the work **idempotent and restartable**, because retries and evictions will re-run it; and alert on Job failure and duration rather than discovering it a week later. For unrecoverable input, exit non-zero fast rather than retrying - and if you need per-item retry semantics, `podFailurePolicy` lets you distinguish a genuine application failure from an infrastructure disruption.
+Set `activeDeadlineSeconds` so the Job is killed rather than running for ever; set `backoffLimit` so failures stop retrying; add `ttlSecondsAfterFinished` so completed Jobs clean themselves up; make the work **idempotent and restartable**, because retries and evictions will re-run it; and alert on Job failure and duration rather than discovering it a week later. For unrecoverable input, exit non-zero fast rather than retrying. `podFailurePolicy` lets you distinguish a genuine application failure (fail the Job on a specific exit code) from an infrastructure disruption (ignore Pods deleted by eviction or preemption), and for Indexed Jobs `backoffLimitPerIndex` gives each work item its own retry budget so one bad shard does not exhaust the Job's.
 
 ## Example
 
@@ -68,7 +68,7 @@ kubectl exec -n batch nightly-reindex-abc12 -c worker -- \
 # OOM or throttling?
 kubectl describe pod -n batch nightly-reindex-abc12 | grep -A4 'Last State'
 
-# Stop the bleeding, keep the evidence
+# Stop the bleeding - save logs first, because deleting the Job deletes its Pods
 kubectl delete job nightly-reindex -n batch --cascade=foreground
 ```
 

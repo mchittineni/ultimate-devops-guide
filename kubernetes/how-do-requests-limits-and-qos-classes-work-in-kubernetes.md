@@ -56,7 +56,7 @@ A classic interview scenario is _how do you limit resource usage without editing
 
 ### Sizing them honestly
 
-Guessing is how you end up with both waste and throttling. Measure: `kubectl top`, `container_memory_working_set_bytes` and CPU rate over a week, then set memory request/limit near the p99 working set plus headroom, and the CPU request near the p90 usage. **Vertical Pod Autoscaler in `recommendationOnly` mode** is the low-risk way to get data-driven numbers; running VPA in `Auto` alongside an HPA on the same resource is a known conflict. Over-requesting is the number one cause of a cluster that is 30% utilised and still needs more nodes - it is a cost problem, not just a tidiness problem.
+Guessing is how you end up with both waste and throttling. Measure: `kubectl top`, `container_memory_working_set_bytes` and CPU rate over a week, then set memory request/limit near the p99 working set plus headroom, and the CPU request near the p90 usage. **Vertical Pod Autoscaler with `updateMode: "Off"`** (recommendations only) is the low-risk way to get data-driven numbers; running VPA in an applying mode (`Recreate` or `InPlaceOrRecreate`; the old `Auto` is now a deprecated alias for `Recreate`) alongside an HPA on the same resource is a known conflict. Over-requesting is the number one cause of a cluster that is 30% utilised and still needs more nodes - it is a cost problem, not just a tidiness problem.
 
 Two runtime-specific notes worth having: a JVM before container-awareness, or without `-XX:MaxRAMPercentage`, sizes its heap from the **host's** memory and gets OOM-killed instantly; and Go's `GOMEMLIMIT`/`GOMAXPROCS` should be aligned to the cgroup, not the node.
 

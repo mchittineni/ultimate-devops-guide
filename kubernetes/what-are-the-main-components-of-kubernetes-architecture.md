@@ -20,16 +20,18 @@ tags:
 - **kube-apiserver** - the only component that talks to etcd, and the front door for everything else. It authenticates, authorises, validates, runs admission control, and persists objects. All communication flows through it.
 - **etcd** - the distributed key-value store holding all cluster state. It is the single source of truth, and the thing you back up.
 - **kube-scheduler** - watches for pods with no assigned node and picks one, filtering on resource requests, taints/tolerations, and affinity, then scoring the survivors.
-- **kube-controller-manager** - runs the reconciliation loops (deployment, replicaset, node, endpoint, service account controllers) that drive actual state towards desired state.
+- **kube-controller-manager** - runs the reconciliation loops (Deployment, ReplicaSet, Node, EndpointSlice, ServiceAccount, Job, and many more controllers) that drive actual state towards desired state.
 - **cloud-controller-manager** - cloud-specific control loops for load balancers, nodes, and routes.
 
 **Node components**
 
 - **kubelet** - the agent on each node. It takes pod specs from the API server, tells the runtime to start containers, runs probes, and reports status.
-- **kube-proxy** - programmes iptables or IPVS rules so Service virtual IPs route to healthy pod endpoints.
+- **kube-proxy** - programmes iptables or nftables rules (IPVS mode still exists but is deprecated) so Service virtual IPs route to healthy pod endpoints. Some CNIs, such as Cilium, replace it with eBPF.
 - **container runtime** - containerd or CRI-O, which actually runs the containers via the CRI.
 
 **Add-ons** - CoreDNS for cluster DNS, a CNI plugin for pod networking, and metrics-server for autoscaling inputs.
+
+**How they coordinate.** No component calls another directly. Each one **watches** the API server for the objects it cares about and writes its results back, so the scheduler, controllers, and kubelets are loosely coupled and can restart independently - a scheduler outage stops new placements but leaves running Pods untouched. The trade-off is that the API server and etcd are on every path: a slow etcd or an overloaded API server degrades the whole control plane, which is why production clusters run three or five etcd members on fast disks and why API Priority and Fairness exists to stop one noisy client starving the rest.
 
 ## Example
 

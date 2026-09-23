@@ -28,7 +28,7 @@ tags:
 
 **Why not a LoadBalancer per Service?** Cost and capability. Each one is a billed cloud resource with its own public IP and its own certificate to manage, and a layer-4 load balancer cannot route on hostname or path. Fifty microservices become fifty bills and fifty DNS records.
 
-**Ingress** solves that: one controller (NGINX, Traefik, HAProxy, or a cloud-native one like AWS Load Balancer Controller) sits behind a single load balancer and routes by host and path to many Services, terminating TLS centrally. The controller is what does the work - the `Ingress` object is just configuration, so nothing happens until a controller is installed.
+**Ingress** solves that: one controller (Traefik, HAProxy, F5 NGINX Ingress Controller, or a cloud-native one like AWS Load Balancer Controller) sits behind a single load balancer and routes by host and path to many Services, terminating TLS centrally. The controller is what does the work - the `Ingress` object is just configuration, so nothing happens until a controller is installed.
 
 **Ingress is feature-frozen, and Gateway API is its successor.** Ingress's weakness is that anything beyond host/path routing - header matching, traffic splitting for canaries, timeouts, retries - has to be expressed in controller-specific annotations, which are not portable and are not validated. Gateway API replaces that with typed resources and a role split that matches how organisations actually work:
 
@@ -36,11 +36,11 @@ tags:
 - `Gateway` - the listener, ports, and TLS config (cluster operator).
 - `HTTPRoute` / `GRPCRoute` / `TCPRoute` - the routing rules (application team, in their own namespace).
 
-That separation is the real selling point: app teams change routes without needing write access to shared ingress config, and `ReferenceGrant` controls cross-namespace access explicitly. New clusters should start on Gateway API; existing Ingress keeps working.
+That separation is the real selling point: app teams change routes without needing write access to shared ingress config, and `ReferenceGrant` controls cross-namespace access explicitly. New clusters should start on Gateway API; existing Ingress keeps working. The pressure to move grew in March 2026 when the community **Ingress-NGINX** controller - the most widely deployed one - was retired and stopped receiving security fixes; `ingress2gateway` converts existing Ingress objects to Gateway API resources.
 
 **TLS.** Certificates live in a Secret of type `kubernetes.io/tls` referenced by the Ingress or Gateway listener. In practice cert-manager issues and renews them automatically via ACME - which matters more every year as maximum public certificate lifetimes shrink.
 
-**Non-HTTP traffic** (databases, gRPC streaming over raw TCP, UDP, MQTT) does not fit Ingress. Use a `LoadBalancer` Service, or Gateway API's `TCPRoute`/`UDPRoute`.
+**Non-HTTP traffic** (databases, gRPC streaming over raw TCP, UDP, MQTT) does not fit Ingress. Use a `LoadBalancer` Service, or Gateway API's `TCPRoute`/`UDPRoute` - these reached the standard channel in Gateway API v1.6 (2026), though implementation support still varies.
 
 ## Example
 

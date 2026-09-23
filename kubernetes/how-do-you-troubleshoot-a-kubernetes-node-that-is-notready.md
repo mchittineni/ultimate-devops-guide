@@ -19,11 +19,11 @@ tags:
 
 ### What the status actually means
 
-The kubelet updates its `Node` object every few seconds. The node controller marks it `NotReady` if no update arrives within `node-monitor-grace-period` (~40 s), then:
+The kubelet updates its `Node` object every few seconds. The node controller marks it `NotReady` if no update arrives within `node-monitor-grace-period` (50 s by default since Kubernetes 1.32; 40 s before), then:
 
 ```text
 kubelet healthy ──> Ready=True
-   │ no status posted for ~40s      -> Ready=Unknown, reason NodeStatusUnknown
+   │ no status posted for ~50s      -> Ready=Unknown, reason NodeStatusUnknown
    │ kubelet posts an unhealthy condition -> Ready=False with a specific reason
    ▼
 node.kubernetes.io/not-ready:NoExecute taint applied
@@ -31,7 +31,7 @@ node.kubernetes.io/not-ready:NoExecute taint applied
    └─ Pods evicted after tolerationSeconds (default ~300s) and rescheduled elsewhere
 ```
 
-That timeline answers the frequent follow-up "how long until it recovers or the Pods move?" - roughly 40 seconds to be noticed, about 5 minutes before Pods are evicted, and both are tunable. Pods on the node are **not** killed instantly, which is deliberate: a brief kubelet restart should not cause mass rescheduling.
+That timeline answers the frequent follow-up "how long until it recovers or the Pods move?" - roughly 50 seconds to be noticed, about 5 minutes before Pods are evicted, and both are tunable. Pods on the node are **not** killed instantly, which is deliberate: a brief kubelet restart should not cause mass rescheduling.
 
 ### The ordered checklist
 
@@ -82,7 +82,7 @@ Different symptom, overlapping causes, and asked just as often:
 
 ### Making it safe while you work
 
-Cordon first so nothing new lands on it, then drain respecting PodDisruptionBudgets; if Pods will not evict, check the PDB rather than reaching for `--force`. For hosts where the kubelet is unreachable, `kubectl debug node/<name> -it --image=busybox` gives you a privileged Pod with the host filesystem mounted - the way to investigate a node you cannot SSH into. And when the answer is "replace it", terminate the instance and let the node group rebuild rather than nursing a broken host.
+Cordon first so nothing new lands on it, then drain respecting PodDisruptionBudgets; if Pods will not evict, check the PDB rather than reaching for `--force`. For hosts where the kubelet is unreachable, `kubectl debug node/<name> -it --profile=sysadmin --image=busybox` gives you a privileged Pod with the host filesystem mounted - the way to investigate a node you cannot SSH into. And when the answer is "replace it", terminate the instance and let the node group rebuild rather than nursing a broken host.
 
 ## Example
 
@@ -93,7 +93,7 @@ kubectl describe node ip-10-0-3-14 | sed -n '/Conditions/,/Addresses/p'
 kubectl get events --field-selector involvedObject.name=ip-10-0-3-14 --sort-by=.lastTimestamp
 
 # 2. no SSH? get a shell with the host mounted at /host
-kubectl debug node/ip-10-0-3-14 -it --image=busybox
+kubectl debug node/ip-10-0-3-14 -it --profile=sysadmin --image=busybox
 chroot /host
 systemctl status kubelet containerd
 journalctl -u kubelet --since -20m --no-pager | tail -50
@@ -126,7 +126,7 @@ kubectl get csr | grep -i pending                       # kubelet serving certs 
 ## Interview tips
 
 - Define `NotReady` precisely - the kubelet has stopped posting healthy status - and then say the three families of cause: kubelet/runtime down, node cannot reach the API server, or a resource pressure condition. Structure beats a list of commands.
-- Give the timeline: ~40 s to be marked NotReady, ~5 min before Pods are evicted, then rescheduled. That earns credit because it explains observed behaviour rather than reciting defaults.
+- Give the timeline: ~50 s to be marked NotReady, ~5 min before Pods are evicted, then rescheduled. That earns credit because it explains observed behaviour rather than reciting defaults.
 - Say "read the conditions first" and name what each one implies. `DiskPressure`, `MemoryPressure`, `PIDPressure`, `NetworkUnavailable` are the interview's expected vocabulary.
 - Volunteer the one-node-versus-many split. Escalating to the control plane, CNI DaemonSet, or a certificate when many nodes fail together is exactly the judgement being tested by "29 of 30 nodes are Ready".
 - Name the two commands that actually solve it in practice: `journalctl -u kubelet` and `kubectl describe node`. Add `kubectl debug node/...` for hosts you cannot SSH into - that detail signals real operational experience.

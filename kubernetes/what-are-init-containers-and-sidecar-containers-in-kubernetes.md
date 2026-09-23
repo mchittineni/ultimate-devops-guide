@@ -12,7 +12,7 @@ tags:
 
 # What are init containers and sidecar containers in Kubernetes?
 
-**Short answer:** Both are extra containers in the same Pod, sharing its network namespace and volumes, but they differ in **lifecycle**. An **init container** runs to completion **before** any application container starts; several run strictly in order, and if one fails the Pod restarts it (per `restartPolicy`) and the application never starts. That makes init containers the right place for one-off preconditions: wait for a dependency, run a schema migration, fetch a secret or a config file, fix volume permissions. A **sidecar** runs _alongside_ the application for the Pod's whole life - log shipper, metrics exporter, service-mesh proxy, secret-refresher. Since Kubernetes 1.29 a sidecar is expressed properly as **an init container with `restartPolicy: Always`**, which fixes the two long-standing problems: the sidecar starts before the app and shuts down after it, and it no longer blocks Jobs from ever completing.
+**Short answer:** Both are extra containers in the same Pod, sharing its network namespace and volumes, but they differ in **lifecycle**. An **init container** runs to completion **before** any application container starts; several run strictly in order, and if one fails the Pod restarts it (per `restartPolicy`) and the application never starts. That makes init containers the right place for one-off preconditions: wait for a dependency, run a schema migration, fetch a secret or a config file, fix volume permissions. A **sidecar** runs _alongside_ the application for the Pod's whole life - log shipper, metrics exporter, service-mesh proxy, secret-refresher. Since Kubernetes 1.29 (on by default; GA in 1.33) a sidecar is expressed properly as **an init container with `restartPolicy: Always`**, which fixes the two long-standing problems: the sidecar starts before the app and shuts down after it, and it no longer blocks Jobs from ever completing.
 
 ## Detail
 
@@ -35,7 +35,7 @@ Historically a sidecar was just another entry in `containers[]`, which caused tw
 1. **No ordering guarantee.** The app could start and issue requests before the mesh proxy or the Vault agent was ready, so the first requests failed. Teams worked around it with sleeps and readiness gates.
 2. **Jobs never finished.** A `Job` completes when all its containers exit; a log shipper that never exits keeps the Job running forever. This is the standard "my CronJob never completes" cause.
 
-The **native sidecar** (`initContainers` entry with `restartPolicy: Always`, stable from 1.29) fixes both: it starts before the app containers, keeps running, restarts independently if it dies, is **ignored** when deciding whether a Job has completed, and is terminated only after the application containers have stopped - so log lines and traces from shutdown still get shipped.
+The **native sidecar** (`initContainers` entry with `restartPolicy: Always`, beta and on by default from 1.29, GA in 1.33) fixes both: it starts before the app containers, keeps running, restarts independently if it dies, is **ignored** when deciding whether a Job has completed, and is terminated only after the application containers have stopped - so log lines and traces from shutdown still get shipped.
 
 ### What they share, and why that is the point
 
@@ -72,7 +72,7 @@ spec:
           envFrom: [{ secretRef: { name: api-secrets } }]
         # 2. native sidecar: starts before the app, stops after it, restarts on its own
         - name: log-shipper
-          image: fluent/fluent-bit:3.1
+          image: fluent/fluent-bit:4.0
           restartPolicy: Always # <- this is what makes it a sidecar
           volumeMounts: [{ name: logs, mountPath: /var/log/app }]
           resources: { requests: { cpu: 20m, memory: 64Mi }, limits: { memory: 128Mi } }
@@ -95,7 +95,7 @@ spec:
       restartPolicy: OnFailure
       initContainers:
         - name: metrics-pusher
-          image: prom/pushgateway-sidecar:latest
+          image: registry.example.com/metrics-pusher:1.2.0 # pushes to a Pushgateway
           restartPolicy: Always # sidecar: does not keep the Job "running"
       containers:
         - name: report
@@ -117,7 +117,7 @@ kubectl debug -it api-7f4c2b --image=nicolaka/netshoot --target=api
 
 - Frame it as lifecycle: init containers run **to completion before** the app, sequentially; sidecars run **for the life of** the Pod. Say they share the Pod's network namespace and volumes, which is what makes both patterns possible.
 - Give two or three concrete init-container uses - wait for a dependency, run migrations, `chown` a volume so a non-root container can write. Concrete beats definitional here.
-- Volunteer the native sidecar change (`initContainers` + `restartPolicy: Always`, 1.29+) and the two problems it solves: startup ordering versus the mesh proxy, and Jobs that never complete. Very few candidates mention this, and it is current.
+- Volunteer the native sidecar change (`initContainers` + `restartPolicy: Always`, on by default since 1.29, GA in 1.33) and the two problems it solves: startup ordering versus the mesh proxy, and Jobs that never complete. Very few candidates mention this, and it is current.
 - If asked how to make one container start before another in the same Pod, say init container. If the two things are separate Deployments, say Kubernetes does not order workloads - use readiness probes and client retries - because that is the trap in the question.
 - Mention the resource-request rule (`max(init) vs sum(app)`) if sizing comes up; it explains a Pod that will not schedule for no obvious reason.
 - Push back thoughtfully on sidecar sprawl: a DaemonSet log collector or direct `/metrics` exposure is usually cheaper than a sidecar per Pod, and name the "sidecar tax". See [what is a sidecar pattern](../advanced-devops-cloud/what-is-a-sidecar-pattern.md), [running a service mesh in production without the sidecar tax](../api-gateway-and-service-mesh/how-do-you-run-a-service-mesh-in-production-without-the-sidecar-tax.md), [troubleshooting a Job or CronJob that never completes](./how-do-you-troubleshoot-a-kubernetes-job-or-cronjob-that-never-completes.md), and [what are DaemonSets in Kubernetes](../container-orchestration-advanced/what-are-daemonsets-in-kubernetes.md).

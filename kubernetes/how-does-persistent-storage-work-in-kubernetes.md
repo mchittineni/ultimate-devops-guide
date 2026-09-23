@@ -27,7 +27,7 @@ Pod ──mounts──> PVC ──bound to──> PV ──backed by──> real
 - **PVC** - namespaced, part of the application. Requests size, access mode, optionally a class and a selector.
 - **PV** - cluster-scoped, represents real capacity. Carries the CSI driver handle, capacity, access modes, reclaim policy, and node affinity (for zonal disks).
 - **StorageClass** - the "kind of storage available here". Holds the provisioner, parameters (disk type, IOPS, filesystem, encryption key), `reclaimPolicy`, `allowVolumeExpansion`, and `volumeBindingMode`. One class is usually marked default.
-- **CSI driver** - the out-of-tree plugin that actually creates, attaches, and mounts the device. In-tree cloud providers are gone; everything is CSI now.
+- **CSI driver** - the out-of-tree plugin that actually creates, attaches, and mounts the device. The in-tree cloud volume plugins (EBS, Azure Disk, GCE PD, and others) have been migrated to CSI and removed; new storage integrations are CSI-only.
 
 Binding is one-to-one and exclusive: a bound PV serves exactly one PVC.
 
