@@ -39,6 +39,22 @@ In most organisations, the dominant components are **waiting for code review** a
 
 **Flow efficiency** - active work time divided by total elapsed time - is the diagnostic that reveals how much of your lead time is pure queueing. Typical values under 15% are common and eye-opening.
 
+## Example
+
+Lead time for every commit in a release, computed from Git and the deploy timestamp:
+
+```bash
+#!/usr/bin/env bash
+# usage: ./lead-time.sh v1.41.0 v1.42.0 2026-09-23T14:05:00Z
+set -euo pipefail
+prev=$1; curr=$2; deployed=$(date -d "$3" +%s)   # GNU date; use gdate on macOS
+
+git log --format='%ct' "$prev..$curr" \
+  | awk -v d="$deployed" '{ print (d - $1) / 3600 }' \
+  | sort -n \
+  | awk '{ a[NR]=$1 } END { printf "commits=%d median_h=%.1f max_h=%.1f\n", NR, a[int((NR+1)/2)], a[NR] }'
+```
+
 ## Interview tips
 
 - Distinguish lead time from cycle time explicitly; it is a frequent point of confusion.

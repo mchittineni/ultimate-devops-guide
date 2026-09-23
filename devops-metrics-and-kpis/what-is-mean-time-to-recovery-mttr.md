@@ -22,6 +22,8 @@ tags:
 - **MTTR** - mean time to _recover/restore_: incident begins → service restored. (Sometimes "repair", which is narrower.)
 - **MTBF** - mean time _between_ failures: reliability of the component.
 
+**DORA's version is narrower.** Since 2023 DORA calls it _failed deployment recovery time_: how long it takes to restore service after a **change** caused an impairment - not recovery from every incident (a cloud region outage is not counted). In the 2024 model it moved from the stability group to throughput, because it depends on how fast you can ship a fix.
+
 For distributed systems, MTTR usually matters more than MTBF. Failures are inevitable; the differentiator is how fast you notice and recover.
 
 **What drives it down**
@@ -34,6 +36,22 @@ For distributed systems, MTTR usually matters more than MTBF. Failures are inevi
 **Measure it honestly.** Use the mean _and_ the distribution - a single 12-hour incident distorts an average built from twenty 5-minute ones. Report the median and p90 alongside, and segment by severity.
 
 **The fastest single win** in most organisations is making rollback trivial and rehearsed. If the first action for any incident can be "revert the last deploy", recovery time collapses.
+
+## Example
+
+Median and p90 time to restore by severity, from the incident tool's own timestamps:
+
+```sql
+SELECT severity,
+       count(*) AS incidents,
+       percentile_cont(0.5) WITHIN GROUP (ORDER BY restored_at - started_at) AS median_ttr,
+       percentile_cont(0.9) WITHIN GROUP (ORDER BY restored_at - started_at) AS p90_ttr,
+       avg(restored_at - started_at)                                        AS mean_ttr
+  FROM incidents
+ WHERE started_at >= now() - interval '90 days'
+ GROUP BY severity
+ ORDER BY severity;
+```
 
 ## Interview tips
 

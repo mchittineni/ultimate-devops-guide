@@ -37,11 +37,32 @@ A deployment that fails in the pipeline and never reaches production is _not_ a 
 
 **Beware the perverse incentive.** Optimising change failure rate alone encourages deploying less often - which is exactly wrong. Always read it alongside deployment frequency and lead time.
 
+## Example
+
+Change failure rate from deployments linked to incidents or rollbacks within 24 hours:
+
+```sql
+SELECT date_trunc('month', d.deployed_at) AS month,
+       count(*)                           AS deploys,
+       count(*) FILTER (WHERE d.rolled_back
+                        OR EXISTS (SELECT 1 FROM incidents i
+                                    WHERE i.caused_by_deploy_id = d.id
+                                      AND i.severity IN ('sev1','sev2'))) AS failed,
+       round(100.0 * count(*) FILTER (WHERE d.rolled_back
+                        OR EXISTS (SELECT 1 FROM incidents i
+                                    WHERE i.caused_by_deploy_id = d.id
+                                      AND i.severity IN ('sev1','sev2'))) / count(*), 1) AS cfr_pct
+  FROM deployments d
+ WHERE d.environment = 'production'
+ GROUP BY 1 ORDER BY 1;
+```
+
 ## Interview tips
 
 - Insist on a written definition of failure; ambiguity makes the metric meaningless.
 - "Smaller batches" is the single highest-impact lever - say it with the reason.
 - Pair it with throughput metrics explicitly to show you understand balanced measurement.
+- Mention DORA's 2024 companion metric, rework rate (unplanned deployments to fix production issues), which catches failures that were quietly hotfixed rather than rolled back.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
