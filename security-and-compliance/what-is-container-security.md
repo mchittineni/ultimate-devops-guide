@@ -28,20 +28,27 @@ tags:
 ## Example
 
 ```yaml
-securityContext: # pod level
-  runAsNonRoot: true
-  runAsUser: 10001
-  fsGroup: 10001
-  seccompProfile: { type: RuntimeDefault }
-containers:
-  - name: app
-    image: ghcr.io/org/app@sha256:9f2a... # pinned by digest
-    securityContext: # container level
-      allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
-      capabilities: { drop: ["ALL"] }
-    resources:
-      limits: { cpu: "1", memory: 512Mi }
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+  namespace: prod # namespace labelled pod-security.kubernetes.io/enforce: restricted
+spec:
+  automountServiceAccountToken: false
+  securityContext: # pod level
+    runAsNonRoot: true
+    runAsUser: 10001
+    fsGroup: 10001
+    seccompProfile: { type: RuntimeDefault }
+  containers:
+    - name: app
+      image: ghcr.io/org/app@sha256:9f2a... # pinned by digest
+      securityContext: # container level
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities: { drop: ["ALL"] }
+      resources:
+        limits: { cpu: "1", memory: 512Mi }
 ```
 
 ## Interview tips
@@ -49,6 +56,8 @@ containers:
 - "Containers share the host kernel" is the sentence that frames why isolation is weaker than a VM.
 - Mounting `/var/run/docker.sock` is the classic dangerous pattern - name it.
 - Mention supply chain: signing, SBOM, and admission policies that verify signatures.
+- Know the enforcement mechanism: PodSecurityPolicy was removed in Kubernetes 1.25; Pod Security Admission (namespace labels `baseline`/`restricted`) is the built-in replacement, with Kyverno or Gatekeeper for anything more specific.
+- Name the trade-off: the hardened settings break images that expect root or a writable filesystem, so plan for `emptyDir` mounts for scratch paths and fix images rather than weakening the policy.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

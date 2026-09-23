@@ -38,7 +38,7 @@ permissions:
   id-token: write # OIDC only
 
 steps:
-  - uses: aws-actions/configure-aws-credentials@v4
+  - uses: aws-actions/configure-aws-credentials@v6
     with:
       role-to-assume: arn:aws:iam::123456789012:role/gha-deploy
       aws-region: eu-west-1 # short-lived credentials, no secrets stored

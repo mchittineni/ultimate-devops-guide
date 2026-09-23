@@ -33,11 +33,11 @@ Two consequences worth stating: **SOC 2 needs history**, so evidence collection 
 
 ### Enforce as early as possible
 
-1. **In code review** - IaC scanning (Checkov, tfsec, Trivy) failing the pull request on an unencrypted volume, a public bucket, or an over-broad security group. Cheapest possible place to catch it. See [how do you scan Infrastructure as Code before it is applied](../devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md).
+1. **In code review** - IaC scanning (Checkov, or Trivy, which absorbed tfsec) failing the pull request on an unencrypted volume, a public bucket, or an over-broad security group. Cheapest possible place to catch it. See [how do you scan Infrastructure as Code before it is applied](../devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md).
 2. **In the pipeline** - dependency and image scanning, secret scanning, SBOM generation, and signed artefacts. Gate on severity and exploitability so the gate stays credible.
 3. **At the cloud control plane** - AWS Service Control Policies, Azure Policy with `deny` effects, GCP Organization Policy: these make a violation **impossible**, not merely detected. "You cannot create an unencrypted disk in this organisation" is worth more than a hundred findings.
 4. **At the Kubernetes admission layer** - Kyverno or Gatekeeper enforcing non-root, resource limits, allowed registries, and required labels. Run new policies in audit mode first, then enforce. See [how do you enforce Kubernetes admission control with Kyverno or OPA Gatekeeper](../devsecops/how-do-you-enforce-kubernetes-admission-control-with-kyverno-or-opa-gatekeeper.md).
-5. **Continuously, at runtime** - AWS Config rules and conformance packs, Security Hub standards (including the PCI DSS and CIS packs), Azure Defender for Cloud regulatory compliance, GCP Security Command Center, plus CIS benchmark scanning on hosts and images. This is what catches anything created outside the pipeline and anything that drifted.
+5. **Continuously, at runtime** - AWS Config rules and conformance packs, Security Hub standards (including the PCI DSS and CIS packs), Microsoft Defender for Cloud regulatory compliance, GCP Security Command Center, plus CIS benchmark scanning on hosts and images. This is what catches anything created outside the pipeline and anything that drifted.
 
 Preventive controls are what change your posture; detective controls are what prove it and catch what prevention missed. Name both, and say which findings auto-remediate (tag a bucket, close a port, re-encrypt) versus which raise a ticket, because auto-remediation on the wrong control causes outages.
 
@@ -89,7 +89,6 @@ metadata:
   annotations:
     policies.kyverno.io/description: "PCI DSS 2.2 / SOC 2 CC6.1 baseline for CDE namespaces"
 spec:
-  validationFailureAction: Audit # switch to Enforce after reviewing the audit report
   background: true
   rules:
     - name: images-from-approved-registry-only
@@ -97,6 +96,7 @@ spec:
         any:
           - resources: { kinds: [Pod], namespaces: ["cde-*"] }
       validate:
+        failureAction: Audit # per rule since Kyverno 1.13; switch to Enforce after reviewing the report
         message: "Images must come from the signed internal registry"
         pattern:
           spec:
@@ -105,6 +105,7 @@ spec:
     - name: require-non-root-and-limits
       match: { any: [{ resources: { kinds: [Pod], namespaces: ["cde-*"] } }] }
       validate:
+        failureAction: Audit
         message: "Containers must run as non-root with resource limits set"
         pattern:
           spec:

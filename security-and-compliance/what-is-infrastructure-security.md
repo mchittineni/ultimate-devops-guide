@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**Identity and access.** The dominant control in cloud. Use roles and short-lived credentials rather than long-lived keys, enforce MFA, apply least privilege, and separate duties. Workload identity (IRSA on EKS, Workload Identity on GKE, managed identities on Azure) removes secrets from application configuration entirely.
+**Identity and access.** The dominant control in cloud. Use roles and short-lived credentials rather than long-lived keys, enforce MFA, apply least privilege, and separate duties. Workload identity (EKS Pod Identity or IRSA on EKS, Workload Identity on GKE, Entra Workload ID / managed identities on Azure) removes secrets from application configuration entirely.
 
 **Network.** Segment with VPCs, subnets, security groups, and NACLs. Keep databases in private subnets with no route to the internet. Use private endpoints for managed services. Inside Kubernetes, default-deny NetworkPolicies then allow explicitly.
 

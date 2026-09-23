@@ -36,9 +36,9 @@ Two cultural points make it work: security findings become normal backlog items 
 security:
   runs-on: ubuntu-latest
   steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: Secret scan
-      uses: gitleaks/gitleaks-action@v2
+      uses: gitleaks/gitleaks-action@v3
     - name: Dependency + image scan
       run: trivy image --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed app:${{ github.sha }}
     - name: IaC policy scan
