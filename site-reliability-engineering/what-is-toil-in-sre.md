@@ -38,6 +38,36 @@ tags:
 
 **Why it matters:** unmanaged toil grows with the service until the team has no capacity for engineering, at which point reliability stops improving and attrition begins.
 
+## Example
+
+```yaml
+# Before: a human deletes old logs on a node every morning (toil).
+# After: the kubelet rotates container logs, and a CronJob enforces retention for app files.
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: prune-app-logs
+  namespace: ops
+spec:
+  schedule: "0 3 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: prune
+              image: busybox:1.36
+              command: ["sh", "-c", "find /data/logs -name '*.log' -mtime +7 -delete"]
+              volumeMounts: [{ name: logs, mountPath: /data/logs }]
+          volumes:
+            - name: logs
+              persistentVolumeClaim: { claimName: app-logs }
+```
+
+Better still is eliminating the task: log to stdout and let the log pipeline own retention.
+
 ## Interview tips
 
 - Reciting the six criteria precisely is the highest-signal answer to this question.

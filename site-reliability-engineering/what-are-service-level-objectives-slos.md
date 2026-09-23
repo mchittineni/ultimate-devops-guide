@@ -29,7 +29,7 @@ tags:
 - Include latency as well as availability - a slow service is an unreliable service.
 - Fewer, meaningful SLOs beat many ignored ones. Start with one or two per critical user journey.
 
-**The error budget** is `1 − SLO`. At 99.9% over 30 days, that is 43.2 minutes of allowed failure. Burn-rate alerts fire when you are consuming the budget too quickly: a multi-window, multi-burn-rate alert (fast burn over 1 hour, slow burn over 6 hours) is the standard pattern, and it is far less noisy than threshold alerting.
+**The error budget** is `1 − SLO`. At 99.9% over 30 days, that is 43.2 minutes of allowed failure. Burn-rate alerts fire when you are consuming the budget too quickly: a multi-window, multi-burn-rate alert (pages for fast burns over 1 and 6 hours, a ticket for slow burn over 3 days, each paired with a short confirmation window) is the standard pattern, and it is far less noisy than threshold alerting.
 
 ## Example
 

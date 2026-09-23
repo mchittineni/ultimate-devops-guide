@@ -33,6 +33,19 @@ tags:
 
 **Say plainly what the anti-patterns are:** a "DevOps team" that is the old operations team renamed and still receives tickets; an SRE team with no authority to enforce an error budget policy, which makes SLOs decorative; a platform team that builds what it finds interesting rather than what teams need. Naming these is often what the interviewer is really probing.
 
+## Example
+
+```text
+The same goal - "deploy checkout safely, many times a day" - seen by each discipline
+
+DevOps (practice)      one team owns build, deploy, and run; CI/CD on every merge;
+                       DORA metrics reviewed monthly
+SRE (reliability)      SLO 99.9% with a burn-rate alert; canary gated on error ratio;
+                       error budget policy freezes risky changes when spent
+Platform (product)     a golden-path template that gives any new service CI/CD,
+                       canary delivery, SLO dashboards, and alerts on day one
+```
+
 ## Interview tips
 
 - Lead with "SRE is a concrete implementation of DevOps principles; platform engineering productises them" - it is the cleanest formulation.
