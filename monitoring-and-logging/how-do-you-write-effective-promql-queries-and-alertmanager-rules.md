@@ -21,8 +21,8 @@ Prometheus Query Language (PromQL) and Alertmanager form the core monitoring and
 
 - **Instant Vector vs Range Vector:** An instant vector returns the single newest sample per series; a range vector (`http_requests_total[5m]`) returns a window of historical samples.
 - **`rate()` vs `increase()`:**
-- `rate(http_requests_total[5m])`: Calculates per-second average rate of increase over a counter. Always use `rate()` on Counters, never on Gauges.
-- `increase(http_requests_total[1h])`: Calculates absolute count increase over the time window.
+  - `rate(http_requests_total[5m])`: Calculates per-second average rate of increase over a counter. Always use `rate()` on Counters, never on Gauges.
+  - `increase(http_requests_total[1h])`: Calculates absolute count increase over the time window.
 - **`histogram_quantile()`:** Calculates p90/p99 latency percentiles from Prometheus histogram buckets: `histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))`
 
 ### 2. Prometheus Alerting Rules Structure
@@ -31,8 +31,9 @@ Alert rules evaluate PromQL expressions continuously. If an expression evaluates
 
 ### 3. Alertmanager Routing & Inhibition
 
-- **Routing Trees:** Direct alerts to appropriate receivers (Slack, PagerDuty, Opsgenie) based on severity labels (`severity: critical` vs `severity: warning`).
+- **Routing Trees:** Direct alerts to appropriate receivers (Slack, PagerDuty, incident.io, Jira Service Management - Opsgenie reached end of sale in 2025 and end of support is April 2027) based on severity labels (`severity: critical` vs `severity: warning`).
 - **Inhibition Rules:** Suppress downstream notification spam when a root cause alert is already firing (e.g. inhibit `InstanceDown` warnings if `ClusterUnreachable` critical alert is firing).
+- **Validate before you ship:** `promtool check rules alerts.yml`, `promtool test rules` for unit tests of alert expressions, and `amtool check-config alertmanager.yml`.
 - **Group Waiting & Interval:** Buffer alerts (`group_wait: 30s`, `group_interval: 5m`) to send a single consolidated notification during incident cascades.
 
 ## Example
@@ -46,9 +47,9 @@ groups:
       # High Error Rate Alert
       - alert: HighHttpErrorRate
         expr: |
-          sum(rate(http_requests_total{status=~"5.."}[5m]))
+          sum by (service) (rate(http_requests_total{status=~"5.."}[5m]))
           /
-          sum(rate(http_requests_total[5m])) * 100 > 5
+          sum by (service) (rate(http_requests_total[5m])) * 100 > 5
         for: 3m
         labels:
           severity: critical
@@ -74,6 +75,7 @@ groups:
 ```yaml
 global:
   resolve_timeout: 5m
+  slack_api_url: 'https://hooks.slack.com/services/REPLACE/ME/TOKEN'
 
 route:
   group_by: ['alertname', 'cluster', 'service']
@@ -82,16 +84,13 @@ route:
   repeat_interval: 4h
   receiver: 'slack-notifications'
   routes:
-    - match:
-        severity: critical
+    - matchers: ['severity="critical"'] # `match:` is deprecated in favour of `matchers:`
       receiver: 'pagerduty-oncall'
 
 inhibit_rules:
-  # Inhibit node warnings if whole cluster is unreachable
-  - source_match:
-      alertname: 'ClusterDown'
-    target_match:
-      severity: 'warning'
+  # Inhibit warnings if the whole cluster is unreachable
+  - source_matchers: ['alertname="ClusterDown"']
+    target_matchers: ['severity="warning"']
     equal: ['cluster']
 
 receivers:
@@ -102,7 +101,7 @@ receivers:
 
   - name: 'pagerduty-oncall'
     pagerduty_configs:
-      - service_key: 'YOUR_PAGERDUTY_SERVICE_KEY'
+      - routing_key: 'YOUR_PAGERDUTY_EVENTS_V2_INTEGRATION_KEY' # Events API v2
         send_resolved: true
 ```
 

@@ -54,9 +54,14 @@ transforms:
     type: remap
     inputs: [k8s]
     source: |
-      . = parse_json!(.message) ?? { "message": .message, "level": "info" }
+      # merge JSON bodies into the event, keeping the kubernetes metadata
+      parsed, err = parse_json(.message)
+      if err == null && is_object(parsed) {
+        . = merge(., object!(parsed))
+      }
+      if !exists(.level) { .level = "info" }
       .service = .kubernetes.container_name
-      .env     = get_env_var!("CLUSTER_ENV")
+      .env = get_env_var("CLUSTER_ENV") ?? "unknown"
 
   drop_noise:
     type: filter
@@ -93,11 +98,16 @@ sinks:
   hot:
     type: loki
     inputs: [sample_success]
+    endpoint: http://loki-gateway.logging.svc
+    encoding: { codec: json }
     labels: { service: "{{ service }}", env: "{{ env }}", level: "{{ level }}" }
     # labels only - the log body stays unindexed in object storage
   archive:
     type: aws_s3
     inputs: [split_audit.general] # unsampled, compressed, cheap - operational replay, NOT audit retention
+    bucket: acme-logs-general
+    region: eu-west-1
+    encoding: { codec: json }
     compression: zstd
     key_prefix: "logs/%Y/%m/%d/"
     server_side_encryption: aws:kms
@@ -108,6 +118,9 @@ sinks:
   audit_archive:
     type: aws_s3
     inputs: [split_audit.audit] # only events explicitly classified as audit/compliance
+    bucket: acme-logs-audit
+    region: eu-west-1
+    encoding: { codec: json }
     compression: zstd
     key_prefix: "audit/%Y/%m/%d/"
     server_side_encryption: aws:kms
@@ -129,14 +142,14 @@ processors:
       - { name: sample-rest, type: probabilistic, probabilistic: { sampling_percentage: 1 } }
 ```
 
-```promql
-# Two alerts that pay for themselves.
+```yaml
+# Two alerts that pay for themselves (Prometheus rules on Vector's internal metrics).
 - alert: LogVolumeSpike
   expr: |
-    sum by (service) (rate(vector_component_sent_events_total[30m]))
-      > 3 * sum by (service) (rate(vector_component_sent_events_total[30m] offset 1d))
+    sum by (component_id) (rate(vector_component_received_events_total{component_type="kubernetes_logs"}[30m]))
+      > 3 * sum by (component_id) (rate(vector_component_received_events_total{component_type="kubernetes_logs"}[30m] offset 1d))
   for: 20m
-  annotations: { summary: "{{ $labels.service }} log volume 3x vs yesterday - check deploys" }
+  annotations: { summary: "Log ingest 3x vs yesterday - check recent deploys (per-service volume: add a log_to_metric transform)" }
 
 - alert: LoggingPipelineBackpressure
   expr: sum(rate(vector_buffer_discarded_events_total[5m])) > 0

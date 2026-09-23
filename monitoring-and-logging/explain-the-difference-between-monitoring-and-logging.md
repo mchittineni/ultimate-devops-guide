@@ -31,6 +31,23 @@ Traces are the third pillar: they follow a single request across services and ex
 
 The connective tissue is correlation IDs - a trace ID propagated through headers and included in every log line and metric exemplar. Without it, you are searching by timestamp and hoping.
 
+## Example
+
+```text
+The same failed request, seen by each signal
+
+metric  http_requests_total{service="checkout",route="/pay",code="502"}  +1
+        (one number in a counter shared by thousands of requests - cheap, alertable)
+
+log     {"ts":"2026-09-23T10:32:11Z","level":"error","service":"checkout",
+         "trace_id":"4bf92f3577b34da6a3ce929d0e0e4736","route":"/pay",
+         "msg":"payment provider timeout after 5000ms","provider":"acme-pay"}
+        (one record with the detail - searchable, expensive at volume)
+
+trace   4bf92f35...  checkout /pay 5.1s -> payments-client 5.0s (timeout)
+        (the same trace_id joins the log line to the request's path)
+```
+
 ## Interview tips
 
 - Mention the three pillars (metrics, logs, traces) and how you move between them.

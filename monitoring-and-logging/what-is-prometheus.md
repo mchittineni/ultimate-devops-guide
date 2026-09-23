@@ -21,6 +21,8 @@ tags:
 
 **Metric types:** counter (monotonic, use with `rate()`), gauge (goes up and down), histogram (bucketed observations, enables percentile estimation), and summary (client-side quantiles).
 
+**Prometheus 3** (released late 2024) brought a new UI, UTF-8 metric and label names, a native OTLP receiver, and remote-write 2.0; native histograms are the direction for latency metrics. Existing PromQL largely carries over, but check the migration guide for changed defaults when upgrading from 2.x.
+
 **Service discovery** integrates with Kubernetes, EC2, Consul, and file-based configs, so targets appear and disappear automatically as pods are scheduled.
 
 **Ecosystem:** Alertmanager for routing, grouping, silencing, and deduplicating alerts; Grafana for dashboards; exporters (node_exporter, blackbox_exporter, database exporters) for systems that cannot be instrumented directly; Thanos or Mimir for long-term storage, global query, and high availability.

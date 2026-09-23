@@ -21,9 +21,11 @@ tags:
 
 **Kibana** - search UI, dashboards, and alerting on top of Elasticsearch.
 
-**Beats** - lightweight shippers installed at the edge: Filebeat for logs, Metricbeat for metrics, Packetbeat for network data. The common modern topology is Filebeat → Kafka (buffer) → Logstash → Elasticsearch → Kibana, so an ingest spike or an Elasticsearch outage does not lose data.
+**Beats** - lightweight shippers installed at the edge: Filebeat for logs, Metricbeat for metrics, Packetbeat for network data. Elastic now steers new deployments towards **Elastic Agent** (centrally managed with Fleet), which bundles the Beats functionality in one agent. The common modern topology is Filebeat → Kafka (buffer) → Logstash → Elasticsearch → Kibana, so an ingest spike or an Elasticsearch outage does not lose data.
 
-Alternatives worth naming: OpenSearch (the open-source fork), and Grafana Loki, which indexes only labels rather than full text and is dramatically cheaper for high-volume Kubernetes logs.
+**Licensing** is a common follow-up: Elastic moved Elasticsearch and Kibana from Apache 2.0 to SSPL/Elastic License in 2021, which led AWS to fork them as OpenSearch (now governed by the Linux Foundation's OpenSearch Software Foundation); in 2024 Elastic added AGPLv3 as a third licence option, so Elasticsearch is again available under an OSI-approved licence.
+
+Alternatives worth naming: OpenSearch, and Grafana Loki, which indexes only labels rather than full text and is dramatically cheaper for high-volume Kubernetes logs.
 
 ## Example
 
