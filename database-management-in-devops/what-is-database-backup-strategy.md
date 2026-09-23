@@ -18,7 +18,7 @@ tags:
 **The layers**
 
 - **Full backups** - a complete copy on a schedule (typically daily or weekly), application-consistent.
-- **Incremental / differential** - changed blocks or pages between fulls, shortening the backup window.
+- **Incremental / differential** - changed blocks or pages between fulls, shortening the backup window. PostgreSQL 17 added native incremental base backups (`pg_basebackup --incremental` plus `pg_combinebackup`); before that, tools such as pgBackRest and WAL-G provided them.
 - **Continuous log archiving** - PostgreSQL WAL, MySQL binlog, SQL Server transaction log - shipped continuously. This is what enables **point-in-time recovery**: restore the last full backup then replay logs to the second before a bad migration ran.
 - **Snapshots** - fast volume-level copies; excellent for rapid recovery, but they live on the same storage system, so they are not a substitute for off-site backups.
 - **Logical dumps** (`pg_dump`, `mysqldump`) - portable and good for single-table recovery, but slow for large databases.
@@ -43,9 +43,12 @@ pg_basebackup -D /backup/base -Ft -z -Xs -P
 # postgresql.conf
 # archive_mode = on
 # archive_command = 'aws s3 cp %p s3://acme-db-wal/%f --sse aws:kms'
+#   (in production prefer pgBackRest or WAL-G: retries, parallelism, verification)
 
-# Restore to a precise moment
+# Restore to a precise moment (PostgreSQL 12+): restore the base backup, then
+# restore_command = 'aws s3 cp s3://acme-db-wal/%f %p'
 # recovery_target_time = '2026-03-14 09:14:00+00'
+touch "$PGDATA/recovery.signal"   # replaces the old recovery.conf file
 ```
 
 ## Interview tips
@@ -53,6 +56,7 @@ pg_basebackup -D /backup/base -Ft -z -Xs -P
 - Point-in-time recovery via log archiving is the capability that separates a real strategy from nightly dumps.
 - "Replication is not backup" is a line worth saying out loud.
 - Close with restore testing and the measured restore time - it is the most credible evidence.
+- The trade-off to name: shorter RPO means continuous log shipping and more storage; shorter RTO means snapshots or standbys, which cost more and do not protect against logical corruption on their own.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
