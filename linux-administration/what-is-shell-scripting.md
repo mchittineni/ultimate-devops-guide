@@ -49,7 +49,8 @@ main() {
   require pg_dump
   require gzip
 
-  local target="${BACKUP_DIR}/db-$(date +%Y%m%d-%H%M%S).sql.gz"
+  local target
+  target="${BACKUP_DIR}/db-$(date +%Y%m%d-%H%M%S).sql.gz"   # separate from `local` so errors are not masked (SC2155)
   log INFO "backing up to ${target}"
 
   pg_dump "$DATABASE_URL" | gzip > "${TMP}/dump.sql.gz"

@@ -11,7 +11,7 @@ tags:
 
 # How do you troubleshoot SSH failures, high CPU, and disk space on Linux servers?
 
-**Short answer:** Troubleshoot SSH failures by inspecting `/var/log/auth.log` and SSH client debug output (`ssh -vvv`), CPU spikes using `top`/`htop`/`vmstat` and `kill -9`, and disk space issues using `df -h`, `du -sh *`, and log retention automation (`logrotate` / cron cleanup).
+**Short answer:** Troubleshoot SSH failures by inspecting `/var/log/auth.log` and SSH client debug output (`ssh -vvv`), CPU spikes by identifying the process and its cause with `top`/`htop`/`pidstat`/`vmstat` before acting (graceful `SIGTERM` first, not `kill -9`), and disk space issues using `df -h`, `du -sh *`, and log retention automation (`logrotate` / cron cleanup).
 
 ## Detail
 
@@ -20,7 +20,8 @@ System administrators and DevOps engineers regularly encounter three baseline Li
 ### 1. SSH Connection Failures (`Permission denied` / `Timeout`)
 
 - **Connection Timeout:** Check network connectivity (Security Groups, firewalls `ufw`/`iptables`, route tables, subnet NACLs), check if `sshd` process is running (`systemctl status sshd`), and verify SSH listening port (default `22`).
-- **Permission Denied (publickey):** Check permissions on home directory (`700` or `755`), `.ssh` folder (`700`), and `.ssh/authorized_keys` file (`600`). If owned by incorrect user or readable by group/others, SSH daemon rejects authentication. Run verbose mode: `ssh -vvv user@server-ip`.
+- **Permission Denied (publickey):** Check permissions on home directory (`700` or `755`), `.ssh` folder (`700`), and `.ssh/authorized_keys` file (`600`). If owned by incorrect user or writable by group/others, `sshd` (with the default `StrictModes yes`) rejects the key. Run verbose mode: `ssh -vvv user@server-ip`, and read the server's view in `journalctl -u ssh` (Debian/Ubuntu unit name) or `-u sshd` (RHEL), or `/var/log/auth.log` / `/var/log/secure`.
+- **Algorithm mismatch:** OpenSSH 8.8+ disables `ssh-rsa` (RSA with SHA-1) signatures by default, so old clients or servers fail with "no matching host key type" or a silent key rejection. The fix is an Ed25519 key or `rsa-sha2-256/512`, not re-enabling SHA-1.
 
 ### 2. High CPU & Memory Consumption Troubleshooting
 
@@ -78,6 +79,8 @@ fi
 - Always mention `ssh -vvv` when asked about SSH connection issues — it pinpoints whether authentication, key exchange, or network connection failed.
 - Explain the `lsof | grep deleted` scenario: interviewers love asking why `df -h` shows 100% full even after `rm -rf /var/log/huge.log`.
 - Know `systemctl` commands (`systemctl status`, `journalctl -u sshd -n 50 --no-pager`) for service log inspection.
+- Prefer `logrotate` (with `copytruncate` or a `postrotate` reload) over ad-hoc `find ... -exec gzip` scripts for application logs: compressing or deleting a file a process still has open does not free the space and can lose lines. Keep the script for directories nothing writes to anymore.
+- For high CPU, find out _why_ before killing: `pidstat -u 1`, `top -H -p <pid>` for the hot thread, and `perf top` for the hot function. `kill -9` destroys the evidence and the process usually comes back.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
@@ -85,7 +88,7 @@ fi
 
 - [[What Bash scripting exercises come up in DevOps interviews?]] (`#502`): [What Bash scripting exercises come up in DevOps interviews?](../scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md)
 - [[How do you patch hundreds of servers safely?]] (`#430`): [How do you patch hundreds of servers safely?](../configuration-management/how-do-you-patch-hundreds-of-servers-safely.md)
-- [[What do you use Python for as a DevOps engineer?]] (`#267`): [What do you use Python for as a DevOps engineer?](../scripting-and-automation/what-do-you-use-python-for-as-a-devops-engineer.md)
+- [[How do you write a production-grade Bash script?]] (`#266`): [How do you write a production-grade Bash script?](../scripting-and-automation/how-do-you-write-a-production-grade-bash-script.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
