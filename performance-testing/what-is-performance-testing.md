@@ -30,19 +30,48 @@ tags:
 
 **Common pitfalls:** load generators that saturate before the system under test, unrealistic caching (same user, same product every request), missing think time, and the coordinated-omission problem where a struggling system's slow responses are silently under-sampled.
 
+## Example
+
+The objective from step 1 written as an executable k6 test - the thresholds are the pass/fail criteria:
+
+```javascript
+import http from "k6/http";
+import { sleep } from "k6";
+
+export const options = {
+  stages: [
+    { duration: "5m", target: 2000 },  // ramp to 2,000 concurrent users
+    { duration: "20m", target: 2000 }, // steady measurement window
+  ],
+  thresholds: {
+    "http_req_duration{name:checkout}": ["p(95)<400"],
+    http_req_failed: ["rate<0.001"],
+  },
+};
+
+export default function () {
+  http.post("https://staging.example.com/api/checkout", JSON.stringify({ cart: "c-123" }), {
+    headers: { "Content-Type": "application/json" },
+    tags: { name: "checkout" },
+  });
+  sleep(3); // think time
+}
+```
+
 ## Interview tips
 
 - Percentiles over averages is the single most reliable signal of experience here.
 - Mention monitoring the load generator itself - testing your own client's limits is a classic mistake.
 - Tie targets to SLOs so the test has a pass/fail meaning rather than producing a number nobody acts on.
+- Trade-off to acknowledge: a production-scale test environment is expensive, so many teams test a scaled-down copy and extrapolate carefully, or run controlled tests in production - be ready to say which you would choose and why.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
 ## Related Concepts
 
+- [[What is progressive delivery and how does it differ from traditional deployment strategies?]] (`#509`): [What is progressive delivery and how does it differ from traditional deployment strategies?](../core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md)
 - [[How do you prevent and handle secret leaks in CI/CD pipelines?]] (`#237`): [How do you prevent and handle secret leaks in CI/CD pipelines?](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)
 - [[Explain Docker Architecture]] (`#10`): [Explain Docker Architecture](../docker/explain-docker-architecture.md)
-- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
