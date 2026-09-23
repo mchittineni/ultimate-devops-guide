@@ -49,19 +49,19 @@ spec:
         - type: RequestHeaderModifier
           requestHeaderModifier:
             set: [{ name: X-Priority, value: batch }] # overwrite whatever arrived
-        - type: ExtensionRef
-          extensionRef: { kind: RateLimitPolicy, name: batch-100rps } # shed first
+        - type: ExtensionRef # RateLimitPolicy is an implementation-specific CRD
+          extensionRef: { group: example.com, kind: RateLimitPolicy, name: batch-100rps } # shed first
     - matches: [{ path: { value: /checkout } }]
       filters:
         - type: RequestHeaderModifier
           requestHeaderModifier:
             set: [{ name: X-Priority, value: interactive }]
         - type: ExtensionRef
-          extensionRef: { kind: RateLimitPolicy, name: interactive-5000rps } # protected
+          extensionRef: { group: example.com, kind: RateLimitPolicy, name: interactive-5000rps } # protected
 ```
 
 ```yaml
-# Envoy: reject at the door when concurrency is exceeded - cheaper than queueing.
+# Envoy cluster config: reject at the door when concurrency is exceeded - cheaper than queueing.
 circuit_breakers:
   thresholds:
     - priority: DEFAULT
@@ -73,15 +73,19 @@ outlier_detection: # eject failing hosts automatically
   consecutive_5xx: 5
   interval: 10s
   base_ejection_time: 30s
+# Envoy route config (retry_policy lives on the route, not the cluster):
 retry_policy:
   retry_on: "5xx,reset"
   num_retries: 2
-  retry_back_off: { base_interval: 0.05s, max_interval: 1s } # with jitter
+  retry_back_off: { base_interval: 0.05s, max_interval: 1s } # Envoy adds jitter itself
   per_try_timeout: 0.3s
 ```
 
 ```python
 # Service: deadline propagation, bounded queue, LIFO under pressure, priority shedding.
+# Sketch: now(), inflight(), downstream(), cache and durable_queue are app-specific helpers.
+import asyncio
+
 MAX_INFLIGHT = 200          # concurrency, not rps - tracks the real resource
 HARD_CEILING = int(MAX_INFLIGHT * 1.25)
 
@@ -135,7 +139,10 @@ sum(rate(requests_shed_total[1m])) by (priority)
 max(queue_depth) by (service)
 sum(circuit_breaker_open) by (dependency)
 histogram_quantile(0.99, sum by (le) (rate(request_duration_seconds_bucket[5m])))
+```
 
+```yaml
+# Prometheus alerting rule
 - alert: SheddingStarted
   expr: sum(rate(requests_shed_total{priority!="batch"}[5m])) > 0
   for: 2m

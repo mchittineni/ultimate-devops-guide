@@ -35,7 +35,7 @@ Enable and read the access log. One line per request tells you the client, the t
 
 **504 - gateway timeout.** Either the load balancer's idle timeout is shorter than a legitimately slow endpoint (raise it deliberately for that route, or make the endpoint asynchronous) or the backend is saturated - queueing, connection-pool exhaustion, or a slow dependency. Check target response time percentiles and target queue depth rather than averages. See [how do you troubleshoot a database that is slow or timing out under load](../database-management-in-devops/how-do-you-troubleshoot-a-database-that-is-slow-or-timing-out-under-load.md).
 
-**Capacity of the load balancer itself.** A very sudden spike can outpace an ALB/NLB's scaling; on AWS the tell is a rise in `SurgeQueueLength`/rejected connections or `HTTPCode_ELB_5XX` with healthy targets. Pre-warm or use an architecture that absorbs bursts (CloudFront in front, or scheduled scaling before a known event).
+**Capacity of the load balancer itself.** A very sudden spike can outpace an ALB/NLB's scaling; on AWS the tell is a rise in `RejectedConnectionCount` (ALB) or `HTTPCode_ELB_5XX` with healthy targets (`SurgeQueueLength`/`SpilloverCount` are the Classic Load Balancer equivalents). For a known event, reserve capacity ahead of time (ALB and NLB support Load Balancer Capacity Unit reservation, which replaced the old support-ticket "pre-warm"), or use an architecture that absorbs bursts (CloudFront in front, or scheduled scaling before the event).
 
 ### Step 3: uneven distribution
 
@@ -43,7 +43,7 @@ Even distribution is not the default in as many cases as people assume:
 
 - **Sticky sessions** pin a client to one target for the cookie's lifetime, so a few heavy clients create hot targets. Remove stickiness by externalising session state (Redis or a database) - the durable fix.
 - **Long-lived connections with connection-level balancing.** A layer 4 balancer distributes _connections_, not requests, so gRPC, HTTP/2, and WebSocket clients that open one connection and multiplex thousands of requests will hammer whichever target they landed on. The fix is a layer 7 balancer, request-level load balancing (a service mesh or a client-side load balancer), or periodic connection recycling (`max_connection_age`). See [what is the difference between a layer 4 and a layer 7 load balancer](./what-is-the-difference-between-a-layer-4-and-a-layer-7-load-balancer.md).
-- **Cross-zone load balancing disabled** (the default for NLB and for Kubernetes `externalTrafficPolicy: Local`). With 2 targets in one zone and 8 in another, each zone still receives ~50% of traffic, so the two targets are overloaded. Enable cross-zone balancing, or keep the target count balanced per zone.
+- **Cross-zone load balancing disabled** (the default for NLB and GWLB; ALB has it on by default but it can be turned off per target group). Kubernetes `externalTrafficPolicy: Local` produces the same skew one level down, because traffic only goes to nodes that host a Pod. With 2 targets in one zone and 8 in another, each zone still receives ~50% of traffic, so the two targets are overloaded. Enable cross-zone balancing, or keep the target count balanced per zone.
 - **DNS-level and client caching.** Clients that resolve the load balancer's DNS once and cache the IP (some JVM defaults, or a proxy with a long TTL cache) pin themselves to one load-balancer node.
 - **Algorithm mismatch.** Round-robin is unfair when request cost varies wildly; least-outstanding-requests handles heterogeneous work far better. And uneven **target capacity** - a mixed instance-type target group - looks like an algorithm bug but is a placement bug.
 - **Keep-alive plus round-robin** is a real subtlety: connections are balanced, and if some connections are far busier than others, the request distribution is not.
@@ -95,8 +95,11 @@ aws elbv2 describe-target-group-attributes --target-group-arn "$TG" \
 # The settings that prevent most of the above - managed as code, not by hand
 resource "aws_lb" "prod" {
   idle_timeout                     = 60    # app keep-alive MUST exceed this
-  enable_cross_zone_load_balancing = true  # off by default on NLB: causes zone skew
-  access_logs { bucket = aws_s3_bucket.lb_logs.id, enabled = true }  # non-negotiable
+  enable_cross_zone_load_balancing = true  # NLB/GWLB only (off by default): zone skew
+  access_logs {                              # non-negotiable
+    bucket  = aws_s3_bucket.lb_logs.id
+    enabled = true
+  }
 }
 
 resource "aws_lb_target_group" "api" {
@@ -113,7 +116,10 @@ resource "aws_lb_target_group" "api" {
     interval            = 10
     matcher             = "200"
   }
-  stickiness { enabled = false, type = "lb_cookie" }  # externalise session state
+  stickiness {                             # externalise session state instead
+    enabled = false
+    type    = "lb_cookie"
+  }
 }
 ```
 

@@ -37,6 +37,36 @@ tags:
 - A documented, versioned runbook naming decision-makers and communication channels.
 - **Regular, rehearsed testing** - a game day or full failover exercise. An untested DR plan should be assumed not to work.
 
+**Trade-off.** Every step up the table buys a lower RPO/RTO with standing cost and operational complexity - an active-active estate roughly doubles infrastructure and makes data consistency a design problem. And replication is not a backup: corruption, a bad migration, or ransomware replicates to the standby within seconds, so you need point-in-time, immutable copies as well.
+
+## Example
+
+```hcl
+# Ransomware-resistant backups: a copy into a separate account's vault with Vault Lock.
+resource "aws_backup_plan" "prod" {
+  name = "prod-daily"
+  rule {
+    rule_name         = "daily"
+    target_vault_name = aws_backup_vault.local.name
+    schedule          = "cron(0 3 * * ? *)"
+    lifecycle { delete_after = 35 }
+
+    copy_action { # cross-account, cross-region copy
+      destination_vault_arn = "arn:aws:backup:eu-west-1:222222222222:backup-vault:dr-vault"
+      lifecycle { delete_after = 35 }
+    }
+  }
+}
+
+# In the DR account: compliance-mode lock - nobody, including root, can delete early.
+resource "aws_backup_vault_lock_configuration" "dr" {
+  backup_vault_name   = aws_backup_vault.dr.name
+  min_retention_days  = 30
+  max_retention_days  = 365
+  changeable_for_days = 3 # grace period, after which the lock is immutable
+}
+```
+
 ## Interview tips
 
 - Derive RPO/RTO from business impact, then pick the strategy - never the other way round.
