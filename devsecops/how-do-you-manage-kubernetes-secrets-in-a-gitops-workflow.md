@@ -55,7 +55,7 @@ The **Secrets Store CSI driver** is the alternative: it mounts secrets directly 
 
 Whichever pattern you choose, a Kubernetes `Secret` is **base64, not encryption**, so:
 
-- **Encryption at rest** on etcd with a **KMS provider**, so the key is not on the control-plane host. On managed clusters, verify the provider has it enabled (EKS supports KMS envelope encryption; AKS and GKE have equivalents).
+- **Encryption at rest** on etcd with a **KMS provider**, so the key is not on the control-plane host. On managed clusters, verify the provider has it enabled (EKS now applies KMS envelope encryption to all Kubernetes API data by default on supported versions and lets you bring a customer-managed key; AKS and GKE have equivalents).
 - **RBAC**: `get`/`list` on secrets in a namespace is equivalent to reading every credential in it. Audit for wildcards, and disable `automountServiceAccountToken` where the workload does not call the API.
 - **Mount as files, not env vars** - env vars leak into crash dumps, child processes, and log lines, and they never refresh.
 - **Admission policy** (Kyverno/Gatekeeper) rejecting any `Secret` with a literal value in a GitOps-managed path, which is how you enforce the rule rather than document it.
@@ -70,13 +70,13 @@ Whichever pattern you choose, a Kubernetes `Secret` is **base64, not encryption*
 
 ### Dynamic secrets, the strongest version
 
-Vault (and cloud equivalents) can **generate** a database credential on request with a short lease and revoke it on expiry. The application asks for a credential, gets one valid for an hour, and there is nothing long-lived to store, leak, or rotate - rotation becomes the normal operating mode rather than an event. Combine with the Vault Agent Injector or the CSI driver and Git holds only the role name. If an interviewer asks how you would design this from scratch, this is the answer to build towards.
+Vault (BSL-licensed since 2023 - OpenBao is the MPL-licensed community fork with a compatible API - and cloud equivalents) can **generate** a database credential on request with a short lease and revoke it on expiry. The application asks for a credential, gets one valid for an hour, and there is nothing long-lived to store, leak, or rotate - rotation becomes the normal operating mode rather than an event. Combine with the Vault Agent Injector or the CSI driver and Git holds only the role name. If an interviewer asks how you would design this from scratch, this is the answer to build towards.
 
 ## Example
 
 ```yaml
 # Pattern 2 (usual production): Git holds a POINTER, not a value.
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ClusterSecretStore
 metadata: { name: aws-secrets }
 spec:
@@ -88,7 +88,7 @@ spec:
         jwt: # IRSA: the operator has no static credential
           serviceAccountRef: { name: external-secrets, namespace: external-secrets }
 ---
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: payments-secrets
@@ -152,7 +152,7 @@ kubectl get secret -n kube-system -l sealedsecrets.bitnami.com/sealed-secrets-ke
 
 ```bash
 # Guardrails: make the rule enforceable, not aspirational
-gitleaks detect --no-banner --redact                    # pre-commit and in CI
+gitleaks git --no-banner --redact                       # pre-commit and in CI (`detect` is deprecated since v8.19)
 grep -rlE '^kind: Secret' --include='*.yaml' apps/ \
   | xargs -r grep -lE '^\s*(data|stringData):' \
   && { echo "plaintext Secret manifest committed"; exit 1; }
@@ -183,8 +183,8 @@ kubectl rollout restart deploy/payments -n prod
 ## Related Concepts
 
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
-- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
