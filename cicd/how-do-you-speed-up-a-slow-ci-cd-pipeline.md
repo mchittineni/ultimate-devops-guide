@@ -66,19 +66,23 @@ Pipeline: checkout-api          before -> after
 # GitHub Actions: cache keyed on the lockfile, with a fallback, plus sharding
 jobs:
   test:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         shard: [1, 2, 3, 4]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with: { fetch-depth: 1 }
-      - uses: actions/cache@v4
+      - uses: pnpm/action-setup@v6 # installs the pnpm version pinned in package.json "packageManager"
+      - id: pnpm-store
+        run: echo "path=$(pnpm store path)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v6
         with:
-          path: ~/.pnpm-store
-          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-
+          path: ${{ steps.pnpm-store.outputs.path }}
+          key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: pnpm-${{ runner.os }}-
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test --shard=${{ matrix.shard }}/4
+      - run: pnpm test --shard=${{ matrix.shard }}/4 # Jest/Vitest shard syntax
 ```
 
 ## Interview tips

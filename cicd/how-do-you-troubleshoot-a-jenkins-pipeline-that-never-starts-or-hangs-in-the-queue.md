@@ -38,7 +38,7 @@ The queue item's tooltip states the reason - read it before theorising. The recu
 
 - **No executor available.** The controller or agent has fewer executors than concurrent demand. Check total executors versus queue depth over time; if queue time is a large share of pipeline duration, you have a capacity problem, not a build problem. See [how do you speed up a slow CI/CD pipeline](./how-do-you-speed-up-a-slow-ci-cd-pipeline.md).
 - **Label mismatch.** `agent { label 'linux-docker' }` matches nothing because the agent is gone, renamed, or the label was misspelled. "Jenkins doesn't have label X" in the tooltip is definitive.
-- **Agent offline or disconnected.** Common reasons: the agent process died, the JNLP/SSH connection dropped, a Java version mismatch after an upgrade, the agent's disk is full (Jenkins takes agents offline below a free-space threshold), the workspace disk is exhausted, or the controller-to-agent version skew after a controller upgrade.
+- **Agent offline or disconnected.** Common reasons: the agent process died, the JNLP/SSH connection dropped, a Java version mismatch after an upgrade (current LTS lines require Java 21 or newer on the controller and every agent - Java 17 support ended with 2.555.1), the agent's disk is full (Jenkins takes agents offline below a free-space threshold), the workspace disk is exhausted, or the controller-to-agent version skew after a controller upgrade.
 - **Concurrency limits and locks.** `disableConcurrentBuilds()`, a `lock()` resource held by a hung build, throttle-category limits, or a `milestone` waiting on an earlier build. A stuck upstream build blocks everything behind it.
 - **Node offline by policy** - marked offline temporarily by an operator, or an ephemeral cloud agent that failed to provision (check the cloud plugin's log: quota exceeded, no capacity in the availability zone, bad AMI or pod template, image pull failure for Kubernetes agents).
 - **The controller itself is unhealthy.** A long GC pause, an exhausted thread pool, or a full `$JENKINS_HOME` disk stalls scheduling entirely; check the controller's load statistics and system log.
@@ -76,7 +76,7 @@ curl -s -u "$USER:$TOKEN" "$JENKINS/queue/api/json?tree=items[why,task[name],inQ
 # orders-api:   Waiting for next available executor on 'agent-03'
 
 # On the agent, the two things that take it offline silently
-df -h /var/lib/jenkins /tmp && java -version
+df -h /var/lib/jenkins /tmp && java -version   # must meet the controller's minimum (Java 21+ on current LTS)
 ```
 
 ## Interview tips
@@ -94,8 +94,8 @@ df -h /var/lib/jenkins /tmp && java -version
 ## Related Concepts
 
 - [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
-- [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

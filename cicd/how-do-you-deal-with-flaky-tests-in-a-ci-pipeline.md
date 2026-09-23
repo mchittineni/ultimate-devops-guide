@@ -66,18 +66,22 @@ Flake report - main branch, last 200 runs (retries counted as flakes)
 
 ```yaml
 # Quarantine as a non-blocking job, with the list under review - not a silent skip
+# (checkout and Python setup steps omitted; --count comes from pytest-repeat)
 jobs:
   test:
+    runs-on: ubuntu-latest
     steps:
-      - run: pytest -m "not quarantine" -p no:randomly --junitxml=results.xml
+      - run: pytest -m "not quarantine" --junitxml=results.xml
   test-quarantine:
+    runs-on: ubuntu-latest
     continue-on-error: true # visible, reported, does not gate the merge
     steps:
       - run: pytest -m quarantine --junitxml=quarantine.xml
   new-test-stability:
+    runs-on: ubuntu-latest
     steps:
       # a new or changed test must pass 10 consecutive runs before it can gate
-      - run: pytest --count=10 $(git diff --name-only origin/main -- 'tests/**')
+      - run: pytest --count=10 $(git diff --name-only --diff-filter=AM origin/main -- 'tests/**')
 ```
 
 ## Interview tips
@@ -93,9 +97,9 @@ jobs:
 
 ## Related Concepts
 
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
 - [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
-- [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

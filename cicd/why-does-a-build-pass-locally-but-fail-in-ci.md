@@ -48,7 +48,7 @@ git status --porcelain
 git clean -ndx            # dry run: what a clean checkout would delete
 
 # 2. Reproduce the CI environment exactly, then run the CI command in it.
-docker run --rm -it -v "$PWD":/src -w /src node:20.11.1-bookworm \
+docker run --rm -it -v "$PWD":/src -w /src node:24.21.0-bookworm \
   bash -lc 'npm ci && npm test'
 
 # 3. Diff the two environments where the failures usually hide.
@@ -58,12 +58,12 @@ node --version; npm --version; echo "$TZ"; locale; nproc; free -m
 ```yaml
 # The environment declared in the repository, read by CI - not duplicated in it
 # .tool-versions (asdf/mise), consumed by the pipeline step below
-# nodejs 20.11.1
-# python 3.12.2
-# terraform 1.7.5
+# nodejs 24.21.0
+# python 3.14.7
+# terraform 1.16.4
 
 steps:
-  - uses: actions/checkout@v4
+  - uses: actions/checkout@v7
     with: { fetch-depth: 0, submodules: recursive, lfs: true }
   - run: |
       test -f .tool-versions || { echo "toolchain not declared"; exit 1; }
@@ -86,7 +86,7 @@ steps:
 
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
 - [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
-- [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

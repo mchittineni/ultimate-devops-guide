@@ -69,7 +69,7 @@ Put policy in the template and in the platform, not in a wiki:
 
 ### Measure it
 
-Track the four DORA metrics per service (deployment frequency, lead time, change failure rate, MTTR) and the platform's own: p50/p95 pipeline duration, queue wait, flaky-test rate, cache hit rate, cost per build, and onboarding time for a new service. Publish them per team. Without numbers, "scaling CI/CD" is a vibe; with them, you can show that adding 50 services did not slow anyone down - and you can find the one pipeline that consumes 30% of the fleet.
+Track the DORA software delivery metrics per service (deployment frequency, change lead time, change failure rate, failed deployment recovery time - the old MTTR - and deployment rework rate, the fifth metric DORA added in 2024) and the platform's own: p50/p95 pipeline duration, queue wait, flaky-test rate, cache hit rate, cost per build, and onboarding time for a new service. Publish them per team. Without numbers, "scaling CI/CD" is a vibe; with them, you can show that adding 50 services did not slow anyone down - and you can find the one pipeline that consumes 30% of the fleet.
 
 ### Consolidating a mixed estate
 
@@ -96,21 +96,32 @@ jobs:
     runs-on: ${{ inputs.runner }}
     permissions: { contents: read, packages: write, id-token: write }
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      - uses: docker/build-push-action@5cd11c3a4ced054e52742c5fd54dca954e0edd85 # v6.7.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        id: build
         with:
           push: true
           tags: ghcr.io/acme/${{ inputs.service }}:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - run: cosign sign --yes ghcr.io/acme/${{ inputs.service }}:${{ github.sha }}
+      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+      # keyless signing via the job's OIDC token; sign the digest, never a mutable tag
+      - run: cosign sign --yes ghcr.io/acme/${{ inputs.service }}@${{ steps.build.outputs.digest }}
 
   deploy:
     needs: build
-    strategy: { matrix: { env: ${{ fromJSON(inputs.deploy_environments) }} } }
+    strategy:
+      matrix:
+        env: ${{ fromJSON(inputs.deploy_environments) }}
     environment: ${{ matrix.env }} # approvals and scoped secrets live here
     runs-on: ${{ inputs.runner }}
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - run: ./deploy.sh ${{ inputs.service }} ${{ matrix.env }} ${{ github.sha }}
 ```
 
@@ -121,6 +132,7 @@ on: { push: { branches: [main] }, pull_request: {} }
 jobs:
   pipeline:
     uses: acme/.github/.github/workflows/service.yml@v3 # pinned, versioned template
+    permissions: { contents: read, packages: write, id-token: write } # a called workflow cannot exceed the caller's grant
     with: { service: payments, runner: ubuntu-24.04-8core }
     secrets: inherit
 ```

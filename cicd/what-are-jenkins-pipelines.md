@@ -28,7 +28,7 @@ tags:
 - `post` - `always` / `success` / `failure` / `unstable` blocks for reporting and cleanup.
 - `options` - timeouts, retry, build retention, concurrency control.
 
-**Durability:** pipeline state is checkpointed, so a controller restart mid-build resumes rather than losing the run.
+**Durability:** pipeline state is checkpointed, so a controller restart mid-build can resume rather than lose the run - subject to the durability setting (`PERFORMANCE_OPTIMIZED` trades some resumability for speed) and to the agent still being connected. It is not high availability.
 
 **Shared libraries** live in their own repository under `vars/` and `src/`, letting you call `standardBuild(language: 'java')` from every team's Jenkinsfile and change the implementation centrally.
 
@@ -49,9 +49,19 @@ pipeline {
       when { branch 'main' }
       steps { timeout(time: 1, unit: 'HOURS') { input message: 'Deploy to production?' } }
     }
-    stage('Deploy') { agent { label 'deploy' } steps { sh './deploy.sh' } }
+    stage('Deploy') {
+      when { branch 'main' }
+      agent { label 'deploy' }
+      steps { sh './deploy.sh' }
+    }
   }
-  post { failure { emailext to: 'team@example.com', subject: "Failed: ${currentBuild.fullDisplayName}" } }
+  post {
+    failure {
+      emailext to: 'team@example.com',
+               subject: "Failed: ${currentBuild.fullDisplayName}",
+               body: "See ${env.BUILD_URL}"
+    }
+  }
 }
 ```
 
@@ -60,14 +70,15 @@ pipeline {
 - Recommend declarative, and be able to say precisely when you would drop into `script { }` blocks.
 - `parallel` plus per-stage agents is the standard answer to "how do you speed up a Jenkins build?"
 - Shared libraries are the answer to pipeline sprawl across many repositories.
+- Know the limit: pipeline Groovy runs on the controller (CPS-transformed), so heavy logic in the `Jenkinsfile` loads the controller - push real work into `sh` steps on agents.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
 ## Related Concepts
 
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
-- [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

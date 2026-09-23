@@ -20,7 +20,7 @@ Hardcoded credentials (AWS keys, database passwords, API tokens) committed to ve
 ### 1. Shift-Left Prevention (Pre-Commit & Push Hooks)
 
 - **Local Scanning:** Developers use pre-commit hooks running `gitleaks` or `trufflehog` to catch secrets before `git commit`.
-- **Repository Branch Protections:** Secret scanning integrated into GitHub/GitLab PR checks blocks merges containing credential entropy patterns.
+- **Server-side enforcement:** Local hooks are optional and bypassable (`--no-verify`), so enforce on the server too: GitHub secret scanning **push protection** and GitLab secret push protection reject a push that contains a recognised credential pattern, and a secret-scanning job in PR checks (gitleaks, TruffleHog) catches custom formats and blocks the merge.
 
 ### 2. Eliminating Long-Lived Static Secrets (OIDC & Vault)
 
@@ -38,7 +38,7 @@ If a secret is exposed in a commit or pipeline log:
 
 1. **Revoke & Rotate:** Immediately invalidate the leaked credential in the target system (AWS IAM, DB, API provider).
 2. **Audit Logs:** Review CloudTrail / audit logs for any access made using the leaked key between the commit timestamp and revocation.
-3. **Purge Git History:** Use `git-filter-repo` or BFG Repo-Cleaner to remove the secret from Git history (simply deleting the file in a new commit leaves the secret accessible in historical commits).
+3. **Purge Git History:** Use `git filter-repo` (or BFG Repo-Cleaner) to remove the secret from Git history (simply deleting the file in a new commit leaves the secret accessible in historical commits). Purging is hygiene, not remediation: forks, clones, CI caches, and the hosting provider's cached views may already hold it, which is why step 1 is revocation.
 
 ## Example
 
@@ -60,13 +60,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Configure AWS Credentials via OIDC
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsCI-Role
           aws-region: us-east-1
+
+      - uses: hashicorp/setup-terraform@v4
 
       - name: Run Terraform Apply
         run: |
@@ -79,7 +81,7 @@ Sample `.pre-commit-config.yaml` snippet:
 ```yaml
 repos:
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.0
+    rev: v8.30.1
     hooks:
       - id: gitleaks
 ```
@@ -89,14 +91,15 @@ repos:
 - Always highlight **OIDC (OpenID Connect)** over static API keys — this is what enterprise interviewers expect to hear.
 - Explain why running `git rm secret.txt` in a subsequent commit is insufficient: the secret remains in `.git` packfiles and commit history.
 - Mention automated key rotation pipelines and immediate audit logging (e.g., CloudTrail events) as part of incident response.
+- Name the limitation of each layer: pre-commit hooks can be skipped, pattern scanners miss custom or low-entropy secrets, and log masking fails on transformed values (base64, URL-encoded, split across lines) - hence defence in depth plus short-lived credentials, so a leak expires on its own.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
 ## Related Concepts
 
 - [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
-- [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

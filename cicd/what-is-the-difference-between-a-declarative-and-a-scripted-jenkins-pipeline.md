@@ -11,7 +11,7 @@ tags:
 
 # What is the difference between a declarative and a scripted Jenkins pipeline?
 
-**Short answer:** Both are Groovy, both live in a `Jenkinsfile`, and both run on the same Pipeline engine - the difference is structure. A **declarative** pipeline opens with `pipeline { }` and imposes a fixed skeleton (`agent`, `stages`, `stage`, `steps`, `post`, `environment`, `options`), which Jenkins can validate before execution, render properly in Blue Ocean and the stage view, and give you built-in `post` conditions, `when` guards, `parallel`, `matrix`, and `options` such as timeouts and retries. A **scripted** pipeline opens with `node { }` and is essentially a Groovy program: you get full imperative control - loops, closures, try/catch, dynamic stage generation - but no schema validation, weaker visualisation, and much more scope to write something unmaintainable. The practical rule teams settle on: **write declarative by default**, and drop into a `script { }` block for the small imperative parts. Reach for fully scripted only when you genuinely need to generate the pipeline structure at runtime.
+**Short answer:** Both are Groovy, both live in a `Jenkinsfile`, and both run on the same Pipeline engine - the difference is structure. A **declarative** pipeline opens with `pipeline { }` and imposes a fixed skeleton (`agent`, `stages`, `stage`, `steps`, `post`, `environment`, `options`), which Jenkins can validate before execution, render properly in the stage graph (Pipeline Graph View; Blue Ocean is no longer actively developed), and give you built-in `post` conditions, `when` guards, `parallel`, `matrix`, and `options` such as timeouts and retries. A **scripted** pipeline opens with `node { }` and is essentially a Groovy program: you get full imperative control - loops, closures, try/catch, dynamic stage generation - but no schema validation, weaker visualisation, and much more scope to write something unmaintainable. The practical rule teams settle on: **write declarative by default**, and drop into a `script { }` block for the small imperative parts. Reach for fully scripted only when you genuinely need to generate the pipeline structure at runtime.
 
 ## Detail
 
@@ -26,7 +26,7 @@ tags:
 | Parallelism                      | `parallel` block, plus `matrix` for axes                         | `parallel([a: {…}, b: {…}])`                     |
 | Timeouts / retries / concurrency | `options { timeout(...) disableConcurrentBuilds() }`             | Wrap steps in `timeout {}` / `retry {}` yourself |
 | Dynamic stage names/count        | Awkward (needs `script`)                                         | Natural                                          |
-| Visualisation                    | Full stage view / Blue Ocean                                     | Degraded                                         |
+| Visualisation                    | Full stage graph (Pipeline Graph View)                           | Degraded                                         |
 | Learning curve                   | Low - looks like configuration                                   | Needs Groovy                                     |
 
 The behavioural difference candidates are asked about most: **where does a syntax error surface?** In a declarative pipeline the whole `Jenkinsfile` is parsed and validated first, so a typo in stage five fails the build immediately, before stage one runs. In a scripted pipeline execution is sequential Groovy, so stages one to four run, do real work, and _then_ it dies at stage five - which is why a broken deploy stage can leave you with a pushed image and no deployment.
@@ -48,7 +48,7 @@ Generating stages from data - "one deploy stage per region in this list", "one t
 ### The constraints that catch people out in both forms
 
 - **`Jenkinsfile` code runs on the controller** (except inside `sh`/`bat` steps on the agent). Heavy Groovy loops, big string manipulation, or parsing large files in the pipeline itself consume controller CPU and memory and slow down every other job.
-- **CPS transformation.** Pipeline Groovy is continuation-passing-style so it can survive a controller restart, which is why many Groovy idioms misbehave - non-serializable objects across steps, `.each` with closures over `sh` calls, and iterators are all common sources of `java.io.NotSerializableException`. Use plain `for` loops, keep non-CPS logic in `@NonCPS` methods in a shared library, and do text processing in `sh` rather than Groovy.
+- **CPS transformation.** Pipeline Groovy is continuation-passing-style so it can survive a controller restart, which is why many Groovy idioms misbehave - non-serializable objects held in a local variable across a step boundary (a regex `Matcher`, a `JsonSlurper` result, an iterator) are the classic source of `java.io.NotSerializableException`, and some closure-taking collection methods behave differently under CPS. Use plain `for` loops, keep non-CPS logic in `@NonCPS` methods in a shared library, and do text processing in `sh` rather than Groovy.
 - **Script approval**. Scripted pipelines and library code that touch internal APIs hit the Groovy sandbox and need administrator approval - a real friction point and, if approved carelessly, a security hole on the controller.
 - **Both should be in the repository.** Pipeline-as-code with a multibranch job is the point; a pipeline pasted into the Jenkins UI has no review, no history, and no branch awareness.
 
@@ -84,7 +84,7 @@ pipeline {
         }
         stage('Image scan') {
           agent { label 'linux' }
-          steps { sh 'trivy image --severity HIGH,CRITICAL --exit-code 1 $IMAGE' }
+          steps { sh 'trivy image --severity HIGH,CRITICAL --exit-code 1 $IMAGE' } // image pushed by the build step
         }
       }
     }
@@ -95,7 +95,7 @@ pipeline {
         timeout(time: 1, unit: 'HOURS') {
           input message: 'Deploy to production?', ok: 'Ship it'
         }
-        node('deployer') { sh "helm upgrade --install api ./chart --set image.tag=${IMAGE} --atomic" }
+        node('deployer') { sh "helm upgrade --install api ./chart --set image.tag=${env.GIT_COMMIT.take(12)} --atomic" }
       }
     }
   }
@@ -157,9 +157,9 @@ buildJavaService(
 
 ## Related Concepts
 
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
 - [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
-- [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

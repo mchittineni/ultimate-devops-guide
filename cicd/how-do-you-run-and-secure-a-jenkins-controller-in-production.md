@@ -60,7 +60,7 @@ Connect agents outbound (JNLP/WebSocket) so you do not need inbound access to bu
 ### Keeping it healthy
 
 - **Upgrade cadence**: track Jenkins **LTS** and patch monthly; plugin CVEs are the most common Jenkins vulnerability class. Pin plugin versions, test upgrades in a staging controller, and use the plugin manager's security warnings as your queue. Remove plugins you no longer use - every plugin is attack surface and an upgrade constraint.
-- **Resource sizing**: heap sized deliberately (not the default), `-XX:+UseG1GC`, and remember that `Jenkinsfile` Groovy executes on the controller - so a pipeline doing heavy string work in Groovy is a controller performance problem. Watch queue length, executor utilisation, and GC pauses.
+- **Resource sizing**: heap sized deliberately (not the default), G1 GC (the default on the Java 21+ runtimes Jenkins now requires - LTS 2.555.1 dropped Java 17), and remember that `Jenkinsfile` Groovy executes on the controller - so a pipeline doing heavy string work in Groovy is a controller performance problem. Watch queue length, executor utilisation, and GC pauses.
 - **Prune aggressively**: `buildDiscarder(logRotator(...))` on every job. Unbounded build history is the usual cause of a controller with a full disk and a slow UI.
 - **Concurrency**: `disableConcurrentBuilds()` on deploy jobs; enough executors on agents that the queue does not back up. See the queue-troubleshooting answer for the diagnostic path.
 - **HA reality check**: Jenkins OSS has no true active-active HA. What you build instead is fast recovery - immutable controller image plus JCasC plus a restored `$JENKINS_HOME` volume, with a documented and rehearsed RTO. If a controller failure is unacceptable, that is an argument for a managed/HA distribution or for a CI system that is stateless by design.
@@ -88,10 +88,12 @@ jenkins:
             permissions: ["Overall/Read", "Job/Read", "Job/Discover"]
             assignments: ["authenticated"]
   securityRealm:
-    oic: # SSO; local signup disabled
+    oic: # SSO via the oic-auth plugin; local signup disabled
       clientId: "${OIDC_CLIENT_ID}"
       clientSecret: "${OIDC_CLIENT_SECRET}"
-      wellKnownOpenIDConfigurationUrl: "https://idp.example.com/.well-known/openid-configuration"
+      serverConfiguration:
+        wellKnown:
+          wellKnownOpenIDConfigurationUrl: "https://idp.example.com/.well-known/openid-configuration"
   clouds:
     - kubernetes: # ephemeral agent per build
         name: k8s
@@ -103,7 +105,7 @@ jenkins:
             label: linux
             containers:
               - name: jnlp
-                image: jenkins/inbound-agent:3283.v92c105e0f819-9
+                image: jenkins/inbound-agent:latest-jdk21 # pin a specific tag/digest in production
                 resourceRequestCpu: "500m"
                 resourceLimitMemory: "2Gi"
 security:
@@ -124,7 +126,7 @@ aws s3 cp /tmp/jenkins-$(date +%F).tgz s3://acme-jenkins-backups/ \
   --sse aws:kms --storage-class STANDARD_IA
 
 # Prove it: restore into a throwaway controller and check a credential binds
-docker run -d -p 8081:8080 -v /restore/jenkins:/var/jenkins_home jenkins/jenkins:2.479.3-lts
+docker run -d -p 8081:8080 -v /restore/jenkins:/var/jenkins_home jenkins/jenkins:2.568.3-lts-jdk21
 ```
 
 ```bash
