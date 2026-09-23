@@ -17,7 +17,7 @@ tags:
 
 **Distributed** means each clone is a complete repository, not a working copy. You can commit, branch, diff, and inspect history with no network. A "central" repository is a convention, not a technical requirement.
 
-**The object model** is what makes Git predictable. A commit points to a tree (a snapshot of the directory), to its parents, and carries author, timestamp, and message. Every object is addressed by the SHA of its content, so history is tamper-evident - changing anything changes every subsequent hash. Branches are just movable pointers to commits, which is why branching is instant.
+**The object model** is what makes Git predictable. A commit points to a tree (a snapshot of the directory), to its parents, and carries author, timestamp, and message. Every object is addressed by the hash of its content (SHA-1 with collision detection by default; SHA-256 repositories are supported), so history is tamper-evident - changing anything changes every subsequent hash. Branches are just movable pointers to commits, which is why branching is instant.
 
 **The three areas:** working directory → staging area (index) → repository. `git add` moves changes to the index, `git commit` writes them to history.
 
@@ -34,6 +34,20 @@ git log --oneline --graph --decorate
 ```
 
 Recovery commands worth knowing cold: `git reflog` (find any commit you "lost"), `git revert` (safe undo on shared branches), `git reset --hard` (dangerous, local only), `git cherry-pick`, `git bisect` (binary search for the commit that broke something), `git stash`.
+
+**Limits.** Git stores full snapshots of every version, so large binary files bloat every clone forever - that is what Git LFS is for. Very large repositories need partial clone (`--filter=blob:none`), sparse checkout, and `git maintenance` to stay fast. And the distributed model means a secret once pushed is in every clone: history rewriting cleans the repository, not the copies.
+
+## Example
+
+```bash
+git init demo && cd demo
+echo "v1" > app.txt && git add app.txt && git commit -m "first"
+git switch -c feature/x                  # a branch is just a new pointer
+echo "v2" > app.txt && git commit -am "change"
+git switch main && git merge feature/x   # fast-forward: main's pointer moves
+git log --oneline --graph --decorate
+cat .git/refs/heads/main                 # the "branch" is one line: a commit ID
+```
 
 ## Interview tips
 
