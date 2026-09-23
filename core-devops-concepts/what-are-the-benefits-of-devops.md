@@ -25,7 +25,22 @@ tags:
 
 **People.** Shared ownership reduces the blame dynamic between teams, and blameless post-mortems turn incidents into learning instead of punishment. Retention improves when on-call is sustainable.
 
-**Business outcomes.** The DORA research programme consistently links elite delivery performance to better commercial performance - faster feedback on product bets, not just faster deploys.
+**Business outcomes.** The DORA research programme has consistently linked strong software delivery performance to better organisational performance - faster feedback on product bets, not just faster deploys. It is survey-based correlation rather than proof of cause, which is worth saying if pressed.
+
+**The costs are real.** Test automation, pipeline and platform work, upskilling, and developers carrying on-call all take investment before the benefits arrive, and the gains stall if the organisation keeps manual approval gates or large batches.
+
+## Example
+
+The benefits are best argued with before/after numbers from your own delivery data:
+
+```text
+Metric (per service, 90-day median)   Before (monthly release)   After (trunk + CD)
+Deployment frequency                  1 / month                   ~4 / day
+Lead time for changes                 18 days                     5 hours
+Change failure rate                   22%                         6%
+Failed deployment recovery time       6 hours                     25 minutes
+Human hours per release               ~40 (war room, manual QA)   ~0 (automated)
+```
 
 ## Interview tips
 

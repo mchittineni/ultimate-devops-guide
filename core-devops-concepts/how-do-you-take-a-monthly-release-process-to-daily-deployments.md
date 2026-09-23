@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**Start by measuring, because you will need the evidence.** Baseline the four DORA metrics - deployment frequency, lead time for changes, change failure rate, and time to restore - plus the thing nobody measures: how many _hours of human toil_ a release consumes. A monthly release usually hides a two-day change-advisory process, a manual regression pass, and a war room. Those costs are your argument.
+**Start by measuring, because you will need the evidence.** Baseline the four DORA metrics - deployment frequency, lead time for changes, change failure rate, and time to restore (DORA now calls it failed deployment recovery time) - plus the thing nobody measures: how many _hours of human toil_ a release consumes. A monthly release usually hides a two-day change-advisory process, a manual regression pass, and a war room. Those costs are your argument.
 
 **Understand why the batch is monthly.** It is almost never "we like monthly". It is one of: manual regression testing that takes a week, a release process that requires six people in a room, a database migration process that is risky, an environment that cannot be reproduced, an approval board that meets monthly, or a rollback story that is "restore from backup". Each has a different fix, so diagnose before prescribing.
 
@@ -35,19 +35,20 @@ tags:
 
 ## Example
 
-```yaml
-# Expand/contract migration: three releases, each independently revertible.
-# Release 1 - expand. Additive only, old code still works.
-- ALTER TABLE users ADD COLUMN email_normalised text;
-- CREATE INDEX CONCURRENTLY idx_users_email_norm ON users (email_normalised);
-# App writes both columns, reads the old one.
+```sql
+-- Expand/contract migration (PostgreSQL): three releases, each independently revertible.
+-- Release 1 - expand. Additive only, old code still works.
+ALTER TABLE users ADD COLUMN email_normalised text;
+CREATE INDEX CONCURRENTLY idx_users_email_norm ON users (email_normalised);
+-- App writes both columns, reads the old one.
 
-# Release 2 - migrate. Backfill in batches, then flip reads behind a flag.
-- UPDATE users SET email_normalised = lower(email) WHERE email_normalised IS NULL LIMIT 10000;
-# Flag `read_normalised_email` enabled per cohort; old column still populated.
+-- Release 2 - migrate. Backfill in batches (repeat until 0 rows), then flip reads behind a flag.
+UPDATE users SET email_normalised = lower(email)
+ WHERE id IN (SELECT id FROM users WHERE email_normalised IS NULL LIMIT 10000);
+-- Flag `read_normalised_email` enabled per cohort; old column still populated.
 
-# Release 3 - contract. Only after the flag is 100% and soaked.
-- ALTER TABLE users DROP COLUMN email;
+-- Release 3 - contract. Only after the flag is 100% and soaked.
+ALTER TABLE users DROP COLUMN email;
 ```
 
 ```yaml
