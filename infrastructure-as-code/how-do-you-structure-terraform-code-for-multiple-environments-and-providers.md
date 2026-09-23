@@ -68,9 +68,20 @@ Smaller states mean faster plans, smaller blast radius, and fewer lock conflicts
 - **Aliases for multiple instances of one provider** - regions, accounts, or a second subscription:
 
   ```hcl
-  provider "aws" { alias = "eu", region = "eu-west-1" }
-  provider "aws" { alias = "us", region = "us-east-1" }
-  module "edge" { source = "./modules/cdn", providers = { aws = aws.us } }
+  provider "aws" {
+    alias  = "eu"
+    region = "eu-west-1"
+  }
+
+  provider "aws" {
+    alias  = "us"
+    region = "us-east-1"
+  }
+
+  module "edge" {
+    source    = "./modules/cdn"
+    providers = { aws = aws.us }
+  }
   ```
 
   Pass providers into modules explicitly with the `providers` argument. Cross-account work uses `assume_role` per provider block rather than long-lived keys.
@@ -79,7 +90,7 @@ Smaller states mean faster plans, smaller blast radius, and fewer lock conflicts
 
 ### Variables, secrets, and the pipeline
 
-Per-environment `terraform.tfvars` committed to Git for non-secret values; secrets from a secret manager or CI-injected environment variables, never in `.tfvars` and never in state you have not encrypted. In CI: `fmt -check`, `validate`, `tflint`, a security scan (`tfsec`/Checkov), then `plan -out=tfplan` on the pull request with the plan posted as a comment, and `apply tfplan` after approval so what is applied is provably what was reviewed. Protect production with a separate approval and separate credentials. See [how do you scan Infrastructure as Code before it is applied](../devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md).
+Per-environment `terraform.tfvars` committed to Git for non-secret values; secrets from a secret manager or CI-injected environment variables, never in `.tfvars` and never in state you have not encrypted. In CI: `fmt -check`, `validate`, `tflint`, a security scan (Checkov or `trivy config`, which absorbed tfsec), then `plan -out=tfplan` on the pull request with the plan posted as a comment, and `apply tfplan` after approval so what is applied is provably what was reviewed. Protect production with a separate approval and separate credentials. See [how do you scan Infrastructure as Code before it is applied](../devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md).
 
 ## Example
 
@@ -87,7 +98,7 @@ Per-environment `terraform.tfvars` committed to Git for non-secret values; secre
 # live/prod/platform/main.tf - a thin composition root: modules + variables, nothing clever
 terraform {
   required_version = "~> 1.9"
-  required_providers { aws = { source = "hashicorp/aws", version = "~> 5.60" } }
+  required_providers { aws = { source = "hashicorp/aws", version = "~> 6.0" } }
 
   backend "s3" {                                   # one state per environment per layer
     bucket       = "acme-tfstate-prod"
@@ -147,7 +158,7 @@ module "eks_dr" {
 ## Interview tips
 
 - Answer with a concrete layout and then justify it. "Directory per environment composing versioned modules" plus the four reasons (state isolation, credentials, readable diff, independent versions) is a complete answer.
-- Have a firm, reasoned position on workspaces: not for environments, good for many identical short-lived stacks. Interviewers ask this specifically because the HashiCorp tutorial suggests workspaces and production practice has moved on.
+- Have a firm, reasoned position on workspaces: not for environments, good for many identical short-lived stacks. Interviewers ask this specifically because workspaces look like the obvious answer, while HashiCorp's own documentation says CLI workspaces are not a suitable isolation mechanism for environments that need separate credentials and access controls.
 - Say that modules must not contain `provider` or `backend` blocks, and explain why - it is the constraint that makes reuse possible.
 - Splitting state by blast radius and change frequency is the senior answer; name the layers and the trade-off (faster plans and smaller blast radius, at the cost of wiring between them).
 - For cross-state wiring, mention both `terraform_remote_state` and publishing to a parameter store, and prefer the latter for decoupling and least privilege.

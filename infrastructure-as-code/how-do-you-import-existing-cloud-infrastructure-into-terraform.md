@@ -23,7 +23,8 @@ Terraform 1.5 introduced top-level `import` blocks, making imports version-contr
 
 1. **Define the import block:** Specify the target resource `to` address and the existing cloud `id`.
 2. **Generate configuration:** Use `terraform plan -generate-config-out=generated.tf` to auto-generate HCL code for the imported resources.
-3. **Refine and apply:** Review `generated.tf`, clean up auto-generated attributes, run `terraform plan` to verify zero changes required, and execute `terraform apply`.
+3. **Refine and apply:** Review `generated.tf`, clean up auto-generated attributes, run `terraform plan` to verify zero changes required, and execute `terraform apply`. The import happens in the apply, so it goes through the same review and locking as any other change.
+4. **Scale it:** since Terraform 1.7 (and OpenTofu), `import` blocks accept `for_each`, so a map of IDs can adopt many resources at once. Remove the blocks after the apply, or leave them - they are no-ops once the resource is in state.
 
 ### CLI Command Import (`terraform import`)
 
@@ -86,6 +87,7 @@ terraform plan
 - Highlight that `terraform import` (CLI method) only modifies the state file (`terraform.tfstate`) and does **not** generate HCL code automatically unless using `import {}` blocks in Terraform 1.5+.
 - Explain how to handle resource dependencies (import parent resources like VPCs/subnets first before importing EC2 instances or security group rules).
 - Mention state safety: backup remote state or perform imports in a dedicated workspace/branch before committing changes.
+- Be honest about the limits: generated config is verbose, sometimes includes conflicting or computed arguments that must be removed, and cannot express intent (variables, modules). Treat it as a starting draft. For bulk discovery, tools such as `aztfexport` (Azure) or cloud-specific exporters produce import blocks at scale.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

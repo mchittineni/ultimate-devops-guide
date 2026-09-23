@@ -30,6 +30,32 @@ The important structural difference is **state**. Terraform knows exactly which 
 
 **The common pattern:** Terraform builds the VPC, subnets, load balancers, and instances, then hands the inventory to Ansible to configure the instances. In a container world the split shifts - Terraform builds the cluster, and configuration moves into images and Kubernetes manifests, reducing Ansible's role to node-level or legacy estate work.
 
+The overlap is real at the edges: Ansible has cloud modules (`amazon.aws.ec2_instance` with `state: present/absent`) and Terraform can bootstrap instances with `user_data`. Using Ansible for provisioning works for small estates but gives you no plan and no record of what to delete; using Terraform for in-guest configuration means provisioners, which are a last resort.
+
+## Example
+
+```hcl
+# Terraform: create the instances and publish an inventory for Ansible
+resource "aws_instance" "web" {
+  for_each      = toset(["a", "b"])
+  ami           = data.aws_ami.al2023.id
+  instance_type = "t3.small"
+  tags          = { Name = "web-${each.key}", Role = "web" }
+}
+
+output "web_private_ips" {
+  value = [for i in aws_instance.web : i.private_ip]
+}
+```
+
+```bash
+# Ansible: configure what runs on them, discovered by tag rather than hard-coded
+terraform apply
+ansible-inventory -i inventory/aws_ec2.yml --graph        # amazon.aws.aws_ec2 plugin, filtered on tag:Role=web
+ansible-playbook -i inventory/aws_ec2.yml web.yml --check --diff
+ansible-playbook -i inventory/aws_ec2.yml web.yml
+```
+
 ## Interview tips
 
 - Refuse the false dichotomy: "they solve different problems, and most estates run both."

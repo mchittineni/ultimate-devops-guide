@@ -25,7 +25,9 @@ Benefits in practice:
 - **Disaster recovery** - rebuild is `apply`, not archaeology.
 - **Drift detection** - `plan` shows where reality diverged from intent.
 
-**Declarative vs imperative:** declarative tools (Terraform, CloudFormation, Bicep, Pulumi) describe the desired end state and compute the diff; imperative scripts describe the steps. Declarative wins because it is idempotent - applying it twice changes nothing the second time.
+**Declarative vs imperative:** declarative tools (Terraform/OpenTofu, CloudFormation, Bicep) describe the desired end state and compute the diff; imperative scripts describe the steps. Pulumi and the AWS CDK sit in between - you write a general-purpose language, but it produces a declarative desired-state model that an engine diffs. Declarative wins for provisioning because it is idempotent - applying it twice changes nothing the second time.
+
+**The costs:** IaC is only authoritative if nobody changes things by hand, so it needs access controls and drift detection; state (for tools that keep it) becomes a sensitive, critical asset; and a bad change now applies everywhere at machine speed, which is why plan review, policy checks, and small blast-radius state splits matter.
 
 **Immutable vs mutable:** the mature pattern is to replace rather than modify - build a new image or new resource and swap traffic, instead of patching in place. This eliminates configuration drift entirely.
 

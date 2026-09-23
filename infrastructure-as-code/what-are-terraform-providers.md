@@ -23,9 +23,9 @@ What a provider supplies:
 - **Data sources** - read-only lookups of things it does not own (`aws_ami`, `aws_caller_identity`).
 - **Provider configuration** - region, credentials, endpoints, default tags.
 
-**Aliases** let you configure the same provider more than once - multiple regions or multiple accounts in a single configuration - and select one per resource with `provider = aws.eu`.
+**Aliases** let you configure the same provider more than once - multiple regions or multiple accounts in a single configuration - and select one per resource with `provider = aws.eu`. (Since AWS provider v6, most AWS resources also accept a per-resource `region` argument, so multi-region within one account no longer needs an alias per region; multi-account still does.)
 
-**Version constraints** matter. Providers evolve independently of Terraform; pin with `~>` and commit the `.terraform.lock.hcl` lock file so every engineer and every CI run resolves identical versions and checksums.
+**Version constraints** matter. Providers evolve independently of Terraform; pin with `~>` and commit the `.terraform.lock.hcl` lock file so every engineer and every CI run resolves identical versions and checksums. Major provider versions remove deprecated arguments and can change defaults, so a major upgrade is a planned migration: read the upgrade guide, bump in dev, and read the plan for replacements. Providers are also executable code downloaded at `init`, which is why the lock file's checksums (and a provider mirror in locked-down environments) matter for supply-chain security.
 
 Authentication should come from the environment - an assumed role, an OIDC token from CI, or a cloud SDK credential chain - never hardcoded keys in the provider block.
 
@@ -34,8 +34,8 @@ Authentication should come from the environment - an assumed role, an OIDC token
 ```hcl
 terraform {
   required_providers {
-    aws        = { source = "hashicorp/aws",        version = "~> 5.60" }
-    kubernetes = { source = "hashicorp/kubernetes", version = "~> 2.32" }
+    aws        = { source = "hashicorp/aws",        version = "~> 6.0" }
+    kubernetes = { source = "hashicorp/kubernetes", version = "~> 3.0" }
   }
 }
 
@@ -61,6 +61,7 @@ resource "aws_acm_certificate" "cdn" {
 - Provider aliases for multi-region/multi-account work is a frequent practical follow-up.
 - Explain the lock file: it pins provider versions _and_ checksums, and belongs in version control.
 - `default_tags` on the AWS provider is a neat answer to "how do you enforce tagging?"
+- Know the distinction from a provisioner: a provider implements resources declaratively through an API; a provisioner runs imperative commands and is a last resort.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
