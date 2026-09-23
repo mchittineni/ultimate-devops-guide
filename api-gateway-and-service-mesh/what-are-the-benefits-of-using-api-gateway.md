@@ -35,6 +35,39 @@ tags:
 
 **Costs to acknowledge:** an extra network hop, a component that must be highly available, and the risk of it becoming a bottleneck for both traffic and team velocity if every change requires a gateway config update.
 
+## Example
+
+```yaml
+# AWS SAM: one HTTP API giving auth, throttling, CORS and routing to two services
+Resources:
+  PublicApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Auth:
+        DefaultAuthorizer: Oidc
+        Authorizers:
+          Oidc:
+            IdentitySource: $request.header.Authorization
+            JwtConfiguration:
+              issuer: https://login.example.com/
+              audience: [orders-api]
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 200
+        ThrottlingRateLimit: 100 # requests per second, enforced at the edge
+      CorsConfiguration:
+        AllowOrigins: [https://app.example.com]
+  OrdersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.13
+      Handler: orders.handler
+      CodeUri: orders/
+      Events:
+        Get:
+          Type: HttpApi
+          Properties: { ApiId: !Ref PublicApi, Path: "/v1/orders/{id}", Method: GET }
+```
+
 ## Interview tips
 
 - Frame the benefits as "cross-cutting concerns solved once" - that is the conceptual core.

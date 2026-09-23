@@ -28,8 +28,8 @@ tags:
 | `401 Unauthorized`            | **Not authenticated**                                      | Missing or invalid credentials/token                                                                                                                                           |
 | `403 Forbidden`               | **Authenticated but not permitted**                        | Authorisation, a WAF rule, an S3 bucket policy, or IP allowlisting. `401` = who are you; `403` = I know who you are and no                                                     |
 | `404 Not Found`               | No route matched                                           | A path-routing rule that matches nothing, a missing ingress rule, or the app's own router. Note a proxy can emit 404 before the backend is ever consulted                      |
-| `405` / `415` / `422`         | Method / media type / semantics                            | API contract mismatches                                                                                                                                                        |
-| `413`                         | Payload too large                                          | Proxy body-size limit (`client_max_body_size`, ALB limits)                                                                                                                     |
+| `405` / `415` / `422`         | Method / media type / unprocessable content                | API contract mismatches                                                                                                                                                        |
+| `413`                         | Content too large                                          | Proxy body-size limit (`client_max_body_size`, ALB limits)                                                                                                                     |
 | `429 Too Many Requests`       | Rate limited                                               | Your limiter, or an upstream API limiting **you**. Should carry `Retry-After`                                                                                                  |
 | `499`                         | Client closed the request (nginx-specific)                 | The client gave up before the backend answered - usually a symptom of slowness, not a cause                                                                                    |
 | `500 Internal Server Error`   | The **application** threw                                  | An unhandled exception. The stack trace is in the app's logs, not the proxy's                                                                                                  |
@@ -198,8 +198,8 @@ The timeout ladder - get this wrong and you generate your own 504s
 ## Related Concepts
 
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What are SLSA (Supply-chain Levels for Software Artifacts) frameworks and how do they verify build integrity?]] (`#539`): [What are SLSA (Supply-chain Levels for Software Artifacts) frameworks and how do they verify build integrity?](../cicd/what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity.md)
+- [[What is Shift-Left and how is it practically implemented across the SDLC?]] (`#510`): [What is Shift-Left and how is it practically implemented across the SDLC?](../core-devops-concepts/what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

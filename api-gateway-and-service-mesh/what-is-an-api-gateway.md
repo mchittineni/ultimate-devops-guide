@@ -30,9 +30,38 @@ Without a gateway, every client must know every service's address, and every ser
 
 **Gateway vs mesh vs load balancer.** A load balancer distributes traffic. A gateway handles _north-south_ traffic (client to system) with API-level features. A service mesh handles _east-west_ traffic (service to service). Many architectures use all three.
 
-**Common implementations:** Kong, NGINX, Envoy-based gateways, AWS API Gateway, Azure API Management, Apigee, and Kubernetes Gateway API implementations.
+**Common implementations:** Kong, NGINX, Envoy-based gateways (Envoy Gateway, Gloo, Emissary), AWS API Gateway, Azure API Management, Apigee, and Kubernetes Gateway API implementations. On Kubernetes, the Gateway API is now the standard way to configure the edge; the community Ingress-NGINX controller has been retired, so new designs should not build on its annotations.
 
 **Watch out for:** making the gateway a single point of failure (deploy it redundantly), and pushing business logic into it, which recreates the enterprise service bus problem.
+
+## Example
+
+```yaml
+# Kubernetes Gateway API: a shared edge Gateway and a team-owned route
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata: { name: public-gateway, namespace: infra }
+spec:
+  gatewayClassName: envoy-gateway # any conformant implementation
+  listeners:
+    - name: https
+      protocol: HTTPS
+      port: 443
+      hostname: "api.example.com"
+      tls: { certificateRefs: [{ name: api-example-com-tls }] }
+      allowedRoutes: { namespaces: { from: All } }
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata: { name: orders, namespace: orders }
+spec:
+  parentRefs: [{ name: public-gateway, namespace: infra }]
+  hostnames: ["api.example.com"]
+  rules:
+    - matches: [{ path: { type: PathPrefix, value: /v1/orders } }]
+      backendRefs: [{ name: orders-api, port: 8080 }]
+      timeouts: { request: 5s }
+```
 
 ## Interview tips
 

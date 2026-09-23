@@ -31,22 +31,37 @@ tags:
 
 ```http
 HTTP/1.1 429 Too Many Requests
-RateLimit-Limit: 1000
-RateLimit-Remaining: 0
-RateLimit-Reset: 42
 Retry-After: 42
+RateLimit-Policy: "default";q=1000;w=3600
+RateLimit: "default";r=0;t=42
 ```
+
+`Retry-After` is the standardised header every client understands. The `RateLimit-Policy` / `RateLimit` pair comes from the IETF httpapi working-group draft, which is still a draft and replaced the older `RateLimit-Limit` / `RateLimit-Remaining` / `RateLimit-Reset` trio that many APIs (and the `X-RateLimit-*` convention) still send - document whichever you emit.
 
 **Related controls:** quotas (longer-period totals, often billing-linked), concurrency limits (in-flight requests rather than rate), and load shedding (dropping low-priority work when the system is saturated).
 
 ## Example
 
 ```lua
--- Token bucket in Redis: atomic check-and-consume
-local tokens = tonumber(redis.call('get', KEYS[1]) or ARGV[1])
-if tokens < 1 then return 0 end
-redis.call('decr', KEYS[1])
-return 1
+-- Token bucket in Redis, run atomically with EVAL/EVALSHA.
+-- KEYS[1] = bucket key (e.g. "rl:{api-key}"), ARGV[1] = capacity, ARGV[2] = refill tokens/second
+local capacity = tonumber(ARGV[1])
+local rate     = tonumber(ARGV[2])
+local t        = redis.call('TIME')                       -- server clock, not the client's
+local now      = tonumber(t[1]) + tonumber(t[2]) / 1000000
+local bucket   = redis.call('HMGET', KEYS[1], 'tokens', 'ts')
+local tokens   = tonumber(bucket[1]) or capacity
+local ts       = tonumber(bucket[2]) or now
+
+tokens = math.min(capacity, tokens + (now - ts) * rate)   -- refill for elapsed time
+local allowed = 0
+if tokens >= 1 then
+  tokens = tokens - 1
+  allowed = 1
+end
+redis.call('HSET', KEYS[1], 'tokens', tokens, 'ts', now)
+redis.call('EXPIRE', KEYS[1], math.ceil(capacity / rate) * 2)  -- idle buckets disappear
+return allowed                                             -- 1 = allow, 0 = reject with 429
 ```
 
 ## Interview tips
@@ -61,7 +76,7 @@ return 1
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
-- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[What is progressive delivery and how does it differ from traditional deployment strategies?]] (`#509`): [What is progressive delivery and how does it differ from traditional deployment strategies?](../core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
