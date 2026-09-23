@@ -42,7 +42,7 @@ The rule to state out loud: **a migration and the code that depends on it never 
 
 - **Adding a column** - safe when nullable with no default (and, on modern PostgreSQL and MySQL 8, a constant default is also metadata-only). A volatile default rewrites the table.
 - **Adding an index** - `CREATE INDEX CONCURRENTLY` in PostgreSQL (no write lock, cannot run in a transaction, can leave an `INVALID` index that you must drop and retry), `ALGORITHM=INPLACE, LOCK=NONE` in MySQL 8, or `gh-ost`/`pt-online-schema-change` for older MySQL.
-- **Adding `NOT NULL`** - two steps: add a `CHECK ... NOT VALID` constraint, then `VALIDATE CONSTRAINT` (which takes only a share lock), rather than a full-table rewrite.
+- **Adding `NOT NULL`** - add a `CHECK (col IS NOT NULL) NOT VALID` constraint, then `VALIDATE CONSTRAINT` (which scans without blocking writes), then `SET NOT NULL` - which PostgreSQL 12+ completes without another scan because the validated check proves it - and drop the now-redundant check. A plain `SET NOT NULL` scans the whole table under `ACCESS EXCLUSIVE`.
 - **Adding a foreign key** - `NOT VALID` then `VALIDATE`, same reasoning.
 - **Changing a column type** - usually a rewrite. Do it as add-new-column + dual-write + backfill + swap, not `ALTER TYPE`.
 - **Renaming anything** - never in place. Add the new name, dual-write, migrate readers, drop the old one.
@@ -106,7 +106,9 @@ done
 -- Release 3: contract. Only once no deployed code reads or writes the old column.
 ALTER TABLE users ADD CONSTRAINT users_first_name_nn
   CHECK (first_name IS NOT NULL) NOT VALID;         -- instant, no rewrite
-ALTER TABLE users VALIDATE CONSTRAINT users_first_name_nn;  -- share lock only
+ALTER TABLE users VALIDATE CONSTRAINT users_first_name_nn;  -- scans, but writes continue
+ALTER TABLE users ALTER COLUMN first_name SET NOT NULL;     -- PG 12+: no scan, check proves it
+ALTER TABLE users DROP CONSTRAINT users_first_name_nn;      -- redundant now
 ALTER TABLE users DROP COLUMN name;                 -- metadata-only in PostgreSQL
 ```
 
@@ -128,7 +130,7 @@ ALTER TABLE users DROP COLUMN name;                 -- metadata-only in PostgreS
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

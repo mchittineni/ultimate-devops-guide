@@ -33,13 +33,17 @@ tags:
 3. **Switch** - deploy code that reads from the new location.
 4. **Contract** - after confidence, remove the old column and the dual-write code.
 
-Each step is independently deployable and reversible. It takes several releases, and that is the point.
+Each step is independently deployable and reversible. It takes several releases, and that is the point - the trade-off is slower delivery of schema changes and temporary dual-write code that must actually be cleaned up.
 
 ## Example
 
 ```sql
 -- V12__add_email_verified.sql  (expand: additive, no lock, no default rewrite)
 ALTER TABLE users ADD COLUMN email_verified boolean;
+
+-- V13__index_email_verified.sql  (separate file: CONCURRENTLY cannot run inside a
+-- transaction, and Flyway refuses to mix transactional and non-transactional
+-- statements in one migration by default)
 CREATE INDEX CONCURRENTLY idx_users_email_verified ON users (email_verified);
 ```
 
