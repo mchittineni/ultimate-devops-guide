@@ -98,7 +98,7 @@ locals {
   interface_services = [
     "ecr.api", "ecr.dkr",        # image pulls: BOTH, plus the S3 gateway endpoint above
     "logs", "monitoring",        # CloudWatch Logs and metrics
-    "secretsmanager", "ssm", "ssmmessages", "ec2messages", # SSM Session Manager
+    "secretsmanager", "ssm", "ssmmessages", # SSM (ec2messages only for pre-3.3.40 agents)
     "sts", "kms", "elasticloadbalancing",
   ]
 }

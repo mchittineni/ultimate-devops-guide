@@ -26,6 +26,10 @@ Introduced at AWS re:Invent 2023, EKS Pod Identity simplifies IAM authentication
 - No OIDC provider configuration required per cluster.
 - IAM Trust Policy trusts the `pods.eks.amazonaws.com` service principal rather than individual OIDC URLs.
 - Simplifies multi-cluster IAM role sharing across environments.
+- Adds session tags (cluster, namespace, service account) automatically, so one role can use ABAC conditions such as `aws:PrincipalTag/kubernetes-namespace`.
+- Supports cross-account access natively: an association can name a target role in another account, and EKS performs the role chaining.
+
+**Limitations.** Pod Identity requires the `eks-pod-identity-agent` add-on on EC2-based nodes and does not work for Pods on Fargate, and it only exists on EKS - so IRSA remains the answer for Fargate Pods and for self-managed or non-EKS clusters. Both require a reasonably current AWS SDK in the container.
 
 ### 2. IRSA (IAM Roles for Service Accounts - Legacy/Standard)
 
@@ -44,6 +48,9 @@ Introduced at AWS re:Invent 2023, EKS Pod Identity simplifies IAM authentication
 | **IAM Trust Principal** | `pods.eks.amazonaws.com`                         | OIDC Provider URL (`oidc.eks.region.amazonaws.com/id/...`) |
 | **Cluster Dependency**  | Managed EKS Add-on Agent                         | OIDC Provider per cluster                                  |
 | **Role Reusability**    | High (Easily reuse across multiple EKS clusters) | Requires adding each OIDC URL to IAM Trust Policy          |
+| **Fargate Pods**        | Not supported                                    | Supported                                                  |
+| **Outside EKS**         | No                                               | Any cluster with a public OIDC issuer                      |
+| **Session tags / ABAC** | Automatic (cluster, namespace, SA)               | Not added by default                                       |
 
 ## Example
 
@@ -67,7 +74,7 @@ Introduced at AWS re:Invent 2023, EKS Pod Identity simplifies IAM authentication
 }
 ```
 
-**2. Kubernetes ServiceAccount and Pod Deployment using **EKS Pod Identity**:**
+**2. Kubernetes ServiceAccount and a Job using **EKS Pod Identity** (no annotation needed - the association lives in the EKS API):**
 
 ```yaml
 apiVersion: v1
@@ -77,25 +84,20 @@ metadata:
   namespace: production
 
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: app-s3-reader
+  name: s3-reader-check
   namespace: production
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: s3-reader
+  backoffLimit: 1
   template:
-    metadata:
-      labels:
-        app: s3-reader
     spec:
       serviceAccountName: s3-reader-sa
+      restartPolicy: Never
       containers:
         - name: app
-          image: amazon/aws-cli:latest
+          image: amazon/aws-cli:2.27.0 # pin a version rather than :latest
           command: ["aws", "s3", "ls", "s3://company-prod-data-bucket/"]
           resources:
             requests:
@@ -118,6 +120,7 @@ aws eks create-pod-identity-association \
 - Highlight that **EKS Pod Identity** is the recommended modern AWS standard because it eliminates per-cluster OIDC setup and simplifies cross-cluster IAM role sharing.
 - Explain the security flaw of node-level IAM roles (Instance Profiles): every pod on the node inherits the node's IAM permissions unless IRSA or Pod Identity is enforced.
 - Mention `sts:AssumeRoleWithWebIdentity` for IRSA vs `sts:AssumeRole` with `sts:TagSession` for EKS Pod Identity.
+- Know the limits: Pod Identity does not cover Fargate Pods or non-EKS clusters, which is where IRSA is still the answer.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
@@ -125,7 +128,7 @@ aws eks create-pod-identity-association \
 
 - [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
 - [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
-- [[What is a cloud landing zone?]] (`#215`): [What is a cloud landing zone?](../cloud-engineering/what-is-a-cloud-landing-zone.md)
+- [[What are the core trade-offs between Multi-Cloud, Hybrid-Cloud, and Single-Cloud architectures?]] (`#542`): [What are the core trade-offs between Multi-Cloud, Hybrid-Cloud, and Single-Cloud architectures?](../cloud-platforms/what-are-the-core-trade-offs-between-multi-cloud-hybrid-cloud-and-single-cloud-architectures.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

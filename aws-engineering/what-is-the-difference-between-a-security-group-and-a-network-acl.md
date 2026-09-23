@@ -77,12 +77,24 @@ Both layers are visible in **VPC Flow Logs**, and this is the fastest way to tel
 ## Example
 
 ```hcl
-# Security groups referencing each other - the readable, scale-proof pattern
+# Security groups referencing each other - the readable, scale-proof pattern.
+# (Inline rules keep the example short; current AWS provider guidance prefers separate
+# aws_vpc_security_group_ingress_rule / _egress_rule resources, one rule each.)
 resource "aws_security_group" "web" {
   name   = "web"
   vpc_id = aws_vpc.this.id
-  ingress { from_port = 443, to_port = 443, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }
-  egress  { from_port = 0,   to_port = 0,   protocol = "-1",  cidr_blocks = ["0.0.0.0/0"] }
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "app" {
@@ -94,7 +106,12 @@ resource "aws_security_group" "app" {
     protocol        = "tcp"
     security_groups = [aws_security_group.web.id] # intent, not addresses
   }
-  egress { from_port = 0, to_port = 0, protocol = "-1", cidr_blocks = ["0.0.0.0/0"] }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "db" {
@@ -116,11 +133,39 @@ resource "aws_network_acl" "private" {
   vpc_id     = aws_vpc.this.id
   subnet_ids = [for s in aws_subnet.private : s.id]
 
-  ingress { rule_no = 100, action = "deny",  protocol = "-1",  from_port = 0,    to_port = 0,     cidr_block = "203.0.113.0/24" } # explicit deny FIRST
-  ingress { rule_no = 200, action = "allow", protocol = "tcp", from_port = 5432, to_port = 5432,  cidr_block = "10.20.0.0/16" }
-  ingress { rule_no = 300, action = "allow", protocol = "tcp", from_port = 1024, to_port = 65535, cidr_block = "0.0.0.0/0" }      # RETURN traffic - stateless!
+  ingress { # explicit deny FIRST
+    rule_no    = 100
+    action     = "deny"
+    protocol   = "-1"
+    from_port  = 0
+    to_port    = 0
+    cidr_block = "203.0.113.0/24"
+  }
+  ingress {
+    rule_no    = 200
+    action     = "allow"
+    protocol   = "tcp"
+    from_port  = 5432
+    to_port    = 5432
+    cidr_block = "10.20.0.0/16"
+  }
+  ingress { # RETURN traffic - stateless!
+    rule_no    = 300
+    action     = "allow"
+    protocol   = "tcp"
+    from_port  = 1024
+    to_port    = 65535
+    cidr_block = "0.0.0.0/0"
+  }
 
-  egress  { rule_no = 100, action = "allow", protocol = "-1",  from_port = 0,    to_port = 0,     cidr_block = "0.0.0.0/0" }
+  egress {
+    rule_no    = 100
+    action     = "allow"
+    protocol   = "-1"
+    from_port  = 0
+    to_port    = 0
+    cidr_block = "0.0.0.0/0"
+  }
 }
 ```
 

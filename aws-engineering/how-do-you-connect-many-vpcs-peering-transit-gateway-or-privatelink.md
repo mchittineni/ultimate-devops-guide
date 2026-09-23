@@ -28,7 +28,7 @@ tags:
 | Cross-region        | Yes (inter-region peering)                | Yes (TGW peering)                                 | Yes, with some service limits          |
 | Cross-account       | Yes                                       | Yes (via RAM sharing)                             | Yes - designed for it                  |
 | Terminates DX / VPN | No                                        | **Yes**                                           | No                                     |
-| Bandwidth           | No aggregate limit; instance limits apply | 50 Gbps per attachment (burst)                    | NLB limits                             |
+| Bandwidth           | No aggregate limit; instance limits apply | High but quota-bound per attachment and AZ        | NLB limits                             |
 | Hourly cost         | **None** (data transfer only)             | Per attachment + per GB                           | Per endpoint per AZ + per GB           |
 | Segmentation        | Per-pair only                             | Multiple TGW route tables = network domains       | Per-service by policy                  |
 | Exposure            | The whole VPC's routable space            | The whole attached space, subject to route tables | **Exactly one service, one port**      |
@@ -69,6 +69,7 @@ The mental shift: with peering or TGW you join two networks and then restrict wi
 - **Overlapping CIDRs with peering/TGW**: strictly you can work around it with private NAT gateways translating one side's addresses, but it is complex and fragile. Prefer PrivateLink, or renumber the VPC if you own both sides - and prevent the problem by allocating non-overlapping CIDRs centrally (IPAM) from day one.
 - **VPN over the internet between VPCs**: works, adds encryption and complexity, occasionally used for cross-cloud (AWS VPC ↔ another provider's VPC, which is how you would answer "connect an AWS VPC to a VPC in IBM Cloud" - site-to-site IPsec VPN, or a partner interconnect through Direct Connect and their equivalent).
 - **Cloud WAN** for very large global estates - TGW-like segmentation managed centrally across regions.
+- **VPC Lattice** for service-to-service connectivity across VPCs and accounts at the application layer: services join a service network, with IAM auth policies per service and no routing or CIDR coordination - closer to PrivateLink-for-many-services than to a network hub.
 - **A shared-services VPC** pattern: put the things everyone needs (AD, DNS resolvers, CI runners, monitoring, egress inspection) in one VPC attached to the hub, so spokes need routes to one place rather than to each other.
 
 ### Cost, which is often the deciding factor

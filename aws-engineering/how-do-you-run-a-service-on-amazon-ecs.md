@@ -19,20 +19,22 @@ tags:
 
 ### Task versus service, and Fargate versus EC2
 
-|                           | Task                                                                         | Service                                       |
-| ------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------- |
-| Lifetime                  | Runs, then exits (or dies)                                                   | Continuously maintains `desiredCount`         |
-| Replaces failures         | No                                                                           | Yes                                           |
-| Load balancer integration | No                                                                           | Yes, via target group registration            |
-| Deployment strategy       | N/A                                                                          | Rolling, blue/green (CodeDeploy), or external |
-| Use for                   | Batch jobs, one-off migrations (`run-task`), scheduled tasks via EventBridge | Long-running APIs and workers                 |
+|                           | Task                                                                         | Service                                                             |
+| ------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Lifetime                  | Runs, then exits (or dies)                                                   | Continuously maintains `desiredCount`                               |
+| Replaces failures         | No                                                                           | Yes                                                                 |
+| Load balancer integration | No                                                                           | Yes, via target group registration                                  |
+| Deployment strategy       | N/A                                                                          | Rolling, built-in blue/green/canary/linear, CodeDeploy, or external |
+| Use for                   | Batch jobs, one-off migrations (`run-task`), scheduled tasks via EventBridge | Long-running APIs and workers                                       |
 
 **Fargate versus EC2 launch type** is the other axis, and the honest comparison:
 
 - **Fargate**: no instances to patch, per-task CPU/memory billing, task-level ENI so security groups apply per task, faster to operate. Costs more per vCPU-hour, has a limited set of CPU/memory combinations, no privileged mode or GPU (Fargate has no GPU support), and no daemon-style placement.
 - **EC2**: cheaper at steady high utilisation (especially with Spot or Savings Plans), gives you GPUs, privileged containers, custom kernel settings, and larger local storage - but you own the AMI, patching, and cluster capacity (via a capacity provider with managed scaling).
 
-Choose Fargate by default and EC2 when a specific requirement forces it. Fargate Spot for interruption-tolerant work is a large, easy saving.
+- **ECS Managed Instances** (2025): EC2 capacity that AWS provisions, patches, and scales for you - a middle ground that gives GPUs and specific instance types without owning the AMI and capacity provider plumbing.
+
+Choose Fargate by default and EC2 (or Managed Instances) when a specific requirement forces it. Fargate Spot for interruption-tolerant work is a large, easy saving.
 
 ### The two IAM roles - a classic exam question
 
@@ -57,8 +59,8 @@ Place tasks in **private subnets** with an ALB in the public subnets. Fargate ta
 
 - **Rolling update** is the default, controlled by `minimumHealthyPercent` and `maximumPercent`. `100/200` means ECS may double capacity briefly and never drop below the desired count - the safe production setting. `50/100` avoids extra capacity but runs degraded during the rollout.
 - **Deployment circuit breaker** (`enable: true, rollback: true`) detects a failing deployment and rolls back to the previous task definition automatically. Turn it on; it converts a bad deploy from an incident into a non-event.
-- **Blue/green via CodeDeploy** with two target groups and a listener shift, including canary and linear traffic-shifting options plus automatic rollback on CloudWatch alarms. This is the answer to "how do you do blue/green on ECS".
-- **`appspec.yml`** is the CodeDeploy file that ties it together for ECS (and for EC2/on-premises deployments): it names the task definition, the container and port, and the lifecycle hooks (`BeforeAllowTraffic`, `AfterAllowTraffic`) where you run validation.
+- **Built-in blue/green, canary, and linear** (ECS deployment controller, since 2025): ECS shifts traffic between two target groups (or Service Connect), with bake times, Lambda lifecycle hooks for validation, and automatic rollback on CloudWatch alarms. This is now the default answer to "how do you do blue/green on ECS".
+- **Blue/green via CodeDeploy** is the older route with the same traffic-shifting options; existing pipelines use it, and **`appspec.yml`** ties it together (task definition, container and port, and the `BeforeAllowTraffic`/`AfterAllowTraffic` hooks).
 - **Task definitions are immutable**: every deploy registers a new revision. Roll back by updating the service to the previous revision - which is why keeping revisions and deploying by revision (not `:latest`) matters. Deploy images by **digest or an immutable tag**, never `latest`, or you cannot say what is running.
 
 ### Scaling
@@ -144,7 +146,10 @@ resource "aws_ecs_service" "payments" {
 
   deployment_minimum_healthy_percent = 100 # never below desired during a deploy
   deployment_maximum_percent         = 200
-  deployment_circuit_breaker { enable = true, rollback = true } # auto-rollback a bad deploy
+  deployment_circuit_breaker { # auto-rollback a bad deploy
+    enable   = true
+    rollback = true
+  }
 
   enable_execute_command = true # `aws ecs execute-command` for a shell
   propagate_tags         = "SERVICE"
@@ -158,8 +163,10 @@ resource "aws_appautoscaling_policy" "payments_requests" {
   policy_type        = "TargetTrackingScaling"
   target_tracking_scaling_policy_configuration {
     target_value = 1000
-    predefined_metric_specification { predefined_metric_type = "ALBRequestCountPerTarget"
-      resource_label = "${aws_lb.public.arn_suffix}/${aws_lb_target_group.payments.arn_suffix}" }
+    predefined_metric_specification {
+      predefined_metric_type = "ALBRequestCountPerTarget"
+      resource_label         = "${aws_lb.public.arn_suffix}/${aws_lb_target_group.payments.arn_suffix}"
+    }
   }
 }
 ```
@@ -195,7 +202,7 @@ aws ecs execute-command --cluster prod --task "$TASK_ARN" \
 - Describe a deploy accurately: build, push, register a **new immutable revision**, update the service. Rollback is pointing at the previous revision, which is why you never deploy `:latest`.
 - Volunteer the **deployment circuit breaker** with rollback and `100/200` min/max healthy percentages. Those two settings are what make ECS deploys safe.
 - Have the health-check-grace-period trap ready - tasks cycling because ECS kills them before the app is ready - because "my deployment keeps failing" usually means this.
-- For blue/green, name CodeDeploy with two target groups, a listener shift, canary/linear options, and `appspec.yml` with its lifecycle hooks.
+- For blue/green, name ECS's built-in blue/green/canary/linear deployments with lifecycle hooks and alarm rollback, and know CodeDeploy with `appspec.yml` as the older equivalent still found in many pipelines.
 - Cover scaling in two halves on EC2 launch type: service auto scaling for task count **and** capacity provider managed scaling for instances, or tasks sit unplaceable.
 - Know `aws ecs execute-command` as the way into a container, and the `stoppedReason`/`exitCode` diagnostic path (`CannotPullContainerError`, 137 for OOM, ELB health check failures).
 - Give a fair ECS-versus-EKS answer: ECS for lowest operational burden on AWS, EKS for the Kubernetes ecosystem and portability. See [what is the difference between ECS, EKS, and Fargate](./what-is-the-difference-between-ecs-eks-and-fargate.md), [building a CI/CD pipeline with CodePipeline, CodeBuild, and CodeDeploy](./how-do-you-build-a-ci-cd-pipeline-using-aws-codepipeline-codebuild-and-codedeploy.md), [what are deployment strategies](../devops-tools-and-automation/what-are-deployment-strategies.md), and [what are VPC endpoints](./what-are-vpc-endpoints-and-when-do-you-use-a-gateway-versus-an-interface-endpoint.md).

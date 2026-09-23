@@ -13,7 +13,7 @@ tags:
 
 # How do you access an instance in a private subnet without SSH keys or a bastion host?
 
-**Short answer:** **SSM Session Manager.** The instance runs the SSM Agent and makes an **outbound** connection to the Systems Manager service; you call `aws ssm start-session` and AWS brokers the two. There is no inbound port, no security group rule, no public IP, no bastion, and **no SSH key** - authentication and authorisation are IAM, and every session is logged to CloudTrail and can be recorded in full to S3 or CloudWatch Logs. For a private subnet with no NAT gateway you add three interface VPC endpoints (`ssm`, `ssmmessages`, `ec2messages`) so the agent can reach the service privately. If you specifically want SSH semantics, **EC2 Instance Connect Endpoint** tunnels SSH/RDP to a private instance without a bastion, and Session Manager can also carry SSH and port forwarding. The framing that lands: replacing keys and bastions with IAM-authenticated, audited, outbound-only sessions removes a standing inbound attack surface and a key-distribution problem at the same time.
+**Short answer:** **SSM Session Manager.** The instance runs the SSM Agent and makes an **outbound** connection to the Systems Manager service; you call `aws ssm start-session` and AWS brokers the two. There is no inbound port, no security group rule, no public IP, no bastion, and **no SSH key** - authentication and authorisation are IAM, and every session is logged to CloudTrail and can be recorded in full to S3 or CloudWatch Logs. For a private subnet with no NAT gateway you add interface VPC endpoints for `ssm` and `ssmmessages` (plus `ec2messages` only for old agents) so the agent can reach the service privately. If you specifically want SSH semantics, **EC2 Instance Connect Endpoint** tunnels SSH/RDP to a private instance without a bastion, and Session Manager can also carry SSH and port forwarding. The framing that lands: replacing keys and bastions with IAM-authenticated, audited, outbound-only sessions removes a standing inbound attack surface and a key-distribution problem at the same time.
 
 ## Detail
 
@@ -35,7 +35,7 @@ The key-distribution problem is the real driver. Once ten engineers have keys on
 
 1. **SSM Agent** installed and running. Pre-installed on Amazon Linux 2/2023, recent Ubuntu LTS AMIs, and Windows Server AMIs; installable elsewhere.
 2. **An instance profile** with `AmazonSSMManagedInstanceCore` (or an equivalent least-privilege policy).
-3. **Network path to the SSM endpoints** - either a NAT gateway, or **interface VPC endpoints** for `ssm`, `ssmmessages`, and `ec2messages`. All three: `ssm` for the API, `ssmmessages` for the Session Manager data channel, `ec2messages` for the agent's message polling. Missing `ssmmessages` is the classic cause of "the instance shows as managed but sessions fail".
+3. **Network path to the SSM endpoints** - either a NAT gateway, or **interface VPC endpoints** for `ssm` (the API) and `ssmmessages` (the Session Manager data channel and, since SSM Agent 3.3.40.0, the agent's control messages too). `ec2messages` is the legacy message-delivery endpoint used only by older agents or as a fallback; regions launched since 2024 do not offer it and AWS is retiring it, so update agents rather than depending on it. Missing `ssmmessages` is the classic cause of "the instance shows as managed but sessions fail".
 4. **IAM permission on the caller** (`ssm:StartSession` on the target, plus `ssm:TerminateSession` on your own sessions).
 
 If an instance does not appear in Fleet Manager, work that list in order: agent running (`systemctl status amazon-ssm-agent`), instance profile attached, endpoint or NAT reachable, and the endpoint's security group allowing 443 from the instance.
@@ -88,7 +88,12 @@ resource "aws_security_group" "app" {
   name   = "app"
   vpc_id = aws_vpc.this.id
   # NO ingress rules at all - the agent connects outbound
-  egress { from_port = 443, to_port = 443, protocol = "tcp", cidr_blocks = [aws_vpc.this.cidr_block] }
+  egress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [aws_vpc.this.cidr_block]
+  }
 }
 
 resource "aws_instance" "app" {
@@ -100,9 +105,9 @@ resource "aws_instance" "app" {
   # key_name deliberately omitted: there is no SSH key to steal or rotate
 }
 
-# The three endpoints that make it work without a NAT gateway
+# The endpoints that make it work without a NAT gateway
 resource "aws_vpc_endpoint" "ssm" {
-  for_each            = toset(["ssm", "ssmmessages", "ec2messages"]) # all three required
+  for_each            = toset(["ssm", "ssmmessages"]) # add "ec2messages" only for agents older than 3.3.40.0
   vpc_id              = aws_vpc.this.id
   service_name        = "com.amazonaws.${var.region}.${each.key}"
   vpc_endpoint_type   = "Interface"
@@ -176,7 +181,7 @@ nslookup ssmmessages.eu-west-1.amazonaws.com    # 3. private IP => endpoint reac
 
 - Name SSM Session Manager immediately and give the mechanism in one line: the agent connects **outbound**, AWS brokers the session, so there is no inbound port, no public IP, no bastion, and no SSH key.
 - Then list the three benefits in the order interviewers care about: IAM-based access control (offboarding is removing a permission), CloudTrail plus optional full session recording, and no key distribution.
-- Know the four prerequisites, and specifically the **three** interface endpoints - `ssm`, `ssmmessages`, `ec2messages`. Being able to say `ssmmessages` is the data channel is the detail that proves you have configured it.
+- Know the four prerequisites, and specifically the interface endpoints - `ssm` and `ssmmessages`, with `ec2messages` now legacy for old agents only. Being able to say `ssmmessages` carries the session data channel (and, on current agents, the control messages) is the detail that proves you have configured it.
 - For "reach a database in a private subnet with no NAT, no NAT instance, and no bastion", answer with an SSM **port-forwarding** session to the RDS endpoint. That is exactly what the question is fishing for, and most candidates go straight to "a bastion" and miss it.
 - Mention EC2 Instance Connect Endpoint as the SSH-shaped answer with a 60-second ephemeral key, and Session Manager's `ProxyCommand` when the team needs `scp`/`rsync`/VS Code Remote.
 - Volunteer tag-based IAM conditions so a role can only open sessions on non-production, plus session recording to S3 with KMS. That turns a convenience answer into a security answer.

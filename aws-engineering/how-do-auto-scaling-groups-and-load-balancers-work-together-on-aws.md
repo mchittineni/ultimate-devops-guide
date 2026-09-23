@@ -17,7 +17,7 @@ tags:
 
 **Two health checks, and the one that matters.** By default an ASG uses EC2 status checks, which pass as long as the instance is booted - an application that has crashed stays in service. Setting the ASG's health check type to ELB means it inherits the load balancer's application-level check (`/healthz`) and terminates and replaces instances that fail it. This single setting is the most common gap in real deployments.
 
-**Load balancer choice.** ALB for HTTP/HTTPS with path and host routing, WAF integration, and OIDC authentication. NLB for TCP/UDP, extreme throughput, static IPs, and preserving client IPs. GWLB for inline security appliances. CLB is legacy. Note that ALB scales its own capacity gradually - for an instant, very large traffic spike, either pre-warm via support or use NLB.
+**Load balancer choice.** ALB for HTTP/HTTPS with path and host routing, WAF integration, and OIDC authentication. NLB for TCP/UDP, extreme throughput, static IPs, and preserving client IPs. GWLB for inline security appliances. CLB is legacy. Note that ALB scales its own capacity gradually - for an instant, very large traffic spike (a launch or a ticket sale), reserve capacity in advance with **LCU reservation** on the ALB (which replaced asking Support to pre-warm) or use NLB.
 
 **Connection draining and graceful shutdown.** Deregistration delay (default 300s) keeps the target receiving in-flight responses while new requests stop. The application must also handle `SIGTERM` by finishing work and closing listeners; a container that exits immediately on `SIGTERM` produces 502s during every scale-in and deploy. Add a lifecycle hook if you need to flush state before termination.
 
@@ -48,10 +48,18 @@ resource "aws_autoscaling_group" "api" {
       spot_allocation_strategy                 = "price-capacity-optimized"
     }
     launch_template {
-      launch_template_specification { launch_template_id = aws_launch_template.api.id }
-      override { instance_type = "m6i.large" }
-      override { instance_type = "m6a.large" }
-      override { instance_type = "m5.large" }
+      launch_template_specification {
+        launch_template_id = aws_launch_template.api.id
+      }
+      override {
+        instance_type = "m7i.large"
+      }
+      override {
+        instance_type = "m6i.large"
+      }
+      override {
+        instance_type = "m6a.large"
+      }
     }
   }
 }

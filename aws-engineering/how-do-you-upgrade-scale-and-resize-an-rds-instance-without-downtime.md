@@ -75,8 +75,9 @@ A small, very frequently asked one: create a database user (not an IAM/RDS admin
 1. **Blue/green deployment** (RDS-managed): AWS builds a green environment replicating from blue, you upgrade and test green, then switch over - typically under a minute, with writes blocked briefly and the endpoints swapped. It is the default answer for major version upgrades now.
 2. **Pre-flight**: check extension compatibility, deprecated syntax, collation changes, and the query planner (a plan regression after a major upgrade is common - capture baseline plans first). Restore a snapshot into a test instance and run your real workload against it.
 3. **Snapshot before, always** - and remember a snapshot restore creates a **new instance** with a new endpoint, so recovery is a repoint rather than an in-place rollback.
-4. **Maintenance windows** for automatic minor upgrades; set them deliberately rather than accepting the default, and disable auto-minor-version for anything where you need to test first.
-5. **Communicate the failover** as an expected 60-second blip, and validate afterwards with error rates and connection metrics rather than a manual check.
+4. **Plan ahead of end of standard support**: a major version past its RDS end-of-standard-support date is automatically enrolled in paid **RDS Extended Support** rather than force-upgraded, so the upgrade calendar is also a cost decision.
+5. **Maintenance windows** for automatic minor upgrades; set them deliberately rather than accepting the default, and disable auto-minor-version for anything where you need to test first.
+6. **Communicate the failover** as an expected 60-second blip, and validate afterwards with error rates and connection metrics rather than a manual check.
 
 ## Example
 
@@ -85,7 +86,7 @@ A small, very frequently asked one: create a database user (not an IAM/RDS admin
 resource "aws_db_instance" "orders" {
   identifier     = "orders-prod"
   engine         = "postgres"
-  engine_version = "16.4"
+  engine_version = "17"          # major only: RDS picks the default minor; pin fully if you must
   instance_class = "db.r6g.xlarge"
 
   multi_az                    = true  # turns restarts into ~60s failovers
@@ -128,11 +129,14 @@ aws rds modify-db-instance --db-instance-identifier orders-prod \
 aws rds describe-events --source-identifier orders-prod --source-type db-instance \
   --duration 60 --query 'Events[].[Date,Message]' --output table
 
-# Major upgrade: blue/green, test green, then switch over
-aws rds create-blue-green-deployment --blue-green-deployment-name orders-pg17 \
+# Major upgrade: pick a valid target, create blue/green, test green, then switch over
+aws rds describe-db-engine-versions --engine postgres \
+  --query 'DBEngineVersions[?starts_with(EngineVersion, `18.`)].EngineVersion' --output text
+TARGET_VERSION=18.1   # substitute a version listed by the command above
+aws rds create-blue-green-deployment --blue-green-deployment-name orders-major-upgrade \
   --source "$(aws rds describe-db-instances --db-instance-identifier orders-prod \
       --query 'DBInstances[0].DBInstanceArn' --output text)" \
-  --target-engine-version 17.2
+  --target-engine-version "$TARGET_VERSION"
 # ... run your test suite against the green endpoint ...
 aws rds switchover-blue-green-deployment --blue-green-deployment-identifier bgd-0abc \
   --switchover-timeout 300
