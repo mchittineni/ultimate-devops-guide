@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**Data sources.** AWS Cost and Usage Report (hourly or resource-level line items delivered to S3, the most detailed source available), Cost Explorer for interactive analysis, Azure Cost Management exports, and GCP billing export to BigQuery. Third-party platforms (CloudHealth, Cloudability, Vantage) and the open-source OpenCost and Kubecost add Kubernetes-level attribution.
+**Data sources.** AWS Cost and Usage Report (hourly or resource-level line items delivered to S3 - now CUR 2.0 via Data Exports, the most detailed source available), Cost Explorer for interactive analysis, Azure Cost Management exports, and GCP billing export to BigQuery. Third-party platforms (CloudHealth, Cloudability, Vantage) and the open-source OpenCost and Kubecost add Kubernetes-level attribution.
 
 **Dimensions that matter:** linked account, service, region, resource ID, usage type, purchase option (on-demand/spot/reserved), and - most importantly - your own tags.
 
@@ -27,11 +27,28 @@ tags:
 
 **Make it actionable.** A report nobody acts on is overhead. Pair it with unit economics - cost per customer, per transaction, per environment - which is what makes cost a comparable engineering metric rather than a raw total.
 
+**A common format.** The FinOps Foundation's **FOCUS** specification defines a standard schema for billing data, and AWS, Azure, Google Cloud, and Oracle all offer FOCUS-formatted exports, so multi-cloud allocation reports no longer need a bespoke normalisation layer for every provider.
+
+## Example
+
+```sql
+-- Showback by team from a FOCUS-format export (column names are provider-neutral).
+SELECT
+  COALESCE(Tags['team'], 'UNALLOCATED')  AS team,
+  ServiceCategory,
+  ROUND(SUM(EffectiveCost), 2)            AS effective_cost  -- amortised, net of discounts
+FROM focus_billing
+WHERE BillingPeriodStart = DATE '2026-08-01'
+GROUP BY 1, 2
+ORDER BY effective_cost DESC;
+```
+
 ## Interview tips
 
 - Unit cost metrics (cost per transaction) are the mature answer; absolute spend rising is fine if unit cost is falling.
 - Shared-cost allocation is the question that reveals whether you have actually done this.
 - Mention amortised versus unblended cost - it shows familiarity with real billing data.
+- Knowing FOCUS as the cross-cloud billing schema shows you are current with FinOps tooling.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
@@ -39,7 +56,7 @@ tags:
 
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

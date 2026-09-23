@@ -19,8 +19,8 @@ In multi-tenant Kubernetes clusters, cloud provider bills only show the total co
 
 ### 1. OpenCost vs Kubecost
 
-- **OpenCost:** CNCF Sandbox project providing an open-source, vendor-neutral specification and engine for real-time Kubernetes container cost allocation.
-- **Kubecost:** Enterprise solution built on OpenCost, adding multi-cluster cost aggregation, automated right-sizing recommendations, budget alerting, and cloud billing integration.
+- **OpenCost:** CNCF incubating project (promoted from the sandbox in 2024) providing an open-source, vendor-neutral specification and engine for real-time Kubernetes container cost allocation, plus cloud-cost ingestion for non-Kubernetes spend.
+- **Kubecost:** Commercial product built on OpenCost (Kubecost was acquired by IBM in 2024), adding multi-cluster cost aggregation, automated right-sizing recommendations, budget alerting, and deeper cloud billing reconciliation.
 
 ### 2. How Container Cost Calculation Works
 
@@ -30,6 +30,9 @@ $$\text{Pod Memory Cost} = \text{Requested RAM (GiB)} \times \text{Hourly RAM Ra
 
 - **Cloud Billing Integration:** Integrates with AWS Cost and Usage Reports (CUR) to reflect actual negotiated enterprise discounts, Savings Plans, and Reserved Instances rather than public list prices.
 - **Idle Cost Allocation:** Distributes unallocated node capacity (CPU/RAM paid for but unused by any pod) proportionally across namespaces or assigns it to cluster overhead.
+- **Requests versus usage:** allocation charges each pod for the _greater_ of what it requested and what it used, because requests are what the scheduler reserves. That is why over-requesting shows up as cost even when the pod is idle.
+
+**Limitations.** Accuracy depends on the pricing source (list prices unless billing integration is configured), shared costs such as the control plane, load balancers, and cross-AZ traffic need an explicit allocation rule, and network cost attribution requires extra configuration. Treat the output as showback-grade, not invoice-grade, until it is reconciled against the bill.
 
 ### 3. FinOps Optimization Actions
 
@@ -55,7 +58,7 @@ helm install opencost opencost/opencost \
 Querying OpenCost API for namespace cost allocation over 7 days:
 
 ```bash
-curl http://opencost.opencost.svc.cluster.local:9003/allocation/compute \
+curl -sG http://opencost.opencost.svc.cluster.local:9003/allocation/compute \
   -d window=7d \
   -d aggregate=namespace \
   -d accumulate=true | jq '.data[0]'
@@ -96,9 +99,9 @@ Sample JSON cost allocation output:
 
 ## Related Concepts
 
+- [[What is progressive delivery and how does it differ from traditional deployment strategies?]] (`#509`): [What is progressive delivery and how does it differ from traditional deployment strategies?](../core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
 - [[What is GitLab CI?]] (`#19`): [What is GitLab CI?](../cicd/what-is-gitlab-ci.md)
-- [[How do you prevent and handle secret leaks in CI/CD pipelines?]] (`#237`): [How do you prevent and handle secret leaks in CI/CD pipelines?](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
