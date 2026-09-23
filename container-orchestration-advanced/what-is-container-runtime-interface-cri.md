@@ -17,7 +17,7 @@ tags:
 
 **The problem it solved.** Originally the kubelet had Docker support compiled in. Supporting other runtimes meant patching Kubernetes itself. CRI defines a stable contract instead, with two services: **RuntimeService** (pod sandbox and container lifecycle, exec, logs) and **ImageService** (pull, list, remove images).
 
-**The dockershim story.** Docker predates CRI and does not implement it, so Kubernetes shipped an adapter called dockershim. It was deprecated in 1.20 and removed in 1.24. This caused alarm, but the practical impact was minimal: Docker-built images are OCI images and run unchanged on containerd or CRI-O. Only tooling that talked to the Docker socket on nodes needed to change.
+**The dockershim story.** Docker predates CRI and does not implement it, so Kubernetes shipped an adapter called dockershim. It was deprecated in 1.20 and removed in 1.24. This caused alarm, but the practical impact was minimal: Docker-built images are OCI images and run unchanged on containerd or CRI-O. Only tooling that talked to the Docker socket on nodes needed to change. Teams that genuinely need Docker Engine on nodes can use `cri-dockerd`, an externally maintained adapter, but managed services have all moved to containerd.
 
 **The layers**
 
@@ -32,7 +32,9 @@ kubelet ──CRI (gRPC)──▶ containerd / CRI-O ──OCI runtime spec─�
 - **gVisor** - a user-space kernel providing stronger isolation for untrusted workloads.
 - **Kata Containers** - lightweight VMs per pod for hardware-level isolation.
 
-**RuntimeClass** lets you select different runtimes per workload, so untrusted tenant code can run under gVisor while trusted services use runc.
+**RuntimeClass** lets you select different runtimes per workload, so untrusted tenant code can run under gVisor while trusted services use runc. The `handler` name must match a runtime configured in containerd or CRI-O on the node, and `scheduling.nodeSelector` on the RuntimeClass keeps such Pods on nodes that have it installed.
+
+**Trade-offs.** Stronger isolation costs performance and compatibility: gVisor intercepts system calls in user space, which slows I/O-heavy workloads and does not support every syscall, and Kata adds VM boot time and memory overhead per Pod. The shared-kernel `runc` default is fastest but means a kernel exploit crosses container boundaries.
 
 ## Example
 
@@ -53,6 +55,8 @@ spec:
 
 ```bash
 crictl ps            # the CRI-level equivalent of docker ps, on a node
+crictl pods          # Pod sandboxes the kubelet has asked the runtime for
+crictl inspect <id>  # runtime view of one container, including its OCI runtime
 ```
 
 ## Interview tips

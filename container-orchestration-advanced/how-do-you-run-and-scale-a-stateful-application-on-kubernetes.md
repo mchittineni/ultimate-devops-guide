@@ -65,6 +65,7 @@ metadata: { name: pg, namespace: data }
 spec:
   serviceName: pg-headless # required: gives pg-0.pg-headless... names
   replicas: 3
+  selector: { matchLabels: { app: pg } }
   podManagementPolicy: OrderedReady
   updateStrategy:
     type: RollingUpdate
@@ -73,6 +74,7 @@ spec:
     whenDeleted: Retain # never let a delete take the data with it
     whenScaled: Retain
   template:
+    metadata: { labels: { app: pg } }
     spec:
       terminationGracePeriodSeconds: 120 # time to checkpoint and hand over leadership
       affinity:
@@ -87,8 +89,13 @@ spec:
           labelSelector: { matchLabels: { app: pg } }
       containers:
         - name: pg
-          image: postgres:16.4
-          readinessProbe: # "ready" must mean caught up, not just listening
+          image: postgres:17
+          env:
+            - { name: PGDATA, value: /var/lib/postgresql/data/pgdata } # subdirectory: a fresh volume has lost+found
+            - name: POSTGRES_PASSWORD
+              valueFrom: { secretKeyRef: { name: pg-superuser, key: password } }
+          volumeMounts: [{ name: data, mountPath: /var/lib/postgresql/data }]
+          readinessProbe: # pg_isready only proves it accepts connections; a production check also bounds replica lag
             exec: { command: ["pg_isready", "-U", "postgres"] }
             periodSeconds: 5
           startupProbe: # slow recovery must not be mistaken for failure
@@ -114,7 +121,7 @@ spec:
 # Scaling out is an application operation, not just a Kubernetes one
 kubectl scale statefulset pg -n data --replicas=4     # creates pg-3 + an EMPTY volume
 # ...the new member still has to be seeded and join replication. With an operator:
-kubectl patch cluster pg -n data --type=merge -p '{"spec":{"instances":4}}'
+kubectl patch clusters.postgresql.cnpg.io pg -n data --type=merge -p '{"spec":{"instances":4}}'   # CloudNativePG
 # the operator base-backups from the primary, starts streaming, and waits for sync
 
 # Scale-in safely: decommission at the application layer FIRST
@@ -138,9 +145,9 @@ kubectl get pvc -n data                               # PVCs remain by design - 
 
 ## Related Concepts
 
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
-- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
-- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[What are ephemeral preview environments and how do you manage their lifecycle and cleanup?]] (`#535`): [What are ephemeral preview environments and how do you manage their lifecycle and cleanup?](../cicd/what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

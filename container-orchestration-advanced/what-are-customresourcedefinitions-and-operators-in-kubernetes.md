@@ -62,7 +62,7 @@ That is "operational knowledge as code". The cost is real too: an operator is so
 
 ### Building one
 
-- **Frameworks**: Kubebuilder / controller-runtime (Go, the mainstream choice), Operator SDK (Go/Ansible/Helm variants - the Helm and Ansible flavours let you wrap existing automation without writing Go), KUDO, kopf (Python), and Metacontroller for simple cases.
+- **Frameworks**: Kubebuilder / controller-runtime (Go, the mainstream choice), Operator SDK (Go/Ansible/Helm variants - the Helm and Ansible flavours let you wrap existing automation without writing Go), Kopf (Python), Java Operator SDK, and Metacontroller for simple cases.
 - **Capability levels** are a useful vocabulary: Level 1 basic install → 2 seamless upgrades → 3 full lifecycle (backup/restore) → 4 deep insights (metrics, alerts) → 5 autopilot (auto-scaling, auto-tuning). Referencing the ladder shows you understand that "we have an operator" is not one thing.
 - **Practical rules**: keep the reconcile function short and idempotent, never block it on long operations (requeue instead), write meaningful `status.conditions`, emit Events, scope RBAC to the namespaces you need, run with leader election so two replicas do not fight, and treat CRD schema changes as an API-compatibility problem.
 
@@ -165,9 +165,9 @@ kubectl patch pgc orders-db -n payments -p '{"metadata":{"finalizers":null}}' --
 
 ## Related Concepts
 
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 - [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
-- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

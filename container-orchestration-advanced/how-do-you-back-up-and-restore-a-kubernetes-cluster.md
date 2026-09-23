@@ -34,7 +34,7 @@ Two etcd nuances worth stating: the snapshot must be paired with the **PKI mater
 
 ### Velero, concretely
 
-Velero runs in-cluster, writes object manifests to an object store (S3/Blob/GCS), and delegates volume data either to **CSI snapshots** (fast, storage-native, stays in the region unless you replicate) or to its **file-system backup** uploader (kopia/restic - slower, but portable across storage classes and clouds, which is what makes cross-provider migration possible).
+Velero runs in-cluster, writes object manifests to an object store (S3/Blob/GCS), and delegates volume data either to **CSI snapshots** (fast, storage-native, stays in the region unless you replicate) or to its **file-system backup** uploader (Kopia - slower, but portable across storage classes and clouds, which is what makes cross-provider migration possible). CSI snapshot data movement combines the two: it snapshots via CSI, then copies the snapshot's data to the object store with Kopia so it survives the loss of the region or storage system. The legacy restic path no longer takes new backups in current Velero releases and is being removed entirely, so restic-era backups need a restore plan before you upgrade past it.
 
 Essentials:
 
@@ -79,9 +79,9 @@ aws s3 cp /backup/ s3://acme-cluster-backups/prod/ --recursive   # off-cluster, 
 
 ```bash
 # --- 2. Workloads and volumes: Velero ---
-velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.10.0 \
+velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.14.0 \
   --bucket acme-velero --backup-location-config region=eu-west-1 \
-  --features=EnableCSI --use-node-agent
+  --features=EnableCSI --use-node-agent   # CSI support is built in since Velero 1.14; the flag is still needed
 
 # tiered schedules with retention
 velero schedule create hourly-payments --schedule "0 * * * *" \
@@ -143,9 +143,9 @@ Restore runbook - rehearsed quarterly, RTO measured not estimated
 
 ## Related Concepts
 
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
-- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

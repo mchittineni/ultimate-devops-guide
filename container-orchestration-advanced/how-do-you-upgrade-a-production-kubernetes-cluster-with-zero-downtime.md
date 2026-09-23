@@ -20,8 +20,8 @@ tags:
 
 ### Before the upgrade
 
-1. **Read the release notes and the deprecation guide for every version you are crossing.** Kubernetes supports **one minor version at a time** (n → n+1) and a kubelet may trail the API server by at most 2-3 minor versions depending on the release. Skipping is unsupported and, on managed platforms, blocked.
-2. **Scan for removed and deprecated APIs** - this is the step that prevents most upgrade incidents. `kubent` or Pluto over live objects _and_ over your Git manifests and Helm charts, because the chart you deploy tomorrow matters as much as the object running today. Old `policy/v1beta1 PodDisruptionBudget`, `batch/v1beta1 CronJob`, and long-tail CRDs are the usual finds.
+1. **Read the release notes and the deprecation guide for every version you are crossing.** Kubernetes supports **one minor version at a time** (n → n+1) and a kubelet may trail the API server by up to three minor versions (two before Kubernetes 1.28), but never be newer. Skipping is unsupported and, on managed platforms, blocked.
+2. **Scan for removed and deprecated APIs** - this is the step that prevents most upgrade incidents. `kubent` or Pluto over live objects _and_ over your Git manifests and Helm charts, because the chart you deploy tomorrow matters as much as the object running today. Historically the finds were `policy/v1beta1 PodDisruptionBudget` and `batch/v1beta1 CronJob` (removed in 1.25); in recent releases they are things like `flowcontrol.apiserver.k8s.io/v1beta3` (removed in 1.32), beta DRA APIs, and long-tail CRDs. Not every breaking change is an API, either: from 1.35 the kubelet refuses to start on cgroup v1 nodes by default, and kube-proxy's IPVS mode is deprecated - so read the "urgent upgrade notes" as well as running the scanners.
 3. **Check add-on compatibility** - CNI, CSI drivers, ingress controller, metrics-server, cluster autoscaler or Karpenter, service mesh, and any webhook. A failing admission webhook after an upgrade blocks every write to the cluster, which is as close to a full outage as Kubernetes gets. Also verify controller RBAC still matches, and that mutating/validating webhooks have `failurePolicy` you can live with.
 4. **Back up state.** On self-managed clusters, snapshot etcd (`etcdctl snapshot save`) and verify the snapshot restores. On managed clusters the control plane is the provider's problem, but back up cluster resources and PVs anyway (Velero) - your objects and data are yours. See [how do you execute a Disaster Recovery failover with minimal RTO and RPO](../backup-and-disaster-recovery/how-do-you-execute-a-disaster-recovery-failover-with-minimal-rto-and-rpo.md).
 5. **Verify the workloads can survive node replacement**: replica count above one, PodDisruptionBudgets that allow progress (a PDB requiring 100% availability blocks drains for ever), readiness probes that mean something, graceful shutdown with `preStop` and a sensible `terminationGracePeriodSeconds`, and topology spread across zones. Any singleton Pod without a PDB will have a gap - decide consciously whether that is acceptable.
@@ -29,7 +29,7 @@ tags:
 
 ### The upgrade order
 
-**Control plane first.** Managed: `aws eks update-cluster-version`, `az aks upgrade --control-plane-only`, `gcloud container clusters upgrade --master`. Self-managed: `kubeapi`/scheduler/controller-manager per control-plane node, one at a time behind their load balancer, with `kubeadm upgrade plan` and `kubeadm upgrade apply`. A newer control plane serving older kubelets is supported; the reverse is not - which is the reason for the order.
+**Control plane first.** Managed: `aws eks update-cluster-version`, `az aks upgrade --control-plane-only`, `gcloud container clusters upgrade --master`. Self-managed: kube-apiserver, scheduler, and controller-manager per control-plane node, one at a time behind their load balancer, with `kubeadm upgrade plan` and `kubeadm upgrade apply`. A newer control plane serving older kubelets is supported; the reverse is not - which is the reason for the order.
 
 **Add-ons next**, to versions that support both the old and new Kubernetes where possible.
 
@@ -55,15 +55,15 @@ Upgrade small and often. A cluster two minors behind requires two sequential upg
 
 ```bash
 # 1. What will break? Scan live objects AND the manifests you are about to apply.
-kubent --target-version 1.31          # deprecated/removed APIs in the cluster
-pluto detect-files -d ./manifests -o wide --target-versions k8s=v1.31
+kubent --target-version 1.36          # deprecated/removed APIs in the cluster
+pluto detect-files -d ./manifests -o wide --target-versions k8s=v1.36
 
 # 2. Version skew reality check before starting
-kubectl version --short
+kubectl version                       # --short was removed; the short form is now the default
 kubectl get nodes -o custom-columns='NAME:.metadata.name,KUBELET:.status.nodeInfo.kubeletVersion'
 
 # 3. Self-managed control plane, one node at a time
-kubeadm upgrade plan v1.31.4 && sudo kubeadm upgrade apply v1.31.4
+kubeadm upgrade plan v1.36.4 && sudo kubeadm upgrade apply v1.36.4
 
 # 4. Worker replacement loop - drain respects PodDisruptionBudgets
 for n in $(kubectl get nodes -l version=old -o name); do
@@ -120,9 +120,9 @@ spec:
 
 ## Related Concepts
 
+- [[What are ephemeral preview environments and how do you manage their lifecycle and cleanup?]] (`#535`): [What are ephemeral preview environments and how do you manage their lifecycle and cleanup?](../cicd/what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup.md)
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
-- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
-- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
