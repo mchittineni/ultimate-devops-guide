@@ -96,11 +96,15 @@ spec:
       static:
         - https://shop.example.com/healthz
         - https://shop.example.com/api/search?q=test
+        - https://shop.example.com/checkout/healthz
       labels: { service: shop, tier: critical }
 ```
 
 ```promql
-# The four golden signals from edge metrics you already have
+# The four golden signals from edge metrics you already have.
+# Shown with ingress-nginx metric names, common in legacy clusters - note ingress-nginx was
+# retired in March 2026; Gateway API implementations (Envoy Gateway, Istio, Cilium, etc.)
+# expose equivalent per-route request and latency metrics under their own names.
 sum(rate(nginx_ingress_controller_requests{service="shop"}[5m]))                    # traffic
 sum(rate(nginx_ingress_controller_requests{service="shop",status=~"5.."}[5m]))
   / sum(rate(nginx_ingress_controller_requests{service="shop"}[5m]))                # errors
@@ -140,8 +144,8 @@ groups:
 ## Related Concepts
 
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
-- [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
+- [[What is Shift-Left and how is it practically implemented across the SDLC?]] (`#510`): [What is Shift-Left and how is it practically implemented across the SDLC?](../core-devops-concepts/what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

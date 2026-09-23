@@ -41,7 +41,9 @@ topk(20, count by (__name__)({__name__=~".+"}))          # worst metrics by seri
 topk(10, count by (job)({__name__=~".+"}))               # worst scrape jobs
 count(count by (endpoint) (http_requests_total))         # cardinality of one label
 prometheus_tsdb_head_series                              # total active series - the cost number
+```
 
+```yaml
 # Growth alert: catch the bad deploy, not the monthly invoice.
 - alert: SeriesGrowthSpike
   expr: |
@@ -78,20 +80,25 @@ scrape_configs:
 # OpenTelemetry Collector: the same policy, fleet-wide, before anything is stored.
 processors:
   filter/drop_noisy:
+    error_mode: ignore
     metrics:
-      exclude: { match_type: regexp, metric_names: ["envoy_cluster_upstream_rq_time_.*"] }
+      metric: # OTTL conditions; the older include/exclude match_type syntax is deprecated
+        - 'IsMatch(name, "envoy_cluster_upstream_rq_time_.*")'
   metricstransform/aggregate_away_pod:
     transforms:
-      - include: http_server_duration
+      - include: http.server.request.duration
         action: update
         operations:
           - action: aggregate_labels
-            label_set: [service, http_route, http_status_class] # pod dropped deliberately
+            label_set: [http.route, http.response.status_code] # pod dropped deliberately
             aggregation_type: sum
 ```
 
 ```python
 # The upstream fix: bounded labels by construction, with an exemplar for the drill-down.
+from prometheus_client import Counter
+
+trace_id = "4bf92f3577b34da6a3ce929d0e0e4736"  # from the active span in real code
 REQ = Counter("http_requests_total", "requests", ["route", "status_class"])  # bounded
 REQ.labels(route="/orders/:id", status_class="5xx").inc(exemplar={"trace_id": trace_id})
 # NOT: labels(user_id=..., request_id=..., full_path=...) - unbounded, use logs/traces

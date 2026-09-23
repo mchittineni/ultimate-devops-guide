@@ -31,6 +31,21 @@ tags:
 
 **Getting value from it:** propagate a correlation ID through every service and into logs, tag spans with release version and tenant, and connect trace exemplars to your metrics dashboards so a latency spike is one click from an example trace.
 
+## Example
+
+```bash
+# Zero-code APM for a JVM service with the OpenTelemetry Java agent, exporting OTLP to a Collector
+curl -sSLo opentelemetry-javaagent.jar \
+  https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
+
+OTEL_SERVICE_NAME=checkout \
+OTEL_RESOURCE_ATTRIBUTES=service.version=1.9.0,deployment.environment.name=prod \
+OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318 \
+java -javaagent:./opentelemetry-javaagent.jar -jar checkout.jar
+```
+
+HTTP servers and clients, JDBC, Kafka, and Redis calls become spans and metrics automatically; add manual spans only for business operations the agent cannot see.
+
 ## Interview tips
 
 - Tail-based versus head-based sampling is the depth question here - know the trade-off.
