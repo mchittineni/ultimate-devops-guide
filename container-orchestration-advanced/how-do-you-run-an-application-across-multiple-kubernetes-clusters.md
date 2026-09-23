@@ -69,7 +69,7 @@ spec:
     - clusters: # every registered cluster labelled env=prod
         selector:
           matchLabels: { env: prod }
-  strategy: # progressive: one wave of clusters at a time
+  strategy: # progressive: one wave at a time (Progressive Syncs must be enabled on the ApplicationSet controller)
     type: RollingSync
     rollingSync:
       steps:
@@ -78,7 +78,9 @@ spec:
         - matchExpressions:
             [{ key: region, operator: In, values: [us-east-1, ap-south-1] }]
   template:
-    metadata: { name: "checkout-{{name}}" }
+    metadata:
+      name: "checkout-{{name}}"
+      labels: { region: "{{metadata.labels.region}}" } # RollingSync steps select Applications by these labels
     spec:
       project: default
       source:
@@ -123,9 +125,9 @@ Traffic and data, active/active reads with a single write region
 
 ## Related Concepts
 
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
-- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What are ephemeral preview environments and how do you manage their lifecycle and cleanup?]] (`#535`): [What are ephemeral preview environments and how do you manage their lifecycle and cleanup?](../cicd/what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

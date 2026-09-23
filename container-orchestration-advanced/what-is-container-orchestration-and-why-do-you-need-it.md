@@ -35,7 +35,7 @@ An orchestrator answers all of them from a declarative description of the desire
 | **Service discovery**  | A stable name and virtual IP in front of a changing set of replicas  |
 | **Load balancing**     | Spreads traffic across healthy replicas only                         |
 | **Scaling**            | Adds or removes replicas from a metric, and nodes to fit them        |
-| **Rolling updates**    | Replaces old versions incrementally, and rolls back on failure       |
+| **Rolling updates**    | Replaces old versions incrementally, and can roll back on command    |
 | **Config and secrets** | Injects configuration at runtime instead of baking it into the image |
 | **Storage**            | Attaches persistent volumes to the container that needs them         |
 

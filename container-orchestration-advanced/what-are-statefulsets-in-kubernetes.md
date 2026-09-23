@@ -23,11 +23,19 @@ tags:
 - **Ordered operations.** Pods are created 0, 1, 2 and terminated in reverse; each waits for the previous to be Ready. `podManagementPolicy: Parallel` disables this when ordering is unnecessary.
 - **Ordered, controlled rollouts** with `partition` for staged canary updates of the set.
 
-**Important caveats.** Deleting a StatefulSet does not delete its PVCs - deliberate, so data is not lost by accident, but it means manual cleanup. Scaling down leaves the volumes behind. And a StatefulSet gives you _identity_, not clustering: replication, leader election, and failover are still the application's job, which is why operators exist for databases.
+**Important caveats.** By default, deleting a StatefulSet does not delete its PVCs - deliberate, so data is not lost by accident, but it means manual cleanup. Scaling down leaves the volumes behind too. `persistentVolumeClaimRetentionPolicy` (stable since Kubernetes 1.32) lets you choose `Delete` for `whenDeleted` and/or `whenScaled` when the data is disposable. And a StatefulSet gives you _identity_, not clustering: replication, leader election, and failover are still the application's job, which is why operators exist for databases.
 
 ## Example
 
 ```yaml
+apiVersion: v1
+kind: Service # the headless Service that gives each Pod its DNS name
+metadata: { name: postgres }
+spec:
+  clusterIP: None
+  selector: { app: postgres }
+  ports: [{ port: 5432, name: pg }]
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata: { name: postgres }
@@ -41,8 +49,12 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
         - name: postgres
-          image: postgres:16
+          image: postgres:17
           ports: [{ containerPort: 5432, name: pg }]
+          env:
+            - { name: PGDATA, value: /var/lib/postgresql/data/pgdata } # a fresh volume has lost+found at its root
+            - name: POSTGRES_PASSWORD # the image refuses to initialise without one
+              valueFrom: { secretKeyRef: { name: postgres-superuser, key: password } }
           volumeMounts: [{ name: data, mountPath: /var/lib/postgresql/data }]
   volumeClaimTemplates:
     - metadata: { name: data }

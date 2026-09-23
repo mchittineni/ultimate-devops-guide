@@ -15,13 +15,15 @@ tags:
 
 ## Detail
 
-**Architecture.** `istiod` is the control plane - it handles service discovery, configuration distribution, and certificate issuance. The data plane is Envoy, injected as a sidecar into each pod (or, in **ambient mode**, run as a per-node ztunnel plus optional waypoint proxies, removing per-pod sidecars).
+**Architecture.** `istiod` is the control plane - it handles service discovery, configuration distribution, and certificate issuance. The data plane is Envoy, injected as a sidecar into each pod - or, in **ambient mode** (GA since Istio 1.24), a per-node `ztunnel` that handles mTLS and L4 policy for every Pod on the node, plus optional per-namespace or per-service **waypoint** proxies (Envoy) only where L7 features are needed. Ambient removes per-pod sidecars, so Pods no longer need restarting to join or upgrade the mesh.
+
+**Sidecar versus ambient.** Sidecars give every Pod full L7 features and isolate failures per Pod, at the cost of CPU and memory in every replica and a proxy upgrade that means a rolling restart of the fleet. Ambient is far cheaper for the common "mTLS plus L4 policy" case, but L7 routing and policy require deploying waypoints, and the shared node proxy is a different failure and multi-tenancy model.
 
 **Core APIs**
 
 - **VirtualService** - routing rules: weighted splits, header matching, rewrites, timeouts, retries, fault injection.
 - **DestinationRule** - what happens after routing: subsets, load-balancing policy, connection pool limits, outlier detection (ejecting unhealthy endpoints), and TLS settings.
-- **Gateway** - ingress and egress at the mesh edge.
+- **Gateway** - ingress and egress at the mesh edge. Istio also implements the Kubernetes **Gateway API** (`Gateway`, `HTTPRoute`), which Istio positions as its future default for traffic management and uses to deploy ambient waypoints; the Istio `VirtualService`/`Gateway` APIs remain supported.
 - **PeerAuthentication** - enforce strict mTLS.
 - **AuthorizationPolicy** - allow/deny rules by source identity, namespace, method, or path.
 - **ServiceEntry** / **Sidecar** - external services, and scoping proxy configuration to reduce memory.
@@ -54,7 +56,8 @@ spec:
 
 - Naming the four or five main CRDs and what each controls demonstrates hands-on use.
 - Ambient mode is the current answer to the sidecar overhead criticism - worth knowing.
-- Compare with Linkerd (simpler, lighter, less featureful) to show you evaluated options.
+- Compare with Linkerd (simpler, lighter, less featureful; stable open-source releases now come via Buoyant, with the project itself shipping edge releases) and Cilium's mesh to show you evaluated options.
+- Know the trade-off in one line: a mesh buys identity, mTLS, and uniform telemetry at the price of latency, resource overhead, and a critical control plane you must upgrade carefully.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

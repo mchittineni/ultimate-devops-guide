@@ -48,13 +48,13 @@ Two details worth knowing precisely. Files whose name starts with `_` are **not*
 | Runs hooks              | No                                                | Yes                                         |
 | Good for                | CI diffing, GitOps rendering, debugging templates | Actually deploying, plus rollback history   |
 
-`helm template` is how you debug: render locally, read the YAML, and see exactly what your values produced. `helm install --dry-run --debug` is the same thing with server-side validation and the computed values printed. In GitOps setups it is common to render with `helm template` and commit or sync the output, so Argo CD/Flux applies plain manifests and the diff is readable.
+`helm template` is how you debug: render locally, read the YAML, and see exactly what your values produced. `helm install --dry-run=server --debug` is the same thing with server-side validation (including admission webhooks) and the computed values printed; a bare `--dry-run` only renders client-side. In GitOps setups it is common to render with `helm template` and commit or sync the output, so Argo CD/Flux applies plain manifests and the diff is readable.
 
 ### Customising a public chart - four options, in order of preference
 
 1. **Values files.** The intended mechanism. Layer them: `-f base.yaml -f prod.yaml --set image.tag=$SHA`, where later files win key by key and `--set` wins over everything. Read the upstream `values.yaml` as the contract; most good charts expose `resources`, `nodeSelector`, `tolerations`, `podAnnotations`, `extraEnv`, `extraVolumes`, and `podSecurityContext` for exactly this reason.
 2. **A wrapper (umbrella) chart.** Declare the public chart as a dependency in your `Chart.yaml`, put your overrides under its name in your `values.yaml`, and add your own extra manifests in your `templates/`. This answers "how do you add extra Kubernetes manifests to a public chart?" - you do not touch the chart, you ship a parent that carries both. Aliases let you install the same subchart twice with different values.
-3. **Post-rendering.** `helm upgrade --post-renderer ./kustomize.sh` pipes the rendered manifests through Kustomize, so you can patch anything the chart did not parameterise without forking.
+3. **Post-rendering.** A post-renderer pipes the rendered manifests through a tool such as Kustomize, so you can patch anything the chart did not parameterise without forking. In Helm 3 `--post-renderer` takes a path to an executable; in Helm 4 post-renderers are plugins and the flag takes the plugin's name.
 4. **Fork.** Last resort. You inherit the maintenance and lose upstream fixes. If you fork, record why in the repository.
 
 Parent-child value rules interviewers probe: subchart values are set under the subchart's name, `global:` is visible to all subcharts, and a parent's value beats the subchart's default.
@@ -67,7 +67,7 @@ Never put real secrets in `values.yaml` - it lands in Git and in the release obj
 
 - **Release state lives in a Secret** in the release namespace (`sh.helm.release.v1.<name>.v<n>`), so `helm list` is only as good as your namespace and context. Lose the namespace, lose the history.
 - **Hooks** (`helm.sh/hook: pre-upgrade`) run as separate objects and are **not** part of the release's rollback set - a failed migration hook leaves a Job behind and a release stuck `pending-upgrade`. Set `helm.sh/hook-delete-policy` accordingly.
-- **`--atomic --timeout 5m`** makes a failed upgrade roll itself back automatically, and `--wait` blocks until resources are Ready. Use both in CI; without them a "successful" deploy just means the YAML was accepted.
+- **`--rollback-on-failure --timeout 5m`** (`--atomic` in Helm 3) makes a failed upgrade roll itself back automatically, and `--wait` blocks until resources are Ready. Use both in CI; without them a "successful" deploy just means the YAML was accepted.
 - **CRDs in `crds/` are installed once and never upgraded or deleted by Helm.** Upgrading CRDs is your job, out of band. This surprises people during operator upgrades.
 - **`--reuse-values` versus `--reset-values`**: `--reuse-values` carries forward what you set last time (and can silently keep a stale image tag); being explicit with full values files avoids the whole class of bug.
 - **Ownership metadata**: adopting an existing object into a release needs the right `app.kubernetes.io/managed-by` and ownership annotations, otherwise you get "exists and cannot be imported".
@@ -86,13 +86,13 @@ version: 1.4.0 # chart version - bump on template changes
 appVersion: "2.7.1" # the application version
 dependencies:
   - name: redis
-    version: 19.6.4
-    repository: https://charts.bitnami.com/bitnami
+    version: 2.3.1
+    repository: oci://registry.example.com/charts # internal chart, pulled over OCI
     condition: redis.enabled # let environments switch it off
-  - name: kube-prometheus-stack
-    version: 61.3.2
-    repository: https://prometheus-community.github.io/helm-charts
-    alias: monitoring
+  - name: service-monitoring
+    version: 0.4.0
+    repository: oci://registry.example.com/charts
+    alias: monitoring # installed under a different name
 ```
 
 ```yaml
@@ -148,7 +148,7 @@ helm unittest .                       # or `helm test` after install
 # Deploy safely: wait for readiness, auto-rollback on failure
 helm upgrade --install payments . -n prod --create-namespace \
   -f values-prod.yaml --set image.tag="$GIT_SHA" \
-  --atomic --timeout 5m
+  --rollback-on-failure --wait --timeout 5m   # Helm 3: --atomic
 
 # Inspect and roll back
 helm history payments -n prod
@@ -162,7 +162,7 @@ helm rollback payments 7 -n prod --wait
 - Recite the layout confidently - `Chart.yaml`, `values.yaml`, `templates/` with `_helpers.tpl` and `NOTES.txt`, `charts/`, `crds/` - and add the two details that show you have written charts: files starting with `_` are not rendered, and `version` versus `appVersion` mean different things.
 - Explain `helm template` versus `helm install` as "render only" versus "render and record a revision", and mention that `template` cannot use `lookup` or run hooks. Then say `helm template` is your debugging tool.
 - For "how do you customise a public chart?", give the ladder: values files, then a wrapper chart with the upstream as a dependency, then a post-renderer, and forking only as a last resort. The wrapper-chart answer is what interviewers are fishing for when they ask about adding extra manifests.
-- Volunteer `--atomic --timeout --wait` for CI, because "the upgrade succeeded but the Pods never became Ready" is a real class of incident.
+- Volunteer `--rollback-on-failure --timeout --wait` (`--atomic` in Helm 3) for CI, because "the upgrade succeeded but the Pods never became Ready" is a real class of incident.
 - Know where release state lives (a Secret in the namespace) and that CRDs in `crds/` are never upgraded by Helm - both are specific and both come up.
 - Be clear about secrets: not in `values.yaml`, prefer an `existingSecret` reference, and remember `helm get values` exposes anything you passed with `--set`.
 - Give a balanced Helm-versus-Kustomize answer rather than a preference. See [what is Helm](./what-is-helm.md), [troubleshooting a failed Helm release](./how-do-you-troubleshoot-a-failed-helm-release.md), [what is ArgoCD](../devops-tools-and-automation/what-is-argocd.md), and [ConfigMaps and Secrets](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md).

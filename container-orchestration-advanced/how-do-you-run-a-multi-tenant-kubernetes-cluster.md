@@ -32,7 +32,7 @@ Saying "if these are real customers running arbitrary containers, I would not pu
 
 ### The five layers for shared clusters
 
-**1. Namespace as the unit of ownership.** One namespace per team-environment (`team-a-prod`), created by automation with the whole policy bundle attached - quota, limit range, default-deny NetworkPolicy, RBAC bindings, and labels for cost allocation. A tenant that can create its own namespaces bypasses all of it, so namespace creation belongs to the platform (or to a controller such as Hierarchical Namespace Controller / Capsule, which model tenant → namespaces properly).
+**1. Namespace as the unit of ownership.** One namespace per team-environment (`team-a-prod`), created by automation with the whole policy bundle attached - quota, limit range, default-deny NetworkPolicy, RBAC bindings, and labels for cost allocation. A tenant that can create its own namespaces bypasses all of it, so namespace creation belongs to the platform (or to a controller such as Capsule, which models tenant → namespaces properly; the Hierarchical Namespace Controller did the same but was archived in 2025).
 
 **2. RBAC scoped tightly.** Bind `Role`s in the tenant's namespaces, never `ClusterRole` bindings at cluster scope. Deny the escape hatches: `get secrets` beyond their own namespace, `escalate`/`bind` verbs, `impersonate`, and access to cluster-scoped objects (nodes, PVs, CRDs, webhooks). Disable `automountServiceAccountToken` where unused, and remember that permission to create a Pod is effectively permission to use any ServiceAccount in that namespace - so a tenant with a privileged SA in their namespace has that privilege.
 
@@ -120,16 +120,17 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata: { name: tenant-guardrails }
 spec:
-  validationFailureAction: Audit # flip to Enforce after reviewing the audit report
   rules:
     - name: images-from-approved-registries
       match: { any: [{ resources: { kinds: [Pod] } }] }
       validate:
+        failureAction: Audit # per-rule since Kyverno 1.13; flip to Enforce after reviewing reports
         message: "Images must come from registry.example.com"
         pattern: { spec: { containers: [{ image: "registry.example.com/*" }] } }
     - name: require-tenant-labels
       match: { any: [{ resources: { kinds: [Pod, Service, PersistentVolumeClaim] } }] }
       validate:
+        failureAction: Audit
         message: "tenant and cost-centre labels are required for cost attribution"
         pattern: { metadata: { labels: { tenant: "?*", cost-centre: "?*" } } }
 ```
@@ -164,9 +165,9 @@ kubectl get pods -A -o json | jq -r '.items[] | [.metadata.labels.tenant,
 
 ## Related Concepts
 
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
-- [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

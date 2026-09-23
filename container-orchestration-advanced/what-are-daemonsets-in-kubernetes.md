@@ -21,7 +21,7 @@ tags:
 
 **Tolerations matter.** Control-plane and specialised nodes carry taints. A monitoring agent that must run everywhere needs the corresponding tolerations, otherwise you get silent blind spots on exactly the nodes you most want to watch.
 
-**Update strategies:** `RollingUpdate` with `maxUnavailable` (and `maxSurge` in newer versions) or `OnDelete` for manual control, which is common for network plugins where a botched rollout can partition the cluster.
+**Update strategies:** `RollingUpdate` with `maxUnavailable` (and `maxSurge`, stable since Kubernetes 1.25, which starts the new Pod before stopping the old one on each node) or `OnDelete` for manual control, which is common for network plugins where a botched rollout can partition the cluster.
 
 **Priority and resources.** Node agents should carry a high `priorityClassName` (`system-node-critical`) so they are not evicted under pressure, and conservative resource requests since they multiply by node count - on a 500-node cluster, 100 MiB per agent is 50 GiB of cluster memory.
 
@@ -42,7 +42,7 @@ spec:
         - operator: Exists # run on every node, including tainted ones
       containers:
         - name: fluent-bit
-          image: fluent/fluent-bit:3.1
+          image: fluent/fluent-bit:4.0
           resources:
             requests: { cpu: 50m, memory: 64Mi }
             limits: { memory: 128Mi }
@@ -64,7 +64,7 @@ spec:
 
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -13,7 +13,7 @@ tags:
 
 # How do you troubleshoot a failed Helm release?
 
-**Short answer:** Separate the three failure layers, because each has a different fix. **Template failures** never reach the cluster - render locally with `helm template` or `helm install --dry-run --debug` and fix the chart. **Apply failures** mean the API server rejected the manifest (schema, immutable field, admission webhook) - `helm install --debug` prints the rejection verbatim. **Runtime failures** mean the objects were created but the Pods are unhealthy, so it is an ordinary Kubernetes debugging job (`describe pod`, events, logs) and Helm is only the messenger. Then know the two operational traps: a release stuck in `pending-install`/`pending-upgrade` needs `helm rollback` or `--force`, and `--wait --atomic --timeout` is what turns a half-applied release into a clean automatic rollback.
+**Short answer:** Separate the three failure layers, because each has a different fix. **Template failures** never reach the cluster - render locally with `helm template` or `helm install --dry-run --debug` and fix the chart. **Apply failures** mean the API server rejected the manifest (schema, immutable field, admission webhook) - `helm install --debug` prints the rejection verbatim. **Runtime failures** mean the objects were created but the Pods are unhealthy, so it is an ordinary Kubernetes debugging job (`describe pod`, events, logs) and Helm is only the messenger. Then know the two operational traps: a release stuck in `pending-install`/`pending-upgrade` needs `helm rollback` (or, as a last resort, deleting the stuck release record), and `--wait --rollback-on-failure --timeout` (`--atomic` before Helm 4) is what turns a half-applied release into a clean automatic rollback.
 
 ## Detail
 
@@ -47,12 +47,12 @@ Here Helm reports success (or a `--wait` timeout) and the real problem is the wo
 Helm stores each release revision as a Secret in the release namespace. Its status matters:
 
 - `deployed` - the good state. `failed` - the upgrade did not complete; the previous revision may still be running.
-- `pending-install`, `pending-upgrade`, `pending-rollback` - **Helm was interrupted** (a killed CI job, a timeout, a lost connection). The release is locked and further upgrades report `another operation (install/upgrade/rollback) is in progress`. Recovery: `helm rollback <release> <last-good-revision>`, or `helm upgrade --force`, or as a last resort delete the newest release Secret (`sh.helm.release.v1.<name>.v<n>`) so Helm forgets the stuck revision. Also worth knowing: a failed **first** install leaves nothing to roll back to, so the fix is `helm uninstall` then reinstall.
+- `pending-install`, `pending-upgrade`, `pending-rollback` - **Helm was interrupted** (a killed CI job, a timeout, a lost connection). The release is locked and further upgrades report `another operation (install/upgrade/rollback) is in progress`. Recovery: `helm rollback <release> <last-good-revision>`, or as a last resort delete the newest release Secret (`sh.helm.release.v1.<name>.v<n>`) so Helm forgets the stuck revision. Also worth knowing: a failed **first** install leaves nothing to roll back to, so the fix is `helm uninstall` then reinstall.
 - `helm history <release>` shows revisions, statuses, and chart versions; `helm get manifest`, `helm get values --all`, and `helm diff upgrade` (the plugin) tell you what actually changed - which is usually the real question.
 
 ### Making failures self-correcting
 
-Deploy with `--atomic --wait --timeout 10m` so any failure rolls back automatically instead of leaving a half-applied release; pin the chart version and the image digest; keep `--history-max` bounded; and prefer a GitOps controller for production, where the desired state is a manifest in Git and rollback is `git revert` rather than an imperative command a human must remember under pressure. See [what is Helm](./what-is-helm.md) and [what is GitOps](../devops-tools-and-automation/what-is-gitops.md).
+Deploy with `--rollback-on-failure --wait --timeout 10m` (Helm 4; the Helm 3 flag is `--atomic`) so any failure rolls back automatically instead of leaving a half-applied release; pin the chart version and the image digest; keep `--history-max` bounded; and prefer a GitOps controller for production, where the desired state is a manifest in Git and rollback is `git revert` rather than an imperative command a human must remember under pressure. See [what is Helm](./what-is-helm.md) and [what is GitOps](../devops-tools-and-automation/what-is-gitops.md).
 
 ## Example
 
@@ -74,10 +74,9 @@ helm diff upgrade checkout ./chart -f values-prod.yaml   # plugin: the real diff
 
 # 4. Unstick a pending release, oldest fix first
 helm rollback checkout 6 -n prod
-# still stuck? then:
-helm upgrade checkout ./chart -f values-prod.yaml -n prod --force --wait --timeout 10m
-# last resort - drop the stuck revision record
+# last resort - drop the stuck revision record, then upgrade again
 kubectl -n prod delete secret sh.helm.release.v1.checkout.v7
+helm upgrade checkout ./chart -f values-prod.yaml -n prod --wait --timeout 10m --rollback-on-failure
 
 # 5. Objects exist but Pods are unhealthy -> it is a Kubernetes problem now
 kubectl get pods -n prod -l app.kubernetes.io/instance=checkout
@@ -103,7 +102,8 @@ resources: {{- toYaml (.Values.resources | default dict) | nindent 12 }}
 - Know the pending-state trap and how to escape it. "A killed CI job leaves the release in `pending-upgrade`, and the fix is `helm rollback` or deleting the release Secret" is a very practical answer few candidates give.
 - Mention immutable fields - Deployment selectors, Service `clusterIP`, `volumeClaimTemplates` - as the class of change Helm cannot upgrade through.
 - Explain that Helm stores state as Secrets in the namespace. Candidates who still say "Tiller" are dating themselves by two major versions.
-- Recommend `--atomic --wait --timeout` for CI, then note the trade-off: an atomic rollback hides the broken state you might have wanted to inspect, so debug runs should omit it.
+- Know the Helm 4 changes that break CI scripts: `--atomic` is now `--rollback-on-failure`, `--force` is now `--force-replace`, post-renderers are plugins, and `helm registry login` takes a hostname only. Helm 3 gets security fixes only until February 2027.
+- Recommend `--rollback-on-failure --wait --timeout` (`--atomic` in Helm 3) for CI, then note the trade-off: an atomic rollback hides the broken state you might have wanted to inspect, so debug runs should omit it.
 - Distinguish "Helm succeeded but Pods are broken" clearly - at that point Helm is irrelevant and you are doing ordinary Pod debugging.
 - Close on the production preference for GitOps, where rollback is `git revert` and the cluster state is not the product of someone's shell history.
 
@@ -113,7 +113,7 @@ resources: {{- toYaml (.Values.resources | default dict) | nindent 12 }}
 
 - [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
-- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
