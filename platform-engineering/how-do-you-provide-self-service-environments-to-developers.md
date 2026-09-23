@@ -48,7 +48,7 @@ jobs:
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7 # pin to a commit SHA in production
       - name: Create namespace with TTL label
         run: |
           NS="pr-${{ github.event.number }}"
@@ -57,14 +57,15 @@ jobs:
             acme.com/ttl=8h acme.com/owner="${{ github.actor }}" acme.com/pr="${{ github.event.number }}"
       - name: Clone the database template (seconds, not minutes)
         run: ./scripts/clone-db-template.sh "pr-${{ github.event.number }}"
-      - name: Deploy only the changed service; shared deps via tenant header
+      - name: Deploy only the changed service (image already built by CI, tagged with the PR head SHA); shared deps via tenant header
         run: |
           helm upgrade --install app ./chart -n "pr-${{ github.event.number }}" \
-            --set image.digest="${{ steps.build.outputs.digest }}" \
+            --set image.tag="${{ github.event.pull_request.head.sha }}" \
             --set tenant="pr-${{ github.event.number }}" \
             --wait --timeout 5m
       - name: Comment the URL on the PR
-        run: gh pr comment ${{ github.event.number }} --body "Preview: https://pr-${{ github.event.number }}.dev.acme.com"
+        run: |
+          gh pr comment ${{ github.event.number }} --body "Preview: https://pr-${{ github.event.number }}.dev.acme.com"
 
   teardown:
     if: github.event.action == 'closed'
@@ -89,8 +90,8 @@ environment cannot outlive its purpose. This is the control that keeps the bill 
 ## Related Concepts
 
 - [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
+- [[What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?]] (`#634`): [What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?](../devops-tools-and-automation/what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs.md)
 - [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
-- [[What is Infrastructure as Code?]] (`#26`): [What is Infrastructure as Code?](../infrastructure-as-code/what-is-infrastructure-as-code.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
