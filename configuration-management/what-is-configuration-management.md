@@ -29,6 +29,32 @@ Without it, servers become snowflakes: each hand-tuned differently, none reprodu
 
 **Where it is heading.** Immutable infrastructure has absorbed much of this work: instead of converging a long-lived server, you bake an image (Packer) or build a container and replace the instance entirely. Configuration management remains essential for the estates that cannot be made immutable, and for golden-image builds themselves.
 
+**The limits.** Configuration management only controls what it declares - anything not in the code can still drift - and continuous convergence against live hosts means every run is a change to production, so a bad commit spreads fleet-wide at the next run unless you roll out in batches. Push tools only correct drift when someone runs them; pull agents need their own infrastructure (servers, certificates, upgrades).
+
+## Example
+
+```yaml
+# Desired state, not steps: safe to run repeatedly
+- hosts: web
+  become: true
+  tasks:
+    - name: Ensure chrony is installed
+      ansible.builtin.package: { name: chrony, state: present }
+    - name: Ensure the NTP config matches the template
+      ansible.builtin.template: { src: chrony.conf.j2, dest: /etc/chrony.conf, mode: "0644" }
+      notify: Restart chronyd
+    - name: Ensure chronyd is running and enabled
+      ansible.builtin.service: { name: chronyd, state: started, enabled: true }
+  handlers:
+    - name: Restart chronyd
+      ansible.builtin.service: { name: chronyd, state: restarted }
+```
+
+```bash
+ansible-playbook ntp.yml --check --diff   # drift report: what would change, and how
+ansible-playbook ntp.yml                  # converge; a second run should report changed=0
+```
+
 ## Interview tips
 
 - Idempotency is the concept to define precisely - it is what separates configuration management from scripting.

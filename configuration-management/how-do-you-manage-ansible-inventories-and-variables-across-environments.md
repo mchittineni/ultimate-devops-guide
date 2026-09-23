@@ -12,7 +12,7 @@ tags:
 
 # How do you manage Ansible inventories and variables across environments?
 
-**Short answer:** One inventory per environment, variables layered by scope, and nothing environment-specific inside a role. Concretely: an inventory directory per environment (`inventories/prod/`, `inventories/staging/`) each containing hosts grouped by function, with **`group_vars/`** and **`host_vars/`** files next to it - so `inventories/prod/group_vars/webservers.yml` holds production web settings and the role itself only ships safe defaults. Use a **static** inventory (INI or YAML) when the hosts are stable, and a **dynamic** inventory plugin (`amazon.aws.aws_ec2`, `azure.azcollection.azure_rm`, `community.general.gcp_compute`) when the cloud is the source of truth, so hosts and groups are built from tags at run time. Precedence is the part interviewers test: role `defaults/` is the weakest, then inventory group_vars, then host_vars, then play/task vars, with `-e` (extra vars) beating everything - which is why `-e` is the right tool for a one-off override and the wrong place for permanent configuration.
+**Short answer:** One inventory per environment, variables layered by scope, and nothing environment-specific inside a role. Concretely: an inventory directory per environment (`inventories/prod/`, `inventories/staging/`) each containing hosts grouped by function, with **`group_vars/`** and **`host_vars/`** files next to it - so `inventories/prod/group_vars/webservers.yml` holds production web settings and the role itself only ships safe defaults. Use a **static** inventory (INI or YAML) when the hosts are stable, and a **dynamic** inventory plugin (`amazon.aws.aws_ec2`, `azure.azcollection.azure_rm`, `google.cloud.gcp_compute`) when the cloud is the source of truth, so hosts and groups are built from tags at run time. Precedence is the part interviewers test: role `defaults/` is the weakest, then inventory group_vars, then host_vars, then play/task vars, with `-e` (extra vars) beating everything - which is why `-e` is the right tool for a one-off override and the wrong place for permanent configuration.
 
 ## Detail
 
@@ -101,7 +101,7 @@ For CI, `--extra-vars "@release.json"` keeps the invocation short and the values
 
 ### Targeting: `--limit` and patterns
 
-`ansible-playbook site.yml -i inventories/prod --limit 'webservers:!web-03*'` is the answer to "run against all database servers except one" - the `:!` exclusion operator on a pattern. Other useful forms: `group1:group2` (union), `group1:&group2` (intersection), `~web-\d+` (regex), `--limit @failed.retry` to re-run only the hosts that failed. Combine with `--list-hosts` **before** running anything destructive; confirming the target list is a habit worth demonstrating in an interview.
+`ansible-playbook site.yml -i inventories/prod --limit 'dbservers:!db-02*'` is the answer to "run against all database servers except one" - the `:!` exclusion operator on a pattern. Other useful forms: `group1:group2` (union), `group1:&group2` (intersection), `~web-\d+` (regex), `--limit @site.retry` to re-run only the hosts that failed (retry files are off by default since Ansible 2.8 - enable `retry_files_enabled = True` in `ansible.cfg` if you rely on them). Combine with `--list-hosts` **before** running anything destructive; confirming the target list is a habit worth demonstrating in an interview.
 
 ### Secrets in inventory
 
@@ -171,7 +171,7 @@ ansible-playbook site.yml -i inventories/prod --limit 'webservers:&eu_west_1' --
 # One-off override for a run; permanent values belong in group_vars
 ansible-playbook deploy.yml -i inventories/prod -e "app_version=1.9.1" -e @release.json
 
-# Retry only what failed
+# Retry only what failed (needs retry_files_enabled = True in ansible.cfg)
 ansible-playbook site.yml -i inventories/prod --limit @site.retry
 ```
 

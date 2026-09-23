@@ -46,7 +46,8 @@ fact_caching = jsonfile
 fact_caching_connection = /var/tmp/ansible_facts
 fact_caching_timeout = 7200
 gather_subset = !all,!any,network,hardware
-callbacks_enabled = profile_tasks   # find the slow task instead of guessing
+# find the slow task instead of guessing
+callbacks_enabled = ansible.posix.profile_tasks
 
 [ssh_connection]
 pipelining = True
@@ -78,8 +79,11 @@ compose:
   max_fail_percentage: 5
   gather_facts: false # this play needs no facts
   tasks:
-    - name: Drain from the load balancer
-      community.aws.elb_target_group_info: # ... deregister before touching the host
+    - name: Drain from the load balancer before touching the host
+      community.aws.elb_target:
+        target_group_name: web-prod
+        target_id: "{{ instance_id }}" # hostvar from the aws_ec2 inventory
+        state: absent
       delegate_to: localhost
 
     - name: Deploy config

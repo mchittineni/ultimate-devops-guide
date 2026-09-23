@@ -37,7 +37,7 @@ tags:
 
 ### Watching a run in progress
 
-The question "which command or flag lets you view the log while a playbook is executing?" has two good answers: raise verbosity (`-v`/`-vvv`) so output streams as tasks complete, and set **`ANSIBLE_LOG_PATH`** (or `log_path` in `ansible.cfg`) so everything is written to a file you can `tail -f` from another terminal. For long-running remote commands, `poll: 0` with `async:` plus `async_status` lets you start the work and check on it rather than staring at a blocked task. Callback plugins (`ANSIBLE_STDOUT_CALLBACK=yaml` or `debug`) make the output dramatically more readable, and `ANSIBLE_DISPLAY_SKIPPED_HOSTS=false` cuts the noise.
+The question "which command or flag lets you view the log while a playbook is executing?" has two good answers: raise verbosity (`-v`/`-vvv`) so output streams as tasks complete, and set **`ANSIBLE_LOG_PATH`** (or `log_path` in `ansible.cfg`) so everything is written to a file you can `tail -f` from another terminal. For long-running remote commands, `poll: 0` with `async:` plus `async_status` lets you start the work and check on it rather than staring at a blocked task. YAML-formatted results (`ANSIBLE_CALLBACK_RESULT_FORMAT=yaml` with the default callback - the old `community.general.yaml` callback was removed in community.general 12) make the output dramatically more readable, and `ANSIBLE_DISPLAY_SKIPPED_HOSTS=false` cuts the noise.
 
 ### Debugging inside the playbook
 
@@ -79,7 +79,7 @@ The strongest test of a playbook is running it twice. The second run should repo
 ### Common failures and what they actually mean
 
 - **"command not found" from `yum`/`apt`/`dnf`** - almost never the package manager missing. It means you used the wrong module for the OS (`apt` on RHEL), or the target lacks Python/the right interpreter, or `PATH` differs under a non-interactive shell. Use `ansible.builtin.package` for cross-platform work, set `ansible_python_interpreter` where auto-detection guesses wrong, and use `become: true` for privileged operations.
-- **A playbook that runs for hours** - check `forks` (default 5 is far too low), enable pipelining and SSH multiplexing, cut fact gathering (`gather_facts: false` or a fact cache), and stop looping `shell` where a module with a `loop` and batching would do. Diagnose with `ANSIBLE_CALLBACKS_ENABLED=profile_tasks` to see exactly which tasks consume the time - that is the answer to "a playbook has been running for two hours, what do you do?": profile it, check whether it is actually progressing (`tail` the log path), confirm no task is waiting on an interactive prompt, and only then decide between waiting and aborting.
+- **A playbook that runs for hours** - check `forks` (default 5 is far too low), enable pipelining and SSH multiplexing, cut fact gathering (`gather_facts: false` or a fact cache), and stop looping `shell` where a module with a `loop` and batching would do. Diagnose with `ANSIBLE_CALLBACKS_ENABLED=ansible.posix.profile_tasks` to see exactly which tasks consume the time - that is the answer to "a playbook has been running for two hours, what do you do?": profile it, check whether it is actually progressing (`tail` the log path), confirm no task is waiting on an interactive prompt, and only then decide between waiting and aborting.
 - **A timeout on one host out of twenty** - that host, not the playbook: SSH reachability, DNS, a full disk, a hung package manager holding a lock (`/var/lib/dpkg/lock`), or a slow provider. `--limit` to that host with `-vvvv`, and consider `serial:` plus `max_fail_percentage` so one bad host does not abort the fleet.
 - **Passing data between tasks and blocks** - `register` a variable and reference it later; it persists for the host across the play, including across blocks. For cross-host values, read `hostvars['other-host'].myvar`; for values needed in later plays, `set_fact` with `cacheable: true`.
 
@@ -95,8 +95,8 @@ ansible-playbook site.yml -i inventories/prod --limit web-01              # cana
 ansible-playbook site.yml -i inventories/prod --limit 'webservers:!web-01'
 
 # Watch it, profile it, resume it
-ANSIBLE_LOG_PATH=./run.log ANSIBLE_STDOUT_CALLBACK=yaml \
-  ANSIBLE_CALLBACKS_ENABLED=profile_tasks \
+ANSIBLE_LOG_PATH=./run.log ANSIBLE_CALLBACK_RESULT_FORMAT=yaml \
+  ANSIBLE_CALLBACKS_ENABLED=ansible.posix.profile_tasks \
   ansible-playbook site.yml -i inventories/prod &
 tail -f ./run.log
 
