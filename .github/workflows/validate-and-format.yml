@@ -22,15 +22,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      # Frontmatter schema, filename slugs, unique IDs, heading consistency,
-      # relative link integrity, and whether any generated index has drifted.
       - name: Validate questions, links, and indexes
         run: python3 scripts/validate_content.py
 
@@ -42,10 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@0dd400df3c087c27c1035b5649526e0209e31180 # v7.0.0
         with:
           node-version: ${{ env.NODE_VERSION }}
 
@@ -65,7 +63,7 @@ jobs:
 
     steps:
       - name: Post success comment on PR
-        uses: actions/github-script@v8
+        uses: actions/github-script@7315597ff3bc25cf35c93e1cc0577487060f5496 # v8
         with:
           script: |
             const marker = "<!-- validation-success -->";
