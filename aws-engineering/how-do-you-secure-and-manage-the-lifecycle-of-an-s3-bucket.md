@@ -65,7 +65,7 @@ ExpiredObjectDeleteMarker          tidies versioning artefacts
 Three details that separate a real answer:
 
 - **Minimum durations and per-object charges.** Standard-IA and One Zone-IA bill a 30-day minimum; Glacier Flexible 90 days; Deep Archive 180. There is also a per-object transition request charge, so transitioning millions of tiny objects can cost more than the storage you save. The rule of thumb: do not transition objects under ~128 KB.
-- **Versioned buckets need noncurrent rules.** A bucket with versioning on and no noncurrent expiry grows forever, invisibly - "we delete objects but storage keeps rising" is always this. The scenario _"in a versioned bucket, how do you delete objects and all their older versions after 10 days?"_ is answered with `Expiration: 10 days` **plus** `NoncurrentVersionExpiration: 10 days` **plus** `ExpiredObjectDeleteMarker: true`.
+- **Versioned buckets need noncurrent rules.** A bucket with versioning on and no noncurrent expiry grows forever, invisibly - "we delete objects but storage keeps rising" is always this. The scenario _"in a versioned bucket, how do you delete objects and all their older versions after 10 days?"_ is answered with `Expiration: 10 days` **plus** `NoncurrentVersionExpiration: 10 days` **plus** `ExpiredObjectDeleteMarker: true` (in its own rule, because it cannot share an `Expiration` with `Days`).
 - **Intelligent-Tiering** as the default for unpredictable access patterns: it moves objects between frequent and infrequent tiers automatically for a small monitoring fee per object, with no retrieval charges, which removes the need to guess. Prefer it over hand-written transitions unless you know the access pattern.
 
 ### Cost levers beyond storage class
@@ -78,7 +78,7 @@ Three details that separate a real answer:
 
 ### Large uploads and integrity
 
-Multipart upload splits a large object into parts, uploads them in parallel (and retries only failed parts), then completes. That is the answer to "how do you speed up a 10 GB upload?" - multipart with a tuned part size and concurrency, plus **S3 Transfer Acceleration** when the client is far from the bucket's region. And when a 10 GB upload fails after 5 GB, the parts are **still there, billed, and invisible in the object listing**: `aws s3api list-multipart-uploads` shows them, `list-parts` shows what arrived, and you either complete the upload or abort it - which is exactly why the `AbortIncompleteMultipartUpload` lifecycle rule belongs on every bucket. For integrity, use checksums (`--checksum-algorithm SHA256`) so corruption is detected rather than assumed away.
+Multipart upload splits a large object into parts, uploads them in parallel (and retries only failed parts), then completes. That is the answer to "how do you speed up a 10 GB upload?" - multipart with a tuned part size and concurrency, plus **S3 Transfer Acceleration** when the client is far from the bucket's region. And when a 10 GB upload fails after 5 GB, the parts are **still there, billed, and invisible in the object listing**: `aws s3api list-multipart-uploads` shows them, `list-parts` shows what arrived, and you either complete the upload or abort it - which is exactly why the `AbortIncompleteMultipartUpload` lifecycle rule belongs on every bucket. For integrity, S3 now calculates a CRC-based checksum on uploads by default (current SDKs and CLI send one automatically); request a specific algorithm (`--checksum-algorithm SHA256`) when a downstream system needs to verify it.
 
 ### Static websites without public access
 
@@ -125,18 +125,38 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "data" {
 
 data "aws_iam_policy_document" "data" {
   statement { # 1. TLS only
-    effect = "Deny"  actions = ["s3:*"]
+    effect    = "Deny"
+    actions   = ["s3:*"]
     resources = [aws_s3_bucket.data.arn, "${aws_s3_bucket.data.arn}/*"]
-    principals { type = "*"  identifiers = ["*"] }
-    condition { test = "Bool"  variable = "aws:SecureTransport"  values = ["false"] }
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+    condition {
+      test     = "Bool"
+      variable = "aws:SecureTransport"
+      values   = ["false"]
+    }
   }
   statement { # 2. only through our VPC endpoint -> leaked keys are useless outside
-    effect = "Deny"  actions = ["s3:*"]
+    effect    = "Deny"
+    actions   = ["s3:*"]
     resources = [aws_s3_bucket.data.arn, "${aws_s3_bucket.data.arn}/*"]
-    principals { type = "*"  identifiers = ["*"] }
-    condition { test = "StringNotEquals"  variable = "aws:SourceVpce"
-                values = [aws_vpc_endpoint.s3.id] }
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+    condition {
+      test     = "StringNotEquals"
+      variable = "aws:SourceVpce"
+      values   = [aws_vpc_endpoint.s3.id]
+    }
   }
+}
+
+resource "aws_s3_bucket_policy" "data" {
+  bucket = aws_s3_bucket.data.id
+  policy = data.aws_iam_policy_document.data.json
 }
 ```
 
@@ -150,9 +170,18 @@ resource "aws_s3_bucket_lifecycle_configuration" "data" {
     status = "Enabled"
     filter { prefix = "logs/" }
 
-    transition { days = 30  storage_class = "STANDARD_IA" }
-    transition { days = 90  storage_class = "GLACIER_IR" }
-    transition { days = 365 storage_class = "DEEP_ARCHIVE" }
+    transition {
+      days          = 30
+      storage_class = "STANDARD_IA"
+    }
+    transition {
+      days          = 90
+      storage_class = "GLACIER_IR"
+    }
+    transition {
+      days          = 365
+      storage_class = "DEEP_ARCHIVE"
+    }
     expiration { days = 2555 } # 7 years, then gone
 
     noncurrent_version_expiration {          # versioned buckets grow forever without this
@@ -168,6 +197,13 @@ resource "aws_s3_bucket_lifecycle_configuration" "data" {
     filter { prefix = "exports/" }
     expiration { days = 10 }
     noncurrent_version_expiration { noncurrent_days = 10 }
+  }
+
+  rule { # delete markers left behind once the versions are gone
+    # (ExpiredObjectDeleteMarker cannot be combined with Days in one rule's Expiration)
+    id     = "ephemeral-exports-markers"
+    status = "Enabled"
+    filter { prefix = "exports/" }
     expiration { expired_object_delete_marker = true }
   }
 }

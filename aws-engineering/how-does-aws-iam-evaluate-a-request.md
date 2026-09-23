@@ -17,7 +17,7 @@ tags:
 
 **Evaluation order, simplified but accurate enough to explain:**
 
-1. Collect all applicable policies: SCPs (and resource control policies), identity-based policies, resource-based policies, permission boundaries, session policies.
+1. Collect all applicable policies: SCPs and resource control policies (RCPs - the resource-side organisation guardrail), identity-based policies, resource-based policies, permission boundaries, session policies.
 2. If any explicit `Deny` matches - decision is deny, immediately.
 3. SCPs must allow the action (they only filter; they never grant).
 4. Then an `Allow` must exist in an identity policy or a resource policy. Permission boundaries and session policies act as intersections: they cap what the identity policy can grant.
@@ -49,14 +49,18 @@ tags:
       }
     },
     {
-      "Sid": "DenyOutsideOrgAndUnencrypted",
+      "Sid": "DenyOutsideOrg",
       "Effect": "Deny",
       "Action": "s3:*",
       "Resource": "arn:aws:s3:::acme-data/*",
-      "Condition": {
-        "StringNotEquals": { "aws:PrincipalOrgID": "o-abc123" },
-        "Bool": { "aws:SecureTransport": "false" }
-      }
+      "Condition": { "StringNotEquals": { "aws:PrincipalOrgID": "o-abc123" } }
+    },
+    {
+      "Sid": "DenyNonTls",
+      "Effect": "Deny",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::acme-data/*",
+      "Condition": { "Bool": { "aws:SecureTransport": "false" } }
     }
   ]
 }
@@ -66,6 +70,7 @@ tags:
 
 - "Explicit deny wins, SCPs filter but never grant, cross-account needs both sides" covers most of what is being probed.
 - Describe boundaries as an intersection - it explains permission boundaries and session policies in one sentence.
+- Know the condition-logic trap: multiple condition keys in one statement are ANDed, so "deny if outside the org **or** without TLS" needs two Deny statements, as in the example.
 - Expect: "how would you prove this role is least privilege?" - Access Analyzer policy generation from CloudTrail, plus last-accessed data.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
@@ -74,7 +79,7 @@ tags:
 
 - [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
 - [[How does networking differ across AWS, Azure, and GCP?]] (`#282`): [How does networking differ across AWS, Azure, and GCP?](../cloud-platforms/how-does-networking-differ-across-aws-azure-and-gcp.md)
-- [[What is a cloud landing zone?]] (`#215`): [What is a cloud landing zone?](../cloud-engineering/what-is-a-cloud-landing-zone.md)
+- [[What are the core trade-offs between Multi-Cloud, Hybrid-Cloud, and Single-Cloud architectures?]] (`#542`): [What are the core trade-offs between Multi-Cloud, Hybrid-Cloud, and Single-Cloud architectures?](../cloud-platforms/what-are-the-core-trade-offs-between-multi-cloud-hybrid-cloud-and-single-cloud-architectures.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

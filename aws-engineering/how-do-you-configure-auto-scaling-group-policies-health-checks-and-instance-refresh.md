@@ -61,7 +61,7 @@ Scale-in and refresh both terminate instances, and users notice unless you drain
 
 ### Mixed instance types and Spot
 
-A mixed-instances policy with several instance types across several AZs, a base of On-Demand plus a Spot percentage, and `capacity-optimized` allocation is the standard cost play - typically 60-70% cheaper for the Spot portion. It requires the workload to tolerate a 2-minute interruption notice, so pair it with a lifecycle hook or the Spot interruption handler to drain gracefully. Say this when asked for real cost optimisations; it is more credible than "we right-sized instances".
+A mixed-instances policy with several instance types across several AZs, a base of On-Demand plus a Spot percentage, and `price-capacity-optimized` allocation (AWS's recommended Spot strategy, balancing interruption risk and price) is the standard cost play - typically 60-70% cheaper for the Spot portion. It requires the workload to tolerate a 2-minute interruption notice, so pair it with a lifecycle hook or the Spot interruption handler to drain gracefully. Say this when asked for real cost optimisations; it is more credible than "we right-sized instances".
 
 ### Self-healing without a load balancer
 
@@ -75,10 +75,16 @@ resource "aws_launch_template" "app" {
   name_prefix   = "app-"
   image_id      = data.aws_ami.app_baked.id   # Packer-built: fast boot, no fighting the grace period
   instance_type = "m6i.large"
-  iam_instance_profile { name = aws_iam_instance_profile.app.name }
-  metadata_options { http_tokens = "required" }
+  iam_instance_profile {
+    name = aws_iam_instance_profile.app.name
+  }
+  metadata_options {
+    http_tokens = "required"
+  }
   user_data = base64encode(templatefile("cloud-init.yaml", { env = var.environment }))
-  lifecycle { create_before_destroy = true }
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_autoscaling_group" "app" {
@@ -97,13 +103,21 @@ resource "aws_autoscaling_group" "app" {
     instances_distribution {
       on_demand_base_capacity                  = 3
       on_demand_percentage_above_base_capacity = 20   # 80% Spot above the base
-      spot_allocation_strategy                 = "capacity-optimized"
+      spot_allocation_strategy                 = "price-capacity-optimized"
     }
     launch_template {
-      launch_template_specification { launch_template_id = aws_launch_template.app.id }
-      override { instance_type = "m6i.large" }
-      override { instance_type = "m5.large" }
-      override { instance_type = "m6a.large" }   # diversity = fewer Spot interruptions
+      launch_template_specification {
+        launch_template_id = aws_launch_template.app.id
+      }
+      override {
+        instance_type = "m7i.large"
+      }
+      override {
+        instance_type = "m6i.large"
+      }
+      override {
+        instance_type = "m6a.large" # diversity = fewer Spot interruptions
+      }
     }
   }
 
@@ -202,7 +216,7 @@ aws cloudwatch list-metrics --namespace CWAgent --metric-name mem_used_percent
 - Nail the health-check answer: add `ELB` to the health check types so an instance that boots but never serves is replaced, and set the **grace period longer than real boot time**. Then give the replacement-loop scenario and its two fixes - longer grace period, and a baked AMI to shorten boot.
 - Say explicitly that changing the launch template does **not** replace running instances, then name **instance refresh** with `MinHealthyPercentage`, checkpoints, `SkipMatching`, and auto-rollback. Offer a second ASG behind the same target group as the blue/green alternative.
 - Bring up connection draining (target group deregistration delay) and lifecycle hooks for graceful shutdown, plus termination policies and scale-in protection.
-- Mention mixed instances with Spot and `capacity-optimized` allocation as a real cost lever, with the interruption-handling caveat. And for "instances should replace themselves when they fail", answer ASG with min=max=1 plus health checks and an immutable AMI. See [how do Auto Scaling groups and load balancers work together on AWS](./how-do-auto-scaling-groups-and-load-balancers-work-together-on-aws.md), [why did your autoscaling not kick in during a traffic spike](../scalability-and-high-availability/why-did-your-autoscaling-not-kick-in-during-a-traffic-spike.md), [what is immutable infrastructure](../infrastructure-as-code/what-is-immutable-infrastructure-and-how-do-you-adopt-it.md), and [troubleshooting a load balancer returning 5xx errors](../scalability-and-high-availability/how-do-you-troubleshoot-a-load-balancer-returning-5xx-errors-or-sending-traffic-unevenly.md).
+- Mention mixed instances with Spot and `price-capacity-optimized` allocation as a real cost lever, with the interruption-handling caveat. And for "instances should replace themselves when they fail", answer ASG with min=max=1 plus health checks and an immutable AMI. See [how do Auto Scaling groups and load balancers work together on AWS](./how-do-auto-scaling-groups-and-load-balancers-work-together-on-aws.md), [why did your autoscaling not kick in during a traffic spike](../scalability-and-high-availability/why-did-your-autoscaling-not-kick-in-during-a-traffic-spike.md), [what is immutable infrastructure](../infrastructure-as-code/what-is-immutable-infrastructure-and-how-do-you-adopt-it.md), and [troubleshooting a load balancer returning 5xx errors](../scalability-and-high-availability/how-do-you-troubleshoot-a-load-balancer-returning-5xx-errors-or-sending-traffic-unevenly.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

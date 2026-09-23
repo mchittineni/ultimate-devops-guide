@@ -12,7 +12,7 @@ tags:
 
 # How does a private subnet reach the internet?
 
-**Short answer:** Through a **NAT gateway that lives in a public subnet**. What makes a subnet "public" or "private" is only its **route table**: a public subnet has a route `0.0.0.0/0 → internet gateway`; a private subnet has `0.0.0.0/0 → nat-xxxx`. The NAT gateway sits in the public subnet (so _its_ default route reaches the internet gateway), holds an Elastic IP, and translates the private instance's source address on the way out. That gives **outbound-only** connectivity: the private instance can initiate connections out, but nothing on the internet can initiate a connection in, because the NAT has no way to map an unsolicited inbound packet to a private host. For inbound traffic to a private instance you do not use NAT at all - you put a **load balancer in the public subnets** with targets in the private ones, or use a VPC endpoint / PrivateLink for AWS and partner services.
+**Short answer:** Through a **NAT gateway** - classically a zonal one that lives in a public subnet, or the newer regional mode that needs no public subnet at all. What makes a subnet "public" or "private" is only its **route table**: a public subnet has a route `0.0.0.0/0 → internet gateway`; a private subnet has `0.0.0.0/0 → nat-xxxx`. The NAT gateway sits in the public subnet (so _its_ default route reaches the internet gateway), holds an Elastic IP, and translates the private instance's source address on the way out. That gives **outbound-only** connectivity: the private instance can initiate connections out, but nothing on the internet can initiate a connection in, because the NAT has no way to map an unsolicited inbound packet to a private host. For inbound traffic to a private instance you do not use NAT at all - you put a **load balancer in the public subnets** with targets in the private ones, or use a VPC endpoint / PrivateLink for AWS and partner services.
 
 ## Detail
 
@@ -32,18 +32,20 @@ So the answer to "how can you tell whether a subnet is public or private?" is: l
 
 ### Why the NAT gateway must be in a public subnet
 
-This is the question interviewers ask to see whether you understand routing rather than diagrams. The NAT gateway is itself a resource that needs to reach the internet: it takes the private instance's traffic, rewrites the source to its own Elastic IP, and forwards it - to its subnet's default route. If you place it in a private subnet, its own default route points at a NAT gateway (possibly itself), and the traffic goes nowhere. **A NAT gateway in a private subnet is a black hole.**
+This is the question interviewers ask to see whether you understand routing rather than diagrams. The NAT gateway is itself a resource that needs to reach the internet: it takes the private instance's traffic, rewrites the source to its own Elastic IP, and forwards it - to its subnet's default route. If you place it in a private subnet, its own default route points at a NAT gateway (possibly itself), and the traffic goes nowhere. **A zonal NAT gateway in a private subnet is a black hole.**
+
+The exception is the **regional NAT gateway** (availability mode `regional`, added in November 2025): it is not placed in any subnet, AWS runs it in every AZ where you have workloads, and private route tables point `0.0.0.0/0` at it directly. It removes the need for public subnets purely to host NAT and the per-AZ plumbing, but is newer, so check feature and region support before standardising on it.
 
 The protection it provides is a consequence of translation, not a firewall feature: outbound connections create a mapping in the NAT's translation table, and replies match that mapping. An unsolicited inbound packet has no mapping, so there is nothing to forward it to. That is why "the NAT protects the private subnet" is true but should be explained as _no inbound mapping exists_, not as _the NAT filters traffic_.
 
 ### High availability and cost - the design decisions
 
-A NAT gateway is **zonal**. If it lives in `eu-west-1a` and that AZ fails, every private subnet routed through it loses egress - including instances in healthy AZs. So:
+A classic NAT gateway is **zonal**. If it lives in `eu-west-1a` and that AZ fails, every private subnet routed through it loses egress - including instances in healthy AZs. So:
 
 - **Production**: one NAT gateway **per availability zone**, each in that AZ's public subnet, with each private subnet's route table pointing at the NAT in its own AZ. This also avoids cross-AZ data-transfer charges on every outbound byte.
 - **Dev/test**: a single NAT gateway shared by all AZs is a legitimate cost saving (a NAT gateway has an hourly charge plus a per-GB processing charge, and three of them add up), as long as you accept the availability and cross-AZ-transfer trade-off.
 
-The "how many NAT gateways do you need for two public and two private subnets in one VPC?" question has a range as its answer: **minimum one** (functional, single point of failure, cross-AZ charges), **maximum/recommended two** - one per AZ, matching the number of AZs, not the number of subnets. Say both numbers and the reasoning; that is what the question is testing.
+The "how many NAT gateways do you need for two public and two private subnets in one VPC?" question has a range as its answer: **minimum one** (functional, single point of failure, cross-AZ charges), **maximum/recommended two** - one per AZ, matching the number of AZs, not the number of subnets. Say both numbers and the reasoning; that is what the question is testing - and add that a single **regional** NAT gateway now gives per-AZ resilience as one resource.
 
 ### NAT gateway versus NAT instance
 
@@ -87,7 +89,10 @@ For IPv6 there is no NAT. The equivalent is an **egress-only internet gateway**:
 # One NAT per AZ - the production layout
 resource "aws_internet_gateway" "this" { vpc_id = aws_vpc.this.id }
 
-resource "aws_eip" "nat" { for_each = toset(var.azs)  domain = "vpc" }
+resource "aws_eip" "nat" {
+  for_each = toset(var.azs)
+  domain   = "vpc"
+}
 
 resource "aws_nat_gateway" "this" {
   for_each      = toset(var.azs)
@@ -99,7 +104,10 @@ resource "aws_nat_gateway" "this" {
 # public: default route to the IGW  ->  this is what makes it "public"
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.this.id
-  route { cidr_block = "0.0.0.0/0", gateway_id = aws_internet_gateway.this.id }
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.this.id
+  }
 }
 
 # private: default route to the NAT in the SAME AZ (HA + no cross-AZ transfer charges)
@@ -146,7 +154,7 @@ aws cloudwatch get-metric-statistics --namespace AWS/NATGateway \
 - Define public versus private by the **route table**, not by the presence of a public IP. That single reframe answers several questions at once, including "how can you tell whether a subnet is public?"
 - Explain why the NAT gateway must sit in a public subnet - it needs its own default route to the internet gateway - and say plainly that a NAT in a private subnet is a black hole.
 - Describe the protection as "no inbound translation mapping exists", not as filtering. It shows you understand NAT rather than repeating a diagram caption.
-- For the how-many-NAT-gateways question, give minimum one and recommended one **per AZ**, and justify it with both AZ failure isolation and cross-AZ data-transfer cost.
+- For the how-many-NAT-gateways question, give minimum one and recommended one **per AZ**, and justify it with both AZ failure isolation and cross-AZ data-transfer cost. Then mention the regional NAT gateway, which delivers the same per-AZ behaviour as one resource with no public subnet.
 - Volunteer VPC endpoints as the cheaper, tighter alternative: a workload that only talks to S3, ECR, Secrets Manager, and CloudWatch may need no NAT at all. This is the highest-value thing you can add here.
 - Compare NAT gateway with NAT instance in terms of managed-versus-DIY, bandwidth, and the two things only an instance can do (security group on the egress path, port forwarding).
 - For inbound to private subnets, draw the path: Route 53 → public ALB → private targets → data tier, with security groups chained by reference. Then add SSM Session Manager and PrivateLink as the non-NAT inbound answers.
@@ -156,9 +164,9 @@ aws cloudwatch get-metric-statistics --namespace AWS/NATGateway \
 
 ## Related Concepts
 
+- [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
 - [[How does Pod networking and service discovery work in Kubernetes?]] (`#447`): [How does Pod networking and service discovery work in Kubernetes?](../kubernetes/how-does-pod-networking-and-service-discovery-work-in-kubernetes.md)
 - [[How do you troubleshoot a Kubernetes Service that has no endpoints?]] (`#403`): [How do you troubleshoot a Kubernetes Service that has no endpoints?](../kubernetes/how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints.md)
-- [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

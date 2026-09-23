@@ -53,7 +53,7 @@ The related "how do you back up an EBS volume and attach it to another server?" 
 ### EFS specifics
 
 - **Performance modes**: General Purpose (default, lowest latency) versus Max I/O (higher throughput, higher latency, legacy). **Throughput modes**: Elastic (recommended - scales automatically, pay for what you use), Bursting (credit-based, and running out of burst credits is the classic EFS performance mystery), or Provisioned.
-- **Storage classes**: Standard, One Zone (cheaper, single-AZ - accepts an AZ failure), and Infrequent Access with lifecycle management to move cold files automatically. Enable IA lifecycle; it is a large saving on typical file shares.
+- **Storage classes**: Standard, One Zone (cheaper, single-AZ - accepts an AZ failure), Infrequent Access, and Archive (for files touched a few times a year), with lifecycle management to move cold files automatically. Enable IA lifecycle; it is a large saving on typical file shares.
 - **Access points** give a per-application root directory with an enforced POSIX UID/GID - the clean way to share one filesystem between workloads without them treading on each other.
 - **Security**: encryption in transit (`-o tls` with the EFS mount helper) and at rest, plus a security group on the mount targets allowing 2049 from clients. A missing NFS rule is the usual cause of a mount that hangs.
 - **Cost discipline**: EFS is priced per GB stored with no provisioning, so a runaway log directory is expensive quietly. Do not use EFS as a general dumping ground because it is convenient.

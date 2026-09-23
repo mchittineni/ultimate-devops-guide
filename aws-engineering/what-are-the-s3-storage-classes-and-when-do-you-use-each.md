@@ -15,15 +15,18 @@ tags:
 
 ## Detail
 
-| Class                | Use when                                 | Watch out for                              |
-| -------------------- | ---------------------------------------- | ------------------------------------------ |
-| Standard             | active data, unknown-but-frequent access | most expensive per GB                      |
-| Intelligent-Tiering  | access pattern unknown or changing       | small per-object monitoring fee            |
-| Standard-IA          | accessed monthly, needs multi-AZ         | 30-day minimum, per-GB retrieval fee       |
-| One Zone-IA          | reproducible data (derived, cached)      | lost if that AZ is lost                    |
-| Glacier Instant      | archives needing millisecond access      | 90-day minimum                             |
-| Glacier Flexible     | archives, minutes-to-hours retrieval     | 90-day minimum, retrieval jobs             |
-| Glacier Deep Archive | compliance retention, 12-hour retrieval  | 180-day minimum, most expensive to restore |
+| Class                | Use when                                  | Watch out for                                 |
+| -------------------- | ----------------------------------------- | --------------------------------------------- |
+| Express One Zone     | latency-critical hot data (ML, analytics) | single AZ, directory buckets, highest price   |
+| Standard             | active data, unknown-but-frequent access  | most expensive per GB of the regional classes |
+| Intelligent-Tiering  | access pattern unknown or changing        | small per-object monitoring fee               |
+| Standard-IA          | accessed monthly, needs multi-AZ          | 30-day minimum, per-GB retrieval fee          |
+| One Zone-IA          | reproducible data (derived, cached)       | lost if that AZ is lost                       |
+| Glacier Instant      | archives needing millisecond access       | 90-day minimum                                |
+| Glacier Flexible     | archives, minutes-to-hours retrieval      | 90-day minimum, retrieval jobs                |
+| Glacier Deep Archive | compliance retention, 12-hour retrieval   | 180-day minimum, most expensive to restore    |
+
+**Express One Zone is the exception to the design.** It stores data in a single AZ in _directory buckets_ for single-digit-millisecond access, co-located with compute - a performance tier, not a cost tier, and one where an AZ loss means data loss.
 
 **Minimum duration charges are the trap.** Moving an object to Standard-IA and deleting it after a week bills 30 days; Deep Archive bills 180. Lifecycle rules that transition objects too early routinely increase cost. Also note that each transition is a request charge - transitioning millions of tiny objects can cost more than the storage saved, which is why small objects should often be aggregated rather than tiered.
 
@@ -70,9 +73,9 @@ tags:
 
 ## Related Concepts
 
+- [[How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?]] (`#407`): [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)
 - [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
 - [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
-- [[How do you design least-privilege identity in the cloud?]] (`#217`): [How do you design least-privilege identity in the cloud?](../cloud-engineering/how-do-you-design-least-privilege-identity-in-the-cloud.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

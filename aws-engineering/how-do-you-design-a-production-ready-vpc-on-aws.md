@@ -17,7 +17,7 @@ tags:
 
 **Subnet tiers and what belongs in each.** Public subnets (route to an internet gateway) hold only load balancers and NAT gateways. Private subnets hold application workloads and reach the internet through NAT. Isolated subnets hold databases and have no route to the internet at all. The tiering is what makes "the database is not reachable from the internet" a property of routing rather than of a firewall rule someone might change.
 
-**Availability Zones and NAT cost.** Use three AZs for quorum-based systems and to survive one AZ loss without capacity panic. A NAT gateway per AZ avoids cross-AZ data charges and removes a single AZ as a dependency for all egress - but each one costs an hourly fee plus per-GB processing, and NAT data processing is a top-three surprise on many AWS bills. Gateway endpoints for S3 and DynamoDB are free and remove that traffic from NAT entirely; interface endpoints for other services cost per hour per AZ but often still win against NAT charges.
+**Availability Zones and NAT cost.** Use three AZs for quorum-based systems and to survive one AZ loss without capacity panic. With classic zonal NAT gateways, one per AZ avoids cross-AZ data charges and removes a single AZ as a dependency for all egress; the **regional NAT gateway** mode (late 2025) gives the same per-AZ behaviour as a single resource that expands into the AZs where you have workloads and needs no public subnet - but each one costs an hourly fee plus per-GB processing, and NAT data processing is a top-three surprise on many AWS bills. Gateway endpoints for S3 and DynamoDB are free and remove that traffic from NAT entirely; interface endpoints for other services cost per hour per AZ but often still win against NAT charges.
 
 **CIDR planning is the decision you cannot undo cheaply.** Pick a /16 from RFC 1918 space that does not overlap your on-premises networks, other accounts, or acquisitions. Subnets should be large enough for EKS, where each Pod consumes a VPC IP address with the AWS VPC CNI - /20 per AZ for a Pod subnet is common, and IP exhaustion is the single most frequent EKS scaling wall. Secondary CIDRs can be added later, but not overlapping ones.
 
@@ -31,7 +31,7 @@ tags:
 # Three-tier, three-AZ VPC with per-AZ NAT and free S3/DynamoDB endpoints
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.13"
+  version = "~> 6.0"
 
   name = "prod"
   cidr = "10.40.0.0/16"
@@ -55,7 +55,8 @@ module "vpc" {
 
 ## Interview tips
 
-- Lead with the three-tier, three-AZ layout, then justify per-AZ NAT on both cost and failure-domain grounds.
+- Lead with the three-tier, three-AZ layout, then justify per-AZ NAT on both cost and failure-domain grounds - and mention the regional NAT gateway as the newer way to get it with one resource.
+- Mention VPC Block Public Access (account- or VPC-level blocking of internet gateway traffic) as a guardrail for VPCs that should never be internet-facing.
 - EKS IP exhaustion with the VPC CNI is the practical war story worth naming.
 - Expect: "security groups or NACLs?" - security groups referencing security groups, with NACLs as a coarse guardrail only.
 

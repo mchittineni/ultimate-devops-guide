@@ -33,6 +33,8 @@ Designing an end-to-end production architecture on AWS requires combining IaC, s
 - **OIDC Authentication:** GitHub Actions assumes temporary IAM roles via AWS Security Token Service (STS).
 - **Pipeline Stages:** Linting → Static Security (Gitleaks, Trivy) → Container Build → Amazon ECR Push → Helm chart release via Argo CD / Helm.
 
+**Trade-offs.** EKS buys the Kubernetes ecosystem at the cost of a version-upgrade treadmill (each minor version gets 14 months of standard support, then paid extended support) and more moving parts than ECS; per-AZ NAT gateways cost money that the newer regional NAT gateway mode or VPC endpoints can reduce; and Aurora's fast failover still requires applications that reconnect and retry.
+
 ## Example
 
 **1. High-Level AWS Production Architecture Diagram:**
@@ -65,7 +67,7 @@ graph TD
 ```hcl
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name = "production-vpc"
   cidr = "10.0.0.0/16"
@@ -73,7 +75,7 @@ module "vpc" {
   azs             = ["us-east-1a", "us-east-1b", "us-east-1c"]
   public_subnets  = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   private_subnets = ["10.0.10.0/24", "10.0.20.0/24", "10.0.30.0/24"]
-  database_subnets = ["10.0.100.0/24", "10.0.200.0/24", "10.0.300.0/24"]
+  database_subnets = ["10.0.100.0/24", "10.0.101.0/24", "10.0.102.0/24"]
 
   enable_nat_gateway   = true
   single_nat_gateway   = false
@@ -82,14 +84,21 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 20.0"
+  version = "~> 21.0" # v21 renamed cluster_name/cluster_version to name/kubernetes_version
 
-  cluster_name    = "production-eks"
-  cluster_version = "1.30"
-  vpc_id          = module.vpc.vpc_id
-  subnet_ids      = module.vpc.private_subnets
+  name               = "production-eks"
+  kubernetes_version = "1.36" # a version in EKS standard support; upgrade before it ends
+  vpc_id             = module.vpc.vpc_id
+  subnet_ids         = module.vpc.private_subnets
 
   enable_cluster_creator_admin_permissions = true
+
+  addons = {
+    eks-pod-identity-agent = {} # required for EKS Pod Identity associations
+    vpc-cni                = {}
+    coredns                = {}
+    kube-proxy             = {}
+  }
 }
 ```
 

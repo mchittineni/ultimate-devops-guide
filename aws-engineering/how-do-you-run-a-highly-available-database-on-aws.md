@@ -30,10 +30,17 @@ tags:
 ## Example
 
 ```hcl
+# Resolve the latest supported Aurora PostgreSQL 17 minor version instead of hard-coding one
+data "aws_rds_engine_version" "pg" {
+  engine                 = "aurora-postgresql"
+  parameter_group_family = "aurora-postgresql17"
+  latest                 = true
+}
+
 resource "aws_rds_cluster" "orders" {
   cluster_identifier     = "orders"
   engine                 = "aurora-postgresql"
-  engine_version         = "16.4"
+  engine_version         = data.aws_rds_engine_version.pg.version
   database_name          = "orders"
   availability_zones     = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
   db_subnet_group_name   = module.vpc.database_subnet_group_name
@@ -69,6 +76,7 @@ Application requirements, not optional:
 
 - Emphasise that HA is only half the answer - the application must survive failover, and backups cover a different failure class.
 - Naming the DNS-cache and connection-lifetime pitfalls is the detail that shows you have lived through a failover.
+- Mention engine lifecycle: major versions past end of standard support are automatically enrolled in paid RDS Extended Support, so version upgrades are an operational and cost commitment, not an optional chore.
 - Expect: "what is your RTO?" - tie it to _tested_ restore time, and admit if you have not tested it.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

@@ -11,7 +11,7 @@ tags:
 
 # How do you build a CI/CD pipeline using AWS CodePipeline, CodeBuild, and CodeDeploy?
 
-**Short answer:** Build an AWS-native CI/CD pipeline by using **AWS CodePipeline** to orchestrate stages (Source, Build, Test, Deploy), **AWS CodeBuild** with a `buildspec.yml` file to compile application artifacts or Docker images, and **AWS CodeDeploy** with an `appspec.yml` file to execute zero-downtime Blue/Green deployments to ECS, EKS, or EC2 Auto Scaling groups.
+**Short answer:** Build an AWS-native CI/CD pipeline by using **AWS CodePipeline** to orchestrate stages (Source, Build, Test, Deploy), **AWS CodeBuild** with a `buildspec.yml` file to compile application artifacts or Docker images, and **AWS CodeDeploy** with an `appspec.yml` file to execute zero-downtime Blue/Green deployments to ECS, Lambda, or EC2 Auto Scaling groups (CodeDeploy does not target EKS; CodePipeline has a separate EKS deploy action, and most EKS teams use GitOps instead).
 
 ## Detail
 
@@ -20,7 +20,7 @@ AWS provides a fully managed, serverless suite of developer tools to build conti
 ### 1. AWS CodePipeline (Pipeline Orchestration)
 
 - **Workflow Engine:** Connects stages (Source → Build → Test → Staging → Production Approval → Deploy).
-- **Integrations:** Triggered automatically via EventBridge when commits are pushed to GitHub, AWS CodeCommit, or Bitbucket, or when images land in Amazon ECR.
+- **Integrations:** V2 pipelines (the current type) trigger on Git push, pull request, or tag events through CodeConnections (GitHub, GitLab, Bitbucket) or CodeCommit - which AWS returned to full general availability in November 2025 after pausing new-customer onboarding in 2024 - and on new images in Amazon ECR via EventBridge. V2 also adds pipeline-level variables, trigger filters, and billing by action-execution minutes.
 
 ### 2. AWS CodeBuild (Continuous Integration)
 
@@ -31,6 +31,9 @@ AWS provides a fully managed, serverless suite of developer tools to build conti
 
 - **Deployment Strategies:** Supports In-Place deployments (rolling updates) and **Blue/Green deployments** (spinning up a parallel green environment and shifting ALB target group traffic).
 - **`appspec.yml` Specification:** Defines deployment hooks (`BeforeInstall`, `AfterInstall`, `ApplicationStart`, `ValidateService`) for EC2/On-Premises, or ECS task definition traffic routing configuration.
+- **ECS alternative:** since 2025 ECS has **built-in** blue/green, canary, and linear deployments with lifecycle hooks and alarm-based rollback, so new ECS services often use the ECS deployment action directly and skip CodeDeploy.
+
+**Trade-offs.** The AWS-native suite needs no extra vendor and uses IAM roles end to end, but its developer experience and ecosystem are thinner than GitHub Actions or GitLab CI, which many teams use for CI while keeping CodeDeploy or ECS deployments for the release step.
 
 ## Example
 
@@ -45,7 +48,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/web-app
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_COMMIT_ID | cut -c 1-7)
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:-latest}
   build:
     commands:

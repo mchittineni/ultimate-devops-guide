@@ -15,18 +15,18 @@ tags:
 
 ## Detail
 
-| Dimension     | CloudFormation                      | CDK                                | Terraform                            |
-| ------------- | ----------------------------------- | ---------------------------------- | ------------------------------------ |
-| Language      | YAML/JSON                           | TypeScript, Python, Java, Go, .NET | HCL                                  |
-| State         | managed by AWS                      | managed by AWS (synthesises CFN)   | you own it (S3 + lock)               |
-| Scope         | AWS only                            | AWS only (CDKTF exists separately) | multi-provider                       |
-| Drift/preview | drift detection, change sets        | change sets via `cdk diff`         | `terraform plan` (best of the three) |
-| New services  | usually first                       | follows CloudFormation coverage    | provider lag, sometimes days–weeks   |
-| Failure mode  | rollback, occasionally stuck stacks | same as CloudFormation             | partial apply, state repair          |
+| Dimension     | CloudFormation                      | CDK                                   | Terraform                            |
+| ------------- | ----------------------------------- | ------------------------------------- | ------------------------------------ |
+| Language      | YAML/JSON                           | TypeScript, Python, Java, Go, .NET    | HCL                                  |
+| State         | managed by AWS                      | managed by AWS (synthesises CFN)      | you own it (S3 + lock)               |
+| Scope         | AWS only                            | AWS only (CDKTF was archived in 2025) | multi-provider                       |
+| Drift/preview | drift detection, change sets        | change sets via `cdk diff`            | `terraform plan` (best of the three) |
+| New services  | usually first                       | follows CloudFormation coverage       | provider lag, sometimes days–weeks   |
+| Failure mode  | rollback, occasionally stuck stacks | same as CloudFormation                | partial apply, state repair          |
 
 **CDK's real advantage is abstraction, not the language.** Constructs let a platform team publish an opinionated, reviewed `SecureBucket` or `StandardService` that encodes tagging, encryption, logging, and alarms, so application teams get compliant infrastructure by default. Its costs are a synth step, a nested-stack model that can be hard to debug, and the ease of writing imperative logic that makes the resulting infrastructure difficult to reason about.
 
-**Terraform's advantage is the plan and the ecosystem.** `terraform plan` is the clearest preview of the three and underpins policy-as-code gates; providers cover AWS plus Datadog, GitHub, Kubernetes, and the rest of the toolchain in one graph. Its costs are state management (remote backend, locking, blast radius of a corrupted state file) and the licence change in 2023 that moved Terraform to BUSL and produced the OpenTofu fork - a question worth being able to discuss neutrally.
+**Terraform's advantage is the plan and the ecosystem.** `terraform plan` is the clearest preview of the three and underpins policy-as-code gates; providers cover AWS plus Datadog, GitHub, Kubernetes, and the rest of the toolchain in one graph. Its costs are state management (remote backend, locking, blast radius of a corrupted state file) and the licence change in 2023 that moved Terraform to BUSL and produced the OpenTofu fork (now a CNCF project), followed by IBM's acquisition of HashiCorp in 2025 - a question worth being able to discuss neutrally. HashiCorp also archived CDK for Terraform (CDKTF) in December 2025, so "CDK-style code for Terraform" is no longer a supported option; teams wanting a programming language use AWS CDK or Pulumi.
 
 **CloudFormation's advantage is that it is the substrate.** No state to manage, native rollback, StackSets for multi-account deployment, and support for new services on launch day. It is verbose, and loops and conditionals are painful, which is exactly the gap CDK fills.
 
@@ -48,7 +48,7 @@ terraform {
     use_lockfile = true # S3 native locking; no DynamoDB table required
   }
   required_providers {
-    aws = { source = "hashicorp/aws", version = "~> 5.70" }
+    aws = { source = "hashicorp/aws", version = "~> 6.0" }
   }
 }
 ```
@@ -83,7 +83,7 @@ export class SecureBucket extends Construct {
 
 - [[What are the different types of cloud services?]] (`#25`): [What are the different types of cloud services?](../cloud-platforms/what-are-the-different-types-of-cloud-services.md)
 - [[How do you choose a cloud provider for a new workload?]] (`#281`): [How do you choose a cloud provider for a new workload?](../cloud-platforms/how-do-you-choose-a-cloud-provider-for-a-new-workload.md)
-- [[What is a cloud landing zone?]] (`#215`): [What is a cloud landing zone?](../cloud-engineering/what-is-a-cloud-landing-zone.md)
+- [[What are the core differences between Cloud Object Storage, Block Storage, and File Storage?]] (`#545`): [What are the core differences between Cloud Object Storage, Block Storage, and File Storage?](../cloud-platforms/what-are-the-core-differences-between-cloud-object-storage-block-storage-and-file-storage.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

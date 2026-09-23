@@ -52,7 +52,7 @@ The critical detail is the **`sub` condition**. A trust policy with `"token.acti
 
 - `repo:acme/api:ref:refs/heads/main` - only the main branch.
 - `repo:acme/api:environment:production` - only jobs targeting the protected environment, which is stronger because environments carry required reviewers.
-- Always pin `aud` (`sts.amazonaws.com`) and the OIDC provider's thumbprint/issuer.
+- Always pin `aud` (`sts.amazonaws.com`) and the exact issuer URL. (AWS now validates GitHub's OIDC certificates against its own trusted CA library, so the provider thumbprint is no longer what protects you - the claim conditions are.)
 
 Then split roles by stage: a **read-only** role for `terraform plan` on pull requests and a **write** role only for the apply job in a protected environment. A hostile pull request can trigger a plan; it must not be able to mutate anything.
 
@@ -132,7 +132,7 @@ resource "aws_iam_role" "gha_apply" {
 # The consumer side: no secrets in the repository at all
 permissions: { contents: read, id-token: write } # id-token is what enables OIDC
 steps:
-  - uses: aws-actions/configure-aws-credentials@v4
+  - uses: aws-actions/configure-aws-credentials@v6 # pin to a full commit SHA in production
     with:
       role-to-assume: arn:aws:iam::111122223333:role/gha-api-apply
       aws-region: eu-west-1
