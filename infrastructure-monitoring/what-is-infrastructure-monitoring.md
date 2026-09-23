@@ -34,6 +34,21 @@ tags:
 
 Infrastructure monitoring is necessary but not sufficient: it tells you a node is unhealthy, not whether users are affected. Pair it with application and SLO monitoring.
 
+## Example
+
+```promql
+# Predictive: a filesystem that will be full within 4 hours at the current trend
+predict_linear(node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"}[6h], 4 * 3600) < 0
+
+# Saturation, not utilisation: containers throttled in more than 25% of CFS periods
+sum by (namespace, pod) (rate(container_cpu_cfs_throttled_periods_total[5m]))
+  / sum by (namespace, pod) (rate(container_cpu_cfs_periods_total[5m])) > 0.25
+
+# The forgotten ones: inodes and file descriptors
+node_filesystem_files_free{fstype!~"tmpfs|overlay"} / node_filesystem_files < 0.1
+process_open_fds / process_max_fds > 0.8
+```
+
 ## Interview tips
 
 - Naming the USE method gives structure to an otherwise list-shaped answer.

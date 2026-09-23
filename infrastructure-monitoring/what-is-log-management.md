@@ -18,7 +18,7 @@ tags:
 **The pipeline**
 
 1. **Generate** - applications write structured JSON to stdout, including a timestamp, level, service, version, and correlation/trace ID.
-2. **Collect** - an agent (Fluent Bit, Vector, Promtail) reads container or file output, typically as a DaemonSet in Kubernetes.
+2. **Collect** - an agent (Fluent Bit, Vector, the OpenTelemetry Collector, or Grafana Alloy - which replaced Promtail, end-of-life since March 2026) reads container or file output, typically as a DaemonSet in Kubernetes.
 3. **Buffer** - Kafka or a disk buffer absorbs spikes and protects against downstream outages.
 4. **Process** - parse, enrich with Kubernetes metadata, redact sensitive fields, drop noise, and sample high-volume debug lines.
 5. **Store and index** - Elasticsearch/OpenSearch (full-text indexing, powerful, expensive) or Loki (indexes labels only, cheap, requires more disciplined labelling).
@@ -62,9 +62,9 @@ tags:
 
 ## Related Concepts
 
-- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -42,6 +42,28 @@ tags:
 - Set retention deliberately, and downsample old data for long-term trends.
 - Monitor the monitoring - a dead-man's-switch alert that fires when the pipeline goes quiet.
 
+## Example
+
+```yaml
+# One alert that follows the rules: symptom-based, owned, severity-labelled, with a runbook
+groups:
+  - name: checkout-slo
+    rules:
+      - alert: CheckoutErrorBudgetBurn
+        expr: |
+          job:slo_errors_per_request:ratio_rate1h{job="checkout"} > 14.4 * 0.001
+          and job:slo_errors_per_request:ratio_rate5m{job="checkout"} > 14.4 * 0.001
+        for: 2m
+        labels: { severity: page, team: payments }
+        annotations:
+          summary: "Checkout burning its 30-day error budget at >14x"
+          runbook_url: "https://runbooks.example.com/checkout/error-budget-burn"
+      # Monitor the monitoring: always firing; the receiver alerts if it STOPS arriving
+      - alert: Watchdog
+        expr: vector(1)
+        labels: { severity: none }
+```
+
 ## Interview tips
 
 - "Urgent, actionable, real" is a crisp three-part test worth memorising.
