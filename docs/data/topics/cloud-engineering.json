@@ -1,0 +1,361 @@
+{
+  "schemaVersion": 1,
+  "slug": "cloud-engineering",
+  "title": "Cloud Engineering",
+  "group": "Cloud Providers",
+  "description": "Provider-neutral cloud engineering: landing zones, hybrid connectivity, least-privilege identity, multi-region resilience, multi-cloud trade-offs, DNS and global routing, and cross-provider service mapping.",
+  "studyNotes": [
+    "Right-sizing a landing zone instead of copying the enterprise template.",
+    "Recovery objectives first, then the cheapest pattern that meets them.",
+    "Translating fluently between AWS, Azure, and GCP - including where it breaks."
+  ],
+  "questions": [
+    {
+      "id": 215,
+      "slug": "what-is-a-cloud-landing-zone",
+      "title": "What is a cloud landing zone?",
+      "topic": "cloud-engineering",
+      "category": "Cloud Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cloud-engineering",
+        "interview-questions"
+      ],
+      "path": "cloud-engineering/what-is-a-cloud-landing-zone.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-engineering/what-is-a-cloud-landing-zone.md",
+      "shortAnswer": "A landing zone is the pre-built, governed foundation that workloads land in: account or project structure, identity and access, network topology, logging and security baselines, guardrail policies, and cost controls - all provisioned as code. Its purpose is that the tenth team to arrive gets the same compliant starting point as the first, without asking anyone.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 216,
+      "slug": "how-do-you-connect-an-on-premises-network-to-the-cloud",
+      "title": "How do you connect an on-premises network to the cloud?",
+      "topic": "cloud-engineering",
+      "category": "Cloud Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cloud-engineering",
+        "interview-questions"
+      ],
+      "path": "cloud-engineering/how-do-you-connect-an-on-premises-network-to-the-cloud.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-engineering/how-do-you-connect-an-on-premises-network-to-the-cloud.md",
+      "shortAnswer": "Either an IPsec VPN over the internet - quick, cheap, bandwidth-limited by the internet path - or a dedicated private circuit (AWS Direct Connect, Azure ExpressRoute, Google Cloud Interconnect) for consistent latency, higher throughput, and lower egress rates. Production designs usually run a dedicated circuit with a VPN as automatic backup, with BGP handling failover.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 217,
+      "slug": "how-do-you-design-least-privilege-identity-in-the-cloud",
+      "title": "How do you design least-privilege identity in the cloud?",
+      "topic": "cloud-engineering",
+      "category": "Cloud Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cloud-engineering",
+        "interview-questions"
+      ],
+      "path": "cloud-engineering/how-do-you-design-least-privilege-identity-in-the-cloud.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-engineering/how-do-you-design-least-privilege-identity-in-the-cloud.md",
+      "shortAnswer": "Eliminate long-lived credentials (SSO federation for humans, workload identity federation for machines), grant to groups and roles rather than individuals, scope permissions to the smallest resource boundary that works, make privileged access time-bound and approved, and derive the actual permission set from observed usage rather than from guesswork.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 218,
+      "slug": "how-do-you-design-for-multi-region-resilience",
+      "title": "How do you design for multi-region resilience?",
+      "topic": "cloud-engineering",
+      "category": "Cloud Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cloud-engineering",
+        "interview-questions"
+      ],
+      "path": "cloud-engineering/how-do-you-design-for-multi-region-resilience.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-engineering/how-do-you-design-for-multi-region-resilience.md",
+      "shortAnswer": "Decide the recovery objectives first, then pick the cheapest pattern that meets them: multi-AZ within one region (covers most failures), active-passive with a warm standby, or active-active. The hard part is never compute - it is data replication, state, and whether you have actually rehearsed a failover.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 219,
+      "slug": "what-are-the-real-trade-offs-of-multi-cloud",
+      "title": "What are the real trade-offs of multi-cloud?",
+      "topic": "cloud-engineering",
+      "category": "Cloud Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cloud-engineering",
+        "interview-questions"
+      ],
+      "path": "cloud-engineering/what-are-the-real-trade-offs-of-multi-cloud.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-engineering/what-are-the-real-trade-offs-of-multi-cloud.md",
+      "shortAnswer": "Multi-cloud buys negotiating leverage, regulatory or customer-mandated flexibility, and access to a specific provider's differentiated service. It costs you depth of expertise, forces least-common-denominator architecture if you insist on portability, multiplies security and identity surface, and adds inter-cloud data-transfer expense. It is justified by a named requirement, not by \"avoiding lock-in\" as a principle.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 220,
+      "slug": "how-do-you-manage-dns-and-global-traffic-routing",
+      "title": "How do you manage DNS and global traffic routing?",
+      "topic": "cloud-engineering",
+      "category": "Cloud Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cloud-engineering",
+        "interview-questions"
+      ],
+      "path": "cloud-engineering/how-do-you-manage-dns-and-global-traffic-routing.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-engineering/how-do-you-manage-dns-and-global-traffic-routing.md",
+      "shortAnswer": "Manage zones as code with short TTLs on anything used for failover, use health-checked routing policies (latency, weighted, geolocation, failover) for cross-region steering, and prefer an anycast global load balancer over DNS-based failover when you need seconds rather than minutes. Split-horizon DNS keeps internal names private, and DNSSEC plus registrar locks protect the zone itself.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 221,
+      "slug": "how-do-the-core-services-of-aws-azure-and-gcp-map-to-each-other",
+      "title": "How do the core services of AWS, Azure, and GCP map to each other?",
+      "topic": "cloud-engineering",
+      "category": "Cloud Engineering",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "cloud-engineering",
+        "interview-questions"
+      ],
+      "path": "cloud-engineering/how-do-the-core-services-of-aws-azure-and-gcp-map-to-each-other.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-engineering/how-do-the-core-services-of-aws-azure-and-gcp-map-to-each-other.md",
+      "shortAnswer": "Most primitives map closely - compute, object storage, managed Kubernetes, IAM, and monitoring exist everywhere with different names. The mappings that are _not_ one-to-one are the interesting ones: GCP's VPC is global while AWS and Azure networks are regional, Azure adds resource groups and a management-group layer above subscriptions, and each provider's serverless and data services differ in semantics as well as naming.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 435,
+      "slug": "how-do-you-troubleshoot-a-dns-problem-in-production",
+      "title": "How do you troubleshoot a DNS problem in production?",
+      "topic": "cloud-engineering",
+      "category": "Cloud Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cloud-engineering",
+        "interview-questions",
+        "network-security",
+        "incident-management",
+        "scalability-and-high-availability"
+      ],
+      "path": "cloud-engineering/how-do-you-troubleshoot-a-dns-problem-in-production.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-engineering/how-do-you-troubleshoot-a-dns-problem-in-production.md",
+      "shortAnswer": "Query the authoritative server directly and compare it with what clients are actually getting - the gap between those two answers is the whole diagnosis. `dig +trace` walks the delegation from the root, `dig @ns1.provider.net name` gives you the authoritative truth, and `dig name` from an affected client shows what the resolver chain is really returning, including a cached stale record. Then classify: **a wrong record** (fix it, and wait out the TTL), **a delegation or NS problem** (registrar or parent zone), **propagation and caching** (nothing to fix but time, which is why low TTLs are a change-management tool), **DNSSEC validation failure** (SERVFAIL everywhere, and the scariest of the set), or **not-DNS-at-all** (resolution is fine and the target is unhealthy). The prevention that matters more than any of the debugging: manage records as code, lower the TTL **before** a planned change, and monitor resolution from outside your network.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    }
+  ]
+}

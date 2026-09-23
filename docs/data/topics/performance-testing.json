@@ -1,0 +1,617 @@
+{
+  "schemaVersion": 1,
+  "slug": "performance-testing",
+  "title": "Performance Testing",
+  "group": "Architecture and Scale",
+  "description": "Load, stress, soak, and spike testing - how to design them, which tools to use, and how to read the results.",
+  "studyNotes": [
+    "Percentiles versus averages when reporting latency.",
+    "How you build a realistic workload model.",
+    "Turning a test result into a capacity decision."
+  ],
+  "questions": [
+    {
+      "id": 71,
+      "slug": "what-is-performance-testing",
+      "title": "What is Performance Testing?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "performance-testing",
+        "interview-questions"
+      ],
+      "path": "performance-testing/what-is-performance-testing.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/what-is-performance-testing.md",
+      "shortAnswer": "Performance testing measures how a system behaves under a defined workload - its throughput, latency, resource use, and stability - to verify it meets requirements and to find the point at which it degrades.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 237,
+          "slug": "how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines",
+          "title": "How do you prevent and handle secret leaks in CI/CD pipelines?",
+          "topic": "cicd"
+        },
+        {
+          "id": 10,
+          "slug": "explain-docker-architecture",
+          "title": "Explain Docker Architecture",
+          "topic": "docker"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 72,
+      "slug": "what-are-different-types-of-performance-tests",
+      "title": "What are different types of Performance Tests?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "performance-testing",
+        "interview-questions"
+      ],
+      "path": "performance-testing/what-are-different-types-of-performance-tests.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/what-are-different-types-of-performance-tests.md",
+      "shortAnswer": "Load (expected traffic), stress (beyond capacity, to find the breaking point), spike (sudden surge), soak/endurance (sustained over hours), volume (large data sets), scalability (does adding resources help), and benchmark (comparison baseline).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 268,
+          "slug": "how-do-you-use-jenkins-shared-libraries",
+          "title": "How do you use Jenkins shared libraries?",
+          "topic": "cicd"
+        },
+        {
+          "id": 536,
+          "slug": "how-do-you-detect-isolate-and-eradicate-flaky-tests-in-a-ci-cd-pipeline",
+          "title": "How do you detect, isolate, and eradicate flaky tests in a CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 73,
+      "slug": "what-are-performance-testing-tools",
+      "title": "What are Performance Testing Tools?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "performance-testing",
+        "interview-questions"
+      ],
+      "path": "performance-testing/what-are-performance-testing-tools.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/what-are-performance-testing-tools.md",
+      "shortAnswer": "k6 and Gatling for modern code-first load testing, JMeter for broad protocol support, Locust for Python-based scripting, and Vegeta or wrk for quick HTTP benchmarks - plus APM tooling to see what the system did under load.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 285,
+          "slug": "how-do-you-take-a-monthly-release-process-to-daily-deployments",
+          "title": "How do you take a monthly release process to daily deployments?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 74,
+      "slug": "what-are-performance-testing-best-practices",
+      "title": "What are Performance Testing Best Practices?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "performance-testing",
+        "interview-questions"
+      ],
+      "path": "performance-testing/what-are-performance-testing-best-practices.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/what-are-performance-testing-best-practices.md",
+      "shortAnswer": "Test against realistic workloads and data in a production-like environment, define pass/fail thresholds from your SLOs, measure percentiles, change one variable at a time, and automate a regression test in the pipeline.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 75,
+      "slug": "how-to-analyze-performance-test-results",
+      "title": "How to analyze Performance Test Results?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "performance-testing",
+        "interview-questions"
+      ],
+      "path": "performance-testing/how-to-analyze-performance-test-results.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/how-to-analyze-performance-test-results.md",
+      "shortAnswer": "Start from the user-facing signals - throughput, error rate, and latency percentiles over time - then correlate with resource and dependency metrics to locate the bottleneck, and validate the finding by fixing one thing and re-testing.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 298,
+      "slug": "how-do-you-load-test-safely-against-production",
+      "title": "How do you load test safely against production?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "performance-testing",
+        "interview-questions"
+      ],
+      "path": "performance-testing/how-do-you-load-test-safely-against-production.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/how-do-you-load-test-safely-against-production.md",
+      "shortAnswer": "Only with an abort mechanism you have tested, and never as a first step. Get authorisation and a window, tag synthetic traffic so it is identifiable and excluded from business data, start from a tiny fraction of production volume and ramp, define automatic kill conditions tied to real user SLOs, isolate side effects (no real payments, no real emails, no polluted analytics), and have one person whose only job is to stop the test. The reason to do it at all is that staging never reproduces production's data volume, cache state, noisy neighbours, or dependency behaviour - so some questions can only be answered there.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 609,
+      "slug": "what-are-load-stress-spike-soak-and-breakpoint-performance-testing-types",
+      "title": "What are Load, Stress, Spike, Soak, and Breakpoint performance testing types?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "performance-testing",
+        "performance",
+        "testing",
+        "load-testing",
+        "stress-testing"
+      ],
+      "path": "performance-testing/what-are-load-stress-spike-soak-and-breakpoint-performance-testing-types.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/what-are-load-stress-spike-soak-and-breakpoint-performance-testing-types.md",
+      "shortAnswer": "Load tests verify performance under expected production volume; Stress tests determine behavior under extreme load beyond capacity; Spike tests measure reaction to sudden dramatic traffic bursts; Soak tests verify stability and memory leaks over days; Breakpoint tests ramp load continuously until the system fails.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 536,
+          "slug": "how-do-you-detect-isolate-and-eradicate-flaky-tests-in-a-ci-cd-pipeline",
+          "title": "How do you detect, isolate, and eradicate flaky tests in a CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Which type of performance test is specifically engineered to detect slow JVM garbage collection degradation and OS file descriptor leaks that occur over extended periods?",
+        "options": [
+          "Spike testing",
+          "Soak (Endurance) testing",
+          "Smoke testing",
+          "Unit testing"
+        ],
+        "answerIndex": 1,
+        "explanation": "Soak testing maintains continuous operational load over 24 to 72 hours, making it the primary method for surfacing slow memory leaks, thread starvation, and storage exhaustion."
+      }
+    },
+    {
+      "id": 610,
+      "slug": "why-are-latency-percentiles-p95-p99-p99-9-vastly-more-informative-than-average-latency",
+      "title": "Why are latency percentiles (p95, p99, p99.9) vastly more informative than average latency?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "performance-testing",
+        "performance",
+        "metrics",
+        "latency",
+        "percentiles"
+      ],
+      "path": "performance-testing/why-are-latency-percentiles-p95-p99-p99-9-vastly-more-informative-than-average-latency.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/why-are-latency-percentiles-p95-p99-p99-9-vastly-more-informative-than-average-latency.md",
+      "shortAnswer": "Average (mean) latency hides severe outlier degradation behind thousands of fast requests; percentiles (p95, p99) measure the actual user experience of the slowest 5% or 1% of transactions, which disproportionately affect high-value users in distributed systems.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 541,
+          "slug": "how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning",
+          "title": "How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?",
+          "topic": "cicd"
+        },
+        {
+          "id": 515,
+          "slug": "how-does-docker-buildkit-work-and-what-caching-and-build-features-does-it-unlock",
+          "title": "How does Docker BuildKit work and what caching and build features does it unlock?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does an application with an average latency of 50ms still cause widespread user dissatisfaction if its p99 latency is 8 seconds?",
+        "options": [
+          "Browsers refuse to render web pages with average latency under 100ms",
+          "The average masks severe tail-end latency outliers affecting the slowest 1% of calls, which is amplified when a single page load makes multiple backend calls",
+          "p99 latency only measures network packet transmission speed",
+          "Average latency cannot be calculated in distributed microservices"
+        ],
+        "answerIndex": 1,
+        "explanation": "Averages conceal extreme tail latency. When a user action triggers dozens of backend microservice calls, the probability of hitting that 8-second p99 tail skyrockets to over 50%."
+      }
+    },
+    {
+      "id": 611,
+      "slug": "what-is-coordinated-omission-in-load-testing-and-how-does-it-invalidate-benchmark-results",
+      "title": "What is Coordinated Omission in load testing and how does it invalidate benchmark results?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "performance-testing",
+        "performance",
+        "testing",
+        "benchmarking",
+        "coordinated-omission"
+      ],
+      "path": "performance-testing/what-is-coordinated-omission-in-load-testing-and-how-does-it-invalidate-benchmark-results.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/what-is-coordinated-omission-in-load-testing-and-how-does-it-invalidate-benchmark-results.md",
+      "shortAnswer": "Coordinated Omission occurs when a load testing tool waits for a blocked response before issuing the next request, inadvertently pausing load generation during server freezes and omitting the catastrophic latency queuing that real clients would experience.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 536,
+          "slug": "how-do-you-detect-isolate-and-eradicate-flaky-tests-in-a-ci-cd-pipeline",
+          "title": "How do you detect, isolate, and eradicate flaky tests in a CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 541,
+          "slug": "how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning",
+          "title": "How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary consequence of Coordinated Omission in load testing results?",
+        "options": [
+          "It causes test runners to consume all local CPU cores",
+          "It drastically under-reports tail latency percentiles by omitting the queued requests that would have piled up during server pauses",
+          "It generates invalid JSON reports",
+          "It prevents load generators from using HTTPS connections"
+        ],
+        "answerIndex": 1,
+        "explanation": "If a testing client blocks on a frozen server, it fails to send subsequent requests on schedule. The tool records one slow request instead of hundreds of backed-up requests, artificially deflating measured latency."
+      }
+    },
+    {
+      "id": 612,
+      "slug": "how-do-you-test-and-tune-linux-kernel-tcp-networking-parameters-for-high-throughput-low-latency-workloads",
+      "title": "How do you test and tune Linux kernel TCP networking parameters for high-throughput, low-latency workloads?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "performance-testing",
+        "linux",
+        "kernel",
+        "sysctl",
+        "tcp",
+        "tuning"
+      ],
+      "path": "performance-testing/how-do-you-test-and-tune-linux-kernel-tcp-networking-parameters-for-high-throughput-low-latency-workloads.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/how-do-you-test-and-tune-linux-kernel-tcp-networking-parameters-for-high-throughput-low-latency-workloads.md",
+      "shortAnswer": "Tuning Linux networking for high throughput involves adjusting `sysctl` parameters to enlarge socket read/write buffers, expand connection listen backlogs (`somaxconn`), reuse TIME_WAIT sockets (`tcp_tw_reuse`), and adopt modern BBR congestion control.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 514,
+          "slug": "what-are-linux-cgroups-v2-and-how-do-they-improve-container-resource-isolation-over-cgroups-v1",
+          "title": "What are Linux cgroups v2 and how do they improve container resource isolation over cgroups v1?",
+          "topic": "docker"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Which Linux kernel setting allows a high-throughput reverse proxy (like NGINX or Envoy) to safely reuse outgoing client TCP connections stuck in TIME_WAIT state?",
+        "options": [
+          "`net.ipv4.tcp_tw_reuse = 1`",
+          "`net.ipv4.icmp_echo_ignore_all = 1`",
+          "`vm.swappiness = 0`",
+          "`fs.file-max = 1000`"
+        ],
+        "answerIndex": 0,
+        "explanation": "`net.ipv4.tcp_tw_reuse = 1` allows the kernel to safely reallocate outgoing TCP sockets residing in TIME_WAIT state if timestamps show the old connection is terminated, preventing ephemeral port exhaustion."
+      }
+    },
+    {
+      "id": 613,
+      "slug": "what-is-database-connection-pooling-and-how-does-improper-pool-sizing-degrade-application-performance",
+      "title": "What is Database Connection Pooling and how does improper pool sizing degrade application performance?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "performance-testing",
+        "databases",
+        "connection-pooling",
+        "hikari",
+        "postgres",
+        "performance"
+      ],
+      "path": "performance-testing/what-is-database-connection-pooling-and-how-does-improper-pool-sizing-degrade-application-performance.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/what-is-database-connection-pooling-and-how-does-improper-pool-sizing-degrade-application-performance.md",
+      "shortAnswer": "Connection pooling maintains a cache of pre-established, reusable database connections; setting pool sizes too large overwhelms the database with context switching and disk I/O contention, while setting them too small starves application threads.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 541,
+          "slug": "how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning",
+          "title": "How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does setting an application's database connection pool size to 500 on an 8-core database server frequently cause query latency to skyrocket?",
+        "options": [
+          "Database engines shut down when handling more than 50 connections",
+          "The 8 CPU cores become overwhelmed by thread context-switching overhead and disk I/O contention trying to execute 500 tasks simultaneously",
+          "Network routers drop TCP connections with pool numbers higher than 100",
+          "Connection poolers only work with single-threaded applications"
+        ],
+        "answerIndex": 1,
+        "explanation": "Hardware CPUs can only execute as many threads simultaneously as physical cores exist. Over-allocating connections forces the kernel to spend CPU time thrashing between context switches."
+      }
+    },
+    {
+      "id": 614,
+      "slug": "how-do-you-profile-cpu-memory-and-i-o-bottlenecks-in-production-with-ebpf-and-flame-graphs",
+      "title": "How do you profile CPU, memory, and I/O bottlenecks in production with eBPF and flame graphs?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "performance-testing",
+        "ebpf",
+        "profiling",
+        "flame-graphs",
+        "performance",
+        "bcc"
+      ],
+      "path": "performance-testing/how-do-you-profile-cpu-memory-and-i-o-bottlenecks-in-production-with-ebpf-and-flame-graphs.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/how-do-you-profile-cpu-memory-and-i-o-bottlenecks-in-production-with-ebpf-and-flame-graphs.md",
+      "shortAnswer": "eBPF (originally \"extended Berkeley Packet Filter\", now just a name) runs verified, sandboxed programs inside the Linux kernel to sample CPU stack traces and trace I/O and memory events with typically around 1% overhead at a low sampling rate; Flame Graphs visualize sampled call stacks where horizontal width represents relative CPU time spent.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 515,
+          "slug": "how-does-docker-buildkit-work-and-what-caching-and-build-features-does-it-unlock",
+          "title": "How does Docker BuildKit work and what caching and build features does it unlock?",
+          "topic": "docker"
+        },
+        {
+          "id": 541,
+          "slug": "how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning",
+          "title": "How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What does a wide horizontal plateau at the very top of a CPU Flame Graph indicate?",
+        "options": [
+          "The application has entered a deadlocked state",
+          "A specific function is consuming a large percentage of total CPU time directly on the processor without delegating to child functions",
+          "The network socket buffer has overflowed",
+          "The function was compiled without optimization flags"
+        ],
+        "answerIndex": 1,
+        "explanation": "On a Flame Graph, width corresponds directly to CPU time. A wide box with nothing on top of it means that specific leaf function is directly burning CPU cycles."
+      }
+    }
+  ]
+}

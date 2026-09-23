@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "slug": "scripting-and-automation",
+  "title": "Scripting and Automation",
+  "group": "Foundations",
+  "description": "The scripting layer under every pipeline - defensive Bash for orchestration, and Python for cloud APIs, structured data, and the tooling Bash cannot carry.",
+  "studyNotes": [
+    "What `set -euo pipefail` does, line by line.",
+    "Whether your script is safe to run twice.",
+    "When you stop writing Bash and reach for Python."
+  ],
+  "questions": [
+    {
+      "id": 266,
+      "slug": "how-do-you-write-a-production-grade-bash-script",
+      "title": "How do you write a production-grade Bash script?",
+      "topic": "scripting-and-automation",
+      "category": "Scripting and Automation",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "scripting-and-automation",
+        "interview-questions"
+      ],
+      "path": "scripting-and-automation/how-do-you-write-a-production-grade-bash-script.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/scripting-and-automation/how-do-you-write-a-production-grade-bash-script.md",
+      "shortAnswer": "Start with `set -euo pipefail` so failures stop the script instead of cascading, quote every variable expansion, use a `trap` to clean up on exit, validate inputs and required commands before doing any work, and make the script idempotent so re-running it is safe. Lint it with `shellcheck`. Know when to stop - once you need data structures, HTTP clients, or real error handling, switch to Python.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 497,
+          "slug": "how-do-you-schedule-work-with-cron-and-systemd-timers",
+          "title": "How do you schedule work with cron and systemd timers?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 41,
+          "slug": "what-are-the-basic-linux-commands-every-devops-engineer-should-know",
+          "title": "What are the basic Linux commands every DevOps engineer should know?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 42,
+          "slug": "what-is-shell-scripting",
+          "title": "What is Shell Scripting?",
+          "topic": "linux-administration"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 267,
+      "slug": "what-do-you-use-python-for-as-a-devops-engineer",
+      "title": "What do you use Python for as a DevOps engineer?",
+      "topic": "scripting-and-automation",
+      "category": "Scripting and Automation",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "scripting-and-automation",
+        "interview-questions"
+      ],
+      "path": "scripting-and-automation/what-do-you-use-python-for-as-a-devops-engineer.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/scripting-and-automation/what-do-you-use-python-for-as-a-devops-engineer.md",
+      "shortAnswer": "Everything Bash is bad at - cloud API automation with `boto3` or the Azure/Google SDKs, parsing and reshaping JSON and YAML, custom Kubernetes controllers and operators, glue between systems that only speak HTTP, and internal CLI tooling. Interviews pair the \"what do you use it for\" question with two or three language fundamentals: list vs tuple, shallow vs deep copy, and the GIL.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 497,
+          "slug": "how-do-you-schedule-work-with-cron-and-systemd-timers",
+          "title": "How do you schedule work with cron and systemd timers?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 42,
+          "slug": "what-is-shell-scripting",
+          "title": "What is Shell Scripting?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 45,
+          "slug": "what-is-linux-file-system-hierarchy",
+          "title": "What is Linux File System Hierarchy?",
+          "topic": "linux-administration"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 301,
+      "slug": "when-do-you-use-bash-and-when-do-you-use-python",
+      "title": "When do you use Bash and when do you use Python?",
+      "topic": "scripting-and-automation",
+      "category": "Scripting and Automation",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "scripting-and-automation",
+        "interview-questions"
+      ],
+      "path": "scripting-and-automation/when-do-you-use-bash-and-when-do-you-use-python.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/scripting-and-automation/when-do-you-use-bash-and-when-do-you-use-python.md",
+      "shortAnswer": "Bash when the job is gluing command-line tools together on a Linux box - a handful of commands, some pipes, exit codes. Python when there is real logic: parsing JSON or YAML, calling APIs, error handling with retries, data structures, or anything another engineer will have to maintain. The practical rule of thumb: **if a Bash script passes 100 lines, needs an array of anything non-trivial, or starts parsing structured data, it wants to be Python.**",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 497,
+          "slug": "how-do-you-schedule-work-with-cron-and-systemd-timers",
+          "title": "How do you schedule work with cron and systemd timers?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 41,
+          "slug": "what-are-the-basic-linux-commands-every-devops-engineer-should-know",
+          "title": "What are the basic Linux commands every DevOps engineer should know?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 42,
+          "slug": "what-is-shell-scripting",
+          "title": "What is Shell Scripting?",
+          "topic": "linux-administration"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 302,
+      "slug": "how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation",
+      "title": "How do you turn a pile of ad hoc scripts into maintainable automation?",
+      "topic": "scripting-and-automation",
+      "category": "Scripting and Automation",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "scripting-and-automation",
+        "interview-questions"
+      ],
+      "path": "scripting-and-automation/how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/scripting-and-automation/how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation.md",
+      "shortAnswer": "Treat the automation as software, not as sysadmin residue. Inventory what exists and what runs it, delete what nothing calls, then give the survivors the same properties you demand of application code: version control with review, a pinned execution environment (a container image, not \"whatever is on the box\"), **idempotency and dry-run**, structured logging and non-zero exit codes, tests in CI, and a single scheduler or pipeline as the only executor. The end state is that no automation runs from an engineer's laptop or a crontab nobody owns, and every run is observable and repeatable.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 497,
+          "slug": "how-do-you-schedule-work-with-cron-and-systemd-timers",
+          "title": "How do you schedule work with cron and systemd timers?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 42,
+          "slug": "what-is-shell-scripting",
+          "title": "What is Shell Scripting?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 45,
+          "slug": "what-is-linux-file-system-hierarchy",
+          "title": "What is Linux File System Hierarchy?",
+          "topic": "linux-administration"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 502,
+      "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+      "title": "What Bash scripting exercises come up in DevOps interviews?",
+      "topic": "scripting-and-automation",
+      "category": "Scripting and Automation",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "scripting-and-automation",
+        "interview-questions",
+        "linux-administration"
+      ],
+      "path": "scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md",
+      "shortAnswer": "The same eight tasks, in different clothing: **delete or archive files older than N days**, **alert when disk usage crosses a threshold**, **check a service and restart it if it is down**, **count or extract patterns from a log**, **rename or move files with a date stamp**, **find and replace text in a file**, **watch a directory for new files**, and **rotate or compress logs on a schedule**. What is being tested is rarely the algorithm - it is whether you write a script someone can run in production: `set -euo pipefail` at the top, quoted variables, `mktemp` instead of a hard-coded `/tmp` path, `find -print0 | xargs -0` instead of parsing `ls`, a `trap` for cleanup, `flock` so cron cannot run two copies, meaningful exit codes, and logging that says what happened. Write the safe version, say why each guard is there, and volunteer the failure mode you are preventing - that is what separates a candidate from a copy-paste answer.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 497,
+          "slug": "how-do-you-schedule-work-with-cron-and-systemd-timers",
+          "title": "How do you schedule work with cron and systemd timers?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 41,
+          "slug": "what-are-the-basic-linux-commands-every-devops-engineer-should-know",
+          "title": "What are the basic Linux commands every DevOps engineer should know?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 42,
+          "slug": "what-is-shell-scripting",
+          "title": "What is Shell Scripting?",
+          "topic": "linux-administration"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 503,
+      "slug": "what-python-exercises-come-up-in-devops-interviews",
+      "title": "What Python exercises come up in DevOps interviews?",
+      "topic": "scripting-and-automation",
+      "category": "Scripting and Automation",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "scripting-and-automation",
+        "interview-questions",
+        "aws-engineering"
+      ],
+      "path": "scripting-and-automation/what-python-exercises-come-up-in-devops-interviews.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/scripting-and-automation/what-python-exercises-come-up-in-devops-interviews.md",
+      "shortAnswer": "Two categories, and they are graded differently. The **operational** ones are what the job actually is: parse a log and aggregate it, filter a list of dictionaries (job records, API responses) by a field, extract unique IP addresses from a live log, check disk usage and alert above a threshold, list cloud resources with boto3 filtered by tag, retrieve a secret, and watch a directory for new files. The **language** ones are quick screens: reverse a string, palindrome, count word occurrences, longest substring without repeats, find pairs summing to N, list versus tuple versus set, shallow versus deep copy, decorators, `5/2` versus `5//2`, and what the GIL means. For the operational ones you are being judged on **using the right data structure, handling errors, and not loading a 4 GB file into memory**; for the language ones, on picking `set` when you need membership testing and `dict`/`Counter` when you need counting - and on saying the complexity out loud. The habit that earns most of the credit: iterate over a file line by line rather than `read()`, use `collections.Counter` and `defaultdict` instead of hand-rolled loops, and pass subprocess arguments as a list so nothing is ever interpreted by a shell.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 497,
+          "slug": "how-do-you-schedule-work-with-cron-and-systemd-timers",
+          "title": "How do you schedule work with cron and systemd timers?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 238,
+          "slug": "how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers",
+          "title": "How do you troubleshoot SSH failures, high CPU, and disk space on Linux servers?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 265,
+          "slug": "how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed",
+          "title": "How do you analyse logs and text files with grep, awk, and sed?",
+          "topic": "linux-administration"
+        }
+      ],
+      "quiz": null
+    }
+  ]
+}

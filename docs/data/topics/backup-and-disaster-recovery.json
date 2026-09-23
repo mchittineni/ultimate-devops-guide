@@ -1,0 +1,664 @@
+{
+  "schemaVersion": 1,
+  "slug": "backup-and-disaster-recovery",
+  "title": "Backup and Disaster Recovery",
+  "group": "Reliability and Operations",
+  "description": "Backup types, RPO/RTO targets, business continuity planning, and the discipline of testing restores.",
+  "studyNotes": [
+    "The 3-2-1 rule and why an untested backup is not a backup.",
+    "Deriving RPO and RTO from business requirements.",
+    "Costs and trade-offs of DR patterns from backup-restore to active-active."
+  ],
+  "questions": [
+    {
+      "id": 61,
+      "slug": "what-is-backup-and-disaster-recovery",
+      "title": "What is Backup and Disaster Recovery?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "backup-and-disaster-recovery",
+        "interview-questions"
+      ],
+      "path": "backup-and-disaster-recovery/what-is-backup-and-disaster-recovery.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/what-is-backup-and-disaster-recovery.md",
+      "shortAnswer": "Backup is copying data so it can be restored after loss; disaster recovery is the broader capability of restoring an entire service after a major failure. Backup is one component of DR, not a substitute for it.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 9,
+          "slug": "what-is-docker-compose",
+          "title": "What is Docker Compose?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 62,
+      "slug": "what-are-different-types-of-backups",
+      "title": "What are different types of backups?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "backup-and-disaster-recovery",
+        "interview-questions"
+      ],
+      "path": "backup-and-disaster-recovery/what-are-different-types-of-backups.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/what-are-different-types-of-backups.md",
+      "shortAnswer": "Full (everything, every time), incremental (changes since the last backup of any type), differential (changes since the last full backup), plus snapshots, continuous data protection, and synthetic fulls.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 63,
+      "slug": "what-is-rpo-and-rto",
+      "title": "What is RPO and RTO?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "backup-and-disaster-recovery",
+        "interview-questions"
+      ],
+      "path": "backup-and-disaster-recovery/what-is-rpo-and-rto.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/what-is-rpo-and-rto.md",
+      "shortAnswer": "RPO (Recovery Point Objective) is the maximum acceptable amount of data loss measured in time; RTO (Recovery Time Objective) is the maximum acceptable time to restore service. RPO drives backup and replication design; RTO drives recovery architecture.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 64,
+      "slug": "what-is-business-continuity-planning",
+      "title": "What is Business Continuity Planning?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "backup-and-disaster-recovery",
+        "interview-questions"
+      ],
+      "path": "backup-and-disaster-recovery/what-is-business-continuity-planning.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/what-is-business-continuity-planning.md",
+      "shortAnswer": "Business continuity planning is the organisation-wide discipline of keeping critical business functions running through a disruption - of which IT disaster recovery is one part alongside people, facilities, suppliers, and communications.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 65,
+      "slug": "what-are-backup-best-practices",
+      "title": "What are backup best practices?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "backup-and-disaster-recovery",
+        "interview-questions"
+      ],
+      "path": "backup-and-disaster-recovery/what-are-backup-best-practices.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/what-are-backup-best-practices.md",
+      "shortAnswer": "Automate backups, follow 3-2-1-1-0, encrypt everything, keep an immutable copy in a separate account, monitor every job, and - above all - test restores on a schedule.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 239,
+      "slug": "how-do-you-execute-a-disaster-recovery-failover-with-minimal-rto-and-rpo",
+      "title": "How do you execute a Disaster Recovery failover with minimal RTO and RPO?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "backup-and-disaster-recovery",
+        "interview-questions"
+      ],
+      "path": "backup-and-disaster-recovery/how-do-you-execute-a-disaster-recovery-failover-with-minimal-rto-and-rpo.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/how-do-you-execute-a-disaster-recovery-failover-with-minimal-rto-and-rpo.md",
+      "shortAnswer": "Execute a Disaster Recovery (DR) failover by maintaining cross-region automated data replication (RPO), declaring outage triggers based on health checks, switching global DNS / Route 53 routing policies (RTO), promoting standby databases, scaling target infrastructure, and verifying application traffic flow.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 436,
+      "slug": "how-do-you-verify-that-your-backups-can-actually-be-restored",
+      "title": "How do you verify that your backups can actually be restored?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "backup-and-disaster-recovery",
+        "interview-questions",
+        "database-management-in-devops",
+        "site-reliability-engineering",
+        "scripting-and-automation"
+      ],
+      "path": "backup-and-disaster-recovery/how-do-you-verify-that-your-backups-can-actually-be-restored.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/how-do-you-verify-that-your-backups-can-actually-be-restored.md",
+      "shortAnswer": "Automate the restore, not just the backup. On a schedule, spin up a clean, isolated environment, **restore from the actual backup artefact**, and then run assertions that prove the data is usable: row counts and checksums against expected ranges, referential-integrity checks, the newest record's timestamp (which measures your real RPO), and an application-level smoke test against the restored copy. Record the **restore duration** because that is your real RTO, not the number in the plan. Destroy the environment afterwards, and alert on a failed or skipped verification exactly as you would on a failed backup. The principle to state plainly: a backup that has never been restored is not a backup, it is a hopeful file - and \"the backup job reported success\" is a statement about the job, not about the data.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 285,
+          "slug": "how-do-you-take-a-monthly-release-process-to-daily-deployments",
+          "title": "How do you take a monthly release process to daily deployments?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 596,
+      "slug": "what-are-rto-and-rpo-and-how-do-they-drive-disaster-recovery-architecture-tiers",
+      "title": "What are RTO and RPO and how do they drive Disaster Recovery architecture tiers?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "backup-and-disaster-recovery",
+        "disaster-recovery",
+        "rto",
+        "rpo",
+        "backup",
+        "business-continuity"
+      ],
+      "path": "backup-and-disaster-recovery/what-are-rto-and-rpo-and-how-do-they-drive-disaster-recovery-architecture-tiers.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/what-are-rto-and-rpo-and-how-do-they-drive-disaster-recovery-architecture-tiers.md",
+      "shortAnswer": "RTO (Recovery Time Objective) is the maximum acceptable duration of downtime before service is restored; RPO (Recovery Point Objective) is the maximum acceptable amount of data loss measured in time (e.g. 15 minutes of lost transactions). Together they pick the DR tier: the lower the targets, the more of the standby environment must already be running and replicating, and the more it costs.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "If an organization has an RPO of 15 minutes and an RTO of 1 hour, what is the impact if a failure occurs at 12:00 PM?",
+        "options": [
+          "The system must be restored by 12:15 PM and can lose up to 1 hour of data",
+          "Service must be restored by 1:00 PM (1 hour RTO) and data loss cannot exceed records created after 11:45 AM (15 min RPO)",
+          "All user passwords must be reset within 15 minutes",
+          "The primary database must take snapshots every 1 hour"
+        ],
+        "answerIndex": 1,
+        "explanation": "RTO dictates that the system must be operational within 1 hour (1:00 PM). RPO dictates that data can only be lost back to 11:45 AM (15 minutes prior to the disaster)."
+      }
+    },
+    {
+      "id": 597,
+      "slug": "what-is-the-3-2-1-backup-rule-and-how-is-it-modernized-for-cloud-and-ransomware-protection",
+      "title": "What is the 3-2-1 backup rule and how is it modernized for cloud and ransomware protection?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "backup-and-disaster-recovery",
+        "backup",
+        "3-2-1",
+        "ransomware",
+        "s3-object-lock"
+      ],
+      "path": "backup-and-disaster-recovery/what-is-the-3-2-1-backup-rule-and-how-is-it-modernized-for-cloud-and-ransomware-protection.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/what-is-the-3-2-1-backup-rule-and-how-is-it-modernized-for-cloud-and-ransomware-protection.md",
+      "shortAnswer": "The classic 3-2-1 rule mandates 3 copies of data on 2 different media types with 1 copy stored offsite; modern cloud architectures extend this with 3-2-1-1-0 by adding an immutable/WORM (Write Once Read Many) air-gapped copy and zero-error automated restore validation.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why should critical cloud backups be stored in S3 buckets with Object Lock in Compliance Mode?",
+        "options": [
+          "Compliance Mode compresses backups by 80%",
+          "It makes objects immutable (WORM), preventing any user—including the AWS root account—from deleting backups during a ransomware attack",
+          "It allows backups to be restored directly without a network connection",
+          "It bypasses AWS billing charges for object storage"
+        ],
+        "answerIndex": 1,
+        "explanation": "In Compliance Mode, S3 Object Lock enforces strict WORM guarantees. Even compromised root or administrator credentials cannot delete or alter protected snapshots until the retention timer expires."
+      }
+    },
+    {
+      "id": 598,
+      "slug": "what-is-the-difference-between-point-in-time-recovery-pitr-and-traditional-periodic-snapshot-backups",
+      "title": "What is the difference between Point-in-Time Recovery (PITR) and traditional periodic snapshot backups?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "backup-and-disaster-recovery",
+        "backup",
+        "pitr",
+        "wal",
+        "databases",
+        "rds"
+      ],
+      "path": "backup-and-disaster-recovery/what-is-the-difference-between-point-in-time-recovery-pitr-and-traditional-periodic-snapshot-backups.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/what-is-the-difference-between-point-in-time-recovery-pitr-and-traditional-periodic-snapshot-backups.md",
+      "shortAnswer": "Periodic snapshots take point-in-time disk freezes every N hours, leaving an RPO gap equal to the snapshot frequency; PITR continuously archives write-ahead transaction logs (WAL/binlog) alongside base snapshots, allowing restoration to any exact second in time.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "How does Point-in-Time Recovery (PITR) achieve restoration to an exact second before a data corruption incident occurred?",
+        "options": [
+          "By taking a full multi-terabyte disk snapshot every single second",
+          "By restoring the latest base snapshot and replaying continuous Write-Ahead Logs (WAL) up to the target timestamp",
+          "By reversing the system clock on the database operating system",
+          "By querying the Git commit history of the database application"
+        ],
+        "answerIndex": 1,
+        "explanation": "PITR restores the closest preceding base snapshot and rolls forward by replaying transaction logs (WAL) entry by entry until reaching the exact millisecond requested."
+      }
+    },
+    {
+      "id": 599,
+      "slug": "why-is-an-untested-backup-not-a-real-backup-and-how-do-you-automate-restore-verification",
+      "title": "Why is an untested backup not a real backup and how do you automate restore verification?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "backup-and-disaster-recovery",
+        "backup",
+        "testing",
+        "automation",
+        "disaster-recovery"
+      ],
+      "path": "backup-and-disaster-recovery/why-is-an-untested-backup-not-a-real-backup-and-how-do-you-automate-restore-verification.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/why-is-an-untested-backup-not-a-real-backup-and-how-do-you-automate-restore-verification.md",
+      "shortAnswer": "Backups frequently fail during real disasters due to silent corruption, missing decryption keys, or unrecorded schema dependencies; automated restore verification periodically spins up ephemeral infrastructure from backups, executes synthetic queries, and destroys the test environment.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 536,
+          "slug": "how-do-you-detect-isolate-and-eradicate-flaky-tests-in-a-ci-cd-pipeline",
+          "title": "How do you detect, isolate, and eradicate flaky tests in a CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 540,
+          "slug": "what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits",
+          "title": "What is Semantic Release and how does it automate versioning and changelogs from commits?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Why do mature engineering teams run automated daily restore pipelines into sandbox environments instead of relying on backup success logs?",
+        "options": [
+          "Cloud providers require daily restores to maintain snapshot licenses",
+          "To prove that backup images can actually boot, decrypt, and serve application queries without discovering silent corruption during a real disaster",
+          "Because snapshots are deleted automatically if not restored within 24 hours",
+          "To accelerate database write throughput"
+        ],
+        "answerIndex": 1,
+        "explanation": "A successful backup log only proves data was written to disk. Automated restore testing guarantees that snapshots can be decrypted, mounted, and queried successfully."
+      }
+    },
+    {
+      "id": 600,
+      "slug": "how-do-you-backup-and-restore-kubernetes-state-including-etcd-pvcs-and-cluster-manifests",
+      "title": "How do you backup and restore Kubernetes state including etcd, PVCs, and cluster manifests?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "backup-and-disaster-recovery",
+        "kubernetes",
+        "backup",
+        "etcd",
+        "velero",
+        "disaster-recovery"
+      ],
+      "path": "backup-and-disaster-recovery/how-do-you-backup-and-restore-kubernetes-state-including-etcd-pvcs-and-cluster-manifests.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/how-do-you-backup-and-restore-kubernetes-state-including-etcd-pvcs-and-cluster-manifests.md",
+      "shortAnswer": "Kubernetes DR requires backing up control-plane state via etcd snapshots (`etcdctl snapshot save`) and application workloads using tools like Velero, which synchronizes declarative manifests and orchestrates VolumeSnapshots (CSI) for PersistentVolumeClaims.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 535,
+          "slug": "what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup",
+          "title": "What are ephemeral preview environments and how do you manage their lifecycle and cleanup?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Which tool is the industry standard for backing up both Kubernetes cluster resource manifests and persistent storage volume snapshots in managed cloud environments (like EKS and GKE)?",
+        "options": [
+          "Velero",
+          "Fluentd",
+          "Prometheus Alertmanager",
+          "CoreDNS"
+        ],
+        "answerIndex": 0,
+        "explanation": "Velero is the CNCF standard tool for backing up, restoring, and migrating Kubernetes manifests and persistent storage volumes via cloud CSI snapshot integration."
+      }
+    },
+    {
+      "id": 601,
+      "slug": "what-are-split-brain-scenarios-in-clustered-storage-and-how-do-quorum-systems-prevent-data-corruption",
+      "title": "What are Split-Brain scenarios in clustered storage and how do Quorum systems prevent data corruption?",
+      "topic": "backup-and-disaster-recovery",
+      "category": "Backup and Disaster Recovery",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "backup-and-disaster-recovery",
+        "ha",
+        "quorum",
+        "split-brain",
+        "raft",
+        "etcd"
+      ],
+      "path": "backup-and-disaster-recovery/what-are-split-brain-scenarios-in-clustered-storage-and-how-do-quorum-systems-prevent-data-corruption.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/what-are-split-brain-scenarios-in-clustered-storage-and-how-do-quorum-systems-prevent-data-corruption.md",
+      "shortAnswer": "Split-brain occurs when a network partition divides a cluster into disconnected sub-groups that both believe they are the leader and accept conflicting writes; Quorum systems require a strict majority vote (`floor(N/2) + 1`) to elect leaders and commit data, ensuring only one partition can operate.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does a 2-node database cluster have worse fault tolerance than a 3-node cluster when enforcing quorum to prevent split-brain?",
+        "options": [
+          "2-node clusters use double the memory of 3-node clusters",
+          "In a 2-node cluster, quorum requires both nodes (2 of 2); if a single node fails, the cluster loses quorum and cannot accept writes",
+          "2-node clusters cannot run on Linux servers",
+          "Raft algorithms require an even number of nodes to operate"
+        ],
+        "answerIndex": 1,
+        "explanation": "Quorum is $N/2 + 1$. For $N=2$, quorum is 2. The loss of either node drops active members below quorum, preventing any writes. For $N=3$, quorum is 2, allowing 1 node to die safely."
+      }
+    }
+  ]
+}

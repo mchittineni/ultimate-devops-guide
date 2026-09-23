@@ -1,0 +1,613 @@
+{
+  "schemaVersion": 1,
+  "slug": "security-and-compliance",
+  "title": "Security and Compliance",
+  "group": "Security",
+  "description": "Shifting security left: DevSecOps practice, infrastructure and container hardening, and compliance expressed as code.",
+  "studyNotes": [
+    "Where security gates belong in a pipeline, and what fails the build.",
+    "How you handle secrets and image vulnerabilities.",
+    "Turning a control framework into automated checks."
+  ],
+  "questions": [
+    {
+      "id": 36,
+      "slug": "what-is-devsecops",
+      "title": "What is DevSecOps?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "security-and-compliance",
+        "interview-questions"
+      ],
+      "path": "security-and-compliance/what-is-devsecops.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-is-devsecops.md",
+      "shortAnswer": "DevSecOps integrates security into every stage of the delivery pipeline rather than bolting it on at the end - making security a shared responsibility of the whole team, automated and continuous.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 491,
+          "slug": "how-do-you-manage-tls-certificates-in-production",
+          "title": "How do you manage TLS certificates in production?",
+          "topic": "network-security"
+        },
+        {
+          "id": 161,
+          "slug": "what-does-a-devsecops-pipeline-look-like-end-to-end",
+          "title": "What does a DevSecOps pipeline look like end to end?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 37,
+      "slug": "what-is-infrastructure-security",
+      "title": "What is Infrastructure Security?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "security-and-compliance",
+        "interview-questions"
+      ],
+      "path": "security-and-compliance/what-is-infrastructure-security.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-is-infrastructure-security.md",
+      "shortAnswer": "Infrastructure security is the protection of the compute, network, storage, and identity layers that applications run on - through least-privilege access, network segmentation, encryption, hardening, patching, and continuous monitoring.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 491,
+          "slug": "how-do-you-manage-tls-certificates-in-production",
+          "title": "How do you manage TLS certificates in production?",
+          "topic": "network-security"
+        },
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 161,
+          "slug": "what-does-a-devsecops-pipeline-look-like-end-to-end",
+          "title": "What does a DevSecOps pipeline look like end to end?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 38,
+      "slug": "what-is-container-security",
+      "title": "What is Container Security?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "security-and-compliance",
+        "interview-questions"
+      ],
+      "path": "security-and-compliance/what-is-container-security.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-is-container-security.md",
+      "shortAnswer": "Container security spans the whole lifecycle - securing the image, the build pipeline, the registry, the runtime configuration, and the orchestrator - because a container is only as safe as the weakest of those layers.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 491,
+          "slug": "how-do-you-manage-tls-certificates-in-production",
+          "title": "How do you manage TLS certificates in production?",
+          "topic": "network-security"
+        },
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 161,
+          "slug": "what-does-a-devsecops-pipeline-look-like-end-to-end",
+          "title": "What does a DevSecOps pipeline look like end to end?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 39,
+      "slug": "what-is-compliance-as-code",
+      "title": "What is Compliance as Code?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "security-and-compliance",
+        "interview-questions"
+      ],
+      "path": "security-and-compliance/what-is-compliance-as-code.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-is-compliance-as-code.md",
+      "shortAnswer": "Compliance as Code expresses regulatory and internal control requirements as executable policies that are enforced automatically in pipelines and at runtime, producing continuous evidence instead of periodic manual audits.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 491,
+          "slug": "how-do-you-manage-tls-certificates-in-production",
+          "title": "How do you manage TLS certificates in production?",
+          "topic": "network-security"
+        },
+        {
+          "id": 161,
+          "slug": "what-does-a-devsecops-pipeline-look-like-end-to-end",
+          "title": "What does a DevSecOps pipeline look like end to end?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 162,
+          "slug": "what-is-the-difference-between-sast-dast-iast-and-sca",
+          "title": "What is the difference between SAST, DAST, IAST, and SCA?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 40,
+      "slug": "what-are-security-best-practices-in-devops",
+      "title": "What are Security Best Practices in DevOps?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "security-and-compliance",
+        "interview-questions"
+      ],
+      "path": "security-and-compliance/what-are-security-best-practices-in-devops.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-are-security-best-practices-in-devops.md",
+      "shortAnswer": "Automate security into the pipeline, eliminate long-lived secrets, apply least privilege everywhere, keep dependencies and images patched, and make production observable enough to detect and respond to compromise quickly.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 491,
+          "slug": "how-do-you-manage-tls-certificates-in-production",
+          "title": "How do you manage TLS certificates in production?",
+          "topic": "network-security"
+        },
+        {
+          "id": 161,
+          "slug": "what-does-a-devsecops-pipeline-look-like-end-to-end",
+          "title": "What does a DevSecOps pipeline look like end to end?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 434,
+      "slug": "how-do-you-automate-compliance-checks-for-pci-dss-soc-2-hipaa-and-gdpr",
+      "title": "How do you automate compliance checks for PCI DSS, SOC 2, HIPAA, and GDPR?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "security-and-compliance",
+        "interview-questions",
+        "devsecops",
+        "cloud-engineering",
+        "infrastructure-as-code"
+      ],
+      "path": "security-and-compliance/how-do-you-automate-compliance-checks-for-pci-dss-soc-2-hipaa-and-gdpr.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/how-do-you-automate-compliance-checks-for-pci-dss-soc-2-hipaa-and-gdpr.md",
+      "shortAnswer": "Translate each framework's requirements into **technical controls**, then enforce each control at the earliest point it can be enforced and **collect the evidence automatically**. Concretely: map requirements to a single internal control set (most controls satisfy several frameworks at once), enforce **preventively** in the pipeline and at admission (IaC scanning, policy as code, admission webhooks, SCPs and Azure Policy) so non-compliant infrastructure cannot be created, monitor **continuously** for drift and for what was created outside the pipeline (Config, Security Hub, Defender for Cloud, Security Command Center), and make the audit trail a by-product of how you work - version control, pull-request approvals, pipeline logs, and immutable audit logs. The framing that wins the interview: **compliance is not a scan you run before an audit; it is a property you enforce continuously, and the auditor's evidence is exported rather than assembled.**",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 491,
+          "slug": "how-do-you-manage-tls-certificates-in-production",
+          "title": "How do you manage TLS certificates in production?",
+          "topic": "network-security"
+        },
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 161,
+          "slug": "what-does-a-devsecops-pipeline-look-like-end-to-end",
+          "title": "What does a DevSecOps pipeline look like end to end?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 563,
+      "slug": "what-is-the-principle-of-least-privilege-and-how-is-it-practically-enforced-in-cloud-iam",
+      "title": "What is the Principle of Least Privilege and how is it practically enforced in cloud IAM?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security",
+        "iam",
+        "least-privilege",
+        "compliance"
+      ],
+      "path": "security-and-compliance/what-is-the-principle-of-least-privilege-and-how-is-it-practically-enforced-in-cloud-iam.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-is-the-principle-of-least-privilege-and-how-is-it-practically-enforced-in-cloud-iam.md",
+      "shortAnswer": "The Principle of Least Privilege dictates that every identity (user, service, pod) must be granted only the minimum permissions necessary to perform its specific task and for the minimum duration required.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 709,
+          "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
+          "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 710,
+          "slug": "what-are-threat-modeling-frameworks-stride-pasta-and-how-do-they-embed-security-into-early-sprint-design",
+          "title": "What are Threat Modeling frameworks (STRIDE, PASTA) and how do they embed security into early sprint design?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 669,
+          "slug": "what-are-web-application-firewalls-waf-and-how-do-they-mitigate-owasp-top-10-vulnerabilities",
+          "title": "What are Web Application Firewalls (WAF) and how do they mitigate OWASP Top 10 vulnerabilities?",
+          "topic": "network-security"
+        }
+      ],
+      "quiz": {
+        "stem": "Which IAM policy statement demonstrates proper enforcement of the Principle of Least Privilege for an app reading objects from a single S3 bucket?",
+        "options": [
+          "`Action: s3:*, Resource: *`",
+          "`Action: s3:GetObject, Resource: arn:aws:s3:::app-data-prod/*`",
+          "`Action: *, Resource: arn:aws:s3:::app-data-prod/*`",
+          "`Action: s3:GetObject, Resource: *`"
+        ],
+        "answerIndex": 1,
+        "explanation": "Option 2 restricts the action to the single read operation (`s3:GetObject`) and scopes the target resource strictly to the specific bucket ARN."
+      }
+    },
+    {
+      "id": 564,
+      "slug": "what-is-a-software-bill-of-materials-sbom-and-how-does-it-prevent-supply-chain-vulnerabilities",
+      "title": "What is a Software Bill of Materials (SBOM) and how does it prevent supply-chain vulnerabilities?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security",
+        "sbom",
+        "supply-chain",
+        "compliance",
+        "trivy"
+      ],
+      "path": "security-and-compliance/what-is-a-software-bill-of-materials-sbom-and-how-does-it-prevent-supply-chain-vulnerabilities.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-is-a-software-bill-of-materials-sbom-and-how-does-it-prevent-supply-chain-vulnerabilities.md",
+      "shortAnswer": "An SBOM is a formal, machine-readable inventory of all software components, third-party libraries, dependencies, and license metadata that make up an application, enabling instant vulnerability analysis during zero-day disclosure events (like Log4j).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 706,
+          "slug": "what-is-container-image-signing-with-sigstore-and-cosign-and-how-is-it-verified-by-kubernetes-admission-controllers",
+          "title": "What is Container Image Signing with Sigstore and Cosign and how is it verified by Kubernetes admission controllers?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 709,
+          "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
+          "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 710,
+          "slug": "what-are-threat-modeling-frameworks-stride-pasta-and-how-do-they-embed-security-into-early-sprint-design",
+          "title": "What are Threat Modeling frameworks (STRIDE, PASTA) and how do they embed security into early sprint design?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does maintaining an automated SBOM catalog accelerate an organization's response to zero-day vulnerability disclosures (like Log4Shell)?",
+        "options": [
+          "SBOM files automatically patch vulnerable code in production without downtime",
+          "Security teams can query the central component inventory to identify affected services instantly without rebuilding or rescanning every repository",
+          "SBOMs encrypt all network connections between microservices",
+          "SBOMs eliminate the need to use open-source libraries"
+        ],
+        "answerIndex": 1,
+        "explanation": "Because an SBOM provides a machine-readable manifest of all dependencies, teams can immediately search their global catalog for the vulnerable package version within minutes of a CVE announcement."
+      }
+    },
+    {
+      "id": 565,
+      "slug": "what-is-the-difference-between-sast-dast-iast-and-sca-security-testing-tools",
+      "title": "What is the difference between SAST, DAST, IAST, and SCA security testing tools?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security",
+        "sast",
+        "dast",
+        "sca",
+        "devsecops"
+      ],
+      "path": "security-and-compliance/what-is-the-difference-between-sast-dast-iast-and-sca-security-testing-tools.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-is-the-difference-between-sast-dast-iast-and-sca-security-testing-tools.md",
+      "shortAnswer": "SAST analyzes static source code without running it; DAST attacks running applications externally via simulated exploits; SCA scans open-source third-party dependencies for known CVEs and license risks; IAST instruments the runtime from inside to verify vulnerabilities as code executes.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 709,
+          "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
+          "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 710,
+          "slug": "what-are-threat-modeling-frameworks-stride-pasta-and-how-do-they-embed-security-into-early-sprint-design",
+          "title": "What are Threat Modeling frameworks (STRIDE, PASTA) and how do they embed security into early sprint design?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 711,
+          "slug": "what-is-runtime-application-self-protection-rasp-and-how-does-it-differ-from-a-perimeter-waf",
+          "title": "What is Runtime Application Self-Protection (RASP) and how does it differ from a perimeter WAF?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": {
+        "stem": "Which security testing tool scans third-party open-source libraries and package lockfiles (like `package-lock.json`) for known public CVEs?",
+        "options": [
+          "Static Application Security Testing (SAST)",
+          "Software Composition Analysis (SCA)",
+          "Dynamic Application Security Testing (DAST)",
+          "Web Application Firewall (WAF)"
+        ],
+        "answerIndex": 1,
+        "explanation": "SCA tools (like Snyk and Trivy) specifically inventory open-source dependencies and match them against vulnerability databases (like the NVD) to flag known CVEs and license risks."
+      }
+    },
+    {
+      "id": 566,
+      "slug": "what-are-envelope-encryption-and-key-management-service-kms-best-practices",
+      "title": "What are envelope encryption and Key Management Service (KMS) best practices?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security",
+        "kms",
+        "encryption",
+        "envelope-encryption"
+      ],
+      "path": "security-and-compliance/what-are-envelope-encryption-and-key-management-service-kms-best-practices.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-are-envelope-encryption-and-key-management-service-kms-best-practices.md",
+      "shortAnswer": "Envelope encryption encrypts data locally with a unique Data Encryption Key (DEK), then encrypts (wraps) that DEK with a Key Encryption Key (KEK) that never leaves the KMS's HSMs, and stores the wrapped DEK next to the ciphertext. Bulk encryption stays fast and local, while access to the data is controlled, audited, and revocable through a single KMS key policy. KMS best practice is then about that key: least-privilege key policies, separation of key administrators from key users, automatic rotation, encryption context, and logging every use.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 709,
+          "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
+          "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 711,
+          "slug": "what-is-runtime-application-self-protection-rasp-and-how-does-it-differ-from-a-perimeter-waf",
+          "title": "What is Runtime Application Self-Protection (RASP) and how does it differ from a perimeter WAF?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 710,
+          "slug": "what-are-threat-modeling-frameworks-stride-pasta-and-how-do-they-embed-security-into-early-sprint-design",
+          "title": "What are Threat Modeling frameworks (STRIDE, PASTA) and how do they embed security into early sprint design?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary performance and security benefit of envelope encryption over encrypting data directly via KMS API calls?",
+        "options": [
+          "It eliminates the need for mathematical encryption algorithms",
+          "It avoids sending large payloads over the network to KMS and protects the root key inside an HSM, using ephemeral data keys for local bulk encryption",
+          "Envelope encryption can only be cracked by quantum computers",
+          "It allows encryption without managing access permissions"
+        ],
+        "answerIndex": 1,
+        "explanation": "Envelope encryption uses fast local symmetric encryption with a unique DEK, avoiding network payload limits while keeping the master root key securely anchored inside the HSM."
+      }
+    },
+    {
+      "id": 567,
+      "slug": "how-do-you-achieve-zero-trust-architecture-in-modern-distributed-cloud-environments",
+      "title": "How do you achieve Zero Trust Architecture in modern distributed cloud environments?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security",
+        "zero-trust",
+        "mtls",
+        "identity"
+      ],
+      "path": "security-and-compliance/how-do-you-achieve-zero-trust-architecture-in-modern-distributed-cloud-environments.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/how-do-you-achieve-zero-trust-architecture-in-modern-distributed-cloud-environments.md",
+      "shortAnswer": "Zero Trust operates on the principle of 'never trust, always verify', eliminating implicit perimeter trust by requiring mutual authentication (mTLS), continuous authorization, least privilege identity verification, and microsegmentation for every network transaction.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 709,
+          "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
+          "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 710,
+          "slug": "what-are-threat-modeling-frameworks-stride-pasta-and-how-do-they-embed-security-into-early-sprint-design",
+          "title": "What are Threat Modeling frameworks (STRIDE, PASTA) and how do they embed security into early sprint design?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 711,
+          "slug": "what-is-runtime-application-self-protection-rasp-and-how-does-it-differ-from-a-perimeter-waf",
+          "title": "What is Runtime Application Self-Protection (RASP) and how does it differ from a perimeter WAF?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": {
+        "stem": "What foundational assumption of the traditional 'castle-and-moat' perimeter security model does Zero Trust reject?",
+        "options": [
+          "That web applications require transport layer encryption (TLS)",
+          "That any device, user, or workload located inside the internal network perimeter is inherently trustworthy",
+          "That passwords should exceed eight characters",
+          "That databases should be backed up regularly"
+        ],
+        "answerIndex": 1,
+        "explanation": "Zero Trust assumes threats exist both outside and inside the network, rejecting the assumption that internal network location implies trustworthiness."
+      }
+    },
+    {
+      "id": 568,
+      "slug": "what-are-soc-2-iso-27001-and-hipaa-compliance-frameworks-and-how-is-compliance-as-code-implemented",
+      "title": "What are SOC 2, ISO 27001, and HIPAA compliance frameworks and how is Compliance as Code implemented?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security",
+        "compliance",
+        "soc2",
+        "policy-as-code"
+      ],
+      "path": "security-and-compliance/what-are-soc-2-iso-27001-and-hipaa-compliance-frameworks-and-how-is-compliance-as-code-implemented.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-are-soc-2-iso-27001-and-hipaa-compliance-frameworks-and-how-is-compliance-as-code-implemented.md",
+      "shortAnswer": "SOC 2 is an attestation report against the AICPA Trust Services Criteria, ISO/IEC 27001 is a certifiable standard for an information security management system, and HIPAA is US law governing protected health information. Compliance as Code turns the technical controls they require into policies that run automatically - OPA/Conftest in pipelines, admission control in clusters, AWS Config or Steampipe/Powerpipe against live resources - producing continuous evidence instead of an annual screenshot exercise. Policies and people processes (risk assessments, training, vendor contracts) still need manual evidence.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 707,
+          "slug": "what-is-policy-as-code-and-how-do-opa-gatekeeper-and-kyverno-enforce-cluster-governance",
+          "title": "What is Policy as Code and how do OPA Gatekeeper and Kyverno enforce cluster governance?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 710,
+          "slug": "what-are-threat-modeling-frameworks-stride-pasta-and-how-do-they-embed-security-into-early-sprint-design",
+          "title": "What are Threat Modeling frameworks (STRIDE, PASTA) and how do they embed security into early sprint design?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 709,
+          "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
+          "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": {
+        "stem": "How does Compliance as Code fundamentally improve an organization's audit readiness compared to traditional annual audits?",
+        "options": [
+          "It exempts companies from hiring accredited third-party auditing firms",
+          "It continuously verifies security and regulatory controls in real-time pipelines rather than relying on point-in-time annual manual checks",
+          "It eliminates all data retention requirements under GDPR",
+          "It automatically encrypts all code repositories"
+        ],
+        "answerIndex": 1,
+        "explanation": "Compliance as Code turns static compliance rules into continuous automated tests in CI/CD and runtime, preventing drift and ensuring continuous compliance."
+      }
+    }
+  ]
+}

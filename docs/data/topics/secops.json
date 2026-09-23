@@ -1,0 +1,688 @@
+{
+  "schemaVersion": 1,
+  "slug": "secops",
+  "title": "SecOps and Threat Detection",
+  "group": "Security",
+  "description": "Security operations for engineers: SOC workflow, SIEM and normalisation, detection engineering, MITRE ATT&CK coverage, threat hunting, and security incident response.",
+  "studyNotes": [
+    "Detecting behaviour rather than artifacts, and validating the detection.",
+    "Preserving evidence before containment during a security incident.",
+    "Which telemetry you would onboard first, and why identity logs come top."
+  ],
+  "questions": [
+    {
+      "id": 169,
+      "slug": "what-does-a-security-operations-center-soc-do",
+      "title": "What does a Security Operations Center (SOC) do?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "secops",
+        "interview-questions"
+      ],
+      "path": "secops/what-does-a-security-operations-center-soc-do.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/what-does-a-security-operations-center-soc-do.md",
+      "shortAnswer": "A SOC is the function that monitors, detects, triages, and responds to security events across an organisation. In practice it runs a tiered queue - automated detections feed analysts who validate and enrich, escalate real incidents to responders, and feed every closed case back into better detections.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 170,
+      "slug": "what-is-a-siem-and-how-do-you-make-one-useful",
+      "title": "What is a SIEM and how do you make one useful?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "secops",
+        "interview-questions"
+      ],
+      "path": "secops/what-is-a-siem-and-how-do-you-make-one-useful.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/what-is-a-siem-and-how-do-you-make-one-useful.md",
+      "shortAnswer": "A SIEM centralises security-relevant logs, normalises them to a common schema, correlates events across sources, and raises detections. It becomes useful only when three things are true: the right sources are onboarded, fields are normalised so a rule works across them, and detections are version-controlled and tuned rather than accumulated.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 171,
+      "slug": "what-is-detection-engineering",
+      "title": "What is detection engineering?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "secops",
+        "interview-questions"
+      ],
+      "path": "secops/what-is-detection-engineering.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/what-is-detection-engineering.md",
+      "shortAnswer": "Detection engineering applies software engineering discipline to detections: threats are modelled, rules are written as code in version control, validated against real attack telemetry, deployed through CI, and measured in production for precision and coverage. It replaces \"enable the vendor's rule pack\" with an owned, testable detection portfolio.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 172,
+      "slug": "what-is-the-mitre-att-and-ck-framework",
+      "title": "What is the MITRE ATT&CK framework?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "secops",
+        "interview-questions"
+      ],
+      "path": "secops/what-is-the-mitre-att-and-ck-framework.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/what-is-the-mitre-att-and-ck-framework.md",
+      "shortAnswer": "ATT&CK is a curated knowledge base of adversary behaviour, organised as tactics (the attacker's goal - initial access, persistence, exfiltration) and techniques (how the goal is achieved), observed in real intrusions. Teams use it as a shared vocabulary and, more practically, as a coverage map: which techniques can we detect, and where are the gaps?",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 536,
+          "slug": "how-do-you-detect-isolate-and-eradicate-flaky-tests-in-a-ci-cd-pipeline",
+          "title": "How do you detect, isolate, and eradicate flaky tests in a CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 539,
+          "slug": "what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity",
+          "title": "What are SLSA (Supply-chain Levels for Software Artifacts) frameworks and how do they verify build integrity?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 173,
+      "slug": "what-is-threat-hunting",
+      "title": "What is threat hunting?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "secops",
+        "interview-questions"
+      ],
+      "path": "secops/what-is-threat-hunting.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/what-is-threat-hunting.md",
+      "shortAnswer": "Threat hunting is the proactive search for adversary activity that existing detections did not catch. It is hypothesis-driven - you state what an attacker would look like in your telemetry, query for it, and either find something or convert the hunt into a new detection. Its main output is usually not an incident but improved coverage.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 174,
+      "slug": "how-do-you-run-a-security-incident-response",
+      "title": "How do you run a security incident response?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "secops",
+        "interview-questions"
+      ],
+      "path": "secops/how-do-you-run-a-security-incident-response.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/how-do-you-run-a-security-incident-response.md",
+      "shortAnswer": "Follow the classic NIST SP 800-61 lifecycle - preparation, detection and analysis, containment, eradication, recovery, and post-incident learning (Rev. 3, published in 2025, re-maps the same activities onto the NIST CSF 2.0 functions) - with an incident commander, a written timeline, and preserved evidence. The differences from an availability incident are that the adversary reacts to your actions, evidence must survive containment, and legal, communications, and regulatory clocks are in scope from the start.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 175,
+      "slug": "what-is-edr-and-how-does-it-differ-from-antivirus",
+      "title": "What is EDR and how does it differ from antivirus?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "secops",
+        "interview-questions"
+      ],
+      "path": "secops/what-is-edr-and-how-does-it-differ-from-antivirus.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/what-is-edr-and-how-does-it-differ-from-antivirus.md",
+      "shortAnswer": "Traditional antivirus blocks known-bad files by signature. EDR (Endpoint Detection and Response) continuously records endpoint behaviour - process trees, network connections, file and registry activity - detects suspicious patterns, and gives responders the ability to investigate and act remotely. Antivirus asks \"is this file bad?\"; EDR asks \"is this behaviour bad?\" and keeps the evidence either way.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 176,
+      "slug": "what-is-soar-and-what-should-you-automate-first",
+      "title": "What is SOAR and what should you automate first?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "secops",
+        "interview-questions"
+      ],
+      "path": "secops/what-is-soar-and-what-should-you-automate-first.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/what-is-soar-and-what-should-you-automate-first.md",
+      "shortAnswer": "SOAR (Security Orchestration, Automation and Response) executes playbooks across your security tools - enriching alerts, opening cases, and taking contained actions. Automate enrichment first, because it is safe, high-volume, and immediately removes the most tedious analyst work; automate response actions only where the action is reversible and the detection is precise.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 712,
+      "slug": "what-is-the-role-of-security-orchestration-automation-and-response-soar-in-secops",
+      "title": "What is the Role of Security Orchestration, Automation, and Response (SOAR) in SecOps?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "secops",
+        "soar",
+        "security-operations"
+      ],
+      "path": "secops/what-is-the-role-of-security-orchestration-automation-and-response-soar-in-secops.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/what-is-the-role-of-security-orchestration-automation-and-response-soar-in-secops.md",
+      "shortAnswer": "SOAR platforms aggregate alerts from SIEMs and telemetry systems, execute automated playbooks to enrich context (e.g., threat intelligence lookups, IP reputation), and execute immediate defensive containment actions (e.g., isolating an infected endpoint or revoking an active session token) without manual human delay.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary operational distinction between a SIEM and a SOAR platform?",
+        "options": [
+          "A SIEM only runs on physical hardware, whereas SOAR runs strictly as a SaaS solution.",
+          "A SIEM focuses on aggregating and correlating log data for detection, whereas SOAR focuses on automating investigation workflows and containment actions.",
+          "SOAR replaces firewalls and intrusion prevention systems, whereas SIEM only analyzes host operating system logs.",
+          "A SIEM cannot generate security alerts, requiring SOAR to calculate risk scores from scratch."
+        ],
+        "answerIndex": 1,
+        "explanation": "SIEM aggregates and correlates security event telemetry to trigger detections, while SOAR connects tools via APIs to automate contextual enrichment, playbook execution, and rapid incident containment."
+      }
+    },
+    {
+      "id": 713,
+      "slug": "how-do-you-design-and-execute-threat-modeling-for-cloud-native-infrastructure",
+      "title": "How Do You Design and Execute Threat Modeling for Cloud-Native Infrastructure?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "secops",
+        "threat-modeling",
+        "cloud-security"
+      ],
+      "path": "secops/how-do-you-design-and-execute-threat-modeling-for-cloud-native-infrastructure.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/how-do-you-design-and-execute-threat-modeling-for-cloud-native-infrastructure.md",
+      "shortAnswer": "Cloud-native threat modeling identifies potential adversaries, entry vectors, and abuse cases across infrastructure components using structured frameworks like STRIDE or PASTA. It maps control plane trust boundaries, container runtimes, IAM privileges, and network interconnects to prioritize mitigations based on impact and likelihood.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "In cloud-native threat modeling, what is the primary risk associated with unrestricted pod access to the cloud instance metadata service (IMDS)?",
+        "options": [
+          "The pod can consume all host memory by repeatedly querying CPU telemetry.",
+          "An SSRF vulnerability in the workload could allow an attacker to retrieve node IAM credentials and assume broad cloud privileges.",
+          "Access to IMDS forces Kubernetes nodes to automatically reboot without grace periods.",
+          "The container runtime will fail its health checks due to packet drops on RFC 1918 subnets."
+        ],
+        "answerIndex": 1,
+        "explanation": "If a pod can reach the instance metadata endpoint without restrictions (e.g., via SSRF), an attacker can extract temporary node credentials and move laterally across cloud provider APIs."
+      }
+    },
+    {
+      "id": 714,
+      "slug": "how-do-you-implement-automated-credential-and-api-key-exposure-detection",
+      "title": "How Do You Implement Automated Credential and API Key Exposure Detection?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "secops",
+        "secrets-management",
+        "detection-engineering"
+      ],
+      "path": "secops/how-do-you-implement-automated-credential-and-api-key-exposure-detection.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/how-do-you-implement-automated-credential-and-api-key-exposure-detection.md",
+      "shortAnswer": "Automated secret exposure detection combines pre-commit hooks, CI/CD pipeline scans, and real-time git repository monitoring using pattern matching, entropy analysis, and provider-specific validations to block commits, revoke leaked credentials immediately, and trigger automated rotation playbooks.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why is simply executing 'git rm' or pushing a new commit with the credential removed insufficient when an API key is committed to a git repository?",
+        "options": [
+          "Git commits are cached in browser local storage and cannot be refreshed.",
+          "The secret remains stored permanently in the git commit history and reflog unless the entire history is rewritten or purged.",
+          "Git branches require manual approval from repository owners to delete deleted line artifacts.",
+          "Git automatically generates a mirror tag that publishes credentials to public package managers."
+        ],
+        "answerIndex": 1,
+        "explanation": "Git preserves historical snapshots in commits and reflogs; removing a secret in a subsequent commit leaves the credential exposed in previous revisions, necessitating immediate key revocation and rotation."
+      }
+    },
+    {
+      "id": 715,
+      "slug": "what-is-endpoint-detection-and-response-edr-and-how-does-it-integrate-into-secops",
+      "title": "What is Endpoint Detection and Response (EDR) and How Does It Integrate into SecOps?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "secops",
+        "edr",
+        "incident-response"
+      ],
+      "path": "secops/what-is-endpoint-detection-and-response-edr-and-how-does-it-integrate-into-secops.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/what-is-endpoint-detection-and-response-edr-and-how-does-it-integrate-into-secops.md",
+      "shortAnswer": "EDR agents continuously monitor host-level behavioral telemetry—including process executions, file modifications, network sockets, and memory operations—to detect advanced threats, provide deep forensic visibility, and enable rapid containment actions like network isolation.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 285,
+          "slug": "how-do-you-take-a-monthly-release-process-to-daily-deployments",
+          "title": "How do you take a monthly release process to daily deployments?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Which capability distinguishes modern EDR solutions from traditional signature-based antivirus software?",
+        "options": [
+          "EDR only scans disk drives once weekly during scheduled maintenance windows.",
+          "EDR continuously captures runtime behavioral telemetry, process lineages, and supports remote live host containment.",
+          "EDR requires no software installation or kernel hooks on target machines.",
+          "EDR is designed solely for hardware firewall rule verification."
+        ],
+        "answerIndex": 1,
+        "explanation": "EDR continuously monitors real-time process execution, parent-child lineages, and network connections to detect fileless/behavioral attacks, while providing forensic search and immediate network isolation."
+      }
+    },
+    {
+      "id": 716,
+      "slug": "how-do-you-detect-and-respond-to-lateral-movement-within-kubernetes-clusters",
+      "title": "How Do You Detect and Respond to Lateral Movement Within Kubernetes Clusters?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "secops",
+        "kubernetes-security",
+        "network-policies"
+      ],
+      "path": "secops/how-do-you-detect-and-respond-to-lateral-movement-within-kubernetes-clusters.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/how-do-you-detect-and-respond-to-lateral-movement-within-kubernetes-clusters.md",
+      "shortAnswer": "Detecting lateral movement in Kubernetes involves monitoring east-west network traffic, container process trees, and Kubernetes API audit logs. Response relies on automated network policies, Pod and ServiceAccount isolation, mutual TLS enforcement, and ephemeral pod termination.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 285,
+          "slug": "how-do-you-take-a-monthly-release-process-to-daily-deployments",
+          "title": "How do you take a monthly release process to daily deployments?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the default Kubernetes networking behavior regarding inter-pod communication if no NetworkPolicy resources are configured in a cluster?",
+        "options": [
+          "Pods can only communicate with other pods running on the same physical worker node.",
+          "All pods can communicate freely with any other pod across all namespaces without restriction.",
+          "Inter-pod communication is blocked until an ingress controller establishes a proxy route.",
+          "Only pods belonging to the 'kube-system' namespace can initiate outbound TCP connections."
+        ],
+        "answerIndex": 1,
+        "explanation": "By default, Kubernetes uses an open flat network model where any pod can communicate with any other pod in any namespace unless restricted by NetworkPolicy or service mesh authorization policies."
+      }
+    },
+    {
+      "id": 717,
+      "slug": "what-is-honeytoken-or-honeypot-deception-and-how-is-it-applied-in-production-environments",
+      "title": "What is Honeytoken or Honeypot Deception and How Is It Applied in Production Environments?",
+      "topic": "secops",
+      "category": "SecOps and Threat Detection",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "secops",
+        "canary-tokens",
+        "threat-detection"
+      ],
+      "path": "secops/what-is-honeytoken-or-honeypot-deception-and-how-is-it-applied-in-production-environments.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/secops/what-is-honeytoken-or-honeypot-deception-and-how-is-it-applied-in-production-environments.md",
+      "shortAnswer": "Deception technology deploys bogus assets (canary tokens, dummy AWS API keys, fake database tables, or decoy service accounts) across production systems. Because these assets have no legitimate operational purpose, any access or invocation triggers a near-zero false-positive security alert.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why do honeytokens and canary credentials produce virtually zero false-positive security alerts?",
+        "options": [
+          "They use complex machine learning algorithms to filter out human errors.",
+          "They have no legitimate operational function in the environment, so any access attempt is inherently unauthorized or anomalous.",
+          "They are encrypted with quantum-resistant keys that prevent decryption by standard users.",
+          "They can only be triggered by automated vulnerability scanners."
+        ],
+        "answerIndex": 1,
+        "explanation": "Because honeytokens and honeypots serve no valid business or system purpose, no legitimate user or service ever touches them. Any access is an immediate indicator of unauthorized probing or compromise."
+      }
+    }
+  ]
+}

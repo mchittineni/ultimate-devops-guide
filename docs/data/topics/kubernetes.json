@@ -1,0 +1,1874 @@
+{
+  "schemaVersion": 1,
+  "slug": "kubernetes",
+  "title": "Kubernetes",
+  "group": "Containers and Kubernetes",
+  "description": "The control plane, the workload objects you touch daily, and the networking abstractions that make Pods reachable.",
+  "studyNotes": [
+    "What each control-plane component does when you run `kubectl apply`.",
+    "Service types and when each is appropriate.",
+    "Why Pods are ephemeral and what that implies for state."
+  ],
+  "questions": [
+    {
+      "id": 11,
+      "slug": "what-is-kubernetes",
+      "title": "What is Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/what-is-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-kubernetes.md",
+      "shortAnswer": "Kubernetes is an open-source container orchestrator that runs containerised workloads across a cluster of machines, continuously reconciling actual state towards the desired state you declare.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 12,
+      "slug": "what-are-the-main-components-of-kubernetes-architecture",
+      "title": "What are the main components of Kubernetes architecture?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/what-are-the-main-components-of-kubernetes-architecture.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-are-the-main-components-of-kubernetes-architecture.md",
+      "shortAnswer": "A control plane (API server, etcd, scheduler, controller manager, cloud controller manager) makes decisions about the cluster, and node components (kubelet, kube-proxy, container runtime) execute them on each worker machine.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 13,
+      "slug": "what-is-a-pod-in-kubernetes",
+      "title": "What is a Pod in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/what-is-a-pod-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-a-pod-in-kubernetes.md",
+      "shortAnswer": "A Pod is the smallest deployable unit in Kubernetes - one or more containers that share a network namespace, IP address, and storage volumes, and are always scheduled together on the same node.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 14,
+      "slug": "what-is-a-service-in-kubernetes",
+      "title": "What is a Service in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/what-is-a-service-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-a-service-in-kubernetes.md",
+      "shortAnswer": "A Service is a stable network endpoint - a virtual IP and DNS name - that load-balances traffic to a dynamic set of pods selected by labels, insulating clients from pod churn.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 15,
+      "slug": "explain-the-difference-between-docker-swarm-and-kubernetes",
+      "title": "Explain the difference between Docker Swarm and Kubernetes",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/explain-the-difference-between-docker-swarm-and-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/explain-the-difference-between-docker-swarm-and-kubernetes.md",
+      "shortAnswer": "Both orchestrate containers across a cluster, but Swarm optimises for simplicity and Kubernetes for capability. Swarm is easy to learn and limited; Kubernetes is complex, extensible, and the industry standard.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 414,
+          "slug": "how-do-you-run-an-application-across-multiple-kubernetes-clusters",
+          "title": "How do you run an application across multiple Kubernetes clusters?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 453,
+          "slug": "how-do-you-run-a-multi-tenant-kubernetes-cluster",
+          "title": "How do you run a multi-tenant Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 625,
+          "slug": "what-is-the-difference-between-client-go-informers-listers-and-reflector-components",
+          "title": "What is the difference between client-go Informers, Listers, and Reflector components?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 234,
+      "slug": "how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff",
+      "title": "How do you troubleshoot a Pod stuck in Pending or CrashLoopBackOff?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff.md",
+      "shortAnswer": "Troubleshoot a `Pending` pod by inspecting cluster scheduling (CPU/memory capacity, node selectors, taints/tolerations, PVC binding), and troubleshoot `CrashLoopBackOff` by checking application runtime logs (`kubectl logs --previous`), failing readiness/liveness probes, missing secrets, or exit codes like `137` (OOMKilled).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 255,
+      "slug": "how-do-liveness-readiness-and-startup-probes-differ",
+      "title": "How do liveness, readiness, and startup probes differ?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/how-do-liveness-readiness-and-startup-probes-differ.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-liveness-readiness-and-startup-probes-differ.md",
+      "shortAnswer": "A **readiness** probe decides whether a Pod receives traffic, a **liveness** probe decides whether the kubelet restarts the container, and a **startup** probe suspends the other two until a slow-booting application has finished starting. They answer three different questions, and conflating them causes outages.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 451,
+          "slug": "how-do-you-back-up-and-restore-a-kubernetes-cluster",
+          "title": "How do you back up and restore a Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 256,
+      "slug": "how-do-you-control-which-node-a-pod-runs-on",
+      "title": "How do you control which node a Pod runs on?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/how-do-you-control-which-node-a-pod-runs-on.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-control-which-node-a-pod-runs-on.md",
+      "shortAnswer": "`nodeSelector` and node affinity are Pod-side rules saying where a Pod _wants_ to go; taints and tolerations are node-side rules saying who a node will _accept_. Pod affinity and anti-affinity place Pods relative to other Pods, and topology spread constraints distribute replicas evenly across failure domains. You usually need a pair: a taint to keep everything else off special hardware, plus affinity to attract the right workloads onto it.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 257,
+      "slug": "how-does-rbac-work-in-kubernetes",
+      "title": "How does RBAC work in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/how-does-rbac-work-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-does-rbac-work-in-kubernetes.md",
+      "shortAnswer": "RBAC grants permissions through four objects: a `Role` (namespaced) or `ClusterRole` (cluster-wide) lists allowed verbs on resources, and a `RoleBinding` or `ClusterRoleBinding` attaches that list to a subject - a user, group, or ServiceAccount. Permissions are purely additive; there are no deny rules, and anything not explicitly granted is refused.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 258,
+      "slug": "how-do-you-autoscale-workloads-and-nodes-in-kubernetes",
+      "title": "How do you autoscale workloads and nodes in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/how-do-you-autoscale-workloads-and-nodes-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-autoscale-workloads-and-nodes-in-kubernetes.md",
+      "shortAnswer": "Three layers that must be designed together - the **Horizontal Pod Autoscaler** adds replicas, the **Vertical Pod Autoscaler** right-sizes each replica's requests, and the **Cluster Autoscaler or Karpenter** adds nodes when Pods cannot be placed. KEDA extends the HPA to scale on external signals such as queue depth. Scaling Pods without a way to add nodes just produces `Pending` Pods.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 452,
+          "slug": "what-are-customresourcedefinitions-and-operators-in-kubernetes",
+          "title": "What are CustomResourceDefinitions and operators in Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 259,
+      "slug": "how-do-you-expose-an-application-running-in-kubernetes-to-the-outside-world",
+      "title": "How do you expose an application running in Kubernetes to the outside world?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/how-do-you-expose-an-application-running-in-kubernetes-to-the-outside-world.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-expose-an-application-running-in-kubernetes-to-the-outside-world.md",
+      "shortAnswer": "Four escalating options - `ClusterIP` (in-cluster only, the default), `NodePort` (a port on every node), `LoadBalancer` (one cloud load balancer per Service), and an **Ingress** or **Gateway API** resource, which puts a single layer-7 router in front of many Services. Production HTTP traffic almost always terminates at an ingress controller or Gateway, because one load balancer serving fifty Services is dramatically cheaper and more capable than fifty load balancers.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 403,
+      "slug": "how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints",
+      "title": "How do you troubleshoot a Kubernetes Service that has no endpoints?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "network-security"
+      ],
+      "path": "kubernetes/how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints.md",
+      "shortAnswer": "Walk the chain in one direction - **Service selector → Pod labels → Pod readiness → port names and numbers → kube-proxy → NetworkPolicy → Service type**. An empty `EndpointSlice` has only three possible causes: no Pod matches the selector, matching Pods are not `Ready`, or the container port does not exist. `kubectl get endpointslices` plus `kubectl describe svc` narrows it in two commands, and the classic culprit is a label typo or a failing readiness probe.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 453,
+          "slug": "how-do-you-run-a-multi-tenant-kubernetes-cluster",
+          "title": "How do you run a multi-tenant Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 404,
+      "slug": "how-do-you-debug-dns-resolution-failures-inside-a-kubernetes-cluster",
+      "title": "How do you debug DNS resolution failures inside a Kubernetes cluster?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "network-security",
+        "monitoring-and-logging"
+      ],
+      "path": "kubernetes/how-do-you-debug-dns-resolution-failures-inside-a-kubernetes-cluster.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-debug-dns-resolution-failures-inside-a-kubernetes-cluster.md",
+      "shortAnswer": "Decide first _which_ resolution is failing - a cluster-internal name, or an external one - because the causes are different. Then work down: **the Pod's `/etc/resolv.conf`** (is it pointing at the cluster DNS service, and what is the `ndots` and search path?), **the `kube-dns` Service and its endpoints**, **CoreDNS Pod health and logs**, **the CoreDNS Corefile** (the `forward` block decides all external lookups), and finally **NetworkPolicy or firewall rules blocking UDP/TCP 53**. Internal names failing points at CoreDNS or its Service; external names failing points at the upstream forwarder or egress path.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 453,
+          "slug": "how-do-you-run-a-multi-tenant-kubernetes-cluster",
+          "title": "How do you run a multi-tenant Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 500,
+          "slug": "how-does-prometheus-collect-metrics-and-what-components-sit-around-it",
+          "title": "How does Prometheus collect metrics, and what components sit around it?",
+          "topic": "monitoring-and-logging"
+        },
+        {
+          "id": 501,
+          "slug": "how-do-the-elk-and-efk-stacks-fit-together",
+          "title": "How do the ELK and EFK stacks fit together?",
+          "topic": "monitoring-and-logging"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 405,
+      "slug": "how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic",
+      "title": "How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "network-security",
+        "devsecops"
+      ],
+      "path": "kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md",
+      "shortAnswer": "NetworkPolicies are **allow-only and additive**: a Pod selected by no policy accepts everything, a Pod selected by any policy for a direction accepts only what the union of its policies permits, and there is no deny rule and no ordering. So debugging is always the same question - _which policies select this Pod, and does their union allow this exact flow?_ Check that a CNI enforcing policy is actually installed (without one, every policy is silently ignored), then compare the podSelector, the namespaceSelector, the ports, and the direction. The two classic mistakes are forgetting that egress rules need **DNS on UDP and TCP 53**, and assuming policy applies to the reply traffic - it does not, connections are stateful.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 453,
+          "slug": "how-do-you-run-a-multi-tenant-kubernetes-cluster",
+          "title": "How do you run a multi-tenant Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 406,
+      "slug": "how-do-you-debug-a-kubernetes-ingress-that-is-not-routing-traffic",
+      "title": "How do you debug a Kubernetes Ingress that is not routing traffic?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "network-security",
+        "api-gateway-and-service-mesh"
+      ],
+      "path": "kubernetes/how-do-you-debug-a-kubernetes-ingress-that-is-not-routing-traffic.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-debug-a-kubernetes-ingress-that-is-not-routing-traffic.md",
+      "shortAnswer": "Follow the request path from the outside in and stop at the first hop that fails - **DNS → the controller's external load balancer → the controller Pod → the Ingress object (class, host, path, TLS) → the backend Service → the Pod**. The error tells you where you are: a connection timeout is DNS or the load balancer, the controller's own 404 page means no rule matched (wrong `ingressClassName`, host, or `pathType`), a 503 means the rule matched but the Service has no ready endpoints, and a 502 means the backend answered badly - wrong port, wrong scheme, or a broken TLS assumption. The controller log for a single request is worth more than any amount of YAML re-reading.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 453,
+          "slug": "how-do-you-run-a-multi-tenant-kubernetes-cluster",
+          "title": "How do you run a multi-tenant Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 414,
+          "slug": "how-do-you-run-an-application-across-multiple-kubernetes-clusters",
+          "title": "How do you run an application across multiple Kubernetes clusters?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 407,
+      "slug": "how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim",
+      "title": "How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "container-orchestration-advanced",
+        "aws-engineering"
+      ],
+      "path": "kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md",
+      "shortAnswer": "Read the PVC's events first - `kubectl describe pvc` names the cause almost every time. Then work through the five things that stop a claim binding or attaching: **no StorageClass** (or no default, so the claim waits for a volume nobody will create), **provisioner failure** (quota, permissions, or the CSI driver not running), **a mismatch between claim and volume** (size, `accessModes`, `storageClassName`, selector), **zone affinity** - an EBS or zonal disk exists in one availability zone and the Pod was scheduled in another, which is the single most common production case - and **`ReadWriteOnce` already attached to a different node**, which blocks the new Pod until the old attachment is released.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 414,
+          "slug": "how-do-you-run-an-application-across-multiple-kubernetes-clusters",
+          "title": "How do you run an application across multiple Kubernetes clusters?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 451,
+          "slug": "how-do-you-back-up-and-restore-a-kubernetes-cluster",
+          "title": "How do you back up and restore a Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 453,
+          "slug": "how-do-you-run-a-multi-tenant-kubernetes-cluster",
+          "title": "How do you run a multi-tenant Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 408,
+      "slug": "how-do-you-troubleshoot-a-kubernetes-job-or-cronjob-that-never-completes",
+      "title": "How do you troubleshoot a Kubernetes Job or CronJob that never completes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "scripting-and-automation",
+        "monitoring-and-logging"
+      ],
+      "path": "kubernetes/how-do-you-troubleshoot-a-kubernetes-job-or-cronjob-that-never-completes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-troubleshoot-a-kubernetes-job-or-cronjob-that-never-completes.md",
+      "shortAnswer": "A Job \"hangs\" for one of four reasons, and the Pod's state tells you which: **the Pod never started** (unschedulable, image pull, PVC pending - the Job is not at fault), **the process is genuinely blocked** (waiting on a lock, a query, a network call with no timeout), **the process exited but the Pod never terminated** (a sidecar or service-mesh proxy still running, so the Pod stays `NotReady` for ever), or **the Job is silently retrying** (`restartPolicy: OnFailure` with the default `backoffLimit` of 6 and an exponential back-off capped at six minutes, so from the outside it looks like one long run). The two settings that prevent all of this are `activeDeadlineSeconds` and `backoffLimit`, and every Job you write should have both.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 500,
+          "slug": "how-does-prometheus-collect-metrics-and-what-components-sit-around-it",
+          "title": "How does Prometheus collect metrics, and what components sit around it?",
+          "topic": "monitoring-and-logging"
+        },
+        {
+          "id": 501,
+          "slug": "how-do-the-elk-and-efk-stacks-fit-together",
+          "title": "How do the ELK and EFK stacks fit together?",
+          "topic": "monitoring-and-logging"
+        },
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 409,
+      "slug": "how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes",
+      "title": "How do you handle node pressure and Pod evictions in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "scalability-and-high-availability",
+        "infrastructure-monitoring"
+      ],
+      "path": "kubernetes/how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md",
+      "shortAnswer": "Understand which mechanism evicted the Pod, because the fixes differ. **The kubelet** evicts under node pressure (memory, disk, inodes, PIDs) and chooses victims by **QoS class** - `BestEffort` first, then `Burstable` exceeding its requests, `Guaranteed` last. **The scheduler** preempts lower-`PriorityClass` Pods to make room for higher ones. **The API server** performs graceful eviction for `drain`, honouring PodDisruptionBudgets. The durable fixes are: set realistic requests and limits so QoS is not accidental, reserve capacity for the system (`--system-reserved`, `--kube-reserved`), give critical workloads a `PriorityClass` and everything else a lower one, protect availability with PDBs, and let the cluster autoscaler add nodes before pressure rather than after.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 414,
+          "slug": "how-do-you-run-an-application-across-multiple-kubernetes-clusters",
+          "title": "How do you run an application across multiple Kubernetes clusters?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 410,
+      "slug": "how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes",
+      "title": "How do you perform and roll back a rolling update in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "devops-tools-and-automation",
+        "incident-management"
+      ],
+      "path": "kubernetes/how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes.md",
+      "shortAnswer": "A Deployment rolls out by creating a new ReplicaSet and shifting replicas across within the bounds of `maxSurge` and `maxUnavailable`, gated by the **readiness probe** - which is what makes the update safe or useless. Watch it with `kubectl rollout status`, and if it goes wrong, `kubectl rollout undo deployment/<name>` restores the previous ReplicaSet immediately. The two things candidates miss: set `minReadySeconds` and `progressDeadlineSeconds` so a broken release stalls instead of quietly replacing every Pod, and remember that **a rollback only reverts the Pod template** - it cannot undo a database migration, a consumed message, or a mutated data format.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 451,
+          "slug": "how-do-you-back-up-and-restore-a-kubernetes-cluster",
+          "title": "How do you back up and restore a Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 442,
+      "slug": "what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes",
+      "title": "What is the difference between a ConfigMap and a Secret in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "devsecops"
+      ],
+      "path": "kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md",
+      "shortAnswer": "Both are namespaced key-value objects that decouple configuration from the image, and both are consumed the same way - as environment variables or as mounted files. The difference is **intent and handling**, not strength: a `Secret` stores its values base64-encoded (encoding, not encryption), is kept out of some log and describe output, can be encrypted at rest in etcd if you configure `EncryptionConfiguration`, has typed variants (`kubernetes.io/tls`, `dockerconfigjson`, service-account tokens), and is what RBAC and admission policy treat as sensitive. The honest interview answer is that **a Secret is not secure by default** - base64 is trivially reversible, and anyone with `get secrets` in the namespace or read access to etcd can read it - which is why production setups pair Secrets with encryption at rest, tight RBAC, and an external secret manager.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 441,
+          "slug": "how-do-you-harden-a-container-image-and-a-dockerfile",
+          "title": "How do you harden a container image and a Dockerfile?",
+          "topic": "docker"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 443,
+      "slug": "how-does-persistent-storage-work-in-kubernetes",
+      "title": "How does persistent storage work in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "container-orchestration-advanced"
+      ],
+      "path": "kubernetes/how-does-persistent-storage-work-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-does-persistent-storage-work-in-kubernetes.md",
+      "shortAnswer": "Storage is deliberately split into a **claim** and a **volume**. A **PersistentVolumeClaim** is the application's request - \"I need 20 GiB, ReadWriteOnce, from this class\" - and lives with the workload. A **PersistentVolume** is the actual piece of storage. A **StorageClass** names a provisioner (a CSI driver) plus its parameters, so when a PVC references a class the driver **dynamically provisions** a matching PV and binds it; static provisioning, where an administrator pre-creates PVs, is the older manual path. The container mounts the PVC, not the PV. The two facts that drive every real design decision: **access modes are enforced by the underlying storage** (a cloud block device is genuinely single-node, so `ReadWriteMany` needs a file service such as EFS, Azure Files, or NFS), and **`volumeBindingMode: WaitForFirstConsumer`** is what stops a volume being created in the wrong availability zone from the Pod that needs it.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 450,
+          "slug": "what-is-inside-a-helm-chart-and-how-do-you-customise-one",
+          "title": "What is inside a Helm chart, and how do you customise one?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 444,
+      "slug": "how-do-requests-limits-and-qos-classes-work-in-kubernetes",
+      "title": "How do requests, limits, and QoS classes work in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "cloud-cost-optimization",
+        "scalability-and-high-availability"
+      ],
+      "path": "kubernetes/how-do-requests-limits-and-qos-classes-work-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-requests-limits-and-qos-classes-work-in-kubernetes.md",
+      "shortAnswer": "A **request** is what the scheduler reserves - it decides which node a Pod fits on and is what the node's \"allocated\" figure counts. A **limit** is what the kubelet enforces at runtime through cgroups. The two resources behave completely differently at the limit: **CPU is compressible**, so exceeding the CPU limit means the container is _throttled_, while **memory is not**, so exceeding the memory limit means the container is _OOM-killed_ and restarted. From the request/limit combination Kubernetes derives a **QoS class** - `Guaranteed` (limits equal requests for every resource), `Burstable` (requests set, lower than limits), `BestEffort` (nothing set) - and that class decides eviction order when a node runs out of resources. The practical rules: always set memory request = memory limit, set a CPU request but be very careful with CPU limits, and never ship a container with nothing set.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 414,
+          "slug": "how-do-you-run-an-application-across-multiple-kubernetes-clusters",
+          "title": "How do you run an application across multiple Kubernetes clusters?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 445,
+      "slug": "what-are-init-containers-and-sidecar-containers-in-kubernetes",
+      "title": "What are init containers and sidecar containers in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "cloud-native-architecture"
+      ],
+      "path": "kubernetes/what-are-init-containers-and-sidecar-containers-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-are-init-containers-and-sidecar-containers-in-kubernetes.md",
+      "shortAnswer": "Both are extra containers in the same Pod, sharing its network namespace and volumes, but they differ in **lifecycle**. An **init container** runs to completion **before** any application container starts; several run strictly in order, and if one fails the Pod restarts it (per `restartPolicy`) and the application never starts. That makes init containers the right place for one-off preconditions: wait for a dependency, run a schema migration, fetch a secret or a config file, fix volume permissions. A **sidecar** runs _alongside_ the application for the Pod's whole life - log shipper, metrics exporter, service-mesh proxy, secret-refresher. Since Kubernetes 1.29 (on by default; GA in 1.33) a sidecar is expressed properly as **an init container with `restartPolicy: Always`**, which fixes the two long-standing problems: the sidecar starts before the app and shuts down after it, and it no longer blocks Jobs from ever completing.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 452,
+          "slug": "what-are-customresourcedefinitions-and-operators-in-kubernetes",
+          "title": "What are CustomResourceDefinitions and operators in Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 446,
+      "slug": "what-is-a-poddisruptionbudget-and-when-do-you-need-one",
+      "title": "What is a PodDisruptionBudget and when do you need one?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "scalability-and-high-availability"
+      ],
+      "path": "kubernetes/what-is-a-poddisruptionbudget-and-when-do-you-need-one.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-a-poddisruptionbudget-and-when-do-you-need-one.md",
+      "shortAnswer": "A PodDisruptionBudget is a contract that limits how many Pods of a workload may be taken down **by voluntary disruptions** at the same time. You declare either `minAvailable` or `maxUnavailable` against a label selector, and the **eviction API** honours it: `kubectl drain`, cluster autoscaler scale-down, node-pool upgrades, and descheduler-style tooling all evict through that API and will block rather than breach the budget. The crucial qualifier is **voluntary**: a PDB does nothing about a node dying, a kernel panic, an OOM kill, or someone running `kubectl delete pod`. You need one for anything where losing several replicas at once is an outage or a data-loss risk - quorum systems (etcd, ZooKeeper, Kafka, Consul), databases, ingress controllers, and any service with a small replica count that gets drained during cluster maintenance.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 414,
+          "slug": "how-do-you-run-an-application-across-multiple-kubernetes-clusters",
+          "title": "How do you run an application across multiple Kubernetes clusters?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 447,
+      "slug": "how-does-pod-networking-and-service-discovery-work-in-kubernetes",
+      "title": "How does Pod networking and service discovery work in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "network-security",
+        "cloud-native-architecture"
+      ],
+      "path": "kubernetes/how-does-pod-networking-and-service-discovery-work-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-does-pod-networking-and-service-discovery-work-in-kubernetes.md",
+      "shortAnswer": "Kubernetes mandates a flat network model: **every Pod gets its own IP, and any Pod can reach any other Pod's IP directly, without NAT, across nodes**. A **CNI plugin** implements that - it allocates the IP, wires the Pod's veth pair into the node, and makes cross-node routing work (native VPC routing, or an overlay such as VXLAN/Geneve, or eBPF). Because Pod IPs are ephemeral, discovery goes through a **Service**: a stable virtual IP and a DNS name, backed by an EndpointSlice that the EndpointSlice controller keeps in sync with the Pods matching the Service's selector. **CoreDNS** resolves `service.namespace.svc.cluster.local`, and **kube-proxy** (iptables or nftables mode; IPVS mode is deprecated since 1.35) or an eBPF dataplane programs each node so that traffic to the ClusterIP is load-balanced to a healthy Pod IP. So: two Pods on the same node talk over the node's bridge; two Pods on different nodes talk over the CNI's routing; and neither needs to know the other's IP because DNS plus Service abstraction hides it.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 453,
+          "slug": "how-do-you-run-a-multi-tenant-kubernetes-cluster",
+          "title": "How do you run a multi-tenant Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 448,
+      "slug": "what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails",
+      "title": "What happens when a Kubernetes control-plane node or etcd fails?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "scalability-and-high-availability",
+        "incident-management"
+      ],
+      "path": "kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md",
+      "shortAnswer": "Running workloads keep running. The control plane is the _reconciliation_ layer, not the data path: kubelets keep their Pods alive from their local state, kube-proxy's rules stay programmed, and traffic keeps flowing through Services and load balancers. What you lose is **change** - no new scheduling, no rollouts, no scaling, no `kubectl`, no Service/endpoint updates, and no self-healing, so a Pod or node that fails during the outage is _not_ replaced. With three control-plane nodes, losing one is a non-event: the API servers are stateless and behind a load balancer, the controller-manager and scheduler re-elect a leader in seconds, and etcd still has 2 of 3 for quorum. Losing **two of three** is the real failure - etcd loses quorum and goes **read-only**, so the whole control plane stops accepting writes even though the API may still answer reads.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 414,
+          "slug": "how-do-you-run-an-application-across-multiple-kubernetes-clusters",
+          "title": "How do you run an application across multiple Kubernetes clusters?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 449,
+      "slug": "how-do-you-troubleshoot-a-kubernetes-node-that-is-notready",
+      "title": "How do you troubleshoot a Kubernetes node that is NotReady?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "linux-administration",
+        "incident-management"
+      ],
+      "path": "kubernetes/how-do-you-troubleshoot-a-kubernetes-node-that-is-notready.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-troubleshoot-a-kubernetes-node-that-is-notready.md",
+      "shortAnswer": "`NotReady` means the **kubelet has stopped posting a healthy status** to the API server - either because the kubelet is down, because it cannot reach the API server, or because it is reporting a condition that makes the node unusable (disk, memory, PID pressure, or no working network plugin). So the diagnosis is a fixed order: first `kubectl describe node` to read the **conditions and their reasons**, which usually names the cause outright; if the reason is generic (`NodeStatusUnknown`, \"kubelet stopped posting node status\"), get onto the host and check the kubelet and container runtime with `systemctl` and `journalctl`; then check the three resources that push a node out of Ready (disk, memory, PIDs) and the CNI. When one node out of thirty is affected, the cause is local - kubelet, runtime, disk, or that node's network path. When many go `NotReady` together, stop looking at nodes and look at the control plane, the CNI DaemonSet, or a certificate.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 520,
+      "slug": "how-does-the-kubernetes-gateway-api-evolve-beyond-standard-ingress-resources",
+      "title": "How does the Kubernetes Gateway API evolve beyond standard Ingress resources?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "networking",
+        "gateway-api",
+        "ingress"
+      ],
+      "path": "kubernetes/how-does-the-kubernetes-gateway-api-evolve-beyond-standard-ingress-resources.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-does-the-kubernetes-gateway-api-evolve-beyond-standard-ingress-resources.md",
+      "shortAnswer": "Gateway API replaces the single, annotation-heavy `Ingress` object with a family of typed, role-oriented resources: a **GatewayClass** (the implementation, owned by the infrastructure provider), a **Gateway** (listeners, ports, and TLS, owned by the cluster operator), and **Routes** such as `HTTPRoute`, `GRPCRoute`, `TLSRoute`, `TCPRoute`, and `UDPRoute` (owned by application teams in their own namespaces). Features that Ingress could only express through controller-specific annotations - header matching, weighted traffic splitting, redirects, rewrites, timeouts, cross-namespace delegation - are part of the portable spec. Ingress is feature-frozen; Gateway API is where new routing features land.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 517,
+          "slug": "how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation",
+          "title": "How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "Which structural limitation of standard Kubernetes Ingress did the Gateway API solve through its role-oriented design?",
+        "options": [
+          "Ingress resources were incapable of routing TCP traffic to pods",
+          "Ingress forced cluster infrastructure configuration, TLS management, and application routing into a single un-delegated resource",
+          "Ingress did not support DNS domain names",
+          "Ingress controllers could only run as DaemonSets"
+        ],
+        "answerIndex": 1,
+        "explanation": "Standard Ingress conflated cluster admin responsibilities (TLS certs, IP bindings) with app team routing, forcing widespread reliance on incompatible controller annotations."
+      }
+    },
+    {
+      "id": 521,
+      "slug": "what-is-the-difference-between-kubernetes-horizontal-pod-autoscaler-and-vertical-pod-autoscaler",
+      "title": "What is the difference between Kubernetes Horizontal Pod Autoscaler and Vertical Pod Autoscaler?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "scaling",
+        "hpa",
+        "vpa"
+      ],
+      "path": "kubernetes/what-is-the-difference-between-kubernetes-horizontal-pod-autoscaler-and-vertical-pod-autoscaler.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-the-difference-between-kubernetes-horizontal-pod-autoscaler-and-vertical-pod-autoscaler.md",
+      "shortAnswer": "The **Horizontal Pod Autoscaler** changes how many replicas run, reacting within seconds to a live metric such as CPU utilisation, requests per second, or queue depth. The **Vertical Pod Autoscaler** changes how big each replica is - its CPU and memory requests (and proportionally its limits) - based on usage history observed over days. HPA is built into Kubernetes; VPA is a separate add-on from the Kubernetes autoscaler project. Use HPA for load that varies with traffic and VPA for right-sizing; do not let both act on the same CPU or memory signal, because each changes the number the other is measuring.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "Why is it generally discouraged to configure both HPA and VPA to act concurrently on CPU utilization for the same workload?",
+        "options": [
+          "The Kubernetes API server will reject the manifest with a validation error",
+          "Both controllers enter a conflicting race loop: VPA enlarges the pod while HPA simultaneously adds more replicas",
+          "VPA does not support CPU metrics, only memory metrics",
+          "HPA can only scale DaemonSets while VPA can only scale Deployments"
+        ],
+        "answerIndex": 1,
+        "explanation": "If both target the same metric, high load triggers both horizontal scaling (more replicas) and vertical resizing (larger pods) simultaneously, wasting resources and destabilizing metrics."
+      }
+    },
+    {
+      "id": 522,
+      "slug": "how-does-kubernetes-in-place-pod-resource-resizing-work-and-what-problem-does-it-solve",
+      "title": "How does Kubernetes In-Place Pod Resource Resizing work and what problem does it solve?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "resources",
+        "in-place-resize",
+        "vpa"
+      ],
+      "path": "kubernetes/how-does-kubernetes-in-place-pod-resource-resizing-work-and-what-problem-does-it-solve.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-does-kubernetes-in-place-pod-resource-resizing-work-and-what-problem-does-it-solve.md",
+      "shortAnswer": "In-place Pod resize makes a running container's CPU and memory requests and limits mutable, so they can be changed without evicting and recreating the Pod - and, for CPU and memory increases, usually without restarting the container. You send the change to the Pod's `resize` subresource, the kubelet checks it fits on the node, and then rewrites the container's cgroup limits live. It was alpha in Kubernetes 1.27, beta (on by default) in 1.33, and GA in 1.35. It removes the restart penalty from vertical scaling, but it cannot move a Pod to a bigger node, cannot change QoS class, and a memory shrink below current usage is still dangerous.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 622,
+          "slug": "how-does-the-kubernetes-controller-pattern-implement-declarative-reconciliation-loops",
+          "title": "How does the Kubernetes Controller Pattern implement declarative reconciliation loops?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 625,
+          "slug": "what-is-the-difference-between-client-go-informers-listers-and-reflector-components",
+          "title": "What is the difference between client-go Informers, Listers, and Reflector components?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 626,
+          "slug": "what-are-kubernetes-dynamic-resource-allocation-dra-and-device-plugins-for-gpu-fpga-workloads",
+          "title": "What are Kubernetes Dynamic Resource Allocation (DRA) and Device Plugins for GPU/FPGA workloads?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the key operational advantage of Kubernetes In-Place Pod Resource Resizing?",
+        "options": [
+          "It allows pods to consume more CPU than the physical node actually possesses",
+          "It mutates CPU and memory limits directly in the container cgroups without restarting the container process",
+          "It bypasses the need for Kubernetes worker nodes entirely",
+          "It automatically rewrites application code to be multithreaded"
+        ],
+        "answerIndex": 1,
+        "explanation": "In-place resizing allows the Kubelet to adjust underlying cgroup boundaries on the fly, avoiding pod eviction, container restarts, and cache invalidation."
+      }
+    },
+    {
+      "id": 523,
+      "slug": "what-are-kubernetes-ephemeral-containers-and-how-are-they-used-for-zero-downtime-debugging",
+      "title": "What are Kubernetes Ephemeral Containers and how are they used for zero-downtime debugging?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "debugging",
+        "ephemeral-containers",
+        "distroless"
+      ],
+      "path": "kubernetes/what-are-kubernetes-ephemeral-containers-and-how-are-they-used-for-zero-downtime-debugging.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-are-kubernetes-ephemeral-containers-and-how-are-they-used-for-zero-downtime-debugging.md",
+      "shortAnswer": "An ephemeral container is a temporary container added to an **already running** Pod through the Pod's `ephemeralcontainers` subresource, without restarting the Pod or its existing containers. It joins the Pod's network namespace and, with `--target`, the process namespace of a specific container, so you can bring `sh`, `curl`, `tcpdump`, or `strace` to a distroless or scratch image that has none of them. It is GA since Kubernetes 1.25 and is what `kubectl debug` uses. The trade-offs: it cannot be removed once added (it stays in the Pod spec until the Pod is deleted), it has no resource guarantees, and it is a powerful capability that needs its own RBAC and Pod Security controls.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 452,
+          "slug": "what-are-customresourcedefinitions-and-operators-in-kubernetes",
+          "title": "What are CustomResourceDefinitions and operators in Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "Why are Ephemeral Containers essential when troubleshooting production workloads running in distroless containers?",
+        "options": [
+          "Distroless images run in read-only RAM disks that cannot receive HTTP traffic",
+          "Distroless images lack shells and diagnostic binaries, preventing conventional `kubectl exec` access",
+          "Kubernetes requires an ephemeral container to capture pod stdout logs",
+          "Ephemeral containers are the only way to restart a failed Pod"
+        ],
+        "answerIndex": 1,
+        "explanation": "Because distroless images contain no shell or debug binaries, `kubectl exec` fails. Ephemeral containers bring a full debugging toolchain into the pod's namespaces without restarting it."
+      }
+    },
+    {
+      "id": 524,
+      "slug": "what-is-the-difference-between-mutating-and-validating-admission-webhooks-in-kubernetes",
+      "title": "What is the difference between Mutating and Validating Admission Webhooks in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "security",
+        "admission-controller",
+        "webhooks"
+      ],
+      "path": "kubernetes/what-is-the-difference-between-mutating-and-validating-admission-webhooks-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-the-difference-between-mutating-and-validating-admission-webhooks-in-kubernetes.md",
+      "shortAnswer": "Both are HTTPS callbacks the API server makes after authentication and authorisation but before an object is persisted to etcd. **Mutating** webhooks run first and may change the object by returning a JSON Patch - injecting a sidecar, adding labels, setting default security contexts. **Validating** webhooks run after all mutation and schema validation, see the final object, and may only allow or deny it. Mutation comes first so that validation judges what will actually be stored. For many cases you no longer need a webhook at all: in-process CEL policies - `ValidatingAdmissionPolicy` (GA in 1.30) and `MutatingAdmissionPolicy` (GA in 1.36) - do the same job without a network hop or a service to keep alive.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 628,
+          "slug": "what-are-kubernetes-admission-webhook-failure-policies-and-how-do-you-prevent-self-locking-outage-loops",
+          "title": "What are Kubernetes Admission Webhook failure policies and how do you prevent self-locking outage loops?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 513,
+          "slug": "how-does-docker-multi-stage-building-optimize-container-security-and-image-size",
+          "title": "How does Docker multi-stage building optimize container security and image size?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "In the Kubernetes API request lifecycle, what happens if a Mutating Webhook modifies a Pod manifest?",
+        "options": [
+          "The Pod is instantly written to etcd, skipping Validating webhooks",
+          "The modified Pod manifest must then pass schema validation and all Validating Admission Webhooks before persistence",
+          "The client receives an HTTP 301 redirect to resubmit the request",
+          "The Mutating Webhook terminates the API server process"
+        ],
+        "answerIndex": 1,
+        "explanation": "Mutating webhooks execute before validating webhooks. Any modifications made by mutating controllers must pass subsequent schema checks and validating controllers."
+      }
+    },
+    {
+      "id": 525,
+      "slug": "how-does-kubernetes-leader-election-work-for-ha-control-planes-and-custom-controllers",
+      "title": "How does Kubernetes Leader Election work for HA control planes and custom controllers?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "ha",
+        "controller",
+        "leader-election"
+      ],
+      "path": "kubernetes/how-does-kubernetes-leader-election-work-for-ha-control-planes-and-custom-controllers.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-does-kubernetes-leader-election-work-for-ha-control-planes-and-custom-controllers.md",
+      "shortAnswer": "Kubernetes leader election is a lock held in a `Lease` object (`coordination.k8s.io/v1`). Every replica of a controller tries to write its own identity into the Lease's `holderIdentity`; the API server's optimistic concurrency (`resourceVersion`) guarantees only one write wins. The winner keeps renewing `renewTime` on a short interval, while standbys watch; if the leader stops renewing for longer than `leaseDurationSeconds`, a standby takes the lease over and starts reconciling. `kube-controller-manager`, `kube-scheduler`, and most operators (via client-go or controller-runtime) all use this. It is active-passive by design, and it trades a few seconds of failover time for never having two writers - though that guarantee is only as good as the leader's discipline in stopping work when it loses the lease.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 451,
+          "slug": "how-do-you-back-up-and-restore-a-kubernetes-cluster",
+          "title": "How do you back up and restore a Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "Which Kubernetes API primitive is standardly used by controllers and control plane components to coordinate active-passive leader election?",
+        "options": [
+          "PersistentVolumeClaims with ReadWriteOnce access mode",
+          "Lease objects in the coordination.k8s.io API group using atomic compare-and-swap renewals",
+          "Direct UDP broadcast packets between worker nodes",
+          "A shared Redis cluster hosted outside Kubernetes"
+        ],
+        "answerIndex": 1,
+        "explanation": "Modern Kubernetes uses `Lease` objects in `coordination.k8s.io`. Standby replicas watch the lease and acquire leadership when the current holder fails to renew its timestamp."
+      }
+    },
+    {
+      "id": 526,
+      "slug": "what-is-kubernetes-topology-spread-constraints-and-how-does-it-differ-from-pod-anti-affinity",
+      "title": "What is Kubernetes Topology Spread Constraints and how does it differ from Pod Anti-Affinity?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "scheduling",
+        "high-availability",
+        "topology"
+      ],
+      "path": "kubernetes/what-is-kubernetes-topology-spread-constraints-and-how-does-it-differ-from-pod-anti-affinity.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-kubernetes-topology-spread-constraints-and-how-does-it-differ-from-pod-anti-affinity.md",
+      "shortAnswer": "Topology spread constraints tell the scheduler to keep matching Pods **evenly distributed** across a topology domain - zones, nodes, racks - within a tolerated imbalance, `maxSkew`. Pod anti-affinity is a **per-domain yes/no rule**: \"do not put this Pod in a domain that already has a matching Pod\". That makes hard anti-affinity a cap (with three zones you can never run more than three Pods), while spread constraints scale to any replica count and simply keep the distribution balanced, such as 4-3-3. Use spread constraints for HA distribution and keep anti-affinity for strict \"never co-locate\" rules.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "Why do Topology Spread Constraints scale better than hard Pod Anti-Affinity across multi-zone Kubernetes clusters?",
+        "options": [
+          "Topology Spread Constraints bypass Kubelet health checks",
+          "Pod Anti-Affinity prevents running more pods than available zones, while Topology Spread allows proportional distribution with a configurable maxSkew",
+          "Topology Spread Constraints only function on bare-metal clusters",
+          "Pod Anti-Affinity requires disabling cluster autoscaling"
+        ],
+        "answerIndex": 1,
+        "explanation": "Hard anti-affinity blocks scheduling once every zone has 1 pod. Topology Spread Constraints allow scaling to arbitrary replica counts while maintaining a balanced distribution across zones (e.g. 4-4-3)."
+      }
+    },
+    {
+      "id": 527,
+      "slug": "how-does-coredns-resolve-services-in-kubernetes-and-how-do-you-troubleshoot-dns-latency-bottlenecks",
+      "title": "How does CoreDNS resolve services in Kubernetes and how do you troubleshoot DNS latency bottlenecks?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "dns",
+        "coredns",
+        "networking"
+      ],
+      "path": "kubernetes/how-does-coredns-resolve-services-in-kubernetes-and-how-do-you-troubleshoot-dns-latency-bottlenecks.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-does-coredns-resolve-services-in-kubernetes-and-how-do-you-troubleshoot-dns-latency-bottlenecks.md",
+      "shortAnswer": "CoreDNS runs as a Deployment behind the `kube-dns` Service; its `kubernetes` plugin watches Services and EndpointSlices through the API and answers `<service>.<namespace>.svc.cluster.local` with the Service's ClusterIP (or the Pod IPs for a headless Service), forwarding everything else upstream. Latency bottlenecks almost always come from three places: the **`ndots:5` search-path expansion** that turns one external lookup into several, **too few CoreDNS replicas** for the query rate, and **conntrack races on UDP** that produce the classic five-second stalls. The standard fixes are fully qualified names or a lower `ndots`, CoreDNS autoscaling, and NodeLocal DNSCache.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 517,
+          "slug": "how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation",
+          "title": "How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does querying an external domain like `api.github.com` from inside a standard Kubernetes Pod generate multiple DNS queries to CoreDNS?",
+        "options": [
+          "CoreDNS encrypts requests with four distinct TLS certificates",
+          "The default `ndots:5` setting forces the resolver to test all cluster search domains before querying the root domain",
+          "Kubernetes requires DNS lookups to query all worker nodes sequentially",
+          "CoreDNS does not support IPv4 addresses"
+        ],
+        "answerIndex": 1,
+        "explanation": "Because `api.github.com` has only 2 dots (less than `ndots:5`), the resolver appends `.default.svc.cluster.local`, `.svc.cluster.local`, etc., generating several NXDOMAIN queries before querying external upstream DNS."
+      }
+    },
+    {
+      "id": 528,
+      "slug": "what-is-the-container-network-interface-cni-and-how-do-overlay-and-routed-cni-plugins-differ",
+      "title": "What is the Container Network Interface (CNI) and how do overlay and routed CNI plugins differ?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "cni",
+        "networking",
+        "overlay"
+      ],
+      "path": "kubernetes/what-is-the-container-network-interface-cni-and-how-do-overlay-and-routed-cni-plugins-differ.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-the-container-network-interface-cni-and-how-do-overlay-and-routed-cni-plugins-differ.md",
+      "shortAnswer": "CNI (Container Network Interface) is a CNCF specification plus a set of plugins: when a Pod sandbox is created, the container runtime calls a CNI plugin binary with the Pod's network namespace, and the plugin creates its interface, assigns an IP, and sets up routes. **Overlay** plugins give Pods addresses from a private cluster range and encapsulate Pod-to-Pod traffic between nodes in VXLAN or Geneve tunnels, so they work on any underlying network but cost MTU and some CPU. **Routed** (flat) plugins make Pod IPs directly routable - from the cloud VPC's own subnets or advertised via BGP - so there is no encapsulation, but Pod addresses consume real network address space and the underlay must know how to reach them.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 517,
+          "slug": "how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation",
+          "title": "How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "What is a major trade-off of using a native routed CNI (such as AWS VPC CNI) instead of an overlay CNI (such as VXLAN-based Flannel)?",
+        "options": [
+          "Routed CNIs cannot enforce NetworkPolicies",
+          "Routed CNIs assign VPC subnet IP addresses to every pod, which can rapidly exhaust the VPC's available IP address pool",
+          "Routed CNIs impose a 50-byte packet header overhead on all network traffic",
+          "Overlay CNIs require external hardware routers on each node"
+        ],
+        "answerIndex": 1,
+        "explanation": "Native routed CNIs draw Pod IPs directly from the underlying VPC subnet. While this eliminates encapsulation overhead, large clusters can quickly exhaust the VPC CIDR."
+      }
+    },
+    {
+      "id": 529,
+      "slug": "what-are-kubernetes-finalizers-and-how-do-you-resolve-a-namespace-stuck-in-the-terminating-state",
+      "title": "What are Kubernetes Finalizers and how do you resolve a namespace stuck in the Terminating state?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "troubleshooting",
+        "finalizers",
+        "controllers"
+      ],
+      "path": "kubernetes/what-are-kubernetes-finalizers-and-how-do-you-resolve-a-namespace-stuck-in-the-terminating-state.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-are-kubernetes-finalizers-and-how-do-you-resolve-a-namespace-stuck-in-the-terminating-state.md",
+      "shortAnswer": "A finalizer is a string in an object's `metadata.finalizers` list that tells the API server \"do not remove this object until some controller has finished cleaning up\". A delete request only sets `metadata.deletionTimestamp`; the object stays, visible and read-only apart from its finalizers, until every controller removes its entry, and then the API server deletes it. A namespace sticks in `Terminating` when something it contains cannot be cleaned up - usually an unavailable aggregated API or webhook that stops discovery, or a custom resource whose controller is gone or failing. Fix the cause first; forcibly removing finalizers is a last resort because it can orphan real cloud resources.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 622,
+          "slug": "how-does-the-kubernetes-controller-pattern-implement-declarative-reconciliation-loops",
+          "title": "How does the Kubernetes Controller Pattern implement declarative reconciliation loops?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 625,
+          "slug": "what-is-the-difference-between-client-go-informers-listers-and-reflector-components",
+          "title": "What is the difference between client-go Informers, Listers, and Reflector components?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 628,
+          "slug": "what-are-kubernetes-admission-webhook-failure-policies-and-how-do-you-prevent-self-locking-outage-loops",
+          "title": "What are Kubernetes Admission Webhook failure policies and how do you prevent self-locking outage loops?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does a Kubernetes resource remain visible with a deletionTimestamp rather than disappearing immediately after a delete command?",
+        "options": [
+          "etcd requires 24 hours of disk compaction before releasing keys",
+          "One or more entries in `metadata.finalizers` have not yet been cleared by their reconciling controllers",
+          "The Kubelet must reboot the worker node before confirming deletion",
+          "The resource is waiting for a cluster backup snapshot to complete"
+        ],
+        "answerIndex": 1,
+        "explanation": "Finalizers notify controllers to execute cleanup logic (e.g. deleting cloud load balancers or storage volumes). The API server will not remove the object from etcd until the finalizer list is empty."
+      }
+    },
+    {
+      "id": 530,
+      "slug": "how-do-pod-disruption-budgets-pdb-protect-application-availability-during-cluster-maintenance",
+      "title": "How do Pod Disruption Budgets (PDB) protect application availability during cluster maintenance?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "pdb",
+        "availability",
+        "maintenance"
+      ],
+      "path": "kubernetes/how-do-pod-disruption-budgets-pdb-protect-application-availability-during-cluster-maintenance.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-pod-disruption-budgets-pdb-protect-application-availability-during-cluster-maintenance.md",
+      "shortAnswer": "A PodDisruptionBudget sets the minimum number of Pods that must stay available (`minAvailable`) or the maximum that may be down (`maxUnavailable`) for a label selector during **voluntary** disruptions - node drains, cluster upgrades, and autoscaler scale-downs. It works because those tools evict Pods through the Eviction API, which refuses any eviction that would breach the budget. It does nothing against involuntary failures, and a budget that allows zero disruptions blocks maintenance entirely.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "What action does Kubernetes take when `kubectl drain` attempts to evict a Pod that would violate a PodDisruptionBudget?",
+        "options": [
+          "The Kubelet immediately forces a hard reboot of the worker node",
+          "The Eviction API rejects the eviction request, causing the drain to block and retry until replacement pods become Ready",
+          "The PDB is automatically deleted and the pod is terminated",
+          "The cluster autoscaler shuts down all application pods across the cluster"
+        ],
+        "answerIndex": 1,
+        "explanation": "Voluntary disruptions rely on the Eviction API. If an eviction violates a PDB, the API returns HTTP 429, forcing the drain process to wait until healthy replicas exist elsewhere."
+      }
+    },
+    {
+      "id": 531,
+      "slug": "what-is-the-difference-between-service-types-clusterip-nodeport-loadbalancer-and-externalname",
+      "title": "What is the difference between Service types ClusterIP, NodePort, LoadBalancer, and ExternalName?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "networking",
+        "services",
+        "clusterip"
+      ],
+      "path": "kubernetes/what-is-the-difference-between-service-types-clusterip-nodeport-loadbalancer-and-externalname.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-the-difference-between-service-types-clusterip-nodeport-loadbalancer-and-externalname.md",
+      "shortAnswer": "`ClusterIP` (the default) gives a Service a virtual IP reachable only inside the cluster. `NodePort` additionally opens the same port (30000-32767 by default) on every node and forwards it to the Service. `LoadBalancer` additionally asks a cloud or load-balancer controller to provision an external load balancer in front. `ExternalName` is different in kind: it has no IP, no endpoints, and no proxying - cluster DNS just returns a CNAME to an external hostname. The first three are layered on each other; `ExternalName` is a DNS alias.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 517,
+          "slug": "how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation",
+          "title": "How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?",
+          "topic": "docker"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "How does an `ExternalName` Kubernetes Service direct traffic to an external database endpoint?",
+        "options": [
+          "kube-proxy translates the database TCP packets through a stateful NAT proxy",
+          "CoreDNS returns a DNS CNAME record pointing to the external hostname, with no packet proxying",
+          "The cloud provider automatically provisions an external Network Load Balancer",
+          "Worker nodes establish a persistent IPSec tunnel to the database host"
+        ],
+        "answerIndex": 1,
+        "explanation": "ExternalName services have no selector or endpoints; CoreDNS simply returns a CNAME record redirecting client DNS resolution directly to the external hostname."
+      }
+    }
+  ]
+}

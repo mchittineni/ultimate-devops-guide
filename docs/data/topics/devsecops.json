@@ -1,0 +1,934 @@
+{
+  "schemaVersion": 1,
+  "slug": "devsecops",
+  "title": "DevSecOps",
+  "group": "Security",
+  "description": "Security built into the delivery pipeline: scanning layers, SBOMs and supply-chain provenance, image signing, secretless pipelines, and vulnerability triage that does not stall delivery.",
+  "studyNotes": [
+    "Which gates block a build, and how you handle the existing backlog.",
+    "SBOM, provenance, and signature verification that fails closed.",
+    "Ranking vulnerabilities by exploitability and exposure, not CVSS alone."
+  ],
+  "questions": [
+    {
+      "id": 161,
+      "slug": "what-does-a-devsecops-pipeline-look-like-end-to-end",
+      "title": "What does a DevSecOps pipeline look like end to end?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions"
+      ],
+      "path": "devsecops/what-does-a-devsecops-pipeline-look-like-end-to-end.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/what-does-a-devsecops-pipeline-look-like-end-to-end.md",
+      "shortAnswer": "Security controls sit at every stage rather than in a final review gate: secret scanning and linting pre-commit, SAST and dependency scanning on pull request, image and IaC scanning at build, signing and admission control at deploy, and runtime detection in production. Each gate has an owner, a severity threshold that fails the build, and a documented exception path.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 162,
+      "slug": "what-is-the-difference-between-sast-dast-iast-and-sca",
+      "title": "What is the difference between SAST, DAST, IAST, and SCA?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions"
+      ],
+      "path": "devsecops/what-is-the-difference-between-sast-dast-iast-and-sca.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/what-is-the-difference-between-sast-dast-iast-and-sca.md",
+      "shortAnswer": "SAST reads your source code without running it, DAST attacks the running application from the outside, IAST instruments the running application to observe code paths while it is exercised, and SCA inventories third-party dependencies and matches them against vulnerability databases. They find different classes of bug, so a mature programme runs all four at different points in the pipeline.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        },
+        {
+          "id": 458,
+          "slug": "how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline",
+          "title": "How do you integrate SonarQube and quality gates into a pipeline?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 163,
+      "slug": "what-is-a-software-bill-of-materials-sbom",
+      "title": "What is a Software Bill of Materials (SBOM)?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions"
+      ],
+      "path": "devsecops/what-is-a-software-bill-of-materials-sbom.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/what-is-a-software-bill-of-materials-sbom.md",
+      "shortAnswer": "An SBOM is a machine-readable inventory of every component in a build - direct and transitive dependencies, versions, and licenses - emitted in a standard format (SPDX or CycloneDX). Its value is answering \"are we affected?\" in minutes when the next Log4Shell lands, instead of grepping repositories for a week.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 441,
+          "slug": "how-do-you-harden-a-container-image-and-a-dockerfile",
+          "title": "How do you harden a container image and a Dockerfile?",
+          "topic": "docker"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        },
+        {
+          "id": 458,
+          "slug": "how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline",
+          "title": "How do you integrate SonarQube and quality gates into a pipeline?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 164,
+      "slug": "what-is-slsa-and-how-do-you-secure-the-software-supply-chain",
+      "title": "What is SLSA and how do you secure the software supply chain?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions"
+      ],
+      "path": "devsecops/what-is-slsa-and-how-do-you-secure-the-software-supply-chain.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/what-is-slsa-and-how-do-you-secure-the-software-supply-chain.md",
+      "shortAnswer": "SLSA (Supply-chain Levels for Software Artifacts) is a tiered framework for proving how an artifact was built. Its core idea is verifiable provenance: a signed statement, produced by the build platform rather than the builder, saying which source commit and which build definition produced this exact digest. Supply-chain security then means verifying that provenance at deploy time and refusing anything that cannot prove its origin.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 165,
+      "slug": "how-do-you-sign-and-verify-container-images",
+      "title": "How do you sign and verify container images?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions"
+      ],
+      "path": "devsecops/how-do-you-sign-and-verify-container-images.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/how-do-you-sign-and-verify-container-images.md",
+      "shortAnswer": "Sign the image by digest with Sigstore `cosign` - ideally keyless, exchanging a CI OIDC token for a short-lived certificate so there is no private key to leak - and store the signature alongside the image in the registry. Verify in an admission controller that fails closed, checking the signing identity, not merely that a signature exists.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        },
+        {
+          "id": 458,
+          "slug": "how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline",
+          "title": "How do you integrate SonarQube and quality gates into a pipeline?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 166,
+      "slug": "how-do-you-manage-secrets-in-ci-cd-pipelines",
+      "title": "How do you manage secrets in CI/CD pipelines?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions"
+      ],
+      "path": "devsecops/how-do-you-manage-secrets-in-ci-cd-pipelines.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/how-do-you-manage-secrets-in-ci-cd-pipelines.md",
+      "shortAnswer": "Eliminate long-lived secrets first: have the pipeline exchange its OIDC identity token for short-lived cloud credentials, so there is nothing static to steal. For secrets that genuinely must exist, keep them in a secrets manager, inject them at run time as environment variables or files, scope them per environment, and audit every read.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 441,
+          "slug": "how-do-you-harden-a-container-image-and-a-dockerfile",
+          "title": "How do you harden a container image and a Dockerfile?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 167,
+      "slug": "how-do-you-scan-infrastructure-as-code-before-it-is-applied",
+      "title": "How do you scan Infrastructure as Code before it is applied?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions"
+      ],
+      "path": "devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md",
+      "shortAnswer": "Run two layers on every pull request: static scanners over the templates (Checkov, or `trivy config`, which absorbed the now-deprecated tfsec) for known misconfigurations, and policy-as-code over the Terraform _plan_ (OPA/Conftest, Sentinel) for organisation-specific rules. Plan-based checks are the stronger gate because they see resolved values, modules, and what will actually change.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 458,
+          "slug": "how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline",
+          "title": "How do you integrate SonarQube and quality gates into a pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 168,
+      "slug": "how-do-you-prioritise-vulnerabilities-without-blocking-delivery",
+      "title": "How do you prioritise vulnerabilities without blocking delivery?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions"
+      ],
+      "path": "devsecops/how-do-you-prioritise-vulnerabilities-without-blocking-delivery.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/how-do-you-prioritise-vulnerabilities-without-blocking-delivery.md",
+      "shortAnswer": "Rank by exploitability and exposure rather than CVSS score alone: is it in CISA's Known Exploited Vulnerabilities catalogue, what is its EPSS probability, is the vulnerable code reachable, is the workload internet-facing, and does a fix exist? Then set remediation SLAs per band, gate only on newly introduced findings, and burn the backlog down on its own track.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 244,
+      "slug": "how-do-you-enforce-kubernetes-admission-control-with-kyverno-or-opa-gatekeeper",
+      "title": "How do you enforce Kubernetes admission control with Kyverno or OPA Gatekeeper?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions"
+      ],
+      "path": "devsecops/how-do-you-enforce-kubernetes-admission-control-with-kyverno-or-opa-gatekeeper.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/how-do-you-enforce-kubernetes-admission-control-with-kyverno-or-opa-gatekeeper.md",
+      "shortAnswer": "Enforce Kubernetes security admission control by deploying dynamic Admission Webhooks via Kyverno or OPA Gatekeeper to validate, mutate, or block non-compliant resource manifests (such as enforcing non-root container users, mandatory resource requests/limits, disallowing privileged containers, and requiring trusted image registry signatures).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 441,
+          "slug": "how-do-you-harden-a-container-image-and-a-dockerfile",
+          "title": "How do you harden a container image and a Dockerfile?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 290,
+      "slug": "what-does-shift-left-security-mean",
+      "title": "What does shift left security mean?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions"
+      ],
+      "path": "devsecops/what-does-shift-left-security-mean.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/what-does-shift-left-security-mean.md",
+      "shortAnswer": "Moving security checks earlier - \"left\" - in the delivery timeline, so problems are found while code is being written rather than in a penetration test weeks after release. In practice it means the IDE, the pull request, and the pipeline each catch a class of issue, with fast automated feedback to the person who wrote the code. It is about **timing and ownership**, not about doing less security later.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 429,
+      "slug": "how-do-you-rotate-secrets-without-downtime",
+      "title": "How do you rotate secrets without downtime?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions",
+        "cicd",
+        "security-and-compliance",
+        "configuration-management"
+      ],
+      "path": "devsecops/how-do-you-rotate-secrets-without-downtime.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/how-do-you-rotate-secrets-without-downtime.md",
+      "shortAnswer": "Never swap a secret in place - **overlap two valid credentials**. The pattern is the same for every secret type: create the new credential while the old one still works, distribute it, let every consumer pick it up (or fetch it dynamically), verify nothing is still using the old one, then revoke the old one as a separate, deliberate step. Downtime happens when rotation is a single atomic swap, when consumers cache the secret at startup and are never restarted, or when nobody knows the full list of consumers. The strategic answer is to remove long-lived secrets where you can - **short-lived dynamic credentials** (Vault database engine, IAM roles, IRSA/Workload Identity, OIDC federation in CI) turn rotation from a scheduled project into a property of the system.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 458,
+          "slug": "how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline",
+          "title": "How do you integrate SonarQube and quality gates into a pipeline?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 504,
+      "slug": "how-do-you-manage-kubernetes-secrets-in-a-gitops-workflow",
+      "title": "How do you manage Kubernetes secrets in a GitOps workflow?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "devsecops",
+        "interview-questions",
+        "kubernetes",
+        "devops-tools-and-automation"
+      ],
+      "path": "devsecops/how-do-you-manage-kubernetes-secrets-in-a-gitops-workflow.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/how-do-you-manage-kubernetes-secrets-in-a-gitops-workflow.md",
+      "shortAnswer": "GitOps says the desired state lives in Git, but a plaintext `Secret` manifest in Git is a credential leak - so you store either **ciphertext** or a **reference**. Three patterns, and the choice is the answer. **Encrypted in Git**: SOPS (with age or a cloud KMS key) or Sealed Secrets, so the repository holds ciphertext that only the cluster can decrypt - Git stays the single source of truth, at the cost of manual rotation and unreadable diffs. **Referenced from a secret manager** (the usual production answer): the **External Secrets Operator** syncs values from Vault, AWS Secrets Manager, or Azure Key Vault into Kubernetes `Secret`s, or the **Secrets Store CSI driver** mounts them straight into Pods - Git holds only a pointer, rotation happens upstream, and you get an audit trail. **Eliminate the secret entirely**: workload identity federation (IRSA, EKS Pod Identity, Entra Workload ID, GCP Workload Identity) so the Pod gets a short-lived token instead of a stored credential, and Vault dynamic secrets so a database password exists for an hour. The framing that lands: the best answer to \"how do you store this secret in Git?\" is often **\"we do not have one to store\"**.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 705,
+      "slug": "how-do-you-integrate-automated-secret-scanning-into-pre-commit-and-ci-pipelines-to-prevent-credential-leaks",
+      "title": "How do you integrate automated secret scanning into pre-commit and CI pipelines to prevent credential leaks?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "devsecops",
+        "secrets",
+        "gitleaks",
+        "trufflehog",
+        "git-hooks"
+      ],
+      "path": "devsecops/how-do-you-integrate-automated-secret-scanning-into-pre-commit-and-ci-pipelines-to-prevent-credential-leaks.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/how-do-you-integrate-automated-secret-scanning-into-pre-commit-and-ci-pipelines-to-prevent-credential-leaks.md",
+      "shortAnswer": "Secret scanners such as Gitleaks and TruffleHog match provider-specific token patterns (plus entropy checks and, for TruffleHog, live verification against the issuing API). Run them in pre-commit hooks for fast feedback and again in CI as the enforced gate, so commits containing API tokens, private keys, or passwords are rejected before they reach shared Git history.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 458,
+          "slug": "how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline",
+          "title": "How do you integrate SonarQube and quality gates into a pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        },
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the required FIRST step when an engineer accidentally pushes an active AWS IAM secret access key to a public Git repository?",
+        "options": [
+          "Delete the line of code and make a new commit with message 'fix'",
+          "Immediately revoke and delete the compromised IAM key in the AWS console before doing anything else",
+          "Reboot the production web servers",
+          "Submit a ticket to GitHub support asking them to delete the commit"
+        ],
+        "answerIndex": 1,
+        "explanation": "Automated scrapers exploit leaked keys within seconds. The immediate priority is revoking the credential in the cloud console to prevent unauthorized infrastructure compromise."
+      }
+    },
+    {
+      "id": 706,
+      "slug": "what-is-container-image-signing-with-sigstore-and-cosign-and-how-is-it-verified-by-kubernetes-admission-controllers",
+      "title": "What is Container Image Signing with Sigstore and Cosign and how is it verified by Kubernetes admission controllers?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "devsecops",
+        "sigstore",
+        "cosign",
+        "supply-chain",
+        "admission-controller"
+      ],
+      "path": "devsecops/what-is-container-image-signing-with-sigstore-and-cosign-and-how-is-it-verified-by-kubernetes-admission-controllers.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/what-is-container-image-signing-with-sigstore-and-cosign-and-how-is-it-verified-by-kubernetes-admission-controllers.md",
+      "shortAnswer": "Sigstore/Cosign cryptographically signs container images during CI/CD using short-lived OpenID Connect certificates; Kubernetes admission controllers (Kyverno, Sigstore policy-controller, or Gatekeeper via the Ratify external data provider) verify this signature and the signer's identity before allowing the image to run, blocking untrusted or tampered images.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        },
+        {
+          "id": 538,
+          "slug": "how-do-you-secure-ci-cd-runners-against-supply-chain-attacks-and-untrusted-pull-requests",
+          "title": "How do you secure CI/CD runners against supply-chain attacks and untrusted pull requests?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "How does keyless signing with Sigstore/Cosign eliminate the burden of managing long-lived private signing keys?",
+        "options": [
+          "It uses unencrypted plain text passwords",
+          "It exchanges short-lived OIDC tokens (from GitHub/GitLab) for temporary X.509 certificates and logs signatures to an immutable public transparency ledger (Rekor)",
+          "It stores private keys in public DNS records",
+          "It runs only on local hardware without internet"
+        ],
+        "answerIndex": 1,
+        "explanation": "Keyless signing leverages workload identity (OIDC) to issue short-lived certificates valid for minutes, recording signatures in a transparency log without managing private key files."
+      }
+    },
+    {
+      "id": 707,
+      "slug": "what-is-policy-as-code-and-how-do-opa-gatekeeper-and-kyverno-enforce-cluster-governance",
+      "title": "What is Policy as Code and how do OPA Gatekeeper and Kyverno enforce cluster governance?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "devsecops",
+        "policy-as-code",
+        "opa",
+        "kyverno",
+        "governance"
+      ],
+      "path": "devsecops/what-is-policy-as-code-and-how-do-opa-gatekeeper-and-kyverno-enforce-cluster-governance.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/what-is-policy-as-code-and-how-do-opa-gatekeeper-and-kyverno-enforce-cluster-governance.md",
+      "shortAnswer": "Policy as Code treats security and operational guardrails as version-controlled code; OPA Gatekeeper (using Rego) and Kyverno (using native YAML) enforce rules at admission time to reject non-compliant resources (e.g. running as root, missing CPU limits, pulling from untrusted registries).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 458,
+          "slug": "how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline",
+          "title": "How do you integrate SonarQube and quality gates into a pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        },
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary operational advantage of Kyverno over OPA Gatekeeper for Kubernetes platform teams?",
+        "options": [
+          "Kyverno runs without a Kubernetes cluster",
+          "Kyverno policies are written in native Kubernetes YAML rather than requiring engineers to learn the complex Rego programming language",
+          "Kyverno eliminates the need for container images",
+          "Kyverno only functions on Windows nodes"
+        ],
+        "answerIndex": 1,
+        "explanation": "Kyverno uses standard Kubernetes YAML patterns, allowing teams to author validation, mutation, and generation rules without learning OPA's specialized Rego language."
+      }
+    },
+    {
+      "id": 708,
+      "slug": "what-are-dependency-vulnerabilities-cves-and-how-do-dependabot-and-renovate-automate-security-remediation",
+      "title": "What are dependency vulnerabilities (CVEs) and how do Dependabot and Renovate automate security remediation?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "devsecops",
+        "cve",
+        "dependabot",
+        "renovate",
+        "dependencies"
+      ],
+      "path": "devsecops/what-are-dependency-vulnerabilities-cves-and-how-do-dependabot-and-renovate-automate-security-remediation.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/what-are-dependency-vulnerabilities-cves-and-how-do-dependabot-and-renovate-automate-security-remediation.md",
+      "shortAnswer": "CVEs are publicly cataloged software flaws; automated dependency bots (Dependabot, Renovate) monitor package lockfiles, detect vulnerable libraries, and automatically open pull requests with patched versions and changelog summaries.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "How do automated dependency tools (like Dependabot and Renovate) reduce Mean Time to Remediate (MTTR) for critical CVE disclosures?",
+        "options": [
+          "By rewriting application source code into Rust",
+          "By automatically generating pull requests with updated package versions and running CI test suites without waiting for manual developer audits",
+          "By deleting all third-party libraries permanently",
+          "By changing the application's domain name"
+        ],
+        "answerIndex": 1,
+        "explanation": "Automated dependency tools detect CVE alerts instantly and open pull requests bumping the vulnerable package version, allowing teams to review and merge patches rapidly."
+      }
+    },
+    {
+      "id": 709,
+      "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
+      "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "devsecops",
+        "dast",
+        "owasp-zap",
+        "security",
+        "testing"
+      ],
+      "path": "devsecops/what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines.md",
+      "shortAnswer": "DAST tests a running application from the outside by executing simulated hacker attacks (SQLi, XSS, header misconfigurations); OWASP ZAP runs inside ephemeral CI containers to scan staging environments and fail pipelines if high-risk vulnerabilities are found.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary operational distinction between SAST (Static AST) and DAST (Dynamic AST)?",
+        "options": [
+          "SAST is only used for databases, while DAST is used for mobile apps",
+          "SAST analyzes source code without executing it, whereas DAST attacks a live, running application over the network to test exploitability",
+          "DAST cannot run inside CI/CD pipelines",
+          "SAST runs exclusively on Linux servers"
+        ],
+        "answerIndex": 1,
+        "explanation": "SAST analyzes raw code files for theoretical patterns. DAST interacts with the live running application over HTTP, validating whether vulnerabilities can be actively exploited in a deployed state."
+      }
+    },
+    {
+      "id": 710,
+      "slug": "what-are-threat-modeling-frameworks-stride-pasta-and-how-do-they-embed-security-into-early-sprint-design",
+      "title": "What are Threat Modeling frameworks (STRIDE, PASTA) and how do they embed security into early sprint design?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "devsecops",
+        "stride",
+        "threat-modeling",
+        "architecture",
+        "security"
+      ],
+      "path": "devsecops/what-are-threat-modeling-frameworks-stride-pasta-and-how-do-they-embed-security-into-early-sprint-design.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/what-are-threat-modeling-frameworks-stride-pasta-and-how-do-they-embed-security-into-early-sprint-design.md",
+      "shortAnswer": "Threat modeling identifies architectural security risks before writing code; the STRIDE framework evaluates six threat categories (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege) across data flow diagrams.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 539,
+          "slug": "what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity",
+          "title": "What are SLSA (Supply-chain Levels for Software Artifacts) frameworks and how do they verify build integrity?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Under the STRIDE threat modeling framework, which security control directly mitigates 'Repudiation' threats (where a user claims they did not perform a fraudulent action)?",
+        "options": [
+          "Adding a Web Application Firewall",
+          "Maintaining immutable, cryptographically verifiable audit logs with tamper-evident user identity tracking",
+          "Increasing database RAM capacity",
+          "Enabling multi-region active-active replication"
+        ],
+        "answerIndex": 1,
+        "explanation": "Repudiation is the ability to deny performing an action. Comprehensive, tamper-evident audit logs and digital signatures prove non-repudiation."
+      }
+    },
+    {
+      "id": 711,
+      "slug": "what-is-runtime-application-self-protection-rasp-and-how-does-it-differ-from-a-perimeter-waf",
+      "title": "What is Runtime Application Self-Protection (RASP) and how does it differ from a perimeter WAF?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "devsecops",
+        "rasp",
+        "waf",
+        "security",
+        "appsec"
+      ],
+      "path": "devsecops/what-is-runtime-application-self-protection-rasp-and-how-does-it-differ-from-a-perimeter-waf.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/what-is-runtime-application-self-protection-rasp-and-how-does-it-differ-from-a-perimeter-waf.md",
+      "shortAnswer": "A WAF inspects network packets at the perimeter using heuristic pattern matching; RASP embeds an instrumentation agent inside the application runtime, hooking sensitive operations (SQL execution, file access, process spawning, deserialisation) so it can block an attack at the moment it would actually change what the application does. The trade-off is per-language agents, runtime overhead, and a security product sitting in your application's process.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        },
+        {
+          "id": 532,
+          "slug": "what-is-pipeline-as-code-and-how-do-modern-ci-systems-validate-and-isolate-pipeline-runs",
+          "title": "What is Pipeline as Code and how do modern CI systems validate and isolate pipeline runs?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does Runtime Application Self-Protection (RASP) generate significantly fewer false-positive security alerts than a perimeter Web Application Firewall (WAF)?",
+        "options": [
+          "RASP only runs on weekends",
+          "RASP operates inside the application runtime, evaluating whether an attack payload actually affects application execution rather than guessing based on surface-level network regex matching",
+          "RASP ignores all SQL injection attempts",
+          "WAFs do not inspect HTTP headers"
+        ],
+        "answerIndex": 1,
+        "explanation": "Because RASP resides inside the runtime environment, it observes whether a payload successfully alters underlying SQL or file commands, preventing alerts when attacks are harmless."
+      }
+    }
+  ]
+}

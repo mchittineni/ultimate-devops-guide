@@ -1,0 +1,656 @@
+{
+  "schemaVersion": 1,
+  "slug": "infrastructure-monitoring",
+  "title": "Infrastructure Monitoring",
+  "group": "Reliability and Operations",
+  "description": "Host and platform monitoring, APM, log management, and the practices that keep dashboards and alerts useful.",
+  "studyNotes": [
+    "The USE and RED methods for choosing what to measure.",
+    "Distributed tracing and where it beats logs.",
+    "Alert fatigue and how to design it away."
+  ],
+  "questions": [
+    {
+      "id": 131,
+      "slug": "what-is-infrastructure-monitoring",
+      "title": "What is Infrastructure Monitoring?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "infrastructure-monitoring",
+        "interview-questions"
+      ],
+      "path": "infrastructure-monitoring/what-is-infrastructure-monitoring.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/what-is-infrastructure-monitoring.md",
+      "shortAnswer": "Infrastructure monitoring is the continuous collection of health and performance signals from the compute, storage, network, and platform layers - hosts, containers, clusters, databases, and cloud services - to detect problems and inform capacity decisions.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 132,
+      "slug": "what-are-monitoring-tools",
+      "title": "What are Monitoring Tools?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "infrastructure-monitoring",
+        "interview-questions"
+      ],
+      "path": "infrastructure-monitoring/what-are-monitoring-tools.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/what-are-monitoring-tools.md",
+      "shortAnswer": "Prometheus with Grafana is the open-source standard for metrics; ELK/OpenSearch or Loki for logs; Jaeger or Tempo for traces; and Datadog, New Relic, or Dynatrace as commercial all-in-one platforms - plus the cloud providers' native offerings.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 133,
+      "slug": "what-are-monitoring-best-practices",
+      "title": "What are Monitoring Best Practices?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "infrastructure-monitoring",
+        "interview-questions"
+      ],
+      "path": "infrastructure-monitoring/what-are-monitoring-best-practices.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/what-are-monitoring-best-practices.md",
+      "shortAnswer": "Monitor what users experience, alert only on actionable symptoms, define signals with USE and RED, keep dashboards purposeful, manage cardinality and cost, and treat monitoring configuration as code.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 134,
+      "slug": "what-is-application-performance-monitoring",
+      "title": "What is Application Performance Monitoring?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "infrastructure-monitoring",
+        "interview-questions"
+      ],
+      "path": "infrastructure-monitoring/what-is-application-performance-monitoring.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/what-is-application-performance-monitoring.md",
+      "shortAnswer": "APM instruments applications to measure their internal behaviour - request latency broken down by code path, database and external call timings, error rates, and traces - so you can find _why_ a service is slow, not merely that it is.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 135,
+      "slug": "what-is-log-management",
+      "title": "What is Log Management?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "infrastructure-monitoring",
+        "interview-questions"
+      ],
+      "path": "infrastructure-monitoring/what-is-log-management.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/what-is-log-management.md",
+      "shortAnswer": "Log management is the pipeline that collects, parses, enriches, stores, indexes, and expires log data from across a system, making it searchable for debugging, auditing, and security investigation.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 293,
+      "slug": "how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale",
+      "title": "How do you control metric cardinality and monitoring cost at scale?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "infrastructure-monitoring",
+        "interview-questions"
+      ],
+      "path": "infrastructure-monitoring/how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale.md",
+      "shortAnswer": "Treat every label as a multiplier and govern it. Find the offending series with `topk` on cardinality, drop or aggregate high-cardinality labels at the collection point (`metric_relabel_configs`, OTel processors) rather than at query time, never put unbounded values (user ID, request ID, full URL path, container ID) in a label, downsample and tier retention, and put a cardinality budget plus a limit per target in place so a single bad deploy cannot double your bill. Move genuinely high-cardinality questions to logs, traces, or exemplars - that is what they are for.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 433,
+      "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+      "title": "How do you add monitoring to an application that has none?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "infrastructure-monitoring",
+        "interview-questions",
+        "monitoring-and-logging",
+        "site-reliability-engineering",
+        "cloud-engineering"
+      ],
+      "path": "infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md",
+      "shortAnswer": "Work from the outside in, so you get value in a day rather than a quarter. **Step 1: black-box monitoring you can add without touching the code** - a synthetic check on the critical user journey plus the four golden signals from whatever already sits in front of the application (load balancer, ingress, or a reverse proxy): traffic, error rate, latency percentiles, saturation. **Step 2: infrastructure and log collection** - host and container metrics from an agent, and existing logs shipped and parsed centrally. **Step 3: instrument the code** - a metrics endpoint, structured logs with a request ID, then tracing. **Step 4: define what \"healthy\" means** as an SLO, and build alerts on user-visible symptoms rather than on every metric you now have. The failure mode to avoid is starting with 400 dashboards and no alerts anyone trusts.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 686,
+      "slug": "what-is-the-use-method-utilization-saturation-and-errors-for-hardware-capacity-and-performance-analysis",
+      "title": "What is the USE Method (Utilization, Saturation, and Errors) for hardware capacity and performance analysis?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring",
+        "use-method",
+        "performance",
+        "brendan-gregg"
+      ],
+      "path": "infrastructure-monitoring/what-is-the-use-method-utilization-saturation-and-errors-for-hardware-capacity-and-performance-analysis.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/what-is-the-use-method-utilization-saturation-and-errors-for-hardware-capacity-and-performance-analysis.md",
+      "shortAnswer": "Created by Brendan Gregg, the USE Method directs engineers to check Utilization (% time resource was busy), Saturation (queued work waiting for resource), and Errors for every physical and virtual system resource (CPU, memory, disk, network).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 541,
+          "slug": "how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning",
+          "title": "How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?",
+          "topic": "cicd"
+        },
+        {
+          "id": 515,
+          "slug": "how-does-docker-buildkit-work-and-what-caching-and-build-features-does-it-unlock",
+          "title": "How does Docker BuildKit work and what caching and build features does it unlock?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": {
+        "stem": "Under Brendan Gregg's USE Method, what does 'Saturation' specifically measure?",
+        "options": [
+          "The physical temperature of the server rack",
+          "The degree to which extra work is queued waiting for a resource because it cannot be serviced immediately",
+          "The total amount of disk space occupied by logs",
+          "The number of users logged into the system"
+        ],
+        "answerIndex": 1,
+        "explanation": "Saturation measures extra work that has queued up behind an overloaded resource (e.g. CPU run queue or disk I/O wait queue), which directly causes latency spikes."
+      }
+    },
+    {
+      "id": 687,
+      "slug": "how-does-node-exporter-collect-linux-host-hardware-and-os-metrics-for-prometheus",
+      "title": "How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring",
+        "prometheus",
+        "node-exporter",
+        "linux"
+      ],
+      "path": "infrastructure-monitoring/how-does-node-exporter-collect-linux-host-hardware-and-os-metrics-for-prometheus.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/how-does-node-exporter-collect-linux-host-hardware-and-os-metrics-for-prometheus.md",
+      "shortAnswer": "Node Exporter is a lightweight daemon that reads Linux kernel diagnostic pseudo-filesystems (`/proc` and `/sys`) and exposes system hardware and OS metrics in plain-text Prometheus format on HTTP port 9100.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 514,
+          "slug": "what-are-linux-cgroups-v2-and-how-do-they-improve-container-resource-isolation-over-cgroups-v1",
+          "title": "What are Linux cgroups v2 and how do they improve container resource isolation over cgroups v1?",
+          "topic": "docker"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "From which Linux kernel source does Prometheus Node Exporter collect raw CPU and memory metrics?",
+        "options": [
+          "By opening an SSH session to the kernel console",
+          "By reading virtual kernel pseudo-filesystems like `/proc/stat` and `/proc/meminfo`",
+          "By running SQL queries against an embedded SQLite database",
+          "By intercepting BIOS hardware bus interrupts"
+        ],
+        "answerIndex": 1,
+        "explanation": "Node Exporter reads the `/proc` and `/sys` virtual filesystems, where the Linux kernel dynamically exposes real-time hardware, process, and memory statistics."
+      }
+    },
+    {
+      "id": 688,
+      "slug": "what-are-blackbox-vs-whitebox-monitoring-and-when-should-each-be-used",
+      "title": "What are Blackbox vs Whitebox monitoring and when should each be used?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring",
+        "blackbox",
+        "whitebox",
+        "synthetic"
+      ],
+      "path": "infrastructure-monitoring/what-are-blackbox-vs-whitebox-monitoring-and-when-should-each-be-used.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/what-are-blackbox-vs-whitebox-monitoring-and-when-should-each-be-used.md",
+      "shortAnswer": "Whitebox monitoring inspects internal system telemetry from the inside (CPU, database query latency, thread pools, app logs); Blackbox monitoring tests system behavior from the outside (probing HTTP endpoints, DNS, SSL certs), evaluating what real users experience.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Which monitoring approach is best suited for detecting that an external SSL/TLS certificate is expiring in 14 days?",
+        "options": [
+          "Whitebox CPU profiling",
+          "Blackbox synthetic probing against the public domain port 443",
+          "Application thread dump analysis",
+          "Database slow query logging"
+        ],
+        "answerIndex": 1,
+        "explanation": "Blackbox monitoring probes the public endpoint from the outside just like a real client, checking the presented TLS certificate expiration date and cipher negotiation."
+      }
+    },
+    {
+      "id": 689,
+      "slug": "what-is-ebpf-based-infrastructure-monitoring-and-how-does-cilium-provide-kernel-level-network-observability",
+      "title": "What is eBPF-based infrastructure monitoring and how does Cilium provide kernel-level network observability?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring",
+        "ebpf",
+        "cilium",
+        "hubble",
+        "networking"
+      ],
+      "path": "infrastructure-monitoring/what-is-ebpf-based-infrastructure-monitoring-and-how-does-cilium-provide-kernel-level-network-observability.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/what-is-ebpf-based-infrastructure-monitoring-and-how-does-cilium-provide-kernel-level-network-observability.md",
+      "shortAnswer": "eBPF attaches verified bytecode programs directly to kernel hooks (tracepoints, kprobes, sockets, `tc`/XDP), capturing network flows, TCP drops, and security events with low overhead and without injecting sidecars or modifying application code. Cilium uses eBPF as its Kubernetes networking datapath, and Hubble exposes the resulting flow data.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 517,
+          "slug": "how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation",
+          "title": "How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?",
+          "topic": "docker"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "How does Cilium with eBPF achieve L7 HTTP observability and security filtering in Kubernetes without injecting sidecar proxy containers?",
+        "options": [
+          "By running an SSH tunnel inside every container",
+          "By using eBPF in the kernel datapath to transparently redirect selected traffic to a shared per-node Envoy proxy that parses HTTP, instead of injecting a proxy into every Pod",
+          "By modifying the source code of the Linux kernel itself",
+          "By compiling application code into WebAssembly"
+        ],
+        "answerIndex": 1,
+        "explanation": "Cilium enforces and observes L3/L4 traffic in eBPF directly; for L7 (HTTP, gRPC, Kafka, DNS) it uses eBPF to redirect only the flows that need it to a node-local Envoy, so no sidecar is injected into application Pods."
+      }
+    },
+    {
+      "id": 690,
+      "slug": "how-do-you-detect-disk-i-o-bottlenecks-using-iostat-iotop-and-vmstat",
+      "title": "How do you detect Disk I/O bottlenecks using iostat, iotop, and vmstat?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "linux",
+        "disk-io",
+        "performance",
+        "iostat",
+        "vmstat"
+      ],
+      "path": "infrastructure-monitoring/how-do-you-detect-disk-i-o-bottlenecks-using-iostat-iotop-and-vmstat.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/how-do-you-detect-disk-i-o-bottlenecks-using-iostat-iotop-and-vmstat.md",
+      "shortAnswer": "Disk I/O bottlenecks are identified using `iostat -xz 1` to check `%util` (device busy percentage) and `await` (average I/O latency in ms), `vmstat 1` to observe `wa` (CPU wait time) and blocked processes (`b`), and `iotop` to pinpoint the specific process hogging disk throughput.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 541,
+          "slug": "how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning",
+          "title": "How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?",
+          "topic": "cicd"
+        },
+        {
+          "id": 514,
+          "slug": "what-are-linux-cgroups-v2-and-how-do-they-improve-container-resource-isolation-over-cgroups-v1",
+          "title": "What are Linux cgroups v2 and how do they improve container resource isolation over cgroups v1?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": {
+        "stem": "When inspecting `iostat -xz 1`, which metric provides the most accurate indicator of real disk I/O response latency (including queue time)?",
+        "options": [
+          "`r/s`",
+          "`await`",
+          "`svctm`",
+          "`wMB/s`"
+        ],
+        "answerIndex": 1,
+        "explanation": "`await` measures the average time in milliseconds that read and write requests spent both waiting in the OS device queue and being serviced by the physical drive."
+      }
+    },
+    {
+      "id": 691,
+      "slug": "what-are-synthetic-monitoring-probes-and-how-do-they-detect-edge-network-outages-before-users-report-them",
+      "title": "What are Synthetic Monitoring probes and how do they detect edge network outages before users report them?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring",
+        "synthetic",
+        "blackbox",
+        "availability"
+      ],
+      "path": "infrastructure-monitoring/what-are-synthetic-monitoring-probes-and-how-do-they-detect-edge-network-outages-before-users-report-them.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/what-are-synthetic-monitoring-probes-and-how-do-they-detect-edge-network-outages-before-users-report-them.md",
+      "shortAnswer": "Synthetic monitoring uses automated headless browsers or API agents located in global cloud regions to periodically simulate real user interactions (login, search, checkout), verifying uptime, SSL validity, and performance before real users are impacted.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does Real User Monitoring (RUM) fail to alert during a catastrophic DNS outage that completely blocks users in a region from reaching your application?",
+        "options": [
+          "RUM only works on mobile phones",
+          "Because blocked users cannot load the application JavaScript bundle required to execute and transmit RUM telemetry back to your monitoring servers",
+          "DNS servers automatically disable RUM tracking",
+          "RUM metrics can only be computed once per month"
+        ],
+        "answerIndex": 1,
+        "explanation": "RUM relies on client-side JavaScript executing in the user's browser. If a DNS failure prevents users from loading the site entirely, no RUM telemetry is ever generated."
+      }
+    }
+  ]
+}

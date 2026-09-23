@@ -1,0 +1,654 @@
+{
+  "schemaVersion": 1,
+  "slug": "incident-management",
+  "title": "Incident Management",
+  "group": "Reliability and Operations",
+  "description": "Detection through post-mortem: response plans, severity levels, on-call practice, and blameless learning.",
+  "studyNotes": [
+    "Roles during an incident and who declares severity.",
+    "What a good post-mortem produces beyond a document.",
+    "Designing an on-call rotation people can sustain."
+  ],
+  "questions": [
+    {
+      "id": 121,
+      "slug": "what-is-incident-management",
+      "title": "What is Incident Management?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "incident-management",
+        "interview-questions"
+      ],
+      "path": "incident-management/what-is-incident-management.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/what-is-incident-management.md",
+      "shortAnswer": "Incident management is the structured process for detecting, responding to, resolving, and learning from unplanned service disruptions - with defined roles, severity levels, communication paths, and a blameless review afterwards.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 122,
+      "slug": "what-is-an-incident-response-plan",
+      "title": "What is an Incident Response Plan?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "incident-management",
+        "interview-questions"
+      ],
+      "path": "incident-management/what-is-an-incident-response-plan.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/what-is-an-incident-response-plan.md",
+      "shortAnswer": "An incident response plan is the documented, rehearsed procedure for handling incidents - defining severity criteria, roles, escalation paths, communication templates, and the steps for detection through post-incident review.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 123,
+      "slug": "what-is-post-mortem-analysis",
+      "title": "What is Post-Mortem Analysis?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "incident-management",
+        "interview-questions"
+      ],
+      "path": "incident-management/what-is-post-mortem-analysis.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/what-is-post-mortem-analysis.md",
+      "shortAnswer": "A post-mortem is a written, blameless analysis after an incident that establishes the timeline, identifies contributing factors, and produces owned, tracked actions to make recurrence less likely or less severe.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 124,
+      "slug": "what-are-incident-severity-levels",
+      "title": "What are Incident Severity Levels?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "incident-management",
+        "interview-questions"
+      ],
+      "path": "incident-management/what-are-incident-severity-levels.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/what-are-incident-severity-levels.md",
+      "shortAnswer": "Severity levels classify incidents by user impact, driving the response - who is paged, how fast, how often stakeholders are updated, and whether a post-mortem is mandatory. A typical scale runs SEV-1 (critical) to SEV-4 (minor).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 125,
+      "slug": "what-is-on-call-management",
+      "title": "What is On-Call Management?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "incident-management",
+        "interview-questions"
+      ],
+      "path": "incident-management/what-is-on-call-management.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/what-is-on-call-management.md",
+      "shortAnswer": "On-call management is the practice of organising who responds to production alerts outside normal hours - rotations, escalation policies, compensation, and the alert hygiene that makes the rotation sustainable.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 292,
+      "slug": "how-do-you-run-a-major-incident-as-incident-commander",
+      "title": "How do you run a major incident as incident commander?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "incident-management",
+        "interview-questions"
+      ],
+      "path": "incident-management/how-do-you-run-a-major-incident-as-incident-commander.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/how-do-you-run-a-major-incident-as-incident-commander.md",
+      "shortAnswer": "You coordinate, you do not debug. Declare the incident and take the role out loud, assign the three other roles (operations lead, communications lead, scribe), keep one channel of record, drive on a fixed cadence of \"what do we know / what are we doing / who owns it\", prioritise **mitigation over root cause** - roll back, fail over, shed load - and hand off the role rather than working past your effectiveness. The commander's output is decisions and clarity, not fixes.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 20,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 425,
+      "slug": "how-do-you-respond-when-a-deployment-breaks-production",
+      "title": "How do you respond when a deployment breaks production?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "incident-management",
+        "interview-questions",
+        "cicd",
+        "devops-tools-and-automation",
+        "database-management-in-devops"
+      ],
+      "path": "incident-management/how-do-you-respond-when-a-deployment-breaks-production.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/how-do-you-respond-when-a-deployment-breaks-production.md",
+      "shortAnswer": "Roll back first, diagnose second. The moment customer impact correlates with a release, the release is the prime suspect and reverting is the fastest mitigation available - you do not need to understand the bug to stop the bleeding. Concretely: declare the incident and take a role, **freeze further deploys**, **roll back or shift traffic away** from the new version, **verify the metrics actually recover**, and only then investigate with the old version safely serving traffic. Two things make this fail: a database migration or data change that a code rollback cannot undo, and a \"rollback\" nobody has ever practised. Afterwards the question is not \"who broke it\" but \"why did the pipeline let it through\" - and the answer becomes a test, a gate, or a canary.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 675,
+      "slug": "what-are-incident-severity-levels-sev-1-to-sev-4-and-how-do-they-govern-response-slas-and-war-rooms",
+      "title": "What are Incident Severity Levels (Sev-1 to Sev-4) and how do they govern response SLAs and war rooms?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "incident-management",
+        "severity-levels",
+        "sla",
+        "sre"
+      ],
+      "path": "incident-management/what-are-incident-severity-levels-sev-1-to-sev-4-and-how-do-they-govern-response-slas-and-war-rooms.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/what-are-incident-severity-levels-sev-1-to-sev-4-and-how-do-they-govern-response-slas-and-war-rooms.md",
+      "shortAnswer": "Severity levels categorize incident business impact (Sev-1 is critical global outage; Sev-4 is minor internal bug), defining strict operational response SLAs, notification escalation paths, and war room protocols.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 268,
+          "slug": "how-do-you-use-jenkins-shared-libraries",
+          "title": "How do you use Jenkins shared libraries?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Which operational scenario warrants declaring a Sev-1 incident under standard enterprise incident management frameworks?",
+        "options": [
+          "An internal engineering wiki has a broken stylesheet",
+          "A core payment processing API is failing globally, preventing all customers from completing transactions",
+          "A daily analytics batch job completed 10 minutes late",
+          "A developer forgot their staging VPN password"
+        ],
+        "answerIndex": 1,
+        "explanation": "Sev-1 is reserved for catastrophic outages affecting core business functionality, causing severe revenue loss or critical customer impact, and requiring immediate all-hands mobilization."
+      }
+    },
+    {
+      "id": 676,
+      "slug": "what-is-the-incident-commander-ic-role-and-how-does-command-structure-coordinate-major-outages",
+      "title": "What is the Incident Commander (IC) role and how does command structure coordinate major outages?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "incident-management",
+        "incident-commander",
+        "ics",
+        "leadership"
+      ],
+      "path": "incident-management/what-is-the-incident-commander-ic-role-and-how-does-command-structure-coordinate-major-outages.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/what-is-the-incident-commander-ic-role-and-how-does-command-structure-coordinate-major-outages.md",
+      "shortAnswer": "The Incident Commander (IC) leads the incident response, holding ultimate decision-making authority; the IC does not debug or write code, but directs the response, assigns roles (Ops Lead, Comms Lead), manages cognitive load, and coordinates mitigation.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Why must the Incident Commander (IC) refrain from actively debugging code or running terminal commands during a major Sev-1 outage?",
+        "options": [
+          "Incident Commanders are not allowed to have terminal access",
+          "Direct technical troubleshooting causes tunnel vision, destroying the IC's high-level situational awareness required to coordinate responders, communication, and mitigation",
+          "Only external consultants can run commands during outages",
+          "To prevent git merge conflicts"
+        ],
+        "answerIndex": 1,
+        "explanation": "If the IC gets bogged down debugging a technical detail, they lose oversight of the broader incident response, leaving communication neglected and technical teams uncoordinated."
+      }
+    },
+    {
+      "id": 677,
+      "slug": "how-do-you-manage-incident-communications-and-public-status-pages-during-high-visibility-outages",
+      "title": "How do you manage Incident Communications and public status pages during high-visibility outages?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "incident-management",
+        "status-page",
+        "communications",
+        "trust"
+      ],
+      "path": "incident-management/how-do-you-manage-incident-communications-and-public-status-pages-during-high-visibility-outages.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/how-do-you-manage-incident-communications-and-public-status-pages-during-high-visibility-outages.md",
+      "shortAnswer": "Incident communication requires honest, transparent, and regular updates at predictable intervals (every 15–30 minutes) on independent status pages, acknowledging the problem, stating customer impact, and describing mitigation efforts without technical jargon.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why should an enterprise public status page (e.g. `status.mycompany.com`) be hosted on infrastructure separate from the main application cloud provider?",
+        "options": [
+          "To reduce SSL certificate costs",
+          "To guarantee the status page remains accessible to customers even if the primary cloud provider experiences a total regional outage",
+          "Public status pages require Windows server architecture",
+          "To comply with browser cookie policies"
+        ],
+        "answerIndex": 1,
+        "explanation": "If your primary cloud account suffers an outage, hosting the status page in that same account guarantees the status page also fails, leaving customers in the dark."
+      }
+    },
+    {
+      "id": 678,
+      "slug": "what-is-the-five-whys-root-cause-analysis-technique-and-how-do-you-avoid-stopping-at-human-error",
+      "title": "What is the Five Whys root cause analysis technique and how do you avoid stopping at human error?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "incident-management",
+        "five-whys",
+        "root-cause",
+        "post-mortem"
+      ],
+      "path": "incident-management/what-is-the-five-whys-root-cause-analysis-technique-and-how-do-you-avoid-stopping-at-human-error.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/what-is-the-five-whys-root-cause-analysis-technique-and-how-do-you-avoid-stopping-at-human-error.md",
+      "shortAnswer": "The Five Whys is an iterative interrogative technique that asks 'Why?' repeatedly to peel away superficial symptoms and identify underlying systemic and process failures, ensuring the investigation does not stop at superficial 'human error'.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "In an effective Five Whys root-cause investigation, why is concluding that 'the operator made a human error' considered a failure of the analysis?",
+        "options": [
+          "Because human operators are legally immune from blame",
+          "Human error is a symptom of poor system design; the analysis must discover why the system permitted a single human mistake to cause catastrophic failure without guardrails",
+          "The Five Whys technique can only be applied to computer hardware",
+          "Software systems never involve human operators"
+        ],
+        "answerIndex": 1,
+        "explanation": "Resilient systems must tolerate human error. An investigation that blames the human fails to address why automated guardrails, permissions, or validation checks were missing."
+      }
+    },
+    {
+      "id": 679,
+      "slug": "what-are-automated-remediation-and-self-healing-systems-and-when-should-automation-halt",
+      "title": "What are Automated Remediation and Self-Healing systems and when should automation halt?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "automation",
+        "self-healing",
+        "remediation",
+        "safety"
+      ],
+      "path": "incident-management/what-are-automated-remediation-and-self-healing-systems-and-when-should-automation-halt.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/what-are-automated-remediation-and-self-healing-systems-and-when-should-automation-halt.md",
+      "shortAnswer": "Automated remediation runs predefined scripts or controllers to fix known failure modes instantly (restarting hung pods, flushing caches, adding ASG capacity); automation must halt (circuit break) when remediations fail repeatedly or when flapping creates runaway cascading instability.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 540,
+          "slug": "what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits",
+          "title": "What is Semantic Release and how does it automate versioning and changelogs from commits?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why must automated self-healing systems incorporate circuit breakers that halt automated restarts after repeated failures?",
+        "options": [
+          "To prevent automated loops from amplifying the outage by repeatedly restarting services, clearing caches, and crashing backend databases",
+          "Because cloud providers charge a penalty for restarting containers",
+          "Automated scripts cannot run more than three times per month",
+          "To allow CPU temperatures to cool down"
+        ],
+        "answerIndex": 0,
+        "explanation": "Uncontrolled automated restarts during an external dependency failure can cause cascading destruction, thrashing connection pools and worsening the outage."
+      }
+    },
+    {
+      "id": 680,
+      "slug": "how-do-you-conduct-post-incident-action-item-tracking-to-prevent-repeat-outages",
+      "title": "How do you conduct post-incident action item tracking to prevent repeat outages?",
+      "topic": "incident-management",
+      "category": "Incident Management",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "incident-management",
+        "action-items",
+        "post-mortem",
+        "governance"
+      ],
+      "path": "incident-management/how-do-you-conduct-post-incident-action-item-tracking-to-prevent-repeat-outages.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/incident-management/how-do-you-conduct-post-incident-action-item-tracking-to-prevent-repeat-outages.md",
+      "shortAnswer": "Post-incident action items must be prioritized as engineering bug tickets with strict completion SLAs, single assignees, and executive visibility, preventing preventative reliability work from being buried under product feature backlog.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What policy prevents engineering teams from perpetually delaying post-incident reliability action items in favor of new product features?",
+        "options": [
+          "Deleting customer tickets after 7 days",
+          "Enforcing error budget policies that halt new feature deployments until overdue high-severity incident action items are completed",
+          "Fining product managers for every unresolved bug",
+          "Prohibiting code releases on Mondays"
+        ],
+        "answerIndex": 1,
+        "explanation": "Linking action items to error budget governance creates real business incentives: teams cannot ship new features until outstanding critical reliability vulnerabilities are remediated."
+      }
+    }
+  ]
+}

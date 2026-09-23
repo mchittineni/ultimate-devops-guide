@@ -1,0 +1,800 @@
+{
+  "schemaVersion": 1,
+  "slug": "monitoring-and-logging",
+  "title": "Monitoring and Logging",
+  "group": "Reliability and Operations",
+  "description": "Metrics, logs, and the toolchain - Prometheus, Grafana, and the ELK stack - plus the conceptual split between monitoring and logging.",
+  "studyNotes": [
+    "Pull versus push metric collection.",
+    "What you alert on versus what you only dashboard.",
+    "How logs get from a container to a searchable index."
+  ],
+  "questions": [
+    {
+      "id": 31,
+      "slug": "what-is-monitoring-in-devops",
+      "title": "What is monitoring in DevOps?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "monitoring-and-logging",
+        "interview-questions"
+      ],
+      "path": "monitoring-and-logging/what-is-monitoring-in-devops.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-is-monitoring-in-devops.md",
+      "shortAnswer": "Monitoring is the continuous collection and evaluation of system signals - metrics, logs, traces, and events - to know whether a service is healthy, to alert humans when it is not, and to give evidence during diagnosis.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 131,
+          "slug": "what-is-infrastructure-monitoring",
+          "title": "What is Infrastructure Monitoring?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 132,
+          "slug": "what-are-monitoring-tools",
+          "title": "What are Monitoring Tools?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 32,
+      "slug": "what-is-elk-stack",
+      "title": "What is ELK Stack?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "monitoring-and-logging",
+        "interview-questions"
+      ],
+      "path": "monitoring-and-logging/what-is-elk-stack.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-is-elk-stack.md",
+      "shortAnswer": "The ELK stack is Elasticsearch (search and analytics store), Logstash (ingestion and transformation pipeline), and Kibana (visualisation) - a platform for centralising, searching, and analysing logs. With Beats added it is often called the Elastic Stack.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 132,
+          "slug": "what-are-monitoring-tools",
+          "title": "What are Monitoring Tools?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 133,
+          "slug": "what-are-monitoring-best-practices",
+          "title": "What are Monitoring Best Practices?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 33,
+      "slug": "what-is-prometheus",
+      "title": "What is Prometheus?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "monitoring-and-logging",
+        "interview-questions"
+      ],
+      "path": "monitoring-and-logging/what-is-prometheus.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-is-prometheus.md",
+      "shortAnswer": "Prometheus is an open-source monitoring system that scrapes time-series metrics from instrumented targets over HTTP, stores them locally with a powerful query language (PromQL), and evaluates alerting rules that fire through Alertmanager.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 131,
+          "slug": "what-is-infrastructure-monitoring",
+          "title": "What is Infrastructure Monitoring?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 132,
+          "slug": "what-are-monitoring-tools",
+          "title": "What are Monitoring Tools?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 34,
+      "slug": "what-is-grafana",
+      "title": "What is Grafana?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "monitoring-and-logging",
+        "interview-questions"
+      ],
+      "path": "monitoring-and-logging/what-is-grafana.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-is-grafana.md",
+      "shortAnswer": "Grafana is an open-source visualisation and dashboarding platform that queries many data sources - Prometheus, Loki, Elasticsearch, CloudWatch, SQL databases - and presents them in unified dashboards with alerting.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 132,
+          "slug": "what-are-monitoring-tools",
+          "title": "What are Monitoring Tools?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 133,
+          "slug": "what-are-monitoring-best-practices",
+          "title": "What are Monitoring Best Practices?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 35,
+      "slug": "explain-the-difference-between-monitoring-and-logging",
+      "title": "Explain the difference between monitoring and logging",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "monitoring-and-logging",
+        "interview-questions"
+      ],
+      "path": "monitoring-and-logging/explain-the-difference-between-monitoring-and-logging.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/explain-the-difference-between-monitoring-and-logging.md",
+      "shortAnswer": "Logging records discrete events with context, one line at a time; monitoring collects and evaluates aggregated numeric signals over time. Logs tell you what happened in a specific request; monitoring tells you how the system is behaving overall.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 131,
+          "slug": "what-is-infrastructure-monitoring",
+          "title": "What is Infrastructure Monitoring?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 132,
+          "slug": "what-are-monitoring-tools",
+          "title": "What are Monitoring Tools?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 253,
+      "slug": "how-do-you-write-effective-promql-queries-and-alertmanager-rules",
+      "title": "How do you write effective PromQL queries and Alertmanager rules?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "monitoring-and-logging",
+        "interview-questions"
+      ],
+      "path": "monitoring-and-logging/how-do-you-write-effective-promql-queries-and-alertmanager-rules.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/how-do-you-write-effective-promql-queries-and-alertmanager-rules.md",
+      "shortAnswer": "Write effective PromQL queries by using `rate()` over range vectors for counter metrics, `histogram_quantile()` for latency percentiles, and structuring Alertmanager rules with multi-window burn rates, inhibition rules, and routing trees to prevent alert fatigue.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 132,
+          "slug": "what-are-monitoring-tools",
+          "title": "What are Monitoring Tools?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 133,
+          "slug": "what-are-monitoring-best-practices",
+          "title": "What are Monitoring Best Practices?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 296,
+      "slug": "how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale",
+      "title": "How do you design a logging pipeline that stays affordable at scale?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "monitoring-and-logging",
+        "interview-questions"
+      ],
+      "path": "monitoring-and-logging/how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale.md",
+      "shortAnswer": "Decide what each log line is _for_ before you ship it. Structure everything as JSON with a small stable schema, filter and sample at the edge (drop health checks and debug noise, tail-sample traces, keep all errors), route by value into tiers - hot searchable index for days, warm object storage for weeks, cold compressed archive for compliance years - and convert repetitive log-derived questions into metrics. The single biggest lever is not the storage engine; it is **not ingesting lines nobody will ever read**.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 135,
+          "slug": "what-is-log-management",
+          "title": "What is Log Management?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 293,
+          "slug": "how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale",
+          "title": "How do you control metric cardinality and monitoring cost at scale?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 500,
+      "slug": "how-does-prometheus-collect-metrics-and-what-components-sit-around-it",
+      "title": "How does Prometheus collect metrics, and what components sit around it?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "monitoring-and-logging",
+        "interview-questions",
+        "kubernetes",
+        "infrastructure-monitoring"
+      ],
+      "path": "monitoring-and-logging/how-does-prometheus-collect-metrics-and-what-components-sit-around-it.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/how-does-prometheus-collect-metrics-and-what-components-sit-around-it.md",
+      "shortAnswer": "Prometheus **pulls**. It discovers targets (from Kubernetes, cloud APIs, Consul, or static config), then scrapes an HTTP `/metrics` endpoint on each one at a fixed interval and stores the samples in its local time-series database. Around the server sit five kinds of component: **exporters** that translate something that does not speak Prometheus into `/metrics` (`node_exporter` for hosts, `kube-state-metrics` for Kubernetes object state, `blackbox_exporter` for probing endpoints, plus database and application-specific ones); **client libraries** inside your applications exposing metrics natively; **service discovery** so targets are found rather than listed; **Alertmanager**, a separate process that receives fired alerts and handles grouping, inhibition, silencing, and routing to Slack/PagerDuty/email; and **Pushgateway** for the one case pull cannot cover - short-lived batch jobs that exit before anyone can scrape them. Grafana sits on top as the query and dashboard layer. The distinction interviewers probe: **Prometheus evaluates alert rules itself and sends alerts to Alertmanager, which does the routing** - people frequently attribute both jobs to one component.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 131,
+          "slug": "what-is-infrastructure-monitoring",
+          "title": "What is Infrastructure Monitoring?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 132,
+          "slug": "what-are-monitoring-tools",
+          "title": "What are Monitoring Tools?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 501,
+      "slug": "how-do-the-elk-and-efk-stacks-fit-together",
+      "title": "How do the ELK and EFK stacks fit together?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "monitoring-and-logging",
+        "interview-questions",
+        "infrastructure-monitoring",
+        "kubernetes"
+      ],
+      "path": "monitoring-and-logging/how-do-the-elk-and-efk-stacks-fit-together.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/how-do-the-elk-and-efk-stacks-fit-together.md",
+      "shortAnswer": "Four roles, whatever the letters. A **collector** on each host or node reads log files and ships them - **Filebeat** in ELK, **Fluentd** or **Fluent Bit** in EFK. A **processing layer** parses, enriches, and normalises - **Logstash** in ELK, or Fluentd's own filters, or Elasticsearch **ingest pipelines**. **Elasticsearch** indexes and stores the documents. **Kibana** queries and visualises them. So ELK = Elasticsearch + Logstash + Kibana, and EFK swaps Logstash for Fluentd/Fluent Bit - which is the norm in Kubernetes because Fluent Bit is a tiny C binary that runs happily as a DaemonSet, whereas Logstash is a JVM process better suited to a central aggregation tier. In Kubernetes the collector runs as a **DaemonSet** reading `/var/log/containers/*.log` (symlinks into the container runtime's logs), enriches each line with Kubernetes metadata from the API - namespace, pod, container, labels - and forwards it. The pieces most candidates miss: a **buffer** (Kafka or Redis, or the collector's own disk buffer) so a burst or an Elasticsearch outage does not lose logs, and **index lifecycle management** so the cluster does not fill up and fall over.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 131,
+          "slug": "what-is-infrastructure-monitoring",
+          "title": "What is Infrastructure Monitoring?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 135,
+          "slug": "what-is-log-management",
+          "title": "What is Log Management?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 556,
+      "slug": "what-are-the-three-pillars-of-observability-and-where-do-their-operational-boundaries-blur",
+      "title": "What are the Three Pillars of Observability and where do their operational boundaries blur?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "observability",
+        "metrics",
+        "logs",
+        "traces",
+        "opentelemetry"
+      ],
+      "path": "monitoring-and-logging/what-are-the-three-pillars-of-observability-and-where-do-their-operational-boundaries-blur.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-are-the-three-pillars-of-observability-and-where-do-their-operational-boundaries-blur.md",
+      "shortAnswer": "Metrics (aggregated numerical time-series), Logs (timestamped discrete event records), and Traces (end-to-end request journeys across distributed services); modern OpenTelemetry unifies them via shared trace and span context.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 132,
+          "slug": "what-are-monitoring-tools",
+          "title": "What are Monitoring Tools?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 133,
+          "slug": "what-are-monitoring-best-practices",
+          "title": "What are Monitoring Best Practices?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 134,
+          "slug": "what-is-application-performance-monitoring",
+          "title": "What is Application Performance Monitoring?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": {
+        "stem": "How does modern OpenTelemetry correlate distributed traces with application logs?",
+        "options": [
+          "By sorting both logs and traces in alphabetical order",
+          "By injecting active `TraceID` and `SpanID` metadata into structured log messages",
+          "By storing all application logs inside etcd",
+          "By converting all log messages into Prometheus histograms"
+        ],
+        "answerIndex": 1,
+        "explanation": "Injecting the current TraceID and SpanID into structured application logs allows operators to jump directly from a failing trace span to the exact corresponding log entries."
+      }
+    },
+    {
+      "id": 557,
+      "slug": "what-is-the-difference-between-prometheus-pushgateway-and-pull-based-scraping",
+      "title": "What is the difference between Prometheus Pushgateway and Pull-based scraping?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "prometheus",
+        "metrics",
+        "pushgateway",
+        "monitoring"
+      ],
+      "path": "monitoring-and-logging/what-is-the-difference-between-prometheus-pushgateway-and-pull-based-scraping.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-is-the-difference-between-prometheus-pushgateway-and-pull-based-scraping.md",
+      "shortAnswer": "Prometheus natively pulls metrics at configured scrape intervals from HTTP endpoints; Pushgateway is an intermediary buffer designed strictly for short-lived batch jobs that terminate before the scraper can query them.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 687,
+          "slug": "how-does-node-exporter-collect-linux-host-hardware-and-os-metrics-for-prometheus",
+          "title": "How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 644,
+          "slug": "what-are-the-four-golden-signals-of-monitoring-and-how-do-you-monitor-them-in-distributed-systems",
+          "title": "What are the Four Golden Signals of Monitoring and how do you monitor them in distributed systems?",
+          "topic": "site-reliability-engineering"
+        },
+        {
+          "id": 688,
+          "slug": "what-are-blackbox-vs-whitebox-monitoring-and-when-should-each-be-used",
+          "title": "What are Blackbox vs Whitebox monitoring and when should each be used?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": {
+        "stem": "What critical operational hazard occurs if Prometheus Pushgateway is used to ingest metrics from continuously running services?",
+        "options": [
+          "Prometheus automatically shuts down after 100 pushes",
+          "Pushgateway retains and serves the last reported metric indefinitely, masking service outages because metrics never disappear",
+          "Pushgateway only supports UDP packets",
+          "Metrics sent to Pushgateway cannot be queried using PromQL"
+        ],
+        "answerIndex": 1,
+        "explanation": "Pushgateway does not age out or expire metrics. If an instance dies, Pushgateway continues returning its last pushed values to Prometheus forever, masking failures."
+      }
+    },
+    {
+      "id": 558,
+      "slug": "what-is-opentelemetry-otel-and-how-does-the-opentelemetry-collector-architecture-work",
+      "title": "What is OpenTelemetry (OTel) and how does the OpenTelemetry Collector architecture work?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "opentelemetry",
+        "otel",
+        "tracing",
+        "collector"
+      ],
+      "path": "monitoring-and-logging/what-is-opentelemetry-otel-and-how-does-the-opentelemetry-collector-architecture-work.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-is-opentelemetry-otel-and-how-does-the-opentelemetry-collector-architecture-work.md",
+      "shortAnswer": "OpenTelemetry is a vendor-neutral CNCF framework providing unified APIs, SDKs, and tooling for telemetry data; the OTel Collector is a proxy pipeline composed of Receivers, Processors, and Exporters that ingests, transforms, and routes telemetry to multiple backends.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 134,
+          "slug": "what-is-application-performance-monitoring",
+          "title": "What is Application Performance Monitoring?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 135,
+          "slug": "what-is-log-management",
+          "title": "What is Log Management?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": {
+        "stem": "Which component of an OpenTelemetry Collector pipeline is responsible for scrubbing personally identifiable information (PII) before telemetry leaves the cluster?",
+        "options": [
+          "The Receiver",
+          "The Processor",
+          "The Exporter",
+          "The DNS resolver"
+        ],
+        "answerIndex": 1,
+        "explanation": "Processors sit between Receivers and Exporters in the OTel pipeline, transforming, filtering, batching, and redacting sensitive PII from telemetry data."
+      }
+    },
+    {
+      "id": 559,
+      "slug": "what-is-high-cardinality-in-metrics-systems-and-why-does-it-crash-time-series-databases",
+      "title": "What is high cardinality in metrics systems and why does it crash time-series databases?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring",
+        "prometheus",
+        "cardinality",
+        "metrics",
+        "tsdb"
+      ],
+      "path": "monitoring-and-logging/what-is-high-cardinality-in-metrics-systems-and-why-does-it-crash-time-series-databases.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-is-high-cardinality-in-metrics-systems-and-why-does-it-crash-time-series-databases.md",
+      "shortAnswer": "High cardinality occurs when a metric label has an unbounded set of unique values (such as `user_id`, `email`, or `ip_address`), causing the TSDB to create millions of separate time-series streams until memory is exhausted.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 687,
+          "slug": "how-does-node-exporter-collect-linux-host-hardware-and-os-metrics-for-prometheus",
+          "title": "How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 644,
+          "slug": "what-are-the-four-golden-signals-of-monitoring-and-how-do-you-monitor-them-in-distributed-systems",
+          "title": "What are the Four Golden Signals of Monitoring and how do you monitor them in distributed systems?",
+          "topic": "site-reliability-engineering"
+        },
+        {
+          "id": 689,
+          "slug": "what-is-ebpf-based-infrastructure-monitoring-and-how-does-cilium-provide-kernel-level-network-observability",
+          "title": "What is eBPF-based infrastructure monitoring and how does Cilium provide kernel-level network observability?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": {
+        "stem": "Which label assignment in a Prometheus metric will most likely cause a catastrophic high-cardinality memory crash?",
+        "options": [
+          "`http_requests_total{environment=\"production\"}`",
+          "`http_requests_total{http_method=\"POST\"}`",
+          "`http_requests_total{user_uuid=\"8f9a2c3d-e4b5-4a6c-9d8e-1f2a3b4c5d6e\"}`",
+          "`http_requests_total{status_code=\"500\"}`"
+        ],
+        "answerIndex": 2,
+        "explanation": "UUIDs are unbounded and unique per customer, creating a brand new time-series in the TSDB index for every single user, quickly causing memory exhaustion."
+      }
+    },
+    {
+      "id": 560,
+      "slug": "what-is-the-difference-between-prometheus-counters-gauges-histograms-and-summaries",
+      "title": "What is the difference between Prometheus Counters, Gauges, Histograms, and Summaries?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "prometheus",
+        "metrics",
+        "histogram",
+        "promql"
+      ],
+      "path": "monitoring-and-logging/what-is-the-difference-between-prometheus-counters-gauges-histograms-and-summaries.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-is-the-difference-between-prometheus-counters-gauges-histograms-and-summaries.md",
+      "shortAnswer": "Counters are monotonically increasing values that only reset on restart; Gauges are instantaneous values that go up and down; Histograms sample observations into client-side buckets enabling server-side aggregations; Summaries calculate client-side quantiles but cannot be aggregated across instances.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 687,
+          "slug": "how-does-node-exporter-collect-linux-host-hardware-and-os-metrics-for-prometheus",
+          "title": "How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 642,
+          "slug": "what-is-multi-window-multi-burn-rate-alerting-and-why-does-it-eliminate-alert-fatigue",
+          "title": "What is Multi-Window Multi-Burn-Rate alerting and why does it eliminate alert fatigue?",
+          "topic": "site-reliability-engineering"
+        },
+        {
+          "id": 644,
+          "slug": "what-are-the-four-golden-signals-of-monitoring-and-how-do-you-monitor-them-in-distributed-systems",
+          "title": "What are the Four Golden Signals of Monitoring and how do you monitor them in distributed systems?",
+          "topic": "site-reliability-engineering"
+        }
+      ],
+      "quiz": {
+        "stem": "Why do site reliability engineers prefer Prometheus Histograms over Summaries when calculating cluster-wide p99 latency SLOs?",
+        "options": [
+          "Summaries use twice as much network bandwidth as Histograms",
+          "Histograms store bucket counters that can be mathematically aggregated across hundreds of distributed pods, whereas quantiles calculated by Summaries cannot be combined",
+          "Summaries cannot measure latency values greater than one second",
+          "Histograms automatically fix slow database queries"
+        ],
+        "answerIndex": 1,
+        "explanation": "Summaries calculate quantiles on the client machine; statistically, you cannot average percentiles across multiple nodes. Histograms expose raw bucket counts that PromQL can aggregate across the entire cluster."
+      }
+    },
+    {
+      "id": 561,
+      "slug": "what-are-structured-logging-best-practices-and-how-do-you-design-log-retention-policies-for-cost-control",
+      "title": "What are structured logging best practices and how do you design log retention policies for cost control?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "logging",
+        "json",
+        "retention",
+        "elasticsearch",
+        "loki"
+      ],
+      "path": "monitoring-and-logging/what-are-structured-logging-best-practices-and-how-do-you-design-log-retention-policies-for-cost-control.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-are-structured-logging-best-practices-and-how-do-you-design-log-retention-policies-for-cost-control.md",
+      "shortAnswer": "Structured logging formats events as JSON with standard key-value metadata (timestamp, level, service, trace_id, environment); cost-effective retention uses hot/warm/cold tiering, aggressive sampling of 200 OKs, and short retention periods for debug logs.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 132,
+          "slug": "what-are-monitoring-tools",
+          "title": "What are Monitoring Tools?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 133,
+          "slug": "what-are-monitoring-best-practices",
+          "title": "What are Monitoring Best Practices?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 134,
+          "slug": "what-is-application-performance-monitoring",
+          "title": "What is Application Performance Monitoring?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": {
+        "stem": "Which filtering practice yields the highest log volume reduction in high-scale Kubernetes clusters without impacting incident debugging?",
+        "options": [
+          "Deleting all error logs immediately after generation",
+          "Dropping routine HTTP 200 health-check probe logs (`/healthz`) at the node logging agent",
+          "Converting all JSON logs into XML",
+          "Restricting logging access to senior managers only"
+        ],
+        "answerIndex": 1,
+        "explanation": "Health check probes from Kubernetes readiness and liveness checks execute every few seconds across thousands of pods, generating up to 60% of total cluster log volume with zero diagnostic value."
+      }
+    },
+    {
+      "id": 562,
+      "slug": "how-does-distributed-tracing-propagate-context-across-asynchronous-message-queues-and-http-boundaries",
+      "title": "How does distributed tracing propagate context across asynchronous message queues and HTTP boundaries?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "tracing",
+        "opentelemetry",
+        "context-propagation",
+        "kafka"
+      ],
+      "path": "monitoring-and-logging/how-does-distributed-tracing-propagate-context-across-asynchronous-message-queues-and-http-boundaries.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/how-does-distributed-tracing-propagate-context-across-asynchronous-message-queues-and-http-boundaries.md",
+      "shortAnswer": "Distributed tracing injects standardized metadata (such as W3C `traceparent` headers) into outgoing HTTP headers or message queue record headers (Kafka, SQS), and the downstream consumer extracts this context to link spans under the same root TraceID.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 723,
+          "slug": "how-do-you-set-slis-and-slos-for-event-driven-and-streaming-architectures",
+          "title": "How Do You Set SLIs and SLOs for Event-Driven and Streaming Architectures?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 134,
+          "slug": "what-is-application-performance-monitoring",
+          "title": "What is Application Performance Monitoring?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 135,
+          "slug": "what-is-log-management",
+          "title": "What is Log Management?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": {
+        "stem": "Where does distributed tracing embed correlation metadata when passing messages through an asynchronous message broker like Apache Kafka?",
+        "options": [
+          "By renaming the Kafka topic dynamically for each message",
+          "Inside the Kafka record's metadata headers as a standardized W3C `traceparent` field",
+          "By writing the trace ID to an external centralized MySQL database before producing",
+          "Inside the broker's underlying operating system kernel socket buffers"
+        ],
+        "answerIndex": 1,
+        "explanation": "Trace context is injected directly into Kafka record headers, allowing consumers to extract the TraceID and continue the distributed trace without modifying the application payload."
+      }
+    }
+  ]
+}

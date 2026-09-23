@@ -1,0 +1,699 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repo": "https://github.com/mchittineni/ultimate-devops-guide",
+    "branch": "main"
+  },
+  "counts": {
+    "topics": 40,
+    "questions": 750,
+    "quiz": 243,
+    "byDifficulty": {
+      "Beginner": 173,
+      "Intermediate": 370,
+      "Advanced": 207
+    }
+  },
+  "topics": [
+    {
+      "slug": "core-devops-concepts",
+      "title": "Core DevOps Concepts",
+      "group": "Foundations",
+      "description": "The vocabulary every DevOps interview opens with: what DevOps actually changes, why it exists, and how CI, continuous delivery, and continuous deployment differ.",
+      "order": 1,
+      "file": "topics/core-devops-concepts.json",
+      "counts": {
+        "questions": 11,
+        "quiz": 5,
+        "byDifficulty": {
+          "Beginner": 6,
+          "Intermediate": 4,
+          "Advanced": 1
+        }
+      }
+    },
+    {
+      "slug": "docker",
+      "title": "Docker",
+      "group": "Containers and Kubernetes",
+      "description": "Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the client/daemon architecture underneath `docker run`.",
+      "order": 2,
+      "file": "topics/docker.json",
+      "counts": {
+        "questions": 22,
+        "quiz": 7,
+        "byDifficulty": {
+          "Beginner": 9,
+          "Intermediate": 10,
+          "Advanced": 3
+        }
+      }
+    },
+    {
+      "slug": "kubernetes",
+      "title": "Kubernetes",
+      "group": "Containers and Kubernetes",
+      "description": "The control plane, the workload objects you touch daily, and the networking abstractions that make Pods reachable.",
+      "order": 3,
+      "file": "topics/kubernetes.json",
+      "counts": {
+        "questions": 39,
+        "quiz": 12,
+        "byDifficulty": {
+          "Beginner": 5,
+          "Intermediate": 26,
+          "Advanced": 8
+        }
+      }
+    },
+    {
+      "slug": "cicd",
+      "title": "CI/CD",
+      "group": "Delivery and Automation",
+      "description": "Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deployment distinction interviewers love to test.",
+      "order": 4,
+      "file": "topics/cicd.json",
+      "counts": {
+        "questions": 30,
+        "quiz": 10,
+        "byDifficulty": {
+          "Beginner": 5,
+          "Intermediate": 19,
+          "Advanced": 6
+        }
+      }
+    },
+    {
+      "slug": "cloud-platforms",
+      "title": "Cloud Platforms",
+      "group": "Cloud Providers",
+      "description": "Cloud service models and the three major providers - enough breadth to discuss AWS, Azure, and GCP comparatively.",
+      "order": 5,
+      "file": "topics/cloud-platforms.json",
+      "counts": {
+        "questions": 13,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 8,
+          "Intermediate": 4,
+          "Advanced": 1
+        }
+      }
+    },
+    {
+      "slug": "infrastructure-as-code",
+      "title": "Infrastructure as Code",
+      "group": "Delivery and Automation",
+      "description": "Declarative infrastructure with Terraform and Ansible - state, providers, idempotency, and where each tool belongs.",
+      "order": 6,
+      "file": "topics/infrastructure-as-code.json",
+      "counts": {
+        "questions": 24,
+        "quiz": 8,
+        "byDifficulty": {
+          "Beginner": 6,
+          "Intermediate": 14,
+          "Advanced": 4
+        }
+      }
+    },
+    {
+      "slug": "monitoring-and-logging",
+      "title": "Monitoring and Logging",
+      "group": "Reliability and Operations",
+      "description": "Metrics, logs, and the toolchain - Prometheus, Grafana, and the ELK stack - plus the conceptual split between monitoring and logging.",
+      "order": 7,
+      "file": "topics/monitoring-and-logging.json",
+      "counts": {
+        "questions": 16,
+        "quiz": 7,
+        "byDifficulty": {
+          "Beginner": 6,
+          "Intermediate": 9,
+          "Advanced": 1
+        }
+      }
+    },
+    {
+      "slug": "security-and-compliance",
+      "title": "Security and Compliance",
+      "group": "Security",
+      "description": "Shifting security left: DevSecOps practice, infrastructure and container hardening, and compliance expressed as code.",
+      "order": 8,
+      "file": "topics/security-and-compliance.json",
+      "counts": {
+        "questions": 12,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 2,
+          "Intermediate": 8,
+          "Advanced": 2
+        }
+      }
+    },
+    {
+      "slug": "linux-administration",
+      "title": "Linux Administration",
+      "group": "Foundations",
+      "description": "The operating system under everything - commands, shell scripting, systemd, service management, and the filesystem hierarchy.",
+      "order": 9,
+      "file": "topics/linux-administration.json",
+      "counts": {
+        "questions": 21,
+        "quiz": 8,
+        "byDifficulty": {
+          "Beginner": 8,
+          "Intermediate": 11,
+          "Advanced": 2
+        }
+      }
+    },
+    {
+      "slug": "version-control",
+      "title": "Version Control",
+      "group": "Foundations",
+      "description": "Git mechanics and the branching models teams actually argue about, including how to resolve conflicts calmly.",
+      "order": 10,
+      "file": "topics/version-control.json",
+      "counts": {
+        "questions": 16,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 7,
+          "Intermediate": 8,
+          "Advanced": 1
+        }
+      }
+    },
+    {
+      "slug": "configuration-management",
+      "title": "Configuration Management",
+      "group": "Delivery and Automation",
+      "description": "Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pull, agent versus agentless.",
+      "order": 11,
+      "file": "topics/configuration-management.json",
+      "counts": {
+        "questions": 17,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 3,
+          "Intermediate": 12,
+          "Advanced": 2
+        }
+      }
+    },
+    {
+      "slug": "scalability-and-high-availability",
+      "title": "Scalability and High Availability",
+      "group": "Architecture and Scale",
+      "description": "Designing systems that grow and stay up: scaling dimensions, load balancing, auto scaling, and recovery objectives.",
+      "order": 12,
+      "file": "topics/scalability-and-high-availability.json",
+      "counts": {
+        "questions": 16,
+        "quiz": 7,
+        "byDifficulty": {
+          "Beginner": 4,
+          "Intermediate": 8,
+          "Advanced": 4
+        }
+      }
+    },
+    {
+      "slug": "backup-and-disaster-recovery",
+      "title": "Backup and Disaster Recovery",
+      "group": "Reliability and Operations",
+      "description": "Backup types, RPO/RTO targets, business continuity planning, and the discipline of testing restores.",
+      "order": 13,
+      "file": "topics/backup-and-disaster-recovery.json",
+      "counts": {
+        "questions": 13,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 6,
+          "Intermediate": 5,
+          "Advanced": 2
+        }
+      }
+    },
+    {
+      "slug": "cloud-native-architecture",
+      "title": "Cloud Native Architecture",
+      "group": "Architecture and Scale",
+      "description": "Microservices, service mesh, event-driven design, and the Twelve-Factor principles that make apps portable.",
+      "order": 14,
+      "file": "topics/cloud-native-architecture.json",
+      "counts": {
+        "questions": 15,
+        "quiz": 7,
+        "byDifficulty": {
+          "Beginner": 3,
+          "Intermediate": 8,
+          "Advanced": 4
+        }
+      }
+    },
+    {
+      "slug": "performance-testing",
+      "title": "Performance Testing",
+      "group": "Architecture and Scale",
+      "description": "Load, stress, soak, and spike testing - how to design them, which tools to use, and how to read the results.",
+      "order": 15,
+      "file": "topics/performance-testing.json",
+      "counts": {
+        "questions": 12,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 5,
+          "Intermediate": 3,
+          "Advanced": 4
+        }
+      }
+    },
+    {
+      "slug": "api-gateway-and-service-mesh",
+      "title": "API Gateway and Service Mesh",
+      "group": "Architecture and Scale",
+      "description": "The API edge: gateway responsibilities, security, rate limiting, and documentation as a first-class artifact.",
+      "order": 16,
+      "file": "topics/api-gateway-and-service-mesh.json",
+      "counts": {
+        "questions": 15,
+        "quiz": 7,
+        "byDifficulty": {
+          "Beginner": 3,
+          "Intermediate": 9,
+          "Advanced": 3
+        }
+      }
+    },
+    {
+      "slug": "container-orchestration-advanced",
+      "title": "Container Orchestration Advanced",
+      "group": "Containers and Kubernetes",
+      "description": "Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime interface.",
+      "order": 17,
+      "file": "topics/container-orchestration-advanced.json",
+      "counts": {
+        "questions": 21,
+        "quiz": 7,
+        "byDifficulty": {
+          "Beginner": 1,
+          "Intermediate": 6,
+          "Advanced": 14
+        }
+      }
+    },
+    {
+      "slug": "devops-tools-and-automation",
+      "title": "DevOps Tools and Automation",
+      "group": "Delivery and Automation",
+      "description": "GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to ship without downtime.",
+      "order": 18,
+      "file": "topics/devops-tools-and-automation.json",
+      "counts": {
+        "questions": 15,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 5,
+          "Intermediate": 8,
+          "Advanced": 2
+        }
+      }
+    },
+    {
+      "slug": "cloud-cost-optimization",
+      "title": "Cloud Cost Optimization",
+      "group": "Cloud Providers",
+      "description": "Reserved and spot capacity, tagging discipline, and the reports that turn a cloud bill into accountable engineering work.",
+      "order": 19,
+      "file": "topics/cloud-cost-optimization.json",
+      "counts": {
+        "questions": 14,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 5,
+          "Intermediate": 8,
+          "Advanced": 1
+        }
+      }
+    },
+    {
+      "slug": "site-reliability-engineering",
+      "title": "Site Reliability Engineering (SRE)",
+      "group": "Reliability and Operations",
+      "description": "Google's operational model: SLIs, SLOs, error budgets, and the systematic elimination of toil.",
+      "order": 20,
+      "file": "topics/site-reliability-engineering.json",
+      "counts": {
+        "questions": 17,
+        "quiz": 8,
+        "byDifficulty": {
+          "Beginner": 6,
+          "Intermediate": 9,
+          "Advanced": 2
+        }
+      }
+    },
+    {
+      "slug": "devops-metrics-and-kpis",
+      "title": "DevOps Metrics and KPIs",
+      "group": "Reliability and Operations",
+      "description": "The four DORA metrics and the measurement habits that keep them honest.",
+      "order": 21,
+      "file": "topics/devops-metrics-and-kpis.json",
+      "counts": {
+        "questions": 12,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 5,
+          "Intermediate": 6,
+          "Advanced": 1
+        }
+      }
+    },
+    {
+      "slug": "serverless-architecture",
+      "title": "Serverless Architecture",
+      "group": "Architecture and Scale",
+      "description": "Functions as a service, the operational model behind them, and the design patterns that keep serverless workloads fast and cheap.",
+      "order": 22,
+      "file": "topics/serverless-architecture.json",
+      "counts": {
+        "questions": 14,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 6,
+          "Intermediate": 7,
+          "Advanced": 1
+        }
+      }
+    },
+    {
+      "slug": "database-management-in-devops",
+      "title": "Database Management in DevOps",
+      "group": "Architecture and Scale",
+      "description": "Treating schemas as code: version control, migration tooling, backup strategy, and performance tuning.",
+      "order": 23,
+      "file": "topics/database-management-in-devops.json",
+      "counts": {
+        "questions": 15,
+        "quiz": 7,
+        "byDifficulty": {
+          "Beginner": 3,
+          "Intermediate": 8,
+          "Advanced": 4
+        }
+      }
+    },
+    {
+      "slug": "network-security",
+      "title": "Network Security",
+      "group": "Security",
+      "description": "Zero trust, TLS, web application firewalls, and segmentation - the controls that protect traffic in and between clouds.",
+      "order": 24,
+      "file": "topics/network-security.json",
+      "counts": {
+        "questions": 19,
+        "quiz": 7,
+        "byDifficulty": {
+          "Beginner": 5,
+          "Intermediate": 11,
+          "Advanced": 3
+        }
+      }
+    },
+    {
+      "slug": "incident-management",
+      "title": "Incident Management",
+      "group": "Reliability and Operations",
+      "description": "Detection through post-mortem: response plans, severity levels, on-call practice, and blameless learning.",
+      "order": 25,
+      "file": "topics/incident-management.json",
+      "counts": {
+        "questions": 13,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 6,
+          "Intermediate": 5,
+          "Advanced": 2
+        }
+      }
+    },
+    {
+      "slug": "devops-culture-and-practices",
+      "title": "DevOps Culture and Practices",
+      "group": "Platform and Leadership",
+      "description": "The human half of DevOps - shared ownership, blamelessness, knowledge sharing, and collaboration that survives incidents.",
+      "order": 26,
+      "file": "topics/devops-culture-and-practices.json",
+      "counts": {
+        "questions": 11,
+        "quiz": 5,
+        "byDifficulty": {
+          "Beginner": 7,
+          "Intermediate": 3,
+          "Advanced": 1
+        }
+      }
+    },
+    {
+      "slug": "infrastructure-monitoring",
+      "title": "Infrastructure Monitoring",
+      "group": "Reliability and Operations",
+      "description": "Host and platform monitoring, APM, log management, and the practices that keep dashboards and alerts useful.",
+      "order": 27,
+      "file": "topics/infrastructure-monitoring.json",
+      "counts": {
+        "questions": 13,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 6,
+          "Intermediate": 5,
+          "Advanced": 2
+        }
+      }
+    },
+    {
+      "slug": "cloud-migration",
+      "title": "Cloud Migration",
+      "group": "Cloud Providers",
+      "description": "Assessment, the 6 Rs, application modernization, and the tooling that moves workloads without surprises.",
+      "order": 28,
+      "file": "topics/cloud-migration.json",
+      "counts": {
+        "questions": 14,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 3,
+          "Intermediate": 8,
+          "Advanced": 3
+        }
+      }
+    },
+    {
+      "slug": "advanced-devops-cloud",
+      "title": "Advanced DevOps & Cloud",
+      "group": "Platform and Leadership",
+      "description": "Senior-level ground: platform engineering, FinOps, policy as code, chaos engineering, observability, and progressive delivery.",
+      "order": 29,
+      "file": "topics/advanced-devops-cloud.json",
+      "counts": {
+        "questions": 27,
+        "quiz": 7,
+        "byDifficulty": {
+          "Beginner": 5,
+          "Intermediate": 10,
+          "Advanced": 12
+        }
+      }
+    },
+    {
+      "slug": "devsecops",
+      "title": "DevSecOps",
+      "group": "Security",
+      "description": "Security built into the delivery pipeline: scanning layers, SBOMs and supply-chain provenance, image signing, secretless pipelines, and vulnerability triage that does not stall delivery.",
+      "order": 30,
+      "file": "topics/devsecops.json",
+      "counts": {
+        "questions": 19,
+        "quiz": 7,
+        "byDifficulty": {
+          "Beginner": 3,
+          "Intermediate": 11,
+          "Advanced": 5
+        }
+      }
+    },
+    {
+      "slug": "secops",
+      "title": "SecOps and Threat Detection",
+      "group": "Security",
+      "description": "Security operations for engineers: SOC workflow, SIEM and normalisation, detection engineering, MITRE ATT&CK coverage, threat hunting, and security incident response.",
+      "order": 31,
+      "file": "topics/secops.json",
+      "counts": {
+        "questions": 14,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 2,
+          "Intermediate": 7,
+          "Advanced": 5
+        }
+      }
+    },
+    {
+      "slug": "slo-engineering",
+      "title": "SLO Engineering",
+      "group": "Reliability and Operations",
+      "description": "The engineering practice behind SLOs: choosing targets, burn-rate alerting, correct latency SLIs, error budget policies, and SLOs for batch, async, and third-party dependencies.",
+      "order": 32,
+      "file": "topics/slo-engineering.json",
+      "counts": {
+        "questions": 14,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 1,
+          "Intermediate": 7,
+          "Advanced": 6
+        }
+      }
+    },
+    {
+      "slug": "sla-management",
+      "title": "SLA Management",
+      "group": "Reliability and Operations",
+      "description": "The commercial side of reliability: SLA versus SLO versus OLA, downtime and composite availability arithmetic, contract clauses, service credits, reporting, and breach response.",
+      "order": 33,
+      "file": "topics/sla-management.json",
+      "counts": {
+        "questions": 12,
+        "quiz": 5,
+        "byDifficulty": {
+          "Beginner": 2,
+          "Intermediate": 8,
+          "Advanced": 2
+        }
+      }
+    },
+    {
+      "slug": "aws-engineering",
+      "title": "AWS Engineering",
+      "group": "Cloud Providers",
+      "description": "Depth on AWS: VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage classes, highly available databases, multi-account organisations, and IaC choices.",
+      "order": 34,
+      "file": "topics/aws-engineering.json",
+      "counts": {
+        "questions": 36,
+        "quiz": 10,
+        "byDifficulty": {
+          "Beginner": 6,
+          "Intermediate": 20,
+          "Advanced": 10
+        }
+      }
+    },
+    {
+      "slug": "azure-engineering",
+      "title": "Azure Engineering",
+      "group": "Cloud Providers",
+      "description": "Depth on Azure: the resource hierarchy, Entra ID and RBAC, VNet and private endpoint design, AKS, Bicep, Azure Policy and landing zones, Azure Monitor with KQL, and the compute options.",
+      "order": 35,
+      "file": "topics/azure-engineering.json",
+      "counts": {
+        "questions": 19,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 1,
+          "Intermediate": 14,
+          "Advanced": 4
+        }
+      }
+    },
+    {
+      "slug": "gcp-engineering",
+      "title": "GCP Engineering",
+      "group": "Cloud Providers",
+      "description": "Depth on Google Cloud: resource hierarchy and org policies, IAM without service-account keys, the global VPC, GKE Standard versus Autopilot, Cloud Run, Cloud Operations, IaC, and the data services.",
+      "order": 36,
+      "file": "topics/gcp-engineering.json",
+      "counts": {
+        "questions": 15,
+        "quiz": 6,
+        "byDifficulty": {
+          "Beginner": 1,
+          "Intermediate": 10,
+          "Advanced": 4
+        }
+      }
+    },
+    {
+      "slug": "cloud-engineering",
+      "title": "Cloud Engineering",
+      "group": "Cloud Providers",
+      "description": "Provider-neutral cloud engineering: landing zones, hybrid connectivity, least-privilege identity, multi-region resilience, multi-cloud trade-offs, DNS and global routing, and cross-provider service mapping.",
+      "order": 37,
+      "file": "topics/cloud-engineering.json",
+      "counts": {
+        "questions": 8,
+        "quiz": 0,
+        "byDifficulty": {
+          "Beginner": 1,
+          "Intermediate": 4,
+          "Advanced": 3
+        }
+      }
+    },
+    {
+      "slug": "platform-engineering",
+      "title": "Platform Engineering",
+      "group": "Platform and Leadership",
+      "description": "Building the internal platform as a product: IDPs, golden paths, Backstage, Crossplane, self-service environments, adoption metrics, and safe rollout of breaking platform changes.",
+      "order": 38,
+      "file": "topics/platform-engineering.json",
+      "counts": {
+        "questions": 14,
+        "quiz": 0,
+        "byDifficulty": {
+          "Beginner": 1,
+          "Intermediate": 5,
+          "Advanced": 8
+        }
+      }
+    },
+    {
+      "slug": "scripting-and-automation",
+      "title": "Scripting and Automation",
+      "group": "Foundations",
+      "description": "The scripting layer under every pipeline - defensive Bash for orchestration, and Python for cloud APIs, structured data, and the tooling Bash cannot carry.",
+      "order": 39,
+      "file": "topics/scripting-and-automation.json",
+      "counts": {
+        "questions": 6,
+        "quiz": 0,
+        "byDifficulty": {
+          "Beginner": 1,
+          "Intermediate": 4,
+          "Advanced": 1
+        }
+      }
+    },
+    {
+      "slug": "interview-experience",
+      "title": "Interview Experience",
+      "group": "Interview Prep",
+      "description": "How the interview itself works - the round structure, explaining your project, answering scenario questions, and the company-by-company record of what was actually asked across 85 employers.",
+      "order": 40,
+      "file": "topics/interview-experience.json",
+      "counts": {
+        "questions": 96,
+        "quiz": 0,
+        "byDifficulty": {
+          "Beginner": 5,
+          "Intermediate": 28,
+          "Advanced": 63
+        }
+      }
+    }
+  ]
+}

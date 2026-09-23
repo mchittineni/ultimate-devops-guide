@@ -1,0 +1,689 @@
+{
+  "schemaVersion": 1,
+  "slug": "slo-engineering",
+  "title": "SLO Engineering",
+  "group": "Reliability and Operations",
+  "description": "The engineering practice behind SLOs: choosing targets, burn-rate alerting, correct latency SLIs, error budget policies, and SLOs for batch, async, and third-party dependencies.",
+  "studyNotes": [
+    "Multi-window multi-burn-rate alerting, and why the short window exists.",
+    "Latency as a threshold ratio rather than a percentile value.",
+    "Owning the SLO even when the failing dependency is not yours."
+  ],
+  "questions": [
+    {
+      "id": 177,
+      "slug": "how-do-you-choose-an-slo-target",
+      "title": "How do you choose an SLO target?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "slo-engineering",
+        "interview-questions"
+      ],
+      "path": "slo-engineering/how-do-you-choose-an-slo-target.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/how-do-you-choose-an-slo-target.md",
+      "shortAnswer": "Start from measured current performance and user expectation, not from a round number. Look at the last 4–8 weeks of the SLI, ask whether users complained during the worse periods, and set the target just above the level users tolerate - then check that the resulting error budget is large enough to permit normal change. Tighten later; a target you cannot meet teaches everyone to ignore SLOs.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 178,
+      "slug": "what-is-multi-window-multi-burn-rate-alerting",
+      "title": "What is multi-window multi-burn-rate alerting?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "slo-engineering",
+        "interview-questions"
+      ],
+      "path": "slo-engineering/what-is-multi-window-multi-burn-rate-alerting.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/what-is-multi-window-multi-burn-rate-alerting.md",
+      "shortAnswer": "Instead of alerting when an error rate crosses a fixed threshold, you alert on how fast the error budget is being consumed. Two burn-rate conditions run in parallel - a fast one (page: a large fraction of the budget in hours) and a slow one (ticket: steady erosion over days) - and each requires both a long and a short window to fire, so alerts are sensitive without being flappy.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 179,
+      "slug": "how-do-you-measure-a-latency-sli-correctly",
+      "title": "How do you measure a latency SLI correctly?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "slo-engineering",
+        "interview-questions"
+      ],
+      "path": "slo-engineering/how-do-you-measure-a-latency-sli-correctly.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/how-do-you-measure-a-latency-sli-correctly.md",
+      "shortAnswer": "Express latency as a ratio of requests faster than a threshold - \"99% of checkout requests complete within 300ms\" - rather than as an average or a percentile value. Threshold-based ratios are aggregatable, tie directly to an error budget, and avoid the arithmetic errors that come from averaging percentiles across instances.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 180,
+      "slug": "what-is-an-error-budget-policy",
+      "title": "What is an error budget policy?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "slo-engineering",
+        "interview-questions"
+      ],
+      "path": "slo-engineering/what-is-an-error-budget-policy.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/what-is-an-error-budget-policy.md",
+      "shortAnswer": "The error budget policy is the written, pre-agreed answer to \"what changes when the budget runs out?\" It names the thresholds, the actions at each threshold, who has authority to enforce them, and the escape hatch. Without it, an error budget is a dashboard nobody acts on.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 181,
+      "slug": "how-do-you-define-slos-for-batch-and-asynchronous-workloads",
+      "title": "How do you define SLOs for batch and asynchronous workloads?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "slo-engineering",
+        "interview-questions"
+      ],
+      "path": "slo-engineering/how-do-you-define-slos-for-batch-and-asynchronous-workloads.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/how-do-you-define-slos-for-batch-and-asynchronous-workloads.md",
+      "shortAnswer": "Request-based availability does not apply, so measure the properties users actually depend on: freshness (how stale is the output), coverage (what fraction of input was processed), correctness, and completion within a deadline. Each becomes a good-events ratio over a window - for example \"99% of hourly runs publish data less than 90 minutes old\".",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 182,
+      "slug": "how-do-you-handle-slos-for-dependencies-you-do-not-own",
+      "title": "How do you handle SLOs for dependencies you do not own?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "slo-engineering",
+        "interview-questions"
+      ],
+      "path": "slo-engineering/how-do-you-handle-slos-for-dependencies-you-do-not-own.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/how-do-you-handle-slos-for-dependencies-you-do-not-own.md",
+      "shortAnswer": "Own your user-facing SLO regardless of whose fault a failure is, then engineer so that a dependency's failure does not automatically become yours: timeouts, retries with jitter, circuit breakers, caching, and graceful degradation. Track each dependency's contribution to your error budget so the conversation with that team - or that vendor - is evidence-based.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 183,
+      "slug": "what-tooling-do-you-use-to-implement-slos",
+      "title": "What tooling do you use to implement SLOs?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "slo-engineering",
+        "interview-questions"
+      ],
+      "path": "slo-engineering/what-tooling-do-you-use-to-implement-slos.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/what-tooling-do-you-use-to-implement-slos.md",
+      "shortAnswer": "Define SLOs declaratively in the service repository - OpenSLO or Sloth YAML - and generate the recording rules, burn-rate alerts, and dashboards from that definition. Hand-written PromQL for every SLO does not survive contact with 40 services; the specification should be reviewed like code and the artefacts should be generated.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 304,
+      "slug": "what-do-you-need-before-you-can-set-your-first-slo",
+      "title": "What do you need before you can set your first SLO?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "slo-engineering",
+        "interview-questions"
+      ],
+      "path": "slo-engineering/what-do-you-need-before-you-can-set-your-first-slo.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/what-do-you-need-before-you-can-set-your-first-slo.md",
+      "shortAnswer": "Four things, in order: a **user journey** worth measuring (not a component), an **SLI** that can be computed from data you already collect, **historical data** to see what your reliability actually is today, and an **owner** who can act when the target is missed. If you cannot name the journey or you have no data, you are not ready to pick a number - and a target picked without data is just a wish that will be ignored the first time it is breached.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 718,
+      "slug": "what-is-the-difference-between-request-based-and-window-based-slis",
+      "title": "What is the Difference Between Request-Based and Window-Based SLIs?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "slo-engineering",
+        "sli",
+        "sre-metrics"
+      ],
+      "path": "slo-engineering/what-is-the-difference-between-request-based-and-window-based-slis.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/what-is-the-difference-between-request-based-and-window-based-slis.md",
+      "shortAnswer": "Request-based SLIs evaluate reliability as the ratio of successful requests to total requests over a period. Window-based SLIs evaluate the percentage of discrete time windows (e.g., 1-minute or 5-minute intervals) during which performance met defined quality thresholds.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why are window-based (time-slice) SLIs frequently preferred over request-based SLIs for low-throughput enterprise services?",
+        "options": [
+          "Window-based SLIs eliminate the need to collect monitoring metrics.",
+          "In low-traffic services, a single failed request can dramatically drop a request-based percentage and cause false alarms, whereas window-based SLIs measure whether the service was healthy during each time bucket.",
+          "Window-based SLIs are required by cloud providers to issue service credits.",
+          "Request-based SLIs cannot measure HTTP 500 error responses."
+        ],
+        "answerIndex": 1,
+        "explanation": "In low-throughput services, small request counts distort request-based percentages (e.g., 1 failure in 5 requests = 80% availability). Window-based SLIs evaluate whether each discrete time interval satisfied health criteria, avoiding low-volume distortion."
+      }
+    },
+    {
+      "id": 719,
+      "slug": "how-do-you-define-and-track-slos-for-asynchronous-background-jobs-and-queues",
+      "title": "How Do You Define and Track SLOs for Asynchronous Background Jobs and Queues?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "slo-engineering",
+        "queue-management",
+        "asynchronous-processing"
+      ],
+      "path": "slo-engineering/how-do-you-define-and-track-slos-for-asynchronous-background-jobs-and-queues.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/how-do-you-define-and-track-slos-for-asynchronous-background-jobs-and-queues.md",
+      "shortAnswer": "Asynchronous background job SLOs focus on message processing latency (time elapsed from enqueue to completion), queue age/depth (oldest unacknowledged message), and successful completion rates, evaluated using window-based metrics or job throughput distributions.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 396,
+          "slug": "how-do-you-speed-up-a-slow-ci-cd-pipeline",
+          "title": "How do you speed up a slow CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 535,
+          "slug": "what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup",
+          "title": "What are ephemeral preview environments and how do you manage their lifecycle and cleanup?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "When designing an SLI for an asynchronous message queue consumer, why is 'Age of Oldest Message' (consumer lag) generally superior to 'Total Message Count'?",
+        "options": [
+          "Total Message Count cannot be collected from cloud monitoring APIs.",
+          "Total Message Count is always zero in production environments.",
+          "A large message count may simply reflect healthy high-throughput processing, whereas a high message age proves that messages are stalling and user-perceived processing is delayed.",
+          "Consumer lag only tracks network packet drops rather than application state."
+        ],
+        "answerIndex": 2,
+        "explanation": "High message count can occur during normal high-volume periods when workers process items swiftly. High age of the oldest message indicates that messages are stuck in the queue, directly impacting user delivery latency."
+      }
+    },
+    {
+      "id": 720,
+      "slug": "how-do-you-handle-planned-maintenance-windows-in-error-budget-calculations",
+      "title": "How Do You Handle Planned Maintenance Windows in Error Budget Calculations?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "slo-engineering",
+        "error-budgets",
+        "maintenance-windows"
+      ],
+      "path": "slo-engineering/how-do-you-handle-planned-maintenance-windows-in-error-budget-calculations.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/how-do-you-handle-planned-maintenance-windows-in-error-budget-calculations.md",
+      "shortAnswer": "Planned maintenance windows should either be included in internal error budgets to drive zero-downtime engineering practices or explicitly scheduled and excluded from commercial customer SLAs via defined contract terms, clear advance notices, and metric blackout tags.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "From a modern Site Reliability Engineering (SRE) perspective, why do teams often choose to count planned maintenance downtime against their internal error budgets?",
+        "options": [
+          "To ensure that cloud providers refund the cost of running compute nodes.",
+          "Because users experience unavailability regardless of whether downtime was scheduled, which incentivizes engineering zero-downtime architectures.",
+          "Because Kubernetes does not support rolling updates or blue-green deployments.",
+          "To automatically cancel customer subscription agreements without penalties."
+        ],
+        "answerIndex": 1,
+        "explanation": "Users are impacted by unavailability whether planned or unplanned. Counting planned downtime against internal error budgets incentivizes teams to engineer zero-downtime deployment and migration patterns."
+      }
+    },
+    {
+      "id": 721,
+      "slug": "what-is-error-budget-burn-rate-alerting-and-how-do-you-tune-thresholds",
+      "title": "What is Error Budget Burn-Rate Alerting and How Do You Tune Thresholds?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "slo-engineering",
+        "burn-rate",
+        "alerting"
+      ],
+      "path": "slo-engineering/what-is-error-budget-burn-rate-alerting-and-how-do-you-tune-thresholds.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/what-is-error-budget-burn-rate-alerting-and-how-do-you-tune-thresholds.md",
+      "shortAnswer": "Burn-rate alerting measures how rapidly an error budget is being consumed relative to time. Multi-window, multi-burn-rate alerting combines short-window detection for catastrophic outages (e.g., 14.4x burn over 1 hour) with long-window detection for subtle degradation (e.g., 1x burn over 3 days) to eliminate alert fatigue.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "In Google SRE multi-window burn-rate alerting, what is the primary purpose of requiring the short window (e.g., 5 minutes) to exceed the burn threshold alongside the long window (e.g., 1 hour)?",
+        "options": [
+          "To reduce the number of metrics collected by Prometheus.",
+          "To ensure the alert only fires if the failure is still actively ongoing, preventing pages for brief transient spikes that have already resolved.",
+          "To ensure that database queries are executed in parallel across all worker nodes.",
+          "To calculate legal service credit percentages automatically."
+        ],
+        "answerIndex": 1,
+        "explanation": "If a massive burst of errors lasts only 2 minutes and ends, the 1-hour average may remain elevated, but the short 5-minute window will have recovered. Requiring both ensures the system does not page on-call engineers for incidents that are already over."
+      }
+    },
+    {
+      "id": 722,
+      "slug": "how-do-you-establish-an-actionable-error-budget-policy-with-engineering-leadership",
+      "title": "How Do You Establish an Actionable Error Budget Policy with Engineering Leadership?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "slo-engineering",
+        "error-budgets",
+        "engineering-management"
+      ],
+      "path": "slo-engineering/how-do-you-establish-an-actionable-error-budget-policy-with-engineering-leadership.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/how-do-you-establish-an-actionable-error-budget-policy-with-engineering-leadership.md",
+      "shortAnswer": "An error budget policy is a formally negotiated social contract between product and engineering leadership that defines specific mandatory operational actions—such as halting non-critical feature releases to prioritize reliability, refactoring, or infrastructure hardening—whenever an SLO error budget is exhausted.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary objective of an agreed-upon Error Budget Policy between product management and engineering?",
+        "options": [
+          "To automatically deduct salary bonuses from software engineers when bugs are found.",
+          "To provide an agreed mechanism that balances feature delivery with reliability by shifting focus to technical debt and stability when the budget is spent.",
+          "To eliminate all testing requirements when error budgets are positive.",
+          "To allow security teams to bypass all infrastructure change review boards."
+        ],
+        "answerIndex": 1,
+        "explanation": "An error budget policy creates an objective balance between velocity and reliability: when the budget is healthy, teams ship rapidly; when exhausted, teams shift focus to fixing stability and technical debt."
+      }
+    },
+    {
+      "id": 723,
+      "slug": "how-do-you-set-slis-and-slos-for-event-driven-and-streaming-architectures",
+      "title": "How Do You Set SLIs and SLOs for Event-Driven and Streaming Architectures?",
+      "topic": "slo-engineering",
+      "category": "SLO Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "slo-engineering",
+        "streaming",
+        "event-driven",
+        "kafka"
+      ],
+      "path": "slo-engineering/how-do-you-set-slis-and-slos-for-event-driven-and-streaming-architectures.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/slo-engineering/how-do-you-set-slis-and-slos-for-event-driven-and-streaming-architectures.md",
+      "shortAnswer": "Event-driven and streaming SLIs measure data freshness (end-to-end event delivery latency), consumer processing lag, message loss/durability (completeness), and pipeline throughput, using time-windowed quantiles rather than simple HTTP status code checks.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why are synthetic canary events frequently injected into streaming and event-driven data pipelines for SLI monitoring?",
+        "options": [
+          "To clean up old data records from disk partitions.",
+          "To measure end-to-end delivery freshness and detect pipeline stalls even when genuine user event volume is low or intermittent.",
+          "To force Kafka consumer groups to rebalance every minute.",
+          "To bypass TLS encryption checks across internal broker clusters."
+        ],
+        "answerIndex": 1,
+        "explanation": "If user traffic drops, passive metrics might show zero errors despite a broken or deadlocked pipeline. Synthetic canary events ensure continuous, proactive measurement of end-to-end propagation latency regardless of user volume."
+      }
+    }
+  ]
+}

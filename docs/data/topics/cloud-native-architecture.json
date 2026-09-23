@@ -1,0 +1,759 @@
+{
+  "schemaVersion": 1,
+  "slug": "cloud-native-architecture",
+  "title": "Cloud Native Architecture",
+  "group": "Architecture and Scale",
+  "description": "Microservices, service mesh, event-driven design, and the Twelve-Factor principles that make apps portable.",
+  "studyNotes": [
+    "When a microservice split helps and when it hurts.",
+    "How a mesh changes the responsibilities of application code.",
+    "Config, state, and logs as Twelve-Factor treats them."
+  ],
+  "questions": [
+    {
+      "id": 66,
+      "slug": "what-is-cloud-native-architecture",
+      "title": "What is Cloud Native Architecture?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cloud-native-architecture",
+        "interview-questions"
+      ],
+      "path": "cloud-native-architecture/what-is-cloud-native-architecture.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-is-cloud-native-architecture.md",
+      "shortAnswer": "Cloud native architecture designs applications specifically for cloud environments - as loosely coupled, containerised, dynamically orchestrated services that are resilient, observable, and changed frequently through automation.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 67,
+      "slug": "what-are-microservices",
+      "title": "What are Microservices?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cloud-native-architecture",
+        "interview-questions"
+      ],
+      "path": "cloud-native-architecture/what-are-microservices.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-are-microservices.md",
+      "shortAnswer": "Microservices are an architectural style that structures an application as a set of small, independently deployable services, each owning a single business capability and its own data, communicating over the network.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 68,
+      "slug": "what-is-service-mesh",
+      "title": "What is Service Mesh?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cloud-native-architecture",
+        "interview-questions"
+      ],
+      "path": "cloud-native-architecture/what-is-service-mesh.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-is-service-mesh.md",
+      "shortAnswer": "A service mesh is a dedicated infrastructure layer that handles service-to-service communication - traffic management, mutual TLS, retries, and telemetry - by intercepting traffic in sidecar proxies, so applications do not implement these concerns themselves.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 69,
+      "slug": "what-is-event-driven-architecture",
+      "title": "What is Event-Driven Architecture?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cloud-native-architecture",
+        "interview-questions"
+      ],
+      "path": "cloud-native-architecture/what-is-event-driven-architecture.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-is-event-driven-architecture.md",
+      "shortAnswer": "Event-driven architecture structures a system around the production, detection, and consumption of events, so producers emit facts about what happened and consumers react independently, without the producer knowing who is listening.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 70,
+      "slug": "what-are-the-12-factor-app-principles",
+      "title": "What are the 12-Factor App principles?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cloud-native-architecture",
+        "interview-questions"
+      ],
+      "path": "cloud-native-architecture/what-are-the-12-factor-app-principles.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-are-the-12-factor-app-principles.md",
+      "shortAnswer": "The Twelve-Factor App is a methodology for building services that are portable, disposable, and suited to continuous deployment on cloud platforms - covering config, dependencies, processes, state, logs, and parity between environments.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 280,
+      "slug": "what-is-the-difference-between-a-monolith-and-microservices",
+      "title": "What is the difference between a monolith and microservices?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "cloud-native-architecture",
+        "interview-questions"
+      ],
+      "path": "cloud-native-architecture/what-is-the-difference-between-a-monolith-and-microservices.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-is-the-difference-between-a-monolith-and-microservices.md",
+      "shortAnswer": "A monolith is one deployable unit containing all the application's functionality; microservices split that functionality into many independently deployable services that talk over the network. The real difference is not code size - it is **the unit of deployment**, and therefore who can ship without coordinating with whom.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 426,
+      "slug": "how-do-you-troubleshoot-high-latency-in-a-microservices-architecture",
+      "title": "How do you troubleshoot high latency in a microservices architecture?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cloud-native-architecture",
+        "interview-questions",
+        "monitoring-and-logging",
+        "api-gateway-and-service-mesh",
+        "performance-testing"
+      ],
+      "path": "cloud-native-architecture/how-do-you-troubleshoot-high-latency-in-a-microservices-architecture.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/how-do-you-troubleshoot-high-latency-in-a-microservices-architecture.md",
+      "shortAnswer": "Localise before you optimise. Use **distributed tracing** to find which span in the request path owns the time - that single step replaces hours of guessing, because in a chain of eight services the slow one is rarely the one being blamed. Then classify what you found: **fan-out and N+1 calls** (the most common architectural cause), **a slow dependency** (usually the database), **queueing from insufficient concurrency or a saturated connection pool**, **retries amplifying load**, **tail latency from one bad instance or availability zone**, or **serialisation and payload size**. Always work in **percentiles** - a p50 that looks fine while p99 is 30x worse is the normal shape of this problem - and remember that a synchronous chain multiplies failure and latency, so the durable fix is often architectural rather than a faster query.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 505,
+      "slug": "how-do-you-design-a-secure-highly-available-three-tier-architecture",
+      "title": "How do you design a secure, highly available three-tier architecture?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cloud-native-architecture",
+        "interview-questions",
+        "scalability-and-high-availability",
+        "aws-engineering",
+        "network-security"
+      ],
+      "path": "cloud-native-architecture/how-do-you-design-a-secure-highly-available-three-tier-architecture.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/how-do-you-design-a-secure-highly-available-three-tier-architecture.md",
+      "shortAnswer": "Three logical tiers - **presentation**, **application**, **data** - mapped onto network layers so that only the first is reachable from the internet. Concretely: a CDN and WAF at the edge, a **public-subnet load balancer** terminating TLS, **application instances or Pods in private subnets** across at least three availability zones behind it, and a **managed database in isolated data subnets** with a synchronous standby in another AZ. Every tier spans multiple AZs, every tier scales independently, and the security groups are **chained by reference** - the app tier accepts traffic only from the load balancer's security group, the database only from the app's - so nothing is expressed as a CIDR and nothing is reachable it should not be. High availability comes from redundancy per tier plus health checks that remove failed members; security comes from the layering plus encryption in transit and at rest, no public IPs below the edge, IAM roles instead of credentials, and secrets from a managed store. The sentence that frames it well: **the tiers are a logical separation of responsibility; the subnets and security groups are how you make that separation enforceable.**",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 602,
+      "slug": "what-are-the-12-factor-app-methodology-principles-and-how-do-they-map-to-kubernetes-deployment-patterns",
+      "title": "What are the 12-Factor App methodology principles and how do they map to Kubernetes deployment patterns?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "cloud-native",
+        "12-factor",
+        "kubernetes",
+        "architecture"
+      ],
+      "path": "cloud-native-architecture/what-are-the-12-factor-app-methodology-principles-and-how-do-they-map-to-kubernetes-deployment-patterns.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-are-the-12-factor-app-methodology-principles-and-how-do-they-map-to-kubernetes-deployment-patterns.md",
+      "shortAnswer": "The Twelve-Factor App, written by Heroku engineers in 2011 and open-sourced for community revision in 2024, describes how to build services that are portable and disposable. Kubernetes assumes most of it: config through ConfigMaps and Secrets, stateless Pods scaled by replicas and the HPA, disposability through `SIGTERM` plus a grace period, logs as `stdout` streams collected by a node agent, and admin processes as Jobs. The mapping is not perfect - factor III's \"config in environment variables\" is weaker for secrets than mounted files or a secrets manager, and stateful workloads legitimately break factor VI with StatefulSets.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 535,
+          "slug": "what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup",
+          "title": "What are ephemeral preview environments and how do you manage their lifecycle and cleanup?",
+          "topic": "cicd"
+        },
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": {
+        "stem": "How does Kubernetes implement the 12-Factor App principle of 'Disposability' (Factor IX: fast startup and graceful shutdown)?",
+        "options": [
+          "By keeping pods running in memory for 30 days after deletion",
+          "By sending a SIGTERM signal to container PID 1 and granting a `terminationGracePeriodSeconds` window to drain connections before issuing SIGKILL",
+          "By compiling source code directly into Linux kernel space",
+          "By requiring all pods to run as singletons"
+        ],
+        "answerIndex": 1,
+        "explanation": "Disposability requires apps to stop cleanly on short notice. Kubernetes sends SIGTERM, waits for termination grace period for graceful drain, and issues SIGKILL only if the app fails to stop."
+      }
+    },
+    {
+      "id": 603,
+      "slug": "what-is-the-difference-between-orchestration-and-choreography-in-microservice-event-driven-architectures",
+      "title": "What is the difference between Orchestration and Choreography in microservice event-driven architectures?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "microservices",
+        "event-driven",
+        "orchestration",
+        "choreography",
+        "saga"
+      ],
+      "path": "cloud-native-architecture/what-is-the-difference-between-orchestration-and-choreography-in-microservice-event-driven-architectures.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-is-the-difference-between-orchestration-and-choreography-in-microservice-event-driven-architectures.md",
+      "shortAnswer": "In **orchestration**, one component - a workflow engine such as Temporal, AWS Step Functions, or Camunda - owns the process: it calls or commands each service in turn, records durable state, and handles timeouts, retries, and compensations. In **choreography**, there is no conductor: each service reacts to events on a broker (`OrderPlaced` → payments charges → `PaymentCaptured` → shipping dispatches) and emits its own. Orchestration makes the flow explicit and observable at the cost of a central dependency; choreography maximises decoupling at the cost of a flow that exists only implicitly across many services.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 454,
+          "slug": "what-is-the-difference-between-a-declarative-and-a-scripted-jenkins-pipeline",
+          "title": "What is the difference between a declarative and a scripted Jenkins pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 7,
+          "slug": "what-is-the-difference-between-docker-image-and-docker-container",
+          "title": "What is the difference between Docker Image and Docker Container?",
+          "topic": "docker"
+        },
+        {
+          "id": 440,
+          "slug": "what-is-the-difference-between-a-bind-mount-and-a-volume-in-docker",
+          "title": "What is the difference between a bind mount and a volume in Docker?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": {
+        "stem": "Which business scenario is better suited to centralized Orchestration (e.g. AWS Step Functions) rather than decentralized Choreography?",
+        "options": [
+          "Sending real-time telemetry metrics to five independent dashboards",
+          "A multi-step financial checkout transaction requiring strict compensation rollbacks (Saga) if any intermediate step fails",
+          "Broadcasting weather updates to millions of mobile phones",
+          "Stateless image thumbnail generation"
+        ],
+        "answerIndex": 1,
+        "explanation": "Multi-step transactional workflows with compensation logic (like payment and inventory sagas) benefit heavily from orchestration, where the central state machine can coordinate rollbacks reliably."
+      }
+    },
+    {
+      "id": 604,
+      "slug": "how-does-the-saga-pattern-manage-distributed-transactions-across-microservices-without-two-phase-commit-2pc",
+      "title": "How does the Saga pattern manage distributed transactions across microservices without two-phase commit (2PC)?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "microservices",
+        "saga-pattern",
+        "distributed-transactions",
+        "consistency"
+      ],
+      "path": "cloud-native-architecture/how-does-the-saga-pattern-manage-distributed-transactions-across-microservices-without-two-phase-commit-2pc.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/how-does-the-saga-pattern-manage-distributed-transactions-across-microservices-without-two-phase-commit-2pc.md",
+      "shortAnswer": "A saga replaces one distributed transaction with a sequence of **local** transactions, one per service, each committed immediately. If a later step fails, the saga runs **compensating transactions** for the steps already completed - cancel the hotel, refund the card - to restore business consistency. Steps are coordinated either by an **orchestrator** (a workflow engine such as Temporal, AWS Step Functions, or Camunda that tells each service what to do) or by **choreography** (services reacting to each other's events). The trade-off is that you give up isolation: other requests can see intermediate states, so the design must tolerate them.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 285,
+          "slug": "how-do-you-take-a-monthly-release-process-to-daily-deployments",
+          "title": "How do you take a monthly release process to daily deployments?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the role of a 'Compensating Transaction' in the distributed Saga pattern?",
+        "options": [
+          "To calculate employee annual financial bonuses",
+          "To explicitly undo the business effects of previously committed local transactions when a downstream step in the saga fails",
+          "To encrypt all database tables during transmission",
+          "To convert SQL queries into NoSQL JSON documents"
+        ],
+        "answerIndex": 1,
+        "explanation": "Since Sagas do not use distributed locks and commit each local step immediately, failure at step 4 requires executing compensating transactions to undo the business changes of steps 1, 2, and 3."
+      }
+    },
+    {
+      "id": 605,
+      "slug": "what-are-sidecar-ambassador-and-adapter-container-design-patterns",
+      "title": "What are Sidecar, Ambassador, and Adapter container design patterns?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "design-patterns",
+        "sidecar",
+        "ambassador",
+        "adapter"
+      ],
+      "path": "cloud-native-architecture/what-are-sidecar-ambassador-and-adapter-container-design-patterns.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-are-sidecar-ambassador-and-adapter-container-design-patterns.md",
+      "shortAnswer": "All three put a helper container in the same Pod as the application, sharing its network namespace (`localhost`) and optionally volumes, so a capability can be added without changing the application. The difference is direction and purpose: a **sidecar** extends or supports the app (log shipping, secret refresh, a mesh proxy); an **ambassador** is an outbound proxy that represents the outside world to the app (the app talks to `localhost`, the ambassador handles discovery, TLS, sharding, or retries); an **adapter** normalises what the app exposes to the outside (converting a custom metrics or log format into a standard one). The shared cost is extra resources per Pod and coupled lifecycles.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 535,
+          "slug": "what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup",
+          "title": "What are ephemeral preview environments and how do you manage their lifecycle and cleanup?",
+          "topic": "cicd"
+        },
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Which multi-container Pod design pattern is used when a secondary container intercepts outgoing database connections to `localhost:5432` and handles read/write splitting across cloud replicas?",
+        "options": [
+          "The Adapter pattern",
+          "The Ambassador pattern",
+          "The Init container pattern",
+          "The Singleton pattern"
+        ],
+        "answerIndex": 1,
+        "explanation": "The Ambassador pattern acts as an outbound proxy representing the outside network to the main container, handling complex connection routing and retries transparently."
+      }
+    },
+    {
+      "id": 606,
+      "slug": "what-is-the-strangler-fig-pattern-and-how-is-it-used-to-safely-decommission-monolithic-applications",
+      "title": "What is the Strangler Fig pattern and how is it used to safely decommission monolithic applications?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "architecture",
+        "refactoring",
+        "strangler-fig",
+        "microservices"
+      ],
+      "path": "cloud-native-architecture/what-is-the-strangler-fig-pattern-and-how-is-it-used-to-safely-decommission-monolithic-applications.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-is-the-strangler-fig-pattern-and-how-is-it-used-to-safely-decommission-monolithic-applications.md",
+      "shortAnswer": "Named by Martin Fowler after vines that grow around a host tree until they replace it, the Strangler Fig pattern replaces a legacy system one capability at a time. You put an interception layer - a reverse proxy, API gateway, or event router - in front of the monolith, build a new service for one slice, redirect that slice's traffic to it, and repeat until nothing routes to the monolith and it can be switched off. It avoids the risk of a big-bang rewrite, at the cost of running old and new side by side for a long time and solving data ownership for every slice.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 397,
+          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+          "title": "Why does a build pass locally but fail in CI?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the core strategic principle behind the Strangler Fig architecture pattern for legacy migration?",
+        "options": [
+          "Halting all feature development for two years to execute a clean-slate rewrite",
+          "Placing an API gateway in front of the monolith to incrementally divert traffic to new microservices one bounded context at a time",
+          "Converting all relational databases into flat CSV files",
+          "Running legacy code inside WebAssembly sandbox modules"
+        ],
+        "answerIndex": 1,
+        "explanation": "The Strangler Fig pattern uses a facade (API Gateway) to route specific API endpoints to new microservices while the legacy monolith continues handling the remainder, enabling incremental risk-free migration."
+      }
+    },
+    {
+      "id": 607,
+      "slug": "what-are-event-sourcing-and-cqrs-patterns-and-when-are-they-appropriate",
+      "title": "What are Event Sourcing and CQRS patterns and when are they appropriate?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "event-sourcing",
+        "cqrs",
+        "architecture",
+        "kafka",
+        "event-driven"
+      ],
+      "path": "cloud-native-architecture/what-are-event-sourcing-and-cqrs-patterns-and-when-are-they-appropriate.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-are-event-sourcing-and-cqrs-patterns-and-when-are-they-appropriate.md",
+      "shortAnswer": "**Event sourcing** stores every state change as an immutable, append-only event (`FundsDeposited`, `FundsWithdrawn`) and derives current state by replaying them, usually from a snapshot. **CQRS** (Command Query Responsibility Segregation) separates the model that handles writes from the models that serve reads, so each can be shaped and scaled for its job; read models are often projections built from the event stream. They fit domains that need a full audit history, temporal queries, or very different read and write shapes - finance, logistics, booking. For ordinary CRUD they add eventual consistency, schema-evolution work, and operational weight that is rarely repaid.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "In an Event Sourced banking architecture, how is a customer's current account balance determined?",
+        "options": [
+          "By querying a single mutable `balance` column in a SQL table",
+          "By replaying the immutable historical sequence of deposit and withdrawal events from the event store",
+          "By guessing based on the customer's average monthly income",
+          "By reading the browser's local storage cache"
+        ],
+        "answerIndex": 1,
+        "explanation": "Event sourcing stores all state modifications as an append-only stream of facts. Current state is reconstructed by replaying the historical sequence of events from genesis or a snapshot."
+      }
+    },
+    {
+      "id": 608,
+      "slug": "what-is-database-per-service-pattern-and-how-do-you-handle-cross-service-queries-and-joins",
+      "title": "What is Database per Service pattern and how do you handle cross-service queries and joins?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "microservices",
+        "database-per-service",
+        "data-management",
+        "cqrs"
+      ],
+      "path": "cloud-native-architecture/what-is-database-per-service-pattern-and-how-do-you-handle-cross-service-queries-and-joins.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-is-database-per-service-pattern-and-how-do-you-handle-cross-service-queries-and-joins.md",
+      "shortAnswer": "Each service owns its data and is the only thing allowed to read or write its schema; everyone else goes through its API or its published events. That keeps schemas private, so a service can change or migrate its storage without coordinating releases. The price is that cross-service joins and transactions disappear, and you replace them with **API composition** (query each owner and join in memory), **replicated read models** (subscribe to events or CDC and keep a local, denormalised copy), or an **analytics store** fed by CDC for reporting - each trading freshness, latency, and complexity differently.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does the 'Database per Service' microservice pattern strictly forbid services from accessing another service's database directly?",
+        "options": [
+          "Cloud databases charge licensing fees per connected microservice",
+          "Direct database access tightly couples internal table schemas, prevents autonomous deployments, and risks database lock contention",
+          "Database engines cannot handle more than one username",
+          "It violates basic Linux network routing rules"
+        ],
+        "answerIndex": 1,
+        "explanation": "If Service B queries Service A's database directly, Service A cannot alter its internal schema without breaking Service B, completely undermining the independence of microservice deployments."
+      }
+    }
+  ]
+}
