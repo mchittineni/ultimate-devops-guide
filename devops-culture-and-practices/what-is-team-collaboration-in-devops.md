@@ -30,11 +30,24 @@ tags:
 
 **Practical warning signs:** requests between teams travel as tickets, operations first sees a service at launch, security reviews happen the week before release, and "that's not our team's problem" is an acceptable answer.
 
+## Example
+
+A `CODEOWNERS` file that builds collaboration into the workflow: security and SRE review the changes they care about inside the same pull request, instead of in a separate gate the week before release.
+
+```text
+# .github/CODEOWNERS - later rules take precedence
+*                         @acme/team-checkout
+/deploy/                  @acme/team-checkout @acme/sre
+/terraform/iam/           @acme/team-checkout @acme/security
+/.github/workflows/       @acme/team-checkout @acme/platform
+```
+
 ## Interview tips
 
 - Shared metrics as the mechanism for aligning incentives is the strongest practical point.
 - Team Topologies vocabulary (stream-aligned, platform, enabling) signals current thinking.
 - The platform team as an enabler rather than a gatekeeper is the distinction interviewers probe.
+- Mention the trade-off of embedding specialists: it removes hand-offs but spreads scarce SRE and security people thin, which is why enabling teams and self-service platforms scale better than one specialist per team.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

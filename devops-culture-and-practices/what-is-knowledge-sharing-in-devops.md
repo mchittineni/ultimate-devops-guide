@@ -32,11 +32,34 @@ tags:
 
 **Practical tests:** could a new joiner deploy to production on day three by following the docs? If your most senior engineer disappeared for a month, what breaks? Answering those honestly usually produces the backlog.
 
+## Example
+
+An architecture decision record (Michael Nygard's format), stored next to the code in `docs/adr/`:
+
+```markdown
+# ADR 0007: Use PgBouncer in transaction mode for the orders database
+
+- Status: Accepted
+- Date: 2026-09-10
+
+## Context
+Scaling the orders API to 40 pods pushed PostgreSQL past max_connections during deploys.
+
+## Decision
+Put PgBouncer in transaction-pooling mode between the pods and the database.
+
+## Consequences
+- Server connections capped at 60 regardless of pod count.
+- Session features (SET, advisory locks, session-level prepared statements) are unavailable;
+  the ORM is configured accordingly.
+```
+
 ## Interview tips
 
 - ADRs are a strong, specific practice to name - capturing _why_, not just what.
 - "Documentation is part of done" only works if it is reviewed in the same pull request; say that.
 - The bus-factor question is a memorable way to frame the risk.
+- Trade-off: documentation has a maintenance cost; a small set of trusted, owned documents (runbooks linked from alerts, ADRs) beats a large wiki nobody updates.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

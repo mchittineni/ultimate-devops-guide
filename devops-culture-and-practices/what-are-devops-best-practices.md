@@ -35,6 +35,7 @@ tags:
 - The test pyramid: many fast unit tests, fewer integration tests, a small number of end-to-end tests. Fix or delete flaky tests.
 - Security scanning in the pipeline (SAST, dependency, secrets, IaC) with sensible failure thresholds.
 - No secrets in code; short-lived credentials via OIDC.
+- Supply-chain hygiene: pin third-party CI actions to a full commit SHA, generate an SBOM, and sign artifacts with provenance (for example Sigstore and SLSA build provenance).
 
 **Operations**
 
@@ -48,6 +49,38 @@ tags:
 - Shared ownership: you build it, you run it.
 - Documentation kept close to the code and updated as part of the change.
 - Measure with DORA metrics and act on the trend, not the number.
+
+## Example
+
+A GitHub Actions job showing several practices at once - SHA-pinned actions, OIDC instead of stored keys, and one artifact built and promoted by digest:
+
+```yaml
+name: build
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  id-token: write          # OIDC token for AWS - no long-lived secrets
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/ci-build
+          aws-region: eu-west-1
+      - name: Test, build once, push
+        run: |
+          make test
+          IMAGE=123456789012.dkr.ecr.eu-west-1.amazonaws.com/app
+          aws ecr get-login-password | docker login --username AWS --password-stdin "${IMAGE%%/*}"
+          docker build -t "$IMAGE:$GITHUB_SHA" .
+          docker push "$IMAGE:$GITHUB_SHA"
+          # Later stages deploy this exact digest to staging, then production
+          docker inspect --format '{{index .RepoDigests 0}}' "$IMAGE:$GITHUB_SHA" > digest.txt
+```
 
 ## Interview tips
 

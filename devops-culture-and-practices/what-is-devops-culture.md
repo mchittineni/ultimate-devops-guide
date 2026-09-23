@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**The pillars**, often summarised as CALMS:
+**The pillars**, often summarised as CALMS (John Willis and Damon Edwards' CAMS, with Lean added by Jez Humble):
 
 - **Culture** - one team with one goal, not development throwing releases over a wall to operations.
 - **Automation** - remove manual toil so people work on problems worth human attention.
@@ -35,11 +35,31 @@ tags:
 
 **The anti-patterns:** a separate "DevOps team" acting as a gatekeeper, blame-driven incident reviews, heroes rewarded for firefighting rather than prevention, and "we do DevOps, we have Jenkins."
 
+## Example
+
+Shared ownership made concrete: the service's catalog entry names the team that builds it _and_ carries its pager, so there is no separate operations hand-off.
+
+```yaml
+# catalog-info.yaml (Backstage)
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: payments-api
+  annotations:
+    pagerduty.com/service-id: P1234AB     # the building team's on-call rota
+    github.com/project-slug: acme/payments-api
+spec:
+  type: service
+  lifecycle: production
+  owner: team-payments                    # builds it, deploys it, runs it
+```
+
 ## Interview tips
 
 - CALMS is a useful structure, but back each letter with a behaviour, not just the word.
 - The "DevOps team as a new silo" anti-pattern is worth naming; interviewers often live it.
 - Best answer to "how do you change culture?": make the right thing the easy thing, and show data.
+- Acknowledge the trade-off of "you build it, you run it": it improves quality but adds on-call load and cognitive load, which is why it needs good alerting and platform support to be sustainable.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
