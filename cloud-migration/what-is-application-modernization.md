@@ -29,6 +29,25 @@ tags:
 
 **Choosing what to modernise:** high change frequency plus high business value justifies investment. A stable system nobody touches, however old, may be best left alone - modernising it returns nothing.
 
+**Trade-offs.** During a strangler migration you run two systems, keep data consistent between them, and pay for both - so the facade and the data-sync story need as much design as the new services. AI-assisted code transformation tools (for example AWS Transform, or language-upgrade assistants) can speed up mechanical work such as framework and runtime upgrades, but they do not decide service boundaries or remove the need for tests.
+
+## Example
+
+```yaml
+# Strangler fig at the edge: new capability served by a new service, everything else
+# still goes to the monolith. Move one path at a time; rollback is removing a rule.
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata: { name: shop, namespace: shop }
+spec:
+  parentRefs: [{ name: public-gateway, namespace: infra }]
+  hostnames: ["shop.example.com"]
+  rules:
+    - matches: [{ path: { type: PathPrefix, value: /api/invoices } }]
+      backendRefs: [{ name: invoicing-service, port: 8080 }] # extracted capability
+    - backendRefs: [{ name: legacy-monolith, port: 8080 }] # default: everything else
+```
+
 ## Interview tips
 
 - The strangler fig pattern is the answer to "how do you modernise without a risky rewrite?"

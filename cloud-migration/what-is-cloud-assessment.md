@@ -24,9 +24,26 @@ tags:
 - **Constraints** - data residency, compliance obligations, licence portability, latency requirements to systems that are staying, and contractual lock-ins.
 - **Migration plan** - a strategy per application, grouped into waves by dependency, with effort estimates and risks.
 
-**How discovery is done.** Agent-based or agentless tooling (AWS Application Discovery Service, Azure Migrate, Google's migration centre, or third parties like Device42) collects utilisation and network flow data automatically. Flow data is what builds the dependency map - interviews with application owners always miss connections.
+**How discovery is done.** Agent-based or agentless tooling (AWS Transform - which replaced Application Discovery Service and Migration Hub for new customers in late 2025 - Azure Migrate, Google Migration Center, or third parties like Device42) collects utilisation and network flow data automatically. Flow data is what builds the dependency map - interviews with application owners always miss connections.
 
 **The business case.** Compare current TCO with projected cloud cost including right-sizing, commitments, and the migration project cost itself. Include the operational benefits that are harder to quantify - provisioning speed, DR capability, and reduced hardware refresh risk.
+
+**Limitation.** Discovery tooling only sees what runs during the collection window - a quarterly batch job or a year-end process can be missed entirely, so collect for long enough to cover the business calendar and confirm with owners.
+
+## Example
+
+```text
+Assessment record for one application (feeds the wave plan)
+
+app: orders-api                owner: team-orders           criticality: tier 1
+servers: 6 VMs (4 app, 2 db)   OS: RHEL 8                   licences: none hardware-bound
+utilisation (6-week p95):      app CPU 22%, mem 41%  ->  right-size 8 vCPU -> 4 vCPU
+                               db  CPU 35%, IOPS 3.1k peak (month-end)
+dependencies (from flow data): payments-gw:443, ldap:636, mainframe-mq:1414 (!)
+constraints: mainframe stays on-prem -> needs hybrid link, latency budget < 10 ms
+strategy: replatform (RDS PostgreSQL, ALB)   wave: 2 (with payments-gw)
+risks: month-end batch not seen in first 2 weeks of data; MQ dependency undocumented
+```
 
 ## Interview tips
 
