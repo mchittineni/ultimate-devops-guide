@@ -109,7 +109,7 @@ A few linter conventions worth knowing, all deliberate and encoded in `.markdown
 
 ### 5. Open the pull request
 
-Fill in the [pull request template](./.github/pull_request_template.md). CI runs the same two scripts plus Prettier on every pull request.
+Fill in the [pull request template](./.github/pull_request_template.md). CI runs `validate_content.py`, Prettier, and markdownlint on every pull request.
 
 ## Adding a new topic
 
