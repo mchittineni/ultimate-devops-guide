@@ -13,7 +13,7 @@ tags:
 
 # How do you run Terraform through a CI/CD pipeline?
 
-**Short answer:** Nobody should be running `apply` from a laptop against production. The pipeline shape that works: on a **pull request**, run `fmt -check`, `validate`, security scanning (Checkov/tfsec/tflint), a policy check, and `terraform plan -out=tfplan` - then post the plan as a PR comment and **save the plan as an artefact**. On **merge to main**, an environment-gated job downloads that same plan and runs `terraform apply tfplan`, so what executes is exactly what was reviewed. Authentication is **OIDC federation** to short-lived cloud credentials, never a stored access key. State lives in a remote backend with **locking** (S3 with native locking or DynamoDB, Azure blob leases, GCS, Terraform Cloud) and is **separated per environment**, so a dev apply cannot touch production. The environment progression is dev → staging → prod using the **same code** with different variable files, each with its own state and its own approval.
+**Short answer:** Nobody should be running `apply` from a laptop against production. The pipeline shape that works: on a **pull request**, run `fmt -check`, `validate`, security scanning (Checkov/Trivy/tflint), a policy check, and `terraform plan -out=tfplan` - then post the plan as a PR comment and **save the plan as an artefact**. On **merge to main**, an environment-gated job downloads that same plan and runs `terraform apply tfplan`, so what executes is exactly what was reviewed. Authentication is **OIDC federation** to short-lived cloud credentials, never a stored access key. State lives in a remote backend with **locking** (S3 with native lockfile locking - DynamoDB locking is deprecated - Azure blob leases, GCS, HCP Terraform) and is **separated per environment**, so a dev apply cannot touch production. The environment progression is dev → staging → prod using the **same code** with different variable files, each with its own state and its own approval.
 
 ## Detail
 
@@ -24,7 +24,7 @@ Pull request
   ├── terraform fmt -check -recursive          fast, deterministic
   ├── terraform init -backend=false            no state access needed to validate
   ├── terraform validate
-  ├── tflint / checkov / tfsec                 security + provider correctness
+  ├── tflint / checkov / trivy config          security + provider correctness
   ├── terraform init  (real backend, read-only creds if possible)
   ├── terraform plan -out=tfplan -lock=false   plan does not need the lock
   ├── conftest / OPA / Sentinel against the JSON plan
@@ -62,15 +62,15 @@ For secrets _inside_ Terraform (database passwords, API keys), pull them at runt
 ### Policy and security gates
 
 - **`tflint`** with the provider ruleset for provider-specific errors a plan would only reveal at apply.
-- **`checkov` / `tfsec` / `trivy config`** for misconfiguration - unencrypted volumes, public buckets, `0.0.0.0/0` ingress. Gate on severity, allow documented exceptions inline so the gate stays credible.
-- **Policy as code on the plan JSON**: `terraform show -json tfplan | conftest test -` (or Sentinel in Terraform Cloud). This is stronger than scanning code, because it evaluates the _actual_ proposed change: "no resource may be deleted in prod without the `approved-destroy` label", "every resource must carry a cost-centre tag", "no security group may open 22 to the world".
+- **`checkov` / `trivy config`** (tfsec's checks now live in Trivy, and tfsec itself is no longer developed) for misconfiguration - unencrypted volumes, public buckets, `0.0.0.0/0` ingress. Gate on severity, allow documented exceptions inline so the gate stays credible.
+- **Policy as code on the plan JSON**: `terraform show -json tfplan | conftest test -` (or Sentinel/OPA policy sets in HCP Terraform). This is stronger than scanning code, because it evaluates the _actual_ proposed change: "no resource may be deleted in prod without the `approved-destroy` label", "every resource must carry a cost-centre tag", "no security group may open 22 to the world".
 - **Drift detection** as a scheduled job: `terraform plan -detailed-exitcode` on every state (exit 2 = drift) and alert on it. Otherwise the console changes people make quietly accumulate until an unrelated apply reverts them at the worst moment.
 
 ### Where the pipeline runs
 
 - **Hosted runners** are fine when the provider APIs are public.
 - **Self-hosted runners** are needed when the API endpoints are private (a private EKS endpoint, a database inside a VPC, an on-premises provider). Make them ephemeral, in the target network, and least-privileged. Never attach them to a public repository.
-- **Terraform Cloud / Spacelift / Atlantis / env0** give you plan/apply orchestration, run queues, state, policy, and an approval UI out of the box. Atlantis is the classic PR-comment workflow (`atlantis plan`, `atlantis apply`) and is worth naming as the "we built this ourselves" alternative.
+- **HCP Terraform (formerly Terraform Cloud) / Spacelift / Atlantis / env0 / Scalr** give you plan/apply orchestration, run queues, state, policy, and an approval UI out of the box. Atlantis is the classic PR-comment workflow (`atlantis plan`, `atlantis apply`) and is worth naming as the "we built this ourselves" alternative.
 
 ### Failure handling
 
@@ -101,12 +101,12 @@ jobs:
     permissions: { contents: read, id-token: write, pull-requests: write }
     defaults: { run: { working-directory: infra/envs/prod } }
     steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-        with: { terraform_version: 1.9.8 }
+      - uses: actions/checkout@v7
+      - uses: hashicorp/setup-terraform@v4
+        with: { terraform_version: 1.16.4 }
       - run: terraform fmt -check -recursive
       - run: terraform init -backend=false && terraform validate
-      - uses: aws-actions/configure-aws-credentials@v4
+      - uses: aws-actions/configure-aws-credentials@v6
         with: # READ-ONLY role for planning
           role-to-assume: arn:aws:iam::111122223333:role/tf-plan-readonly
           aws-region: eu-west-1
@@ -114,9 +114,9 @@ jobs:
       - run: terraform plan -out=tfplan -input=false -lock=false -no-color
       - run: terraform show -json tfplan > tfplan.json
       - run: conftest test --policy ../../policy tfplan.json # policy on the real change
-      - uses: bridgecrewio/checkov-action@master
+      - uses: bridgecrewio/checkov-action@444c9db6fa75e2d9c19ebf1fde7322089be9009e # v12.3125.0 (pin, never @master)
         with: { directory: infra, framework: terraform, soft_fail: false }
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with: { name: tfplan, path: infra/envs/prod/tfplan, retention-days: 5 }
       - if: github.event_name == 'pull_request'
         run: gh pr comment "$PR" --body "$(terraform show -no-color tfplan | head -300)"
@@ -126,18 +126,18 @@ jobs:
     if: github.ref == 'refs/heads/main'
     needs: plan
     runs-on: ubuntu-24.04
-    environment: production # required reviewers gate this job
+    environment: production # required reviewers gate this job: they approve the plan produced by this run's plan job on main
     permissions: { contents: read, id-token: write }
     defaults: { run: { working-directory: infra/envs/prod } }
     steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-        with: { terraform_version: 1.9.8 }
-      - uses: aws-actions/configure-aws-credentials@v4
+      - uses: actions/checkout@v7
+      - uses: hashicorp/setup-terraform@v4
+        with: { terraform_version: 1.16.4 }
+      - uses: aws-actions/configure-aws-credentials@v6
         with: # WRITE role, only here
           role-to-assume: arn:aws:iam::111122223333:role/tf-apply
           aws-region: eu-west-1
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with: { name: tfplan, path: infra/envs/prod }
       - run: terraform init -input=false
       - run: terraform apply -input=false -no-color tfplan # the reviewed plan, verbatim
@@ -152,7 +152,7 @@ terraform {
     key          = "prod/network/terraform.tfstate" # one state per component
     region       = "eu-west-1"
     encrypt      = true
-    use_lockfile = true # S3 native locking (or dynamodb_table = "tf-locks")
+    use_lockfile = true # S3 native locking (dynamodb_table is deprecated)
   }
 }
 provider "aws" {
@@ -163,10 +163,10 @@ provider "aws" {
 ```
 
 ```rego
-# policy/plan.rego - deny surprises in the actual proposed change
+# policy/plan.rego - deny surprises in the actual proposed change (Rego v1 syntax, OPA 1.x / current Conftest)
 package main
 
-deny[msg] {
+deny contains msg if {
   rc := input.resource_changes[_]
   rc.change.actions[_] == "delete"
   not rc.change.after
@@ -174,7 +174,7 @@ deny[msg] {
   msg := sprintf("refusing to delete a database: %s", [rc.address])
 }
 
-deny[msg] {
+deny contains msg if {
   rc := input.resource_changes[_]
   rc.type == "aws_security_group_rule"
   rc.change.after.cidr_blocks[_] == "0.0.0.0/0"
@@ -199,10 +199,10 @@ esac
 - Say OIDC federation immediately, and add the two refinements: trust policies constrained to repository and ref, and a **read-only role for plan, write role for apply**. The read/write split is what stops a hostile PR from mutating infrastructure.
 - Describe state layout as one state per environment per component, justified by blast radius and plan speed, and mention CI-level serialisation (a concurrency group per state) alongside backend locking.
 - Answer the `tfvars` question honestly: non-secret values in version control, secrets from the secret manager at runtime, and note that **state stores secrets in plaintext**, so the backend needs encryption, versioning, and tight IAM.
-- Distinguish scanning code (Checkov/tfsec) from policy on the **plan JSON** (Conftest/OPA/Sentinel), and give an example rule such as "no database deletions without an explicit approval label". Evaluating the real change is a level above linting files.
+- Distinguish scanning code (Checkov/Trivy) from policy on the **plan JSON** (Conftest/OPA/Sentinel), and give an example rule such as "no database deletions without an explicit approval label". Evaluating the real change is a level above linting files.
 - Bring up scheduled drift detection with `-detailed-exitcode` unprompted; it is how you stop console changes accumulating silently.
 - Be clear there is no rollback - fix forward, keep blast radius small, expect a held lock after an interrupted apply and verify with `plan` before force-unlocking.
-- If the pipeline is slow, diagnose it: state size, backend distance, plugin cache, and planning only the components a change touches. Name Atlantis, Terraform Cloud, or Spacelift as ready-made options. See [managing Terraform state safely in a team](./how-do-you-manage-terraform-state-safely-in-a-team.md), [structuring Terraform code for multiple environments and providers](./how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md), [scanning IaC before it is applied](../devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md), and [authenticating to AWS without long-lived access keys](../aws-engineering/how-do-you-authenticate-to-aws-without-long-lived-access-keys.md).
+- If the pipeline is slow, diagnose it: state size, backend distance, plugin cache, and planning only the components a change touches. Name Atlantis, HCP Terraform, or Spacelift as ready-made options. See [managing Terraform state safely in a team](./how-do-you-manage-terraform-state-safely-in-a-team.md), [structuring Terraform code for multiple environments and providers](./how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md), [scanning IaC before it is applied](../devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md), and [authenticating to AWS without long-lived access keys](../aws-engineering/how-do-you-authenticate-to-aws-without-long-lived-access-keys.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

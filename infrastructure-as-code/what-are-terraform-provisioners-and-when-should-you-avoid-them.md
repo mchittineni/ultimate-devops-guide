@@ -145,7 +145,7 @@ runcmd:
 resource "local_file" "ansible_inventory" {
   filename = "${path.module}/inventory.ini"
   content  = templatefile("${path.module}/inventory.tmpl", {
-    hosts = [for i in aws_instance.good : i.private_ip]
+    hosts = [aws_instance.good.private_ip]
   })
 }
 

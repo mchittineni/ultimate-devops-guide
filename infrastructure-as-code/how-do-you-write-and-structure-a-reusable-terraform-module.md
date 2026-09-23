@@ -64,8 +64,14 @@ Registry-sourced modules support `version`; raw Git sources do not, which is why
 A module should declare which providers it **needs** (`required_providers` with version constraints) but not **configure** them. The root module configures providers and passes aliased ones explicitly:
 
 ```hcl
-provider "aws" { region = "eu-west-1" }
-provider "aws" { alias = "us", region = "us-east-1" }
+provider "aws" {
+  region = "eu-west-1"
+}
+
+provider "aws" {
+  alias  = "us"
+  region = "us-east-1"
+}
 
 module "cdn" {
   source    = "./modules/cdn"
@@ -96,8 +102,8 @@ The frequently-asked version is _"you are writing a hundred lines of repetitive 
 ### Testing and quality gates
 
 - **`terraform validate` + `fmt -check`** on every module, in CI.
-- **`tflint`** with the provider ruleset for provider-specific mistakes; **`checkov`/`tfsec`** for security defaults inside the module (so consumers inherit a safe baseline).
-- **`terraform test`** (native, `.tftest.hcl`) or **Terratest** for real apply-and-assert-then-destroy tests against the `examples/` directories. Testing the examples means your documented usage is the thing under test.
+- **`tflint`** with the provider ruleset for provider-specific mistakes; **`checkov`/`trivy config`** (Trivy now carries the old tfsec checks) for security defaults inside the module (so consumers inherit a safe baseline).
+- **`terraform test`** (native, `.tftest.hcl`, Terraform 1.6+; `tofu test` in OpenTofu) or **Terratest** for real apply-and-assert-then-destroy tests against the `examples/` directories. Since 1.7 `terraform test` can also use `mock_provider` for fast plan-only unit tests that create nothing. Testing the examples means your documented usage is the thing under test.
 - **`terraform-docs` in a pre-commit hook** so the README table matches the variables.
 - Publish to a private registry or a tagged Git repository, with a CHANGELOG and semver: patch for fixes, minor for new optional inputs, **major for anything that forces resource replacement or removes an input**.
 
@@ -133,6 +139,15 @@ variable "subnets" {
     public  = { newbits = 4, public = true }
     private = { newbits = 4 }
     data    = { newbits = 6 }
+  }
+}
+
+variable "azs" {
+  type        = list(string)
+  description = "Availability zones to spread each subnet tier across."
+  validation {
+    condition     = length(var.azs) >= 2
+    error_message = "At least two availability zones are required."
   }
 }
 
@@ -191,7 +206,7 @@ output "subnet_ids_by_tier" {
 terraform {
   required_version = ">= 1.6"
   required_providers {
-    aws = { source = "hashicorp/aws", version = ">= 5.0, < 6.0" } # constraint, not config
+    aws = { source = "hashicorp/aws", version = ">= 6.0, < 7.0" } # constraint, not config
   }
 }
 ```
@@ -201,7 +216,7 @@ terraform {
 terraform fmt -check -recursive && terraform validate
 tflint --recursive && checkov -d . --framework terraform
 terraform-docs markdown table . > README.md          # docs generated from code
-terraform test                                        # runs examples/*.tftest.hcl
+terraform test                                        # runs *.tftest.hcl in the module root and tests/
 
 # Consuming and upgrading deliberately
 terraform init -upgrade && terraform plan   # read the plan for -/+ replacements

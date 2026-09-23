@@ -144,11 +144,20 @@ module "tenant" {
 # Migrating count -> for_each without destroying anything
 # declarative and reviewable:
 cat >> moved.tf <<'EOF'
-moved { from = aws_instance.web[0]  to = aws_instance.svc["api"]    }
-moved { from = aws_instance.web[1]  to = aws_instance.svc["worker"] }
-moved { from = aws_instance.web[2]  to = aws_instance.svc["batch"]  }
+moved {
+  from = aws_instance.web[0]
+  to   = aws_instance.svc["api"]
+}
+moved {
+  from = aws_instance.web[1]
+  to   = aws_instance.svc["worker"]
+}
+moved {
+  from = aws_instance.web[2]
+  to   = aws_instance.svc["batch"]
+}
 EOF
-terraform plan     # MUST report "No changes" - that is the safety check
+terraform plan     # MUST show only moves and "0 to add, 0 to change, 0 to destroy"
 
 # imperative equivalent, one at a time
 terraform state mv 'aws_instance.web[0]' 'aws_instance.svc["api"]'

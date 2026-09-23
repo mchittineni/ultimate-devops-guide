@@ -56,10 +56,27 @@ Immutable infrastructure does not delete Ansible, Chef, or Puppet - it moves the
 
 ```hcl
 # Packer: the artefact is built once in CI, versioned, and scanned
+packer {
+  required_plugins {                                   # plugins are no longer bundled with Packer
+    amazon  = { source = "github.com/hashicorp/amazon", version = "~> 1.8" }
+    ansible = { source = "github.com/hashicorp/ansible", version = "~> 1.1" }
+  }
+}
+
+variable "git_sha" {
+  type = string
+}
+
 source "amazon-ebs" "base" {
   ami_name      = "app-base-${var.git_sha}"          # versioned, immutable
   instance_type = "t3.medium"
-  source_ami_filter { filters = { name = "al2023-ami-*-x86_64" }, most_recent = true, owners = ["amazon"] }
+  region        = "eu-west-1"
+  ssh_username  = "ec2-user"
+  source_ami_filter {
+    filters     = { name = "al2023-ami-*-x86_64" }
+    most_recent = true
+    owners      = ["amazon"]
+  }
 }
 
 build {
@@ -84,11 +101,17 @@ resource "aws_launch_template" "api" {
 resource "aws_autoscaling_group" "api" {
   min_size = 6
   max_size = 60
-  launch_template { id = aws_launch_template.api.id, version = "$Latest" }
+  launch_template {
+    id      = aws_launch_template.api.id
+    version = aws_launch_template.api.latest_version # a concrete version, so a change triggers the refresh
+  }
 
   instance_refresh {                        # rolling replacement, not in-place change
     strategy = "Rolling"
-    preferences { min_healthy_percentage = 90, instance_warmup = 120 }
+    preferences {
+      min_healthy_percentage = 90
+      instance_warmup        = 120
+    }
   }
   lifecycle { create_before_destroy = true }
 }

@@ -27,7 +27,9 @@ Core concepts:
 - **Handler** - a task triggered only when something actually changed (restart a service after a config change).
 - **Ansible Vault** - encrypts sensitive variables at rest inside the repository.
 
-Ansible shines at configuration management, application deployment, and orchestrated multi-step operations (rolling restarts, patching runs). It can provision cloud resources, but Terraform is generally the better fit for that half of the problem.
+Ansible shines at configuration management, application deployment, and orchestrated multi-step operations (rolling restarts, patching runs). It can provision cloud resources, but Terraform is generally the better fit for that half of the problem, because Ansible keeps no state: it cannot plan a diff against what exists or notice that a resource was removed from the playbook.
+
+The trade-offs of the push/SSH model: runs are only as current as the last execution (no continuous enforcement unless you schedule it, for example with AWX/Ansible Automation Platform), large fleets need tuning (`forks`, pipelining, fact caching), and idempotency is only as good as the modules - `command`/`shell` tasks are not idempotent unless you add `creates:` or `changed_when:`.
 
 ## Example
 

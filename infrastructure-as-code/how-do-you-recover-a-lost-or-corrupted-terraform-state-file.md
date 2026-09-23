@@ -11,7 +11,7 @@ tags:
 
 # How do you recover a lost or corrupted Terraform state file?
 
-**Short answer:** Stop before you run anything. In order of preference: restore the previous object version from the versioned backend bucket, restore from the `.terraform.tfstate.backup` file Terraform writes on every apply, or - if no copy exists anywhere - rebuild the state by importing every real resource back into a fresh state file. Never run `terraform apply` against empty state, because Terraform will interpret existing infrastructure as absent and try to create duplicates.
+**Short answer:** Stop before you run anything. In order of preference: restore the previous object version from the versioned backend bucket, restore from the `terraform.tfstate.backup` file Terraform writes next to local state, or - if no copy exists anywhere - rebuild the state by importing every real resource back into a fresh state file. Never run `terraform apply` against empty state, because Terraform will interpret existing infrastructure as absent and try to create duplicates.
 
 ## Detail
 
@@ -22,8 +22,8 @@ tags:
 **Recovery ladder, in order:**
 
 1. **Backend object versioning.** If the bucket has versioning enabled - which is why it is non-negotiable - list previous versions and restore the last good one. This is a two-minute fix and covers deletion, truncation, and corruption alike.
-2. **`terraform.tfstate.backup`.** Terraform writes the previous state next to the current one on every write, including when using some remote backends locally. If someone deleted the state on a workstation, the backup is often still there.
-3. **Terraform/HCP Cloud state history.** Managed backends keep every state version with the run that produced it, and let you roll back through the UI or API.
+2. **`terraform.tfstate.backup`.** With local state, Terraform keeps the previous state in `terraform.tfstate.backup` next to the current one on every write. If someone deleted the state on a workstation, the backup is often still there. Remote backends do not write this file - their own versioning is the equivalent.
+3. **HCP Terraform (formerly Terraform Cloud) state history.** Managed backends keep every state version with the run that produced it, and let you roll back through the UI or API.
 4. **A colleague's or CI runner's cached copy.** `.terraform/` directories on a build agent may still hold a recent pull.
 5. **Rebuild by import.** The last resort, described below.
 
@@ -36,7 +36,7 @@ tags:
 
 This is slow and manual for a large estate, which is the point: it is the argument for versioned buckets that you make to the interviewer.
 
-**Corruption rather than deletion.** Symptoms are a JSON parse error, a resource present twice, or a state whose `serial` went backwards after a concurrent write. Restore from a version first. If you must repair by hand: `terraform state pull > repair.json`, edit, then `terraform state push repair.json`. Never hand-edit the remote object in place, and never lower the `serial` - Terraform uses it to detect stale writes.
+**Corruption rather than deletion.** Symptoms are a JSON parse error, a resource present twice, or a state whose `serial` went backwards after a concurrent write. Restore from a version first. If you must repair by hand: `terraform state pull > repair.json`, edit, then `terraform state push repair.json`. Never hand-edit the remote object in place, and never lower the `serial` by hand - Terraform uses it (with `lineage`) to detect stale writes, which is also why pushing an older restored version is refused unless you pass `-force`. Only do that with every other run locked out.
 
 **Stuck locks are a different failure** that people confuse with corruption. If a run is killed mid-apply, the lock persists and every subsequent run blocks. `terraform force-unlock <LOCK_ID>` clears it - but only after you have confirmed no apply is genuinely still running, because force-unlocking a live apply is how you get the concurrent-write corruption you were trying to avoid.
 
@@ -60,7 +60,7 @@ aws s3api get-object \
   --version-id 3HL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo \
   restored.tfstate
 
-terraform state push restored.tfstate
+terraform state push -force restored.tfstate   # -force: the restored serial is older than the current one
 terraform plan   # MUST be empty before you trust it
 ```
 
@@ -93,7 +93,7 @@ terraform force-unlock 1a2b3c4d-5e6f-7890-abcd-ef1234567890
 
 - The first sentence should be "stop - do not run `apply`." Interviewers are checking for the reflex, and everything else follows from it.
 - Explain the consequence precisely: empty state makes Terraform plan a full recreate, and unique-name collisions turn that into a half-applied mess.
-- Give the ladder in order - bucket versioning, `.tfstate.backup`, managed state history, then import - rather than jumping straight to import.
+- Give the ladder in order - bucket versioning, `terraform.tfstate.backup`, managed state history, then import - rather than jumping straight to import.
 - Prefer `import` blocks over the `terraform import` command and say why: reviewable in a PR, and `plan` dry-runs the adoption.
 - "Plan must be empty afterwards" is the verification step most candidates omit.
 - Close by turning it into prevention: versioned encrypted bucket, locking, split state, and no local state in production. That reframes a recovery question as a design answer.

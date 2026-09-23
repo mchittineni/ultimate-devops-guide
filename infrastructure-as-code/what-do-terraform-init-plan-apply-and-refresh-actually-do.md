@@ -17,16 +17,16 @@ tags:
 
 ### `init` - what it really sets up
 
-| Step                   | Effect                                                  | Failure you will see                                                                      |
-| ---------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Backend initialisation | Connects to S3/AzureRM/GCS/Terraform Cloud, pulls state | `Backend initialization required`, or a state-migration prompt after changing the backend |
-| Provider installation  | Downloads plugins to `.terraform/providers`             | Version constraints unsatisfiable, or a checksum mismatch against the lock file           |
-| Module installation    | Copies/clones modules into `.terraform/modules`         | Bad source URL, or a private registry credential problem                                  |
-| Lock file              | Creates or verifies `.terraform.lock.hcl`               | `provider ... does not match any of the checksums`                                        |
+| Step                   | Effect                                                | Failure you will see                                                                      |
+| ---------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Backend initialisation | Connects to S3/AzureRM/GCS/HCP Terraform, pulls state | `Backend initialization required`, or a state-migration prompt after changing the backend |
+| Provider installation  | Downloads plugins to `.terraform/providers`           | Version constraints unsatisfiable, or a checksum mismatch against the lock file           |
+| Module installation    | Copies/clones modules into `.terraform/modules`       | Bad source URL, or a private registry credential problem                                  |
+| Lock file              | Creates or verifies `.terraform.lock.hcl`             | `provider ... does not match any of the checksums`                                        |
 
 `init` is **safe and idempotent** - run it as often as you like. Flags worth knowing: `-upgrade` (allow newer provider versions within constraints, and rewrite the lock file), `-reconfigure` (discard backend settings and start fresh), `-migrate-state` (move existing state to a new backend), and `-backend-config=...` for values you keep out of the repository.
 
-**`.terraform.lock.hcl` should be committed.** It pins the exact provider versions and their checksums so every engineer and every CI run uses identical providers, which is what makes a plan reproducible. Add `-platform=` entries when your laptops and CI runners differ in OS/architecture, or CI will fail on a missing hash.
+**`.terraform.lock.hcl` should be committed.** It pins the exact provider versions and their checksums so every engineer and every CI run uses identical providers, which is what makes a plan reproducible. Run `terraform providers lock -platform=linux_amd64 -platform=darwin_arm64` when your laptops and CI runners differ in OS/architecture, or CI will fail on a missing hash.
 
 ### `plan` - the diff, and how to read it
 

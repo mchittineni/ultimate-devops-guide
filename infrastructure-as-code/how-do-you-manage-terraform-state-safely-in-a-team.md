@@ -21,16 +21,16 @@ tags:
 
 **Remote backends and locking:**
 
-| Backend             | Locking mechanism                                                              |
-| ------------------- | ------------------------------------------------------------------------------ |
-| S3                  | Native S3 lockfile (`use_lockfile = true`); older setups used a DynamoDB table |
-| Azure Blob          | Native blob leases                                                             |
-| GCS                 | Native object locking                                                          |
-| Terraform/HCP Cloud | Managed, with run queueing and audit history                                   |
+| Backend       | Locking mechanism                                                                |
+| ------------- | -------------------------------------------------------------------------------- |
+| S3            | Native S3 lockfile (`use_lockfile = true`); DynamoDB-table locking is deprecated |
+| Azure Blob    | Native blob leases                                                               |
+| GCS           | Native object locking                                                            |
+| HCP Terraform | Managed, with run queueing and audit history                                     |
 
 Locking is what prevents the classic corruption case: two engineers run `apply` simultaneously, both read the same state, both write, and the second write silently discards the first one's resources. With a lock the second run blocks and prints who holds it.
 
-> On AWS, S3 now supports native state locking via `use_lockfile = true`, so a separate DynamoDB table is no longer required for new configurations. Plenty of existing code still uses DynamoDB - know both, and be ready to say the separate table is legacy.
+> On AWS, S3 supports native state locking via `use_lockfile = true` (Terraform 1.10+, OpenTofu 1.10+), and the `dynamodb_table` argument is deprecated (since Terraform 1.11) and slated for removal. Plenty of existing code still uses DynamoDB - know both, and migrate by enabling `use_lockfile` alongside the table before removing it.
 
 **Enable versioning on the bucket.** This is the cheapest insurance in all of Terraform: a corrupted or truncated state is a matter of restoring the previous object version. Turn on server-side encryption too, and block public access.
 
