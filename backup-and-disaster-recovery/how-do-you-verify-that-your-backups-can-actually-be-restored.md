@@ -16,7 +16,9 @@ tags:
 
 **Short answer:** Automate the restore, not just the backup. On a schedule, spin up a clean, isolated environment, **restore from the actual backup artefact**, and then run assertions that prove the data is usable: row counts and checksums against expected ranges, referential-integrity checks, the newest record's timestamp (which measures your real RPO), and an application-level smoke test against the restored copy. Record the **restore duration** because that is your real RTO, not the number in the plan. Destroy the environment afterwards, and alert on a failed or skipped verification exactly as you would on a failed backup. The principle to state plainly: a backup that has never been restored is not a backup, it is a hopeful file - and "the backup job reported success" is a statement about the job, not about the data.
 
-## Restoring from the backup artefact matters
+## Detail
+
+### Restoring from the backup artefact matters
 
 The commonest way this goes wrong is testing the wrong thing:
 
@@ -28,8 +30,6 @@ The commonest way this goes wrong is testing the wrong thing:
 - **Application-incompatible**: the schema in the backup predates a migration and the current code cannot read it.
 
 Only an end-to-end restore that ends with the application working catches all of these.
-
-## Detail
 
 ### The automated verification loop
 
@@ -84,7 +84,9 @@ HOST=$(terraform -chdir=./verify output -raw db_host)
 # 2. Restore from the ARTEFACT - and from the immutable copy, which is the one that matters
 LATEST=$(aws s3api list-objects-v2 --bucket acme-backups-locked --prefix prod/pg/ \
   --query 'sort_by(Contents,&LastModified)[-1].Key' --output text)
-aws s3 cp "s3://acme-backups-locked/$LATEST" - | pg_restore -h "$HOST" -U postgres -d app --jobs=4
+# pg_restore cannot run parallel (--jobs) from stdin, so land the dump on disk first
+aws s3 cp "s3://acme-backups-locked/$LATEST" /tmp/restore.dump
+pg_restore -h "$HOST" -U postgres -d app --jobs=4 /tmp/restore.dump
 RESTORE_SECS=$(( $(date +%s) - START ))          # this is the real RTO, not the plan's number
 
 # 3. Assertions: is the data USABLE, not merely present?

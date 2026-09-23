@@ -34,6 +34,36 @@ tags:
 
 The uncomfortable truth interviewers probe: most organisations have backups; far fewer have proven restores. "When did you last restore from backup, and how long did it take?" is the question that separates the two.
 
+## Example
+
+An AWS Backup plan that covers both halves - a local backup for everyday restores, plus a copy to another region for DR:
+
+```json
+{
+  "BackupPlanName": "prod-daily",
+  "Rules": [
+    {
+      "RuleName": "daily-35d",
+      "TargetBackupVaultName": "prod-vault",
+      "ScheduleExpression": "cron(0 3 * * ? *)",
+      "Lifecycle": { "DeleteAfterDays": 35 },
+      "CopyActions": [
+        {
+          "DestinationBackupVaultArn": "arn:aws:backup:us-west-2:123456789012:backup-vault:dr-vault",
+          "Lifecycle": { "DeleteAfterDays": 35 }
+        }
+      ]
+    }
+  ]
+}
+```
+
+```bash
+aws backup create-backup-plan --backup-plan file://prod-daily.json
+```
+
+The backup plan protects data; DR still needs the runbook, infrastructure as code for the second region, and DNS failover to use that copy.
+
 ## Interview tips
 
 - Say the 3-2-1 rule, then extend it with immutability - it shows current ransomware awareness.
@@ -45,8 +75,8 @@ The uncomfortable truth interviewers probe: most organisations have backups; far
 ## Related Concepts
 
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
 - [[What is Docker Compose?]] (`#9`): [What is Docker Compose?](../docker/what-is-docker-compose.md)
-- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

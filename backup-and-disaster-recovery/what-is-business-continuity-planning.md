@@ -30,11 +30,33 @@ tags:
 
 For a DevOps engineer, the practical contributions are: keeping the dependency map current, maintaining DR automation as code, ensuring runbooks are accessible offline, and pushing for real failover tests rather than paper exercises.
 
+## Example
+
+A BIA entry kept as code next to the runbooks, so it is versioned, reviewed, and available offline:
+
+```yaml
+# bia/order-fulfilment.yaml
+function: order-fulfilment
+owner: head-of-operations
+impact_per_hour: { revenue_gbp: 40000, regulatory: none }
+max_tolerable_downtime: 8h
+rto: 2h
+rpo: 15m
+dependencies:
+  systems: [orders-api, warehouse-wms, payments-gateway]
+  suppliers: [courier-api]        # third party - check its own continuity commitments
+  people: [warehouse-shift-lead]
+manual_workaround: "Print pick lists from the last WMS export; take phone orders on paper"
+last_tested: 2026-06-12
+test_type: tabletop
+```
+
 ## Interview tips
 
 - Position BCP as containing DR, not the reverse - the distinction is often tested.
 - Name the BIA as the source of RTO/RPO targets.
 - The best practical point: store the plan and credentials somewhere that survives the outage the plan is for.
+- Mention that standards exist - ISO 22301 for business continuity management - without claiming certification is the goal; a tested plan matters more than a certificate.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
@@ -42,7 +64,7 @@ For a DevOps engineer, the practical contributions are: keeping the dependency m
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is progressive delivery and how does it differ from traditional deployment strategies?]] (`#509`): [What is progressive delivery and how does it differ from traditional deployment strategies?](../core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
