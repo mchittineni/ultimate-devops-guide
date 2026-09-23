@@ -36,11 +36,39 @@ tags:
 
 **Watch out for** the segmentation that exists on the diagram but not in the rules, and for over-segmentation that makes the network unmanageable and encourages engineers to open broad exceptions.
 
+## Example
+
+```hcl
+# Data tier: no route to the internet, reachable only from the app tier's security group
+resource "aws_route_table" "data" {
+  vpc_id = aws_vpc.main.id
+  # deliberately no 0.0.0.0/0 route: no internet or NAT gateway
+}
+
+resource "aws_security_group" "db" {
+  vpc_id = aws_vpc.main.id
+
+  ingress {
+    from_port       = 5432
+    to_port         = 5432
+    protocol        = "tcp"
+    security_groups = [aws_security_group.app.id] # the rule follows the workload, not an IP range
+  }
+}
+```
+
+```bash
+# Prove the boundary from the other side (the evidence auditors ask for)
+nc -vz -w 3 db.internal 5432   # from an app-tier host: succeeds
+nc -vz -w 3 db.internal 5432   # from a web-tier host: times out
+```
+
 ## Interview tips
 
 - Lateral movement is the threat to name - it explains _why_ segmentation matters.
 - Referencing security groups by group rather than CIDR is a practical detail that shows cloud experience.
 - Mention PCI scope reduction if the role touches regulated environments.
+- Name the trade-off: every boundary adds rules to maintain and a path to debug. Segment where trust or data sensitivity changes, and test the boundaries continuously rather than trusting the diagram.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

@@ -79,7 +79,8 @@ Simple but frequently asked: **ingress** is traffic entering your network or wor
 ```nginx
 # Reverse proxy: one public origin, TLS terminated, routed by path, CORS handled here
 server {
-  listen 443 ssl http2;
+  listen 443 ssl;
+  http2 on;   # nginx 1.25.1+; the old `listen ... http2` parameter is deprecated
   server_name app.example.com;
 
   ssl_certificate     /etc/ssl/certs/app.pem;

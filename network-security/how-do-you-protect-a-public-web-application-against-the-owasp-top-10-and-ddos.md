@@ -19,18 +19,20 @@ tags:
 
 ### Mapping the OWASP Top 10 to actual controls
 
-| Category                            | Primary control (in the application)                                                         | Secondary (platform / WAF)                                                   |
-| ----------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| **A01 Broken access control**       | Server-side authorisation on every request; deny by default; never trust client-supplied IDs | **WAF cannot fix this.** Detect with logging on 403 spikes and IDOR patterns |
-| **A02 Cryptographic failures**      | TLS everywhere, strong ciphers, no secrets in code, encrypt at rest                          | Load balancer TLS policy, HSTS, certificate automation                       |
-| **A03 Injection**                   | **Parameterised queries / prepared statements**, output encoding, no shell interpolation     | WAF SQLi/XSS rule sets, CSP header                                           |
-| **A04 Insecure design**             | Threat modelling, rate limits on business logic, abuse cases in the design                   | Quotas at the API gateway                                                    |
-| **A05 Security misconfiguration**   | Hardened defaults, no default credentials, minimal features enabled                          | IaC scanning, CIS benchmarks, admission policy                               |
-| **A06 Vulnerable components**       | SCA in CI, patch cadence, SBOM                                                               | Image scanning, virtual patching in the WAF while you fix                    |
-| **A07 Auth failures**               | MFA, proper session handling, lockout/backoff, no credential stuffing viability              | WAF credential-stuffing and bot rules, rate limits on `/login`               |
-| **A08 Software/data integrity**     | Signed artefacts, verified dependencies, no untrusted deserialisation                        | Admission control verifying signatures                                       |
-| **A09 Logging/monitoring failures** | Log auth events, log access decisions, alert on anomalies                                    | WAF logs to SIEM, GuardDuty-style detection                                  |
-| **A10 SSRF**                        | Allowlist outbound destinations, block link-local, validate URLs server-side                 | Egress firewall with FQDN rules, **IMDSv2 required**                         |
+The current list is the **OWASP Top 10:2025** (the 2021 edition is still widely quoted, so expect both numbering schemes in interviews):
+
+| Category (2025)                                   | Primary control (in the application)                                                                                           | Secondary (platform / WAF)                                                                                         |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| **A01 Broken access control** (now includes SSRF) | Server-side authorisation on every request; deny by default; never trust client-supplied IDs; allowlist outbound URLs for SSRF | **WAF cannot fix this.** Detect 403 spikes and IDOR patterns; egress firewall with FQDN rules, **IMDSv2 required** |
+| **A02 Security misconfiguration**                 | Hardened defaults, no default credentials, minimal features enabled                                                            | IaC scanning, CIS benchmarks, admission policy                                                                     |
+| **A03 Software supply chain failures**            | SCA in CI, pinned and verified dependencies, SBOM, protected build pipeline                                                    | Image scanning, virtual patching in the WAF while you fix                                                          |
+| **A04 Cryptographic failures**                    | TLS everywhere, strong ciphers, no secrets in code, encrypt at rest                                                            | Load balancer TLS policy, HSTS, certificate automation                                                             |
+| **A05 Injection**                                 | **Parameterised queries / prepared statements**, output encoding, no shell interpolation                                       | WAF SQLi/XSS rule sets, CSP header                                                                                 |
+| **A06 Insecure design**                           | Threat modelling, rate limits on business logic, abuse cases in the design                                                     | Quotas at the API gateway                                                                                          |
+| **A07 Authentication failures**                   | MFA, proper session handling, lockout/backoff, no credential stuffing viability                                                | WAF credential-stuffing and bot rules, rate limits on `/login`                                                     |
+| **A08 Software or data integrity failures**       | Signed artefacts, integrity-checked updates, no untrusted deserialisation                                                      | Admission control verifying signatures                                                                             |
+| **A09 Security logging and alerting failures**    | Log auth events, log access decisions, alert on anomalies                                                                      | WAF logs to SIEM, GuardDuty-style detection                                                                        |
+| **A10 Mishandling of exceptional conditions**     | Fail closed, handle errors without leaking stack traces or state, consistent timeouts                                          | Generic error pages at the edge, anomaly alerts on 5xx spikes                                                      |
 
 Two points to make explicitly, because they separate a real answer from a product pitch. First, **A01 is the top category and a WAF cannot see it** - a request to `/api/orders/12345` looks identical whether or not that order belongs to you, so authorisation must be in the application. Second, the WAF's genuine superpower is **virtual patching**: when a CVE lands in a framework you cannot redeploy for three days, a targeted WAF rule blocks exploitation while you fix properly. Framing the WAF as time-buying rather than as protection is the mature position.
 
@@ -104,7 +106,11 @@ resource "aws_wafv2_web_acl" "edge" {
         }
       }
     }
-    visibility_config { cloudwatch_metrics_enabled = true  metric_name = "common"  sampled_requests_enabled = true }
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name = "common"
+      sampled_requests_enabled = true
+    }
   }
 
   rule {
@@ -120,12 +126,19 @@ resource "aws_wafv2_web_acl" "edge" {
             positional_constraint = "STARTS_WITH"
             search_string         = "/login"
             field_to_match { uri_path {} }
-            text_transformation { priority = 0  type = "LOWERCASE" }
+            text_transformation {
+              priority = 0
+              type = "LOWERCASE"
+            }
           }
         }
       }
     }
-    visibility_config { cloudwatch_metrics_enabled = true  metric_name = "ratelimit"  sampled_requests_enabled = true }
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name = "ratelimit"
+      sampled_requests_enabled = true
+    }
   }
 
   rule { # bot control: challenge rather than block, to avoid false positives
@@ -141,7 +154,17 @@ resource "aws_wafv2_web_acl" "edge" {
         }
       }
     }
-    visibility_config { cloudwatch_metrics_enabled = true  metric_name = "bots"  sampled_requests_enabled = true }
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name = "bots"
+      sampled_requests_enabled = true
+    }
+  }
+
+  visibility_config { # required at the web ACL level as well as per rule
+    cloudwatch_metrics_enabled = true
+    metric_name = "edge-protection"
+    sampled_requests_enabled = true
   }
 }
 ```

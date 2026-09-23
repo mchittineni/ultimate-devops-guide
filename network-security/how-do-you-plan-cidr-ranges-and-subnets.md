@@ -136,7 +136,7 @@ resource "aws_vpc_ipv4_cidr_block_association" "pods" {
 
 ```bash
 # Central allocation, so two teams cannot self-allocate the same range
-aws ec2-ipam create-ipam-pool --address-family ipv4 \
+aws ec2 create-ipam-pool --address-family ipv4 \
   --ipam-scope-id ipam-scope-0abc --locale eu-west-1 \
   --provisioned-cidrs Cidr=10.16.0.0/12
 aws ec2 allocate-ipam-pool-cidr --ipam-pool-id ipam-pool-0abc --netmask-length 16
