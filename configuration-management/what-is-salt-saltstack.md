@@ -26,7 +26,9 @@ tags:
 - **Reactor and beacons** - beacons emit events (a file changed, a service died) and the reactor responds automatically, enabling genuine event-driven automation.
 - **Salt Mine and orchestration** - cross-node data sharing and multi-node workflow coordination.
 
-Salt's differentiators are raw execution speed and the event-driven reactor system. Its trade-offs are a more complex master setup than Ansible and a smaller ecosystem than Ansible or Puppet.
+Salt's differentiators are raw execution speed and the event-driven reactor system. Its trade-offs are a more complex master setup than Ansible, a smaller ecosystem than Ansible or Puppet, and a master that is a high-value target: it can run arbitrary commands as root on every minion, and exposed masters were mass-exploited in 2020 (CVE-2020-11651/11652), so the master's ports must never face the internet and it must be patched promptly.
+
+**Ecosystem.** Salt is Apache-2.0 open source; SaltStack was acquired by VMware in 2020 and is now under Broadcom, with the commercial layer sold as part of VMware's automation products. Current releases ship as self-contained "onedir" packages (Salt 3006 LTS and later) that bundle their own Python.
 
 ## Example
 
@@ -65,8 +67,8 @@ salt -G 'os:Ubuntu' state.apply nginx    # target by grain
 ## Related Concepts
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
+- [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

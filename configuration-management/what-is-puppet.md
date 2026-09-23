@@ -27,7 +27,9 @@ tags:
 - **Facter** - node facts available as variables.
 - **Roles and profiles** - the standard pattern: profiles wrap technology modules, roles compose profiles, nodes get exactly one role.
 
-Puppet's strength is continuous enforcement at large scale with strong reporting and compliance evidence. Its cost is the DSL learning curve and running the server infrastructure.
+Puppet's strength is continuous enforcement at large scale with strong reporting and compliance evidence. Its cost is the DSL learning curve and running the server infrastructure (Puppet server, PuppetDB, the CA and certificate lifecycle).
+
+**Licensing, as of 2025.** Puppet is owned by Perforce, which moved official Puppet binaries and packages to a commercially licensed distribution (free only for small, non-production use). The community responded with **OpenVox**, a fork of the Apache-2.0 Puppet code maintained by Vox Pupuli, which is a drop-in replacement for the agent and server. For a new deployment, which distribution you run is now a real decision.
 
 ## Example
 
@@ -60,6 +62,7 @@ class profile::nginx (
 - Declarative and relationship-driven - explain that file order does not imply execution order.
 - Roles and profiles is the design pattern interviewers expect from anyone who has run Puppet at scale.
 - Contrast with Ansible: pull/agent/continuous enforcement versus push/agentless/on-demand.
+- Know the 2025 licensing change and the OpenVox fork - it signals you follow the ecosystem, and it matters for cost.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

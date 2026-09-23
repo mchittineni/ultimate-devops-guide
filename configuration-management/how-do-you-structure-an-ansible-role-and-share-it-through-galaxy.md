@@ -62,7 +62,7 @@ For genuinely shared plugins - custom modules, filters, lookups - the modern hom
 # requirements.yml - pinned, so builds are reproducible
 collections:
   - name: community.general
-    version: "9.5.1"
+    version: "13.4.0"
   - name: acme.platform
     source: https://automation-hub.example.com/api/galaxy/content/published/
     version: "1.4.0"
@@ -146,9 +146,9 @@ galaxy_info:
   author: acme-platform
   description: Install and configure nginx as a reverse proxy
   license: MIT
-  min_ansible_version: "2.15"
+  min_ansible_version: "2.19" # oldest ansible-core release still in support
   platforms:
-    - { name: EL, versions: ["8", "9"] }
+    - { name: EL, versions: ["9", "10"] }
     - { name: Ubuntu, versions: ["jammy", "noble"] }
   galaxy_tags: [nginx, web, proxy]
 dependencies:

@@ -83,7 +83,7 @@ Say this part out loud in an interview, because it is what separates "I know the
 The production pattern is to fetch secrets at run time:
 
 - **HashiCorp Vault** via the `community.hashi_vault.vault_kv2_get` lookup, with AppRole or JWT auth from CI.
-- **AWS Secrets Manager / SSM Parameter Store** via `amazon.aws.secretsmanager_random_password`, the `aws_secret` lookup, or `aws_ssm`, authenticated by an instance profile or OIDC.
+- **AWS Secrets Manager / SSM Parameter Store** via the `amazon.aws.secretsmanager_secret` and `amazon.aws.ssm_parameter` lookups (renamed from `aws_secret`/`aws_ssm` in amazon.aws 6.0), authenticated by an instance profile or OIDC.
 - **Azure Key Vault** via `azure.azcollection.azure_keyvault_secret`, authenticated by a managed identity.
 
 Then Ansible Vault holds only the **bootstrap** credential (or nothing at all, if the runner has a machine identity). Rotation happens in the secret manager and Ansible picks up the new value on the next run, with no commit and no redeploy - which is the whole point.
@@ -158,7 +158,7 @@ ansible-vault rekey --vault-id prod@old-pass --new-vault-id prod@new-pass \
 
 - name: Or from AWS Secrets Manager, authenticated by the runner's role
   ansible.builtin.set_fact:
-    db_password: "{{ lookup('amazon.aws.aws_secret', 'prod/api/db',
+    db_password: "{{ lookup('amazon.aws.secretsmanager_secret', 'prod/api/db',
                             nested=true, region='eu-west-1') }}"
   no_log: true
 ```
@@ -166,7 +166,7 @@ ansible-vault rekey --vault-id prod@old-pass --new-vault-id prod@new-pass \
 ```bash
 # Hygiene checks worth automating
 grep -rL '\$ANSIBLE_VAULT' inventories/*/group_vars/vault.yml   # any left unencrypted?
-git secrets --scan || gitleaks detect --no-banner                # nothing plaintext committed
+gitleaks git --no-banner .                                     # nothing plaintext committed
 ansible-playbook site.yml --check --diff -i inventories/prod     # --diff can print secrets:
                                                                 # review before sharing output
 ```

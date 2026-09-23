@@ -67,16 +67,20 @@ Patch on a schedule the fleet is used to (weekly security, monthly full) so the 
   serial: [1, 5, "25%"] # canary -> small batch -> ramp
   max_fail_percentage: 0 # any failure stops the whole run
   order: shuffle # avoid always hitting the same host first
-  vars:
-    patch_snapshot: "2026-08-01" # frozen repo snapshot: identical packages for all
+  # repo files on every host already point at a frozen snapshot (Pulp/Satellite content
+  # view or a date-stamped mirror), so every batch gets an identical package set
 
   pre_tasks:
-    - name: Remove from the load balancer and let connections drain
-      community.aws.elb_target_group_info: # (delegate to a control host)
+    - name: Remove from the load balancer
+      community.aws.elb_target:
+        target_group_name: web-prod
+        target_id: "{{ instance_id }}" # from the aws_ec2 inventory
+        state: absent
+        deregister_unused: true
       delegate_to: localhost
-      # ...deregister this instance, then:
-    - name: Wait for in-flight requests to finish
+    - name: Wait for in-flight requests to finish (>= the target group's deregistration delay)
       ansible.builtin.wait_for: { timeout: 45 }
+      delegate_to: localhost
 
   tasks:
     - name: Apply security updates only, from the pinned snapshot
@@ -84,7 +88,6 @@ Patch on a schedule the fleet is used to (weekly security, monthly full) so the 
         name: "*"
         state: latest
         security: true
-        releasever: "{{ patch_snapshot }}"
       register: patch_result
 
     - name: Does anything actually require a reboot?
@@ -106,7 +109,14 @@ Patch on a schedule the fleet is used to (weekly security, monthly full) so the 
   post_tasks:
     - name: Return to the load balancer only after a real health check
       ansible.builtin.uri: { url: "http://127.0.0.1:8080/healthz", status_code: 200 }
-    # ...then re-register the target and confirm it reaches healthy state
+    - name: Re-register and wait until the target group reports it healthy
+      community.aws.elb_target:
+        target_group_name: web-prod
+        target_id: "{{ instance_id }}"
+        state: present
+        target_status: healthy
+        target_status_timeout: 300
+      delegate_to: localhost
 ```
 
 ```bash

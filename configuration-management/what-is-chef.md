@@ -27,7 +27,7 @@ tags:
 
 **Two-phase execution** is Chef's distinctive behaviour: the compile phase evaluates the Ruby and builds a resource collection, then the converge phase executes those resources in order. Ruby code outside a resource block runs at compile time, which surprises newcomers.
 
-Because recipes are Ruby, Chef offers more programmatic power than a pure DSL - and more rope. Its testing story is strong: **Test Kitchen** spins up real instances, **ChefSpec** unit-tests the resource collection, and **InSpec** verifies the converged system (and doubles as a standalone compliance tool).
+Because recipes are Ruby, Chef offers more programmatic power than a pure DSL - and more rope. Commercially, Chef is owned by Progress: the source code is Apache-2.0, but Progress's official binaries (Chef Infra Client, InSpec) require a commercial licence for production use, and **Cinc** is the community-built, freely redistributable distribution of the same code. That licensing, and a smaller community than Ansible's, is why Chef appears mostly in established estates rather than new projects. Its testing story is strong: **Test Kitchen** spins up real instances, **ChefSpec** unit-tests the resource collection, and **InSpec** verifies the converged system (and doubles as a standalone compliance tool).
 
 ## Example
 
@@ -53,7 +53,7 @@ end
 ## Interview tips
 
 - Compile versus converge phase is the classic Chef gotcha worth naming.
-- InSpec is worth highlighting - it outlives Chef itself as a compliance-as-code tool.
+- InSpec is worth highlighting - it is used on its own as a compliance-as-code tool (note that current InSpec releases also need a Progress licence; Cinc Auditor is the free build).
 - Position it against Puppet (Ruby DSL and imperative-friendly vs declarative) and Ansible (agent vs agentless).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
