@@ -41,7 +41,7 @@ So the working patterns are: the application **watches the file** and reloads (b
 
 ### Azure Pipelines
 
-- **Variable group linked to Key Vault** (Library → Variable group → Link secrets from an Azure key vault) is the tidiest: secrets appear as pipeline variables, are masked in logs, and are fetched at run time. The service connection's identity needs **Get** and **List** on secrets.
+- **Variable group linked to Key Vault** (Library → Variable group → Link secrets from an Azure key vault) is the tidiest: secrets appear as pipeline variables, are masked in logs, and are fetched at run time. The service connection's identity needs the **Key Vault Secrets User** role (RBAC vaults) or **Get** and **List** on secrets (legacy access-policy vaults).
 - **`AzureKeyVault@2` task** when you want to fetch inside a specific job or filter by name pattern.
 - **Masked, not safe**: masking replaces exact matches. A secret that is base64-encoded, split, or printed by a tool as part of a larger string is **not** masked. Keep `--debug`/`system.debug` off in production pipelines.
 - **Secret variables need explicit `env:` mapping** to reach a script - they are deliberately not injected automatically.
@@ -50,7 +50,7 @@ So the working patterns are: the application **watches the file** and reloads (b
 
 ### Vault design and access control
 
-- **Azure RBAC over access policies.** The RBAC model gives you granular roles (Key Vault Secrets User, Secrets Officer, Administrator, Crypto User), inherits from management groups, and is auditable like everything else in Azure. Access policies are the legacy model with coarser permissions.
+- **Azure RBAC over access policies.** The RBAC model gives you granular roles (Key Vault Secrets User, Secrets Officer, Administrator, Crypto User), inherits from management groups, and is auditable like everything else in Azure. Access policies are the legacy model with coarser permissions, and newer Key Vault API versions make Azure RBAC the default for new vaults.
 - **A vault per environment**, not one vault with prefixed names - so a dev identity cannot read production secrets and the RBAC boundary matches the blast radius.
 - **Soft delete and purge protection on** (purge protection is required for some compliance profiles and cannot be turned off once enabled).
 - **Private endpoint** plus firewall rules with "allow trusted Microsoft services" only where genuinely needed.
@@ -59,7 +59,7 @@ So the working patterns are: the application **watches the file** and reloads (b
 
 ### The equivalents elsewhere
 
-Worth a sentence, because interviewers switch platforms: AWS uses **IRSA or EKS Pod Identity** with Secrets Manager (or the same CSI driver with the AWS provider), and GCP uses **Workload Identity** with Secret Manager. The pattern is identical - federate a Kubernetes service account to a cloud identity, then let the platform vend short-lived credentials - and saying that shows the concept rather than the product is what you understand.
+Worth a sentence, because interviewers switch platforms: AWS uses **EKS Pod Identity or IRSA** with Secrets Manager (or the same CSI driver with the AWS provider), and GCP uses **Workload Identity Federation for GKE** with Secret Manager. The pattern is identical - federate a Kubernetes service account to a cloud identity, then let the platform vend short-lived credentials - and saying that shows the concept rather than the product is what you understand.
 
 ## Example
 
@@ -144,10 +144,11 @@ spec:
 ```
 
 ```bash
-# Rotation actually working requires the driver to poll AND something to react
-helm upgrade csi-secrets-store csi-secrets-store-provider-azure/csi-secrets-store-provider-azure \
-  -n kube-system --set secrets-store-csi-driver.enableSecretRotation=true \
-  --set secrets-store-csi-driver.rotationPollInterval=2m
+# Rotation actually working requires the driver to poll AND something to react.
+# On AKS use the managed add-on (self-managed installs set the same options via Helm values).
+az aks enable-addons -g rg-prod -n aks-prod --addons azure-keyvault-secrets-provider
+az aks addon update -g rg-prod -n aks-prod --addon azure-keyvault-secrets-provider \
+  --enable-secret-rotation --rotation-poll-interval 2m
 
 az keyvault secret set --vault-name kv-payments-prod --name db-password --value 'new-value'
 # the mounted FILE updates within the poll interval:

@@ -21,7 +21,7 @@ tags:
 
 **Resource groups are lifecycle containers.** Everything in a group should share a deployment and deletion lifecycle, because deleting a resource group deletes everything in it. A resource group has a location, but that location only stores the group's metadata - resources inside it may live in other regions.
 
-**Inheritance flows down and cannot be broken.** A policy assigned at a management group applies to every subscription beneath it; an RBAC assignment at a subscription applies to all resource groups and resources within. There is no "deny inheritance" - Azure Policy `Deny` effects at a higher scope cannot be overridden lower down, which is precisely what makes them useful as guardrails.
+**Inheritance flows down and cannot be broken.** A policy assigned at a management group applies to every subscription beneath it; an RBAC assignment at a subscription applies to all resource groups and resources within. There is no "deny inheritance" - Azure Policy `Deny` effects at a higher scope cannot be overridden lower down (only a policy exemption, itself a controlled and auditable object, can carve out a scope), which is precisely what makes them useful as guardrails.
 
 **Tags do not inherit by default.** Tags applied to a resource group do not propagate to resources - a frequent surprise on cost reports. Use an Azure Policy with a `modify` effect to inherit required tags from the resource group, and make the tags themselves mandatory with a `deny` policy at the management-group level.
 

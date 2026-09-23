@@ -60,7 +60,7 @@ Do not use a service principal for the cluster or for workloads. The cluster sho
 
 ### The equivalents on other clouds
 
-Say this if the interviewer switches platform, because it shows you understand the concept rather than the branding: a managed identity is AWS's **instance profile / task role / IRSA** and GCP's **attached service account with Workload Identity**; an app registration with federated credentials is AWS's **OIDC role trust policy** and GCP's **Workload Identity Federation**. In every case the pattern is the same - bind a verifiable workload identity to a role and let the platform vend short-lived credentials.
+Say this if the interviewer switches platform, because it shows you understand the concept rather than the branding: a managed identity is AWS's **instance profile / task role / EKS Pod Identity or IRSA** and GCP's **attached service account with Workload Identity**; an app registration with federated credentials is AWS's **OIDC role trust policy** and GCP's **Workload Identity Federation**. In every case the pattern is the same - bind a verifiable workload identity to a role and let the platform vend short-lived credentials.
 
 ### Governance
 
@@ -112,7 +112,7 @@ az role assignment create --assignee "$APP_ID" --role Contributor \
 
 ```yaml
 # The pipeline side: OIDC, so there is no secret to store or rotate
-- uses: azure/login@v2
+- uses: azure/login@v3 # pin to a full commit SHA in production
   with:
     client-id: ${{ vars.AZURE_CLIENT_ID }} # not a secret - just an ID
     tenant-id: ${{ vars.AZURE_TENANT_ID }}

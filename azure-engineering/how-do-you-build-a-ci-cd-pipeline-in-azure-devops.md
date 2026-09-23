@@ -146,7 +146,7 @@ stages:
           runOnce:
             deploy:
               steps:
-                - task: HelmDeploy@0
+                - task: HelmDeploy@1
                   inputs:
                     connectionType: Kubernetes Service Connection
                     kubernetesServiceConnection: aks-dev
@@ -199,8 +199,9 @@ stages:
       - job: build
         steps:
           - ${{ parameters.buildSteps }} # the consumer's steps
-          - task: CredScan@3 # enforced: the consumer cannot remove these
-          - task: SdtReport@2
+          # enforced: the consumer cannot remove these (GitHub Advanced Security for Azure DevOps)
+          - task: AdvancedSecurity-Dependency-Scanning@1
+          - task: AdvancedSecurity-Publish@1
 
 # consumer repository - five lines, and every guardrail is inherited
 # extends:

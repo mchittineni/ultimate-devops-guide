@@ -21,7 +21,7 @@ tags:
 
 **Private endpoints are the main security decision.** By default PaaS services (Storage, SQL, Key Vault) have public endpoints. A private endpoint gives the service a private IP inside your VNet; combined with `publicNetworkAccess = Disabled` on the resource, this removes the internet path entirely. The catch is DNS: the resource's public FQDN must resolve to the private IP, which requires linked private DNS zones - misconfigured private DNS is the single most common cause of "the private endpoint does not work".
 
-**Outbound internet access is changing.** Implicit outbound access for new VMs is being retired, so egress must be explicit: NAT gateway (simple, scalable SNAT), a load balancer's outbound rules, or routing through Azure Firewall for inspection and FQDN filtering. NAT gateway also solves SNAT port exhaustion, which is a real failure mode for chatty outbound workloads.
+**Outbound internet access has changed.** Since 31 March 2026, subnets in newly created VNets are private by default (`defaultOutboundAccess: false`), so VMs get no implicit outbound internet IP; existing VNets are unaffected but should be migrated. Egress must be explicit: NAT gateway (simple, scalable SNAT), a load balancer's outbound rules, or routing through Azure Firewall for inspection and FQDN filtering. NAT gateway also solves SNAT port exhaustion, which is a real failure mode for chatty outbound workloads. The StandardV2 NAT gateway SKU (GA 2026) is zone-redundant by default, whereas the original Standard SKU is zonal.
 
 **Address planning.** Non-overlapping RFC 1918 space across hubs, spokes, and on-premises, sized for growth - and for AKS, sized for the networking model you choose (Azure CNI consumes a VNet IP per Pod; overlay modes conserve address space). Azure reserves five addresses per subnet, so a /29 is smaller than it looks.
 
@@ -81,13 +81,17 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-11-01' = {
         name: 'snet-app'
         properties: {
           addressPrefix: '10.60.16.0/20'
+          defaultOutboundAccess: false // private subnet: egress only via the NAT gateway
           networkSecurityGroup: { id: nsgApp.id }
           natGateway: { id: nat.id }
         }
       }
       {
         name: 'snet-data' // private endpoints only, no egress
-        properties: { addressPrefix: '10.60.48.0/24' }
+        properties: {
+          addressPrefix: '10.60.48.0/24'
+          defaultOutboundAccess: false
+        }
       }
     ]
   }
