@@ -17,7 +17,9 @@ tags:
 
 An **image** is a stack of read-only layers plus metadata (entrypoint, environment, exposed ports). Each Dockerfile instruction that changes the filesystem creates a layer, identified by a content digest. Layers are shared: ten containers from the same image consume the image's disk space once.
 
-A **container** adds a writable layer on top of those read-only layers, using a copy-on-write filesystem. Writes inside a running container land in this layer, and it is deleted when the container is removed - which is why anything you need to keep belongs in a volume or an external datastore.
+A **container** adds a writable layer on top of those read-only layers, using a copy-on-write filesystem. Writes inside a running container land in this layer, and it is deleted when the container is removed - which is why anything you need to keep belongs in a volume or an external datastore. The trade-off of copy-on-write is performance: the first write to a file from a lower layer copies the whole file up, so write-heavy paths (databases, caches, logs) should live on a volume rather than in the container's writable layer.
+
+An image is identified by its **digest** (`sha256:...`), a hash of its manifest; a **tag** such as `nginx:1.29` is a movable pointer that can be re-pushed to a different digest. Deploy by digest when you need to know exactly what is running.
 
 |           | Image                         | Container                          |
 | --------- | ----------------------------- | ---------------------------------- |
@@ -31,8 +33,8 @@ A **container** adds a writable layer on top of those read-only layers, using a 
 ```bash
 docker images                      # list images (templates)
 docker ps -a                       # list containers (instances)
-docker run -d --name a nginx:1.27  # two containers...
-docker run -d --name b nginx:1.27  # ...one shared image on disk
+docker run -d --name a nginx:1.29  # two containers...
+docker run -d --name b nginx:1.29  # ...one shared image on disk
 docker diff a                      # inspect a container's writable layer
 ```
 

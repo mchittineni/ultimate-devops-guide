@@ -31,7 +31,8 @@ The trap is the tar behaviour being **implicit**. `ADD app.tar.gz /opt/` leaves 
 ### Why `ADD <url>` is the wrong tool
 
 ```dockerfile
-ADD https://example.com/tool.tar.gz /tmp/    # downloads, does NOT extract
+# downloads, does NOT extract (Dockerfiles have no trailing comments - they would be parsed as arguments)
+ADD https://example.com/tool.tar.gz /tmp/
 ```
 
 Problems: the download lands in its own layer and stays in the image even if you delete it later; you cannot pipe it through a checksum or signature check in the same instruction on classic syntax; and cache invalidation is driven by remote metadata rather than content. The `RUN` equivalent verifies and cleans up in one layer:
@@ -42,7 +43,7 @@ RUN curl -fsSL https://example.com/tool.tar.gz -o /tmp/t.tgz \
  && tar -xzf /tmp/t.tgz -C /usr/local && rm /tmp/t.tgz
 ```
 
-Modern BuildKit does add `ADD --checksum=sha256:...` for remote URLs, which closes the verification gap - worth mentioning as the nuance, while noting the layer-hygiene argument still stands.
+Modern BuildKit does add `ADD --checksum=sha256:...` for remote URLs, which closes the verification gap, and `ADD` can also fetch a Git repository at a pinned ref (`ADD https://github.com/org/repo.git#v1.2.3 /src`) - worth mentioning as the nuance, while noting the layer-hygiene argument still stands.
 
 ### Flags both instructions share
 
@@ -60,7 +61,7 @@ Modern BuildKit does add `ADD --checksum=sha256:...` for remote URLs, which clos
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM node:20-alpine AS build
+FROM node:24-alpine AS build
 WORKDIR /src
 
 # 1. dependency manifests first: this layer is cached until they change
@@ -71,7 +72,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM nginx:1.27-alpine
+FROM nginx:1.29-alpine
 # 3. COPY --from: only the built assets reach the final image
 COPY --from=build --chown=nginx:nginx /src/dist/ /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
@@ -80,7 +81,8 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 ```dockerfile
 # The one legitimate ADD: building a base image from a rootfs tarball
 FROM scratch
-ADD alpine-minirootfs-3.20.0-x86_64.tar.gz /     # auto-extraction is the point here
+# auto-extraction is the point here
+ADD alpine-minirootfs-3.22.0-x86_64.tar.gz /
 CMD ["/bin/sh"]
 ```
 
@@ -106,9 +108,9 @@ Dockerfile
 
 ## Related Concepts
 
+- [[What is a Service in Kubernetes?]] (`#14`): [What is a Service in Kubernetes?](../kubernetes/what-is-a-service-in-kubernetes.md)
 - [[Explain the difference between Docker Swarm and Kubernetes]] (`#15`): [Explain the difference between Docker Swarm and Kubernetes](../kubernetes/explain-the-difference-between-docker-swarm-and-kubernetes.md)
 - [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
-- [[How does persistent storage work in Kubernetes?]] (`#443`): [How does persistent storage work in Kubernetes?](../kubernetes/how-does-persistent-storage-work-in-kubernetes.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

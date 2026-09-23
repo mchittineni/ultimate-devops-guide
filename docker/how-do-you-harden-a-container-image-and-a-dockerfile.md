@@ -34,7 +34,7 @@ tags:
 | Drop capabilities           | `--cap-drop=ALL`, add back only what is needed                         | Default Docker keeps ~14 capabilities including `NET_RAW` and `CHOWN`                                                 |
 | No privilege escalation     | `--security-opt=no-new-privileges` / `allowPrivilegeEscalation: false` | Neutralises setuid binaries left in the image                                                                         |
 | Never `--privileged`        | Use a specific capability or device instead                            | `--privileged` disables nearly every isolation boundary; it is effectively host root                                  |
-| Don't mount the socket      | Avoid `-v /var/run/docker.sock:...`                                    | Access to the daemon socket **is** root on the host. Use a rootless builder or Kaniko/BuildKit in CI                  |
+| Don't mount the socket      | Avoid `-v /var/run/docker.sock:...`                                    | Access to the daemon socket **is** root on the host. Use rootless BuildKit or Buildah in CI                           |
 | Seccomp / AppArmor          | Keep the default profiles on; tighten per workload                     | The default seccomp profile blocks ~44 syscalls at no cost                                                            |
 | No shell in the final stage | Distroless or `scratch`                                                | Removes the easiest interactive foothold                                                                              |
 
@@ -64,7 +64,7 @@ The answer to "a CVE is in a running container" is not `apt-get upgrade` inside 
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM golang:1.23-alpine AS build
+FROM golang:1.27-alpine AS build
 WORKDIR /src
 COPY go.mod go.sum ./
 RUN --mount=type=cache,target=/go/pkg/mod go mod download
@@ -73,12 +73,13 @@ COPY . .
 RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/api ./cmd/api
 
 # private registry credentials that must never reach a layer
-FROM node:20-alpine AS assets
+FROM node:24-alpine AS assets
 WORKDIR /a
 COPY package*.json ./
 RUN --mount=type=secret,id=npmrc,target=/root/.npmrc npm ci --omit=dev
 
-FROM gcr.io/distroless/static-debian12:nonroot@sha256:d71f4d239b1f0a4b5b1a4c8bd3b6bd0a7a0e4dcf3f6b2f1e0c9d8a7b6c5d4e3f
+# in production append @sha256:<digest> and let Renovate/Dependabot bump it
+FROM gcr.io/distroless/static-debian12:nonroot
 USER 65532:65532
 COPY --from=build /out/api /api
 EXPOSE 8080
@@ -119,10 +120,12 @@ docker buildx build --secret id=npmrc,src=$HOME/.npmrc --sbom=true \
 trivy image --scanners vuln,secret,misconfig \
   --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 registry.example.com/api:1.9.0
 
-cosign sign --yes registry.example.com/api:1.9.0          # keyless OIDC in CI
-cosign verify --certificate-identity-regexp '.*' \
+DIGEST=$(docker buildx imagetools inspect registry.example.com/api:1.9.0 --format '{{json .Manifest.Digest}}' | tr -d '"')
+cosign sign --yes registry.example.com/api@"$DIGEST"   # keyless OIDC in CI; sign the digest, not the tag
+cosign verify \
+  --certificate-identity 'https://github.com/acme/api/.github/workflows/release.yml@refs/heads/main' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  registry.example.com/api:1.9.0
+  registry.example.com/api@"$DIGEST"                    # pin the signer identity - never '.*'
 
 # Prove nothing sensitive is in the layers
 docker history --no-trunc registry.example.com/api:1.9.0
@@ -134,7 +137,7 @@ docker history --no-trunc registry.example.com/api:1.9.0
 - Split your answer into **image-time** and **runtime** controls, and say explicitly that a hardened image with a `privileged` pod spec is not hardened. That distinction is what senior interviewers are listening for.
 - Use a numeric UID in `USER` and explain why: `runAsNonRoot` cannot resolve a username to a UID, so `USER app` can still fail admission.
 - Be precise about secrets: `ARG` and `ENV` are visible in `docker history`, deleted files persist in their layer, and the fix is BuildKit `--mount=type=secret` at build and a mounted file at run.
-- Mention that mounting `/var/run/docker.sock` is equivalent to giving root on the host - it is the most common self-inflicted CI vulnerability. Offer rootless BuildKit or Kaniko instead.
+- Mention that mounting `/var/run/docker.sock` is equivalent to giving root on the host - it is the most common self-inflicted CI vulnerability. Offer rootless BuildKit or Buildah instead (Google's Kaniko was archived in 2025; only community forks remain).
 - Say that signing only matters with admission enforcement, and name Kyverno or Gatekeeper. See [how do you sign and verify container images](../devsecops/how-do-you-sign-and-verify-container-images.md), [Kubernetes admission control with Kyverno or OPA Gatekeeper](../devsecops/how-do-you-enforce-kubernetes-admission-control-with-kyverno-or-opa-gatekeeper.md), [prioritising vulnerabilities without blocking delivery](../devsecops/how-do-you-prioritise-vulnerabilities-without-blocking-delivery.md), and [namespaces, cgroups, and capabilities](./how-do-namespaces-cgroups-and-capabilities-isolate-a-container.md).
 - If asked how to fix a CVE in a running container, refuse the in-place upgrade and describe rebuild-rescan-redeploy plus compensating controls when the fix is genuinely far off.
 

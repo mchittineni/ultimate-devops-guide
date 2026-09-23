@@ -19,7 +19,7 @@ tags:
 
 **Docker daemon (`dockerd`)** - the long-running server. It handles API requests, builds images with BuildKit, manages networks and volumes, and delegates the actual container lifecycle downwards.
 
-**containerd** - the container runtime that supervises container lifecycle, image pulls, and storage. It is an independent CNCF project, which is why Kubernetes was able to drop the Docker shim and talk to containerd directly.
+**containerd** - the container runtime that supervises container lifecycle, image pulls, and storage. It is an independent CNCF project, which is why Kubernetes was able to drop the Docker shim and talk to containerd directly. Since Docker Engine 29, fresh installs also use the **containerd image store** by default, so image content and snapshots live in containerd rather than in Docker's legacy graph drivers (`overlay2` and friends are deprecated there); upgraded installs keep their existing store until migrated.
 
 **runc** - the low-level OCI runtime that actually creates the container: it sets up namespaces and cgroups and execs the process. One short-lived `runc` invocation per container start.
 
@@ -28,6 +28,8 @@ tags:
 **Objects** - images, containers, volumes, networks, and (in Swarm mode) services.
 
 The layered design matters: because `containerd` and `runc` implement OCI standards, images built by Docker run under Podman, CRI-O, or Kubernetes without change.
+
+**The trade-off of the daemon model.** A single root-privileged daemon is convenient - one API, shared image cache, restart policies - but it is also a single point of failure and a large privilege boundary: anyone who can reach its socket controls the host. Rootless mode (the daemon and containers run as an unprivileged user inside a user namespace) and daemonless tools such as Podman exist to shrink that boundary, at the cost of some networking and storage features.
 
 ## Example
 

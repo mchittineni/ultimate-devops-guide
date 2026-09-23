@@ -87,8 +87,11 @@ services:
     ports: ["127.0.0.1:8080:8080"] # only the edge is published, host-loopback only
 
   db:
-    image: postgres:16.4
-    command: ["postgres", "-c", "listen_addresses=*"] # bind 0.0.0.0, not 127.0.0.1
+    image: postgres:17
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password # the image will not initialise without a password
+    secrets: [db_password]
+    command: ["postgres", "-c", "listen_addresses=*"] # the image default, made explicit: bind all interfaces
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
@@ -98,6 +101,10 @@ services:
 networks:
   app-net: # user-defined -> embedded DNS, so names resolve
     driver: bridge
+
+secrets:
+  db_password:
+    file: ./db_password.txt
 ```
 
 ## Interview tips
