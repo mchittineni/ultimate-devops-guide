@@ -35,6 +35,28 @@ The pillars framing is useful but incomplete. What actually delivers observabili
 
 **Why it matters more now:** in a monolith, a stack trace usually explained the failure. In a distributed system with dozens of services and dynamic scheduling, the interesting failures are emergent and cannot be predicted in advance - so pre-defined dashboards are structurally insufficient.
 
+## Example
+
+```json
+{
+  "timestamp": "2026-09-14T10:32:11.482Z",
+  "service": "checkout",
+  "version": "3.8.0",
+  "region": "eu-west-1",
+  "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+  "span_id": "00f067aa0ba902b7",
+  "route": "POST /orders",
+  "http.status_code": 502,
+  "duration_ms": 1840,
+  "customer.tier": "enterprise",
+  "feature_flag.new_pricing": true,
+  "db.pool_wait_ms": 1210,
+  "error.type": "UpstreamTimeout"
+}
+```
+
+One wide, structured event like this can be sliced by version, region, customer tier, or flag state after the fact - and its `trace_id` links it to the full distributed trace.
+
 ## Interview tips
 
 - "Answering questions you did not anticipate" is the definition that shows real understanding.

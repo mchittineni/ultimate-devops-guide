@@ -35,6 +35,38 @@ tags:
 
 **Blue/green versus canary:** blue/green gives the fastest rollback; canary gives the smallest blast radius. Many teams combine them - deploy green, shift a small percentage first, then complete the switch.
 
+## Example
+
+```yaml
+# Kubernetes blue/green: two Deployments, one Service; the switch is the selector
+apiVersion: v1
+kind: Service
+metadata: { name: shop }
+spec:
+  selector: { app: shop, slot: blue } # change to slot: green to cut over; back to roll back
+  ports: [{ port: 80, targetPort: 8080 }]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: shop-green }
+spec:
+  replicas: 6 # same size as blue - full capacity before the switch
+  selector: { matchLabels: { app: shop, slot: green } }
+  template:
+    metadata: { labels: { app: shop, slot: green } }
+    spec:
+      containers:
+        - name: shop
+          image: ghcr.io/example/shop:3.8.0
+```
+
+```bash
+# Smoke-test green directly, then switch and (if needed) switch back
+kubectl port-forward deploy/shop-green 9090:8080 & curl -fsS localhost:9090/healthz
+kubectl patch service shop -p '{"spec":{"selector":{"app":"shop","slot":"green"}}}'
+kubectl patch service shop -p '{"spec":{"selector":{"app":"shop","slot":"blue"}}}'   # rollback
+```
+
 ## Interview tips
 
 - The shared database is the question behind the question - lead with backward-compatible migrations.

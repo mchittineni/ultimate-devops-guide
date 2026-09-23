@@ -28,7 +28,7 @@ tags:
 
 **Benefits:** language independence (the same sidecar serves Java, Go, and Python services), separation of concerns, independent upgrade of the capability, and reuse across every workload.
 
-**Costs:** resource overhead per pod, which multiplies across thousands of pods; added latency on the network path; lifecycle complexity - historically, a sidecar could keep a Job pod alive forever, or shut down before the app finished. Kubernetes native sidecars (init containers with `restartPolicy: Always`, stable since 1.29) fix the ordering and lifecycle problems properly.
+**Costs:** resource overhead per pod, which multiplies across thousands of pods; added latency on the network path; lifecycle complexity - historically, a sidecar could keep a Job pod alive forever, or shut down before the app finished. Kubernetes native sidecars (init containers with `restartPolicy: Always`, on by default since 1.29 and GA in 1.33) fix the ordering and lifecycle problems properly.
 
 **The trend away from sidecars:** Istio ambient mode and eBPF-based approaches (Cilium) move these functions to the node or kernel to eliminate per-pod overhead. Worth knowing, because it is where the ecosystem is heading.
 
@@ -38,7 +38,8 @@ tags:
 spec:
   initContainers:
     - name: vault-agent # native sidecar: starts first, runs alongside, stops last
-      image: hashicorp/vault:1.17
+      image: hashicorp/vault:2.1
+      args: ["agent", "-config=/vault/config/agent.hcl"] # config from a ConfigMap, omitted here
       restartPolicy: Always
       volumeMounts: [{ name: secrets, mountPath: /vault/secrets }]
   containers:

@@ -38,6 +38,37 @@ tags:
 
 **Playbooks must be rehearsed.** Tabletop exercises reveal the gaps - nobody knew who could authorise the failover, the contact list was stale, the plan lived only in the wiki that was down. Discovering that during a drill is the entire point.
 
+## Example
+
+```markdown
+# Playbook: Regional outage (primary region unavailable)
+
+**Activate when:** SLO burn-rate page for 2+ tier-1 services in the same region, or provider status confirms a regional event.
+**Who can activate:** any on-call incident commander (IC).
+
+## Roles
+
+- IC - owns decisions and timeline; does not debug.
+- Tech lead - coordinates responders; owns the failover runbook.
+- Comms lead - status page every 30 min, customer-success briefing.
+- Scribe - timeline in the incident channel.
+
+## Decision points
+
+| Decision                  | Criteria                                               | Authority        |
+| ------------------------- | ------------------------------------------------------ | ---------------- |
+| Fail over to secondary    | Primary impaired > 15 min and no provider ETA < 30 min | IC + eng. VP     |
+| Customer notification     | Any customer-visible impact > 10 min                   | IC               |
+| Regulator notification    | Personal-data exposure suspected                       | DPO + legal      |
+
+## Phases
+
+1. Detect and declare (SEV1), open the incident channel and bridge.
+2. Contain: freeze deploys; enable degraded mode (read-only checkout).
+3. Recover: run `runbooks/region-failover.md`; verify SLIs in the secondary.
+4. Exit when SLIs are green for 30 min; schedule the postmortem within 5 working days.
+```
+
 ## Interview tips
 
 - The runbook/playbook distinction is the core of the question - answer it directly and early.
@@ -50,7 +81,7 @@ tags:
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
-- [[What is Docker?]] (`#6`): [What is Docker?](../docker/what-is-docker.md)
+- [[How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?]] (`#541`): [How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?](../cicd/how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

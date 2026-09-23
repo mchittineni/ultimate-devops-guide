@@ -29,6 +29,38 @@ tags:
 
 **Keep the number of SLOs small.** Two or three per critical user journey, reviewed quarterly against real user experience and complaint data. Dozens of SLOs nobody looks at are worse than three that drive decisions.
 
+## Example
+
+```yaml
+# OpenSLO-style definition (a vendor-neutral format); tools such as Sloth or Pyrra
+# generate the same idea as Prometheus recording and burn-rate alerting rules.
+apiVersion: openslo/v1
+kind: SLO
+metadata:
+  name: checkout-availability
+spec:
+  service: checkout-api
+  description: 99.9% of checkout requests succeed, measured at the load balancer
+  budgetingMethod: Occurrences
+  timeWindow:
+    - duration: 28d
+      isRolling: true
+  objectives:
+    - target: 0.999
+  indicator:
+    metadata: { name: checkout-good-requests }
+    spec:
+      ratioMetric:
+        good:
+          metricSource:
+            type: Prometheus
+            spec: { query: 'sum(rate(lb_requests_total{service="checkout",code!~"5.."}[5m]))' }
+        total:
+          metricSource:
+            type: Prometheus
+            spec: { query: 'sum(rate(lb_requests_total{service="checkout"}[5m]))' }
+```
+
 ## Interview tips
 
 - Give a complete, precisely-worded SLO statement - the specificity itself is the answer.
@@ -39,9 +71,9 @@ tags:
 
 ## Related Concepts
 
+- [[What is progressive delivery and how does it differ from traditional deployment strategies?]] (`#509`): [What is progressive delivery and how does it differ from traditional deployment strategies?](../core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md)
+- [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
-- [[What are Jenkins Pipelines?]] (`#18`): [What are Jenkins Pipelines?](../cicd/what-are-jenkins-pipelines.md)
-- [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

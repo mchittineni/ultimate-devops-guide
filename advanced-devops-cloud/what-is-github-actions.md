@@ -31,7 +31,7 @@ tags:
 - **Caching and artifacts** - speed up builds and pass outputs between jobs.
 - **Concurrency groups** - cancel superseded runs and serialise deployments.
 
-**Security.** Set `permissions:` explicitly at the minimum required (the default token is broad). Pin third-party actions to a commit SHA, not a mutable tag. Be extremely careful with `pull_request_target`, which runs with write access in the context of a fork's code. Restrict which actions are allowed at the organisation level.
+**Security.** Set `permissions:` explicitly at the minimum required - repositories and organisations created before February 2023 still default the `GITHUB_TOKEN` to read-write, and even a read-only default is broader than most jobs need. Pin third-party actions to a commit SHA, not a mutable tag. Be extremely careful with `pull_request_target`, which runs with write access in the context of a fork's code. Restrict which actions are allowed at the organisation level.
 
 ## Example
 
@@ -53,8 +53,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: production # required reviewers configured in repo settings
     steps:
-      - uses: actions/checkout@v4
-      - uses: aws-actions/configure-aws-credentials@v4
+      # tags shown for readability; in production pin each action to a full commit SHA
+      - uses: actions/checkout@v7
+      - uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::123456789012:role/gha-deploy
           aws-region: eu-west-1

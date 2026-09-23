@@ -36,6 +36,24 @@ tags:
 
 **Read the exclusions carefully.** A "99.99%" SLA that excludes maintenance windows, measures monthly, and requires the customer to file a claim within 30 days provides much less protection than the headline suggests. The same applies when _you_ are the customer evaluating a cloud provider.
 
+## Example
+
+```text
+Illustrative SLA service-credit schedule (monthly uptime, measured by the provider)
+
+  Monthly uptime            Service credit
+  < 99.9%  and >= 99.0%     10% of the monthly fee
+  < 99.0%  and >= 95.0%     25%
+  < 95.0%                   100%
+
+  Exclusions: scheduled maintenance announced 5+ days ahead, customer-caused
+  failures, force majeure. Credits must be claimed within 30 days.
+
+Internal targets that sit behind it
+  SLA 99.9%  ->  SLO 99.95% (rolling 28 days)  ->  SLI: good / valid requests at the LB
+  99.9% of 30 days = 43 min of allowed downtime; 99.95% = 21.6 min
+```
+
 ## Interview tips
 
 - "SLO tighter than SLA" is the practical relationship interviewers want stated.
@@ -47,8 +65,8 @@ tags:
 ## Related Concepts
 
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
+- [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
-- [[What are Jenkins Pipelines?]] (`#18`): [What are Jenkins Pipelines?](../cicd/what-are-jenkins-pipelines.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

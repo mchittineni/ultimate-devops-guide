@@ -31,6 +31,39 @@ tags:
 
 **The anti-pattern** is the platform team as a gatekeeper - a ticket queue in front of infrastructure. That is the old operations silo with a new name.
 
+## Example
+
+```yaml
+# A golden-path template (Backstage Scaffolder): one form creates a repo, pipeline,
+# catalog entry and dashboards with the organisation's defaults baked in
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: go-http-service
+  title: Go HTTP service (paved road)
+spec:
+  owner: group:platform-team
+  type: service
+  parameters:
+    - title: Service details
+      required: [name, owner]
+      properties:
+        name: { type: string, pattern: "^[a-z][a-z0-9-]{2,30}$" }
+        owner: { type: string, ui:field: OwnerPicker }
+  steps:
+    - id: fetch
+      action: fetch:template
+      input: { url: ./skeleton, values: { name: "${{ parameters.name }}" } }
+    - id: publish
+      action: publish:github
+      input: { repoUrl: "github.com?owner=example&repo=${{ parameters.name }}" }
+    - id: register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+```
+
 ## Interview tips
 
 - "Platform as a product, developers as customers" is the sentence that captures the whole discipline.
