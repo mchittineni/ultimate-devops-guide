@@ -21,7 +21,7 @@ tags:
 
 **IAM inherits and is additive - there is no deny by omission at a lower level.** A role granted at the folder applies to every project inside it. IAM Deny policies exist and evaluate before allows, but the default model is union-of-grants, which is why granting `Editor` at the organisation node is such a common and serious mistake.
 
-**Organization policy constraints are the real guardrails.** Distinct from IAM, they restrict what configurations are permitted regardless of permissions: `constraints/compute.requireShieldedVm`, `constraints/compute.vmExternalIpAccess` (no public IPs), `constraints/iam.disableServiceAccountKeyCreation`, `constraints/gcp.resourceLocations` (data residency). Applied at the organisation or folder level, they are inherited and cannot be overridden below unless the constraint allows it.
+**Organization policy constraints are the real guardrails.** Distinct from IAM, they restrict what configurations are permitted regardless of permissions: `constraints/compute.requireShieldedVm`, `constraints/compute.vmExternalIpAccess` (no public IPs), `constraints/iam.disableServiceAccountKeyCreation`, `constraints/gcp.resourceLocations` (data residency). Applied at the organisation or folder level, they are inherited by every descendant. A lower level can only override or merge with them if someone holds Organization Policy Administrator (`roles/orgpolicy.policyAdmin`), a role that can only be granted at the organisation node - so the guardrail is really "who holds that role". Organisations created since 2024 also get a set of secure-by-default policies enforced automatically, including blocking service-account key creation and restricting public-access and domain sharing.
 
 **Billing is attached, not inherited.** A billing account links to projects and is managed separately from the resource hierarchy, so a project can be moved between folders without changing billing, and billing admin is a separate role from resource admin. Labels on projects and resources are what make cost reports meaningful - enforce them with policy and validate them in CI, because GCP does not require them.
 
@@ -61,7 +61,7 @@ Org policies at the organization node:
 
 - [[How do you choose a cloud provider for a new workload?]] (`#281`): [How do you choose a cloud provider for a new workload?](../cloud-platforms/how-do-you-choose-a-cloud-provider-for-a-new-workload.md)
 - [[How does networking differ across AWS, Azure, and GCP?]] (`#282`): [How does networking differ across AWS, Azure, and GCP?](../cloud-platforms/how-does-networking-differ-across-aws-azure-and-gcp.md)
-- [[What is a cloud landing zone?]] (`#215`): [What is a cloud landing zone?](../cloud-engineering/what-is-a-cloud-landing-zone.md)
+- [[What are the core trade-offs between Multi-Cloud, Hybrid-Cloud, and Single-Cloud architectures?]] (`#542`): [What are the core trade-offs between Multi-Cloud, Hybrid-Cloud, and Single-Cloud architectures?](../cloud-platforms/what-are-the-core-trade-offs-between-multi-cloud-hybrid-cloud-and-single-cloud-architectures.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
