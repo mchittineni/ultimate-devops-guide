@@ -66,9 +66,9 @@ spec:
         # AND: pods labelled role=gateway *in* namespaces labelled tier=edge
         - podSelector: { matchLabels: { role: gateway } }
           namespaceSelector: { matchLabels: { tier: edge } }
-        # OR (separate item): the ingress controller namespace, any pod
+        # OR (separate item): the Gateway/ingress controller namespace, any pod
         - namespaceSelector:
-            matchLabels: { kubernetes.io/metadata.name: ingress-nginx }
+            matchLabels: { kubernetes.io/metadata.name: gateway-system }
       ports:
         - { protocol: TCP, port: 8080 } # the CONTAINER port, not the Service port
   egress:

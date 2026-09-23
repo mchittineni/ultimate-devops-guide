@@ -82,8 +82,9 @@ roleRef:
 kubectl auth can-i delete pods --namespace payments
 kubectl auth can-i list secrets --as system:serviceaccount:payments:api -n payments
 
-# Everything a subject can do (kubectl 1.32+)
-kubectl auth whoami
+# Everything you can do in a namespace, and who the API server thinks you are
+kubectl auth can-i --list -n payments
+kubectl auth whoami                     # GA since 1.28
 ```
 
 ## Interview tips

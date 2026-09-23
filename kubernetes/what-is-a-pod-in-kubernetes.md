@@ -21,7 +21,7 @@ Pods are **ephemeral and disposable**. They are never repaired in place - a fail
 
 Multi-container patterns:
 
-- **Sidecar** - a companion container adding capability: a log shipper, a service-mesh proxy, a config reloader.
+- **Sidecar** - a companion container adding capability: a log shipper, a service-mesh proxy, a config reloader. Since Kubernetes 1.29 (GA in 1.33) the native form is an init container with `restartPolicy: Always`, which starts before the app, stops after it, and does not keep a Job from completing.
 - **Init containers** - run to completion before app containers start; used for migrations, waiting on dependencies, or fetching secrets.
 - **Ambassador / adapter** - proxying outbound connections, or reshaping the app's metrics output.
 
@@ -45,7 +45,7 @@ spec:
       ports: [{ containerPort: 8080 }]
       volumeMounts: [{ name: logs, mountPath: /var/log/app }]
     - name: log-shipper # sidecar, same volume
-      image: fluent-bit:3.1
+      image: fluent/fluent-bit:4.0
       volumeMounts: [{ name: logs, mountPath: /var/log/app, readOnly: true }]
   volumes:
     - name: logs
@@ -56,7 +56,7 @@ spec:
 
 - "Why not one container per pod always?" - because sidecars need the shared network and filesystem.
 - Be precise on readiness vs liveness; confusing them causes real outages (a failing liveness probe restart-loops a healthy-but-slow app).
-- In practice you rarely create bare Pods - Deployments, StatefulSets, and Jobs create them for you.
+- In practice you rarely create bare Pods - Deployments, StatefulSets, and Jobs create them for you. A bare Pod is not rescheduled if its node dies, which is the trade-off that makes controllers mandatory in production.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

@@ -43,7 +43,7 @@ If `minAvailable` equals the replica count - `replicas: 1` with `minAvailable: 1
 - For a three-node quorum, `minAvailable: 2` is correct: one may leave, quorum survives.
 - Watch `status.disruptionsAllowed` (`kubectl get pdb`); if it sits at 0, maintenance is blocked and you should know before you start a cluster upgrade, not during it.
 
-Also note that unhealthy Pods count against you: if a replica is already `CrashLoopBackOff`, the budget may allow zero further disruptions. `unhealthyPodEvictionPolicy: AlwaysAllow` (1.27+) lets already-unready Pods be evicted so a drain can make progress instead of deadlocking on broken Pods.
+Also note that unhealthy Pods count against you: if a replica is already `CrashLoopBackOff`, the budget may allow zero further disruptions. `unhealthyPodEvictionPolicy: AlwaysAllow` (beta in 1.27, GA in 1.31) lets already-unready Pods be evicted so a drain can make progress instead of deadlocking on broken Pods.
 
 ### PDBs are not a substitute for spreading
 
@@ -57,7 +57,7 @@ Together these three - spread, PDB, graceful shutdown - are what "safe during a 
 
 ### Where it shows up operationally
 
-`kubectl drain` reports `Cannot evict pod as it would violate the pod's disruption budget` and retries. That message is a feature: it is the cluster telling you the maintenance would breach availability. The right responses are to wait, scale the workload up temporarily, or fix an unhealthy replica - not `--force` or `--disable-eviction`, which delete Pods directly and skip the budget entirely.
+`kubectl drain` reports `Cannot evict pod as it would violate the pod's disruption budget` and retries. That message is a feature: it is the cluster telling you the maintenance would breach availability. The right responses are to wait, scale the workload up temporarily, or fix an unhealthy replica - not `--disable-eviction`, which deletes Pods directly and skips the budget entirely, or deleting Pods by hand. (`--force` is different: it only lets drain remove Pods that no controller manages, and those Pods are then lost for good.)
 
 ## Example
 
@@ -119,7 +119,7 @@ kubectl get pdb -A
 kubectl get pdb api-pdb -n prod -o jsonpath='{.status.disruptionsAllowed}{"\n"}'
 kubectl describe pdb api-pdb -n prod        # which Pods are counted unhealthy
 
-# Drain honours it; --force does not (and is why people think PDBs "do not work")
+# Drain honours it; --disable-eviction and manual pod deletes do not (and are why people think PDBs "do not work")
 kubectl drain ip-10-0-3-14 --ignore-daemonsets --delete-emptydir-data
 ```
 
@@ -130,7 +130,7 @@ kubectl drain ip-10-0-3-14 --ignore-daemonsets --delete-emptydir-data
 - Give the quorum example - three replicas, `minAvailable: 2` - because it shows you are thinking about what the workload needs rather than copying a template.
 - Say that a PDB is one leg of a tripod with `topologySpreadConstraints` and graceful shutdown, and that a budget over three replicas on one node buys nothing.
 - Mention `status.disruptionsAllowed` as the pre-upgrade check, and `unhealthyPodEvictionPolicy: AlwaysAllow` as the fix for drains blocked by already-broken Pods. Both are recent and specific.
-- If they ask what to do when a drain is blocked: wait, temporarily scale up, or repair the unhealthy replica - never `--force`, which bypasses the budget you deliberately set. See [upgrading a production Kubernetes cluster with zero downtime](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md), [node pressure and Pod evictions](./how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md), and [rolling updates and rollback](./how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes.md).
+- If they ask what to do when a drain is blocked: wait, temporarily scale up, or repair the unhealthy replica - never `--disable-eviction` or manual Pod deletes, which bypass the budget you deliberately set. See [upgrading a production Kubernetes cluster with zero downtime](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md), [node pressure and Pod evictions](./how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md), and [rolling updates and rollback](./how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

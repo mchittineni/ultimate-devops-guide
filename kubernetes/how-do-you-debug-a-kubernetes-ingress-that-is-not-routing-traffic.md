@@ -29,6 +29,10 @@ tags:
 8. **Backend protocol assumptions.** If the upstream speaks HTTPS or gRPC and the controller assumes plain HTTP, you get 502s or a protocol error. That is what `nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"` (or `GRPC`) exists for.
 9. **NetworkPolicy.** A default-deny in the application namespace blocks the controller's Pods from reaching the backend even though every Kubernetes object is correct. Allow the ingress controller namespace explicitly.
 
+### A note on the controller in these examples
+
+The commands and annotations below use the community **Ingress-NGINX** controller because it is still the one most clusters run. It was **retired in March 2026**: its repositories are read-only and it receives no further releases or security fixes, so a cluster still running it should be planning a move to a Gateway API implementation (or another maintained Ingress controller). The debugging method does not change - DNS, load balancer, controller, route, Service, Pod - only the controller's log format and annotation names do. `nginx.ingress.kubernetes.io/*` annotations are controller-specific and do nothing on any other implementation.
+
 ### Isolate with a bypass test
 
 Take layers away rather than reasoning about all of them: `kubectl port-forward svc/checkout 8080:80` proves the app and Service work; `curl` from inside the controller Pod to the Service DNS name proves the controller can reach the backend; `curl --resolve shop.example.com:443:<lb-ip>` proves routing without touching DNS. Whichever test first fails is your layer.
@@ -94,6 +98,7 @@ spec:
 - Bring up `ingressClassName` and the no-default-class case - an Ingress that no controller owns fails with no error message at all.
 - Know `pathType` semantics and the rewrite-with-capture-group trap. This is the most common cause of a 404 on a URL that looks right.
 - For TLS, mention the fake certificate as the tell, the same-namespace secret requirement, and the cert-manager chain (`Certificate` → `CertificateRequest` → `Order` → `Challenge`).
+- If the controller is Ingress-NGINX, say that it was retired in March 2026 and that the migration target is Gateway API (the `ingress2gateway` tool converts existing Ingress objects). It shows you track the ecosystem, not just the YAML.
 - Close with the bypass tests (`port-forward`, `curl` from inside the controller Pod, `--resolve`) - taking layers away is more convincing than reading YAML harder. See [how do you expose an application running in Kubernetes to the outside world](./how-do-you-expose-an-application-running-in-kubernetes-to-the-outside-world.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

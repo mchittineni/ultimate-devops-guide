@@ -13,7 +13,7 @@ tags:
 
 # How does Pod networking and service discovery work in Kubernetes?
 
-**Short answer:** Kubernetes mandates a flat network model: **every Pod gets its own IP, and any Pod can reach any other Pod's IP directly, without NAT, across nodes**. A **CNI plugin** implements that - it allocates the IP, wires the Pod's veth pair into the node, and makes cross-node routing work (native VPC routing, or an overlay such as VXLAN/Geneve, or eBPF). Because Pod IPs are ephemeral, discovery goes through a **Service**: a stable virtual IP and a DNS name, backed by an EndpointSlice that the endpoints controller keeps in sync with the Pods matching the Service's selector. **CoreDNS** resolves `service.namespace.svc.cluster.local`, and **kube-proxy** (iptables or IPVS mode) or an eBPF dataplane programs each node so that traffic to the ClusterIP is load-balanced to a healthy Pod IP. So: two Pods on the same node talk over the node's bridge; two Pods on different nodes talk over the CNI's routing; and neither needs to know the other's IP because DNS plus Service abstraction hides it.
+**Short answer:** Kubernetes mandates a flat network model: **every Pod gets its own IP, and any Pod can reach any other Pod's IP directly, without NAT, across nodes**. A **CNI plugin** implements that - it allocates the IP, wires the Pod's veth pair into the node, and makes cross-node routing work (native VPC routing, or an overlay such as VXLAN/Geneve, or eBPF). Because Pod IPs are ephemeral, discovery goes through a **Service**: a stable virtual IP and a DNS name, backed by an EndpointSlice that the EndpointSlice controller keeps in sync with the Pods matching the Service's selector. **CoreDNS** resolves `service.namespace.svc.cluster.local`, and **kube-proxy** (iptables or nftables mode; IPVS mode is deprecated since 1.35) or an eBPF dataplane programs each node so that traffic to the ClusterIP is load-balanced to a healthy Pod IP. So: two Pods on the same node talk over the node's bridge; two Pods on different nodes talk over the CNI's routing; and neither needs to know the other's IP because DNS plus Service abstraction hides it.
 
 ## Detail
 
@@ -51,7 +51,8 @@ app code: GET http://payments:8080/charge
    ├─ kube-proxy has programmed this node so that packets to 10.96.42.7:8080
    │        DNAT to one of the ready backend Pod IPs (10.244.3.19:8080)
    │        - iptables mode: a chain of probabilistic rules per Service
-   │        - IPVS mode: a real load-balancer table, O(1) at scale
+   │        - nftables mode: verdict maps, scales far better (GA since 1.33)
+   │        - IPVS mode: a kernel load-balancer table (deprecated since 1.35)
    │        - Cilium: an eBPF map, no iptables at all
    │
    ├─ CNI routes 10.244.3.19 to the node hosting it (VPC route or VXLAN tunnel)

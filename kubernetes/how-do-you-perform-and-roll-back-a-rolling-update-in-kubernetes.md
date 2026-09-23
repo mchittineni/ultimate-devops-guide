@@ -108,7 +108,8 @@ kubectl rollout status deployment/checkout --timeout=5m || {
 kubectl rollout status deployment/checkout
 # Waiting for deployment "checkout" rollout to finish: 3 of 10 updated replicas are available
 kubectl get rs -l app=checkout          # old vs new ReplicaSet, desired/current/ready
-kubectl describe pod -l app=checkout --field-selector=status.phase=Pending | grep -A6 Events
+kubectl get pods -l app=checkout --field-selector=status.phase=Pending -o name \
+  | xargs kubectl describe | grep -A6 Events
 
 kubectl rollout history deployment/checkout
 kubectl rollout undo deployment/checkout --to-revision=7

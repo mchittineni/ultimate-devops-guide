@@ -22,7 +22,7 @@ What it provides out of the box:
 - **Scheduling** - placing pods on nodes based on resource requests, affinity rules, taints, and topology spread.
 - **Self-healing** - restarting failed containers, replacing pods, and refusing traffic to unready ones.
 - **Service discovery and load balancing** - stable virtual IPs and DNS names in front of ephemeral pods.
-- **Rollouts and rollbacks** - declarative, incremental deployment with automatic revert on failure.
+- **Rollouts and rollbacks** - declarative, incremental deployment gated by readiness probes, with one-command rollback (`kubectl rollout undo`). A failed rollout stalls rather than reverting itself; automated rollback needs tooling such as Argo Rollouts or Flagger.
 - **Configuration and secrets** - injected as environment variables or mounted files, separate from images.
 - **Autoscaling** - of pods (HPA/VPA) and of nodes (Cluster Autoscaler).
 - **Extensibility** - Custom Resource Definitions and operators let you manage anything with the same model.
@@ -46,19 +46,19 @@ spec:
     spec:
       containers:
         - name: web
-          image: nginx:1.27
+          image: nginx:1.29
           ports: [{ containerPort: 80 }]
           resources:
             requests: { cpu: 100m, memory: 128Mi }
             limits: { cpu: 500m, memory: 256Mi }
           readinessProbe:
-            httpGet: { path: /healthz, port: 80 }
+            httpGet: { path: /, port: 80 } # stock nginx serves / but has no /healthz
 ```
 
 ## Interview tips
 
 - Lead with the reconciliation loop and declarative model - that is the conceptual core.
-- Be ready for "when would you _not_ use Kubernetes?" A single small service is better served by a managed platform.
+- Be ready for "when would you _not_ use Kubernetes?" A single small service is better served by a managed platform. The trade-off is operational: Kubernetes buys portability and a huge ecosystem at the cost of real complexity - upgrades every few months (each minor release gets roughly a year of patches), networking, security, and cost management.
 - Know that Kubernetes gives you primitives, not a platform; teams still build the developer experience on top.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
