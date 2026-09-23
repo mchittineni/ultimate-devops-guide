@@ -81,7 +81,8 @@ LOG=/var/log/disk-alert.log
 ALERT_TO=${ALERT_TO:-ops@example.com}
 
 # read df line by line; strip the % so the comparison is numeric
-df -hP --output=pcent,target -x tmpfs -x devtmpfs | tail -n +2 | while read -r pcent mount; do
+# (GNU df: --output cannot be combined with -P)
+df --output=pcent,target -x tmpfs -x devtmpfs | tail -n +2 | while read -r pcent mount; do
   used=${pcent%\%}; used=${used// /}
   if (( used >= THRESHOLD )); then
     msg="$(date -Is) DISK ${mount} at ${used}% (threshold ${THRESHOLD}%)"
@@ -135,10 +136,11 @@ PAT=${2:-ERR}
 
 wc -l < "$FILE"                                    # total lines
 grep -c -- "$PAT" "$FILE" || true                  # lines CONTAINING the pattern
-grep -o -- "$PAT" "$FILE" | wc -l                  # OCCURRENCES (may be >1 per line)
+{ grep -o -- "$PAT" "$FILE" || true; } | wc -l     # OCCURRENCES (may be >1 per line)
+# (grep exits 1 on no match; under pipefail that would abort the script)
 
 # top 10 error messages, normalised so IDs do not fragment the count
-grep -- "$PAT" "$FILE" \
+{ grep -- "$PAT" "$FILE" || true; } \
   | sed -E 's/[0-9a-f]{8,}/<id>/g; s/[0-9]+/<n>/g' \
   | awk -F'ERR' '{print $2}' | sort | uniq -c | sort -rn | head -10
 
@@ -146,7 +148,7 @@ grep -- "$PAT" "$FILE" \
 awk '/ERROR/ { c[$0]++ } END { for (m in c) if (c[m] > 3) printf "[ALERT] %dx %s\n", c[m], m }' "$FILE"
 
 # unique IPs and how many there are
-grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' "$FILE" | sort -u | tee /dev/stderr | wc -l
+{ grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' "$FILE" || true; } | sort -u | tee /dev/stderr | wc -l
 ```
 
 **Rename `.txt` files with today's date, and find-and-replace:**
@@ -222,7 +224,8 @@ set -euo pipefail
 readonly SCRIPT_NAME=${0##*/}
 readonly LOCK=/var/lock/${SCRIPT_NAME}.lock
 TMPDIR_LOCAL=$(mktemp -d)                  # never a predictable /tmp path
-trap 'rc=$?; rm -rf "$TMPDIR_LOCAL"; exit $rc' EXIT INT TERM   # cleanup on any exit
+trap 'rm -rf "$TMPDIR_LOCAL"' EXIT       # cleanup on any exit, including signals
+trap 'exit 130' INT; trap 'exit 143' TERM # turn signals into a clean exit (runs the EXIT trap)
 
 log()  { printf '%s [%s] %s\n' "$(date -Is)" "$1" "${*:2}" | logger -t "$SCRIPT_NAME" -s; }
 die()  { log ERROR "$*"; exit 1; }

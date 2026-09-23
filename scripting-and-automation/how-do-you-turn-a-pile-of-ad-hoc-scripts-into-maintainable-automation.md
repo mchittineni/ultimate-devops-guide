@@ -44,10 +44,21 @@ tags:
 #!/usr/bin/env python3
 """Snapshot cleanup - idempotent, dry-run by default, structured logs, real exit codes."""
 import argparse, json, logging, sys, uuid
+from datetime import datetime, timedelta, timezone
 import boto3
 from botocore.config import Config
 
 RUN_ID = str(uuid.uuid4())
+
+def find_stale_snapshots(ec2, older_than_days: int) -> list[dict]:
+    cutoff = datetime.now(timezone.utc) - timedelta(days=older_than_days)
+    stale = []
+    for page in ec2.get_paginator("describe_snapshots").paginate(OwnerIds=["self"]):
+        for s in page["Snapshots"]:
+            if s["StartTime"] < cutoff:
+                stale.append({"SnapshotId": s["SnapshotId"],
+                              "age_days": (datetime.now(timezone.utc) - s["StartTime"]).days})
+    return sorted(stale, key=lambda s: -s["age_days"])
 
 def log(event: str, **fields) -> None:
     logging.info(json.dumps({"event": event, "run_id": RUN_ID, **fields}))
@@ -112,21 +123,21 @@ spec:
               args: ["snapshots", "cleanup", "--older-than-days=90", "--apply"]
 ```
 
-```promql
+```yaml
 # Alert on failure AND on absence - a job that stops running is the quieter failure.
 - alert: CronJobFailing
   expr: kube_job_status_failed{job_name=~"snapshot-cleanup.*"} > 0
   for: 5m
 
 - alert: CronJobStale
-  expr: time() - max(kube_job_status_succeeded_time{job_name=~"snapshot-cleanup.*"}) > 172800
+  expr: time() - kube_cronjob_status_last_successful_time{cronjob="snapshot-cleanup"} > 172800  # kube-state-metrics
   annotations: { summary: "snapshot-cleanup has not succeeded in 48h" }
 ```
 
 ```bash
 # Inventory: find what you are actually dealing with, before promising anything.
 for h in $(cat hosts.txt); do ssh "$h" 'crontab -l 2>/dev/null; systemctl list-timers --all'; done
-find . -name '*.sh' -newermt '-365 days' | xargs -r wc -l | sort -n   # and what is stale
+find . -name '*.sh' ! -newermt '365 days ago' -print           # untouched for a year: deletion candidates
 gh api /repos/acme/infra/actions/workflows --jq '.workflows[] | select(.state=="active") | .name'
 shellcheck scripts/*.sh                                              # the cheapest quality win
 ```

@@ -30,7 +30,7 @@ tags:
 
 - **List vs tuple** - lists are mutable, tuples are immutable and hashable, so a tuple can be a dict key or set member. Tuples are marginally faster and signal "this will not change". The practical answer: tuples for fixed records, lists for collections you mutate.
 - **Shallow vs deep copy** - `copy.copy()` copies the outer object but shares the nested objects; `copy.deepcopy()` recursively copies everything. This bites when copying a nested config dict, mutating the copy, and finding the original changed too. Note `dict.copy()` and slicing are both shallow.
-- **The GIL** - CPython's Global Interpreter Lock allows only one thread to execute Python bytecode at a time, so threads do not give you CPU parallelism. They _do_ help with I/O-bound work, because the lock is released during I/O waits - which is most DevOps work. For CPU-bound work use `multiprocessing` or a native extension. (Recent CPython releases ship an experimental free-threaded build, but assume the GIL applies unless told otherwise.)
+- **The GIL** - CPython's Global Interpreter Lock allows only one thread to execute Python bytecode at a time, so threads do not give you CPU parallelism. They _do_ help with I/O-bound work, because the lock is released during I/O waits - which is most DevOps work. For CPU-bound work use `multiprocessing` or a native extension. (CPython 3.13 introduced an experimental free-threaded build and 3.14 made it officially supported, but it is still a separate, opt-in build with patchy C-extension support - assume the GIL applies unless told otherwise.)
 - **Mutable default arguments** - `def f(items=[])` shares one list across every call. Use `None` and create inside.
 - **Generators** - `yield` streams items lazily instead of building a list in memory. The correct answer to "how would you process a 10 GB log file in Python."
 - **Context managers** - `with open(...)` guarantees cleanup; the same pattern applies to locks and connections.
@@ -97,7 +97,8 @@ def main() -> int:
                      volume["VolumeId"], name, volume["Size"],
                      volume["CreateTime"].date())
 
-        log.info("total reclaimable: %s GiB (~$%.2f/month gp3)", total_gb, total_gb * 0.08)
+        log.info("total reclaimable: %s GiB (~$%.2f/month at ~$0.08/GiB gp3; check your region's price)",
+                 total_gb, total_gb * 0.08)
     except ClientError as exc:                       # specific, not bare except
         log.error("AWS API call failed: %s", exc)
         return 1
