@@ -11,7 +11,7 @@ tags:
 
 # How do you scan Infrastructure as Code before it is applied?
 
-**Short answer:** Run two layers on every pull request: static scanners over the templates (Checkov, `trivy config`, tfsec) for known misconfigurations, and policy-as-code over the Terraform _plan_ (OPA/Conftest, Sentinel) for organisation-specific rules. Plan-based checks are the stronger gate because they see resolved values, modules, and what will actually change.
+**Short answer:** Run two layers on every pull request: static scanners over the templates (Checkov, or `trivy config`, which absorbed the now-deprecated tfsec) for known misconfigurations, and policy-as-code over the Terraform _plan_ (OPA/Conftest, Sentinel) for organisation-specific rules. Plan-based checks are the stronger gate because they see resolved values, modules, and what will actually change.
 
 ## Detail
 
@@ -34,7 +34,7 @@ trivy config . --severity HIGH,CRITICAL --exit-code 1
 # Strong layer: policy over the resolved plan
 terraform plan -out=tf.plan
 terraform show -json tf.plan > tf.json
-conftest test --policy ./policy tf.json
+conftest test --policy ./policy tf.json   # same flow with OpenTofu: tofu plan / tofu show -json
 ```
 
 ```rego

@@ -27,7 +27,7 @@ tags:
 | **Pre-deploy**   | Admission policy, config validation, DAST against staging                | Minutes       |
 | **Runtime**      | Vulnerability re-scanning, drift and anomaly detection, WAF              | Continuous    |
 
-**The tools by what they look at.** **SAST** reads your source code for insecure patterns. **SCA** checks your dependencies against known-vulnerability databases - and for most applications, this finds the most real risk for the least effort, because most of the code you ship is somebody else's. **Secret scanning** catches credentials before they enter Git history. **IaC scanning** (Checkov, tfsec, Trivy) catches the public S3 bucket or the open security group before it exists. **DAST** attacks a running application. **Container scanning** covers the base image and OS packages you inherited.
+**The tools by what they look at.** **SAST** reads your source code for insecure patterns. **SCA** checks your dependencies against known-vulnerability databases - and for most applications, this finds the most real risk for the least effort, because most of the code you ship is somebody else's. **Secret scanning** catches credentials before they enter Git history. **IaC scanning** (Checkov, or Trivy, which absorbed tfsec) catches the public S3 bucket or the open security group before it exists. **DAST** attacks a running application. **Container scanning** covers the base image and OS packages you inherited.
 
 **Ownership shifts too, and that is the harder half.** Shift left only works if developers can act on the findings, which means security stops being a gate a separate team operates and starts being feedback the delivery team owns. The security team's job becomes building the checks, setting the policy, and helping with the hard findings - not manually reviewing every release.
 
@@ -51,11 +51,11 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with: { fetch-depth: 0 } # full history so secret scanning can see the diff
 
       - name: Secrets (blocking - a leaked credential is always a stop)
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@v3
 
       - name: Dependencies (blocking on high/critical with a fix available)
         run: |
@@ -79,10 +79,10 @@ jobs:
 # .pre-commit-config.yaml - the leftmost check, running on the developer's machine.
 repos:
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.0
+    rev: v8.30.1
     hooks: [{ id: gitleaks }]
   - repo: https://github.com/bridgecrewio/checkov
-    rev: 3.2.0
+    rev: 3.3.19
     hooks: [{ id: checkov, args: [--quiet, --compact] }]
 ```
 

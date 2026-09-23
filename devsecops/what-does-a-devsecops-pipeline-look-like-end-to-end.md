@@ -44,12 +44,12 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with: { fetch-depth: 0 } # gitleaks needs history
       - name: Secret scan
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@v3
       - name: Dependency review (blocks new vulnerable deps)
-        uses: actions/dependency-review-action@v4
+        uses: actions/dependency-review-action@v5
         with: { fail-on-severity: high }
       - name: IaC scan
         run: |
@@ -62,6 +62,7 @@ jobs:
 - Name the gates in order and say which ones block. "Security is everyone's responsibility" without a pipeline is not an answer.
 - The baseline/new-findings distinction and expiring waivers are the two details that show you have run this in a real team.
 - Expect the follow-up: "what do you do when the critical has no fix?" - compensating control, documented risk acceptance, and a tracked ticket.
+- Treat the security tooling as supply chain too: pin actions and scanner images to a commit SHA or digest (the tags above are for readability). In March 2026 attackers force-pushed most `aquasecurity/trivy-action` tags to a credential stealer - tag-pinned pipelines ran it, SHA-pinned ones did not.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

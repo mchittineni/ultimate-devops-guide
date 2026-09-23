@@ -84,7 +84,7 @@ DROP USER app_a;                                             -- 5. only when cou
 
 ```yaml
 # External Secrets Operator: rotation with no deployment, and a restart for env consumers
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata: { name: checkout-db, namespace: prod }
 spec:

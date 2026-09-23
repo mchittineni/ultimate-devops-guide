@@ -42,7 +42,8 @@ jobs:
       id-token: write # required to mint the OIDC token
       contents: read
     steps:
-      - uses: aws-actions/configure-aws-credentials@v4
+      # pin third-party actions to a full commit SHA in production; the tag is shown for readability
+      - uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::111122223333:role/deploy-prod
           aws-region: eu-west-1
@@ -64,6 +65,7 @@ condition {
 - Lead with "remove the secret entirely via OIDC federation" - it reframes the question and is what modern teams do.
 - The `sub` condition pinning repo and ref is the detail that proves you have configured this rather than read about it.
 - Expect the fork/`pull_request_target` question, and "what do you do after a leak?" - rotate first, forensics second.
+- Mention that the pipeline's own dependencies are an attack path to its secrets: pin actions to commit SHAs, because tags can be force-pushed - which is exactly how the March 2026 `trivy-action` compromise served a credential stealer to workflows that referenced it by version tag during the compromise window; SHA-pinned workflows were unaffected.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
