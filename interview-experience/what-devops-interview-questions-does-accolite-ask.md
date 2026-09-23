@@ -77,9 +77,9 @@ HAVING COUNT(*) > 3;
 
 ## Related Concepts
 
+- [[What is the difference between Artifact Promotion and rebuilding binaries across environments?]] (`#534`): [What is the difference between Artifact Promotion and rebuilding binaries across environments?](../cicd/what-is-the-difference-between-artifact-promotion-and-rebuilding-binaries-across-environments.md)
 - [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
-- [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

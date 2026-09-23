@@ -74,8 +74,7 @@ seq 1 100 | paste -sd+ | bc          # shorter
 echo $(( 100 * 101 / 2 ))            # O(1) — Gauss; mention it exists
 
 # The triangular pattern: row r holds r numbers, counted DOWN from the
-# highest value in that row.
-#!/usr/bin/env bash
+# highest value in that row. Save as tri.sh and run: bash tri.sh 4
 n=${1:?usage: $0 N}
 counter=1
 for (( row=1; row<=n; row++ )); do
@@ -110,8 +109,8 @@ done
 ## Related Concepts
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[What are ephemeral preview environments and how do you manage their lifecycle and cleanup?]] (`#535`): [What are ephemeral preview environments and how do you manage their lifecycle and cleanup?](../cicd/what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup.md)
 - [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
-- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

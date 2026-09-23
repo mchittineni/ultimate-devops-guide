@@ -77,8 +77,8 @@ SENIORITY SIGNAL
 
 ## Interview tips
 
-- Master-node-down and worker-node-down are a paired question; answer them as a contrast. Control plane down means no scheduling, no API, no self-healing, but existing Pods keep serving traffic. Worker down means the node controller marks it `NotReady`, tolerations expire, and Pods are rescheduled elsewhere. See [Kubernetes architecture](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md).
-- Node recovery time is a numbers question. Name the knobs: `node-monitor-grace-period`, the eviction timeout, and image pull time on the replacement node. A candidate who says "about five minutes by default, and here is what makes it that" beats one who says "it depends".
+- Master-node-down and worker-node-down are a paired question; answer them as a contrast. Control plane down means no scheduling, no API, no self-healing, but existing Pods keep serving traffic. Worker down means the node controller marks it `NotReady`, applies the `node.kubernetes.io/not-ready` or `unreachable` taint, the Pods' default 300-second tolerations expire, and they are evicted and rescheduled elsewhere by their controllers. See [Kubernetes architecture](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md).
+- Node recovery time is a numbers question. Name the knobs: `node-monitor-grace-period` before the node is marked `NotReady` (50 seconds by default since Kubernetes 1.32, 40 before), the default 300-second `tolerationSeconds` on the not-ready and unreachable taints before Pods are evicted (the old `--pod-eviction-timeout` flag is gone), then scheduling plus image pull time on the replacement node. A candidate who says "roughly five to six minutes by default, and here is what makes it that" beats one who says "it depends".
 - SLI/SLO/SLA at this level must include the error budget and what you do when it is exhausted. See [SLA vs SLO vs SLI vs OLA](../sla-management/what-is-the-difference-between-an-sla-an-slo-an-sli-and-an-ola.md) and [error budgets](../site-reliability-engineering/what-is-error-budget.md).
 - Observability versus monitoring is graded on whether you mention unknown-unknowns and high-cardinality data rather than reciting "three pillars". See [monitoring versus logging](../monitoring-and-logging/explain-the-difference-between-monitoring-and-logging.md).
 - Have one major incident rehearsed with a timeline, a wrong hypothesis you discarded, the actual fix, and the preventive action. Two separate questions here want that same story, so it must be strong. See [running a major incident](../incident-management/how-do-you-run-a-major-incident-as-incident-commander.md) and [post-mortems](../incident-management/what-is-post-mortem-analysis.md).
@@ -91,7 +91,7 @@ SENIORITY SIGNAL
 
 - [[What is the difference between SRE, DevOps, and Platform Engineering?]] (`#232`): [What is the difference between SRE, DevOps, and Platform Engineering?](../site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md)
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
-- [[What is a production readiness review?]] (`#231`): [What is a production readiness review?](../site-reliability-engineering/what-is-a-production-readiness-review.md)
+- [[What are ephemeral preview environments and how do you manage their lifecycle and cleanup?]] (`#535`): [What are ephemeral preview environments and how do you manage their lifecycle and cleanup?](../cicd/what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

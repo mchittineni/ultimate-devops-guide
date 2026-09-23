@@ -99,15 +99,15 @@ THE PATTERN
 - AWS-to-IBM-Cloud connectivity has two defensible answers: a site-to-site IPsec VPN over the internet between the two clouds' gateways, or a private circuit through a colocation provider such as Direct Connect paired with IBM's equivalent. Mention overlapping CIDRs as the practical hazard. See [the real trade-offs of multi-cloud](../cloud-engineering/what-are-the-real-trade-offs-of-multi-cloud.md).
 - The browser question is the best opportunity in the round to show breadth, so keep it structured: cache and DNS resolution, TCP handshake, TLS handshake, HTTP request, load balancer and reverse proxy, application and database, response, then render. There is a dedicated walkthrough at [what happens when a user opens your application in a browser](../network-security/what-happens-when-a-user-opens-your-application-in-a-browser.md).
 - Both TLS questions want the handshake mechanism, not "it encrypts traffic": certificate presented and validated against a trusted CA chain, hostname checked, key agreement, then symmetric encryption for the session. See [what SSL/TLS is](../network-security/what-is-ssl-tls.md).
-- kube-proxy does not communicate with nodes; it runs _on_ each node, watches Services and EndpointSlices from the API server, and programs iptables or IPVS rules locally. Correcting the premise politely is a strong signal. See [main components of Kubernetes architecture](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md).
+- kube-proxy does not communicate with nodes; it runs _on_ each node, watches Services and EndpointSlices from the API server, and programs iptables or nftables rules locally (IPVS mode is deprecated since Kubernetes 1.35; nftables has been GA since 1.33), or is replaced entirely by an eBPF dataplane such as Cilium. Correcting the premise politely is a strong signal. See [main components of Kubernetes architecture](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
 ## Related Concepts
 
+- [[What is the difference between Artifact Promotion and rebuilding binaries across environments?]] (`#534`): [What is the difference between Artifact Promotion and rebuilding binaries across environments?](../cicd/what-is-the-difference-between-artifact-promotion-and-rebuilding-binaries-across-environments.md)
 - [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
-- [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
-- [[Why does a build pass locally but fail in CI?]] (`#397`): [Why does a build pass locally but fail in CI?](../cicd/why-does-a-build-pass-locally-but-fail-in-ci.md)
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
