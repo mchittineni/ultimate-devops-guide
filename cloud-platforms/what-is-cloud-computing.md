@@ -29,6 +29,20 @@ The economic shift is from capital expenditure to operating expenditure, and fro
 
 The **shared responsibility model** is the concept interviewers probe: the provider secures _of_ the cloud (physical facilities, hypervisor, managed service internals); you secure _in_ the cloud (your data, identity and access management, network configuration, patching of anything you run yourself). The boundary moves depending on the service - with a managed database the provider patches the engine, with EC2 you patch the OS.
 
+## Example
+
+"Infrastructure becomes an API" in practice - the same request that once took a purchase order is one call, and the meter starts running immediately:
+
+```bash
+# Provision on demand (self-service, measured service)
+aws ec2 run-instances --image-id resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64 \
+  --instance-type t3.micro --count 1 \
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=env,Value=demo}]'
+
+# Elasticity: release it when demand falls, and the billing stops
+aws ec2 terminate-instances --instance-ids i-0123456789abcdef0
+```
+
 ## Interview tips
 
 - Name the shared responsibility model explicitly; it is the most-tested cloud concept.
