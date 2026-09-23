@@ -36,6 +36,23 @@ tags:
 
 **Know your maximum exposure.** Credits are usually capped at a percentage of the monthly fee, which means the financial risk is bounded - but reputational and renewal risk is not. When engineering is asked "can we promise this?", the answer should reference the internal SLO, the composite dependency ceiling, and the historical measurement, not optimism.
 
+## Example
+
+```text
+Availability definition clause - the part disputes are actually about
+
+"Monthly Uptime Percentage" means 100% minus the percentage of one-minute
+intervals in the calendar month (UTC) in which the Service was Unavailable.
+
+"Unavailable" means that at least two of three synthetic probes, run every
+60 seconds from three regions against https://api.example.com/v1/health,
+received no response or an HTTP 5xx within 10 seconds.
+
+Excluded: Scheduled Maintenance announced >= 7 days in advance, capped at
+4 hours per month; failures caused by Customer's systems or misuse; features
+labelled Beta. Claims must be filed within 30 days of month end.
+```
+
 ## Interview tips
 
 - Say early that measurement definition and exclusions cause more disputes than the target itself.
@@ -46,9 +63,9 @@ tags:
 
 ## Related Concepts
 
+- [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
+- [[What is Semantic Release and how does it automate versioning and changelogs from commits?]] (`#540`): [What is Semantic Release and how does it automate versioning and changelogs from commits?](../cicd/what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits.md)
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
-- [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
