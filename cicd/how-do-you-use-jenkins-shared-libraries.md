@@ -40,7 +40,7 @@ tags:
 
 **Pin to tags in production.** Configuring the library to track `main` means every merge to the library instantly changes every pipeline in the organisation - a single bad commit can break all builds at once. Tag releases, have services reference a tag, and roll forward deliberately. Allowing `Modifiable default version` lets a team pin an older tag while you migrate.
 
-**Trusted vs untrusted.** Libraries configured globally at the Jenkins level run **outside** the Groovy sandbox with full access to the controller - so they must live in a repository only platform engineers can write to. Folder-level libraries and `libraryResource`-loaded code are sandboxed. Treating the shared library repository as production infrastructure, with code review and branch protection, is a security answer interviewers look for.
+**Trusted vs untrusted.** Libraries configured globally at the Jenkins level run **outside** the Groovy sandbox with full access to the controller - so they must live in a repository only platform engineers can write to. Folder-level libraries are treated as untrusted and run inside the sandbox (`libraryResource` only returns file contents, so what you do with them is governed by the calling code's trust level). Treating the shared library repository as production infrastructure, with code review and branch protection, is a security answer interviewers look for.
 
 **Testing.** A library that breaks every pipeline needs tests. JenkinsPipelineUnit lets you unit-test `vars/` steps on the JVM without a Jenkins instance; run it in the library's own CI, plus a smoke pipeline that exercises the library end to end before you tag a release.
 
@@ -126,9 +126,9 @@ standardPipeline(
 
 ## Related Concepts
 
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
-- [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

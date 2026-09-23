@@ -39,7 +39,7 @@ The pair interviewers ask about together - **`needs` versus `concurrency`** - do
 
 **2. OIDC instead of stored cloud keys.** `permissions: id-token: write` plus `aws-actions/configure-aws-credentials` (or the Azure/GCP equivalent) exchanges a short-lived GitHub token for cloud credentials with no secret in the repository at all. Constrain the cloud-side trust policy to your **repository and ref** (`repo:acme/api:ref:refs/heads/main`, or an environment) - a trust policy with `repo:acme/*:*` is a wide-open door. This is also the direct answer to "IAM user versus GitHub OIDC role versus a stored key - which is more secure?"
 
-**3. Pin third-party actions to a full commit SHA.** A tag is mutable: `@v3` can be moved to malicious code, and this has happened in the wild. `uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1` with Dependabot keeping the SHAs current. For very sensitive repositories, vendor the action or use an internal allowlist (organisation policy can restrict which actions may run).
+**3. Pin third-party actions to a full commit SHA.** A tag is mutable: `@v3` can be moved to malicious code, and this has happened in the wild. `uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1` with Dependabot keeping the SHAs current. For very sensitive repositories, vendor the action or use an internal allowlist: the organisation or enterprise allowed-actions policy can restrict which actions may run, block specific actions or versions, and (since August 2025) **require full-SHA pinning**, failing any workflow that references a tag. Note the limit: a pinned action can still download unpinned code at runtime.
 
 **4. Untrusted code and privileged triggers.** `pull_request` from a fork gets **no secrets** and a read-only token - that is the safe default. `pull_request_target` runs in the **base** repository's context with secrets, and the dangerous anti-pattern is checking out `github.event.pull_request.head.sha` inside it and then running the PR's build scripts, which is remote code execution with your secrets. If you need a privileged action on a PR, do the untrusted build in a `pull_request` job, upload an artifact, and process it in a separate `workflow_run` job that never executes fork code. Also require approval for first-time contributors.
 
@@ -78,19 +78,19 @@ jobs:
       fail-fast: false # see every failing version, not just the first
       max-parallel: 4
       matrix:
-        node: [20, 22]
+        node: [22, 24] # supported LTS lines; Node 20 reached end of life in April 2026
         include:
-          - node: 22
+          - node: 24
             coverage: true
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: ${{ matrix.node }}
           cache: npm # built-in dependency cache, keyed correctly for you
       - run: npm ci && npm test
       - if: matrix.coverage
-        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with: { name: coverage, path: coverage/ }
 
   build:
@@ -99,19 +99,19 @@ jobs:
     permissions:
       contents: read
       packages: write # only this job needs to push
-      id-token: write # only this job needs OIDC
     outputs:
       tag: ${{ steps.meta.outputs.tag }}
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - id: meta
         run: echo "tag=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
-      - uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.0.2
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
         with:
-          role-to-assume: arn:aws:iam::111122223333:role/gha-api-deploy # no stored keys
-          aws-region: eu-west-1
-      - uses: docker/setup-buildx-action@988b5a0280414f521da01fcc63a27aeeb4b104db # v3.6.1
-      - uses: docker/build-push-action@5cd11c3a4ced054e52742c5fd54dca954e0edd85 # v6.7.0
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }} # scoped by the packages: write grant above
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
         with:
           context: services/api
           push: true
@@ -124,8 +124,12 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     environment: production # required reviewers + environment-scoped secrets
-    permissions: { contents: read, id-token: write }
+    permissions: { contents: read, id-token: write } # only this job needs OIDC
     steps:
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: arn:aws:iam::111122223333:role/gha-api-deploy # no stored keys
+          aws-region: eu-west-1
       - run: echo "Deploying ${{ needs.build.outputs.tag }}" # output passed via needs
 ```
 
@@ -163,7 +167,7 @@ jobs:
 - For caching, mention the `setup-*` built-in caches first, lockfile-hashed keys with `restore-keys`, and `type=gha` Docker layer cache. Saying "a fresh runner has no cache, so ordering your Dockerfile achieves nothing without an imported cache" is the insight.
 - Say `permissions: contents: read` at the root, elevated per job. It is the single cheapest hardening step and interviewers notice when candidates know the default is too broad.
 - Recommend OIDC over stored cloud keys, and immediately add the trust-policy constraint on `repo:` and `ref:` - an unconstrained trust policy defeats the whole point.
-- Pin actions to a commit SHA and explain that tags are mutable, with Dependabot keeping them current.
+- Pin actions to a commit SHA and explain that tags are mutable, with Dependabot keeping them current - and mention that organisations can now enforce SHA pinning by policy.
 - Bring up `pull_request` versus `pull_request_target` unprompted, describe the RCE pattern, and give the safe alternative (untrusted build uploads an artifact; a separate privileged workflow consumes it). Add the script-injection example with `env:`.
 - Warn against self-hosted runners on public repositories and recommend ephemeral runners. See [how do you prevent and handle secret leaks in CI/CD pipelines](./how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md), [what is GitHub Actions](../advanced-devops-cloud/what-is-github-actions.md), [how do you trigger a pipeline](./how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md), [speeding up a slow pipeline](./how-do-you-speed-up-a-slow-ci-cd-pipeline.md), and [authenticating to AWS without long-lived access keys](../aws-engineering/how-do-you-authenticate-to-aws-without-long-lived-access-keys.md).
 

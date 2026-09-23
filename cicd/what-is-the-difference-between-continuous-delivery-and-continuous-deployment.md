@@ -30,6 +30,34 @@ Choosing continuous delivery is often a _business_ decision - coordinating a rel
 
 A useful middle ground many teams adopt: continuous deployment to staging automatically, continuous delivery to production, with the approval becoming a formality that is eventually removed.
 
+The limitation of each: a manual gate batches changes while they wait, so each release is bigger and harder to diagnose, and the approver rarely has more information than the pipeline. Removing the gate moves all of that judgement into automation - if the tests or the rollback signal are weak, continuous deployment ships bad changes faster.
+
+## Example
+
+```yaml
+# The same pipeline; one setting is the whole difference.
+# In GitHub Actions the "production" environment either has required reviewers
+# (continuous delivery) or does not (continuous deployment).
+name: release
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: staging # no reviewers: always automatic
+    steps:
+      - uses: actions/checkout@v7
+      - run: ./deploy.sh staging "$GITHUB_SHA"
+  deploy-production:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    environment: production # add required reviewers here -> continuous delivery
+    steps:
+      - uses: actions/checkout@v7
+      - run: ./deploy.sh production "$GITHUB_SHA" --canary 5 --auto-rollback
+```
+
 ## Interview tips
 
 - The crispest phrasing: "delivery means every change _could_ go to production; deployment means every change _does_."
@@ -40,9 +68,9 @@ A useful middle ground many teams adopt: continuous deployment to staging automa
 
 ## Related Concepts
 
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
 - [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
-- [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -62,11 +62,11 @@ Two ordering rules people get wrong: analysis must come **after** tests (no cove
 - **Correct scanner per stack**: `sonar-maven-plugin` / `sonarqube` Gradle plugin (they know your module layout and coverage paths), `dotnet sonarscanner begin/end` for .NET (the begin/end wrapper is mandatory - a plain CLI scan of a .NET solution produces poor results), and `sonar-scanner` CLI with `sonar-project.properties` for JS/Python/Go.
 - **Exclusions with intent**: generated code, vendored dependencies, and migrations should be excluded (`sonar.exclusions`); test code should be declared as tests (`sonar.test.inclusions`), not excluded, or you lose useful analysis. Do not exclude a package because it fails the gate.
 - **Cache the scanner and the analysis cache** in CI to keep the step from dominating build time.
-- **Editions matter**: branch and PR analysis and some languages require Developer Edition or above; Community Edition analyses only the main branch. SonarCloud/SonarQube Cloud is the hosted option. Knowing this stops you promising something the licence does not include.
+- **Editions matter**: branch and PR analysis and some languages require SonarQube Server Developer Edition or above; the free **SonarQube Community Build** (formerly Community Edition) analyses only a single branch. **SonarQube Cloud** (formerly SonarCloud) is the hosted option. Knowing this stops you promising something the licence does not include.
 
 ### SonarQube is not a security scanner
 
-Sonar finds a class of security-relevant bugs (injection patterns, hardcoded secrets, unsafe deserialisation) - it is SAST-adjacent - but it does **not** cover dependency vulnerabilities, container image CVEs, or IaC misconfiguration. A complete pipeline pairs it with SCA (Snyk, Dependabot, OWASP Dependency-Check), image scanning (Trivy, Grype), IaC scanning (Checkov, tfsec), and secret scanning (gitleaks). Saying that boundary out loud is what distinguishes someone who has built a pipeline from someone who has installed a plugin.
+Sonar finds a class of security-relevant bugs (injection patterns, hardcoded secrets, unsafe deserialisation) - it is SAST-adjacent - but the core product does **not** cover dependency vulnerabilities, container image CVEs, or IaC misconfiguration. (Sonar now sells SCA as part of its paid Advanced Security add-on for Enterprise Edition and SonarQube Cloud, but most pipelines still run a dedicated scanner.) A complete pipeline pairs it with SCA (Snyk, Dependabot, OWASP Dependency-Check), image scanning (Trivy, Grype), IaC scanning (Checkov, tfsec), and secret scanning (gitleaks). Saying that boundary out loud is what distinguishes someone who has built a pipeline from someone who has installed a plugin.
 
 ### When a developer asks you to remove the gate because it is slow
 
@@ -116,9 +116,9 @@ jobs:
   quality:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with: { fetch-depth: 0 } # Sonar needs full history for new-code detection
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v6
         with: { distribution: temurin, java-version: "21", cache: maven }
       - run: mvn -B verify # tests + coverage FIRST
       - name: SonarQube analysis and gate
@@ -161,7 +161,7 @@ ls -l target/site/jacoco/jacoco.xml
 - Explain the new-code gate and why it beats an absolute threshold on a legacy codebase - achievable on day one, ratchets upwards, does not get disabled. Quote the Sonar way defaults if you can.
 - Say the gate lives on the **server** so every project inherits one standard, not in each `Jenkinsfile`.
 - Recommend PR analysis with decoration and a required status check for feedback before merge, plus main-branch analysis for the baseline. That answers the every-push-versus-every-PR question directly.
-- Mention edition limits (branch/PR analysis needs Developer Edition or SonarCloud) and stack-specific scanners, especially the `dotnet sonarscanner begin/end` wrapper. Both signal hands-on use.
+- Mention edition limits (branch/PR analysis needs Developer Edition or above, or SonarQube Cloud - not the free Community Build) and stack-specific scanners, especially the `dotnet sonarscanner begin/end` wrapper. Both signal hands-on use.
 - Draw the boundary: Sonar is not dependency scanning, image scanning, or IaC scanning - name the companions.
 - For "a developer wants the slow scan removed", answer with diagnosis and parallelisation first, then a time-boxed audited exception if genuinely needed - never a silent deletion. See [what does a DevSecOps pipeline look like end to end](../devsecops/what-does-a-devsecops-pipeline-look-like-end-to-end.md), [SAST, DAST, IAST, and SCA](../devsecops/what-is-the-difference-between-sast-dast-iast-and-sca.md), [speeding up a slow CI/CD pipeline](./how-do-you-speed-up-a-slow-ci-cd-pipeline.md), and [how do you deal with flaky tests](./how-do-you-deal-with-flaky-tests-in-a-ci-pipeline.md).
 
@@ -171,7 +171,7 @@ ls -l target/site/jacoco/jacoco.xml
 
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
 - [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
-- [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

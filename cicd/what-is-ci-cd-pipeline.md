@@ -41,15 +41,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: make lint test
 
   build:
     needs: test
     runs-on: ubuntu-latest
-    permissions: { contents: read, packages: write, id-token: write }
+    permissions: { contents: read, packages: write }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+      - run: echo "$TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+        env: { TOKEN: "${{ secrets.GITHUB_TOKEN }}" }
       - run: docker build -t ghcr.io/org/app:${{ github.sha }} .
       - run: docker push ghcr.io/org/app:${{ github.sha }}
 
@@ -58,6 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production # gated approval lives here
     steps:
+      - uses: actions/checkout@v7
       - run: ./deploy.sh ghcr.io/org/app:${{ github.sha }}
 ```
 
@@ -71,9 +74,9 @@ jobs:
 
 ## Related Concepts
 
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
-- [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

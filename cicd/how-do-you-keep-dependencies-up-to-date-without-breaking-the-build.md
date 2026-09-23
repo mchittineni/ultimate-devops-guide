@@ -61,7 +61,7 @@ Read it as information, not noise. Triage in this order: is the failure in the d
       groupName: "dev tooling",
       automerge: true,
     },
-    { matchPackagePatterns: ["^@aws-sdk/"], groupName: "aws sdk" },
+    { matchPackageNames: ["@aws-sdk/**"], groupName: "aws sdk" }, // glob; matchPackagePatterns is deprecated
     { matchUpdateTypes: ["major"], automerge: false, labels: ["major-upgrade"] },
     { matchPackageNames: ["node"], matchUpdateTypes: ["major"], enabled: false },
   ],

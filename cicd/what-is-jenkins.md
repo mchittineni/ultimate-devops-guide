@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-Jenkins runs a controller that schedules work onto agents - static VMs, Docker containers, or dynamically provisioned Kubernetes pods. Its longevity comes from two things: it runs anywhere, including fully on-premises behind a firewall, and its ~1,800 plugins integrate with essentially every tool an enterprise already owns.
+Jenkins runs a controller that schedules work onto agents - static VMs, Docker containers, or dynamically provisioned Kubernetes pods. Its longevity comes from two things: it runs anywhere, including fully on-premises behind a firewall, and its roughly 2,000 plugins integrate with essentially every tool an enterprise already owns.
 
 Modern Jenkins practice:
 
@@ -26,7 +26,7 @@ Modern Jenkins practice:
 - **Kubernetes plugin** - spin up a fresh agent pod per build, so builds are isolated and the fleet scales to zero.
 - **Configuration as Code (JCasC)** - the controller's own configuration expressed in YAML.
 
-The trade-off versus hosted options like GitHub Actions or GitLab CI is that you operate Jenkins yourself: upgrades, plugin compatibility, agent capacity, and security hardening are your responsibility.
+The trade-off versus hosted options like GitHub Actions or GitLab CI is that you operate Jenkins yourself: upgrades, plugin compatibility, agent capacity, and security hardening are your responsibility. That includes the runtime: current LTS releases require Java 21 or newer on the controller and agents (Java 17 support ended with 2.555.1), and plugin CVEs are the most common Jenkins vulnerability class, so you need a patch cadence.
 
 ## Example
 
@@ -67,9 +67,9 @@ pipeline {
 
 ## Related Concepts
 
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[How do you troubleshoot a GitOps pipeline that will not sync?]] (`#428`): [How do you troubleshoot a GitOps pipeline that will not sync?](../devops-tools-and-automation/how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync.md)
 - [[How do you manage build artefacts with Nexus or Artifactory?]] (`#460`): [How do you manage build artefacts with Nexus or Artifactory?](../devops-tools-and-automation/how-do-you-manage-build-artefacts-with-nexus-or-artifactory.md)
-- [[What do you need to know about Maven as a DevOps engineer?]] (`#461`): [What do you need to know about Maven as a DevOps engineer?](../devops-tools-and-automation/what-do-you-need-to-know-about-maven-as-a-devops-engineer.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
