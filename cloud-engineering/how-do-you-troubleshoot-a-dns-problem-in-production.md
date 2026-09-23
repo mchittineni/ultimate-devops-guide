@@ -31,7 +31,7 @@ tags:
 - **Delegation and registrar problems.** NS records at the registrar not matching the zone, an expired domain, a nameserver that no longer serves the zone (lame delegation), or a missing glue record. These produce total, sudden, hard-to-explain outages and are outside your cloud console.
 - **Propagation and caching.** There is no "propagation" mechanism - only caches expiring. A record with a 24-hour TTL will take up to 24 hours to disappear from resolvers, and some resolvers and client libraries ignore short TTLs. Negative caching (the SOA minimum TTL) means a **failed** lookup can also be cached, which is why fixing a missing record does not always give instant relief.
 - **DNSSEC.** An expired signature, a broken chain of trust after a key rollover, or a DS record that no longer matches gives `SERVFAIL` from validating resolvers while non-validating ones work - a symptom that looks like partial insanity. `dig +dnssec +cd` (checking disabled) distinguishes it in one command: if `+cd` works and the normal query fails, it is DNSSEC.
-- **Resolver-side problems.** A client's `/etc/resolv.conf`, search-domain surprises, a full conntrack table or UDP packet loss, responses over 512 bytes failing where TCP fallback or EDNS is blocked by a middlebox, or an internal resolver that cannot reach forwarders. In Kubernetes this is its own topic - see [how do you debug DNS resolution failures inside a Kubernetes cluster](../kubernetes/how-do-you-debug-dns-resolution-failures-inside-a-kubernetes-cluster.md).
+- **Resolver-side problems.** A client's `/etc/resolv.conf`, search-domain surprises, a full conntrack table or UDP packet loss, large responses (above the EDNS buffer size, commonly 1232 bytes since DNS Flag Day 2020) failing where TCP fallback is blocked by a firewall or middlebox, or an internal resolver that cannot reach forwarders. In Kubernetes this is its own topic - see [how do you debug DNS resolution failures inside a Kubernetes cluster](../kubernetes/how-do-you-debug-dns-resolution-failures-inside-a-kubernetes-cluster.md).
 - **Split-horizon confusion.** A private hosted zone resolving internally and a public zone resolving differently is by design, but it means "works from my laptop, fails in the VPC" is expected rather than a bug. Always say **from where** you are testing.
 
 ### During the incident
@@ -74,7 +74,7 @@ curl -sv --resolve shop.example.com:443:203.0.113.10 https://shop.example.com/he
 #   ^ bypasses DNS entirely: if this works, DNS was never the problem
 
 # 6. Client-side reality check (and the Kubernetes/hostNetwork trap)
-cat /etc/resolv.conf; systemd-resolve --status 2>/dev/null | head -20
+cat /etc/resolv.conf; resolvectl status 2>/dev/null | head -20   # systemd-resolved hosts
 ```
 
 ```hcl
@@ -133,7 +133,7 @@ The change-management habit that prevents most DNS incidents
 
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

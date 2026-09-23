@@ -28,7 +28,7 @@ tags:
 | Cost          | tagging/labelling standard, budgets, anomaly alerts, showback               |
 | Provisioning  | an automated request path that creates and baselines a new environment      |
 
-**Vendor accelerators exist and are usually worth starting from:** AWS Control Tower with Account Factory, Azure Landing Zones from the Cloud Adoption Framework, and Google's Cloud Foundation Toolkit. They encode a decade of others' mistakes; the work is adapting them to your compliance and network realities, not rebuilding them.
+**Vendor accelerators exist and are usually worth starting from:** AWS Control Tower with Account Factory (or Account Factory for Terraform), Azure Landing Zones from the Cloud Adoption Framework (with Bicep and Terraform accelerators built on Azure Verified Modules), and Google Cloud's enterprise foundations blueprint and Cloud Foundation Fabric, or the console's guided foundation setup. They encode a decade of others' mistakes; the work is adapting them to your compliance and network realities, not rebuilding them.
 
 **The vending machine is the part teams undervalue.** A landing zone that requires a ticket and a human to create an account has not solved the problem. The valuable artefact is a self-service pipeline: request an environment, get an account/project with identity, network, logging, budgets, policies, and a catalogue entry attached, in minutes and fully audited.
 
