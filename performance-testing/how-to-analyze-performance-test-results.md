@@ -33,11 +33,28 @@ tags:
 
 **Report** with context: configuration, workload, environment, the percentile table, the identified bottleneck, and the recommendation with expected impact.
 
+## Example
+
+Print the percentiles that matter from a k6 run, then find the knee server-side with PromQL:
+
+```bash
+k6 run --summary-trend-stats="avg,p(50),p(95),p(99),max" load.js
+# http_req_duration...: avg=182ms p(50)=121ms p(95)=410ms p(99)=1.9s max=6.2s
+# A p99 ten times the median points at queueing or a slow dependency, not raw compute.
+```
+
+```promql
+# Throughput vs p99 over the ramp: the knee is where the first flattens and the second climbs
+sum(rate(http_requests_total{job="api"}[1m]))
+histogram_quantile(0.99, sum by (le) (rate(http_request_duration_seconds_bucket{job="api"}[1m])))
+```
+
 ## Interview tips
 
 - "CPU low, latency high - so it is waiting on something" is the diagnostic instinct interviewers want to hear.
 - Mention coordinated omission if you want to demonstrate depth on measurement accuracy.
 - Always end with re-testing to prove the fix - analysis without validation is a hypothesis.
+- Trade-off to mention: averages across a whole run hide the knee - always look at the time series against the load ramp, not only the end-of-test summary.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

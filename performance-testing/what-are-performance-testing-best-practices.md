@@ -45,6 +45,32 @@ tags:
 - Short benchmark on every pull request to catch regressions; full load test before major releases; nightly soak.
 - Fail the build on threshold breaches, and trend the results over time so slow degradation is visible.
 
+## Example
+
+A pipeline gate: k6 exits with a non-zero code (99) when a threshold fails, which fails the CI job.
+
+```javascript
+// perf/smoke.js - short regression benchmark run on every pull request
+import http from "k6/http";
+
+export const options = {
+  vus: 20,
+  duration: "2m",
+  thresholds: {
+    "http_req_duration{endpoint:search}": ["p(95)<300", "p(99)<800"],
+    http_req_failed: ["rate<0.005"],
+  },
+};
+
+export default function () {
+  http.get(`${__ENV.BASE_URL}/search?q=boots`, { tags: { endpoint: "search" } });
+}
+```
+
+```bash
+k6 run -e BASE_URL=https://pr-1234.preview.example.com perf/smoke.js
+```
+
 ## Interview tips
 
 - The knee of the throughput/latency curve is a precise, senior way to define capacity.

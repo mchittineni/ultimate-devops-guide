@@ -15,16 +15,16 @@ tags:
 
 ## Detail
 
-| Tool                   | Language       | Strengths                                              | Watch out for                                 |
-| ---------------------- | -------------- | ------------------------------------------------------ | --------------------------------------------- |
-| **k6**                 | JavaScript     | Modern, low resource use, CI-friendly, good thresholds | No browser-level testing (separate module)    |
-| **Gatling**            | Scala/Java DSL | Very efficient, excellent HTML reports                 | Scala learning curve                          |
-| **JMeter**             | GUI + XML      | Mature, many protocols, huge plugin set                | Heavy, resource-hungry, XML in Git is painful |
-| **Locust**             | Python         | Easy to script complex logic, distributed              | Python concurrency limits per worker          |
-| **Artillery**          | YAML/JS        | Simple YAML scenarios, serverless-friendly             | Less powerful reporting                       |
-| **wrk / Vegeta / hey** | CLI            | Instant micro-benchmarks                               | HTTP only, no scenario logic                  |
+| Tool                   | Language                        | Strengths                                                    | Watch out for                                                                  |
+| ---------------------- | ------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| **k6**                 | JavaScript/TypeScript           | Modern, low resource use, CI-friendly, good thresholds       | Browser tests (built-in `k6/browser`) cost far more per VU than protocol tests |
+| **Gatling**            | Java, Kotlin, Scala, JS/TS DSLs | Very efficient, excellent HTML reports, open-model injection | Some features (distributed runs, dashboards) are in the commercial edition     |
+| **JMeter**             | GUI + XML                       | Mature, many protocols, huge plugin set                      | Heavy, resource-hungry, XML in Git is painful                                  |
+| **Locust**             | Python                          | Easy to script complex logic, distributed                    | Python concurrency limits per worker                                           |
+| **Artillery**          | YAML/JS                         | Simple YAML scenarios, serverless-friendly                   | Less powerful reporting                                                        |
+| **wrk / Vegeta / hey** | CLI                             | Instant micro-benchmarks                                     | HTTP only, no scenario logic                                                   |
 
-**Choosing:** prefer a code-first tool that lives in Git and runs in CI. k6 is the common modern default for HTTP and gRPC services. JMeter still wins when you must test JDBC, JMS, or legacy protocols.
+**Choosing:** prefer a code-first tool that lives in Git and runs in CI. k6 (Grafana Labs) is the common modern default for HTTP and gRPC services. Check how the tool models load, too: closed-model virtual users that wait for each response under-report latency when the system stalls (coordinated omission), so use arrival-rate executors or open injection profiles when measuring tail latency. JMeter still wins when you must test JDBC, JMS, or legacy protocols.
 
 **Do not test in a vacuum.** Pair the load generator with server-side observability - Prometheus/Grafana, an APM (Datadog, New Relic, Dynatrace), database performance insights, and profilers. The load tool tells you _that_ p99 rose; the APM tells you _why_.
 
@@ -64,9 +64,9 @@ export default function () {
 
 ## Related Concepts
 
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
-- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[How do you take a monthly release process to daily deployments?]] (`#285`): [How do you take a monthly release process to daily deployments?](../core-devops-concepts/how-do-you-take-a-monthly-release-process-to-daily-deployments.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

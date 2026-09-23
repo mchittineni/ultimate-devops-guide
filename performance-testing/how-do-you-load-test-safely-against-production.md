@@ -74,7 +74,7 @@ export default function () {
 }
 ```
 
-```promql
+```yaml
 # The real kill switch: real-user impact, not test metrics. Page and abort on these.
 - alert: LoadTestHarmingRealUsers
   expr: |

@@ -31,6 +31,29 @@ tags:
 
 Note the related but distinct disciplines: **capacity planning** uses these results to size infrastructure, and **chaos engineering** tests resilience to failure rather than to load.
 
+## Example
+
+A spike test in k6 - the shape of the `stages` array is what makes it a spike rather than a load test:
+
+```javascript
+import http from "k6/http";
+
+export const options = {
+  stages: [
+    { duration: "2m", target: 50 },   // normal traffic
+    { duration: "10s", target: 1000 }, // sudden 20x surge
+    { duration: "3m", target: 1000 },  // hold: does autoscaling catch up?
+    { duration: "10s", target: 50 },   // drop back
+    { duration: "3m", target: 50 },    // does it recover cleanly?
+  ],
+  thresholds: { http_req_failed: ["rate<0.01"] },
+};
+
+export default function () {
+  http.get("https://staging.example.com/api/products");
+}
+```
+
 ## Interview tips
 
 - Be able to name the specific defect class each test type finds - that is the real question.
@@ -42,8 +65,8 @@ Note the related but distinct disciplines: **capacity planning** uses these resu
 ## Related Concepts
 
 - [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+- [[How do you detect, isolate, and eradicate flaky tests in a CI/CD pipeline?]] (`#536`): [How do you detect, isolate, and eradicate flaky tests in a CI/CD pipeline?](../cicd/how-do-you-detect-isolate-and-eradicate-flaky-tests-in-a-ci-cd-pipeline.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
-- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
