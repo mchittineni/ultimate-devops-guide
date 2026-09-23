@@ -11,7 +11,7 @@ tags:
 
 # How do service credits work?
 
-**Short answer:** A service credit is a percentage of the affected period's fees refunded when measured availability falls below the committed tier - typically 10% for a small miss, rising to 25–100% for severe ones, capped at the monthly fee, and usually claimable only if the customer files within a stated window. They are the standard remedy precisely because they are bounded and predictable.
+**Short answer:** A service credit is a percentage of the affected period's fees credited back (usually against future invoices, not as cash) when measured availability falls below the committed tier - typically 10% for a small miss, rising to 25–100% for severe ones, capped at the monthly fee, and usually claimable only if the customer files within a stated window. They are the standard remedy precisely because they are bounded and predictable.
 
 ## Detail
 
@@ -60,7 +60,7 @@ Unaffected regions: no credit. Being able to prove this saved ~78% of the exposu
 
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
-- [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+- [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
