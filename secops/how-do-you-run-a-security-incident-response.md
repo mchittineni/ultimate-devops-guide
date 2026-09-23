@@ -11,7 +11,7 @@ tags:
 
 # How do you run a security incident response?
 
-**Short answer:** Follow the NIST 800-61 cycle - preparation, detection and analysis, containment, eradication, recovery, and post-incident learning - with an incident commander, a written timeline, and preserved evidence. The differences from an availability incident are that the adversary reacts to your actions, evidence must survive containment, and legal, communications, and regulatory clocks are in scope from the start.
+**Short answer:** Follow the classic NIST SP 800-61 lifecycle - preparation, detection and analysis, containment, eradication, recovery, and post-incident learning (Rev. 3, published in 2025, re-maps the same activities onto the NIST CSF 2.0 functions) - with an incident commander, a written timeline, and preserved evidence. The differences from an availability incident are that the adversary reacts to your actions, evidence must survive containment, and legal, communications, and regulatory clocks are in scope from the start.
 
 ## Detail
 
@@ -21,7 +21,7 @@ tags:
 
 **Scoping is the hard part.** From one confirmed compromise, work outward: what else did that identity touch, which credentials were reachable from that host, which other resources share the same trust boundary? Cloud audit logs and identity provider logs carry most of this. Assume any credential present on a compromised host is compromised.
 
-**Regulatory clocks start early.** GDPR requires notifying the supervisory authority within 72 hours of becoming aware of a qualifying personal-data breach; sector rules (financial services, healthcare, critical infrastructure) impose their own, sometimes shorter, windows. Whether the clock has started is a legal determination - engineering's job is to establish facts and timestamps precisely.
+**Regulatory clocks start early.** GDPR requires notifying the supervisory authority within 72 hours of becoming aware of a qualifying personal-data breach; sector and regional rules impose their own, sometimes shorter, windows - for example NIS2's 24-hour early warning for essential and important entities in the EU, and the US SEC's four business days after a public company determines an incident is material. Whether the clock has started is a legal determination - engineering's job is to establish facts and timestamps precisely.
 
 **Recovery means rebuilding, not cleaning.** Restore from a known-good image or a backup predating compromise, rotate every credential in the blast radius, and monitor specifically for the attacker's observed behaviour for weeks afterwards. Cleaning a host you do not fully understand leaves persistence behind.
 
