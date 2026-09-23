@@ -39,7 +39,7 @@ Mon  Standup + support rota. Two teams stuck on a failed deploy - root cause is
      a confusing error message in the shared workflow. Filed as a platform bug.
 Tue  Build: add a "database-required" option to the Go service template, so a new
      service gets an RDS instance, a secret, and a connection pool automatically.
-Wed  Operate: EKS 1.32 upgrade in staging. Check deprecated APIs, run the add-on
+Wed  Operate: EKS 1.35 upgrade in staging. Check deprecated APIs, run the add-on
      matrix, canary one node group. Write the runbook update.
 Thu  Product: talk to three teams about their biggest friction. Discover local
      development, not deployment, is the real pain. Adjust the roadmap.
@@ -56,8 +56,9 @@ on:
       service: { required: true, type: string }
 jobs:
   ship:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: make test
       - run: trivy fs --severity HIGH,CRITICAL --exit-code 1 . # security defaults included
       - run: syft . -o spdx-json > sbom.json # supply chain, without teams thinking about it
@@ -91,9 +92,9 @@ $ platform new service --name checkout --language go --database postgres
 
 ## Related Concepts
 
+- [[What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?]] (`#634`): [What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?](../devops-tools-and-automation/what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs.md)
 - [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
 - [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
-- [[What is Infrastructure as Code?]] (`#26`): [What is Infrastructure as Code?](../infrastructure-as-code/what-is-infrastructure-as-code.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

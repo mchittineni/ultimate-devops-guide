@@ -20,18 +20,20 @@ Serving Large Language Models (LLMs) in production presents distinct infrastruct
 ### 1. High-Performance Inference Engines
 
 - **vLLM:** Designed specifically for LLM serving with **PagedAttention**, an algorithm that manages Key-Value (KV) cache memory efficiently, achieving up to 24x higher throughput than standard HuggingFace Transformers.
-- **Triton Inference Server:** NVIDIA's enterprise serving platform offering multi-model execution, dynamic batching, and support for TensorRT-LLM, ONNX, and PyTorch backends.
+- **Triton Inference Server:** NVIDIA's enterprise serving platform (now branded NVIDIA Dynamo Triton) offering multi-model execution, dynamic batching, and support for TensorRT-LLM, vLLM, ONNX, and PyTorch backends.
 
 ### 2. Model Weight Management & Fast Startup
 
 - **Storage Bottleneck:** Downloading a 70B parameter model weights file (~140GB) on container startup causes extreme latency.
-- **Solution - PVC Caching / ReadOnlyMany Volumes:** Use high-speed CSI drivers (e.g. AWS EFS, Lustre, or local NVMe instance storage cached with `huggingface-cli` or `s3fs`) to share pre-downloaded weights across pods instantly.
+- **Solution - PVC Caching / ReadOnlyMany Volumes:** Use high-speed CSI drivers (e.g. FSx for Lustre, Filestore, or local NVMe instance storage pre-populated with the `hf download` CLI - the successor to `huggingface-cli` - or from S3) to share pre-downloaded weights across pods instantly.
 
 ### 3. Parallelism & Scaling Strategy
 
 - **Tensor Parallelism (`--tensor-parallel-size`):** Splits single model matrix multiplications across multiple GPUs on the same node (e.g. 4x A10G GPUs).
 - **Pipeline Parallelism:** Distributes model layers across multiple nodes over high-speed interconnects (NVIDIA NVLink / InfiniBand).
 - **Zero-Downtime Model Updates:** Use Istio or Argo Rollouts to perform canary releases when deploying updated model weights or prompt templates.
+- **Autoscale on the right signal:** GPU utilisation sits near 100% whenever a batch is running, so it says little about headroom. Scale on queue depth (`vllm:num_requests_waiting`), KV-cache usage, or TTFT, and route with a model-aware layer (the Gateway API Inference Extension, KServe, or llm-d) that considers each replica's load and cached prefixes.
+- **Trade-off:** GPU replicas take minutes to become ready (node provisioning, image pull, weight loading), so scale-from-zero saves money at the price of long cold starts; latency-sensitive endpoints keep a warm minimum.
 
 ## Example
 
@@ -55,7 +57,7 @@ spec:
     spec:
       containers:
         - name: vllm-container
-          image: vllm/vllm-openai:v0.26.1
+          image: vllm/vllm-openai:v0.30.0
           args:
             - "--model"
             - "meta-llama/Meta-Llama-3-8B-Instruct"
@@ -66,7 +68,7 @@ spec:
             - "--gpu-memory-utilization"
             - "0.90"
           env:
-            - name: HUGGING_FACE_HUB_TOKEN
+            - name: HF_TOKEN # HUGGING_FACE_HUB_TOKEN is the deprecated name
               valueFrom:
                 secretKeyRef:
                   name: hf-token-secret
@@ -115,8 +117,8 @@ curl http://vllm-llama3.ai-platform.svc.cluster.local:8000/v1/chat/completions \
 ## Related Concepts
 
 - [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
+- [[What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?]] (`#634`): [What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?](../devops-tools-and-automation/what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs.md)
 - [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
-- [[What is Infrastructure as Code?]] (`#26`): [What is Infrastructure as Code?](../infrastructure-as-code/what-is-infrastructure-as-code.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

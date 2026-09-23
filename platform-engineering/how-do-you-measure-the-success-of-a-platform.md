@@ -11,18 +11,18 @@ tags:
 
 # How do you measure the success of a platform?
 
-**Short answer:** Combine delivery outcomes (the four DORA metrics), adoption (share of teams and new services on the golden path, self-service completion rate), developer experience (a short recurring survey plus time-to-first-deploy for a new engineer), and efficiency (platform cost per team, and platform-engineer time spent on toil versus product work). No single number is sufficient, and output metrics like "features shipped" measure nothing.
+**Short answer:** Combine delivery outcomes (the DORA software delivery metrics), adoption (share of teams and new services on the golden path, self-service completion rate), developer experience (a short recurring survey plus time-to-first-deploy for a new engineer), and efficiency (platform cost per team, and platform-engineer time spent on toil versus product work). No single number is sufficient, and output metrics like "features shipped" measure nothing.
 
 ## Detail
 
 **The four layers, and what each catches:**
 
-| Layer           | Metrics                                                                      | Catches                                 |
-| --------------- | ---------------------------------------------------------------------------- | --------------------------------------- |
-| Delivery (DORA) | deployment frequency, lead time, change failure rate, MTTR                   | whether the platform speeds up delivery |
-| Adoption        | % new services on the path, % on supported versions, tickets vs self-service | whether anyone wants it                 |
-| Experience      | developer satisfaction, time to first deploy, top friction points            | whether it is pleasant to use           |
-| Efficiency      | cost per team, toil share of platform team time, incident load               | whether it is sustainable               |
+| Layer           | Metrics                                                                                                            | Catches                                 |
+| --------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------- |
+| Delivery (DORA) | deployment frequency, lead time, change failure rate, failed deployment recovery time (formerly MTTR), rework rate | whether the platform speeds up delivery |
+| Adoption        | % new services on the path, % on supported versions, tickets vs self-service                                       | whether anyone wants it                 |
+| Experience      | developer satisfaction, time to first deploy, top friction points                                                  | whether it is pleasant to use           |
+| Efficiency      | cost per team, toil share of platform team time, incident load                                                     | whether it is sustainable               |
 
 **Adoption is the metric a platform team cannot fake.** Delivery metrics can improve for unrelated reasons; a survey can be gamed by asking the wrong people. The percentage of new services that voluntarily choose the golden path, and the share of existing services still on a supported template version, are hard to argue with.
 
@@ -32,7 +32,7 @@ tags:
 
 **Survey sparingly and act visibly.** A short quarterly survey (5–8 questions, one free-text "what slows you down most?") gets responses; a long one does not. The critical part is closing the loop: publish what you heard and what you changed, or response rates collapse. Frameworks such as SPACE and DevEx exist to keep the questions balanced across satisfaction, flow, and cognitive load.
 
-**Beware metrics that drive the wrong behaviour.** Deployment frequency alone rewards trivial deploys; MTTR alone rewards closing incidents rather than fixing causes; "tickets closed" rewards a service desk over automation. Always pair a speed metric with a stability metric - that pairing is the whole point of DORA.
+**Beware metrics that drive the wrong behaviour.** Deployment frequency alone rewards trivial deploys; recovery time alone rewards closing incidents rather than fixing causes; "tickets closed" rewards a service desk over automation. Always pair a speed metric with a stability metric - that pairing is the whole point of DORA, which since 2024 counts five metrics (throughput: deployment frequency, lead time, recovery time; instability: change failure rate, deployment rework rate).
 
 **Report in the language of the business** when talking to leadership: cycle time and change failure rate translate into shipping speed and incident cost; platform cost per team translates into efficiency. Reporting internal component delivery to an executive audience is how platform teams lose funding.
 
@@ -44,7 +44,7 @@ Platform scorecard - Q3 2026 (published to all engineering)
 Delivery         deployment frequency     4.1/day/team   ▲ from 2.6
                  lead time (commit->prod) 22 min p50     ▲ from 51 min
                  change failure rate      9%             ▼ from 14%
-                 MTTR                     31 min p50     ▼ from 47 min
+                 failed-deploy recovery   31 min p50     ▼ from 47 min
 
 Adoption         new services on path     31/34 (91%)
                  on supported template    28/42 (67%)    target 85% by Q4
@@ -73,8 +73,8 @@ for deploy debugging. Not done: secret rotation (moved to Q4, now top request).
 ## Related Concepts
 
 - [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
+- [[What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?]] (`#634`): [What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?](../devops-tools-and-automation/what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs.md)
 - [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
-- [[What is Ansible?]] (`#28`): [What is Ansible?](../infrastructure-as-code/what-is-ansible.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

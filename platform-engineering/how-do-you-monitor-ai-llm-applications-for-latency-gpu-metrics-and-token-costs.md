@@ -28,7 +28,7 @@ Monitoring generative AI workloads requires expanding traditional RED (Rate, Err
 
 ### 2. Streaming LLM Inference Metrics
 
-Unlike standard HTTP endpoints returning single payloads, LLM responses stream over Time:
+Unlike standard HTTP endpoints returning single payloads, LLM responses stream over time:
 
 - **Time to First Token (TTFT):** Latency from request receipt until the first generated token arrives. Critical for user-perceived responsiveness.
 - **Inter-Token Latency (ITL):** Time taken to generate each subsequent token (determines streaming smooth reading speed).
@@ -36,7 +36,8 @@ Unlike standard HTTP endpoints returning single payloads, LLM responses stream o
 
 ### 3. AI FinOps & Token Cost Management
 
-- **Prompt & Completion Token Tracking:** Instrument application code (or API Gateway proxies) to record `prompt_tokens` and `completion_tokens` parsed from model response metadata.
+- **Prompt & Completion Token Tracking:** Instrument application code (or API Gateway proxies) to record `prompt_tokens` and `completion_tokens` parsed from model response metadata (for streaming OpenAI-compatible APIs, request `stream_options: {"include_usage": true}` to get the final counts). The OpenTelemetry GenAI semantic conventions standardise these as `gen_ai.usage.input_tokens` / `gen_ai.usage.output_tokens` on spans, so traces and cost data line up.
+- **Serving-engine metrics:** vLLM and Triton already export TTFT, inter-token latency, queue depth, and KV-cache usage on `/metrics` - scrape those before writing your own.
 - **Cost Allocation:** Multiply token counts by provider pricing models (e.g. AWS Bedrock, OpenAI, or self-hosted GPU node hourly costs) grouped by team, application, or user environment tags.
 
 ## Example
@@ -59,7 +60,7 @@ spec:
       path: /metrics
 ```
 
-Python application tracing LLM calls with OpenTelemetry and token metrics:
+Python application recording TTFT and token metrics with the Prometheus client:
 
 ```python
 import time
@@ -83,14 +84,16 @@ def track_llm_inference(prompt: str, model_name: str, team_id: str):
     stream = call_llm_api_streaming(prompt, model=model_name)
 
     first_token_received = False
-    prompt_tokens = len(prompt.split()) # Approximate or parse from API
+    prompt_tokens = 0  # taken from the usage block in the final chunk, never estimated
     completion_tokens = 0
 
     for chunk in stream:
-        if not first_token_received:
+        if chunk.choices and not first_token_received:
             TTFT_HISTOGRAM.observe(time.time() - start_time)
             first_token_received = True
-        completion_tokens += 1
+        if chunk.usage:  # sent last when stream_options include_usage is set
+            prompt_tokens = chunk.usage.prompt_tokens
+            completion_tokens = chunk.usage.completion_tokens
 
     TOKEN_COUNTER.labels(type="prompt", model=model_name, team=team_id).inc(prompt_tokens)
     TOKEN_COUNTER.labels(type="completion", model=model_name, team=team_id).inc(completion_tokens)
@@ -117,8 +120,8 @@ sum(increase(DCGM_FI_DEV_XID_ERRORS[5m])) by (pod, gpu)
 ## Related Concepts
 
 - [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
+- [[What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?]] (`#634`): [What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?](../devops-tools-and-automation/what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs.md)
 - [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
-- [[What is Service Mesh?]] (`#68`): [What is Service Mesh?](../cloud-native-architecture/what-is-service-mesh.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

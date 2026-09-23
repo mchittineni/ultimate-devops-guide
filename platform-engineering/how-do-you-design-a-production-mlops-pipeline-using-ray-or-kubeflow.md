@@ -30,55 +30,45 @@ MLOps (Machine Learning Operations) extends DevOps principles to machine learnin
 4. **Model Registry & Provenance:** Log artifacts, hyperparameter configurations, datasets, and container image SHAs in a Model Registry (MLflow / W&B).
 5. **GitOps Deployment:** Update image tags or model URI references in Helm/Kustomize manifests, triggering automated canary rollout via Argo CD.
 
+**Choosing between them.** They are complementary rather than rivals: KFP (or Argo Workflows underneath it) orchestrates the DAG, lineage, and artefacts, while Ray does the distributed compute inside a step - a KFP step can submit a `RayJob` via KubeRay. The trade-off is operational weight: Kubeflow is a large platform to run and upgrade, and for smaller teams a managed service (Vertex AI Pipelines, SageMaker Pipelines) or a lighter orchestrator is often the better call.
+
 ## Example
 
-Kubeflow Pipeline definition (Python SDK v2) running training and validation steps:
+Kubeflow Pipeline definition (KFP SDK v2 - `ContainerOp` and `set_gpu_limit` are v1-era APIs that no longer exist or are deprecated):
 
 ```python
-from kfp import dsl
-from kfp.dsl import ContainerOp, Input, Output, Dataset, Model
+from kfp import compiler, dsl
+from kfp.dsl import Dataset, Input, Model, Output
 
-@dsl.component(
-    base_image="python:3.10-slim",
-    packages_to_install=["torch", "transformers"]
-)
-def train_model(
-    dataset: Input[Dataset],
-    model_artifact: Output[Model],
-    epochs: int = 3
-):
-    import torch
+
+@dsl.component(base_image="python:3.12-slim", packages_to_install=["torch", "transformers"])
+def train_model(dataset: Input[Dataset], model_artifact: Output[Model], epochs: int = 3):
     print(f"Loading data from {dataset.path} and training for {epochs} epochs...")
     # Training logic executing on GPU...
     with open(model_artifact.path, "w") as f:
         f.write("model_weights_v1.bin")
+    model_artifact.metadata["epochs"] = epochs
 
-@dsl.component(
-    base_image="python:3.10-slim",
-    packages_to_install=["scikit-learn"]
-)
-def evaluate_model(
-    model_artifact: Input[Model],
-    passed_evaluation: Output[Dataset]
-):
+
+@dsl.component(base_image="python:3.12-slim")
+def evaluate_model(model_artifact: Input[Model], threshold: float = 0.90) -> float:
     print(f"Evaluating model at {model_artifact.path}...")
-    accuracy = 0.94
-    if accuracy >= 0.90:
-        print("Model passed evaluation gate!")
-        with open(passed_evaluation.path, "w") as f:
-            f.write("APPROVED")
-    else:
-        raise ValueError("Model evaluation score below threshold!")
+    accuracy = 0.94  # replace with a real evaluation against a held-out set
+    if accuracy < threshold:
+        raise ValueError(f"accuracy {accuracy} below gate {threshold}")  # fails the run
+    return accuracy
 
-@dsl.pipeline(
-    name="llm-fine-tuning-pipeline",
-    description="Fine-tune and evaluate LLM model on Kubernetes"
-)
-def mlops_pipeline(epochs: int = 5):
-    train_task = train_model(epochs=epochs)
-    train_task.set_gpu_limit("2")
 
-    eval_task = evaluate_model(model_artifact=train_task.outputs["model_artifact"])
+@dsl.pipeline(name="llm-fine-tuning-pipeline", description="Fine-tune and evaluate a model")
+def mlops_pipeline(dataset_uri: str, epochs: int = 5):
+    data = dsl.importer(artifact_uri=dataset_uri, artifact_class=Dataset, reimport=False)
+    train_task = train_model(dataset=data.output, epochs=epochs)
+    train_task.set_accelerator_type("nvidia.com/gpu").set_accelerator_limit(2)
+    evaluate_model(model_artifact=train_task.outputs["model_artifact"])
+
+
+if __name__ == "__main__":
+    compiler.Compiler().compile(mlops_pipeline, "pipeline.yaml")  # upload to KFP or Vertex AI
 ```
 
 RayCluster manifest snippet managed via KubeRay operator:
@@ -90,7 +80,7 @@ metadata:
   name: ray-training-cluster
   namespace: ai-platform
 spec:
-  rayVersion: '2.9.0'
+  rayVersion: '2.58.0'
   headGroupSpec:
     rayStartParams:
       dashboard-host: '0.0.0.0'
@@ -98,7 +88,7 @@ spec:
       spec:
         containers:
           - name: ray-head
-            image: rayproject/ray:2.9.0-py310
+            image: rayproject/ray:2.58.0-py312
   workerGroupSpecs:
     - groupName: gpu-workers
       replicas: 4
@@ -106,7 +96,7 @@ spec:
         spec:
           containers:
             - name: ray-worker
-              image: rayproject/ray:2.9.0-py310-gpu
+              image: rayproject/ray:2.58.0-py312-gpu
               resources:
                 limits:
                   nvidia.com/gpu: "1"
@@ -123,8 +113,8 @@ spec:
 ## Related Concepts
 
 - [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
+- [[What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?]] (`#634`): [What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?](../devops-tools-and-automation/what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs.md)
 - [[What is Infrastructure as Code?]] (`#26`): [What is Infrastructure as Code?](../infrastructure-as-code/what-is-infrastructure-as-code.md)
-- [[What is Ansible?]] (`#28`): [What is Ansible?](../infrastructure-as-code/what-is-ansible.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
