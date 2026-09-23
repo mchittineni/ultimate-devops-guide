@@ -31,11 +31,38 @@ tags:
 
 **Signals it is working:** more incidents reported (not fewer - reporting improves), voluntary disclosure of near misses, and post-mortem actions that change systems rather than adding process.
 
+## Example
+
+A post-mortem skeleton that steers the writing towards systems, not people:
+
+```markdown
+# Incident 2026-09-14: checkout errors after config deploy
+
+**Impact:** 18% of checkout requests failed for 23 minutes (14:02-14:25 UTC).
+
+## Timeline (facts only, no judgement)
+- 14:00 Config change merged and deployed by the pipeline.
+- 14:02 Error-rate SLO burn alert fired; on-call acknowledged at 14:04.
+- 14:19 Change identified via deploy annotation; rollback started.
+
+## Contributing factors
+- The config schema allowed an empty list; nothing validated it before deploy.
+- Canary analysis only checked latency, not error rate.
+
+## What went well
+- Rollback was one command and took 4 minutes.
+
+## Actions (each with an owner and a date)
+- Add schema validation for this config in CI - team-checkout - 2026-09-30
+- Add error rate to canary analysis - team-platform - 2026-10-07
+```
+
 ## Interview tips
 
 - "Blameless is not accountability-free" pre-empts the standard objection.
 - The counterfactual/hindsight point is a sophisticated one that lands well.
 - More reported incidents as a _positive_ signal is counter-intuitive and shows real understanding.
+- Trade-off to acknowledge: blamelessness takes sustained leadership effort, and one punitive reaction to an honest mistake can undo years of it.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

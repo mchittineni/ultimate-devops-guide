@@ -57,10 +57,12 @@ spec:
   steps:
     - id: scaffold # repo with CI, tests, Dockerfile, OTel, health endpoints
       action: fetch:template
-    - id: pipeline # build, scan, sign, canary deploy - no team wiring required
-      action: github:actions:enable
-    - id: observability # dashboard, SLO, alert routes created from the start
-      action: grafana:dashboard:create
+    - id: publish # repo created with the shared CI workflow already in it
+      action: publish:github
+    - id: pipeline # first build, scan, sign, canary deploy - no team wiring required
+      action: github:actions:dispatch
+    - id: observability # custom action: dashboard, SLO, alert routes from the start
+      action: acme:observability:bootstrap
     - id: ownership # CODEOWNERS + on-call rota + catalog entry, non-optional
       action: catalog:register
 ```
