@@ -24,7 +24,7 @@ tags:
 | Medium            | Between once per week and once per month |
 | Low               | Fewer than once per month                |
 
-These labels come from the report years that published performance tiers; the 2025 State of DevOps report retired the elite/high/medium/low ranking in favour of seven team archetypes. Use the bands as a scale for orienting yourself, not as a grade.
+These labels come from the report years that published performance tiers; the 2025 DORA report (_State of AI-assisted Software Development_) retired the elite/high/medium/low ranking in favour of seven team archetypes. Use the bands as a scale for orienting yourself, not as a grade.
 
 **Why it matters beyond speed.** Deployment frequency is really a measure of batch size and of how much friction sits between a developer and production. High frequency requires automated testing, automated deployment, trunk-based development, and low-risk release mechanics - so a high number is evidence that all of those exist.
 
@@ -40,6 +40,16 @@ These labels come from the report years that published performance tiers; the 20
 **Measure it honestly.** Count deployments that actually reach production and serve users. Exclude configuration-only no-ops if they inflate the number, and measure per service or per team rather than as one company-wide total, which averages away the signal.
 
 **The trap:** chasing the number by splitting one release into five deployments. Because it is easily gamed, it is only meaningful next to change failure rate and lead time.
+
+## Example
+
+Counting successful production deploys straight from the CI system with the GitHub CLI:
+
+```bash
+# Successful runs of the production deploy workflow this month
+gh run list --workflow deploy-production.yml --status success \
+  --created ">=2026-09-01" --limit 1000 --json createdAt --jq 'length'
+```
 
 ## Interview tips
 

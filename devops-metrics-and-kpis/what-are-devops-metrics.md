@@ -24,9 +24,9 @@ tags:
 | Change failure rate             | Percentage of deploys causing degradation | Roughly 5%                      |
 | Failed deployment recovery time | Time to restore after a failed change     | Less than one hour              |
 
-Two measure **throughput**, two measure **stability** - and the central DORA finding is that they rise together. Teams that deploy more often also fail less, because small changes are safer. A fifth metric, **reliability** (operational performance against SLOs), was later added.
+Two measure **throughput**, two measure **stability** - and the central DORA finding is that they rise together. Teams that deploy more often also fail less, because small changes are safer. DORA also tracks **reliability** (operational performance against SLOs) alongside these, and in 2024 added a fifth delivery metric, **rework rate** - the share of deployments that are unplanned fixes for production issues. The 2024 model regroups them: _throughput_ is lead time, deployment frequency, and failed deployment recovery time; _instability_ is change failure rate and rework rate.
 
-**Know that the tiers were retired.** DORA renamed "time to restore service" to _failed deployment recovery time_, and the 2025 State of DevOps report abandoned the elite/high/medium/low ranking entirely, replacing it with seven team archetypes that pair delivery performance with human factors - burnout, friction, and perceived product value. The numbers above are still a useful scale for orienting yourself; they are no longer a league table you get placed in.
+**Know that the tiers were retired.** DORA renamed "time to restore service" to _failed deployment recovery time_, and the 2025 DORA report (_State of AI-assisted Software Development_) abandoned the elite/high/medium/low ranking entirely, replacing it with seven team archetypes that pair delivery performance with human factors - burnout, friction, and perceived product value. The numbers above are still a useful scale for orienting yourself; they are no longer a league table you get placed in.
 
 **Complementary measures**
 
@@ -37,9 +37,27 @@ Two measure **throughput**, two measure **stability** - and the central DORA fin
 
 **How to use them well.** Metrics are for the team to improve its own system, not for comparing teams or individuals. Every metric is gameable - deployment frequency rises if you split one deploy into ten, change failure rate falls if you redefine "failure." Use them in balanced pairs, look at trends rather than absolute values, and always pair a quantitative metric with a qualitative signal.
 
+## Example
+
+The two most common metrics computed from a deployments table (the system of record, not a spreadsheet):
+
+```sql
+-- Per service, last 30 days: deployment frequency and change failure rate
+SELECT service,
+       count(*)                                         AS deploys_30d,
+       round(count(*) / 30.0, 2)                        AS deploys_per_day,
+       round(100.0 * count(*) FILTER (WHERE caused_incident OR rolled_back)
+             / count(*), 1)                             AS change_failure_rate_pct
+  FROM deployments
+ WHERE environment = 'production'
+   AND deployed_at >= now() - interval '30 days'
+ GROUP BY service
+ ORDER BY deploys_30d DESC;
+```
+
 ## Interview tips
 
-- Name all four DORA metrics precisely; getting this list right is table stakes.
+- Name all four DORA metrics precisely, then add rework rate as the 2024 fifth metric; getting this list right is table stakes.
 - The throughput/stability pairing and the fact they correlate positively is the insight worth stating.
 - Volunteer the gaming risk before being asked - it shows you have used these in practice.
 

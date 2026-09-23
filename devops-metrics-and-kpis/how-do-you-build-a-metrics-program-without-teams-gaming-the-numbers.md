@@ -39,7 +39,7 @@ tags:
 - **Trends over absolutes.** "Our lead time went from 9 days to 2" is the useful statement; "we are at 2.1 days and they are at 1.8" is not.
 - **As a prompt, not a verdict.** The metric says "look here"; the conversation with the team finds the cause. A rising change failure rate might be a flaky test suite, an understaffed team, or a genuinely riskier domain.
 
-**Round it out with the things DORA misses.** Add **reliability** (SLO attainment and error budget burn - the fifth DORA metric), **operational load** (pages per person per week, toil hours), and **developer experience** (DevEx / SPACE-style surveys: time to first commit, build wait time, self-reported friction). Qualitative survey data is harder to game than system metrics precisely because it measures perception, and it catches the case where throughput is great because everyone is working weekends.
+**Round it out with the things DORA misses.** Add **reliability** (SLO attainment and error budget burn, which DORA tracks alongside the delivery metrics), **rework rate** (the unplanned deployments made to fix production issues - DORA's fifth delivery metric since 2024), **operational load** (pages per person per week, toil hours), and **developer experience** (DevEx / SPACE-style surveys: time to first commit, build wait time, self-reported friction). Qualitative survey data is harder to game than system metrics precisely because it measures perception, and it catches the case where throughput is great because everyone is working weekends.
 
 **Expect to iterate.** Assume every definition has a loophole and that someone will find it. When they do, that is information about your incentives, not a disciplinary matter - fix the metric pair. Review the metric set itself once or twice a year and retire what nobody acts on; an unread dashboard is pure cost.
 
@@ -92,7 +92,7 @@ metrics:
 - Have two concrete gaming examples ready (splitting deploys, closing incidents early) and the specific counter-metric for each.
 - "Instrument from systems of record, never self-reported" is a short, high-signal sentence. Say it.
 - Be firm that these are team-level trend metrics and never individual performance inputs. Interviewers often ask this as a trap.
-- Mention the fifth DORA metric (reliability) and add operational load plus a DevEx survey. It shows you know throughput metrics alone hide burnout.
+- Mention that DORA now has five delivery metrics (rework rate was added in 2024) plus reliability, and add operational load plus a DevEx survey. It shows you know throughput metrics alone hide burnout.
 - Say that definitions are the hard part and that you publish the query. Anyone who has run a metrics program has had the "our lead time is different from yours" argument.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
