@@ -37,6 +37,23 @@ Without an agreed consequence, the error budget is just a dashboard.
 
 **Planned consumption.** Budget can be spent deliberately - on a risky migration, a load test in production, or a chaos experiment. That is a feature, not an abuse: unspent budget suggests the SLO is too loose or the team is over-investing in reliability.
 
+## Example
+
+```promql
+# Error budget remaining for a 99.9% SLO over 30 days (1 = untouched, 0 = spent, < 0 = overspent)
+1 - (
+  (1 - sum(rate(http_requests_total{job="checkout",code!~"5.."}[30d]))
+     / sum(rate(http_requests_total{job="checkout"}[30d])))
+  / (1 - 0.999)
+)
+```
+
+```text
+100M requests in 30 days at 99.9%  -> 100,000 failures allowed
+Observed failures so far: 62,000   -> 62% spent, 38% remaining
+Policy: < 50% remaining -> no risky migrations, canary time doubled
+```
+
 ## Interview tips
 
 - The policy - the agreed consequence of exhaustion - is the answer that distinguishes real practice from theory.

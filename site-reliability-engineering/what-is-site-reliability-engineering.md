@@ -30,6 +30,19 @@ tags:
 
 **SRE vs DevOps:** DevOps is a set of cultural goals; SRE is a specific, opinionated implementation of them. As the saying goes, "class SRE implements DevOps."
 
+## Example
+
+```text
+An SRE week for one service, in practice
+
+SLO        checkout: 99.9% of requests succeed, 99% < 300 ms, rolling 28 days
+Budget     38% remaining  -> normal release cadence
+On-call    3 pages this week, all actionable; 1 non-actionable alert deleted
+Toil       measured at 31% of team time (cap: 50%); top item = manual cert renewals
+Project    automate cert renewal with cert-manager -> est. 4 h/week returned
+Review     post-incident review for Tuesday's 12-minute outage; 3 owned actions
+```
+
 ## Interview tips
 
 - Lead with error budgets - they are what makes SRE distinct from "operations with a better name."
