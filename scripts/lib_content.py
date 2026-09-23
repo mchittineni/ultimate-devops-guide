@@ -36,6 +36,7 @@ class Question:
     difficulty: str
     tags: list[str] = field(default_factory=list)
     body: str = ""
+    quiz: dict | None = None
 
     @property
     def topic_dir(self) -> str:
@@ -67,35 +68,63 @@ def topic_meta() -> dict:
     return json.loads(TOPIC_META_PATH.read_text(encoding="utf-8"))
 
 
+def _scalar(raw: str) -> str:
+    return raw.strip().strip('"')
+
+
+def _parse_block(lines: list[tuple[int, str]], index: int, indent: int) -> tuple[object, int]:
+    """Parse the entries sitting at ``indent`` columns; return the value and next index.
+
+    ``lines`` is the pre-filtered (indent, text) stream. A block is a list when its
+    first entry starts with ``- ``, otherwise a mapping. Nested blocks recurse, which
+    is what lets the ``quiz:`` frontmatter block hold its own keys and options list.
+    """
+    if lines[index][1].startswith("- "):
+        items: list[str] = []
+        while index < len(lines) and lines[index][0] == indent and lines[index][1].startswith("- "):
+            items.append(_scalar(lines[index][1][2:]))
+            index += 1
+        return items, index
+
+    mapping: dict = {}
+    while index < len(lines) and lines[index][0] == indent and not lines[index][1].startswith("- "):
+        key, sep, value = lines[index][1].partition(":")
+        index += 1
+        if not sep:
+            continue  # not a key line - ignore rather than guess
+        key, value = key.strip(), value.strip()
+        if value:
+            mapping[key] = _scalar(value)
+        elif index < len(lines) and lines[index][0] > indent:
+            mapping[key], index = _parse_block(lines, index, lines[index][0])
+        else:
+            # A key with nothing under it means an empty list (`tags:` with no items).
+            mapping[key] = []
+    return mapping, index
+
+
 def parse_frontmatter(text: str) -> tuple[dict, str]:
     """Parse the strict frontmatter subset used in this repo.
 
-    Supports ``key: value`` scalars and ``key:`` followed by ``  - item`` lists.
-    Returns the mapping plus the body that follows the closing delimiter.
+    Supports ``key: value`` scalars, ``key:`` followed by ``  - item`` lists, and
+    nested mappings one or more levels deep. Returns the mapping plus the body that
+    follows the closing delimiter.
     """
     match = FRONTMATTER_RE.match(text)
     if not match:
         return {}, text
 
-    data: dict = {}
-    current_list_key: str | None = None
-    for raw_line in match.group(1).splitlines():
-        if not raw_line.strip() or raw_line.lstrip().startswith("#"):
+    lines: list[tuple[int, str]] = []
+    for raw_line in match.group(1).expandtabs(2).splitlines():
+        stripped = raw_line.strip()
+        if not stripped or stripped.startswith("#"):
             continue
-        if raw_line.startswith((" ", "\t")) and raw_line.lstrip().startswith("- "):
-            if current_list_key is None:
-                continue
-            data[current_list_key].append(raw_line.lstrip()[2:].strip().strip('"'))
-            continue
-        key, _, value = raw_line.partition(":")
-        key, value = key.strip(), value.strip()
-        if value == "":
-            current_list_key = key
-            data[key] = []
-        else:
-            current_list_key = None
-            data[key] = value.strip('"')
-    return data, text[match.end():]
+        lines.append((len(raw_line) - len(raw_line.lstrip(" ")), stripped))
+
+    if not lines:
+        return {}, text[match.end():]
+    data, _ = _parse_block(lines, 0, lines[0][0])
+    return (data if isinstance(data, dict) else {}), text[match.end():]
 
 
 def topic_title(directory: str, readme_text: str | None = None) -> str:
@@ -138,6 +167,7 @@ def load_topics(root: Path = REPO_ROOT) -> list[Topic]:
                     difficulty=str(meta.get("difficulty", "")),
                     tags=list(meta.get("tags", [])),
                     body=body,
+                    quiz=meta["quiz"] if isinstance(meta.get("quiz"), dict) else None,
                 )
             )
         topic.questions.sort(key=lambda q: q.id)
