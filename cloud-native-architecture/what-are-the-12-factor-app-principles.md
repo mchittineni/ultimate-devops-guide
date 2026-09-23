@@ -30,7 +30,34 @@ tags:
 
 **Why it still matters:** these principles are precisely what a container orchestrator assumes. A Twelve-Factor app runs on Kubernetes, Cloud Run, or Heroku with no modification; one that writes session state to local disk and logs to a file will not scale or survive rescheduling.
 
-Common additions for modern services: expose health endpoints, emit telemetry (metrics and traces), and treat API contracts as versioned artifacts.
+Heroku open-sourced the methodology in 2024 so the community can revise it. Common additions for modern services: expose health endpoints, emit telemetry (metrics and traces), and treat API contracts as versioned artifacts.
+
+## Example
+
+```python
+# Factors III (config), VII (port binding), IX (disposability) and XI (logs) in one small app
+import json, logging, os, signal, sys, threading
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+logging.basicConfig(stream=sys.stdout, level=os.getenv("LOG_LEVEL", "INFO"),
+                    format="%(message)s")                       # XI: logs to stdout
+DATABASE_URL = os.environ["DATABASE_URL"]                        # III: config from env
+PORT = int(os.getenv("PORT", "8080"))                            # VII: bind a port
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200); self.end_headers(); self.wfile.write(b"ok\n")
+        logging.info(json.dumps({"event": "request", "path": self.path}))
+
+server = ThreadingHTTPServer(("0.0.0.0", PORT), Handler)
+
+def on_sigterm(signum, frame):                                   # IX: graceful SIGTERM
+    logging.info(json.dumps({"event": "shutdown"}))
+    threading.Thread(target=server.shutdown).start()             # stop accepting, finish in-flight
+
+signal.signal(signal.SIGTERM, on_sigterm)
+server.serve_forever()
+```
 
 ## Interview tips
 

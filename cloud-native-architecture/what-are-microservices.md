@@ -30,6 +30,22 @@ tags:
 
 **The usual advice** - and the answer interviewers want - is to start with a modular monolith, learn the true domain boundaries, and extract services where independent deployment or scaling genuinely pays. Splitting a domain you do not yet understand produces a distributed monolith: all the complexity, none of the independence.
 
+## Example
+
+```text
+One business capability, owned end to end - what "a microservice" means in practice
+
+  service:      orders
+  owns:         orders schema (PostgreSQL) - no other service has credentials
+  exposes:      REST /v1/orders (OpenAPI spec in repo), event OrderPlaced v2 (schema registry)
+  consumes:     PaymentCaptured, PaymentFailed (idempotent handlers, keyed by order_id)
+  deploys:      its own pipeline; canary 5% -> 100%; no release train with other services
+  resilience:   2 s timeout + 1 jittered retry to payments; circuit breaker; outbox for events
+  runs:         3-20 replicas (HPA on CPU and queue lag); readiness probe on /ready
+  observes:     RED metrics, traces via OpenTelemetry, SLO 99.9% on POST /v1/orders
+  on-call:      orders team rotation - the team that ships it is paged for it
+```
+
 ## Interview tips
 
 - Independent deployability is the acid test; state it as the definition.
