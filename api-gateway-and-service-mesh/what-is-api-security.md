@@ -33,13 +33,20 @@ tags:
 
 ```yaml
 # Gateway-enforced JWT validation and rate limit
+# (Kong: the OSS jwt plugin verifies signature, exp and nbf; audience checks need
+#  the openid-connect plugin or a custom check)
 plugins:
   - name: jwt
     config:
-      claims_to_verify: [exp, aud]
+      claims_to_verify: [exp, nbf]
       key_claim_name: iss
+      maximum_expiration: 3600 # reject tokens valid for more than an hour
   - name: rate-limiting
-    config: { minute: 120, policy: redis, limit_by: consumer }
+    config:
+      minute: 120
+      limit_by: consumer
+      policy: redis # shared counters across gateway nodes
+      redis: { host: redis.gateway.svc, port: 6379 }
 ```
 
 ## Interview tips
@@ -53,8 +60,8 @@ plugins:
 ## Related Concepts
 
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
-- [[What is GitLab CI?]] (`#19`): [What is GitLab CI?](../cicd/what-is-gitlab-ci.md)
+- [[What is progressive delivery and how does it differ from traditional deployment strategies?]] (`#509`): [What is progressive delivery and how does it differ from traditional deployment strategies?](../core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md)
+- [[What is Shift-Left and how is it practically implemented across the SDLC?]] (`#510`): [What is Shift-Left and how is it practically implemented across the SDLC?](../core-devops-concepts/what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -17,7 +17,7 @@ tags:
 
 **What the sidecar tax actually is.** Each sidecar adds ~50-150 MB of memory and a CPU floor per Pod, two extra network hops per request (typically single-digit milliseconds of p99), a second container to upgrade in lockstep with the control plane, and a set of race conditions - traffic before the proxy is ready, jobs that never exit because the sidecar stays alive, `initContainer` traffic bypassing the mesh. On 5,000 Pods that is thousands of dollars a month and a permanent operational surface. Kubernetes native sidecars (`initContainers` with `restartPolicy: Always`) fixed the startup and Job-completion races; they did not fix the resource cost.
 
-**Ambient / sidecar-less as the default starting point.** Istio's ambient mode splits the data plane: a per-node `ztunnel` DaemonSet does mTLS and L4 authorization for every Pod with zero per-Pod overhead, and an optional per-namespace `waypoint` proxy handles L7 features (HTTP retries, header routing, per-route authorization). You pay for L7 only where you use it. Cilium reaches the same place from below, doing identity and L4 policy in eBPF in the kernel and delegating L7 to a per-node Envoy. Linkerd keeps sidecars but its Rust micro-proxy is small enough that the tax is materially lower than Envoy's.
+**Ambient / sidecar-less as the default starting point.** Istio's ambient mode (GA since Istio 1.24) splits the data plane: a per-node `ztunnel` DaemonSet does mTLS and L4 authorization for every Pod with zero per-Pod overhead, and an optional per-namespace `waypoint` proxy handles L7 features (HTTP retries, header routing, per-route authorization). You pay for L7 only where you use it. Cilium reaches the same place from below, doing identity and L4 policy in eBPF in the kernel and delegating L7 to a per-node Envoy. Linkerd keeps sidecars but its Rust micro-proxy is small enough that the tax is materially lower than Envoy's.
 
 **Decide what you are buying before you choose a mesh.**
 
@@ -61,13 +61,14 @@ spec:
             principals: ["cluster.local/ns/checkout/sa/checkout"]
 ---
 # Opt this namespace into L7 only because it needs retries and header routing.
+# Create the waypoint, then label the namespace: istio.io/use-waypoint=payments-waypoint
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: payments-waypoint
   namespace: payments
-  annotations:
-    istio.io/for: waypoint
+  labels:
+    istio.io/waypoint-for: service # the default; use "workload" or "all" for Pod-addressed traffic
 spec:
   gatewayClassName: istio-waypoint
   listeners:
@@ -97,7 +98,8 @@ spec:
 istioctl proxy-status                  # is every proxy synced with the control plane?
 istioctl analyze -A                    # config errors before they reach the data plane
 kubectl top pods -n payments           # the sidecar tax, measured rather than assumed
-istioctl upgrade --revision canary-1-24  # revisioned control plane, one namespace at a time
+istioctl install --set revision=canary    # new control-plane revision beside the old one;
+                                          # move namespaces over with istio.io/rev=canary
 ```
 
 ## Interview tips
