@@ -55,7 +55,7 @@ Three subnet tiers per AZ, so nine subnets plus a small infra subnet per AZ for 
 - **Security groups chained by reference**, not by CIDR: `sg-app` allows 8080 from `sg-alb`; `sg-db` allows 5432 from `sg-app`. The rules keep working as instances scale and are replaced, and the intent is readable. Answering this question with CIDR ranges is the tell that someone has not built it.
 - **No public IPs below the edge.** The ALB is the only internet-facing component; app instances and the database have private addresses only. Administrative access is **SSM Session Manager**, not a bastion with port 22 open.
 - **TLS everywhere**: terminate at the edge and at the ALB with ACM-managed certificates, and re-encrypt to the app tier where the data warrants it. Encrypt at rest with KMS (EBS, RDS, S3) and enforce TLS-only access with a bucket policy.
-- **IAM roles, not credentials**: an instance profile / task role / IRSA for the app tier, and application secrets from Secrets Manager or Parameter Store fetched at runtime - never baked into an AMI or an image.
+- **IAM roles, not credentials**: an instance profile, an ECS task role, or EKS Pod Identity (IRSA on older clusters) for the app tier, and application secrets from Secrets Manager or Parameter Store fetched at runtime - never baked into an AMI or an image.
 - **WAF at the edge** with managed rule sets in detection mode first, plus rate limiting and bot rules. And the point people miss: **lock the origin to the CDN** (a managed prefix list or service tag, plus a shared secret header), or an attacker can resolve the ALB and bypass the WAF entirely.
 - **Defence in depth**: NACLs as a coarse subnet guardrail (particularly an explicit deny for known-bad CIDRs, which security groups cannot express), VPC Flow Logs, GuardDuty, and Config rules for continuous drift detection.
 - **Least privilege in the data tier**: separate database users per service with only the grants they need, no shared admin account, and IAM database authentication where supported.
@@ -91,7 +91,12 @@ resource "aws_security_group" "alb" {
     protocol        = "tcp"
     prefix_list_ids = [data.aws_ec2_managed_prefix_list.cloudfront.id]
   }
-  egress { from_port = 0, to_port = 0, protocol = "-1", cidr_blocks = ["0.0.0.0/0"] }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "app" {
@@ -103,7 +108,12 @@ resource "aws_security_group" "app" {
     protocol        = "tcp"
     security_groups = [aws_security_group.alb.id] # <- reference, survives scaling
   }
-  egress { from_port = 0, to_port = 0, protocol = "-1", cidr_blocks = ["0.0.0.0/0"] }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "db" {
@@ -129,8 +139,16 @@ resource "aws_autoscaling_group" "app" {
   health_check_type         = "ELB" # replace instances that boot but never serve
   health_check_grace_period = 300   # longer than real startup, or you loop
   target_group_arns         = [aws_lb_target_group.app.arn]
-  launch_template { id = aws_launch_template.app.id, version = "$Latest" }
-  instance_refresh { strategy = "Rolling", preferences { min_healthy_percentage = 90 } }
+  launch_template {
+    id      = aws_launch_template.app.id
+    version = "$Latest"
+  }
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 90
+    }
+  }
 }
 
 resource "aws_lb_target_group" "app" {
@@ -139,7 +157,12 @@ resource "aws_lb_target_group" "app" {
   protocol             = "HTTP"
   vpc_id               = aws_vpc.this.id
   deregistration_delay = 60 # connection draining on scale-in
-  health_check { path = "/healthz", interval = 15, healthy_threshold = 2, unhealthy_threshold = 3 }
+  health_check {
+    path                = "/healthz"
+    interval            = 15
+    healthy_threshold   = 2
+    unhealthy_threshold = 3
+  }
 }
 
 resource "aws_db_instance" "orders" {
