@@ -40,6 +40,16 @@ tags:
 
 **Where the benefits stop.** Sustained high-throughput workloads are cheaper on reserved compute. Latency-sensitive paths suffer from cold starts. Long-running or stateful processing does not fit the execution limits. And the operational burden does not vanish - it shifts to distributed tracing, event-schema management, and understanding provider quotas.
 
+## Example
+
+```bash
+# From nothing to a scalable, HTTPS, pay-per-use endpoint in a few commands (AWS SAM CLI)
+sam init --runtime python3.13 --dependency-manager pip --app-template hello-world --name hello --no-interactive
+cd hello && sam build
+sam deploy --guided          # creates the function, API, IAM role and log group
+# No servers, no capacity plan; idle cost ~ zero. The same template redeploys to any account.
+```
+
 ## Interview tips
 
 - Lead with the two strongest - scale to zero and no server management - then qualify honestly.

@@ -25,13 +25,31 @@ tags:
 | Startup concern     | Cold start          | Cold start             | Warm              | Always on         |
 | State               | Stateless           | Stateless              | Can be stateful   | Anything          |
 
-**Implementations:** AWS Lambda, Azure Functions, Google Cloud Functions, Cloudflare Workers (V8 isolates, near-zero cold start), and self-hosted options such as Knative and OpenFaaS on Kubernetes.
+**Implementations:** AWS Lambda, Azure Functions (the Flex Consumption plan is the current serverless plan), Cloud Run functions (formerly Google Cloud Functions), Cloudflare Workers (V8 isolates, near-zero cold start), and self-hosted options such as Knative and OpenFaaS on Kubernetes.
 
 **The programming model.** A function receives an event and a context, does one thing, and returns. It is stateless between invocations, subject to execution time and memory limits, and must tolerate being run concurrently many times over and being retried.
 
 **Where FaaS fits best:** event processing (a file lands, a message arrives), scheduled jobs, webhook receivers, lightweight APIs with variable traffic, glue between managed services, and stream processing.
 
 **Where it does not:** long-running computation, workloads needing persistent connections (though WebSocket support exists via gateways), consistently high throughput where reserved compute is cheaper, and applications with heavyweight runtimes where cold start dominates.
+
+## Example
+
+```javascript
+// The FaaS programming model: an event in, a result out, no server code.
+// Azure Functions (Node.js v4 programming model), HTTP-triggered.
+const { app } = require("@azure/functions");
+
+app.http("greet", {
+  methods: ["GET"],
+  authLevel: "function",
+  handler: async (request, context) => {
+    const name = request.query.get("name") ?? "world";
+    context.log(`greeting ${name}`); // goes to the platform's logs
+    return { status: 200, jsonBody: { message: `Hello, ${name}` } };
+  },
+});
+```
 
 ## Interview tips
 
