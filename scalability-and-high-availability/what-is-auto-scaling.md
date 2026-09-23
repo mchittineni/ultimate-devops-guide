@@ -34,6 +34,38 @@ tags:
 
 At the cluster level, the pod autoscaler needs the **Cluster Autoscaler** or Karpenter beneath it to add nodes when pods cannot be scheduled.
 
+**Limitations.** Autoscaling is reactive (or, with predictive scaling, only as good as the forecast), so it cannot absorb a spike shorter than the time to provision and warm up capacity - that needs headroom or load shedding. It also only helps when the bottleneck is the tier being scaled; adding app instances in front of a saturated database makes things worse.
+
+## Example
+
+```hcl
+# AWS: target tracking on an Auto Scaling group - keep average CPU near 60%.
+resource "aws_autoscaling_policy" "cpu_target" {
+  name                   = "cpu-60"
+  autoscaling_group_name = aws_autoscaling_group.api.name
+  policy_type            = "TargetTrackingScaling"
+  estimated_instance_warmup = 120 # ignore metrics from instances still booting
+
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+    target_value = 60
+  }
+}
+
+# Scheduled scaling for a known peak: capacity is there before the load arrives.
+resource "aws_autoscaling_schedule" "weekday_morning" {
+  scheduled_action_name  = "weekday-morning"
+  autoscaling_group_name = aws_autoscaling_group.api.name
+  recurrence             = "0 7 * * MON-FRI"
+  time_zone              = "Europe/London"
+  min_size               = 6
+  max_size               = 40
+  desired_capacity       = 10
+}
+```
+
 ## Interview tips
 
 - "What metric do you scale on?" is the real question - answering "CPU" without qualification is a weak signal.

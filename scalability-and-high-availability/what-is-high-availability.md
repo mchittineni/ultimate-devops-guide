@@ -38,6 +38,39 @@ Each nine costs materially more. The right target comes from what the business l
 
 **HA is not DR.** High availability handles component failure within an environment, typically automatically and in seconds. Disaster recovery handles the loss of an entire site or region, typically with a documented procedure and a much longer RTO.
 
+**Availability multiplies down a serial chain.** A request that passes through three components at 99.9% each is at best about 99.7% available, so redundancy has to exist at every hop, not just the web tier.
+
+## Example
+
+```yaml
+# Kubernetes: spread replicas across zones and keep a floor during voluntary disruptions.
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: api }
+spec:
+  replicas: 6
+  selector: { matchLabels: { app: api } }
+  template:
+    metadata: { labels: { app: api } }
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone # survive the loss of one AZ
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector: { matchLabels: { app: api } }
+      containers:
+        - name: api
+          image: registry.example.com/api:1.8.2
+          readinessProbe: { httpGet: { path: /readyz, port: 8080 }, periodSeconds: 5 }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: api }
+spec:
+  minAvailable: 4 # node drains and upgrades never take more than 2 away
+  selector: { matchLabels: { app: api } }
+```
+
 ## Interview tips
 
 - Know the nines table well enough to reason about it out loud.
@@ -49,8 +82,8 @@ Each nine costs materially more. The right target comes from what the business l
 ## Related Concepts
 
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
-- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
-- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
+- [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

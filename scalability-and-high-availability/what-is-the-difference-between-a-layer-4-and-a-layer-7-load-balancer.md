@@ -73,8 +73,14 @@ resource "aws_lb_listener_rule" "api_v2" {
   action {
     type = "forward"
     forward {
-      target_group { arn = aws_lb_target_group.stable.arn, weight = 90 }
-      target_group { arn = aws_lb_target_group.canary.arn, weight = 10 }
+      target_group {
+        arn    = aws_lb_target_group.stable.arn
+        weight = 90
+      }
+      target_group {
+        arn    = aws_lb_target_group.canary.arn
+        weight = 10
+      }
     }
   }
 }
