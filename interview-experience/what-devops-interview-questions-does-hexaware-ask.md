@@ -85,8 +85,15 @@ stages:
       - job: build
         pool: { vmImage: ubuntu-latest }
         steps:
+          - task: SonarQubePrepare@7
+            inputs:
+              SonarQube: sonar-connection # service connection name
+              scannerMode: cli
+              configMode: manual
+              cliProjectKey: app
           - script: make build
-          - task: SonarQubePublish@5
+          - task: SonarQubeAnalyze@7
+          - task: SonarQubePublish@7 # waits for the quality gate result
 
   - stage: DeployProd
     dependsOn: Build

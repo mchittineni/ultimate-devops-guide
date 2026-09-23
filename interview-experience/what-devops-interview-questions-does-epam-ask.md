@@ -174,9 +174,9 @@ EPAM SCALES THE ROUND TO THE LEVEL
 ```
 
 ```bash
-# The log-splitting script from set 1. Argument-driven, case-insensitive,
-# and it fails loudly rather than producing empty files silently.
 #!/usr/bin/env bash
+# The log-splitting script from set 1. Argument-driven, case-insensitive,
+# fails loudly on a missing or unreadable file; no match gives an empty file.
 set -euo pipefail
 
 logfile="${1:?usage: $0 <logfile>}"
@@ -211,8 +211,8 @@ printf 'errors: %d, warnings: %d\n' \
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[What are ephemeral preview environments and how do you manage their lifecycle and cleanup?]] (`#535`): [What are ephemeral preview environments and how do you manage their lifecycle and cleanup?](../cicd/what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup.md)
 - [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
-- [[How do you keep dependencies up to date without breaking the build?]] (`#401`): [How do you keep dependencies up to date without breaking the build?](../cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

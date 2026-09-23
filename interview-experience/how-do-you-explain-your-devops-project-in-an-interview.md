@@ -47,7 +47,7 @@ STRUCTURE — 90 seconds, then stop
                 60 engineers, 8 product teams, EU + US regions."
 
   Architecture "Request path: Route 53 → CloudFront → WAF → ALB →
-                NGINX ingress on EKS → ~30 services → RDS Postgres
+                Gateway API on EKS → ~30 services → RDS Postgres
                 (Multi-AZ) + ElastiCache. Async work on SQS.
                 Everything in Terraform, deployed by Argo CD from Git."
 
