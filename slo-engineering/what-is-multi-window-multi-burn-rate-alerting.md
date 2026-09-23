@@ -19,7 +19,7 @@ tags:
 
 **Why a short window is paired with the long one.** The long window (say 6 hours) gives statistical confidence and low false-positive rate; alone it also stays firing long after the incident ends. Adding a short window (30 minutes, one twelfth of the long one) as an AND condition means the alert clears quickly once the burn stops. This pairing is the "multi-window" half.
 
-**The canonical configuration** from the Google SRE workbook, for a 30-day window:
+**The common configuration** for a 30-day window - the two page rows and the 1x/3-day ticket come from the Google SRE Workbook; the 3x/1-day ticket is a widely used addition (Sloth generates it by default):
 
 | Severity | Burn rate | Long window | Short window | Budget consumed when it fires |
 | -------- | --------- | ----------- | ------------ | ----------------------------- |

@@ -35,7 +35,7 @@ Classifying every dependency as hard or soft, and testing the soft path, is the 
 
 ```yaml
 # Envoy/Istio: outlier detection ejects a failing upstream, with a strict timeout
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1
 kind: DestinationRule
 metadata:
   name: payments
