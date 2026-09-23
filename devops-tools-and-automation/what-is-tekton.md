@@ -24,9 +24,9 @@ tags:
 - **Workspace** - shared storage (PVC, ConfigMap, Secret, or emptyDir) mounted across Tasks.
 - **Triggers** - EventListener, TriggerBinding, and TriggerTemplate turn a webhook into a PipelineRun.
 
-**Why Kubernetes-native matters.** Pipelines are YAML in Git, versioned and reviewed. Executions are pods, so they use existing cluster autoscaling, RBAC, network policy, node selection, and monitoring. There is no separate CI server to operate, patch, and scale. Tekton Hub provides reusable Tasks (git-clone, kaniko, buildah, ko).
+**Why Kubernetes-native matters.** Pipelines are YAML in Git, versioned and reviewed. Executions are pods, so they use existing cluster autoscaling, RBAC, network policy, node selection, and monitoring. There is no separate CI server to operate, patch, and scale. Reusable Tasks (git-clone, buildah, ko) are published on **Artifact Hub** - the old Tekton Hub was deprecated and its public instance shut down in January 2026 - and are pulled in at run time with **resolvers** (hub, bundles, git, cluster) rather than installed by hand. Cluster-scoped `ClusterTask`s have been removed in favour of the cluster resolver.
 
-**Trade-offs.** It is a framework rather than a product: there is no rich built-in UI (Tekton Dashboard is basic), the YAML is verbose compared with GitHub Actions, and you assemble the developer experience yourself. Products like OpenShift Pipelines and Jenkins X build on it to close that gap.
+**Trade-offs.** It is a framework rather than a product: there is no rich built-in UI (Tekton Dashboard is basic), the YAML is verbose compared with GitHub Actions, and you assemble the developer experience yourself. Products like OpenShift Pipelines build on it to close that gap.
 
 **Where it fits:** platform teams building an internal CI/CD offering on Kubernetes, and organisations that want builds isolated in their own cluster with strict supply-chain controls (Tekton Chains signs artifacts and generates provenance).
 
@@ -43,7 +43,13 @@ spec:
   workspaces: [{ name: source }]
   tasks:
     - name: clone
-      taskRef: { name: git-clone }
+      taskRef: # fetched from Artifact Hub at run time via the hub resolver
+        resolver: hub
+        params:
+          - { name: type, value: artifact }
+          - { name: kind, value: task }
+          - { name: name, value: git-clone }
+          - { name: version, value: "0.9" }
       workspaces: [{ name: output, workspace: source }]
       params:
         - { name: url, value: $(params.repo-url) }
@@ -52,9 +58,9 @@ spec:
       runAfter: [clone]
       taskRef: { name: golang-test }
       workspaces: [{ name: source, workspace: source }]
-    - name: build-image
+    - name: build-image # buildah: kaniko's upstream repository was archived in 2025
       runAfter: [test]
-      taskRef: { name: kaniko }
+      taskRef: { name: buildah }
       workspaces: [{ name: source, workspace: source }]
 ```
 
@@ -62,6 +68,7 @@ spec:
 
 - "Pipelines as Kubernetes CRDs, builds as pods" is the one-line summary.
 - Tekton Chains for supply-chain provenance is a strong detail to raise.
+- Knowing that Tekton Hub is gone (Artifact Hub plus resolvers now) and that kaniko's original repository was archived shows your knowledge is current.
 - Be honest that most teams choose GitHub Actions or GitLab CI unless they specifically need Kubernetes-native execution.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

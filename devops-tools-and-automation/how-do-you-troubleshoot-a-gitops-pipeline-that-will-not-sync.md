@@ -87,7 +87,7 @@ flux logs --level=error --since=30m
 kubectl describe kustomization apps -n flux-system | tail -20
 
 # Reproduce the rendering locally - if it fails here, the cluster is innocent
-kustomize build ./clusters/prod/apps | kubeconform -strict -kubernetes-version 1.31.0 -
+kustomize build ./clusters/prod/apps | kubeconform -strict -kubernetes-version 1.35.0 -  # match the cluster
 helm template checkout ./chart -f values-prod.yaml >/dev/null
 
 # Permanently OutOfSync? Find who else is writing the field.

@@ -17,7 +17,7 @@ tags:
 
 **The layers**
 
-- **Provisioning** - Terraform, CloudFormation, Pulumi, Crossplane create the resources.
+- **Provisioning** - Terraform (or its open-source fork OpenTofu, since Terraform moved to the Business Source License in 2023), CloudFormation/CDK, Pulumi, Crossplane create the resources.
 - **Configuration** - Ansible, Puppet, or image baking with Packer bring them to a desired state.
 - **Orchestration** - Kubernetes schedules and supervises workloads.
 - **Deployment** - CI/CD pipelines and GitOps controllers ship application changes.
@@ -30,6 +30,30 @@ tags:
 **What to automate first:** whatever is done most often, is riskiest by hand, or blocks other people. Environment creation, deployment, and certificate renewal usually top that list.
 
 **Guardrails matter as much as automation.** Automated change with no policy checks propagates a mistake faster than a human could. Pair automation with plan review, policy as code, staged rollout, and the ability to revert.
+
+## Example
+
+```yaml
+# GitHub Actions: infrastructure changes are planned on the PR and applied only after merge.
+name: infra
+on:
+  pull_request: { paths: ["infra/**"] }
+  push: { branches: [main], paths: ["infra/**"] }
+permissions: { id-token: write, contents: read, pull-requests: write }
+jobs:
+  plan-apply:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: infra } }
+    steps:
+      - uses: actions/checkout@v7 # pin third-party actions to a commit SHA in production
+      - uses: opentofu/setup-opentofu@v2
+      - uses: aws-actions/configure-aws-credentials@v6
+        with: { role-to-assume: "arn:aws:iam::111122223333:role/infra-ci", aws-region: eu-west-1 }
+      - run: tofu init -input=false
+      - run: tofu plan -input=false -out=tfplan # reviewed on the pull request
+      - if: github.ref == 'refs/heads/main'
+        run: tofu apply -input=false tfplan
+```
 
 ## Interview tips
 

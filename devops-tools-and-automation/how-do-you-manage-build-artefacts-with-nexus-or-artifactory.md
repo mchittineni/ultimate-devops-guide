@@ -29,6 +29,8 @@ Ordering inside a group matters: put hosted repositories **before** proxies so a
 
 Both products are multi-format: Maven, npm, PyPI, NuGet, Go, Helm, Docker/OCI, Debian/RPM, and generic "raw". One system for every ecosystem is the main argument for having one at all.
 
+**Check the licence tier before you design around it.** Sonatype replaced Nexus Repository OSS with a free **Community Edition** in 2024, which is capped (40,000 components and 100,000 requests per day at the time of writing) and pauses new components above those limits - a real constraint for a busy CI estate. JFrog's free tiers are similarly limited. Plan for a paid tier, a cloud-native registry (ECR, Artifact Registry, GitHub Packages) for some formats, or an open-source registry such as Harbor for OCI images.
+
 ### Why proxy public registries
 
 - **Build reliability** - Maven Central or Docker Hub having a bad day stops being your outage.
@@ -61,7 +63,7 @@ Artifactory adds **build info** (the build's name, number, VCS revision, depende
 
 ### Security layer
 
-- **Xray** (Artifactory) or **IQ Server** (Nexus) scan artefacts and their transitive dependencies continuously, can **block downloads** of a known-bad version at the repository level, and enforce licence policy. In the pipeline, pair with Trivy/Grype for images and an SCA tool for source dependencies. The frequently-asked distinction: Xray scans what is _in the repository_ (including things built months ago, rescanned when a new CVE lands); a pipeline scanner checks what you are building _now_. You want both.
+- **Xray** (Artifactory) or **Sonatype Lifecycle / Repository Firewall** (Nexus, formerly IQ Server) scan artefacts and their transitive dependencies continuously, can **block downloads** of a known-bad version at the repository level, and enforce licence policy. In the pipeline, pair with Trivy/Grype for images and an SCA tool for source dependencies. The frequently-asked distinction: Xray scans what is _in the repository_ (including things built months ago, rescanned when a new CVE lands); a pipeline scanner checks what you are building _now_. You want both.
 - **Authentication and permissions**: SSO/LDAP, per-repository read/write/delete, service accounts per pipeline with deploy-only rights. Never give CI delete permission on a release repository.
 - **Signing and provenance**: publish an SBOM and a signature (cosign for OCI, GPG for Maven/RPM) alongside the artefact and verify at deploy or admission time.
 - **Retention and cleanup**: policies by age, download count, and count-per-version; unreferenced Docker layers reclaimed by garbage collection. Storage growth is the most common operational complaint and the easiest to fix with policy.
@@ -103,12 +105,12 @@ docker login registry.example.com   # a Docker-format repository in Nexus/Artifa
 
 ```bash
 # Build once, capture build info, scan, then PROMOTE the same digest
-jf rt docker-push registry.example.com/docker-staging/api:1.9.0 \
-  docker-staging --build-name=api --build-number="$CI_BUILD"
+jf docker push registry.example.com/docker-staging/api:1.9.0 \
+  --build-name=api --build-number="$CI_BUILD"
 jf rt build-collect-env api "$CI_BUILD"
 jf rt build-publish api "$CI_BUILD"           # dependency graph + VCS revision recorded
 
-jf xr build-scan api "$CI_BUILD" --fail=true  # block on policy violations
+jf build-scan api "$CI_BUILD" --fail=true     # block on policy violations
 
 # promotion is metadata, not a rebuild
 jf rt build-promote api "$CI_BUILD" docker-prod --status=Released --copy=true
@@ -137,7 +139,7 @@ curl -s -u "$U:$T" "https://nexus.example.com/service/rest/v1/status/check" | jq
 - State the release-versus-snapshot rule and the immutability setting that enforces it. Then extend it to containers: deploy by digest, not by a mutable tag.
 - Say "build once, promote the same artefact" and explain that promotion is a metadata operation. It is the core practice the question is really about.
 - Give three concrete reasons to proxy public registries - reliability, Docker Hub rate limits, and an inventory of everything you consume. The rate-limit answer always lands.
-- Distinguish repository scanning (Xray/IQ, continuous, catches CVEs published after the build) from pipeline scanning (this build, now). Recommend both.
+- Distinguish repository scanning (Xray/Sonatype, continuous, catches CVEs published after the build) from pipeline scanning (this build, now). Recommend both.
 - Answer the Git-versus-artefact-repository comparison in terms of source versus binaries, diffing versus checksums, permanent history versus retention policy.
 - Mention operational reality: storage growth needs retention policies and GC, and backups must cover blobs and metadata together. See [how do you consolidate a sprawling DevOps toolchain](./how-do-you-consolidate-a-sprawling-devops-toolchain.md), [what is a Software Bill of Materials](../devsecops/what-is-a-software-bill-of-materials-sbom.md), [signing and verifying container images](../devsecops/how-do-you-sign-and-verify-container-images.md), and [promoting a release across dev, staging, and production](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md).
 

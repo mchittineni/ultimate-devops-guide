@@ -30,7 +30,30 @@ tags:
 
 **Tools:** Argo CD and Flux for Kubernetes; Crossplane or Terraform controllers extend the model to cloud infrastructure.
 
-**Challenges to acknowledge:** secret management (sealed secrets, SOPS, or an external secrets operator), promotion between environments, and the temptation to hand-edit clusters during incidents - which the controller will undo.
+**Challenges to acknowledge:** secret management (sealed secrets, SOPS, or an external secrets operator), promotion between environments, and the temptation to hand-edit clusters during incidents - which the controller will undo. GitOps also describes desired state, not ordered procedures: database migrations, one-off jobs, and cross-cluster sequencing still need hooks, waves, or a pipeline around the controller.
+
+## Example
+
+```yaml
+# Flux: pull a config repository and continuously reconcile one path of it.
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata: { name: platform, namespace: flux-system }
+spec:
+  url: https://github.com/acme/platform-config.git
+  ref: { branch: main }
+  interval: 1m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata: { name: apps, namespace: flux-system }
+spec:
+  sourceRef: { kind: GitRepository, name: platform }
+  path: ./clusters/prod/apps
+  interval: 10m # re-apply even without a commit: this is the drift correction
+  prune: true # resources deleted from Git are deleted from the cluster
+  wait: true
+```
 
 ## Interview tips
 
