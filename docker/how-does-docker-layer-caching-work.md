@@ -59,7 +59,7 @@ This is the part most candidates miss. A clean CI runner has an empty local cach
 
 ### Layer count is not the metric
 
-"Fewer layers" was a real constraint under old storage drivers with a 127-layer limit; today the thing that matters is **total content** and **cache hit rate**. Do not merge unrelated `RUN` steps just to reduce the count - you lose cache granularity. Merge the ones that must be atomic for cleanup.
+"Fewer layers" was a pressing constraint under old storage drivers (AUFS capped images at 127 layers; overlay2 still has a ceiling of 128), but no sensible Dockerfile gets near it - the things that matter are **total content** and **cache hit rate**. Do not merge unrelated `RUN` steps just to reduce the count - you lose cache granularity. Merge the ones that must be atomic for cleanup.
 
 ## Example
 
@@ -85,8 +85,10 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 
 ```dockerfile
 # Cleanup must be in the SAME RUN, or the files live on in the earlier layer
+# (pin exact package versions only if you also pin the base image digest -
+#  Debian drops superseded versions from its mirrors, which breaks the build)
 RUN apt-get update \
- && apt-get install -y --no-install-recommends curl=7.88.1-10+deb12u5 \
+ && apt-get install -y --no-install-recommends ca-certificates curl \
  && rm -rf /var/lib/apt/lists/*
 ```
 

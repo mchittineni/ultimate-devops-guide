@@ -49,11 +49,15 @@ PID 1 is also expected to reap orphaned child processes. If your application spa
 ```dockerfile
 FROM python:3.12-slim
 WORKDIR /app
+# envsubst and nc are used by entrypoint.sh; slim images do not include them
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends gettext-base netcat-openbsd \
+ && rm -rf /var/lib/apt/lists/*
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
-# exec form: gunicorn is PID 1 and receives SIGTERM from `docker stop`
+# exec form: the script runs first, then `exec` makes gunicorn PID 1 so it receives SIGTERM
 ENTRYPOINT ["/app/entrypoint.sh"]
 # default arguments - overridable on the command line
 CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "4", "app:app"]
@@ -96,7 +100,7 @@ docker inspect -f 'ENTRYPOINT={{.Config.Entrypoint}} CMD={{.Config.Cmd}}' img
 
 - [[What is Kubernetes?]] (`#11`): [What is Kubernetes?](../kubernetes/what-is-kubernetes.md)
 - [[What are the main components of Kubernetes architecture?]] (`#12`): [What are the main components of Kubernetes architecture?](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)
-- [[What is a Service in Kubernetes?]] (`#14`): [What is a Service in Kubernetes?](../kubernetes/what-is-a-service-in-kubernetes.md)
+- [[Explain the difference between Docker Swarm and Kubernetes]] (`#15`): [Explain the difference between Docker Swarm and Kubernetes](../kubernetes/explain-the-difference-between-docker-swarm-and-kubernetes.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

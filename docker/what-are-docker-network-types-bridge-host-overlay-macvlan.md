@@ -31,7 +31,7 @@ Docker uses a pluggable Container Network Model (CNM) to provide network connect
   - Creates a virtual VXLAN overlay network connecting Swarm daemon nodes or multi-host container networks without requiring host-routing rules.
 - **Macvlan:**
   - Assigns a unique physical MAC address to a container, making it appear as a physical network device connected directly to the underlying physical network.
-  - Ideal for legacy applications expecting direct access to physical subnets.
+  - Ideal for legacy applications expecting direct access to physical subnets. Needs a network that accepts multiple MACs per port (most cloud VPCs do not), and the host cannot reach its own macvlan containers without an extra sub-interface. **IPvlan** is the sibling driver that shares the parent's MAC when MAC limits are the problem.
 - **None:**
   - Disables all networking for the container, creating a completely isolated loopback interface.
 
@@ -58,7 +58,7 @@ docker run -d --name web-app --network app-net -p 8080:80 my-web-app:v1
 docker network inspect app-net
 ```
 
-Docker Compose custom overlay network definition for multi-service deployment:
+Docker Compose with two user-defined networks, so the database is reachable only from the API tier:
 
 ```yaml
 # No top-level `version:` key - the Compose Specification dropped it and
@@ -79,6 +79,8 @@ services:
 
   db:
     image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: example # required by the image; use Compose secrets outside local dev
     networks:
       - backend
 

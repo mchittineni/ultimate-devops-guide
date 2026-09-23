@@ -24,7 +24,9 @@ Useful capabilities:
 - **Profiles** - optional services (say, a seed job or an observability stack) enabled per invocation.
 - **Override files** - `compose.override.yaml` layers local-only settings such as bind mounts and debug ports.
 
-For production orchestration, Kubernetes or a managed container service is the normal choice; Compose does not provide scheduling, self-healing across hosts, or rolling updates.
+Two modernisation points trip people up. The standalone Python `docker-compose` (v1) reached end of life in 2023; today's Compose is the Go-based `docker compose` CLI plugin implementing the open **Compose Specification**. And the top-level `version:` key is obsolete - Compose ignores it and prints a warning - so current files start directly with `services:`. Newer features such as `docker compose watch` (sync or rebuild on file changes) and `include:` (compose files from other projects) build on that spec.
+
+For production orchestration, Kubernetes or a managed container service is the normal choice; Compose does not provide scheduling, self-healing across hosts, or rolling updates. The trade-off is deliberate: Compose is simple precisely because it manages one host, and it is still a reasonable way to run a small, single-server deployment if you accept that the host is a single point of failure.
 
 ## Example
 
@@ -66,6 +68,7 @@ docker compose down -v      # -v also removes named volumes
 - Say explicitly where Compose stops and Kubernetes starts - it shows you know the tool's scope.
 - `depends_on` alone only waits for _start_, not readiness; the health-check condition is the correct answer.
 - Compose files are excellent for reproducible integration tests in CI.
+- If you see `version: "3.8"` or `docker-compose` in a file or script, say it is legacy: the key is obsolete and v1 is end-of-life.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

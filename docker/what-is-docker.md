@@ -24,6 +24,8 @@ Containers are not lightweight virtual machines. They are ordinary Linux process
 
 Because there is no guest operating system, containers start in milliseconds and a host can run hundreds of them.
 
+The trade-off of sharing the kernel is isolation strength: a kernel vulnerability can cross container boundaries in a way that a hypervisor boundary prevents, and Linux containers need a Linux kernel (Docker Desktop on macOS and Windows runs one in a lightweight VM). Docker is also no longer the only way to build or run OCI images - Podman, Buildah, containerd's `nerdctl`, and Kubernetes (which uses containerd or CRI-O directly) all work with the same images.
+
 The core objects: an **image** (immutable, layered template), a **container** (a running instance of an image), a **Dockerfile** (the build recipe), a **registry** (where images are stored and shared), and **volumes** (persistent storage that outlives the container).
 
 ## Example

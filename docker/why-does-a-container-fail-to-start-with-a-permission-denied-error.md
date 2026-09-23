@@ -46,7 +46,7 @@ This is the most common runtime case. A bind mount keeps the **host's** ownershi
 
 ### 4. Host security modules and rootless quirks
 
-- **SELinux** (RHEL, Fedora, CentOS) denies bind-mount access with a plain `Permission denied` and an AVC entry in the audit log. Add `:Z` (private label) or `:z` (shared) to the mount, or set the correct label with `chcon`. `getenforce` and `ausearch -m avc -ts recent` confirm it in seconds.
+- **SELinux** (RHEL, Fedora, Rocky/AlmaLinux, CentOS Stream) denies bind-mount access with a plain `Permission denied` and an AVC entry in the audit log. Add `:Z` (private label) or `:z` (shared) to the mount, or set the correct label with `chcon`. `getenforce` and `ausearch -m avc -ts recent` confirm it in seconds.
 - **AppArmor** (Ubuntu, Debian) blocks specific syscalls or paths; the denial appears in `dmesg`.
 - **Rootless Docker or Podman** maps container UIDs into a subuid range, so files created inside appear as high-numbered host UIDs and host files are frequently unreadable. Understanding this is what makes rootless debugging tractable.
 - **`docker.sock` permission denied** is a different problem with the same words: your user is not in the `docker` group, or you are targeting the socket from inside a container without mounting it.

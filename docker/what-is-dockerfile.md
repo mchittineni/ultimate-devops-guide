@@ -33,7 +33,7 @@ Two practices matter most. **Layer ordering:** put the things that change rarely
 
 ```dockerfile
 # ---- build stage ----
-FROM node:20-alpine AS build
+FROM node:24-alpine AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci                      # cached unless dependencies change
@@ -41,7 +41,7 @@ COPY . .
 RUN npm run build
 
 # ---- runtime stage ----
-FROM node:20-alpine
+FROM node:24-alpine
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package*.json ./
@@ -57,7 +57,7 @@ CMD ["node", "dist/server.js"]
 
 - `ENTRYPOINT` vs `CMD`: entrypoint is the executable, cmd supplies default arguments - and `docker run` overrides cmd.
 - Always mention `.dockerignore`; without it you ship `node_modules` and `.git` into the build context.
-- Running as non-root and pinning base image tags are the security answers interviewers listen for.
+- Running as non-root and pinning base images (by digest for full reproducibility, with Renovate or Dependabot to bump them) are the security answers interviewers listen for. Start files with `# syntax=docker/dockerfile:1` to get current BuildKit Dockerfile features.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
