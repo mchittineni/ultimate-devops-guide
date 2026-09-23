@@ -29,6 +29,22 @@ tags:
 
 **Operating it:** run it highly available across zones, monitor proxy configuration convergence and certificate issuance, size it for the number of proxies and services (memory grows with the size of the configuration each proxy receives - the `Sidecar` resource limits this), and upgrade it carefully, since it is a critical dependency for every new pod.
 
+## Example
+
+```bash
+# Is every proxy in sync with the control plane?
+istioctl proxy-status            # SYNCED / NOT SENT / STALE per proxy and xDS type
+
+# What did the control plane actually push to one proxy?
+istioctl proxy-config cluster deploy/checkout -n prod
+istioctl proxy-config secret  deploy/checkout -n prod   # workload cert and expiry
+
+# Control-plane health signals worth alerting on (Prometheus metrics from istiod)
+#   pilot_proxy_convergence_time   - how long config takes to reach proxies
+#   pilot_xds_pushes               - push volume (spikes = churn)
+#   citadel_server_csr_count       - certificate signing requests being served
+```
+
 ## Interview tips
 
 - "Control plane configures, data plane carries traffic" is the essential distinction.

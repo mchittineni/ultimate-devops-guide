@@ -34,6 +34,21 @@ tags:
 
 **Start small.** One availability SLI and one latency SLI per critical journey is a complete, useful starting point. Precision in defining two indicators beats vagueness across twenty.
 
+## Example
+
+```promql
+# Availability SLI: good / valid requests, excluding client errors
+sum(rate(http_requests_total{job="checkout", code!~"5..|4.."}[5m]))
+/
+sum(rate(http_requests_total{job="checkout", code!~"4.."}[5m]))
+
+# Latency SLI: proportion of requests faster than 300 ms
+# (requires a histogram bucket boundary at le="0.3")
+sum(rate(http_request_duration_seconds_bucket{job="checkout", le="0.3"}[5m]))
+/
+sum(rate(http_request_duration_seconds_count{job="checkout"}[5m]))
+```
+
 ## Interview tips
 
 - The good/valid ratio phrasing is the canonical SRE formulation - use it.

@@ -28,7 +28,7 @@ tags:
 **Detection**
 
 - `terraform plan` on a schedule in CI, alerting when a non-empty diff appears against unchanged code. This is the simplest effective control.
-- Purpose-built tools: `driftctl`, Terraform Cloud drift detection, or provider-native services such as AWS Config and CloudFormation drift detection.
+- Platform features: HCP Terraform (formerly Terraform Cloud) health assessments with drift detection, Spacelift or env0 drift detection, or provider-native services such as AWS Config and CloudFormation drift detection. The open-source `driftctl` is no longer maintained, so do not build on it.
 - GitOps controllers detect drift continuously by design, and Argo CD reports resources as `OutOfSync`.
 
 **Prevention and remediation**
@@ -36,7 +36,7 @@ tags:
 - Remove or tightly restrict console write access in production; make the pipeline the only path.
 - Automatic reconciliation where it is safe - Argo CD's `selfHeal`, or a scheduled re-apply.
 - Use `ignore_changes` deliberately for fields legitimately managed elsewhere (autoscaled desired counts, tags applied by other systems).
-- Import genuinely-needed manual changes back into code (`terraform import`) rather than reverting blindly.
+- Import genuinely-needed manual resources back into code - declaratively with an `import` block (Terraform 1.5+ and OpenTofu) so the import is reviewed in a pull request, or with `terraform import` - rather than reverting blindly.
 - A break-glass process for emergencies that includes a mandatory follow-up to reconcile code with reality.
 
 ## Example

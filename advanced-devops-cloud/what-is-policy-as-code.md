@@ -20,11 +20,11 @@ tags:
 **Where policies are enforced** - layered, because each catches what the others miss:
 
 - **Pre-commit / IDE** - instant feedback while writing.
-- **Pull request** - `conftest`, `checkov`, `tfsec` evaluating Terraform plans and manifests. Fast feedback, but bypassable.
+- **Pull request** - `conftest`, `checkov`, or Trivy (which absorbed `tfsec`) evaluating Terraform plans and manifests. Fast feedback, but bypassable.
 - **Admission control** - OPA Gatekeeper or Kyverno rejecting non-compliant resources at the Kubernetes API server. Not bypassable.
 - **Cloud runtime** - AWS Config rules, Azure Policy, or SCPs that detect and sometimes remediate drift in live resources.
 
-**Tools:** Open Policy Agent with the Rego language (general-purpose, works across Kubernetes, Terraform, CI, and application authorisation), Kyverno (Kubernetes-native YAML policies, easier for Kubernetes-only use, and can mutate as well as validate), Sentinel (HashiCorp), and Cloud Custodian for cloud resource policies with remediation.
+**Tools:** Open Policy Agent with the Rego language (general-purpose, works across Kubernetes, Terraform, CI, and application authorisation), Kyverno (Kubernetes-native YAML and CEL policies, easier for Kubernetes-only use, and can mutate and generate as well as validate), Kubernetes' built-in `ValidatingAdmissionPolicy` (CEL expressions evaluated in the API server, GA since 1.30), Sentinel (HashiCorp), and Cloud Custodian for cloud resource policies with remediation.
 
 **Good practice:** treat policies like any other code - unit tests for each rule, a repository with review, staged rollout from audit mode to enforcement, and clear violation messages that tell the engineer exactly how to fix the problem. A policy that says "denied by policy 47" wastes everyone's time.
 
@@ -36,11 +36,11 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata: { name: require-resource-limits }
 spec:
-  validationFailureAction: Audit # switch to Enforce after review
   rules:
     - name: check-limits
       match: { any: [{ resources: { kinds: [Pod] } }] }
       validate:
+        failureAction: Audit # switch to Enforce after review (replaces the deprecated spec.validationFailureAction)
         message: "Every container must set CPU and memory limits."
         pattern:
           spec:

@@ -33,6 +33,37 @@ tags:
 - **Recovery loops can amplify failure.** Aggressive restarts under load, or an autoscaler reacting to a downstream outage, can make things worse. Use backoff, rate limits, and circuit breakers.
 - **Retain observability.** Automatic recovery destroys evidence; capture logs, metrics, and ideally a core dump before replacing the instance.
 
+## Example
+
+```yaml
+# Kubernetes self-healing primitives on one Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: api }
+spec:
+  replicas: 3 # the ReplicaSet controller replaces any Pod that disappears
+  selector: { matchLabels: { app: api } }
+  template:
+    metadata: { labels: { app: api } }
+    spec:
+      terminationGracePeriodSeconds: 30 # time to drain on SIGTERM
+      containers:
+        - name: api
+          image: ghcr.io/example/api:2.4.1
+          readinessProbe: # failing -> removed from Service endpoints, not restarted
+            httpGet: { path: /ready, port: 8080 }
+            periodSeconds: 5
+          livenessProbe: # failing -> kubelet restarts the container (with backoff)
+            httpGet: { path: /healthz, port: 8080 }
+            initialDelaySeconds: 10
+            failureThreshold: 3
+```
+
+```promql
+# Alert on chronic "healing": containers restarting repeatedly
+increase(kube_pod_container_status_restarts_total{namespace="prod"}[1h]) > 5
+```
+
 ## Interview tips
 
 - "Self-healing must not hide chronic failure" is the mature caveat - alert on restart rates.

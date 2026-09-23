@@ -32,6 +32,34 @@ tags:
 
 **Note:** "service catalog" also refers to AWS Service Catalog and ITIL service catalogues, which are about approved provisionable products rather than a software inventory. Clarify which is meant if the question is ambiguous.
 
+## Example
+
+```yaml
+# catalog-info.yaml - Backstage entity kept in the service's own repository
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: checkout-api
+  description: Takes payment and creates orders
+  annotations:
+    github.com/project-slug: example/checkout-api
+    pagerduty.com/service-id: PX1234A
+    backstage.io/techdocs-ref: dir:.
+  links:
+    - url: https://grafana.example.com/d/checkout
+      title: Dashboard
+    - url: https://runbooks.example.com/checkout
+      title: Runbook
+  tags: [tier-1, pci]
+spec:
+  type: service
+  lifecycle: production
+  owner: group:payments-team
+  system: commerce
+  dependsOn: [resource:orders-db, component:payments-gateway]
+  providesApis: [checkout-api]
+```
+
 ## Interview tips
 
 - Entries as code in the service repository is the answer to "how do you keep it accurate?"
@@ -44,7 +72,7 @@ tags:
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

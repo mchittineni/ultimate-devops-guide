@@ -28,9 +28,32 @@ tags:
 
 **Safety requirements are non-negotiable:** a clearly bounded blast radius, an automated abort/rollback ("stop button"), strong observability so you can see the impact immediately, business-hours execution with the team present, and stakeholder awareness.
 
-**Tools:** Chaos Mesh and LitmusChaos for Kubernetes, AWS Fault Injection Simulator, Gremlin (commercial), and Netflix's Chaos Monkey, the original.
+**Tools:** Chaos Mesh and LitmusChaos for Kubernetes, AWS Fault Injection Service (FIS, formerly Fault Injection Simulator), Azure Chaos Studio, Gremlin (commercial), and Netflix's Chaos Monkey, the original.
 
 **Maturity note:** do not start here. If you do not yet have good observability, tested rollback, and known-good SLOs, chaos experiments will only tell you things you already suspect.
+
+## Example
+
+```yaml
+# Chaos Mesh: kill one checkout Pod every 10 minutes, bounded to a labelled canary set
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: checkout-pod-kill
+  namespace: chaos
+spec:
+  schedule: "*/10 * * * *"
+  concurrencyPolicy: Forbid
+  type: PodChaos
+  podChaos:
+    action: pod-kill
+    mode: one # blast radius: a single Pod per run
+    selector:
+      namespaces: [checkout]
+      labelSelectors: { chaos: "allowed" } # only Pods that opted in
+# Hypothesis: checkout error rate stays < 0.1% and p99 < 500 ms during each kill.
+# Abort: delete the Schedule (kubectl delete schedule checkout-pod-kill -n chaos).
+```
 
 ## Interview tips
 

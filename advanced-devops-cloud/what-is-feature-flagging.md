@@ -28,13 +28,14 @@ tags:
 
 **The main risk is debt.** Every flag is a branch in the code, and combinations multiply. Manage it deliberately: set an expiry date at creation, track flag age, alert on stale flags, and treat removal as part of finishing the feature - not optional cleanup.
 
-**Implementation:** LaunchDarkly, Unleash, Flagsmith, or OpenFeature (the vendor-neutral standard) - with local caching and a safe default so an outage of the flag service does not take down your application.
+**Implementation:** LaunchDarkly, Unleash, Flagsmith, or OpenFeature (the CNCF vendor-neutral API and SDK standard, which lets you swap providers without touching call sites) - with local caching and a safe default so an outage of the flag service does not take down your application.
 
 ## Example
 
 ```javascript
+// OpenFeature client: flag key, safe default, evaluation context
 const enabled = await flags.getBooleanValue("new-checkout", false, {
-  userId,
+  targetingKey: userId,
   plan,
 });
 return enabled ? newCheckout(cart) : legacyCheckout(cart); // default false = safe fallback
