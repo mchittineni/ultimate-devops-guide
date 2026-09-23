@@ -11,7 +11,7 @@ tags:
 
 # How do you architect an end-to-end production DevOps project on GCP?
 
-**Short answer:** Architect an end-to-end production DevOps project on GCP by building a Global VPC with Shared VPC networks, running GKE Autopilot with Workload Identity Federation (keyless IAM), provisioning Cloud SQL / Cloud Spanner via Terraform, automating pipelines with Cloud Build / GitHub Actions via Workload Identity, and monitoring with Google Cloud Operations Suite (Stackdriver).
+**Short answer:** Architect an end-to-end production DevOps project on GCP by building a Global VPC with Shared VPC networks, running GKE Autopilot with Workload Identity Federation (keyless IAM), provisioning Cloud SQL / Cloud Spanner via Terraform, automating pipelines with Cloud Build / GitHub Actions via Workload Identity, and monitoring with Google Cloud Observability (formerly the Cloud Operations suite).
 
 ## Detail
 
@@ -20,20 +20,22 @@ Google Cloud Platform's architecture differs fundamentally from other clouds due
 ### 1. Global Networking & VPC Architecture
 
 - **Global VPC:** GCP VPCs are global resources spanning all GCP regions naturally.
-- **Shared VPC Topology:** Host Project manages shared network subnets, Cloud NAT, Cloud Armor WAF, and Internal HTTP(S) Load Balancers, while Service Projects deploy isolated application workloads.
+- **Shared VPC Topology:** Host Project manages shared network subnets, Cloud NAT, and firewall policies, while Service Projects deploy isolated application workloads and their load balancers (with Cloud Armor security policies attached to the backend services).
 - **Private Google Access & VPC Service Controls:** Ensures GKE pods and Compute instances communicate with Google APIs (Cloud Storage, BigQuery) over internal Google private IP addresses, surrounded by VPC Service Controls perimeter boundaries.
 
 ### 2. Compute & Keyless IAM (GKE Autopilot + Workload Identity)
 
 - **GKE Autopilot:** Production-ready managed Kubernetes where Google manages node provisioning, OS patching, control plane scaling, and security hardening automatically.
-- **Workload Identity Federation:** Maps Kubernetes ServiceAccounts directly to GCP IAM Service Accounts without generating service account JSON key files (completely eliminating key leak risks).
+- **Workload Identity Federation for GKE:** Kubernetes ServiceAccounts are IAM principals in their own right (`principal://...svc.id.goog/...`), so you grant roles to them directly - or map them to a Google service account where a tool needs one - without generating JSON key files.
 - **Cloud SQL / Spanner Database:** Highly available relational data storage configured with Private IP only and Cloud SQL Auth Proxy for secure encrypted access.
 
 ### 3. CI/CD & Observability Infrastructure
 
 - **Cloud Build / GitHub Actions:** Authenticated via GCP Workload Identity Federation pools for keyless build execution.
-- **Artifact Registry:** Secure storage for container images and Helm charts with automated vulnerability scanning.
-- **Google Cloud Operations Suite:** Integrated Prometheus metrics, Cloud Logging, and Cloud Trace for APM telemetry.
+- **Artifact Registry:** Secure storage for container images and Helm charts (OCI), with vulnerability scanning via Artifact Analysis. Container Registry (`gcr.io`) is shut down; `gcr.io` paths are served by Artifact Registry.
+- **Google Cloud Observability:** Managed Service for Prometheus, Cloud Logging, and Cloud Trace, fed by OpenTelemetry.
+
+**Trade-offs.** Autopilot and managed services trade control for less toil - no node SSH, per-request pricing, and provider-specific APIs. The global VPC simplifies multi-region routing but makes firewall and route mistakes global, so hierarchical firewall policies and change review on the host project matter.
 
 ## Example
 
@@ -97,9 +99,10 @@ resource "google_container_cluster" "primary" {
     services_secondary_range_name = "service-ranges"
   }
 
-  workload_identity_config {
-    workload_pool = "${var.gcp_project_id}.svc.id.goog"
-  }
+  # Autopilot enables Workload Identity Federation for GKE automatically
+  # (pool: <project-id>.svc.id.goog), so no workload_identity_config block is needed.
+
+  deletion_protection = true
 }
 ```
 

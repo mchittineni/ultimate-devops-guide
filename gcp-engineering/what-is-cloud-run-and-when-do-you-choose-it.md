@@ -25,9 +25,9 @@ tags:
 
 **Networking and access.** Direct VPC egress (or a Serverless VPC Access connector) lets a service reach private resources such as Cloud SQL or an internal API; ingress can be restricted to internal traffic or a load balancer; IAM `run.invoker` controls who may call it, and service-to-service authentication uses ID tokens rather than shared secrets. Combined with a global external load balancer, you get Cloud CDN, Cloud Armor, and multi-region routing in front of it.
 
-**Where Cloud Run is the wrong choice:** long-lived stateful processes, workloads needing sidecars beyond what Cloud Run supports (multi-container services exist but are constrained), anything requiring the Kubernetes API or operators, GPU-heavy training jobs (inference on GPUs is supported), and services that must maintain in-memory session state across requests without an external store.
+**Where Cloud Run is the wrong choice:** long-lived stateful processes, workloads needing sidecars beyond what Cloud Run supports (multi-container services exist but are constrained), anything requiring the Kubernetes API or operators, large multi-node GPU training (Cloud Run does offer GPUs for inference and single-instance work), and services that must maintain in-memory session state across requests without an external store.
 
-**Versus Cloud Functions.** Cloud Functions (2nd gen) is built on Cloud Run - same infrastructure, with a source-based deployment and function signature. If you want a container and full control, use Cloud Run directly; if you want to deploy a single handler from source with event bindings, functions are the convenience layer.
+**Versus Cloud Run functions.** What was Cloud Functions (2nd gen) was renamed **Cloud Run functions** in 2024 and runs on Cloud Run itself - same infrastructure, with a source-based deployment and function signature. If you want a container and full control, use Cloud Run directly; if you want to deploy a single handler from source with event bindings, functions are the convenience layer.
 
 ## Example
 

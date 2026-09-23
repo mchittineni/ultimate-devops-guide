@@ -19,11 +19,11 @@ tags:
 
 **Grant to groups, at the smallest useful scope.** Bindings on individuals do not survive team changes. Bindings at the organisation node apply everywhere, which is why an `Editor` grant there is effectively production admin. Most real grants belong at the project, or on a single resource (a bucket, a topic, a Cloud Run service) where the API supports resource-level policies.
 
-**Service accounts are identities, and their keys are the problem.** A JSON service-account key is a long-lived credential that has been at the root of many GCP incidents. Prefer: attached service accounts for workloads inside GCP (a VM, a Cloud Run service, a GKE Pod), Workload Identity for GKE Pods, and Workload Identity Federation for anything outside GCP (GitHub Actions, AWS workloads, on-premises). Enforce it with the `disableServiceAccountKeyCreation` org policy so the insecure path is unavailable rather than merely discouraged.
+**Service accounts are identities, and their keys are the problem.** A JSON service-account key is a long-lived credential that has been at the root of many GCP incidents. Prefer: attached service accounts for workloads inside GCP (a VM, a Cloud Run service), Workload Identity Federation for GKE for Pods, and Workload Identity Federation for anything outside GCP (GitHub Actions, AWS workloads, on-premises). Enforce it with the `disableServiceAccountKeyCreation` org policy so the insecure path is unavailable rather than merely discouraged.
 
 **Impersonation instead of keys for humans and automation.** `--impersonate-service-account` mints a short-lived token, requiring `roles/iam.serviceAccountTokenCreator` on the target. This keeps an audit trail of _which human_ acted as the service account - much better than a shared key in a secrets manager.
 
-**Conditions and Deny policies for finer control.** IAM Conditions add constraints on request attributes (resource name prefix, time of day, `request.time` expiry) - for example, temporary elevated access that expires automatically. IAM Deny policies block permissions regardless of grants and evaluate before allows, which is the equivalent of an AWS SCP-style guardrail.
+**Conditions and Deny policies for finer control.** IAM Conditions add constraints on request attributes (resource name prefix, time of day, `request.time` expiry) - for example, temporary elevated access that expires automatically. IAM Deny policies block permissions regardless of grants and evaluate before allows, which is the equivalent of an AWS SCP-style guardrail. Principal access boundary policies add the opposite constraint - limiting which resources a set of principals can ever access, whatever they are granted - which is how you stop an identity in one organisation or folder from being granted access to resources elsewhere.
 
 **Verify with tooling, not assumption.** Policy Troubleshooter explains why a specific principal can or cannot do something; Policy Analyzer answers "who can access this resource?"; Recommender proposes role reductions based on 90 days of observed usage. Those recommendations are the fastest route from `Editor` sprawl to least privilege.
 
@@ -40,7 +40,8 @@ gcloud iam workload-identity-pools providers create-oidc github-oidc \
   --attribute-mapping="google.subject=assertion.sub,attribute.repository=assertion.repository" \
   --attribute-condition="assertion.repository=='acme/checkout'"
 
-# Only the main branch of that repo may impersonate the deployer service account
+# Only identities from that repo (enforced by the attribute condition above) may impersonate the deployer SA.
+# Tighten further with a condition on assertion.ref, e.g. main branch only.
 gcloud iam service-accounts add-iam-policy-binding deployer@payments-prod.iam.gserviceaccount.com \
   --role=roles/iam.workloadIdentityUser \
   --member="principalSet://iam.googleapis.com/projects/$PN/locations/global/workloadIdentityPools/github/attribute.repository/acme/checkout"
@@ -58,6 +59,7 @@ gcloud projects add-iam-policy-binding payments-prod \
 
 - "Additive grants, inherited downward, no implicit deny below" is the model to state first.
 - Service-account keys are the trap: say you disable their creation by org policy and use federation or impersonation.
+- Know that federated principals can now be granted roles on resources directly (`principal://` / `principalSet://` members) without a service account in between; impersonating a service account is still common for tools that need one.
 - Expect: "how would you prove least privilege?" - IAM Recommender over 90 days of usage, plus Policy Analyzer.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
@@ -65,8 +67,8 @@ gcloud projects add-iam-policy-binding payments-prod \
 ## Related Concepts
 
 - [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
+- [[How does Cloud IAM Role Federation differ from static Service Account keys?]] (`#546`): [How does Cloud IAM Role Federation differ from static Service Account keys?](../cloud-platforms/how-does-cloud-iam-role-federation-differ-from-static-service-account-keys.md)
 - [[How do you connect an on-premises network to the cloud?]] (`#216`): [How do you connect an on-premises network to the cloud?](../cloud-engineering/how-do-you-connect-an-on-premises-network-to-the-cloud.md)
-- [[How do you design least-privilege identity in the cloud?]] (`#217`): [How do you design least-privilege identity in the cloud?](../cloud-engineering/how-do-you-design-least-privilege-identity-in-the-cloud.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -11,7 +11,7 @@ tags:
 
 # How do you monitor Google Cloud with the Cloud Operations Suite?
 
-**Short answer:** Cloud Monitoring holds metrics, Cloud Logging holds logs with sinks that route them onward, and Cloud Trace, Profiler, and Error Reporting cover request traces, CPU/heap profiles, and exception grouping. The distinctive pieces are log-based metrics (turn a log pattern into a time series), log sinks with exclusions (control cost and export to BigQuery), and a native SLO/burn-rate API in Cloud Monitoring.
+**Short answer:** The suite is now branded **Google Cloud Observability** (formerly the Cloud Operations suite, originally Stackdriver). Cloud Monitoring holds metrics, Cloud Logging holds logs with sinks that route them onward, and Cloud Trace, Profiler, and Error Reporting cover request traces, CPU/heap profiles, and exception grouping. The distinctive pieces are log-based metrics (turn a log pattern into a time series), log sinks with exclusions (control cost and export to BigQuery), and a native SLO/burn-rate API in Cloud Monitoring.
 
 ## Detail
 
@@ -25,7 +25,7 @@ tags:
 
 **Alerting policies** combine a condition (metric threshold, absence of data, log match, or SLO burn) with notification channels. Two details matter: alert on _absence_ of data for things that should always report (a silent exporter looks healthy), and configure auto-close carefully so incidents do not resolve themselves while still broken.
 
-**Instrumentation.** OpenTelemetry is the recommended path for traces and custom metrics, exporting to Cloud Trace and Cloud Monitoring. Trace sampling defaults are low - raise it for low-traffic critical paths and keep all error traces, otherwise the trace you want during an incident was sampled away.
+**Instrumentation.** OpenTelemetry is the recommended path for traces and custom metrics; Google Cloud accepts OTLP directly via its Telemetry API, or you run an OpenTelemetry Collector that exports to Cloud Trace and Cloud Monitoring. Trace sampling defaults are low - raise it for low-traffic critical paths and keep all error traces, otherwise the trace you want during an incident was sampled away.
 
 ## Example
 
@@ -53,6 +53,7 @@ gcloud logging sinks create logs-to-bq \
 - Log-based metrics and sink exclusions are the two GCP-specific answers that show real usage.
 - Mention the native SLO API - and Managed Service for Prometheus if the platform is GKE-based.
 - Expect: "how do you notice a broken exporter?" - alert on metric absence, not just thresholds.
+- Know the trade-off: Cloud Logging ingestion is priced per GiB, so an unfiltered `_Default` bucket on a chatty GKE estate can cost more than the workloads; exclusions and sampling are budget decisions, not just hygiene.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
