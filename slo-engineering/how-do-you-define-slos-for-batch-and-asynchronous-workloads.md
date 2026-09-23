@@ -46,8 +46,9 @@ avg_over_time(
 ```
 
 ```promql
-# Queue timeliness: age of the oldest unprocessed message, the SLI that matters for async
-max(kafka_consumergroup_lag_seconds{group="fulfilment"})
+# Queue timeliness: consumer lag in seconds, the SLI that matters for async.
+# The metric name depends on your lag exporter; this is kafka-lag-exporter's naming.
+max(kafka_consumergroup_group_max_lag_seconds{group="fulfilment"})
 ```
 
 ## Interview tips
@@ -62,7 +63,7 @@ max(kafka_consumergroup_lag_seconds{group="fulfilment"})
 
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
-- [[How do you use Jenkins shared libraries?]] (`#268`): [How do you use Jenkins shared libraries?](../cicd/how-do-you-use-jenkins-shared-libraries.md)
+- [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -19,7 +19,7 @@ tags:
 
 **The good-events pattern.** Count requests under the threshold as "good" and divide by total. This composes correctly across instances, regions, and time, and it converts latency into exactly the same budget arithmetic as availability. In Prometheus, `histogram_quantile` on a bucket boundary is unnecessary - read the cumulative bucket directly.
 
-**Choose the bucket boundary before you need it.** Native histograms aside, classic Prometheus histograms only resolve at defined bucket edges, so the SLI threshold must coincide with a bucket boundary. Add explicit buckets at your candidate thresholds (0.1, 0.25, 0.3, 0.5, 1, 2.5) when instrumenting, or you will be interpolating.
+**Choose the bucket boundary before you need it.** Native histograms (which use exponential buckets and make the threshold choice far less painful, at the cost of needing native-histogram support end to end) aside, classic Prometheus histograms only resolve at defined bucket edges, so the SLI threshold must coincide with a bucket boundary. Add explicit buckets at your candidate thresholds (0.1, 0.25, 0.3, 0.5, 1, 2.5) when instrumenting, or you will be interpolating.
 
 **Measure where the user is.** Server-side timing excludes DNS, TLS handshake, network transit, and client rendering. If the SLO is about user experience, the load balancer or CDN is a better vantage point than the application, and real-user monitoring is better still. Say which vantage point you chose and why.
 
@@ -37,11 +37,18 @@ sum(rate(http_request_duration_seconds_bucket{job="checkout",code!~"5..",le="0.3
 sum(rate(http_request_duration_seconds_count{job="checkout",code!~"5.."}[28d]))
 ```
 
-```yaml
-# Instrument with buckets that match your thresholds - decide them up front
-histogram:
-  name: http_request_duration_seconds
-  buckets: [0.05, 0.1, 0.2, 0.3, 0.5, 1, 2.5, 5, 10]
+```python
+# Instrument with buckets that match your thresholds - decide them up front (prometheus_client)
+from prometheus_client import Histogram
+
+REQUEST_LATENCY = Histogram(
+    "http_request_duration_seconds",
+    "HTTP request latency",
+    ["job", "route", "code"],
+    buckets=[0.05, 0.1, 0.2, 0.3, 0.5, 1, 2.5, 5, 10],
+)
+
+REQUEST_LATENCY.labels(job="checkout", route="/checkout", code="200").observe(0.214)
 ```
 
 ## Interview tips
