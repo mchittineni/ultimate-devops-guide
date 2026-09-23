@@ -111,6 +111,63 @@ def check_questions(topics, errors: list[str]) -> None:
                     break
 
 
+QUIZ_KEYS = {"stem", "options", "answer", "explanation"}
+QUIZ_MIN_OPTIONS, QUIZ_MAX_OPTIONS = 3, 5
+QUIZ_MIN_EXPLANATION = 40
+QUIZ_BANNED_OPTIONS = ("all of the above", "none of the above", "both of the above", "a and b")
+
+
+def check_quiz_blocks(topics, errors: list[str]) -> None:
+    """Validate the optional multiple-choice block. Absent is fine; malformed is not."""
+    for topic in topics:
+        for q in topic.questions:
+            if q.quiz is None:
+                continue
+            rel = q.path.relative_to(REPO_ROOT)
+            quiz = q.quiz
+
+            unknown = sorted(set(quiz) - QUIZ_KEYS)
+            if unknown:
+                errors.append(f"{rel}: unknown quiz key(s): {', '.join(unknown)}")
+
+            options = quiz.get("options")
+            if not isinstance(options, list) or not all(isinstance(o, str) for o in options):
+                errors.append(f"{rel}: quiz.options must be a list of strings")
+                continue
+            if not QUIZ_MIN_OPTIONS <= len(options) <= QUIZ_MAX_OPTIONS:
+                errors.append(
+                    f"{rel}: quiz.options has {len(options)} entries "
+                    f"(need {QUIZ_MIN_OPTIONS}-{QUIZ_MAX_OPTIONS})"
+                )
+            if any(not o.strip() for o in options):
+                errors.append(f"{rel}: quiz.options contains an empty option")
+            lowered = [o.strip().lower() for o in options]
+            if len(set(lowered)) != len(lowered):
+                errors.append(f"{rel}: quiz.options contains duplicates")
+            for option in lowered:
+                if option.startswith(QUIZ_BANNED_OPTIONS):
+                    errors.append(f"{rel}: quiz.options must not use '{option}' style answers")
+
+            answer = str(quiz.get("answer", ""))
+            if not answer.isdigit():
+                errors.append(f"{rel}: quiz.answer must be the 1-based index of the correct option")
+            elif not 1 <= int(answer) <= len(options):
+                errors.append(
+                    f"{rel}: quiz.answer {answer} is out of range for {len(options)} options"
+                )
+
+            explanation = quiz.get("explanation")
+            if not isinstance(explanation, str) or len(explanation.strip()) < QUIZ_MIN_EXPLANATION:
+                errors.append(
+                    f"{rel}: quiz.explanation must be at least {QUIZ_MIN_EXPLANATION} characters - "
+                    "say why the answer is right and why the tempting option is wrong"
+                )
+
+            stem = quiz.get("stem")
+            if stem is not None and (not isinstance(stem, str) or not stem.strip()):
+                errors.append(f"{rel}: quiz.stem is present but empty - omit it to reuse the title")
+
+
 def check_links(errors: list[str]) -> None:
     for md in sorted(REPO_ROOT.rglob("*.md")):
         if ".git" in md.parts or "node_modules" in md.parts:
@@ -178,12 +235,14 @@ def main() -> int:
 
     check_orphan_files(errors)
     check_questions(topics, errors)
+    check_quiz_blocks(topics, errors)
     check_links(errors)
     check_indexes(topics, errors)
 
     if not args.quiet:
         print(f"Topics:    {len(topics)}")
         print(f"Questions: {len(questions)}")
+        print(f"Quiz-ready: {sum(1 for q in questions if q.quiz)}")
         ids = sorted(q.id for q in questions if q.id > 0)
         if ids:
             gaps = sorted(set(range(ids[0], ids[-1] + 1)) - set(ids))

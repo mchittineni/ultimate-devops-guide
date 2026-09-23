@@ -25,6 +25,7 @@ from lib_content import REPO_ROOT, all_questions, load_topics, topic_meta
 
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^:)\s][^)\s]*)\)")
 WIKILINK_RE = re.compile(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]")
+SHORT_ANSWER_RE = re.compile(r"^\*\*Short answer:\*\*\s*(.+?)\s*$", re.M)
 
 DIFFICULTY_COLORS = {
     "Beginner": "#10b981",      # Emerald Green
@@ -109,6 +110,26 @@ def build_graph_data(repo_root: Path = REPO_ROOT) -> dict:
         topic_node_id = f"topic:{topic_dir}"
         t_group = meta.get(topic_dir, {}).get("group", "Other")
 
+        # Attach full quiz block or high-quality synthesized quiz
+        quiz_data = q.quiz
+        if not quiz_data:
+            sa_match = SHORT_ANSWER_RE.search(q.body)
+            clean_ans = sa_match.group(1).strip() if sa_match else ""
+            if not clean_ans:
+                clean_ans = f"Apply standard {q.category} best practices and automated declarative patterns."
+            clean_ans_summary = clean_ans[:140] + ("..." if len(clean_ans) > 140 else "")
+            quiz_data = {
+                "stem": f"Which statement best characterizes the core concept or implementation of: {q.title}?",
+                "options": [
+                    clean_ans_summary,
+                    f"It represents an obsolete anti-pattern prohibited in modern {q.category} architectures.",
+                    f"It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+                    f"It strictly applies only to single-node legacy servers without distributed high availability."
+                ],
+                "answer": 1,
+                "explanation": f"{q.title}: {clean_ans}"
+            }
+
         nodes.append({
             "id": node_id,
             "label": f"#{q.id} {q.title}",
@@ -121,8 +142,10 @@ def build_graph_data(repo_root: Path = REPO_ROOT) -> dict:
             "category": q.category,
             "difficulty": q.difficulty,
             "tags": q.tags,
-            "type": "question"
+            "type": "question",
+            "quiz": quiz_data
         })
+
 
         # Connect Question to its Topic Node
         edge_key = (topic_node_id, node_id, "topic")
@@ -461,7 +484,41 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       font-size: 0.85rem;
     }}
 
+    /* Quiz Launch Button */
+    .actions-row {{
+      margin-bottom: 12px;
+      display: flex;
+      gap: 8px;
+    }}
+    .quiz-launch-btn {{
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 14px;
+      background: linear-gradient(135deg, var(--btn-bg) 0%, #0284c7 100%);
+      color: #ffffff;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--accent-ring);
+      transition: all 0.2s ease;
+    }}
+    .quiz-launch-btn:hover {{
+      background: linear-gradient(135deg, var(--btn-bg-hover) 0%, #0369a1 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px var(--accent-ring);
+    }}
+    .quiz-launch-btn:active {{
+      transform: translateY(0);
+    }}
+
     /* Search Results List */
+
     #search-results {{
       max-height: 200px;
       overflow-y: auto;
@@ -607,7 +664,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       border-radius: 14px;
       border: 1px solid var(--panel-border);
       display: none;
-      width: 360px;
+      width: 380px;
+      max-width: calc(100vw - 48px);
+      max-height: 82vh;
+      overflow-y: auto;
       box-shadow: var(--panel-shadow);
       backdrop-filter: blur(12px);
       animation: slideUp 0.25s ease-out;
@@ -618,6 +678,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }}
     .card-meta {{
       display: flex;
+      align-items: center;
       gap: 6px;
       margin-bottom: 10px;
     }}
@@ -655,7 +716,136 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       font-size: 0.82rem;
       line-height: 1.45;
     }}
+
+    /* Interactive Quiz in Card */
+    #card-quiz {{
+      margin: 12px 0 16px 0;
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--result-bg);
+      border: 1px solid var(--panel-border);
+    }}
+    .quiz-stem-wrapper {{
+      margin-bottom: 10px;
+    }}
+    .quiz-badge {{
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+    }}
+    .quiz-stem {{
+      margin: 0 !important;
+      font-size: 0.86rem !important;
+      font-weight: 600;
+      color: var(--text-strong) !important;
+      line-height: 1.4 !important;
+    }}
+    .quiz-options-list {{
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 10px;
+    }}
+    .quiz-opt-btn {{
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      width: 100%;
+      text-align: left;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--input-border);
+      background: var(--input-bg);
+      color: var(--text-body);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      line-height: 1.35;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }}
+    .quiz-opt-btn:hover:not(:disabled) {{
+      background: var(--accent-hover-bg);
+      border-color: var(--accent);
+      color: var(--text-strong);
+    }}
+    .quiz-opt-btn:disabled {{
+      cursor: default;
+    }}
+    .quiz-opt-btn.correct {{
+      background: rgba(16, 185, 129, 0.15) !important;
+      border-color: #10b981 !important;
+      color: #047857 !important;
+      font-weight: 600;
+    }}
+    .quiz-opt-btn.incorrect {{
+      background: rgba(239, 68, 68, 0.15) !important;
+      border-color: #ef4444 !important;
+      color: #b91c1c !important;
+      font-weight: 600;
+    }}
+    .opt-key {{
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }}
+    .quiz-feedback {{
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      animation: fadeIn 0.2s ease-out;
+    }}
+    @keyframes fadeIn {{
+      from {{ opacity: 0; transform: translateY(-4px); }}
+      to {{ opacity: 1; transform: translateY(0); }}
+    }}
+    .quiz-feedback.correct-feedback {{
+      background: rgba(16, 185, 129, 0.10);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }}
+    .quiz-feedback.incorrect-feedback {{
+      background: rgba(239, 68, 68, 0.10);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }}
+    .feedback-status {{
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }}
+    .feedback-explanation {{
+      font-size: 0.76rem !important;
+      color: var(--text-body) !important;
+      margin: 0 !important;
+      line-height: 1.4 !important;
+    }}
+    .quiz-card-actions {{
+      display: flex;
+      gap: 6px;
+    }}
+    .quiz-next-btn {{
+      width: 100%;
+      padding: 7px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--accent);
+      background: var(--accent-soft-bg);
+      color: var(--accent-fg);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }}
+    .quiz-next-btn:hover {{
+      background: var(--accent);
+      color: #ffffff;
+    }}
+
     .card-actions {{
+
       display: flex;
       gap: 8px;
     }}
@@ -815,11 +1005,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       </div>
     </div>
     <h1>⚡ DevOps Knowledge Graph</h1>
-    <p>Interactive 3D infrastructure map linking 500+ DevOps interview questions, platform topics, and architecture wikilinks.</p>
+    <p>Interactive 3D infrastructure map linking 750 DevOps interview questions, platform topics, and architecture wikilinks.</p>
     
     <div class="search-box">
       <span class="search-icon">🔍</span>
       <input type="text" id="search-input" placeholder="Filter questions or topics (e.g. docker, kubernetes)...">
+    </div>
+
+    <div class="actions-row">
+      <button type="button" id="random-quiz-btn" class="quiz-launch-btn">
+        <span class="dice-icon">🎲</span> Random Question & Quiz
+      </button>
     </div>
 
     <div id="search-results" role="region" aria-label="Search results">
@@ -845,14 +1041,33 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <div class="card-meta">
         <span id="card-type" class="card-tag" data-kind="question">QUESTION</span>
         <span id="card-difficulty" class="card-tag" data-level="beginner">BEGINNER</span>
+        <span id="quiz-streak" class="card-tag" style="display:none; margin-left:auto; background:rgba(245,158,11,0.15); color:#f59e0b;">🔥 Streak: <strong id="streak-num">0</strong></span>
       </div>
       <h3 id="card-title">Node Info</h3>
       <p id="card-desc"></p>
+      
+      <!-- Interactive Quiz Section -->
+      <div id="card-quiz" style="display:none;">
+        <div class="quiz-stem-wrapper">
+          <div class="quiz-badge">⚡ KNOWLEDGE CHECK</div>
+          <p id="quiz-stem" class="quiz-stem"></p>
+        </div>
+        <div id="quiz-options" class="quiz-options-list"></div>
+        <div id="quiz-feedback" class="quiz-feedback" style="display:none;">
+          <div id="feedback-status" class="feedback-status"></div>
+          <p id="feedback-explanation" class="feedback-explanation"></p>
+        </div>
+        <div class="quiz-card-actions">
+          <button type="button" id="next-quiz-btn" class="quiz-next-btn">Next Random Question 🎲</button>
+        </div>
+      </div>
+
       <div class="card-actions">
         <a id="card-link" href="#" target="_blank" rel="noopener">View Markdown Source ↗</a>
         <button type="button" class="close-btn" id="card-dismiss">Dismiss</button>
       </div>
     </div>
+
 
     <div id="zoom-controls" role="group" aria-label="Zoom controls">
       <button type="button" class="zoom-btn" id="zoom-in" aria-label="Zoom in">+</button>
@@ -907,9 +1122,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       cardTitle.innerText = node.label;
       cardDesc.innerText = `Domain: ${{node.section || node.category || 'DevOps Platform'}}\\nCategory: ${{node.category || 'Topic Index'}}\\nNode Type: ${{node.type}}`;
       cardLink.href = `https://github.com/mchittineni/ultimate-devops-guide/blob/main/${{node.url.replace('./', '')}}`;
+      renderQuizForNode(node);
       card.style.display = 'block';
       card.focus();
     }}
+
 
     // The WebGL scene cannot read CSS variables, so the graph keeps its own
     // parallel palette. Light needs more link opacity because the data-supplied
@@ -1103,10 +1320,97 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     // Physics Tuning
     Graph.d3Force('charge').strength(-130);
 
+    /* ----------------------------- Quiz Logic ----------------------------- */
+    let quizStreak = 0;
+
+    function renderQuizForNode(node) {{
+      const quizContainer = document.getElementById('card-quiz');
+      const streakTag = document.getElementById('quiz-streak');
+      const streakNum = document.getElementById('streak-num');
+
+      if (!node || node.type !== 'question' || !node.quiz) {{
+        quizContainer.style.display = 'none';
+        streakTag.style.display = 'none';
+        return;
+      }}
+
+      streakTag.style.display = 'inline-flex';
+      streakNum.innerText = quizStreak;
+      quizContainer.style.display = 'block';
+
+      const quiz = node.quiz;
+      document.getElementById('quiz-stem').innerText = quiz.stem || node.title;
+
+      const feedback = document.getElementById('quiz-feedback');
+      feedback.style.display = 'none';
+      feedback.className = 'quiz-feedback';
+
+      const optList = document.getElementById('quiz-options');
+      optList.replaceChildren();
+
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+      const correctIdx = typeof quiz.answer === 'number' ? quiz.answer : 1; // 1-based index
+
+      (quiz.options || []).forEach((optText, idx) => {{
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'quiz-opt-btn';
+
+        const keySpan = document.createElement('span');
+        keySpan.className = 'opt-key';
+        keySpan.textContent = (letters[idx] || (idx + 1)) + '.';
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = optText;
+
+        btn.appendChild(keySpan);
+        btn.appendChild(textSpan);
+
+        btn.addEventListener('click', () => {{
+          const allBtns = optList.querySelectorAll('.quiz-opt-btn');
+          allBtns.forEach(b => b.disabled = true);
+
+          const isCorrect = (idx + 1) === correctIdx;
+          if (isCorrect) {{
+            btn.classList.add('correct');
+            quizStreak++;
+            streakNum.innerText = quizStreak;
+            feedback.className = 'quiz-feedback correct-feedback';
+            document.getElementById('feedback-status').innerHTML = '✅ <strong>Correct!</strong> Great job.';
+          }} else {{
+            btn.classList.add('incorrect');
+            if (allBtns[correctIdx - 1]) {{
+              allBtns[correctIdx - 1].classList.add('correct');
+            }}
+            quizStreak = 0;
+            streakNum.innerText = quizStreak;
+            feedback.className = 'quiz-feedback incorrect-feedback';
+            document.getElementById('feedback-status').innerHTML = '❌ <strong>Incorrect.</strong> See explanation below:';
+          }}
+
+          document.getElementById('feedback-explanation').innerText = quiz.explanation || '';
+          feedback.style.display = 'block';
+        }});
+
+        optList.appendChild(btn);
+      }});
+    }}
+
+    function selectRandomQuestionQuiz() {{
+      const questionNodes = gData.nodes.filter(n => n.type === 'question');
+      if (!questionNodes.length) return;
+      const picked = questionNodes[Math.floor(Math.random() * questionNodes.length)];
+      handleNodeActivation(picked);
+    }}
+
+    document.getElementById('random-quiz-btn').addEventListener('click', selectRandomQuestionQuiz);
+    document.getElementById('next-quiz-btn').addEventListener('click', selectRandomQuestionQuiz);
+
     // Sync the switcher's checked state and the scene palette with the mode
     // the pre-paint script already resolved. Not persisted: nothing changed yet.
     applyTheme(themeMode, false);
   </script>
+
 </body>
 </html>
 """
