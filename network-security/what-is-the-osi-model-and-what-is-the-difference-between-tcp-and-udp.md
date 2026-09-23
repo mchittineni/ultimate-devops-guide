@@ -60,7 +60,7 @@ Being able to say "a security group is effectively layer 3/4, a WAF is layer 7, 
 Details worth having ready:
 
 - **Teardown** uses `FIN`/`FIN-ACK`, and the closing side sits in `TIME_WAIT` for twice the maximum segment lifetime - which is why a busy proxy accumulates `TIME_WAIT` sockets and why port exhaustion is a real failure mode at high connection churn (`ss -s` shows it; connection reuse and keep-alive are the fix).
-- **DNS uses UDP 53** for normal queries and falls back to **TCP 53** when a response exceeds 512 bytes (or with DNSSEC and zone transfers) - which is why a firewall that allows only UDP 53 breaks resolution intermittently and mysteriously. This is a genuinely common production bug and a great thing to volunteer.
+- **DNS uses UDP 53** for normal queries and falls back to **TCP 53** when a response is too big for UDP - the server sets the truncation (TC) bit and the client retries over TCP. The limit is 512 bytes classically, or the EDNS(0) buffer size the client advertises (1232 bytes is the common default since DNS Flag Day 2020); DNSSEC answers and zone transfers hit it routinely - which is why a firewall that allows only UDP 53 breaks resolution intermittently and mysteriously. This is a genuinely common production bug and a great thing to volunteer.
 - **QUIC / HTTP-3 runs over UDP** and re-implements reliability, ordering, and congestion control in user space, plus TLS 1.3 in the handshake - so "UDP is unreliable" is a property of the protocol, not a limitation you are stuck with.
 - **MTU and MSS**: a mismatch (common with overlay networks and VPN tunnels) makes small requests work and large responses hang, because the oversized packet is dropped and ICMP "fragmentation needed" is often filtered. `ping -M do -s 1472` locates it; MSS clamping fixes it.
 - **`SYN` retries** are what you see when a port is filtered: a `DROP` gives you a hanging connect and a timeout, while a `REJECT`/RST gives you an immediate "connection refused". That difference tells you whether a firewall is dropping or nothing is listening - one of the most useful diagnostic distinctions there is.
@@ -107,7 +107,7 @@ sudo tcpdump -ni any 'tcp port 443 and (tcp[tcpflags] & (tcp-syn|tcp-rst) != 0)'
 
 dig +short A example.com @1.1.1.1            # UDP 53
 dig +tcp +short A example.com @1.1.1.1       # TCP 53 - blocked? large answers break
-dig +dnssec DNSKEY example.com | wc -c        # >512 bytes -> needs TCP fallback
+dig +dnssec +bufsize=512 DNSKEY example.com   # small buffer forces truncation (tc flag) -> TCP retry
 
 # MTU: works small, hangs large -> classic overlay/VPN MSS problem
 ping -M do -s 1472 10.20.1.10   # 1472 + 28 = 1500. Fails? lower until it passes
@@ -135,7 +135,7 @@ Where the cloud controls sit - the mapping that makes OSI useful
 - Place real tools on the model out loud - WAF and ALB at 7, NLB and security groups at 4, route tables and NACLs at 3. That converts a memory test into evidence of working knowledge.
 - Note that the industry mostly uses the four-layer TCP/IP model and that arguing about whether TLS is 6 or 7 is unproductive. Being able to say that reads as confidence rather than ignorance.
 - For TCP versus UDP, lead with connection-oriented-and-reliable versus connectionless-and-lightweight, then name the mechanisms: handshake, sequence numbers, acknowledgements, retransmission, congestion control.
-- Volunteer the **DNS UDP 53 with TCP fallback above 512 bytes** detail, and the firewall bug it causes. It is specific, real, and very few candidates mention it.
+- Volunteer the **DNS UDP 53 with TCP fallback for truncated responses** detail, and the firewall bug it causes. It is specific, real, and very few candidates mention it.
 - Mention QUIC/HTTP-3 running over UDP with reliability re-implemented in user space, so "UDP is unreliable" is not the end of the story.
 - Have the hang-versus-refused distinction ready: a dropped packet gives you `SYN` retries and a timeout, a rejected one gives you an instant "connection refused". It is the fastest way to tell a firewall problem from a dead service.
 - Add MTU/MSS mismatch as the cause of "small requests work, large responses hang" - the classic overlay-network and VPN symptom.

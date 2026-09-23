@@ -19,16 +19,16 @@ tags:
 
 ### Where certificates come from, and what fits where
 
-| Scenario                                   | Mechanism                                                          | Renewal                                                |
-| ------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------ |
-| Public HTTPS on ALB/CloudFront/App Gateway | **ACM** / Key Vault certificate / Google-managed                   | Automatic, if the DNS validation record stays in place |
-| Kubernetes Ingress                         | **cert-manager** + ACME (HTTP-01 or DNS-01) or a private CA issuer | Automatic at ~2/3 of lifetime                          |
-| Any host, any web server                   | **certbot** / Let's Encrypt with a renewal timer + reload hook     | Automatic (90-day certs, renew at 60)                  |
-| Internal service-to-service                | Private CA (AWS Private CA, Vault PKI, step-ca) or a service mesh  | Short-lived (hours/days), rotated by the platform      |
-| Client certificates / mTLS                 | Private CA, issued per workload                                    | Short-lived                                            |
-| Code signing, non-web                      | Dedicated CA + HSM/KMS                                             | Manual, tightly controlled                             |
+| Scenario                                   | Mechanism                                                          | Renewal                                                                                                                            |
+| ------------------------------------------ | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Public HTTPS on ALB/CloudFront/App Gateway | **ACM** / Key Vault certificate / Google-managed                   | Automatic, if the DNS validation record stays in place                                                                             |
+| Kubernetes Ingress                         | **cert-manager** + ACME (HTTP-01 or DNS-01) or a private CA issuer | Automatic at ~2/3 of lifetime                                                                                                      |
+| Any host, any web server                   | **certbot** / Let's Encrypt with a renewal timer + reload hook     | Automatic (90-day certs today, 45-day by 2028; renew at ~2/3 of lifetime, or when the CA's ACME Renewal Information (ARI) says so) |
+| Internal service-to-service                | Private CA (AWS Private CA, Vault PKI, step-ca) or a service mesh  | Short-lived (hours/days), rotated by the platform                                                                                  |
+| Client certificates / mTLS                 | Private CA, issued per workload                                    | Short-lived                                                                                                                        |
+| Code signing, non-web                      | Dedicated CA + HSM/KMS                                             | Manual, tightly controlled                                                                                                         |
 
-The general principle: **the shorter the lifetime, the better the hygiene** - a certificate that renews every 60 days has a tested renewal path, while a three-year certificate guarantees that nobody remembers how it was installed. Public CA maximum lifetimes have been shrinking for exactly this reason, and the industry direction is towards much shorter validity, so an answer built on manual annual renewals is already obsolete.
+The general principle: **the shorter the lifetime, the better the hygiene** - a certificate that renews every 60 days has a tested renewal path, while a three-year certificate guarantees that nobody remembers how it was installed. Public CA maximum lifetimes are shrinking on a fixed schedule for exactly this reason: CA/Browser Forum ballot SC-081 capped public TLS certificates at **200 days from March 2026**, falling to **100 days in March 2027** and **47 days in March 2029**, with domain-validation reuse shrinking alongside. Let's Encrypt is moving its default from 90 to 45 days by 2028 (opt-in 45-day profile already available). An answer built on manual annual renewals is already obsolete - a manual process cannot keep up with eight renewals a year per certificate.
 
 ### Validation methods, and why DNS wins
 
@@ -45,7 +45,7 @@ For ACM specifically: DNS validation adds a CNAME that must **stay in place** fo
 3. **Serve the full chain.** The most common "works in my browser, fails in `curl`/Java" bug is a missing intermediate: browsers often cache or fetch intermediates, other clients do not. Always deploy leaf + intermediate(s), and verify with `openssl s_client -showcerts`.
 4. **Renew automatically**, well before expiry, and **reload** the server - a renewed file on disk that nginx has not reloaded is still the old certificate in memory. `systemctl reload nginx` in a deploy hook, or cert-manager updating the Secret and the ingress controller watching it.
 5. **Monitor independently.** A blackbox probe (`blackbox_exporter` `probe_ssl_earliest_cert_expiry`, or a synthetic check) measures what clients actually see, which catches the cases automation misses: a stale certificate on one of four load balancers, a manual certificate nobody automated, or a renewal that succeeded but was never reloaded.
-6. **Revoke** when a key is compromised (CRL/OCSP), and rotate the key - reissuing with the same key after a compromise achieves nothing.
+6. **Revoke** when a key is compromised, and rotate the key - reissuing with the same key after a compromise achieves nothing. Revocation checking is moving to CRLs: Let's Encrypt shut down its OCSP service in 2025, so do not build monitoring or stapling configuration that assumes an OCSP URL is present.
 
 ### The expired-certificate runbook
 
@@ -102,7 +102,7 @@ metadata: { name: letsencrypt-prod }
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: platform@example.com
+    email: platform@example.com # account contact only - Let's Encrypt stopped sending expiry emails in 2025
     privateKeySecretRef: { name: letsencrypt-prod-account }
     solvers:
       - dns01: # DNS-01: works for wildcards and non-public endpoints
@@ -149,7 +149,10 @@ resource "aws_lb_listener" "https" {
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06" # pin it; do not inherit a default
   certificate_arn   = aws_acm_certificate.main.arn
-  default_action { type = "forward"  target_group_arn = aws_lb_target_group.app.arn }
+  default_action {
+    type = "forward"
+    target_group_arn = aws_lb_target_group.app.arn
+  }
 }
 ```
 
@@ -175,6 +178,7 @@ The alert that prevents the incident - from an EXTERNAL probe, not from the CA's
 ## Interview tips
 
 - Lead with automation plus independent monitoring, and say the line that reframes the topic: **every expiry outage is a monitoring failure**, because the expiry date was known months in advance.
+- Show you know the lifetimes are falling: CA/B Forum SC-081 takes public certificates to 200 days (2026), 100 (2027), and 47 (2029), and Let's Encrypt to 45 days by 2028. The consequence is the point - anything not fully automated, including the reload, will break.
 - Match the mechanism to the place - ACM/Key Vault for cloud load balancers, cert-manager for Kubernetes, certbot for standalone hosts, a private CA for internal mTLS - rather than naming one tool for everything.
 - Explain DNS-01 versus HTTP-01 and say why DNS-01 is preferred: wildcards and non-public endpoints, fully automatable. Then add the ACM detail that the validation CNAME must remain in place for renewals.
 - Get the wildcard rule right: `*.example.com` covers one label only, not the apex and not a second level - so you need the apex in the SAN list. That precision is frequently tested.

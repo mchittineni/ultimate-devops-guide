@@ -17,7 +17,7 @@ tags:
 
 **What it replaces.** The perimeter model assumed everything inside the corporate network or VPC was trustworthy. That failed for obvious reasons: cloud workloads, remote work, SaaS, and the fact that one compromised host historically meant free movement across the whole internal network.
 
-**Core principles** (as codified in NIST SP 800-207):
+**Core principles** (the widely used three-part summary; NIST SP 800-207 states them as seven tenets, and the CISA Zero Trust Maturity Model v2 turns them into a staged roadmap across identity, devices, networks, applications, and data):
 
 1. **Verify explicitly** - authenticate and authorise on every request using all available signals: identity, device posture, location, and behaviour.
 2. **Least privilege** - just-enough, just-in-time access, scoped narrowly and time-limited.
@@ -34,11 +34,35 @@ tags:
 
 **In practice for a DevOps engineer:** mTLS between all services, workload identity instead of static credentials, short-lived access to production through a broker with audit trails, and NetworkPolicies that express identity-based rather than IP-based rules.
 
+## Example
+
+```yaml
+# Service-to-service zero trust in Istio: mTLS required, then allow by workload identity
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata: { name: default, namespace: payments }
+spec:
+  mtls: { mode: STRICT } # plaintext from anything without a mesh identity is rejected
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata: { name: payments-api, namespace: payments }
+spec:
+  selector: { matchLabels: { app: payments-api } }
+  action: ALLOW
+  rules:
+    - from:
+        - source: { principals: ["cluster.local/ns/checkout/sa/checkout"] } # SPIFFE identity, not an IP
+      to:
+        - operation: { methods: ["POST"], paths: ["/v1/charges"] }
+```
+
 ## Interview tips
 
-- "Never trust, always verify" plus the three NIST principles is the complete conceptual answer.
+- "Never trust, always verify" plus the three principles is the conceptual answer; citing NIST SP 800-207 (policy decision point and enforcement point) and the CISA maturity model shows you know where they come from.
 - Emphasise that zero trust is an architecture, not a product - vendors claiming otherwise are selling.
 - Service mesh mTLS and identity-aware proxies are the concrete implementations to name.
+- Name the limitation honestly: zero trust moves the risk to the identity provider and policy engine - if the IdP is compromised or down, everything is - and migrations take years, so expect to run a hybrid of perimeter and zero-trust controls.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

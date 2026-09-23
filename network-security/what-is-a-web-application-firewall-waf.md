@@ -47,7 +47,17 @@ resource "aws_wafv2_web_acl" "app" {
         name        = "AWSManagedRulesCommonRuleSet"
       }
     }
-    visibility_config { cloudwatch_metrics_enabled = true, metric_name = "common", sampled_requests_enabled = true }
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name = "common"
+      sampled_requests_enabled = true
+    }
+  }
+
+  visibility_config { # required at the web ACL level as well as per rule
+    cloudwatch_metrics_enabled = true
+    metric_name = "app-waf"
+    sampled_requests_enabled = true
   }
 }
 ```
@@ -64,7 +74,7 @@ resource "aws_wafv2_web_acl" "app" {
 
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is progressive delivery and how does it differ from traditional deployment strategies?]] (`#509`): [What is progressive delivery and how does it differ from traditional deployment strategies?](../core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
