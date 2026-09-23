@@ -27,7 +27,7 @@ Know `-e`'s limits: it does not fire inside conditions, `&&`/`||` chains, or mos
 
 **`&` vs `&&` - a question asked verbatim.** A single `&` backgrounds the command and returns immediately; `&&` runs the next command only if the previous one succeeded. Similarly `|` pipes stdout while `||` runs on failure.
 
-**`trap` for cleanup.** Temporary files, lock files, and port-forwards must be removed whether the script succeeds, fails, or is interrupted. `trap cleanup EXIT` covers normal and error exits; add `INT TERM` to handle Ctrl-C and termination signals.
+**`trap` for cleanup.** Temporary files, lock files, and port-forwards must be removed whether the script succeeds, fails, or is interrupted. `trap cleanup EXIT` covers normal and error exits, and Bash also runs it when the script is killed by SIGINT or SIGTERM. If you trap `INT`/`TERM` yourself, make that handler call `exit` (for example `trap 'exit 130' INT`) - a handler that only cleans up lets the script carry on after Ctrl-C.
 
 **Idempotency.** Automation gets re-run - by a retry, by a nervous operator, by a pipeline. Check before you create (`mkdir -p`, `[[ -f ... ]]`), make deletions tolerant (`rm -f`), and prefer declarative tools where you can. "Can I run this twice safely?" is a standard follow-up.
 
@@ -65,7 +65,9 @@ cleanup() {
   [[ $rc -ne 0 ]] && log "failed with exit code $rc"
   return $rc
 }
-trap cleanup EXIT INT TERM
+trap cleanup EXIT
+trap 'exit 130' INT     # Ctrl-C: exit (which runs the EXIT trap), do not carry on
+trap 'exit 143' TERM
 
 # --- preconditions before any mutation ------------------------------------
 for cmd in kubectl jq; do
@@ -92,7 +94,7 @@ done
 # --- idempotent: setting the same image twice is a no-op -------------------
 log "promoting ${IMAGE} to ${ENVIRONMENT}"
 kubectl --context "$KUBE_CONTEXT" -n "$ENVIRONMENT" \
-  set image deployment/api "api=${IMAGE}" --record=false
+  set image deployment/api "api=${IMAGE}"
 
 if ! kubectl --context "$KUBE_CONTEXT" -n "$ENVIRONMENT" \
      rollout status deployment/api --timeout=5m; then

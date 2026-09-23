@@ -18,7 +18,7 @@ tags:
 **What Bash is genuinely good at.** Process orchestration. Running a program, checking whether it succeeded, piping its output into the next one, and moving files around. It is available on every Linux host without installing anything, it is what CI pipeline steps and container entrypoints run, and for that job nothing is more concise:
 
 ```bash
-kubectl get pods -o name | grep failed | xargs -r kubectl delete
+kubectl get pods --field-selector=status.phase=Failed -o name | xargs -r kubectl delete
 ```
 
 Nine words in Python would be twenty lines. Bash is also the right answer when the task _is_ the command line: a wrapper, a bootstrap script, a `make` target, a Dockerfile entrypoint, a git hook.

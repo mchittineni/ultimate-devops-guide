@@ -214,7 +214,7 @@ def second_largest(nums):
 - **`a = [0]; b = {0}`** - `a[0]` returns `0`; `b[0]` raises `TypeError` because a set is unordered and not subscriptable. To get a value out, iterate or `next(iter(b))`.
 - **Shallow versus deep copy**: `copy.copy` copies the container and shares the nested objects, so mutating a nested list is visible through both; `copy.deepcopy` recurses. The gotcha that matters in real code is a mutable default argument (`def f(x=[])`) sharing state across calls.
 - **Decorators** are functions that wrap functions - the mechanism behind `@retry`, `@timing`, and `@app.route`. Show one with `functools.wraps`.
-- **The GIL** means only one thread executes Python bytecode at a time, so threads help with **I/O-bound** work (waiting on the network - exactly what DevOps scripts do) and not with **CPU-bound** work, for which you use `multiprocessing`, a C extension that releases the GIL (NumPy), or `asyncio` for high-concurrency I/O. Free-threaded builds are changing this, but the practical rule stands.
+- **The GIL** means only one thread executes Python bytecode at a time, so threads help with **I/O-bound** work (waiting on the network - exactly what DevOps scripts do) and not with **CPU-bound** work, for which you use `multiprocessing` or a C extension that releases the GIL (NumPy); `asyncio` is the other tool for high-concurrency I/O. Free-threaded builds are changing this, but the practical rule stands.
 - **`re.search` versus `re.match`**: `match` anchors at the start, `search` scans anywhere. Half of all "my regex does not work" is this.
 
 ### The habits interviewers are actually scoring
