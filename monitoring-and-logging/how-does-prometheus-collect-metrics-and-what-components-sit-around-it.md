@@ -31,7 +31,7 @@ Prometheus  ──scrape every 15-30s──> http://target:9100/metrics   (plain
         └─ remote_write     -> Thanos / Mimir / Cortex / a vendor, for long-term + global view
 ```
 
-Pull has real advantages: the monitoring system knows the intended target list, so a target that stops responding is an explicit `up == 0` rather than silence; there is no fan-in problem; and any target can be scraped by hand with `curl` for debugging. Its limits are equally real: targets must be reachable **from** Prometheus (so a firewall or NAT in between is a problem), and anything that exits between scrapes is invisible - which is what Pushgateway exists for. Push-based systems (StatsD, OpenTelemetry with OTLP) solve the reverse trade-off.
+Pull has real advantages: the monitoring system knows the intended target list, so a target that stops responding is an explicit `up == 0` rather than silence; there is no fan-in problem; and any target can be scraped by hand with `curl` for debugging. Its limits are equally real: targets must be reachable **from** Prometheus (so a firewall or NAT in between is a problem), and anything that exits between scrapes is invisible - which is what Pushgateway exists for. Push-based systems (StatsD, OpenTelemetry with OTLP) solve the reverse trade-off - and Prometheus 3 can also accept pushed data itself, via its OTLP receiver (`--web.enable-otlp-receiver`) and remote-write receiver, for cases where pull does not fit.
 
 ### The components, and what each is actually for
 
@@ -61,7 +61,7 @@ With the Prometheus Operator this becomes declarative: a team ships a `ServiceMo
 
 Asked as a scenario, and the answer is almost always **cardinality**. Prometheus holds an in-memory index of every active series, and a series is a unique combination of metric name and label values. So a label with unbounded values - a user ID, a request ID, a full URL path with IDs in it, a pod name in a metric that outlives pods, a customer email - multiplies series without limit. A single metric with a `path` label capturing `/orders/12345` creates one series per order.
 
-Diagnose it, do not guess: `prometheus_tsdb_head_series` is the total, `topk(10, count by (__name__)({__name__=~".+"}))` finds the worst metrics, and the `/status/tsdb` page lists the biggest label values. Fix by **dropping the offending label at ingest** with `metric_relabel_configs`, fixing the instrumentation to bucket the value (`/orders/:id`), reducing retention, raising scrape intervals for low-value targets, and - once you are beyond one server - moving long-term storage to Thanos or Mimir with downsampling rather than growing the box. Federation and sharding by team or cluster are the other structural answers. See [controlling metric cardinality and monitoring cost at scale](../infrastructure-monitoring/how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale.md).
+Diagnose it, do not guess: `prometheus_tsdb_head_series` is the total, `topk(10, count by (__name__)({__name__=~".+"}))` finds the worst metrics, and the TSDB Status page (`/tsdb-status` in the UI, `/api/v1/status/tsdb` in the API) lists the biggest label values. Fix by **dropping the offending label at ingest** with `metric_relabel_configs`, fixing the instrumentation to bucket the value (`/orders/:id`), reducing retention, raising scrape intervals for low-value targets, and - once you are beyond one server - moving long-term storage to Thanos or Mimir with downsampling rather than growing the box. Federation and sharding by team or cluster are the other structural answers. See [controlling metric cardinality and monitoring cost at scale](../infrastructure-monitoring/how-do-you-control-metric-cardinality-and-monitoring-cost-at-scale.md).
 
 ### Metric types, and the one people get wrong
 
@@ -151,7 +151,7 @@ inhibit_rules:
     equal: [cluster]
 receivers:
   - name: pagerduty
-    pagerduty_configs: [{ service_key: "<key>" }]
+    pagerduty_configs: [{ routing_key: "<events-v2-integration-key>" }]
   - name: slack-team
     slack_configs: [{ api_url: "<webhook>", channel: "#alerts" }]
 ```

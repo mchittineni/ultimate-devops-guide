@@ -25,7 +25,35 @@ Capabilities that matter in practice:
 - **Exemplars and correlations** - jump from a latency spike on a graph directly to a matching trace.
 - **Annotations** - overlay deploys and incidents onto graphs, which makes "what changed?" answerable in seconds.
 
-The wider Grafana stack pairs it with **Loki** (logs), **Tempo** (traces), **Mimir** (long-term metrics), and **Pyroscope** (profiles).
+The wider Grafana stack pairs it with **Loki** (logs), **Tempo** (traces), **Mimir** (long-term metrics), **Pyroscope** (profiles), and **Alloy**, the collector that replaced Grafana Agent and Promtail.
+
+**Trade-off.** Because Grafana stores no data, it is only as fast and as reliable as the data sources behind it; a slow Loki query or an overloaded Prometheus makes the dashboard slow, and dashboards with dozens of expensive panels are a common cause of backend load.
+
+## Example
+
+```yaml
+# /etc/grafana/provisioning/datasources/datasources.yaml - data sources as code
+apiVersion: 1
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+---
+# /etc/grafana/provisioning/dashboards/dashboards.yaml - load dashboard JSON from disk (synced from Git)
+apiVersion: 1
+providers:
+  - name: team-dashboards
+    type: file
+    allowUiUpdates: false
+    options:
+      path: /var/lib/grafana/dashboards
+```
 
 ## Interview tips
 

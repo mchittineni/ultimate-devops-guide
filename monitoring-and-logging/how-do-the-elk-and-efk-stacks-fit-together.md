@@ -59,7 +59,7 @@ An **index** is a collection of documents with a mapping (the schema for fields)
 
 The pieces that keep a cluster alive:
 
-- **Index Lifecycle Management (ILM)** with hot → warm → cold → frozen → delete phases: hot on fast disks and actively written, warm read-only and force-merged, cold/frozen searchable from object storage, then deleted. Without ILM the cluster fills and goes red, which is the most common self-inflicted Elasticsearch outage.
+- **Index Lifecycle Management (ILM)** with hot → warm → cold → frozen → delete phases: hot on fast disks and actively written, warm read-only and force-merged, cold/frozen searchable from object storage (searchable snapshots need an Enterprise licence on self-managed clusters), then deleted. Without ILM the cluster fills and goes red, which is the most common self-inflicted Elasticsearch outage.
 - **Mappings and templates**: define the mapping explicitly. Relying on dynamic mapping means a single log line with a new field shape causes a **mapping conflict** and rejected documents, and unbounded fields cause a **mapping explosion** that bloats the cluster state.
 - **Shards**: each index has primary and replica shards; too many small shards waste heap and slow the master, too few makes indexing a bottleneck. Aim for shards in the tens of gigabytes and use ILM rollover on size, not just time.
 - **Retention as a decision, not a default**: 7-30 days hot for debugging, longer in cheap storage or S3 for audit. This is where most of the cost is.
@@ -95,52 +95,64 @@ kind: ConfigMap
 metadata: { name: fluent-bit-config, namespace: logging }
 data:
   fluent-bit.conf: |
+    # Classic-format Fluent Bit config: comments must be on their own line,
+    # an inline "# ..." would become part of the value.
     [SERVICE]
         Flush         5
         Log_Level     warn
-        storage.path  /var/log/flb-storage/     # disk buffer: survives ES downtime
+        # disk buffer: survives Elasticsearch downtime
+        storage.path  /var/log/flb-storage/
         storage.sync  normal
         storage.backlog.mem_limit 64M
 
     [INPUT]
         Name              tail
         Path              /var/log/containers/*.log
-        Parser            cri
+        # built-in parsers for the container runtime log format (CRI or Docker JSON)
+        multiline.parser  docker, cri
         Tag               kube.*
-        DB                /var/log/flb_kube.db   # position DB: no dupes after restart
+        # position DB: no duplicates after a restart or rotation
+        DB                /var/log/flb_kube.db
         Mem_Buf_Limit     32MB
         Skip_Long_Lines   On
         Refresh_Interval  10
         storage.type      filesystem
 
+    # keep stack traces as ONE document - runs before the kubernetes filter
+    [FILTER]
+        Name                  multiline
+        Match                 kube.*
+        multiline.key_content log
+        multiline.parser      java, go, python
+
     [FILTER]
         Name                kubernetes
         Match               kube.*
         Kube_Tag_Prefix     kube.var.log.containers.
-        Merge_Log           On                   # parse JSON application logs
+        # parse JSON application logs into fields
+        Merge_Log           On
         Keep_Log            Off
         Labels              On
         Annotations         Off
 
+    # drop what nobody ever queries
     [FILTER]
-        Name    grep                             # drop what nobody ever queries
+        Name    grep
         Match   kube.*
         Exclude log ^.*(GET /healthz|GET /readyz).*$
 
-    [FILTER]
-        Name    multiline                        # keep stack traces as ONE document
-        Match   kube.*
-        multiline.parser  java,go,python
-
+    # write into the logs-app-kubernetes data stream (matches the index template below)
     [OUTPUT]
         Name            es
         Match           kube.*
         Host            elasticsearch.logging.svc
         Port            9200
-        Logstash_Format On
-        Logstash_Prefix logs-app
+        Index           logs-app-kubernetes
+        # data streams only accept "create" operations
+        Write_Operation create
         Suppress_Type_Name On
-        Retry_Limit     False                    # keep retrying rather than dropping
+        # keep retrying rather than dropping
+        Retry_Limit     False
         tls             On
 ```
 
