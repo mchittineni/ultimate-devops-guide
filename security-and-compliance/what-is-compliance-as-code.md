@@ -32,7 +32,8 @@ The cultural benefit is that requirements stop being a PDF nobody reads: they be
 ```rego
 package kubernetes.admission
 
-deny[msg] {
+# OPA 1.x (Rego v1) syntax: `contains` and `if` are required
+deny contains msg if {
   input.request.kind.kind == "Pod"
   c := input.request.object.spec.containers[_]
   not c.securityContext.runAsNonRoot
