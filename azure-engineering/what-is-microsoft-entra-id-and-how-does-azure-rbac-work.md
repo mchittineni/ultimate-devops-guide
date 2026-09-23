@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**A role assignment has three parts:** the security principal (user, group, service principal, or managed identity), the role definition (a set of allowed and denied operations), and the scope. Assignments inherit downward, and the effective permission is the union of all matching assignments - except that a `Deny` assignment (used by Azure Blueprints and managed apps) always wins.
+**A role assignment has three parts:** the security principal (user, group, service principal, or managed identity), the role definition (a set of allowed and denied operations), and the scope. Assignments inherit downward, and the effective permission is the union of all matching assignments - except that a deny assignment always wins. You cannot create deny assignments directly; the platform creates them for deployment stacks with `denySettings` and for managed applications (Azure Blueprints also used them, but Blueprints is being retired in stages through January 2027).
 
 **Managed identities remove secrets.** A system-assigned managed identity is tied to one resource's lifecycle; a user-assigned identity is a standalone resource shared by several. Either way, the platform issues tokens through the instance metadata endpoint, so no credential exists in configuration. For CI/CD outside Azure, workload identity federation lets a GitHub Actions or GitLab OIDC token exchange for Azure tokens - the modern replacement for a service-principal secret.
 

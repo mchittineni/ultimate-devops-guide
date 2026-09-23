@@ -82,19 +82,28 @@ Diagnose with Application Gateway access, performance, and firewall **diagnostic
 
 ### AKS specifics
 
-AKS `Service type=LoadBalancer` provisions an Azure Load Balancer; an ingress controller (nginx, or **Application Gateway Ingress Controller**) puts layer 7 in front. AGIC programmes an Application Gateway directly from Ingress resources, which removes a hop and gives you WAF at the ingress - at the cost of tighter coupling and slower config propagation than an in-cluster controller. Given nginx ingress controller changes in the ecosystem, the sensible answer to "which ingress controller would you suggest?" is: AGIC when you want the managed WAF and no in-cluster data plane, or a maintained in-cluster controller (Traefik, HAProxy, Envoy Gateway / Gateway API implementations) when you want speed of config and portability.
+AKS `Service type=LoadBalancer` provisions an Azure Load Balancer; an ingress controller (nginx, or **Application Gateway Ingress Controller**) puts layer 7 in front. AGIC programmes an Application Gateway directly from Ingress resources, which removes a hop and gives you WAF at the ingress - at the cost of tighter coupling and slower config propagation than an in-cluster controller. Its successor is **Application Gateway for Containers**, a separate managed L7 service driven by Gateway API (or Ingress) resources through the ALB Controller, with near-instant config propagation. The upstream Ingress-NGINX project was retired in March 2026, and AKS supports the managed NGINX in the application routing add-on only until November 2026, moving it to a Gateway API implementation - so the sensible answer to "which ingress controller would you suggest?" is Gateway API: Application Gateway for Containers when you want a managed data plane with WAF, or a maintained in-cluster implementation (the application routing add-on's Gateway API mode, Envoy Gateway, Istio, Cilium, Traefik) when you want portability.
+
+**Lifecycle notes.** Application Gateway v1 SKUs are retired (April 2026) - use v2. Front Door (classic) retires in March 2027 in favour of Front Door Standard/Premium, which is what the `azurerm_cdn_frontdoor_*` resources below manage.
 
 ## Example
 
 ```hcl
-# Application Gateway WAF v2: certificate from Key Vault, autoscaling, custom probe
+# Application Gateway WAF v2: certificate from Key Vault, autoscaling, custom probe.
+# Excerpt - frontend IP/port, backend pool, and routing rule blocks omitted for brevity.
 resource "azurerm_application_gateway" "app" {
   name                = "agw-prod"
   resource_group_name = azurerm_resource_group.prod.name
   location            = "westeurope"
 
-  sku { name = "WAF_v2"  tier = "WAF_v2" }
-  autoscale_configuration { min_capacity = 2  max_capacity = 10 }
+  sku {
+    name = "WAF_v2"
+    tier = "WAF_v2"
+  }
+  autoscale_configuration {
+    min_capacity = 2
+    max_capacity = 10
+  }
   zones = ["1", "2", "3"]                       # zone-redundant
 
   identity {                                     # to read the cert from Key Vault
@@ -102,7 +111,10 @@ resource "azurerm_application_gateway" "app" {
     identity_ids = [azurerm_user_assigned_identity.agw.id]
   }
 
-  gateway_ip_configuration { name = "gw-ip"  subnet_id = azurerm_subnet.agw.id } # dedicated subnet
+  gateway_ip_configuration { # dedicated subnet
+    name      = "gw-ip"
+    subnet_id = azurerm_subnet.agw.id
+  }
 
   ssl_certificate {
     name                = "wildcard-example-com"
@@ -126,7 +138,9 @@ resource "azurerm_application_gateway" "app" {
     interval            = 15
     timeout             = 10
     unhealthy_threshold = 3
-    match { status_code = ["200-299"] }
+    match {
+      status_code = ["200-299"]
+    }
   }
 
   backend_http_settings {
@@ -139,11 +153,25 @@ resource "azurerm_application_gateway" "app" {
     trusted_root_certificate_names      = ["internal-ca"]   # end-to-end TLS
   }
 
-  waf_configuration {
-    enabled          = true
-    firewall_mode    = "Detection"               # Detection first, then Prevention
-    rule_set_type    = "OWASP"
-    rule_set_version = "3.2"
+  # WAF policy (preferred over the legacy inline waf_configuration block)
+  firewall_policy_id = azurerm_web_application_firewall_policy.app.id
+}
+
+resource "azurerm_web_application_firewall_policy" "app" {
+  name                = "wafp-agw-prod"
+  resource_group_name = azurerm_resource_group.prod.name
+  location            = "westeurope"
+
+  policy_settings {
+    enabled = true
+    mode    = "Detection" # Detection first, then Prevention
+  }
+
+  managed_rules {
+    managed_rule_set {
+      type    = "Microsoft_DefaultRuleSet" # DRS 2.1 supersedes the OWASP CRS 3.x sets
+      version = "2.1"
+    }
   }
 }
 ```
@@ -162,7 +190,11 @@ resource "azurerm_cdn_frontdoor_firewall_policy" "waf" {
     priority = 100
     rate_limit_threshold = 1000
     rate_limit_duration_in_minutes = 1
-    match_condition { match_variable = "RequestUri"  operator = "Contains"  match_values = ["/api/"] }
+    match_condition {
+      match_variable = "RequestUri"
+      operator       = "Contains"
+      match_values   = ["/api/"]
+    }
   }
 }
 

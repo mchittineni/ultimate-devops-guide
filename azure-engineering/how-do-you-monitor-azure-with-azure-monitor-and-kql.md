@@ -19,6 +19,8 @@ tags:
 
 **Diagnostic settings are the plumbing everyone forgets.** No resource sends logs anywhere by default. Each resource needs a diagnostic setting pointing at a Log Analytics workspace (query), a storage account (cheap retention), or Event Hubs (streaming to a SIEM). Enforce it with a `DeployIfNotExists` policy at the management group so new resources are covered without asking teams.
 
+**Collection from VMs and clusters uses the Azure Monitor Agent and data collection rules (DCRs).** The legacy Log Analytics agent (MMA/OMS) was retired in August 2024; DCRs decide which counters, logs, and events are collected and can filter or transform data at ingestion, which is also a cost control.
+
 **Workspace design.** Fewer workspaces is generally better - cross-workspace queries are possible but clumsier, and Sentinel works best with consolidated data. Use table-level retention and the Basic/Auxiliary log tiers for high-volume, low-value tables (verbose firewall or CDN logs) and Analytics tier for what you query interactively. Commitment tiers cut the per-GB price once volume is predictable.
 
 **KQL is the skill being tested.** The idiom is a pipeline: filter early (`where` on time first, since time is the partition key), then project only needed columns, then summarise. `summarize ... by bin(TimeGenerated, 5m)` is the workhorse for trends; `join kind=leftouter` correlates across tables; `_ResourceId` links back to resources. Filtering late over a large table is the difference between a two-second query and a timeout.

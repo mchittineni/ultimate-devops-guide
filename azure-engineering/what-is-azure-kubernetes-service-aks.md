@@ -19,13 +19,17 @@ tags:
 
 **Workload identity is the important integration.** A Kubernetes service account is federated to an Entra managed identity, so a Pod obtains Azure tokens with no secret in the cluster. This replaced the deprecated pod-managed-identity (aad-pod-identity) approach, and it is the answer to "how does your Pod read from Key Vault?" - combined with the Secrets Store CSI driver to project secrets as files.
 
-**Networking model is a decision you cannot change later.** Azure CNI gives Pods real VNet IPs (routable, but consumes address space fast); Azure CNI Overlay gives Pods addresses from a separate overlay CIDR and conserves VNet space; kubenet is legacy. Choose the network policy engine at creation too - Cilium (Azure CNI powered by Cilium) is the current default recommendation and brings eBPF dataplane and network policy in one.
+**Networking model is a decision you cannot change later.** Azure CNI gives Pods real VNet IPs (routable, but consumes address space fast); Azure CNI Overlay gives Pods addresses from a separate overlay CIDR and conserves VNet space; kubenet is legacy and retires on 31 March 2028, so existing kubenet clusters should plan the in-place migration to CNI Overlay. Choose the network policy engine at creation too - Cilium (Azure CNI powered by Cilium) is the current default recommendation and brings eBPF dataplane and network policy in one.
 
 **Cluster RBAC via Entra.** Enable Entra integration with Azure RBAC for Kubernetes authorisation, so `kubectl` access is granted through Azure role assignments and covered by Conditional Access and PIM - rather than by distributing a cluster admin kubeconfig, which is the pattern auditors object to. Disable local accounts to make it enforceable.
 
 **Upgrades are the recurring operational cost.** Kubernetes minor versions leave AKS support roughly every 12 months, so plan two to three upgrades a year: control plane first, then node pools (surge upgrade with `maxSurge`), with pod disruption budgets and `topologySpreadConstraints` in place so the drain does not cause an outage. Auto-upgrade channels plus planned maintenance windows automate the routine part.
 
 **Scaling.** Cluster autoscaler per node pool, KEDA for event-driven workload scaling (queue length, custom metrics), and Virtual Nodes/ACI for burst capacity. Node autoprovisioning (the Karpenter-based provider) is the newer option for right-sized nodes without predefined pools.
+
+**AKS Automatic** is the opinionated mode: Microsoft preconfigures node autoprovisioning, CNI Overlay with Cilium, workload identity, Entra RBAC, managed ingress/Gateway API, monitoring, and automatic upgrades - the closest AKS equivalent of GKE Autopilot or EKS Auto Mode. You trade configuration freedom for less operational work.
+
+**Ingress.** The upstream Ingress-NGINX project was retired in March 2026 and AKS supports the managed NGINX in the application routing add-on only until November 2026, so new clusters should use Gateway API - the application routing add-on's Gateway API mode, Application Gateway for Containers, or another implementation.
 
 ## Example
 
@@ -75,6 +79,7 @@ spec:
 
 - Workload identity (not the deprecated pod identity) is the detail that dates your knowledge correctly.
 - Say that the network plugin choice is immutable and explain the IP-exhaustion trade-off.
+- Know the current defaults: CNI Overlay with Cilium, Gateway API rather than Ingress-NGINX, and AKS Automatic as the low-ops option.
 - Expect: "how do you handle upgrades?" - surge upgrades, PDBs, maintenance windows, and the roughly-annual version cadence.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

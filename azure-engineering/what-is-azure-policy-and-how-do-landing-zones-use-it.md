@@ -25,6 +25,8 @@ tags:
 | `DeployIfNotExists` | deploys a related resource when missing    | diagnostic settings to Log Analytics           |
 | `AuditIfNotExists`  | flags resources lacking a related resource | VM without an agent installed                  |
 
+Other effects exist for narrower cases: `DenyAction` blocks specific actions such as deleting a resource, `Append` adds fields, `Manual` records attested compliance, and `Disabled` switches a definition off per assignment.
+
 **Roll out in stages.** Assign as `Audit` first, look at the compliance report, fix or exempt the existing estate, then flip to `Deny`. Turning on `Deny` across a live environment without that step breaks pipelines and destroys goodwill. Exemptions should be scoped and given expiry dates.
 
 **`DeployIfNotExists` is what makes observability universal.** Rather than asking every team to wire diagnostic settings, the policy deploys them - every new resource ships logs and metrics to the central Log Analytics workspace by default. These policies need a managed identity with permissions at the assignment scope, which is the most common reason a remediation task fails.
@@ -85,7 +87,7 @@ az policy assignment create \
 
 - [[How do you choose a cloud provider for a new workload?]] (`#281`): [How do you choose a cloud provider for a new workload?](../cloud-platforms/how-do-you-choose-a-cloud-provider-for-a-new-workload.md)
 - [[How does networking differ across AWS, Azure, and GCP?]] (`#282`): [How does networking differ across AWS, Azure, and GCP?](../cloud-platforms/how-does-networking-differ-across-aws-azure-and-gcp.md)
-- [[What is a cloud landing zone?]] (`#215`): [What is a cloud landing zone?](../cloud-engineering/what-is-a-cloud-landing-zone.md)
+- [[What are Cloud Availability Zones and how are they engineered for fault independence?]] (`#544`): [What are Cloud Availability Zones and how are they engineered for fault independence?](../cloud-platforms/what-are-cloud-availability-zones-and-how-are-they-engineered-for-fault-independence.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

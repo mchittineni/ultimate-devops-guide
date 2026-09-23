@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-Designing a enterprise production environment on Microsoft Azure requires enforcing landing zone principles, strict network isolation, federated identity, and automated Bicep/Terraform deployments:
+Designing an enterprise production environment on Microsoft Azure requires enforcing landing zone principles, strict network isolation, federated identity, and automated Bicep/Terraform deployments:
 
 ### 1. Enterprise Network Topology (Hub-and-Spoke VNet)
 
@@ -33,6 +33,8 @@ Designing a enterprise production environment on Microsoft Azure requires enforc
 
 - **Azure DevOps Pipelines / GitHub Actions:** Authenticates to Azure via OIDC Workload Identity Federation (eliminating service principal secret keys).
 - **Azure Policy:** Enforces Enterprise Governance (e.g. denying public storage accounts, enforcing mandatory resource tagging, requiring encrypted disks).
+
+**Trade-offs.** Forcing all egress through a hub firewall and all PaaS access through private endpoints gives central inspection and no public data paths, but costs money (Firewall and private endpoints are billed hourly), adds latency, and makes private DNS a critical dependency - a broken zone link takes applications down. Since March 2026 new VNets have no implicit outbound internet access, so egress through the firewall or a NAT gateway must be designed from day one.
 
 ## Example
 
@@ -63,7 +65,7 @@ graph TD
 param location string = resourceGroup().location
 param clusterName string = 'prod-aks-cluster'
 
-resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
   name: 'spoke-vnet'
   location: location
   properties: {
@@ -83,14 +85,33 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
   }
 }
 
-resource aksCluster 'Microsoft.ContainerService/managedClusters@2023-10-01' = {
+resource aksIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'id-${clusterName}'
+  location: location
+}
+
+resource aksCluster 'Microsoft.ContainerService/managedClusters@2024-09-01' = {
   name: clusterName
   location: location
   identity: {
-    type: 'SystemAssigned'
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${aksIdentity.id}': {}
+    }
   }
   properties: {
     dnsPrefix: 'prodaks'
+    aadProfile: {
+      managed: true
+      enableAzureRBAC: true
+    }
+    disableLocalAccounts: true
+    networkProfile: {
+      networkPlugin: 'azure'
+      networkPluginMode: 'overlay'
+      networkDataplane: 'cilium'
+      podCidr: '192.168.0.0/16'
+    }
     agentPoolProfiles: [
       {
         name: 'systempool'
@@ -98,13 +119,14 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2023-10-01' = {
         vmSize: 'Standard_D4s_v5'
         mode: 'System'
         vnetSubnetID: vnet.properties.subnets[0].id
+        availabilityZones: ['1', '2', '3']
       }
     ]
+    oidcIssuerProfile: {
+      enabled: true // oidcIssuerProfile sits under properties, not securityProfile
+    }
     securityProfile: {
       workloadIdentity: {
-        enabled: true
-      }
-      oidcIssuerProfile: {
         enabled: true
       }
     }
