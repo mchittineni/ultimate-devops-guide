@@ -85,7 +85,7 @@ Regardless of the scheduler:
 
 - **Idempotent**: running it twice must be harmless. Assume it will be, because retries, catch-ups, and human re-runs all happen.
 - **Locked**: `flock`, or a systemd service which cannot run concurrently with itself.
-- **Bounded**: a timeout (`timeout 30m ...`, or `RuntimeMaxSec=` on the unit) so a hung job does not block the next hundred runs.
+- **Bounded**: a timeout (`timeout 30m ...`, or `TimeoutStartSec=` on a `Type=oneshot` unit - `RuntimeMaxSec=` does not apply to oneshot services) so a hung job does not block the next hundred runs.
 - **Logged with context**: start, finish, duration, and outcome, tagged so you can find it (`logger -t jobname`).
 - **Correct exit codes**: `set -euo pipefail` in Bash, and exit non-zero on failure so the scheduler and your monitoring can tell.
 - **Monitored for absence**: alert when the job has _not_ succeeded recently.
@@ -106,12 +106,11 @@ sudo tee /etc/cron.d/db-backup <<'EOF'
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 MAILTO=""
-# m  h  dom mon dow  user   command
-  17 2  *   *   *    backup /usr/bin/flock -n /var/lock/db-backup.lock \
-                       /usr/bin/timeout 3h /usr/local/bin/db-backup.sh \
-                       2>&1 | /usr/bin/logger -t db-backup
+# m  h  dom mon dow  user   command   (one line - cron has no line continuation)
+17 2 * * * backup /usr/bin/flock -n /var/lock/db-backup.lock /usr/bin/timeout 3h /usr/local/bin/db-backup.sh 2>&1 | /usr/bin/logger -t db-backup
 EOF
 # note: minute 17, not 0 - do not stampede shared services on the hour
+# and systemd unit files have a related trap: comments must be on their own line, not after a value
 ```
 
 ```ini
@@ -126,9 +125,11 @@ Wants=network-online.target
 Type=oneshot
 User=backup
 ExecStart=/usr/local/bin/db-backup.sh
-RuntimeMaxSec=3h                 # hard timeout
+# hard timeout (for Type=oneshot the whole run is the start phase, so RuntimeMaxSec= would not apply)
+TimeoutStartSec=3h
 Nice=10
-IOSchedulingClass=idle           # do not fight production I/O
+# do not fight production I/O
+IOSchedulingClass=idle
 MemoryMax=1G
 PrivateTmp=true
 ProtectSystem=strict
@@ -142,9 +143,12 @@ NoNewPrivileges=true
 Description=Run the nightly database backup
 
 [Timer]
-OnCalendar=*-*-* 02:00:00        # UTC, because the host runs UTC
-RandomizedDelaySec=1800          # spread 500 hosts over 30 minutes
-Persistent=true                  # if the host was down at 02:00, run on next boot
+# UTC, because the host runs UTC
+OnCalendar=*-*-* 02:00:00
+# spread 500 hosts over 30 minutes
+RandomizedDelaySec=1800
+# if the host was down at 02:00, run on next boot
+Persistent=true
 AccuracySec=1min
 Unit=db-backup.service
 

@@ -37,6 +37,7 @@ After=network-online.target postgresql.service
 Wants=network-online.target
 
 [Service]
+# Type=notify needs the app to call sd_notify(READY=1); use Type=exec for apps that do not
 Type=notify
 User=myapp
 Group=myapp

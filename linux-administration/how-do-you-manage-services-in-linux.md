@@ -54,11 +54,29 @@ journalctl -u nginx -b -1                   # previous boot
 
 Older systems use SysV init (`service nginx start`, `chkconfig`), and containers invert the model entirely - the orchestrator, not systemd, supervises the process.
 
+## Example
+
+```bash
+# Customise a packaged service safely: a drop-in, not an edit of the vendor unit
+sudo mkdir -p /etc/systemd/system/nginx.service.d
+sudo tee /etc/systemd/system/nginx.service.d/override.conf <<'UNIT'
+[Service]
+Restart=on-failure
+RestartSec=5s
+LimitNOFILE=65535
+UNIT
+sudo systemctl daemon-reload                 # required after any unit-file change
+sudo nginx -t && sudo systemctl reload nginx # validate config, then reload without dropping connections
+systemctl show nginx -p Restart -p LimitNOFILE
+systemctl status nginx --no-pager
+```
+
 ## Interview tips
 
 - `reload` versus `restart` is a common trap: reload preserves connections where the daemon supports it.
 - Drop-in overrides (`systemctl edit`) are the correct way to customise packaged units.
 - Mention `mask` - the answer when a service keeps coming back because something depends on it.
+- Watch for crash loops: `Restart=always` can make a repeatedly failing service look "active" at a glance - check the restart counter (`systemctl show -p NRestarts`), the journal, and `StartLimitBurst=` rather than assuming it is healthy.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

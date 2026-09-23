@@ -15,25 +15,25 @@ tags:
 
 ## Detail
 
-| Path             | Purpose                                                               |
-| ---------------- | --------------------------------------------------------------------- |
-| `/`              | Root of the single tree; everything mounts under it                   |
-| `/bin`, `/sbin`  | Essential user and system binaries (usually symlinks into `/usr` now) |
-| `/boot`          | Kernel, initramfs, bootloader configuration                           |
-| `/dev`           | Device nodes                                                          |
-| `/etc`           | Host-specific configuration - never binaries                          |
-| `/home`          | User home directories                                                 |
-| `/lib`, `/lib64` | Shared libraries and kernel modules                                   |
-| `/mnt`, `/media` | Temporary and removable mounts                                        |
-| `/opt`           | Self-contained third-party software                                   |
-| `/proc`          | Virtual filesystem exposing process and kernel state                  |
-| `/root`          | Root user's home                                                      |
-| `/run`           | Volatile runtime data (PIDs, sockets), cleared at boot                |
-| `/srv`           | Data served by the system (web, ftp)                                  |
-| `/sys`           | Virtual filesystem for devices and kernel objects                     |
-| `/tmp`           | Temporary files, world-writable, often cleared on boot                |
-| `/usr`           | Read-only user programs, libraries, and docs                          |
-| `/var`           | Variable data: logs, caches, spools, databases                        |
+| Path             | Purpose                                                                                               |
+| ---------------- | ----------------------------------------------------------------------------------------------------- |
+| `/`              | Root of the single tree; everything mounts under it                                                   |
+| `/bin`, `/sbin`  | Essential binaries - symlinks into `/usr/bin` on merged-`/usr` distributions (all current major ones) |
+| `/boot`          | Kernel, initramfs, bootloader configuration                                                           |
+| `/dev`           | Device nodes                                                                                          |
+| `/etc`           | Host-specific configuration - never binaries                                                          |
+| `/home`          | User home directories                                                                                 |
+| `/lib`, `/lib64` | Shared libraries and kernel modules                                                                   |
+| `/mnt`, `/media` | Temporary and removable mounts                                                                        |
+| `/opt`           | Self-contained third-party software                                                                   |
+| `/proc`          | Virtual filesystem exposing process and kernel state                                                  |
+| `/root`          | Root user's home                                                                                      |
+| `/run`           | Volatile runtime data (PIDs, sockets), cleared at boot                                                |
+| `/srv`           | Data served by the system (web, ftp)                                                                  |
+| `/sys`           | Virtual filesystem for devices and kernel objects                                                     |
+| `/tmp`           | Temporary files, world-writable; a RAM-backed tmpfs by default on Fedora, Arch, and Debian 13+        |
+| `/usr`           | Read-only user programs, libraries, and docs                                                          |
+| `/var`           | Variable data: logs, caches, spools, databases                                                        |
 
 Two directories earn special attention operationally. `/var` is where disks fill - logs and container layers live there, so it is often a separate filesystem. `/proc` is where you read live process state: `/proc/<pid>/limits`, `/proc/<pid>/fd`, `/proc/meminfo`, `/proc/loadavg`.
 
