@@ -32,6 +32,22 @@ tags:
 
 **Healthy targets:** fewer than two pages per shift on average, and near-zero pages that required no action. Beyond that, you are burning people out and training them to ignore the pager.
 
+## Example
+
+```text
+On-call health review - payments rotation, last 4 weeks
+
+Rotation        6 engineers, weekly primary + secondary, 10-min escalation
+Pages           23 total = 1.4 per 12-hour shift  (target < 2)
+Actionable      17 / 23 = 74%                      (target > 90%)
+Night pages     9 - of which 6 from "PaymentsQueueDepthHigh" (self-resolved every time)
+Ack time p90    4 min
+
+Actions: demote PaymentsQueueDepthHigh to a ticket and replace with a queue-age SLO
+alert; add runbook to the 2 alerts without one; next review in 2 weeks.
+Compensation: 1 day off in lieu per week of primary on-call.
+```
+
 ## Interview tips
 
 - Alert quality is the answer to almost every on-call question - noise is the core problem.

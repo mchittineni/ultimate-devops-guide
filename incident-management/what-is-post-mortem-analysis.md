@@ -31,6 +31,25 @@ tags:
 
 **Which incidents get one:** every incident above an agreed severity, plus any near miss the team found instructive. Publish them internally - the learning value is mostly in the reading.
 
+## Example
+
+```markdown
+# Post-mortem: EU checkout errors, 2026-02-11 (SEV-1, 78 min)
+
+**Summary:** A database failover took longer than the application's connection timeout; checkout failed for EU customers for 78 minutes.
+
+**Impact:** 412 enterprise tenants; ~38,000 failed checkouts; 62% of the monthly error budget; SLA breached for EU (credits applied).
+
+**Timeline (UTC):** 03:04 primary DB host failure · 03:06 page · 03:21 IC declared · 03:55 pools restarted · 04:22 recovered.
+What we believed at 03:30: "the network is partitioned" (it was not - pools were stuck on dead connections).
+
+**Contributing factors:** connection pools with no validation on borrow; failover never tested under load; runbook assumed automatic reconnection.
+
+**What went well:** the page fired in 2 minutes. **Where we got lucky:** it happened at 03:00, off-peak.
+
+**Actions:** enable connection validation (@dana, 2026-02-25) · quarterly failover test under load (@kai, 2026-03-15) · update runbook (@sam, 2026-02-18)
+```
+
 ## Interview tips
 
 - Explain _why_ blamelessness produces better information - the psychological-safety argument, not just the rule.
