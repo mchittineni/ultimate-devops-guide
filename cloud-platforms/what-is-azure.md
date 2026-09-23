@@ -35,6 +35,19 @@ Azure organises resources hierarchically: **management groups → subscriptions 
 
 **Azure Policy** enforces governance rules (allowed regions, required tags, denied SKUs) across subscriptions, and is the usual answer for compliance at scale. **Managed identities** give a VM or app a rotating identity in Entra ID so code never handles credentials.
 
+The trade-off is that Azure's control plane is broad and occasionally inconsistent between services (different SKUs, networking models, and API versions per resource type), so reading a resource's SKU and zone support before designing is part of the job.
+
+## Example
+
+```bash
+# Resource groups as a lifecycle boundary: create, deploy into, and delete as one unit
+az login
+az group create --name rg-demo-weu --location westeurope --tags env=dev owner=platform
+az storage account create --name stdemo$RANDOM --resource-group rg-demo-weu \
+  --sku Standard_ZRS --min-tls-version TLS1_2 --allow-blob-public-access false
+az group delete --name rg-demo-weu --yes --no-wait   # removes everything inside it
+```
+
 ## Interview tips
 
 - Hierarchy and resource groups are the Azure-specific concept most often tested.

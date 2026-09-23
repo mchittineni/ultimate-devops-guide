@@ -21,9 +21,9 @@ tags:
 
 **SaaS - Software as a Service.** Finished applications: Microsoft 365, Salesforce, Datadog. You configure and use; you own only your data and access control.
 
-**FaaS / serverless.** Lambda, Azure Functions, Cloud Functions - event-driven functions, scale to zero, billed per invocation and duration.
+**FaaS / serverless.** Lambda, Azure Functions, Cloud Run functions (formerly Cloud Functions) - event-driven functions, scale to zero, billed per invocation and duration. The trade-off is less control over the runtime: cold starts, execution-time limits, and provider-specific event wiring.
 
-**CaaS - Containers as a Service.** ECS, AKS, GKE: you supply container images, the platform schedules them.
+**CaaS - Containers as a Service.** ECS, EKS, AKS, GKE, and serverless container runtimes such as Fargate, Azure Container Apps, and Cloud Run: you supply container images, the platform schedules them.
 
 Who manages what:
 
@@ -34,6 +34,24 @@ Who manages what:
 | OS                       | You     | You      | Provider | Provider |
 | Virtualisation / servers | You     | Provider | Provider | Provider |
 | Networking / facilities  | You     | Provider | Provider | Provider |
+
+The boundaries blur in practice: the same provider service can sit at different levels depending on configuration (GKE Standard vs Autopilot, EKS with managed node groups vs EKS Auto Mode), so describe _what you still operate_ rather than arguing about the label.
+
+## Example
+
+The same "hello" HTTP service at three levels of abstraction - note what you stop owning at each step:
+
+```bash
+# IaaS: you own the VM, OS patching, the runtime, and the process supervisor
+gcloud compute instances create web-1 --zone=europe-west1-b \
+  --machine-type=e2-small --image-family=debian-12 --image-project=debian-cloud
+
+# CaaS / serverless containers: you own the image; the platform owns nodes and scaling
+gcloud run deploy hello --image=us-docker.pkg.dev/cloudrun/container/hello \
+  --region=europe-west1 --allow-unauthenticated
+
+# SaaS: nothing to deploy - you own configuration, identities, and data only
+```
 
 ## Interview tips
 

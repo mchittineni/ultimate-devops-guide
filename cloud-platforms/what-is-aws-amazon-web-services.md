@@ -20,7 +20,7 @@ Services a DevOps engineer touches constantly:
 - **Compute** - EC2 (virtual machines), ECS and EKS (containers), Lambda (functions), Fargate (serverless containers), Auto Scaling Groups.
 - **Storage** - S3 (object), EBS (block volumes), EFS (shared file), Glacier tiers (archive).
 - **Networking** - VPC, subnets, security groups, NACLs, Route 53 (DNS), CloudFront (CDN), ALB/NLB, Transit Gateway, PrivateLink.
-- **Databases** - RDS and Aurora (relational), DynamoDB (key-value), ElastiCache (Redis/Memcached).
+- **Databases** - RDS and Aurora (relational), DynamoDB (key-value), ElastiCache (Valkey, Redis OSS, Memcached).
 - **Identity and security** - IAM roles and policies, KMS (encryption keys), Secrets Manager, GuardDuty, Security Hub.
 - **DevOps tooling** - CloudFormation and CDK (IaC), CodePipeline/CodeBuild, ECR (registry), Systems Manager (patching, Parameter Store, session access).
 - **Observability** - CloudWatch metrics, logs, and alarms; X-Ray for tracing.
@@ -42,7 +42,7 @@ aws ec2 describe-instances \
 
 ## Interview tips
 
-- IAM is the most-asked AWS topic: roles over users, least privilege, no long-lived access keys, and IRSA/OIDC for workloads.
+- IAM is the most-asked AWS topic: roles over users, least privilege, no long-lived access keys, and EKS Pod Identity (or IRSA) and OIDC federation for workloads and CI.
 - Understand the AZ/region distinction well enough to design a highly available architecture on a whiteboard.
 - Know a cost lever or two - S3 lifecycle policies, Graviton instances, savings plans.
 

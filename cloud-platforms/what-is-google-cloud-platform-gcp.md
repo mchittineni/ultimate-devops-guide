@@ -24,11 +24,25 @@ Signature services:
 - **Cloud Storage** - object storage with a single global namespace and lifecycle-managed classes.
 - **Pub/Sub** - global messaging, and **Dataflow** for stream and batch processing.
 - **Vertex AI** - managed ML platform.
-- **Cloud Operations** (formerly Stackdriver) - monitoring, logging, and tracing.
+- **Google Cloud Observability** (formerly Cloud Operations suite, originally Stackdriver) - Cloud Monitoring, Cloud Logging, and Cloud Trace.
 
 The resource hierarchy is **organisation → folders → projects → resources**. The **project** is the fundamental unit of isolation, billing, and IAM - a much stronger boundary than an AWS tag and often used per-environment or per-team.
 
-Networking is distinctive: VPCs are global rather than regional, with subnets per region, so a single VPC can span the world.
+Networking is distinctive: VPCs are global rather than regional, with subnets per region, so a single VPC can span the world. The trade-off is a single blast radius - one bad firewall rule or route applies everywhere - and a smaller third-party ecosystem and service catalogue than AWS.
+
+## Example
+
+```bash
+# Projects are the unit of isolation: create one, link billing, enable only the APIs you need
+gcloud projects create acme-payments-prod --folder=123456789012
+gcloud billing projects link acme-payments-prod --billing-account=0X0X0X-0X0X0X-0X0X0X
+gcloud services enable run.googleapis.com artifactregistry.googleapis.com --project=acme-payments-prod
+
+# One global VPC, regional subnets
+gcloud compute networks create core --subnet-mode=custom --project=acme-payments-prod
+gcloud compute networks subnets create eu --network=core --region=europe-west1 \
+  --range=10.10.0.0/20 --enable-private-ip-google-access --project=acme-payments-prod
+```
 
 ## Interview tips
 

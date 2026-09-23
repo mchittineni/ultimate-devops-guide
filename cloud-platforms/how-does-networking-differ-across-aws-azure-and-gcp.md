@@ -17,24 +17,24 @@ tags:
 
 **Scope of the virtual network.**
 
-| Concept                | AWS                               | Azure                                  | GCP                                            |
-| ---------------------- | --------------------------------- | -------------------------------------- | ---------------------------------------------- |
-| Network object         | VPC (**regional**)                | VNet (**regional**)                    | VPC (**global**)                               |
-| Subnet scope           | One AZ                            | Spans zones within the region          | Regional (spans zones)                         |
-| Per-instance firewall  | Security group (stateful)         | NSG (subnet or NIC), ASGs for grouping | VPC firewall rules by tag / service account    |
-| Subnet-level ACL       | Network ACL (stateless)           | NSG at subnet                          | Hierarchical firewall policies                 |
-| Cross-network          | VPC peering, Transit Gateway      | VNet peering, Virtual WAN              | VPC peering, Network Connectivity Center       |
-| Private access to PaaS | VPC endpoints / PrivateLink       | Service endpoints, Private Endpoint    | Private Service Connect, Private Google Access |
-| Hybrid                 | Direct Connect, Site-to-Site VPN  | ExpressRoute, VPN Gateway              | Cloud Interconnect, Cloud VPN                  |
-| Managed egress         | NAT Gateway (per-AZ, per-AZ cost) | NAT Gateway (regional)                 | Cloud NAT (regional, no per-AZ instance)       |
-| L7 global entry        | CloudFront + ALB                  | Front Door + App Gateway               | Global external Application Load Balancer      |
+| Concept                | AWS                                          | Azure                                                   | GCP                                            |
+| ---------------------- | -------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------- |
+| Network object         | VPC (**regional**)                           | VNet (**regional**)                                     | VPC (**global**)                               |
+| Subnet scope           | One AZ                                       | Spans zones within the region                           | Regional (spans zones)                         |
+| Per-instance firewall  | Security group (stateful)                    | NSG (subnet or NIC), ASGs for grouping                  | VPC firewall rules by tag / service account    |
+| Subnet-level ACL       | Network ACL (stateless)                      | NSG at subnet                                           | Hierarchical firewall policies                 |
+| Cross-network          | VPC peering, Transit Gateway                 | VNet peering, Virtual WAN                               | VPC peering, Network Connectivity Center       |
+| Private access to PaaS | VPC endpoints / PrivateLink                  | Service endpoints, Private Endpoint                     | Private Service Connect, Private Google Access |
+| Hybrid                 | Direct Connect, Site-to-Site VPN             | ExpressRoute, VPN Gateway                               | Cloud Interconnect, Cloud VPN                  |
+| Managed egress         | NAT Gateway (zonal per-AZ, or regional mode) | NAT Gateway (Standard zonal; StandardV2 zone-redundant) | Cloud NAT (regional, no per-AZ instance)       |
+| L7 global entry        | CloudFront + ALB                             | Front Door + App Gateway                                | Global external Application Load Balancer      |
 
 **Where the models genuinely diverge, not just in naming:**
 
 - **Global VPC (GCP).** Subnets in `us-central1` and `europe-west1` sit in one VPC with private RFC1918 reachability and no peering. Design consequence: fewer moving parts for multi-region, but a single blast radius for firewall and routing mistakes, and hierarchical firewall policies at the folder/org level become the control you actually manage.
 - **Load balancer anycast (GCP).** GCP's global load balancer is a single anycast IP fronting backends in many regions. AWS and Azure achieve global entry by layering a CDN/edge service (CloudFront, Front Door) in front of regional load balancers, which means an extra tier and extra config.
 - **Firewall attachment model.** AWS security groups are referenceable objects - a rule can allow "traffic from security group X", which is effectively identity-based microsegmentation. GCP firewall rules can target **service accounts**, which is even closer to identity. Azure NSGs are CIDR/tag-based with Application Security Groups as the grouping mechanism; the mental model is closer to a traditional firewall.
-- **NAT and egress economics.** AWS NAT Gateways are per-AZ resources you pay for hourly _and_ per GB, and cross-AZ traffic to a NAT in another zone is an easy accidental cost. Cloud NAT on GCP is a regional configuration with no per-zone instances. Egress pricing differs enough between providers to change architecture decisions for data-heavy workloads.
+- **NAT and egress economics.** AWS NAT Gateways are billed hourly _and_ per GB. The classic zonal NAT Gateway lives in one AZ, so you deploy one per AZ and cross-AZ traffic to a NAT in another zone is an easy accidental cost; the regional availability mode (added late 2025) is a single gateway that expands across the AZs where you have workloads and needs no public subnet. Cloud NAT on GCP is a regional configuration with no per-zone instances. Azure NAT Gateway attaches per subnet; the original Standard SKU is zonal, while StandardV2 (GA in 2026) is zone-redundant - and since March 2026 new Azure VNets default to private subnets with no implicit "default outbound access", so explicit egress (NAT Gateway, load balancer, or firewall) is now a design decision rather than an accident. Egress pricing differs enough between providers to change architecture decisions for data-heavy workloads.
 - **Private connectivity to managed services.** AWS PrivateLink, Azure Private Endpoint, and GCP Private Service Connect solve the same problem, but the DNS integration differs materially - Azure requires private DNS zones linked to the VNet, and forgetting that link is the single most common "it resolves to a public IP" failure.
 - **IP address planning.** Azure reserves five addresses per subnet; AWS reserves five; GCP reserves four. More importantly, secondary IP ranges (alias IPs) on GCP are how GKE assigns Pod addresses, so a GKE cluster consumes far more address space than the node count suggests. Undersized CIDR blocks are the mistake that forces a rebuild.
 
@@ -86,7 +86,10 @@ resource "google_compute_firewall" "db_from_app" {
   direction               = "INGRESS"
   source_service_accounts = ["app@project.iam.gserviceaccount.com"] # identity-based
   target_service_accounts = ["db@project.iam.gserviceaccount.com"]
-  allow { protocol = "tcp" ports = ["5432"] }
+  allow {
+    protocol = "tcp"
+    ports    = ["5432"]
+  }
 }
 ```
 
