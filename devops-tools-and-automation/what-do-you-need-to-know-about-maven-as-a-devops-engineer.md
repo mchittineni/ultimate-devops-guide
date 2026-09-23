@@ -96,7 +96,7 @@ mvn versions:display-dependency-updates
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>3.3.4</version>
+        <version>4.1.1</version>
         <type>pom</type><scope>import</scope>   <!-- a BOM: aligns dozens of versions -->
       </dependency>
     </dependencies>
@@ -109,14 +109,14 @@ mvn versions:display-dependency-updates
     </dependency>
     <dependency>
       <groupId>jakarta.servlet</groupId><artifactId>jakarta.servlet-api</artifactId>
-      <version>6.0.0</version><scope>provided</scope>   <!-- container supplies it -->
+      <version>6.1.0</version><scope>provided</scope>   <!-- container supplies it -->
     </dependency>
   </dependencies>
 
   <build><plugins>
     <plugin>   <!-- coverage report that SonarQube will import -->
       <groupId>org.jacoco</groupId><artifactId>jacoco-maven-plugin</artifactId>
-      <version>0.8.12</version>
+      <version>0.8.15</version>
       <executions>
         <execution><goals><goal>prepare-agent</goal></goals></execution>
         <execution><id>report</id><phase>verify</phase><goals><goal>report</goal></goals></execution>
@@ -158,8 +158,8 @@ ENTRYPOINT ["java","-jar","/app/api.jar"]
 ## Related Concepts
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

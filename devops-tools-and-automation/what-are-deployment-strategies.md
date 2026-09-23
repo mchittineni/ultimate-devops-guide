@@ -31,6 +31,36 @@ tags:
 - **Automated analysis.** Canary is only as good as the metrics that decide to promote or abort - error rate, latency, and business signals compared against the baseline.
 - **Deploy is not release.** Feature flags let you deploy code and enable behaviour separately, which is often safer than any traffic-shifting strategy.
 
+**Where they are implemented.** A Kubernetes `Deployment` does recreate and rolling natively (`maxSurge`/`maxUnavailable`). Blue/green and canary need traffic control above it: Argo Rollouts or Flagger driving a service mesh, the Gateway API's weighted `HTTPRoute` backends, or a cloud load balancer's weighted target groups.
+
+## Example
+
+```yaml
+# Argo Rollouts: a canary that shifts traffic in steps and aborts on bad metrics.
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata: { name: checkout }
+spec:
+  replicas: 10
+  selector: { matchLabels: { app: checkout } }
+  template:
+    metadata: { labels: { app: checkout } }
+    spec:
+      containers:
+        - name: checkout
+          image: registry.example.com/checkout:2.4.0
+  strategy:
+    canary:
+      steps:
+        - setWeight: 10
+        - pause: { duration: 5m }
+        - analysis: # automated promote/abort, not a human watching a dashboard
+            templates: [{ templateName: success-rate }]
+        - setWeight: 50
+        - pause: { duration: 10m }
+        - setWeight: 100
+```
+
 ## Interview tips
 
 - Backward compatibility during coexistence is the point that separates thorough answers from a memorised table.
@@ -43,7 +73,7 @@ tags:
 
 - [[How do you promote a release across dev, staging, and production?]] (`#399`): [How do you promote a release across dev, staging, and production?](../cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
-- [[How do you prevent and handle secret leaks in CI/CD pipelines?]] (`#237`): [How do you prevent and handle secret leaks in CI/CD pipelines?](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)
+- [[What is progressive delivery and how does it differ from traditional deployment strategies?]] (`#509`): [What is progressive delivery and how does it differ from traditional deployment strategies?](../core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
