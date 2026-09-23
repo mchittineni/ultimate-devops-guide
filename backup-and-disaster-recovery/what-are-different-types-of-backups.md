@@ -33,6 +33,26 @@ tags:
 - **Point-in-time recovery** from continuous log archiving (WAL, binlog) is what lets you restore to the moment before a bad migration.
 - **Restore chain risk**: one corrupt incremental invalidates everything after it - which is why increments are verified, not assumed.
 
+## Example
+
+GNU `tar` shows the full / incremental / differential mechanics directly: the snapshot file records what has already been backed up.
+
+```bash
+# Sunday: level-0 full backup; data.snar records file state
+tar --create --gzip --file=full.tgz --listed-incremental=data.snar /srv/data
+
+# Incremental: each run diffs against the updated snapshot (changes since the LAST backup)
+tar --create --gzip --file=inc-mon.tgz --listed-incremental=data.snar /srv/data
+
+# Differential: diff against a copy of the level-0 snapshot every time (changes since the FULL)
+cp level0.snar diff.snar   # level0.snar = copy of data.snar taken right after the full
+tar --create --gzip --file=diff-tue.tgz --listed-incremental=diff.snar /srv/data
+
+# Restore: full first, then increments in order (incremental) or just the latest differential
+tar --extract --gzip --file=full.tgz --listed-incremental=/dev/null -C /restore
+tar --extract --gzip --file=inc-mon.tgz --listed-incremental=/dev/null -C /restore
+```
+
 ## Interview tips
 
 - The incremental-versus-differential trade-off (backup speed vs restore speed) is the classic exam question.

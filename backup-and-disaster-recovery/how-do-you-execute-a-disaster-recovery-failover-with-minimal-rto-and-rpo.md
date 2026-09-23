@@ -50,7 +50,7 @@ resource "aws_route53_record" "primary" {
     type = "PRIMARY"
   }
 
-  set_identifier = "us-east-1-primary"
+  set_identifier  = "us-east-1-primary"
   health_check_id = aws_route53_health_check.primary_health.id
 
   alias {
@@ -80,19 +80,29 @@ resource "aws_route53_record" "secondary" {
 }
 ```
 
-Promoting RDS Aurora Global Database Secondary Cluster via AWS CLI:
+Promoting an Aurora Global Database secondary cluster via the AWS CLI:
 
 ```bash
-# Fail over global database to secondary region us-west-2
+# Unplanned regional outage: fail over to us-west-2, accepting loss of any
+# writes not yet replicated (typically seconds - this IS your RPO).
 aws rds failover-global-cluster \
+    --global-cluster-identifier prod-global-db \
+    --target-db-cluster-identifier arn:aws:rds:us-west-2:123456789012:cluster:prod-us-west-2-cluster \
+    --allow-data-loss
+
+# Planned DR drill or failback with a healthy primary: zero-data-loss switchover
+aws rds switchover-global-cluster \
     --global-cluster-identifier prod-global-db \
     --target-db-cluster-identifier arn:aws:rds:us-west-2:123456789012:cluster:prod-us-west-2-cluster
 ```
+
+Without `--allow-data-loss`, `failover-global-cluster` defaults to a switchover, which needs the primary region to be reachable - exactly what you do not have in a real regional outage.
 
 ## Interview tips
 
 - Memorize definitions: **RPO** = Data loss window (backed up data), **RTO** = Downtime window (time to recover).
 - Explain the trade-offs: Active-Active provides zero downtime but introduces split-brain risks, data consistency complexity, and doubled infrastructure costs.
+- Know the difference between a **switchover** (planned, zero data loss, primary must be healthy) and a **failover** (unplanned, accepts replication lag as data loss). Also mention DNS TTLs and client-side caching: Route 53 health checks flip the record quickly, but resolvers and clients cache the old answer for the record's TTL (and some clients ignore TTLs entirely), so DNS propagation is part of your effective RTO.
 - Emphasize regular **Game Days** (Chaos Engineering / simulated region outages) to validate that automated failover runbooks actually work when real outages occur.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
