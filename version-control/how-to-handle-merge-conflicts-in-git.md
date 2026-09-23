@@ -51,8 +51,36 @@ Note that during a _rebase_ the sides are inverted relative to a merge - `HEAD` 
 - `git merge --abort` / `git rebase --abort` to get back to safety.
 - `git config rerere.enabled true` - Git remembers how you resolved a conflict and replays it, which is a large win during long rebases.
 - `git log --merge -p <file>` to see the commits from both sides that touched the file.
+- `git config --global merge.conflictStyle zdiff3` (Git 2.35+) adds the **common ancestor** to the markers, so you can see what each side changed rather than guessing - the single most useful setting for resolving conflicts correctly.
 
 **Prevention beats cure:** short-lived branches, frequent integration, small pull requests, agreed code formatting (so whitespace never conflicts), and avoiding wide refactors during a busy period.
+
+The limitation to state: Git only detects **textual** conflicts. Two changes to different lines can merge cleanly and still break the program (one branch renames a function, the other adds a call to the old name), which is why tests after every resolution - and a merge queue that tests the combined result - matter more than the resolution itself.
+
+## Example
+
+```bash
+git config --global merge.conflictStyle zdiff3
+git merge feature/timeouts
+# CONFLICT (content): Merge conflict in src/config.js
+
+cat src/config.js
+# <<<<<<< HEAD
+# const timeout = 30;
+# ||||||| base
+# const timeout = 10;
+# =======
+# const timeout = 60;
+# >>>>>>> feature/timeouts
+#   -> both sides changed 10; decide deliberately (here: keep 60)
+
+git checkout --theirs src/config.js      # or edit by hand
+git add src/config.js
+npm test                                 # a clean merge can still be wrong
+git commit --no-edit                     # completes the merge
+
+# During a rebase, --ours/--theirs are swapped: --ours is the upstream you are replaying onto
+```
 
 ## Interview tips
 

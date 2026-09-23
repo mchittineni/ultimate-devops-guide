@@ -37,7 +37,7 @@ tags:
 
 **Then prevent it.** Recovery is a skill; not needing it is a configuration:
 
-- **Branch protection** on `main` and release branches: no force-push, no deletion, required reviews and status checks. This alone removes the most common cause.
+- **Branch protection** (or, on GitHub, repository/organisation **rulesets**, which can target many branches and repositories at once) on `main` and release branches: no force-push, no deletion, required reviews and status checks. This alone removes the most common cause.
 - **`--force-with-lease` instead of `--force`** for the legitimate case of updating your own feature branch - it refuses the push if the remote moved since you last fetched, which is precisely the accident you are trying to avoid. Set `push.useForceIfIncludes` and make it a team habit.
 - **Extend the safety net**: raise `gc.reflogExpire` and `gc.reflogExpireUnreachable` so the reflog is a longer-lived backup, and keep a scheduled `git clone --mirror` of important repositories somewhere outside the forge.
 - **Never rewrite published history** on a shared branch. If you must (a leaked secret, a huge file), do it as an announced, coordinated event with a mirror taken first - and remember that rewriting to remove a secret does not un-leak it: rotate the credential, because the old objects may persist in forks, caches, and clones.
@@ -46,7 +46,7 @@ tags:
 
 ```bash
 # 0. Freeze. Lock the branch in the forge, tell the team to stop pulling.
-gh api -X PUT repos/acme/app/branches/main/protection/enforce_admins   # or the UI
+gh api -X POST repos/acme/app/branches/main/protection/enforce_admins  # or lock the branch in the UI / a ruleset
 
 # 1. Reflog: the fastest recovery, on any clone that has not fetched since.
 git reflog show main
@@ -99,7 +99,8 @@ git config --global gc.reflogExpireUnreachable '90 days'
 
 # An off-forge backup, because the forge is a single point of failure too.
 git clone --mirror git@github.com:acme/app.git && \
-  (cd app.git && git remote add backup s3://... && git push --mirror backup)
+  (cd app.git && git bundle create ../app-$(date +%F).bundle --all) && \
+  aws s3 cp app-$(date +%F).bundle s3://acme-git-backups/   # restorable with: git clone app-*.bundle
 ```
 
 ## Interview tips

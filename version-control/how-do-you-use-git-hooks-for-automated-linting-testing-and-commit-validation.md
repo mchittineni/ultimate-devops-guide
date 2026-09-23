@@ -30,7 +30,8 @@ Git hooks are event-driven shell scripts located in `.git/hooks/` that execute a
 
 Git hooks inside `.git/hooks/` are not committed to version control by default. To share hooks across engineering teams:
 
-- **Python `pre-commit` Framework:** Uses `.pre-commit-config.yaml` to pull version-controlled hook plugins, installing hooks automatically during `git init`.
+- **Python `pre-commit` Framework:** Uses `.pre-commit-config.yaml` to pull version-controlled, pinned hook repositories; each developer runs `pre-commit install` once (or `pre-commit install --hook-type commit-msg` for message hooks) to write the shim into `.git/hooks/`. CI runs `pre-commit run --all-files` so the same checks cannot be skipped.
+- **`core.hooksPath`:** Git itself can point at a tracked directory (`git config core.hooksPath .githooks`), sharing plain scripts without any framework.
 - **Husky (Node.js ecosystem):** Configures client hooks inside `.husky/` directory tracked in Git.
 
 ## Example
@@ -40,7 +41,7 @@ Git hooks inside `.git/hooks/` are not committed to version control by default. 
 ```yaml
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -49,24 +50,24 @@ repos:
         args: ['--maxkb=500']
 
   - repo: https://github.com/psf/black
-    rev: 24.2.0
+    rev: 26.5.1
     hooks:
       - id: black
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.0
+    rev: v8.30.1
     hooks:
       - id: gitleaks
 
   - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v3.1.0
+    rev: v4.4.0
     hooks:
       - id: conventional-pre-commit
         stages: [commit-msg]
         args: [feat, fix, chore, docs, style, refactor, perf, test]
 ```
 
-**2. Executable bash shell script for `pre-commit` hook (`.git/hooks/pre-commit`):
+**2. Executable bash shell script for `pre-commit` hook (`.git/hooks/pre-commit`):**
 
 ```bash
 #!/usr/bin/env bash
@@ -82,7 +83,7 @@ fi
 
 # Run secret scanning
 if command -v gitleaks &> /dev/null; then
-    gitleaks protect --staged --verbose
+    gitleaks git --pre-commit --staged --verbose   # replaces the deprecated 'protect --staged'
 fi
 
 echo "Pre-commit checks passed successfully!"
@@ -91,7 +92,8 @@ echo "Pre-commit checks passed successfully!"
 ## Interview tips
 
 - Highlight why manual `.git/hooks/` scripts fail in team settings: `.git/` folder is ignored by version control. Frameworks like `pre-commit` or `husky` solve this by storing configuration in root project files.
-- Mention `git commit --no-verify`: developers can bypass client-side hooks; therefore, server-side CI/CD pipeline checks are still mandatory as a final enforcement gate.
+- Mention `git commit --no-verify`: developers can bypass client-side hooks; therefore, server-side CI/CD pipeline checks are still mandatory as a final enforcement gate. On hosted forges you usually cannot install `pre-receive` hooks; the equivalents are branch protection/rulesets with required status checks and push protection for secrets.
+- Keep hooks fast (seconds, staged files only). A slow `pre-commit` hook is the fastest way to teach a team to use `--no-verify`.
 - Connect Git hooks to DevSecOps: running `gitleaks` or `trufflehog` in a `pre-commit` hook prevents secrets from ever entering `.git` history on developer machines.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

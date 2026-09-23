@@ -27,6 +27,21 @@ tags:
 
 Whatever the model, the practices that matter more than the diagram are: short-lived branches, small pull requests, protected `main` with required checks, and a linear, readable history.
 
+## Example
+
+```bash
+# Trunk-based / GitHub Flow: one short-lived branch per change
+git switch -c fix/login-timeout origin/main
+git commit -am "fix: raise login timeout to 30s"
+git push -u origin fix/login-timeout
+gh pr create --fill                       # review + required checks, then squash-merge today
+
+# Release branching: cut once, patch by cherry-picking fixes from main
+git switch -c release/2.4 v2.4.0
+git cherry-pick -x 9f2c1ab                # -x records the original commit in the message
+git tag -a v2.4.1 -m "2.4.1" && git push origin release/2.4 v2.4.1
+```
+
 ## Interview tips
 
 - The strongest answer explains the _criteria_ for choosing, not just the diagrams.

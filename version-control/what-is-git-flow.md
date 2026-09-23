@@ -25,7 +25,7 @@ tags:
 
 **Where it fits.** Versioned products, on-premises or packaged software, mobile releases going through app-store review, and teams with a formal QA phase and defined release windows.
 
-**Its costs.** Two permanent branches double the merge surface. Feature branches often live for weeks, which delays integration feedback - precisely what CI is meant to prevent. Release stabilisation periods create a "code freeze" culture. For a continuously deployed web service, this ceremony buys very little.
+**Its costs.** Two permanent branches double the merge surface. Feature branches often live for weeks, which delays integration feedback - precisely what CI is meant to prevent. Release stabilisation periods create a "code freeze" culture. For a continuously deployed web service, this ceremony buys very little - which is why Vincent Driessen, who published the model in 2010, added a note in 2020 recommending a simpler flow such as GitHub Flow for continuously delivered software.
 
 ```text
 main     ──●───────────────●────────────●──  (v1.0)      (v1.1)   (v1.1.1)
@@ -36,6 +36,29 @@ develop  ──●───●────●───────●───�
             \       /        \     /
 feature      ●─────●          ●───●
 ```
+
+## Example
+
+```bash
+# Feature: branch from develop, merge back with --no-ff to keep the feature visible
+git switch -c feature/payments develop
+git commit -am "feat: add payments"
+git switch develop && git merge --no-ff feature/payments
+
+# Release: stabilise on a release branch, then merge to main (tagged) AND back to develop
+git switch -c release/1.1.0 develop
+git commit -am "chore: bump version to 1.1.0"
+git switch main && git merge --no-ff release/1.1.0 && git tag -a v1.1.0 -m "1.1.0"
+git switch develop && git merge --no-ff release/1.1.0
+
+# Hotfix: branch from main, merge to both
+git switch -c hotfix/1.1.1 main
+git commit -am "fix: null pointer in checkout"
+git switch main && git merge --no-ff hotfix/1.1.1 && git tag -a v1.1.1 -m "1.1.1"
+git switch develop && git merge --no-ff hotfix/1.1.1
+```
+
+The original `git flow` CLI extension (git-flow / git-flow AVH) automates these steps but is no longer actively maintained; plain Git commands like the above are the portable form.
 
 ## Interview tips
 
