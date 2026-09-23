@@ -1,0 +1,832 @@
+{
+  "schemaVersion": 1,
+  "slug": "configuration-management",
+  "title": "Configuration Management",
+  "group": "Delivery and Automation",
+  "description": "Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pull, agent versus agentless.",
+  "studyNotes": [
+    "Desired state, drift, and convergence.",
+    "Trade-offs between the major tools.",
+    "Where configuration management ends and immutable infrastructure begins."
+  ],
+  "questions": [
+    {
+      "id": 51,
+      "slug": "what-is-configuration-management",
+      "title": "What is Configuration Management?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "configuration-management",
+        "interview-questions"
+      ],
+      "path": "configuration-management/what-is-configuration-management.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/what-is-configuration-management.md",
+      "shortAnswer": "Configuration management is the practice of defining, applying, and continuously enforcing the desired state of systems - packages, files, services, users - from version-controlled definitions, so every machine is consistent and drift is corrected automatically.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 397,
+          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+          "title": "Why does a build pass locally but fail in CI?",
+          "topic": "cicd"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 52,
+      "slug": "what-is-puppet",
+      "title": "What is Puppet?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "configuration-management",
+        "interview-questions"
+      ],
+      "path": "configuration-management/what-is-puppet.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/what-is-puppet.md",
+      "shortAnswer": "Puppet is a declarative, agent-based configuration management tool. Nodes run an agent that periodically fetches a compiled catalogue from a Puppet server and enforces the described state, correcting drift on every run.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 397,
+          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+          "title": "Why does a build pass locally but fail in CI?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 53,
+      "slug": "what-is-chef",
+      "title": "What is Chef?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "configuration-management",
+        "interview-questions"
+      ],
+      "path": "configuration-management/what-is-chef.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/what-is-chef.md",
+      "shortAnswer": "Chef is a configuration management tool that describes desired state in Ruby-based \"recipes\" grouped into \"cookbooks\", applied by a `chef-client` agent that converges the node towards the state defined on the Chef Infra Server.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 397,
+          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+          "title": "Why does a build pass locally but fail in CI?",
+          "topic": "cicd"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 54,
+      "slug": "what-is-salt-saltstack",
+      "title": "What is Salt (SaltStack)?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "configuration-management",
+        "interview-questions"
+      ],
+      "path": "configuration-management/what-is-salt-saltstack.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/what-is-salt-saltstack.md",
+      "shortAnswer": "Salt is a configuration management and remote execution framework built on a very fast messaging bus, able to run commands across tens of thousands of nodes in seconds, in either agent (minion) or agentless (SSH) mode.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 55,
+      "slug": "compare-different-configuration-management-tools",
+      "title": "Compare different Configuration Management tools",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "configuration-management",
+        "interview-questions"
+      ],
+      "path": "configuration-management/compare-different-configuration-management-tools.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/compare-different-configuration-management-tools.md",
+      "shortAnswer": "Ansible is agentless, YAML-based, and easiest to adopt; Puppet is declarative, agent-based, and strongest at continuous enforcement and compliance; Chef is Ruby-based with the best testing story; Salt is fastest at scale with event-driven automation.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 397,
+          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+          "title": "Why does a build pass locally but fail in CI?",
+          "topic": "cicd"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 283,
+      "slug": "how-do-you-run-ansible-at-scale-across-thousands-of-hosts",
+      "title": "How do you run Ansible at scale across thousands of hosts?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "configuration-management",
+        "interview-questions"
+      ],
+      "path": "configuration-management/how-do-you-run-ansible-at-scale-across-thousands-of-hosts.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/how-do-you-run-ansible-at-scale-across-thousands-of-hosts.md",
+      "shortAnswer": "Stop treating it as one big play. Split the run into batches with `serial` and `max_fail_percentage`, use a **dynamic inventory** sourced from the cloud API rather than a static file, cache facts and skip gathering where you do not need them, push execution out to workers (AWX/Ansible Automation Platform, or a controller per region), and make the playbooks genuinely idempotent so a partial run is safe to repeat. Beyond a few thousand nodes, the honest answer is usually to bake images instead - configuration management scales worst exactly where mutable servers scale worst.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 397,
+          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+          "title": "Why does a build pass locally but fail in CI?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 430,
+      "slug": "how-do-you-patch-hundreds-of-servers-safely",
+      "title": "How do you patch hundreds of servers safely?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "configuration-management",
+        "interview-questions",
+        "linux-administration",
+        "security-and-compliance",
+        "scripting-and-automation"
+      ],
+      "path": "configuration-management/how-do-you-patch-hundreds-of-servers-safely.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/how-do-you-patch-hundreds-of-servers-safely.md",
+      "shortAnswer": "Patch in **waves with health gates**, never all at once. Concretely: know your inventory and current patch level, pin to a **frozen repository snapshot** so every host gets an identical set of packages, test on a canary group, then roll in batches (`serial` in Ansible, or an instance-refresh percentage) taking each host **out of the load balancer before patching and back in only after a health check passes**. Handle reboots explicitly - `needs-restarting`/`checkrestart` tells you whether the kernel or a library actually requires one - and stop the whole run on the first batch failure rather than continuing into a fleet-wide outage. On modern estates the better answer is often not to patch at all: **rebuild an immutable image and replace the instances**, because that removes both the drift and the partial-failure problem.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 402,
+          "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+          "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+          "topic": "cicd"
+        },
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 468,
+      "slug": "how-do-you-structure-an-ansible-role-and-share-it-through-galaxy",
+      "title": "How do you structure an Ansible role and share it through Galaxy?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "configuration-management",
+        "interview-questions",
+        "infrastructure-as-code"
+      ],
+      "path": "configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/how-do-you-structure-an-ansible-role-and-share-it-through-galaxy.md",
+      "shortAnswer": "A role is a directory with a fixed layout that Ansible loads by convention: **`tasks/main.yml`** (what it does), **`handlers/main.yml`** (restart-style actions triggered by `notify`), **`defaults/main.yml`** (the role's public inputs at the **lowest** variable precedence, so callers can override them freely), **`vars/main.yml`** (internal values at high precedence - use sparingly), **`templates/`** (Jinja2 `.j2` files), **`files/`** (static copies), **`meta/main.yml`** (dependencies, supported platforms, Galaxy metadata), and **`molecule/`** plus `README.md` for tests and documentation. You create one with `ansible-galaxy role init <name>`, call it from a playbook under `roles:` or with `include_role`/`import_role`, and share it by pushing to a Git repository and either importing it into Ansible Galaxy or - the modern approach - packaging roles and plugins together as a **collection** (`namespace.collection`) installed from a `requirements.yml`. The distinction interviewers listen for: **`defaults/` is for values you expect callers to change; `vars/` is for values you do not.**",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 397,
+          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+          "title": "Why does a build pass locally but fail in CI?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 469,
+      "slug": "how-do-you-manage-ansible-inventories-and-variables-across-environments",
+      "title": "How do you manage Ansible inventories and variables across environments?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "configuration-management",
+        "interview-questions",
+        "cloud-engineering"
+      ],
+      "path": "configuration-management/how-do-you-manage-ansible-inventories-and-variables-across-environments.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/how-do-you-manage-ansible-inventories-and-variables-across-environments.md",
+      "shortAnswer": "One inventory per environment, variables layered by scope, and nothing environment-specific inside a role. Concretely: an inventory directory per environment (`inventories/prod/`, `inventories/staging/`) each containing hosts grouped by function, with **`group_vars/`** and **`host_vars/`** files next to it - so `inventories/prod/group_vars/webservers.yml` holds production web settings and the role itself only ships safe defaults. Use a **static** inventory (INI or YAML) when the hosts are stable, and a **dynamic** inventory plugin (`amazon.aws.aws_ec2`, `azure.azcollection.azure_rm`, `google.cloud.gcp_compute`) when the cloud is the source of truth, so hosts and groups are built from tags at run time. Precedence is the part interviewers test: role `defaults/` is the weakest, then inventory group_vars, then host_vars, then play/task vars, with `-e` (extra vars) beating everything - which is why `-e` is the right tool for a one-off override and the wrong place for permanent configuration.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 397,
+          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+          "title": "Why does a build pass locally but fail in CI?",
+          "topic": "cicd"
+        },
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 470,
+      "slug": "how-do-you-handle-secrets-in-ansible-with-vault",
+      "title": "How do you handle secrets in Ansible with Vault?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "configuration-management",
+        "interview-questions",
+        "devsecops"
+      ],
+      "path": "configuration-management/how-do-you-handle-secrets-in-ansible-with-vault.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/how-do-you-handle-secrets-in-ansible-with-vault.md",
+      "shortAnswer": "`ansible-vault` encrypts files or individual values with a symmetric key so they can live safely in Git. `ansible-vault encrypt group_vars/prod/vault.yml` encrypts a whole file; `ansible-vault encrypt_string` encrypts one value inline; and at run time you supply the password with `--vault-password-file` (pointing at a file **or an executable script** that prints the password) or `--ask-vault-pass`. Use **`--vault-id`** to keep separate passwords per environment, so a developer with the dev password cannot decrypt production. The convention that makes this workable in practice is **indirection**: keep encrypted variables in a `vault.yml` with a `vault_` prefix and reference them from plain-text variables (`db_password: \"{{ vault_db_password }}\"`), so you can still grep to see _where_ a secret is used without decrypting anything. And be clear about the limit - Vault is encryption at rest for your repository, not a secret manager: there is no rotation, no audit trail, and no per-request access control, so for anything serious, look secrets up at run time from HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault instead.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 397,
+          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+          "title": "Why does a build pass locally but fail in CI?",
+          "topic": "cicd"
+        },
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 471,
+      "slug": "how-do-you-debug-and-safely-test-an-ansible-playbook",
+      "title": "How do you debug and safely test an Ansible playbook?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "configuration-management",
+        "interview-questions",
+        "scripting-and-automation"
+      ],
+      "path": "configuration-management/how-do-you-debug-and-safely-test-an-ansible-playbook.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/how-do-you-debug-and-safely-test-an-ansible-playbook.md",
+      "shortAnswer": "Work outwards from cheap and safe to expensive and risky. **`--syntax-check`** and `ansible-lint` catch structural mistakes with no hosts involved. **`--list-hosts`** confirms you are aiming at the right machines - the check that prevents the worst class of mistake. **`--check --diff`** is a dry run that shows what would change, line by line, without changing it. **`-vvv`** shows the module arguments and the raw JSON result (and `-vvvv` adds the connection detail). **`--start-at-task`** and `--step` let you resume or single-step instead of re-running an hour of work. Inside the playbook, `register` a result and `debug` it, use `assert` to fail fast on bad assumptions, and wrap risky sequences in **`block`/`rescue`/`always`** so a failure has a defined recovery path. And the thing that makes all of this unnecessary most of the time: **use modules rather than `shell`**, because modules are idempotent and report `changed` honestly, so a second run proving \"0 changed\" is your real test.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 397,
+          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+          "title": "Why does a build pass locally but fail in CI?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 583,
+      "slug": "what-is-idempotency-in-configuration-management-and-why-is-it-essential-for-infrastructure-stability",
+      "title": "What is Idempotency in configuration management and why is it essential for infrastructure stability?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "ansible",
+        "idempotency",
+        "configuration-management",
+        "automation"
+      ],
+      "path": "configuration-management/what-is-idempotency-in-configuration-management-and-why-is-it-essential-for-infrastructure-stability.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/what-is-idempotency-in-configuration-management-and-why-is-it-essential-for-infrastructure-stability.md",
+      "shortAnswer": "Idempotency is the property of an operation where applying it multiple times produces the exact same end state as applying it once, ensuring repeated runs fix drift without causing side effects or unintended modifications.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 540,
+          "slug": "what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits",
+          "title": "What is Semantic Release and how does it automate versioning and changelogs from commits?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the expected outcome when an idempotent Ansible playbook task is executed against a server that is already in the desired state?",
+        "options": [
+          "The task terminates with an error",
+          "The task reports 'ok' (no changes made) and the host state remains completely unchanged",
+          "The task restarts the server to ensure consistency",
+          "The task deletes existing configuration files and rebuilds them"
+        ],
+        "answerIndex": 1,
+        "explanation": "An idempotent task checks the current state against the desired state. If they match, it takes no action and reports zero changes made."
+      }
+    },
+    {
+      "id": 584,
+      "slug": "how-does-ansible-architecture-work-without-agents-and-how-does-it-execute-tasks-over-ssh",
+      "title": "How does Ansible architecture work without agents and how does it execute tasks over SSH?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "ansible",
+        "architecture",
+        "agentless",
+        "ssh"
+      ],
+      "path": "configuration-management/how-does-ansible-architecture-work-without-agents-and-how-does-it-execute-tasks-over-ssh.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/how-does-ansible-architecture-work-without-agents-and-how-does-it-execute-tasks-over-ssh.md",
+      "shortAnswer": "Ansible is agentless; it uses SSH (or WinRM) to connect to target hosts, generates standalone temporary Python scripts containing the task module and parameters, transfers them over SFTP/SCP, executes them on the target, and parses the returned JSON results.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What software prerequisites must be present on a remote target Linux host for standard Ansible management?",
+        "options": [
+          "An active Ansible Daemon process running on port 8080",
+          "A standard SSH server (OpenSSH) and a Python interpreter",
+          "A local Docker engine and Kubernetes cluster",
+          "An active PostgreSQL database connection"
+        ],
+        "answerIndex": 1,
+        "explanation": "Ansible's agentless architecture connects via standard OpenSSH and executes dynamically generated module payloads using the target's existing Python interpreter."
+      }
+    },
+    {
+      "id": 585,
+      "slug": "how-does-ansible-handle-secret-encryption-with-ansible-vault-and-what-are-its-production-trade-offs",
+      "title": "How does Ansible handle secret encryption with Ansible Vault and what are its production trade-offs?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "ansible",
+        "vault",
+        "secrets",
+        "security"
+      ],
+      "path": "configuration-management/how-does-ansible-handle-secret-encryption-with-ansible-vault-and-what-are-its-production-trade-offs.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/how-does-ansible-handle-secret-encryption-with-ansible-vault-and-what-are-its-production-trade-offs.md",
+      "shortAnswer": "Ansible Vault encrypts sensitive YAML files or individual strings with a symmetric AES-256 cipher (key derived from the vault password with PBKDF2, integrity-protected with HMAC-SHA256), allowing secrets to be committed safely to Git and decrypted at runtime via vault password files or client scripts.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 532,
+          "slug": "what-is-pipeline-as-code-and-how-do-modern-ci-systems-validate-and-isolate-pipeline-runs",
+          "title": "What is Pipeline as Code and how do modern CI systems validate and isolate pipeline runs?",
+          "topic": "cicd"
+        },
+        {
+          "id": 533,
+          "slug": "how-does-openid-connect-oidc-eliminate-long-lived-cloud-credentials-in-ci-cd-pipelines",
+          "title": "How does OpenID Connect (OIDC) eliminate long-lived cloud credentials in CI/CD pipelines?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary advantage of using Ansible Vault's `!vault` inline variable encryption over full-file encryption?",
+        "options": [
+          "Inline encryption runs three times faster",
+          "It allows variable keys and non-sensitive settings to remain readable in Git diffs, preventing merge conflicts on unrelated parameters",
+          "Inline encryption does not require a vault password to decrypt",
+          "It automatically changes passwords every 30 days"
+        ],
+        "answerIndex": 1,
+        "explanation": "Full-file encryption turns the entire YAML file into binary ciphertext, making Git diffs opaque and merge conflicts impossible to review. Inline encryption encrypts only the sensitive scalar value."
+      }
+    },
+    {
+      "id": 586,
+      "slug": "what-is-the-difference-between-mutable-and-immutable-infrastructure-in-modern-deployment-patterns",
+      "title": "What is the difference between mutable and immutable infrastructure in modern deployment patterns?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "architecture",
+        "immutable",
+        "mutable",
+        "packer",
+        "terraform"
+      ],
+      "path": "configuration-management/what-is-the-difference-between-mutable-and-immutable-infrastructure-in-modern-deployment-patterns.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/what-is-the-difference-between-mutable-and-immutable-infrastructure-in-modern-deployment-patterns.md",
+      "shortAnswer": "Mutable infrastructure updates running servers in-place over time (e.g. running Ansible playbooks or `apt-get upgrade` on live VMs); Immutable infrastructure never modifies running instances, replacing servers entirely with pre-baked machine images (AMIs) or containers for every release.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "How does an immutable infrastructure deployment strategy handle a software update on production servers?",
+        "options": [
+          "By opening an SSH session to run `yum update` on live instances",
+          "By building a new versioned machine image/container, provisioning fresh instances, and terminating the old ones",
+          "By manually editing configuration files in `/etc` on each node",
+          "By pausing all web traffic for 24 hours"
+        ],
+        "answerIndex": 1,
+        "explanation": "Immutable infrastructure never modifies instances in-place. Updates involve deploying brand-new instances provisioned from updated golden images and retiring the old instances."
+      }
+    },
+    {
+      "id": 587,
+      "slug": "what-are-dynamic-inventories-in-ansible-and-how-do-they-automate-cloud-fleet-discovery",
+      "title": "What are Dynamic Inventories in Ansible and how do they automate cloud fleet discovery?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "ansible",
+        "inventory",
+        "cloud",
+        "dynamic-inventory"
+      ],
+      "path": "configuration-management/what-are-dynamic-inventories-in-ansible-and-how-do-they-automate-cloud-fleet-discovery.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/what-are-dynamic-inventories-in-ansible-and-how-do-they-automate-cloud-fleet-discovery.md",
+      "shortAnswer": "Dynamic Inventories query cloud provider APIs (AWS EC2, Azure VMs, GCP Compute) at runtime to discover currently running instances based on tags, regions, and autoscaling groups, eliminating brittle static IP lists.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why are static inventory files (`hosts.ini`) unsuitable for configuration management in modern cloud autoscaling environments?",
+        "options": [
+          "Ansible cannot parse plain text files",
+          "Instances are dynamically created and destroyed with ephemeral IP addresses, causing static inventories to drift instantly",
+          "Static inventories only work on Windows servers",
+          "Cloud providers block access to files ending in `.ini`"
+        ],
+        "answerIndex": 1,
+        "explanation": "Autoscaling groups continuously spin up and terminate instances with dynamic private IPs. Dynamic inventory plugins query cloud APIs in real-time to discover live instances by tag."
+      }
+    },
+    {
+      "id": 588,
+      "slug": "how-do-you-test-ansible-roles-using-molecule-and-testinfra-in-ci-cd-pipelines",
+      "title": "How do you test Ansible roles using Molecule and testinfra in CI/CD pipelines?",
+      "topic": "configuration-management",
+      "category": "Configuration Management",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "ansible",
+        "testing",
+        "molecule",
+        "testinfra",
+        "cicd"
+      ],
+      "path": "configuration-management/how-do-you-test-ansible-roles-using-molecule-and-testinfra-in-ci-cd-pipelines.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/configuration-management/how-do-you-test-ansible-roles-using-molecule-and-testinfra-in-ci-cd-pipelines.md",
+      "shortAnswer": "Molecule automates testing of Ansible roles by spinning up ephemeral test instances (containers or VMs), applying the role, testing idempotency (verifying zero changes on re-run), and executing assertion tests (Ansible `assert` tasks by default, or Testinfra) before destroying the test environment. Linting (`ansible-lint`, `yamllint`) runs as a separate CI step - Molecule dropped its built-in `lint` stage.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 536,
+          "slug": "how-do-you-detect-isolate-and-eradicate-flaky-tests-in-a-ci-cd-pipeline",
+          "title": "How do you detect, isolate, and eradicate flaky tests in a CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What does the `idempotence` phase of a `molecule test` execution specifically verify?",
+        "options": [
+          "That the role installs in under ten seconds",
+          "That executing the role a second time against the target results in zero changed tasks",
+          "That the Docker daemon has not run out of memory",
+          "That all YAML files pass indentation checks"
+        ],
+        "answerIndex": 1,
+        "explanation": "Molecule's idempotence check applies the role a second consecutive time and asserts that `changed=0`. If any task reports a change, the test fails because the role is not truly idempotent."
+      }
+    }
+  ]
+}

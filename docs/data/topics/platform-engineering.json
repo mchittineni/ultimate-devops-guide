@@ -1,0 +1,616 @@
+{
+  "schemaVersion": 1,
+  "slug": "platform-engineering",
+  "title": "Platform Engineering",
+  "group": "Platform and Leadership",
+  "description": "Building the internal platform as a product: IDPs, golden paths, Backstage, Crossplane, self-service environments, adoption metrics, and safe rollout of breaking platform changes.",
+  "studyNotes": [
+    "Golden paths that are chosen, not mandated - and escapable abstractions.",
+    "Measuring adoption and developer outcomes rather than components shipped.",
+    "Versioning the platform interface and automating consumer migrations."
+  ],
+  "questions": [
+    {
+      "id": 222,
+      "slug": "what-is-an-internal-developer-platform-idp",
+      "title": "What is an Internal Developer Platform (IDP)?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/what-is-an-internal-developer-platform-idp.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/what-is-an-internal-developer-platform-idp.md",
+      "shortAnswer": "An IDP is the curated set of self-service capabilities a product team uses to build, deploy, and run software without filing tickets: scaffolding, CI/CD, environments, infrastructure provisioning, secrets, observability, and the guardrails around them. It is a product built by a platform team for internal users, not a collection of tools with a wiki page.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 223,
+      "slug": "what-is-a-golden-path",
+      "title": "What is a golden path?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/what-is-a-golden-path.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/what-is-a-golden-path.md",
+      "shortAnswer": "A golden path is the supported, opinionated route through the platform for a common task - creating a service, adding a database, shipping to production - where the default choices are already made, compliant, and maintained by the platform team. It is a recommendation made irresistible by being the easiest option, not a rule enforced by policy.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 224,
+      "slug": "how-do-you-treat-a-platform-as-a-product",
+      "title": "How do you treat a platform as a product?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/how-do-you-treat-a-platform-as-a-product.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/how-do-you-treat-a-platform-as-a-product.md",
+      "shortAnswer": "Give it identified users, a roadmap driven by their problems, a versioned interface with deprecation policy, documentation and support channels, adoption metrics, and someone accountable for whether developers actually choose it. The concrete difference from a tools team is that success is measured by voluntary adoption and developer outcomes, not by tickets closed or components shipped.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 225,
+      "slug": "what-is-backstage",
+      "title": "What is Backstage?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/what-is-backstage.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/what-is-backstage.md",
+      "shortAnswer": "Backstage is an open-source developer portal framework from Spotify, now a CNCF project. Its core pieces are a software catalogue (every service, its owner, its dependencies), software templates (scaffolding new components), TechDocs (docs-as-code rendered beside each component), and a plugin system that surfaces CI, cloud, and incident data in one place. It is a framework you build on, not a product you install.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 226,
+      "slug": "what-is-crossplane-and-how-does-it-compare-to-terraform",
+      "title": "What is Crossplane and how does it compare to Terraform?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/what-is-crossplane-and-how-does-it-compare-to-terraform.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/what-is-crossplane-and-how-does-it-compare-to-terraform.md",
+      "shortAnswer": "Crossplane turns cloud infrastructure into Kubernetes resources reconciled continuously by controllers, and lets a platform team publish composite abstractions (a `PostgresInstance` that expands into a real database, subnet group, secret, and firewall rule) as custom resources. Terraform runs as a batch job producing a plan you review and apply. Crossplane's advantage is continuous reconciliation and a native self-service API; Terraform's is maturity, ecosystem, and the trustworthiness of `plan`.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 227,
+      "slug": "how-do-you-provide-self-service-environments-to-developers",
+      "title": "How do you provide self-service environments to developers?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/how-do-you-provide-self-service-environments-to-developers.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/how-do-you-provide-self-service-environments-to-developers.md",
+      "shortAnswer": "Make environments ephemeral, created from a pull request and destroyed on merge, using a namespace or lightweight cluster with the service under test deployed fresh and its dependencies either shared-but-isolated or virtualised. The three problems to solve are data seeding, dependency simulation, and cost - and the discipline that makes it work is a hard time-to-live on every environment.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 228,
+      "slug": "how-do-you-measure-the-success-of-a-platform",
+      "title": "How do you measure the success of a platform?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/how-do-you-measure-the-success-of-a-platform.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/how-do-you-measure-the-success-of-a-platform.md",
+      "shortAnswer": "Combine delivery outcomes (the DORA software delivery metrics), adoption (share of teams and new services on the golden path, self-service completion rate), developer experience (a short recurring survey plus time-to-first-deploy for a new engineer), and efficiency (platform cost per team, and platform-engineer time spent on toil versus product work). No single number is sufficient, and output metrics like \"features shipped\" measure nothing.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 229,
+      "slug": "how-do-you-roll-out-breaking-platform-changes-safely",
+      "title": "How do you roll out breaking platform changes safely?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/how-do-you-roll-out-breaking-platform-changes-safely.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/how-do-you-roll-out-breaking-platform-changes-safely.md",
+      "shortAnswer": "Treat the platform interface as a versioned public API: ship the new version alongside the old, announce a deprecation with a dated removal, provide automated migration (a codemod or bot-raised pull requests), track consumer migration progress, and only then remove the old path. For changes you cannot version - a Kubernetes upgrade, a base-image bump - stage them across environments and cohorts with a tested rollback.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 240,
+      "slug": "how-do-you-orchestrate-and-autoscale-gpu-workloads-in-kubernetes",
+      "title": "How do you orchestrate and autoscale GPU workloads in Kubernetes?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/how-do-you-orchestrate-and-autoscale-gpu-workloads-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/how-do-you-orchestrate-and-autoscale-gpu-workloads-in-kubernetes.md",
+      "shortAnswer": "Orchestrate GPU workloads in Kubernetes using the NVIDIA GPU Operator (for driver injection and container runtime configuration), partition GPUs via Multi-Instance GPU (MIG) or Time-Slicing, and autoscale GPU nodes using Karpenter or KEDA based on GPU duty cycle and VRAM utilization metrics.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 26,
+          "slug": "what-is-infrastructure-as-code",
+          "title": "What is Infrastructure as Code?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 241,
+      "slug": "how-do-you-deploy-and-scale-llm-inference-serving-with-vllm-or-triton-on-kubernetes",
+      "title": "How do you deploy and scale LLM inference serving with vLLM or Triton on Kubernetes?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/how-do-you-deploy-and-scale-llm-inference-serving-with-vllm-or-triton-on-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/how-do-you-deploy-and-scale-llm-inference-serving-with-vllm-or-triton-on-kubernetes.md",
+      "shortAnswer": "Deploy LLM inference engines (such as vLLM or Triton Inference Server) on Kubernetes by mounting model weights via fast local NVMe caches or streaming from S3/OCI, enabling PagedAttention for KV cache optimization, using tensor parallelism across multiple GPUs, and managing zero-downtime model deployments with progressive traffic routing.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 242,
+      "slug": "how-do-you-monitor-ai-llm-applications-for-latency-gpu-metrics-and-token-costs",
+      "title": "How do you monitor AI/LLM applications for latency, GPU metrics, and token costs?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/how-do-you-monitor-ai-llm-applications-for-latency-gpu-metrics-and-token-costs.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/how-do-you-monitor-ai-llm-applications-for-latency-gpu-metrics-and-token-costs.md",
+      "shortAnswer": "Monitor AI/LLM applications by collecting hardware telemetry via NVIDIA DCGM Exporter (GPU utilization, VRAM, temperature), tracking inference performance metrics (TTFT, ITL, queue depth), capturing LLM app traces via OpenTelemetry/LangSmith, and calculating per-tenant token consumption for FinOps cost governance.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 243,
+      "slug": "how-do-you-design-a-production-mlops-pipeline-using-ray-or-kubeflow",
+      "title": "How do you design a production MLOps pipeline using Ray or Kubeflow?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/how-do-you-design-a-production-mlops-pipeline-using-ray-or-kubeflow.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/how-do-you-design-a-production-mlops-pipeline-using-ray-or-kubeflow.md",
+      "shortAnswer": "Design a production MLOps pipeline on Kubernetes using Kubeflow Pipelines (KFP) or KubeRay to orchestrate data ingestion, feature extraction, distributed GPU training, automated evaluation gates, model artifact registration (MLflow / Weights & Biases), and GitOps-driven deployment to inference clusters.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 26,
+          "slug": "what-is-infrastructure-as-code",
+          "title": "What is Infrastructure as Code?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 245,
+      "slug": "how-do-you-deploy-and-scale-vector-databases-in-kubernetes-for-rag-applications",
+      "title": "How do you deploy and scale Vector Databases in Kubernetes for RAG applications?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/how-do-you-deploy-and-scale-vector-databases-in-kubernetes-for-rag-applications.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/how-do-you-deploy-and-scale-vector-databases-in-kubernetes-for-rag-applications.md",
+      "shortAnswer": "Deploy and scale vector databases (such as Milvus, Qdrant, Weaviate, or pgvector) on Kubernetes by decoupling query/indexing microservices, provisioning high-IOPS persistent storage (e.g. AWS `io2` / local NVMe), building HNSW index partitions in RAM, and implementing read-replica scaling for low-latency similarity search in Retrieval-Augmented Generation (RAG) pipelines.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 235,
+          "slug": "how-do-you-import-existing-cloud-infrastructure-into-terraform",
+          "title": "How do you import existing cloud infrastructure into Terraform?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 299,
+      "slug": "what-does-a-platform-engineer-actually-do-day-to-day",
+      "title": "What does a platform engineer actually do day to day?",
+      "topic": "platform-engineering",
+      "category": "Platform Engineering",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "platform-engineering",
+        "interview-questions"
+      ],
+      "path": "platform-engineering/what-does-a-platform-engineer-actually-do-day-to-day.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/what-does-a-platform-engineer-actually-do-day-to-day.md",
+      "shortAnswer": "Builds and runs the internal tooling other engineers use to ship - pipelines, service templates, Kubernetes clusters, secret management, observability defaults, self-service environments - and treats those engineers as customers. The distinguishing habit is that a platform engineer's success is measured by other teams' throughput, so the work is product work: find the friction, build the paved path, document it, and support it. If you are doing per-team ticket work rather than building something reusable, you are running an operations queue, not a platform.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 634,
+          "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
+          "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": null
+    }
+  ]
+}

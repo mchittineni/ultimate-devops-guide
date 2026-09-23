@@ -1,0 +1,859 @@
+{
+  "schemaVersion": 1,
+  "slug": "site-reliability-engineering",
+  "title": "Site Reliability Engineering (SRE)",
+  "group": "Reliability and Operations",
+  "description": "Google's operational model: SLIs, SLOs, error budgets, and the systematic elimination of toil.",
+  "studyNotes": [
+    "Writing an SLI that reflects user experience.",
+    "What an exhausted error budget should actually change.",
+    "Which work counts as toil and how you cap it."
+  ],
+  "questions": [
+    {
+      "id": 96,
+      "slug": "what-is-site-reliability-engineering",
+      "title": "What is Site Reliability Engineering?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "site-reliability-engineering",
+        "interview-questions"
+      ],
+      "path": "site-reliability-engineering/what-is-site-reliability-engineering.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-is-site-reliability-engineering.md",
+      "shortAnswer": "SRE is Google's discipline of applying software engineering to operations - running services against explicit reliability targets, using error budgets to balance velocity against stability, and automating away repetitive operational work.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 177,
+          "slug": "how-do-you-choose-an-slo-target",
+          "title": "How do you choose an SLO target?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 178,
+          "slug": "what-is-multi-window-multi-burn-rate-alerting",
+          "title": "What is multi-window multi-burn-rate alerting?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 179,
+          "slug": "how-do-you-measure-a-latency-sli-correctly",
+          "title": "How do you measure a latency SLI correctly?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 97,
+      "slug": "what-are-service-level-objectives-slos",
+      "title": "What are Service Level Objectives (SLOs)?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "site-reliability-engineering",
+        "interview-questions"
+      ],
+      "path": "site-reliability-engineering/what-are-service-level-objectives-slos.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-are-service-level-objectives-slos.md",
+      "shortAnswer": "An SLO is an internal target for a service level indicator over a defined window - for example, \"99.9% of requests succeed over 28 days\" - that sets the reliability bar and generates the error budget.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 177,
+          "slug": "how-do-you-choose-an-slo-target",
+          "title": "How do you choose an SLO target?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 178,
+          "slug": "what-is-multi-window-multi-burn-rate-alerting",
+          "title": "What is multi-window multi-burn-rate alerting?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 179,
+          "slug": "how-do-you-measure-a-latency-sli-correctly",
+          "title": "How do you measure a latency SLI correctly?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 98,
+      "slug": "what-are-service-level-indicators-slis",
+      "title": "What are Service Level Indicators (SLIs)?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "site-reliability-engineering",
+        "interview-questions"
+      ],
+      "path": "site-reliability-engineering/what-are-service-level-indicators-slis.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-are-service-level-indicators-slis.md",
+      "shortAnswer": "An SLI is a carefully defined quantitative measure of some aspect of service quality - typically expressed as the ratio of good events to total valid events - that reflects what users actually experience.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 177,
+          "slug": "how-do-you-choose-an-slo-target",
+          "title": "How do you choose an SLO target?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 178,
+          "slug": "what-is-multi-window-multi-burn-rate-alerting",
+          "title": "What is multi-window multi-burn-rate alerting?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 179,
+          "slug": "how-do-you-measure-a-latency-sli-correctly",
+          "title": "How do you measure a latency SLI correctly?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 99,
+      "slug": "what-is-error-budget",
+      "title": "What is Error Budget?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "site-reliability-engineering",
+        "interview-questions"
+      ],
+      "path": "site-reliability-engineering/what-is-error-budget.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-is-error-budget.md",
+      "shortAnswer": "The error budget is the amount of unreliability an SLO permits - `1 − SLO` over the window. It converts reliability from an argument into an accounting exercise: while budget remains, ship; when it is spent, fix.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 177,
+          "slug": "how-do-you-choose-an-slo-target",
+          "title": "How do you choose an SLO target?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 178,
+          "slug": "what-is-multi-window-multi-burn-rate-alerting",
+          "title": "What is multi-window multi-burn-rate alerting?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 179,
+          "slug": "how-do-you-measure-a-latency-sli-correctly",
+          "title": "How do you measure a latency SLI correctly?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 100,
+      "slug": "what-is-toil-in-sre",
+      "title": "What is Toil in SRE?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "site-reliability-engineering",
+        "interview-questions"
+      ],
+      "path": "site-reliability-engineering/what-is-toil-in-sre.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-is-toil-in-sre.md",
+      "shortAnswer": "Toil is manual, repetitive, automatable, tactical work with no enduring value, that scales linearly with service growth. SRE treats it as a measurable quantity to be capped and systematically eliminated.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 177,
+          "slug": "how-do-you-choose-an-slo-target",
+          "title": "How do you choose an SLO target?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 179,
+          "slug": "how-do-you-measure-a-latency-sli-correctly",
+          "title": "How do you measure a latency SLI correctly?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 181,
+          "slug": "how-do-you-define-slos-for-batch-and-asynchronous-workloads",
+          "title": "How do you define SLOs for batch and asynchronous workloads?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 230,
+      "slug": "how-do-you-do-capacity-planning",
+      "title": "How do you do capacity planning?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "site-reliability-engineering",
+        "interview-questions"
+      ],
+      "path": "site-reliability-engineering/how-do-you-do-capacity-planning.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/how-do-you-do-capacity-planning.md",
+      "shortAnswer": "Establish the unit of demand (requests, orders, active users), measure how much resource one unit consumes through load testing, project demand from organic growth plus known events, then provision for peak with headroom for failure domains and lead times. Autoscaling handles the shape of a normal day; capacity planning handles whether the ceiling is high enough at all.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 177,
+          "slug": "how-do-you-choose-an-slo-target",
+          "title": "How do you choose an SLO target?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 179,
+          "slug": "how-do-you-measure-a-latency-sli-correctly",
+          "title": "How do you measure a latency SLI correctly?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 181,
+          "slug": "how-do-you-define-slos-for-batch-and-asynchronous-workloads",
+          "title": "How do you define SLOs for batch and asynchronous workloads?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 231,
+      "slug": "what-is-a-production-readiness-review",
+      "title": "What is a production readiness review?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "site-reliability-engineering",
+        "interview-questions"
+      ],
+      "path": "site-reliability-engineering/what-is-a-production-readiness-review.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-is-a-production-readiness-review.md",
+      "shortAnswer": "A PRR is a structured check, before a service takes production traffic or SRE support, that it can be operated: SLOs defined, alerts that page on symptoms, dashboards, a runbook, capacity and dependency analysis, rollback tested, and an owner with an on-call rotation. Done well it is a collaborative design review with a checklist; done badly it is a gate that teams learn to route around.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 177,
+          "slug": "how-do-you-choose-an-slo-target",
+          "title": "How do you choose an SLO target?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 178,
+          "slug": "what-is-multi-window-multi-burn-rate-alerting",
+          "title": "What is multi-window multi-burn-rate alerting?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 181,
+          "slug": "how-do-you-define-slos-for-batch-and-asynchronous-workloads",
+          "title": "How do you define SLOs for batch and asynchronous workloads?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 232,
+      "slug": "what-is-the-difference-between-sre-devops-and-platform-engineering",
+      "title": "What is the difference between SRE, DevOps, and Platform Engineering?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "site-reliability-engineering",
+        "interview-questions"
+      ],
+      "path": "site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md",
+      "shortAnswer": "DevOps is a set of cultural and practice principles for shortening the path from commit to production. SRE is a specific implementation of those principles with reliability as the measured objective - SLOs, error budgets, toil limits. Platform engineering is the discipline of building the internal product that makes those practices self-service for other teams. They are complementary, not competing.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 177,
+          "slug": "how-do-you-choose-an-slo-target",
+          "title": "How do you choose an SLO target?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 178,
+          "slug": "what-is-multi-window-multi-burn-rate-alerting",
+          "title": "What is multi-window multi-burn-rate alerting?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 179,
+          "slug": "how-do-you-measure-a-latency-sli-correctly",
+          "title": "How do you measure a latency SLI correctly?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 233,
+      "slug": "how-do-you-design-alerts-that-page-a-human",
+      "title": "How do you design alerts that page a human?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "site-reliability-engineering",
+        "interview-questions"
+      ],
+      "path": "site-reliability-engineering/how-do-you-design-alerts-that-page-a-human.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/how-do-you-design-alerts-that-page-a-human.md",
+      "shortAnswer": "Page only on user-visible symptoms that are urgent, actionable, and real - in practice, error-budget burn rate against an SLO. Everything else becomes a ticket or a dashboard. Every page must have a documented action; if the responder's only option is to watch, the alert should not have woken them.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 177,
+          "slug": "how-do-you-choose-an-slo-target",
+          "title": "How do you choose an SLO target?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 178,
+          "slug": "what-is-multi-window-multi-burn-rate-alerting",
+          "title": "What is multi-window multi-burn-rate alerting?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 179,
+          "slug": "how-do-you-measure-a-latency-sli-correctly",
+          "title": "How do you measure a latency SLI correctly?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 641,
+      "slug": "what-is-the-difference-between-sli-slo-sla-and-error-budgets-in-sre-practice",
+      "title": "What is the difference between SLI, SLO, SLA, and Error Budgets in SRE practice?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sre",
+        "sli",
+        "slo",
+        "sla",
+        "error-budget"
+      ],
+      "path": "site-reliability-engineering/what-is-the-difference-between-sli-slo-sla-and-error-budgets-in-sre-practice.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-is-the-difference-between-sli-slo-sla-and-error-budgets-in-sre-practice.md",
+      "shortAnswer": "An SLI is a quantifiable metric of service health; an SLO is an internal target reliability goal agreed upon by engineering and product; an SLA is a legally binding customer contract with financial penalties; an Error Budget is the allowable unreliability ($100\\% - \\text{SLO}$) used to balance innovation speed with stability.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 724,
+          "slug": "what-is-the-difference-between-an-sla-an-slo-and-an-ola",
+          "title": "What is the Difference Between an SLA, an SLO, and an OLA?",
+          "topic": "sla-management"
+        },
+        {
+          "id": 675,
+          "slug": "what-are-incident-severity-levels-sev-1-to-sev-4-and-how-do-they-govern-response-slas-and-war-rooms",
+          "title": "What are Incident Severity Levels (Sev-1 to Sev-4) and how do they govern response SLAs and war rooms?",
+          "topic": "incident-management"
+        },
+        {
+          "id": 718,
+          "slug": "what-is-the-difference-between-request-based-and-window-based-slis",
+          "title": "What is the Difference Between Request-Based and Window-Based SLIs?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary operational purpose of an SRE Error Budget?",
+        "options": [
+          "To calculate annual employee salary deductions for outages",
+          "To act as a neutral governor balancing feature velocity against reliability by defining how much unreliability is tolerable",
+          "To bill clients for API requests exceeding rate limits",
+          "To purchase spare physical server hardware"
+        ],
+        "answerIndex": 1,
+        "explanation": "An error budget ($100\\% - \\text{SLO}$) quantifies acceptable failure, allowing product teams to push features aggressively until the budget is burned, at which point focus pivots to stability."
+      }
+    },
+    {
+      "id": 642,
+      "slug": "what-is-multi-window-multi-burn-rate-alerting-and-why-does-it-eliminate-alert-fatigue",
+      "title": "What is Multi-Window Multi-Burn-Rate alerting and why does it eliminate alert fatigue?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sre",
+        "burn-rate",
+        "alerting",
+        "prometheus",
+        "slo"
+      ],
+      "path": "site-reliability-engineering/what-is-multi-window-multi-burn-rate-alerting-and-why-does-it-eliminate-alert-fatigue.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-is-multi-window-multi-burn-rate-alerting-and-why-does-it-eliminate-alert-fatigue.md",
+      "shortAnswer": "Multi-Window Multi-Burn-Rate alerting calculates how fast the error budget is being consumed over multiple time windows (short and long), paging humans only for catastrophic burns that will exhaust the monthly budget quickly while preventing noise on transient spikes.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 721,
+          "slug": "what-is-error-budget-burn-rate-alerting-and-how-do-you-tune-thresholds",
+          "title": "What is Error Budget Burn-Rate Alerting and How Do You Tune Thresholds?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 675,
+          "slug": "what-are-incident-severity-levels-sev-1-to-sev-4-and-how-do-they-govern-response-slas-and-war-rooms",
+          "title": "What are Incident Severity Levels (Sev-1 to Sev-4) and how do they govern response SLAs and war rooms?",
+          "topic": "incident-management"
+        },
+        {
+          "id": 724,
+          "slug": "what-is-the-difference-between-an-sla-an-slo-and-an-ola",
+          "title": "What is the Difference Between an SLA, an SLO, and an OLA?",
+          "topic": "sla-management"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does Google SRE recommend checking both a long window (e.g. 1 hour) and a short window (e.g. 5 minutes) in Multi-Window Burn Rate alerting?",
+        "options": [
+          "Because Prometheus cannot compute metrics over a single window",
+          "To ensure that brief, self-resolving error spikes reset the alert quickly and prevent unnecessary on-call pages",
+          "To reduce the number of Prometheus servers required",
+          "To guarantee that all alerts result in immediate server reboots"
+        ],
+        "answerIndex": 1,
+        "explanation": "If a spike lasts only 2 minutes, it burns budget briefly but poses no threat to the monthly SLO. The short window check clears as soon as the spike subsides, preventing noisy on-call wake-ups."
+      }
+    },
+    {
+      "id": 643,
+      "slug": "what-is-toil-in-sre-and-how-do-engineering-teams-identify-measure-and-cap-it",
+      "title": "What is Toil in SRE and how do engineering teams identify, measure, and cap it?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sre",
+        "toil",
+        "automation",
+        "google-sre"
+      ],
+      "path": "site-reliability-engineering/what-is-toil-in-sre-and-how-do-engineering-teams-identify-measure-and-cap-it.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-is-toil-in-sre-and-how-do-engineering-teams-identify-measure-and-cap-it.md",
+      "shortAnswer": "Toil is work that is repetitive, manual, tactical, lacks enduring value, and scales linearly as the service grows (e.g. manual user resets, certificate installs); Google SRE mandates that engineering teams spend at most 50% of their time on toil, reserving 50%+ for engineering project work.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 675,
+          "slug": "what-are-incident-severity-levels-sev-1-to-sev-4-and-how-do-they-govern-response-slas-and-war-rooms",
+          "title": "What are Incident Severity Levels (Sev-1 to Sev-4) and how do they govern response SLAs and war rooms?",
+          "topic": "incident-management"
+        },
+        {
+          "id": 679,
+          "slug": "what-are-automated-remediation-and-self-healing-systems-and-when-should-automation-halt",
+          "title": "What are Automated Remediation and Self-Healing systems and when should automation halt?",
+          "topic": "incident-management"
+        },
+        {
+          "id": 177,
+          "slug": "how-do-you-choose-an-slo-target",
+          "title": "How do you choose an SLO target?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": {
+        "stem": "According to Google SRE guidelines, which of the following activities qualifies as 'Toil'?",
+        "options": [
+          "Writing a Terraform module to automate VPC creation",
+          "Conducting a blameless post-mortem analysis",
+          "Manually executing an SSH script every morning to clean up disk space on servers",
+          "Designing a multi-region failover architecture"
+        ],
+        "answerIndex": 2,
+        "explanation": "Toil is manual, repetitive, automatable, and scales with service growth. Manually SSHing into servers to delete logs produces no enduring value and should be automated."
+      }
+    },
+    {
+      "id": 644,
+      "slug": "what-are-the-four-golden-signals-of-monitoring-and-how-do-you-monitor-them-in-distributed-systems",
+      "title": "What are the Four Golden Signals of Monitoring and how do you monitor them in distributed systems?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sre",
+        "monitoring",
+        "golden-signals",
+        "prometheus"
+      ],
+      "path": "site-reliability-engineering/what-are-the-four-golden-signals-of-monitoring-and-how-do-you-monitor-them-in-distributed-systems.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-are-the-four-golden-signals-of-monitoring-and-how-do-you-monitor-them-in-distributed-systems.md",
+      "shortAnswer": "The Four Golden Signals are Latency (time to service a request), Traffic (demand on the system), Errors (rate of failed requests), and Saturation (how full the most constrained resource is); together they provide high-fidelity visibility into user experience and system capacity.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 675,
+          "slug": "what-are-incident-severity-levels-sev-1-to-sev-4-and-how-do-they-govern-response-slas-and-war-rooms",
+          "title": "What are Incident Severity Levels (Sev-1 to Sev-4) and how do they govern response SLAs and war rooms?",
+          "topic": "incident-management"
+        },
+        {
+          "id": 177,
+          "slug": "how-do-you-choose-an-slo-target",
+          "title": "How do you choose an SLO target?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 179,
+          "slug": "how-do-you-measure-a-latency-sli-correctly",
+          "title": "How do you measure a latency SLI correctly?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": {
+        "stem": "Which of Google's Four Golden Signals measures the fraction of constrained system resources currently in use (such as thread pool queues or memory headroom)?",
+        "options": [
+          "Latency",
+          "Traffic",
+          "Errors",
+          "Saturation"
+        ],
+        "answerIndex": 3,
+        "explanation": "Saturation measures how full the most constrained system resource is, providing early warning before memory exhaustion or thread queue overflows degrade user experience."
+      }
+    },
+    {
+      "id": 645,
+      "slug": "what-is-a-blameless-post-mortem-and-how-do-you-write-effective-incident-reviews-that-drive-systemic-changes",
+      "title": "What is a Blameless Post-Mortem and how do you write effective incident reviews that drive systemic changes?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sre",
+        "post-mortem",
+        "incident-management",
+        "culture"
+      ],
+      "path": "site-reliability-engineering/what-is-a-blameless-post-mortem-and-how-do-you-write-effective-incident-reviews-that-drive-systemic-changes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-is-a-blameless-post-mortem-and-how-do-you-write-effective-incident-reviews-that-drive-systemic-changes.md",
+      "shortAnswer": "A blameless post-mortem assumes that engineers act with good intentions given the information they had; it investigates systemic vulnerabilities, missing automated guardrails, and confusing tooling rather than punishing individuals, producing concrete action items to prevent recurrence.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Timeline (UTC)",
+        "Contributing factors",
+        "What went well / where we got lucky",
+        "Action items",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 675,
+          "slug": "what-are-incident-severity-levels-sev-1-to-sev-4-and-how-do-they-govern-response-slas-and-war-rooms",
+          "title": "What are Incident Severity Levels (Sev-1 to Sev-4) and how do they govern response SLAs and war rooms?",
+          "topic": "incident-management"
+        },
+        {
+          "id": 678,
+          "slug": "what-is-the-five-whys-root-cause-analysis-technique-and-how-do-you-avoid-stopping-at-human-error",
+          "title": "What is the Five Whys root cause analysis technique and how do you avoid stopping at human error?",
+          "topic": "incident-management"
+        },
+        {
+          "id": 680,
+          "slug": "how-do-you-conduct-post-incident-action-item-tracking-to-prevent-repeat-outages",
+          "title": "How do you conduct post-incident action item tracking to prevent repeat outages?",
+          "topic": "incident-management"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary danger of practicing 'blameful' post-mortems where engineers are punished for operational mistakes?",
+        "options": [
+          "It violates cloud provider terms of service",
+          "Engineers become fearful and cover up mistakes, delay reporting incidents, and stop innovating or refactoring legacy systems",
+          "Blameful post-mortems consume too much disk storage",
+          "It forces all systems to use relational databases"
+        ],
+        "answerIndex": 1,
+        "explanation": "Blaming individuals creates a culture of fear. Employees conceal failures, avoid taking risks, and delay reporting incidents, leaving underlying systemic vulnerabilities unpatched."
+      }
+    },
+    {
+      "id": 646,
+      "slug": "what-is-chaos-engineering-and-how-do-gamedays-uncover-latent-systemic-flaws-in-production",
+      "title": "What is Chaos Engineering and how do GameDays uncover latent systemic flaws in production?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "chaos-engineering",
+        "gameday",
+        "resilience",
+        "gremlin"
+      ],
+      "path": "site-reliability-engineering/what-is-chaos-engineering-and-how-do-gamedays-uncover-latent-systemic-flaws-in-production.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-is-chaos-engineering-and-how-do-gamedays-uncover-latent-systemic-flaws-in-production.md",
+      "shortAnswer": "Chaos Engineering is the discipline of experimenting on a system to build confidence in its capability to withstand turbulent conditions; GameDays are structured cross-team simulations where realistic failures (AZ loss, DB crash, DNS drop) are injected to validate automated recovery.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 720,
+          "slug": "how-do-you-handle-planned-maintenance-windows-in-error-budget-calculations",
+          "title": "How Do You Handle Planned Maintenance Windows in Error Budget Calculations?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 722,
+          "slug": "how-do-you-establish-an-actionable-error-budget-policy-with-engineering-leadership",
+          "title": "How Do You Establish an Actionable Error Budget Policy with Engineering Leadership?",
+          "topic": "slo-engineering"
+        },
+        {
+          "id": 190,
+          "slug": "what-do-you-do-when-you-breach-an-sla",
+          "title": "What do you do when you breach an SLA?",
+          "topic": "sla-management"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the first step in conducting a scientific Chaos Engineering experiment?",
+        "options": [
+          "Deleting all production Kubernetes namespaces",
+          "Defining a measurable 'Steady State' metric baseline representing normal, healthy system operation",
+          "Submitting a ticket to cancel cloud backups",
+          "Restarting all network routers"
+        ],
+        "answerIndex": 1,
+        "explanation": "Chaos experiments require a measurable 'steady state' baseline (e.g. latency and order completion rate) so engineers can verify whether the system maintains normal function under simulated stress."
+      }
+    },
+    {
+      "id": 647,
+      "slug": "how-do-on-call-rotations-and-escalation-policies-ensure-rapid-incident-triage-without-engineer-burnout",
+      "title": "How do On-Call rotations and escalation policies ensure rapid incident triage without engineer burnout?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sre",
+        "on-call",
+        "pagerduty",
+        "burnout",
+        "incident-management"
+      ],
+      "path": "site-reliability-engineering/how-do-on-call-rotations-and-escalation-policies-ensure-rapid-incident-triage-without-engineer-burnout.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/how-do-on-call-rotations-and-escalation-policies-ensure-rapid-incident-triage-without-engineer-burnout.md",
+      "shortAnswer": "Healthy on-call rotations distribute operational burden across teams with clear primary and secondary escalation tiers, compensation, follow-the-sun scheduling, and strict caps on alert volume (< 2 pages per 12-hour shift) to prevent burnout.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 675,
+          "slug": "what-are-incident-severity-levels-sev-1-to-sev-4-and-how-do-they-govern-response-slas-and-war-rooms",
+          "title": "What are Incident Severity Levels (Sev-1 to Sev-4) and how do they govern response SLAs and war rooms?",
+          "topic": "incident-management"
+        },
+        {
+          "id": 121,
+          "slug": "what-is-incident-management",
+          "title": "What is Incident Management?",
+          "topic": "incident-management"
+        },
+        {
+          "id": 122,
+          "slug": "what-is-an-incident-response-plan",
+          "title": "What is an Incident Response Plan?",
+          "topic": "incident-management"
+        }
+      ],
+      "quiz": {
+        "stem": "Under Google SRE best practices, what should happen if an alert repeatedly pages an on-call engineer for an issue that resolves itself automatically within three minutes?",
+        "options": [
+          "The engineer should be disciplined for not responding fast enough",
+          "The alert should be demoted to a non-paging ticket or adjusted with longer evaluation windows because it is non-actionable toil",
+          "The server should be rebooted every three minutes",
+          "The on-call shift duration should be doubled"
+        ],
+        "answerIndex": 1,
+        "explanation": "If a condition self-heals without human action, paging a human is pure toil and causes alert fatigue. Alerts must be reserved strictly for events requiring immediate human intervention."
+      }
+    },
+    {
+      "id": 648,
+      "slug": "what-are-runbooks-and-playbooks-and-how-do-you-transition-procedural-runbooks-into-automated-runbooks",
+      "title": "What are Runbooks and Playbooks and how do you transition procedural runbooks into automated runbooks?",
+      "topic": "site-reliability-engineering",
+      "category": "Site Reliability Engineering (SRE)",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sre",
+        "runbooks",
+        "automation",
+        "incident-response"
+      ],
+      "path": "site-reliability-engineering/what-are-runbooks-and-playbooks-and-how-do-you-transition-procedural-runbooks-into-automated-runbooks.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/site-reliability-engineering/what-are-runbooks-and-playbooks-and-how-do-you-transition-procedural-runbooks-into-automated-runbooks.md",
+      "shortAnswer": "Runbooks provide step-by-step procedures for diagnosing and mitigating specific alert conditions; maturing SRE organizations evolve static documentation into executable interactive notebooks and ultimately automated self-healing scripts.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Diagnose",
+        "Mitigate (stop the customer pain first)",
+        "Escalate",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 675,
+          "slug": "what-are-incident-severity-levels-sev-1-to-sev-4-and-how-do-they-govern-response-slas-and-war-rooms",
+          "title": "What are Incident Severity Levels (Sev-1 to Sev-4) and how do they govern response SLAs and war rooms?",
+          "topic": "incident-management"
+        },
+        {
+          "id": 679,
+          "slug": "what-are-automated-remediation-and-self-healing-systems-and-when-should-automation-halt",
+          "title": "What are Automated Remediation and Self-Healing systems and when should automation halt?",
+          "topic": "incident-management"
+        },
+        {
+          "id": 721,
+          "slug": "what-is-error-budget-burn-rate-alerting-and-how-do-you-tune-thresholds",
+          "title": "What is Error Budget Burn-Rate Alerting and How Do You Tune Thresholds?",
+          "topic": "slo-engineering"
+        }
+      ],
+      "quiz": {
+        "stem": "Why must every production PagerDuty alert include a direct link to a verified Runbook?",
+        "options": [
+          "To satisfy cloud billing requirements",
+          "To provide stressed on-call engineers with clear diagnostic commands and immediate mitigation steps without relying on tribal memory under pressure",
+          "To prevent the alert from triggering SMS messages",
+          "To automatically restart the affected container"
+        ],
+        "answerIndex": 1,
+        "explanation": "During high-severity incidents, cognitive stress is extreme. Linking direct runbooks ensures on-call engineers have clear, tested triage and mitigation steps ready immediately."
+      }
+    }
+  ]
+}

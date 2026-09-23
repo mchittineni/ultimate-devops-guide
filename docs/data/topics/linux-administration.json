@@ -1,0 +1,1029 @@
+{
+  "schemaVersion": 1,
+  "slug": "linux-administration",
+  "title": "Linux Administration",
+  "group": "Foundations",
+  "description": "The operating system under everything - commands, shell scripting, systemd, service management, and the filesystem hierarchy.",
+  "studyNotes": [
+    "Diagnosing a slow or full host from the shell alone.",
+    "Writing a safe, idempotent shell script.",
+    "How systemd starts, supervises, and logs a service."
+  ],
+  "questions": [
+    {
+      "id": 41,
+      "slug": "what-are-the-basic-linux-commands-every-devops-engineer-should-know",
+      "title": "What are the basic Linux commands every DevOps engineer should know?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "path": "linux-administration/what-are-the-basic-linux-commands-every-devops-engineer-should-know.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-are-the-basic-linux-commands-every-devops-engineer-should-know.md",
+      "shortAnswer": "File and text handling (`ls`, `find`, `grep`, `sed`, `awk`, `tail`), process and resource inspection (`ps`, `top`, `df`, `du`, `free`, `lsof`), networking (`ss`, `curl`, `dig`, `tcpdump`), service control (`systemctl`, `journalctl`), and permissions (`chmod`, `chown`).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 42,
+      "slug": "what-is-shell-scripting",
+      "title": "What is Shell Scripting?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "path": "linux-administration/what-is-shell-scripting.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-is-shell-scripting.md",
+      "shortAnswer": "Shell scripting is automating sequences of shell commands in a file so operational tasks are repeatable, reviewable, and runnable by anyone or anything - including CI pipelines and cron.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 43,
+      "slug": "what-is-systemd",
+      "title": "What is systemd?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "path": "linux-administration/what-is-systemd.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-is-systemd.md",
+      "shortAnswer": "systemd is the init system and service manager on most modern Linux distributions - PID 1. It starts the system, supervises services with dependency-aware parallel startup, and provides logging, timers, resource control, and sandboxing.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 44,
+      "slug": "how-do-you-manage-services-in-linux",
+      "title": "How do you manage services in Linux?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "path": "linux-administration/how-do-you-manage-services-in-linux.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-do-you-manage-services-in-linux.md",
+      "shortAnswer": "With `systemctl` on modern distributions - start, stop, restart, reload, enable, and disable units - plus `journalctl` for their logs, and unit files under `/etc/systemd/system` for configuration.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 45,
+      "slug": "what-is-linux-file-system-hierarchy",
+      "title": "What is Linux File System Hierarchy?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "path": "linux-administration/what-is-linux-file-system-hierarchy.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-is-linux-file-system-hierarchy.md",
+      "shortAnswer": "The Filesystem Hierarchy Standard defines a single tree rooted at `/`, with each top-level directory having a defined purpose - `/etc` for configuration, `/var` for variable data, `/usr` for programs, `/proc` and `/sys` for kernel interfaces.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 238,
+      "slug": "how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers",
+      "title": "How do you troubleshoot SSH failures, high CPU, and disk space on Linux servers?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "path": "linux-administration/how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-do-you-troubleshoot-ssh-failures-high-cpu-and-disk-space-on-linux-servers.md",
+      "shortAnswer": "Troubleshoot SSH failures by inspecting `/var/log/auth.log` and SSH client debug output (`ssh -vvv`), CPU spikes by identifying the process and its cause with `top`/`htop`/`pidstat`/`vmstat` before acting (graceful `SIGTERM` first, not `kill -9`), and disk space issues using `df -h`, `du -sh *`, and log retention automation (`logrotate` / cron cleanup).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 265,
+      "slug": "how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed",
+      "title": "How do you analyse logs and text files with grep, awk, and sed?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "path": "linux-administration/how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed.md",
+      "shortAnswer": "`grep` selects lines that match a pattern, `awk` splits each line into fields and operates on them, and `sed` edits a stream line by line. The workflow is almost always the same pipeline: filter with `grep`, extract or aggregate columns with `awk`, transform text with `sed`, then `sort | uniq -c | sort -rn` to rank the result.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 295,
+      "slug": "how-do-you-debug-a-linux-performance-problem-from-first-principles",
+      "title": "How do you debug a Linux performance problem from first principles?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "path": "linux-administration/how-do-you-debug-a-linux-performance-problem-from-first-principles.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-do-you-debug-a-linux-performance-problem-from-first-principles.md",
+      "shortAnswer": "Work top-down through the four resources - **CPU, memory, disk, network** - narrowing from system-wide to per-process to per-syscall, and always compare against a known baseline. Start with the 60-second checklist (`uptime`, `dmesg`, `vmstat`, `mpstat`, `pidstat`, `iostat`, `free`, `sar`, `top`), form one hypothesis about which resource is saturated, then confirm it with a targeted tool (`strace`/`perf`/`bpftrace`) before changing anything. The discipline that matters is measuring utilisation _and saturation_, because a resource at 100% utilisation with no queue is fine while one at 60% with a deep queue is not.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 494,
+      "slug": "what-is-the-difference-between-a-hard-link-and-a-soft-link",
+      "title": "What is the difference between a hard link and a soft link?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "path": "linux-administration/what-is-the-difference-between-a-hard-link-and-a-soft-link.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-is-the-difference-between-a-hard-link-and-a-soft-link.md",
+      "shortAnswer": "A **hard link** is a second **name for the same inode**. The two names are indistinguishable - same inode number, same data, same permissions - and the file's contents survive until the **last** name is removed, because the inode keeps a link count. A **soft link** (symbolic link, symlink) is a separate small file whose contents are a **path string** pointing at another name. So a symlink has its own inode, can point across filesystems, can point at a directory, and **breaks** if the target is renamed or deleted (a \"dangling\" link), whereas a hard link cannot cross filesystem boundaries, cannot normally target a directory, and never dangles. The practical consequence you use daily: symlinks are how you express \"current version\" (`/opt/app/current → /opt/app/1.9.0`), and hard links are how tools such as `rsync --link-dest` and package managers build space-efficient snapshots where unchanged files share the same blocks.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 50,
+          "slug": "how-to-handle-merge-conflicts-in-git",
+          "title": "How to handle merge conflicts in Git?",
+          "topic": "version-control"
+        },
+        {
+          "id": 263,
+          "slug": "what-is-the-difference-between-git-merge-rebase-and-cherry-pick",
+          "title": "What is the difference between git merge, rebase, and cherry-pick?",
+          "topic": "version-control"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 495,
+      "slug": "walk-through-the-linux-boot-process",
+      "title": "Walk through the Linux boot process",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions",
+        "incident-management"
+      ],
+      "path": "linux-administration/walk-through-the-linux-boot-process.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/walk-through-the-linux-boot-process.md",
+      "shortAnswer": "Six stages. **Firmware** (BIOS or UEFI) initialises hardware, runs POST, and finds a boot device - BIOS reads the MBR, UEFI reads an EFI executable from the EFI System Partition. **Bootloader** (GRUB2, or systemd-boot) presents entries and loads the **kernel** plus the **initramfs** into memory, passing the kernel command line. **Kernel** decompresses itself, initialises core subsystems and drivers, and mounts the **initramfs** as a temporary root. **initramfs** contains just enough drivers and tooling to find and mount the _real_ root filesystem - LVM, RAID, LUKS decryption, iSCSI, NFS - then pivots to it. **PID 1 (`systemd`)** starts and drives everything else: it resolves the dependency graph for the **default target** (usually `multi-user.target` on a server, `graphical.target` on a desktop), mounts filesystems from `/etc/fstab`, brings up networking, and starts units. Finally the login prompt (`getty` or a display manager) appears. The reason a DevOps engineer needs this: when an instance does not come back after a reboot, knowing which stage it died in tells you whether to look at the bootloader, the initramfs, `/etc/fstab`, or a failed unit - and `journalctl -b`, `systemd-analyze blame`, and the serial console are how you find out.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 302,
+          "slug": "how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation",
+          "title": "How do you turn a pile of ad hoc scripts into maintainable automation?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 496,
+      "slug": "how-do-you-manage-disks-filesystems-and-lvm-on-linux",
+      "title": "How do you manage disks, filesystems, and LVM on Linux?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions",
+        "infrastructure-monitoring"
+      ],
+      "path": "linux-administration/how-do-you-manage-disks-filesystems-and-lvm-on-linux.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-do-you-manage-disks-filesystems-and-lvm-on-linux.md",
+      "shortAnswer": "Work down the stack: a **block device** (`/dev/nvme1n1`) optionally carries a **partition table**, on top of which you either create a filesystem directly or build **LVM** - a physical volume (`pvcreate`), grouped into a volume group (`vgcreate`), sliced into logical volumes (`lvcreate`) - and then a filesystem (`mkfs.xfs`/`mkfs.ext4`) mounted at a path, recorded in `/etc/fstab` **by UUID**. LVM exists to break the one-disk-one-filesystem coupling: you can add a disk to a volume group and **grow a logical volume and its filesystem online, with no downtime** (`lvextend -r`), which is exactly the answer to \"add 50 GB to `/opt` with no downtime\". The distinction people miss: a **directory** is a path in an existing filesystem, a **mount point** is a directory where a _different_ filesystem is attached - and `df -h <path>` versus `findmnt` is how you tell which you are looking at. Two failure modes are worth knowing cold: a filesystem that is only half full but cannot be written to because **inodes** are exhausted (`df -ih`), and a filesystem the kernel has remounted **read-only** after an I/O error.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 302,
+          "slug": "how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation",
+          "title": "How do you turn a pile of ad hoc scripts into maintainable automation?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 497,
+      "slug": "how-do-you-schedule-work-with-cron-and-systemd-timers",
+      "title": "How do you schedule work with cron and systemd timers?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions",
+        "scripting-and-automation"
+      ],
+      "path": "linux-administration/how-do-you-schedule-work-with-cron-and-systemd-timers.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-do-you-schedule-work-with-cron-and-systemd-timers.md",
+      "shortAnswer": "A **cron job** is a scheduled command, defined either in a user's crontab (`crontab -e`) or in a system file (`/etc/crontab`, `/etc/cron.d/*` - which take an extra **user** field). The schedule is five fields: **minute, hour, day-of-month, month, day-of-week**, so `0 2 * * *` is 02:00 daily and `*/15 * * * *` is every fifteen minutes. **systemd timers** do the same job with a unit file pair (`foo.service` plus `foo.timer`) and are better for anything that matters: dependency ordering, `journalctl` logging, `RandomizedDelaySec` to spread load, `Persistent=true` to catch up after downtime, resource limits, and `systemctl list-timers` to see what will run next. The three things that cause nearly every cron incident: **cron runs with a minimal environment** (a tiny `PATH`, no profile, so a script that works in your shell fails silently), **overlapping runs** when a job takes longer than its interval, and **output going nowhere** because nobody reads the mail cron tries to send. So: absolute paths, a lock, and explicit logging - or use a systemd timer, which handles two of the three for you.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 267,
+          "slug": "what-do-you-use-python-for-as-a-devops-engineer",
+          "title": "What do you use Python for as a DevOps engineer?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 498,
+      "slug": "how-do-you-inspect-and-manage-linux-processes-signals-and-resource-limits",
+      "title": "How do you inspect and manage Linux processes, signals, and resource limits?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions",
+        "incident-management"
+      ],
+      "path": "linux-administration/how-do-you-inspect-and-manage-linux-processes-signals-and-resource-limits.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-do-you-inspect-and-manage-linux-processes-signals-and-resource-limits.md",
+      "shortAnswer": "Every process has a **PID**, a parent, an owner, and a **state** - `R` running, `S` interruptible sleep (the normal idle state, waiting on I/O or an event), `D` **uninterruptible sleep** (blocked in the kernel, usually on disk or NFS - it cannot be killed and it counts towards load average), `T` stopped, `Z` **zombie** (finished, but its parent has not reaped the exit status). You inspect with `ps`, `top`/`htop`, `pgrep`, and `/proc/<pid>/`, and you signal with `kill`. The distinction interviewers test: `kill` sends **SIGTERM (15)** by default, which asks a process to shut down gracefully and can be handled; `kill -9` sends **SIGKILL**, which the process cannot catch, block, or ignore because the kernel destroys it - so it loses in-flight work, leaves temporary files and locks behind, and cannot flush buffers. Always try SIGTERM first and reserve SIGKILL for something that has genuinely stopped responding. Limits are per-process and set with `ulimit` (interactively), `/etc/security/limits.conf` or a systemd unit's `LimitNOFILE=` (persistently), and cgroups (which is what containers use) - and the specific one you will meet is **\"Too many open files\"**, which is the `nofile` limit, not a disk problem.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 569,
+      "slug": "what-are-linux-namespaces-and-how-do-they-form-the-architectural-foundation-of-containers",
+      "title": "What are Linux namespaces and how do they form the architectural foundation of containers?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "linux",
+        "kernel",
+        "namespaces",
+        "containers",
+        "docker"
+      ],
+      "path": "linux-administration/what-are-linux-namespaces-and-how-do-they-form-the-architectural-foundation-of-containers.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-are-linux-namespaces-and-how-do-they-form-the-architectural-foundation-of-containers.md",
+      "shortAnswer": "Linux namespaces partition kernel resources so that a group of processes sees its own isolated instance of them. Linux has eight namespace types - mount, UTS, IPC, PID, network, user, cgroup, and time - and container runtimes combine them (plus cgroups for resource limits, and capabilities, seccomp, and LSMs for privilege) to make an ordinary process look like its own machine. It is isolation, not virtualisation: every container still shares the host kernel.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 301,
+          "slug": "when-do-you-use-bash-and-when-do-you-use-python",
+          "title": "When do you use Bash and when do you use Python?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 46,
+          "slug": "what-is-git",
+          "title": "What is Git?",
+          "topic": "version-control"
+        }
+      ],
+      "quiz": {
+        "stem": "Which Linux namespace allows a container process to appear as PID 1 inside the container while running as a high PID number on the underlying host?",
+        "options": [
+          "Network (NET) namespace",
+          "Process ID (PID) namespace",
+          "Mount (MNT) namespace",
+          "User (USER) namespace"
+        ],
+        "answerIndex": 1,
+        "explanation": "The PID namespace isolates process ID numbering, allowing the initial container process to be assigned PID 1 while appearing as a regular process on the host."
+      }
+    },
+    {
+      "id": 570,
+      "slug": "how-does-the-linux-virtual-file-system-vfs-and-inode-architecture-work",
+      "title": "How does the Linux Virtual File System (VFS) and inode architecture work?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "linux",
+        "filesystem",
+        "inodes",
+        "vfs"
+      ],
+      "path": "linux-administration/how-does-the-linux-virtual-file-system-vfs-and-inode-architecture-work.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-does-the-linux-virtual-file-system-vfs-and-inode-architecture-work.md",
+      "shortAnswer": "VFS is the kernel abstraction layer providing a uniform interface across diverse filesystems (ext4, XFS, NFS); inodes are metadata data structures storing file permissions, ownership, file size, and disk block pointers, but NOT the file name or file contents.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 301,
+          "slug": "when-do-you-use-bash-and-when-do-you-use-python",
+          "title": "When do you use Bash and when do you use Python?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 46,
+          "slug": "what-is-git",
+          "title": "What is Git?",
+          "topic": "version-control"
+        },
+        {
+          "id": 578,
+          "slug": "how-does-git-internally-store-data-using-blobs-trees-commits-and-annotated-tags",
+          "title": "How does Git internally store data using Blobs, Trees, Commits, and Annotated Tags?",
+          "topic": "version-control"
+        }
+      ],
+      "quiz": {
+        "stem": "Why can an application fail with 'No space left on device' when `df -h` reports 200 GB of free disk space?",
+        "options": [
+          "The Linux kernel limits files to 10MB in size",
+          "The filesystem has exhausted its allocated inode table (`df -i`), typically caused by millions of tiny files",
+          "The CPU is overheating and throttling write operations",
+          "The hard disk sector size was changed while the machine was running"
+        ],
+        "answerIndex": 1,
+        "explanation": "Filesystems pre-allocate a fixed number of inodes. Creating millions of tiny files can consume all available inodes before raw disk capacity is exhausted, preventing new file creation."
+      }
+    },
+    {
+      "id": 571,
+      "slug": "what-is-the-difference-between-hard-links-and-symbolic-soft-links-in-linux",
+      "title": "What is the difference between hard links and symbolic (soft) links in Linux?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "linux",
+        "filesystem",
+        "symlinks",
+        "hardlinks"
+      ],
+      "path": "linux-administration/what-is-the-difference-between-hard-links-and-symbolic-soft-links-in-linux.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-is-the-difference-between-hard-links-and-symbolic-soft-links-in-linux.md",
+      "shortAnswer": "A hard link is an additional directory entry pointing directly to an existing inode on the same filesystem; a symbolic link is a separate file with its own inode containing the path string to another file, capable of spanning across filesystems.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 267,
+          "slug": "what-do-you-use-python-for-as-a-devops-engineer",
+          "title": "What do you use Python for as a DevOps engineer?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 301,
+          "slug": "when-do-you-use-bash-and-when-do-you-use-python",
+          "title": "When do you use Bash and when do you use Python?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "What happens to the target data if the original file is deleted after creating a hard link to it in Linux?",
+        "options": [
+          "The hard link breaks and the data is lost",
+          "The data remains intact and fully readable via the hard link because the inode link count is still greater than zero",
+          "The Linux kernel reboots to repair filesystem integrity",
+          "The hard link automatically converts into a symbolic link"
+        ],
+        "answerIndex": 1,
+        "explanation": "Deleting a file decrements the inode's reference count. Since the hard link points directly to the inode, the data is preserved on disk until all hard links are unlinked."
+      }
+    },
+    {
+      "id": 572,
+      "slug": "how-does-linux-memory-management-handle-buffers-cached-memory-and-swap-space",
+      "title": "How does Linux memory management handle buffers, cached memory, and swap space?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "linux",
+        "memory",
+        "cache",
+        "swap",
+        "performance"
+      ],
+      "path": "linux-administration/how-does-linux-memory-management-handle-buffers-cached-memory-and-swap-space.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-does-linux-memory-management-handle-buffers-cached-memory-and-swap-space.md",
+      "shortAnswer": "Linux utilizes otherwise idle RAM for page cache and disk buffers to accelerate I/O, reclaiming this memory instantly when applications request it; Swap moves inactive memory pages to disk to free physical RAM for active processes and cache.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 301,
+          "slug": "when-do-you-use-bash-and-when-do-you-use-python",
+          "title": "When do you use Bash and when do you use Python?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 47,
+          "slug": "what-is-git-branching-strategy",
+          "title": "What is Git Branching Strategy?",
+          "topic": "version-control"
+        },
+        {
+          "id": 579,
+          "slug": "how-do-you-recover-lost-commits-using-the-git-reflog",
+          "title": "How do you recover lost commits using the Git Reflog?",
+          "topic": "version-control"
+        }
+      ],
+      "quiz": {
+        "stem": "Which metric reported by `free -m` represents the actual amount of memory that can be allocated to a new application without forcing the system to swap?",
+        "options": [
+          "`free`",
+          "`available`",
+          "`shared`",
+          "`total`"
+        ],
+        "answerIndex": 1,
+        "explanation": "`available` estimates how much memory is available for starting new applications without swapping, combining unused memory with reclaimable page caches."
+      }
+    },
+    {
+      "id": 573,
+      "slug": "what-are-zombie-and-orphan-processes-in-linux-and-how-do-you-cleanly-handle-them",
+      "title": "What are Zombie and Orphan processes in Linux and how do you cleanly handle them?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "linux",
+        "processes",
+        "zombie",
+        "orphan",
+        "signals"
+      ],
+      "path": "linux-administration/what-are-zombie-and-orphan-processes-in-linux-and-how-do-you-cleanly-handle-them.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-are-zombie-and-orphan-processes-in-linux-and-how-do-you-cleanly-handle-them.md",
+      "shortAnswer": "An Orphan process is one whose parent died before it finished (adopted by PID 1/systemd); a Zombie process (`<defunct>`) is a terminated process that has released its memory but remains in the process table until its parent reads its exit status code via `wait()`.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 301,
+          "slug": "when-do-you-use-bash-and-when-do-you-use-python",
+          "title": "When do you use Bash and when do you use Python?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 47,
+          "slug": "what-is-git-branching-strategy",
+          "title": "What is Git Branching Strategy?",
+          "topic": "version-control"
+        },
+        {
+          "id": 49,
+          "slug": "what-is-trunk-based-development",
+          "title": "What is Trunk Based Development?",
+          "topic": "version-control"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does executing `kill -9 <PID>` on a zombie process fail to remove it from the output of `ps`?",
+        "options": [
+          "Zombie processes are protected by immutable SELinux policies",
+          "The process is already dead and has released its memory; it only exists as an entry in the kernel process table until its parent calls `wait()`",
+          "Only the root user can issue signals to zombies",
+          "Zombie processes execute exclusively inside the kernel space"
+        ],
+        "answerIndex": 1,
+        "explanation": "A zombie has already terminated; no executable code remains to receive signals. It persists only as an entry in the process table until its parent reaps its exit code via `wait()`."
+      }
+    },
+    {
+      "id": 574,
+      "slug": "what-is-the-difference-between-process-states-d-uninterruptible-sleep-and-s-interruptible-sleep",
+      "title": "What is the difference between process states D (uninterruptible sleep) and S (interruptible sleep)?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "linux",
+        "processes",
+        "kernel",
+        "uninterruptible-sleep"
+      ],
+      "path": "linux-administration/what-is-the-difference-between-process-states-d-uninterruptible-sleep-and-s-interruptible-sleep.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-is-the-difference-between-process-states-d-uninterruptible-sleep-and-s-interruptible-sleep.md",
+      "shortAnswer": "State `S` (Interruptible Sleep) means the process is waiting for an event (timer, socket) and wakes up immediately upon receiving signals; State `D` (Uninterruptible Sleep) means the process is waiting on hardware or disk I/O inside a kernel driver and will not respond to any signals, including `SIGKILL`.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 267,
+          "slug": "what-do-you-use-python-for-as-a-devops-engineer",
+          "title": "What do you use Python for as a DevOps engineer?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 301,
+          "slug": "when-do-you-use-bash-and-when-do-you-use-python",
+          "title": "When do you use Bash and when do you use Python?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 46,
+          "slug": "what-is-git",
+          "title": "What is Git?",
+          "topic": "version-control"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does a Linux system show a high load average (e.g. load of 15 on a 2-core CPU) even though CPU utilization is under 5%?",
+        "options": [
+          "The system clock is running backward",
+          "Multiple processes are blocked in state `D` (uninterruptible sleep) waiting for disk or network I/O, which Linux counts toward load average",
+          "The memory cache is disabled",
+          "The network interface is running in half-duplex mode"
+        ],
+        "answerIndex": 1,
+        "explanation": "Unlike UNIX systems that only measure runnable processes on the CPU, Linux includes processes in uninterruptible disk/network sleep (`D` state) in its load average calculation."
+      }
+    },
+    {
+      "id": 575,
+      "slug": "how-does-systemd-manage-service-lifecycles-cgroups-and-journal-logging",
+      "title": "How does systemd manage service lifecycles, cgroups, and journal logging?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "linux",
+        "systemd",
+        "journalctl",
+        "cgroups"
+      ],
+      "path": "linux-administration/how-does-systemd-manage-service-lifecycles-cgroups-and-journal-logging.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-does-systemd-manage-service-lifecycles-cgroups-and-journal-logging.md",
+      "shortAnswer": "systemd is the Linux init system (PID 1) that manages service dependencies in parallel, places every service in its own isolated cgroup to ensure clean process tree termination, and captures stdout/stderr into binary, indexed journal logs (`journalctl`).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 267,
+          "slug": "what-do-you-use-python-for-as-a-devops-engineer",
+          "title": "What do you use Python for as a DevOps engineer?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 301,
+          "slug": "when-do-you-use-bash-and-when-do-you-use-python",
+          "title": "When do you use Bash and when do you use Python?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "How does systemd guarantee that stopping a service also terminates all background child worker processes spawned by that daemon?",
+        "options": [
+          "By parsing process names using regular expressions",
+          "By tracking all processes spawned by the unit inside a dedicated Linux cgroup and terminating the entire cgroup",
+          "By restarting the entire operating system",
+          "By blocking fork() system calls across the host"
+        ],
+        "answerIndex": 1,
+        "explanation": "systemd places each service in its own distinct cgroup. When `systemctl stop` is issued, systemd signals all processes residing in that cgroup, preventing orphaned background processes."
+      }
+    },
+    {
+      "id": 576,
+      "slug": "what-is-the-difference-between-tcp-and-udp-and-how-do-you-diagnose-packet-loss-and-latency-with-ss-ip-and-tcpdump",
+      "title": "What is the difference between TCP and UDP and how do you diagnose packet loss and latency with ss, ip, and tcpdump?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "linux",
+        "networking",
+        "tcp",
+        "udp",
+        "tcpdump"
+      ],
+      "path": "linux-administration/what-is-the-difference-between-tcp-and-udp-and-how-do-you-diagnose-packet-loss-and-latency-with-ss-ip-and-tcpdump.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-is-the-difference-between-tcp-and-udp-and-how-do-you-diagnose-packet-loss-and-latency-with-ss-ip-and-tcpdump.md",
+      "shortAnswer": "TCP is a connection-oriented, reliable protocol with handshakes, sequencing, and congestion control; UDP is connectionless and lightweight without retransmissions; network issues are diagnosed using `ip` (interfaces/routing), `ss` (socket buffers/state), and `tcpdump` (packet capture).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 267,
+          "slug": "what-do-you-use-python-for-as-a-devops-engineer",
+          "title": "What do you use Python for as a DevOps engineer?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 301,
+          "slug": "when-do-you-use-bash-and-when-do-you-use-python",
+          "title": "When do you use Bash and when do you use Python?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "When inspecting a listening TCP port with `ss -lnt`, what does a high non-zero value in the `Recv-Q` column indicate?",
+        "options": [
+          "The network cable has been physically disconnected",
+          "The application has failed to call `accept()` quickly enough, and the TCP backlog queue is filling up",
+          "The remote client has disconnected cleanly",
+          "The server has run out of available hard drive storage"
+        ],
+        "answerIndex": 1,
+        "explanation": "For listening sockets, `Recv-Q` represents the number of established TCP connections waiting in the socket backlog queue to be accepted by the application process."
+      }
+    }
+  ]
+}

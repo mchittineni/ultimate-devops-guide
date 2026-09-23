@@ -1,0 +1,591 @@
+{
+  "schemaVersion": 1,
+  "slug": "sla-management",
+  "title": "SLA Management",
+  "group": "Reliability and Operations",
+  "description": "The commercial side of reliability: SLA versus SLO versus OLA, downtime and composite availability arithmetic, contract clauses, service credits, reporting, and breach response.",
+  "studyNotes": [
+    "Allowed downtime per target, and composite availability across dependencies.",
+    "Why measurement definitions and exclusions cause more disputes than the number.",
+    "What you do - commercially and technically - when you breach."
+  ],
+  "questions": [
+    {
+      "id": 184,
+      "slug": "what-is-the-difference-between-an-sla-an-slo-an-sli-and-an-ola",
+      "title": "What is the difference between an SLA, an SLO, an SLI, and an OLA?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "sla-management",
+        "interview-questions"
+      ],
+      "path": "sla-management/what-is-the-difference-between-an-sla-an-slo-an-sli-and-an-ola.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/what-is-the-difference-between-an-sla-an-slo-an-sli-and-an-ola.md",
+      "shortAnswer": "An SLI is the measurement, an SLO is the internal target for that measurement, an SLA is the external contract with a consequence attached, and an OLA is the internal agreement between teams that makes the SLA achievable. The SLO is always stricter than the SLA, so you have room to react before money is at stake.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 185,
+      "slug": "how-do-you-calculate-allowed-downtime-for-an-availability-target",
+      "title": "How do you calculate allowed downtime for an availability target?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "sla-management",
+        "interview-questions"
+      ],
+      "path": "sla-management/how-do-you-calculate-allowed-downtime-for-an-availability-target.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/how-do-you-calculate-allowed-downtime-for-an-availability-target.md",
+      "shortAnswer": "Allowed downtime is `(1 − target) × window`. For 99.9% over a 30-day month that is `0.001 × 43,200 minutes ≈ 43.2 minutes`. Know the common values by heart, and be precise about the window (30 days versus a calendar month versus a year) because the same percentage yields very different budgets.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 186,
+      "slug": "how-do-you-calculate-composite-availability-across-dependencies",
+      "title": "How do you calculate composite availability across dependencies?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "sla-management",
+        "interview-questions"
+      ],
+      "path": "sla-management/how-do-you-calculate-composite-availability-across-dependencies.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/how-do-you-calculate-composite-availability-across-dependencies.md",
+      "shortAnswer": "Components in series multiply (`A × B × C`), so availability always falls; redundant components in parallel combine as `1 − (1−A)^n`, so availability rises. Model the request path as a graph of serial and parallel segments, and the result is the ceiling on any SLA you can honestly offer.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 187,
+      "slug": "what-belongs-in-a-well-written-sla",
+      "title": "What belongs in a well-written SLA?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "sla-management",
+        "interview-questions"
+      ],
+      "path": "sla-management/what-belongs-in-a-well-written-sla.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/what-belongs-in-a-well-written-sla.md",
+      "shortAnswer": "Scope, a precise measurement method, the targets, exclusions, the remedy, the claim process, and a review clause. The number is the least interesting part - most disputes are about how availability was measured and whether an exclusion applied, so those clauses are where engineering input matters most.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 540,
+          "slug": "what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits",
+          "title": "What is Semantic Release and how does it automate versioning and changelogs from commits?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 188,
+      "slug": "how-do-service-credits-work",
+      "title": "How do service credits work?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "sla-management",
+        "interview-questions"
+      ],
+      "path": "sla-management/how-do-service-credits-work.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/how-do-service-credits-work.md",
+      "shortAnswer": "A service credit is a percentage of the affected period's fees credited back (usually against future invoices, not as cash) when measured availability falls below the committed tier - typically 10% for a small miss, rising to 25–100% for severe ones, capped at the monthly fee, and usually claimable only if the customer files within a stated window. They are the standard remedy precisely because they are bounded and predictable.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 189,
+      "slug": "how-do-you-report-sla-compliance-to-customers",
+      "title": "How do you report SLA compliance to customers?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "sla-management",
+        "interview-questions"
+      ],
+      "path": "sla-management/how-do-you-report-sla-compliance-to-customers.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/how-do-you-report-sla-compliance-to-customers.md",
+      "shortAnswer": "Publish availability from the same measurement the contract defines, automatically and on a schedule: a live status page driven by monitoring rather than by hand, a monthly compliance figure per service and region, and an incident history with timestamps and post-incident summaries. Manual reporting is slow, disputed, and - during an incident - always late.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 190,
+      "slug": "what-do-you-do-when-you-breach-an-sla",
+      "title": "What do you do when you breach an SLA?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "sla-management",
+        "interview-questions"
+      ],
+      "path": "sla-management/what-do-you-do-when-you-breach-an-sla.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/what-do-you-do-when-you-breach-an-sla.md",
+      "shortAnswer": "Establish the facts precisely (which customers, which window, measured against the contractual definition), notify proactively rather than waiting for a claim, apply the credits the contract requires, deliver a post-incident review with committed remediation, and then treat the underlying cause as prioritised engineering work with a named owner and a date.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 724,
+      "slug": "what-is-the-difference-between-an-sla-an-slo-and-an-ola",
+      "title": "What is the Difference Between an SLA, an SLO, and an OLA?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sla-management",
+        "sla",
+        "slo",
+        "ola"
+      ],
+      "path": "sla-management/what-is-the-difference-between-an-sla-an-slo-and-an-ola.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/what-is-the-difference-between-an-sla-an-slo-and-an-ola.md",
+      "shortAnswer": "An SLA is a legally binding customer contract with financial penalties for downtime. An SLO is an internal engineering reliability target stricter than the SLA. An OLA (Operational Level Agreement) is an internal contract between internal teams defining dependencies and response times required to meet the SLO.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why should an organization's internal Service Level Objective (SLO) always be stricter than its customer-facing Service Level Agreement (SLA)?",
+        "options": [
+          "Because internal monitoring tools calculate time zones differently than customer clocks.",
+          "To provide an operational safety margin that allows engineering teams to detect and remediate failures before legally binding financial penalties are triggered.",
+          "To prevent developers from using version control systems during deployments.",
+          "Because cloud providers prohibit aligning SLOs with SLAs."
+        ],
+        "answerIndex": 1,
+        "explanation": "If your SLO is 99.9% and your SLA is 99.9%, the moment your internal budget is exhausted you are already incurring contractual liabilities and customer penalties. Stricter SLOs provide a critical buffer."
+      }
+    },
+    {
+      "id": 725,
+      "slug": "how-are-service-credits-and-penalties-structured-in-enterprise-cloud-slas",
+      "title": "How Are Service Credits and Penalties Structured in Enterprise Cloud SLAs?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sla-management",
+        "service-credits",
+        "cloud-contracts"
+      ],
+      "path": "sla-management/how-are-service-credits-and-penalties-structured-in-enterprise-cloud-slas.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/how-are-service-credits-and-penalties-structured-in-enterprise-cloud-slas.md",
+      "shortAnswer": "Service credits are non-cash contractual discounts applied to future billing cycles when availability falls below agreed thresholds. They scale tier-by-tier based on downtime severity, require customer claim submissions with evidence, and cap maximum vendor liability.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "In enterprise cloud agreements, what does the 'sole and exclusive remedy' clause typically mean regarding SLA breaches?",
+        "options": [
+          "The customer can unilaterally terminate the vendor's cloud data centers.",
+          "Service credits on future bills represent the only compensation available to the customer for downtime, preventing claims for indirect business loss or lost revenue.",
+          "The vendor must replace all customer physical servers free of charge.",
+          "The cloud provider automatically pays the customer double their monthly contract value in cash."
+        ],
+        "answerIndex": 1,
+        "explanation": "The 'sole and exclusive remedy' clause stipulates that service credits are the only financial redress for outages, shielding providers from liability for consequential damages such as lost customer revenue or reputation harm."
+      }
+    },
+    {
+      "id": 726,
+      "slug": "how-do-you-account-for-force-majeure-and-third-party-provider-outages-in-slas",
+      "title": "How Do You Account for Force Majeure and Third-Party Provider Outages in SLAs?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sla-management",
+        "force-majeure",
+        "third-party-risk"
+      ],
+      "path": "sla-management/how-do-you-account-for-force-majeure-and-third-party-provider-outages-in-slas.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/how-do-you-account-for-force-majeure-and-third-party-provider-outages-in-slas.md",
+      "shortAnswer": "SLA contracts account for external risks through explicit exclusion clauses covering force majeure events (natural disasters, war, major internet infrastructure blackouts) and upstream third-party dependencies, supported by multi-vendor redundancy or customer pass-through terms.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 237,
+          "slug": "how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines",
+          "title": "How do you prevent and handle secret leaks in CI/CD pipelines?",
+          "topic": "cicd"
+        },
+        {
+          "id": 532,
+          "slug": "what-is-pipeline-as-code-and-how-do-modern-ci-systems-validate-and-isolate-pipeline-runs",
+          "title": "What is Pipeline as Code and how do modern CI systems validate and isolate pipeline runs?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Why are standard cloud provider regional outages (e.g., AWS us-east-1 failing) typically NOT eligible for Force Majeure relief in enterprise contracts?",
+        "options": [
+          "Because cloud providers do not use physical data centers.",
+          "Because regional cloud outages are foreseeable operational risks that can be mitigated through multi-region or resilient architectural design.",
+          "Because Force Majeure only applies to open-source software licenses.",
+          "Because cloud contracts require judicial approval before any outage occurs."
+        ],
+        "answerIndex": 1,
+        "explanation": "Force Majeure applies only to unforeseeable, unavoidable events like natural catastrophes or war. Cloud infrastructure disruptions are foreseeable operational risks that enterprises expect vendors to engineer around."
+      }
+    },
+    {
+      "id": 727,
+      "slug": "how-do-you-reconcile-multi-region-uptime-guarantees-with-underlying-cloud-provider-slas",
+      "title": "How Do You Reconcile Multi-Region Uptime Guarantees with Underlying Cloud Provider SLAs?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sla-management",
+        "multi-region",
+        "composite-availability"
+      ],
+      "path": "sla-management/how-do-you-reconcile-multi-region-uptime-guarantees-with-underlying-cloud-provider-slas.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/how-do-you-reconcile-multi-region-uptime-guarantees-with-underlying-cloud-provider-slas.md",
+      "shortAnswer": "Reconciling multi-region guarantees requires calculating parallel composite availability across regions, identifying single-point-of-failure shared global dependencies (DNS, IAM, control planes), and offering an application SLA that leaves an adequate risk margin above calculated limits.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why can an application deployed across two 99.9% cloud regions still fail to achieve a 99.99% overall SLA?",
+        "options": [
+          "Because multi-region deployments require twice the number of developer commits.",
+          "Because global shared serial dependencies (such as DNS, IAM, or centralized databases) limit total composite availability to their individual lower SLAs.",
+          "Because cloud providers automatically void SLAs when traffic crosses regional boundaries.",
+          "Because TCP connections cannot route between geographic regions."
+        ],
+        "answerIndex": 1,
+        "explanation": "Even if regional compute is redundant in parallel, any shared global component (such as Route 53, an identity provider, or a global database) acts as a serial bottleneck that bounds the overall composite availability."
+      }
+    },
+    {
+      "id": 728,
+      "slug": "how-do-you-design-customer-facing-status-pages-and-real-time-sla-transparency",
+      "title": "How Do You Design Customer-Facing Status Pages and Real-Time SLA Transparency?",
+      "topic": "sla-management",
+      "category": "SLA Management",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "sla-management",
+        "status-page",
+        "incident-communication"
+      ],
+      "path": "sla-management/how-do-you-design-customer-facing-status-pages-and-real-time-sla-transparency.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/sla-management/how-do-you-design-customer-facing-status-pages-and-real-time-sla-transparency.md",
+      "shortAnswer": "Customer status pages provide transparent, real-time communication during incidents while shielding sensitive internal telemetry. They must be hosted on separate external infrastructure from the main platform to remain operational during major outages.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the most critical architectural requirement when deploying a customer-facing incident status page?",
+        "options": [
+          "It must run inside the exact same Kubernetes cluster as the production application.",
+          "It must be hosted completely out-of-band on independent external infrastructure and DNS so it remains operational during core platform outages.",
+          "It must display unredacted database connection logs directly to the public.",
+          "It must update only once every 24 hours to prevent customer concern."
+        ],
+        "answerIndex": 1,
+        "explanation": "If your status page is hosted on the same infrastructure or relies on the same DNS as your production app, a major outage will bring down the status page as well, leaving customers with zero communication."
+      }
+    }
+  ]
+}

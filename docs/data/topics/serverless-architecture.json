@@ -1,0 +1,705 @@
+{
+  "schemaVersion": 1,
+  "slug": "serverless-architecture",
+  "title": "Serverless Architecture",
+  "group": "Architecture and Scale",
+  "description": "Functions as a service, the operational model behind them, and the design patterns that keep serverless workloads fast and cheap.",
+  "studyNotes": [
+    "Cold starts and how to mitigate them.",
+    "Statelessness, idempotency, and event-source semantics.",
+    "When serverless is the wrong choice."
+  ],
+  "questions": [
+    {
+      "id": 106,
+      "slug": "what-is-serverless-computing",
+      "title": "What is Serverless Computing?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "serverless-architecture",
+        "interview-questions"
+      ],
+      "path": "serverless-architecture/what-is-serverless-computing.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/what-is-serverless-computing.md",
+      "shortAnswer": "Serverless is a cloud execution model where the provider fully manages the servers - provisioning, scaling, and patching - and you are billed only for actual execution, scaling to zero when idle. Servers still exist; you simply never operate them.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 107,
+      "slug": "what-is-aws-lambda",
+      "title": "What is AWS Lambda?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "serverless-architecture",
+        "interview-questions"
+      ],
+      "path": "serverless-architecture/what-is-aws-lambda.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/what-is-aws-lambda.md",
+      "shortAnswer": "AWS Lambda is Amazon's function-as-a-service platform. You upload code as a zip or container image, configure memory and a trigger, and AWS runs it on demand - scaling automatically and billing per millisecond of execution.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 108,
+      "slug": "what-are-the-benefits-of-serverless",
+      "title": "What are the benefits of Serverless?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "serverless-architecture",
+        "interview-questions"
+      ],
+      "path": "serverless-architecture/what-are-the-benefits-of-serverless.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/what-are-the-benefits-of-serverless.md",
+      "shortAnswer": "No infrastructure to operate, automatic scaling from zero to peak, pay-only-for-use billing, faster time to market, and built-in high availability - letting small teams ship production services without an operations burden.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 109,
+      "slug": "what-are-serverless-best-practices",
+      "title": "What are Serverless Best Practices?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "serverless-architecture",
+        "interview-questions"
+      ],
+      "path": "serverless-architecture/what-are-serverless-best-practices.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/what-are-serverless-best-practices.md",
+      "shortAnswer": "Keep functions small and single-purpose, make handlers idempotent, initialise expensive resources outside the handler, mind cold starts, apply least-privilege IAM per function, and instrument everything with structured logs and traces.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 110,
+      "slug": "what-is-function-as-a-service-faas",
+      "title": "What is Function as a Service (FaaS)?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "serverless-architecture",
+        "interview-questions"
+      ],
+      "path": "serverless-architecture/what-is-function-as-a-service-faas.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/what-is-function-as-a-service-faas.md",
+      "shortAnswer": "FaaS is the compute model at the heart of serverless: you deploy individual functions that the platform executes in response to events, scaling each independently and billing only for execution time.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 303,
+      "slug": "how-do-you-design-a-serverless-system-for-production",
+      "title": "How do you design a serverless system for production?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "serverless-architecture",
+        "interview-questions"
+      ],
+      "path": "serverless-architecture/how-do-you-design-a-serverless-system-for-production.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/how-do-you-design-a-serverless-system-for-production.md",
+      "shortAnswer": "Design for the four things that separate a demo from production: **idempotency** (every event source retries and may deliver twice, so every handler must tolerate duplicates), **concurrency and downstream limits** (a Lambda scaling to 1,000 will exhaust a database's connections long before it exhausts itself), **failure handling** (dead-letter queues, retry policy, and partial batch failure), and **cold-start latency** where it is user-facing (provisioned concurrency, smaller packages, or a different compute model). Add per-function least-privilege IAM, distributed tracing, and a per-function cost model, and the architecture holds.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 423,
+      "slug": "how-do-you-monitor-and-debug-a-serverless-application",
+      "title": "How do you monitor and debug a serverless application?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "serverless-architecture",
+        "interview-questions",
+        "monitoring-and-logging",
+        "aws-engineering",
+        "infrastructure-monitoring"
+      ],
+      "path": "serverless-architecture/how-do-you-monitor-and-debug-a-serverless-application.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/how-do-you-monitor-and-debug-a-serverless-application.md",
+      "shortAnswer": "You cannot SSH into a function, so observability has to be designed in rather than added later. Instrument three layers: **the platform metrics** (invocations, errors, duration, throttles, concurrency, and - critically - dead-letter and destination failures), **structured JSON logs with a correlation ID** propagated across every hop, and **distributed tracing** (X-Ray, or OpenTelemetry to your own backend) because a serverless request is a chain of managed services rather than one process. Then alert on the things unique to this model: **throttles** (`Throttles > 0` means requests were rejected, not slow), **async retry exhaustion and DLQ depth** (silent data loss otherwise), **iterator age** for stream consumers, and **p99 duration approaching the configured timeout**. The recurring debugging traps are asynchronous invocations failing invisibly, cold starts distorting latency percentiles, and downstream connection limits.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 424,
+      "slug": "how-do-you-build-a-ci-cd-pipeline-for-a-serverless-application",
+      "title": "How do you build a CI/CD pipeline for a serverless application?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "serverless-architecture",
+        "interview-questions",
+        "cicd",
+        "aws-engineering",
+        "devops-tools-and-automation"
+      ],
+      "path": "serverless-architecture/how-do-you-build-a-ci-cd-pipeline-for-a-serverless-application.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/how-do-you-build-a-ci-cd-pipeline-for-a-serverless-application.md",
+      "shortAnswer": "Treat the whole application - functions, API definition, queues, tables, permissions - as **one versioned infrastructure artefact** deployed by a framework (AWS SAM, Serverless Framework, CDK, or Terraform), never by uploading a zip by hand. The pipeline builds and packages once, deploys to per-environment **separate accounts**, and promotes the same artefact upward. The serverless-specific parts are: **function versions plus aliases** as the deployment unit, **weighted alias traffic shifting** for canary releases with CloudWatch alarms that auto-roll-back, **short-lived OIDC credentials** instead of stored cloud keys, and testing that leans on real cloud resources in an ephemeral stack because local emulation only proves your code parses.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 655,
+      "slug": "what-are-serverless-cold-starts-and-how-do-runtime-selection-provisioned-concurrency-and-architecture-mitigate-them",
+      "title": "What are Serverless Cold Starts and how do runtime selection, provisioned concurrency, and architecture mitigate them?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "serverless",
+        "aws-lambda",
+        "cold-starts",
+        "performance"
+      ],
+      "path": "serverless-architecture/what-are-serverless-cold-starts-and-how-do-runtime-selection-provisioned-concurrency-and-architecture-mitigate-them.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/what-are-serverless-cold-starts-and-how-do-runtime-selection-provisioned-concurrency-and-architecture-mitigate-them.md",
+      "shortAnswer": "A cold start is the extra latency of a request that has to wait for a new execution environment: the platform creates the sandbox (a Firecracker microVM on Lambda), downloads the code or image, starts the runtime, and runs your initialisation code before the handler. Warm requests reuse an existing environment and skip all of that. Mitigations work at three levels: make init cheap (small packages, lazy loading, fast runtimes), keep environments ready (**provisioned concurrency**) or restore them from a snapshot (**SnapStart** for Java, Python, and .NET), and design so the user-facing path is not waiting (queues, async work, or a container service for steady latency-critical traffic). Since August 2025 Lambda bills the init phase for all functions, so cold starts are now a cost as well as a latency issue.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 515,
+          "slug": "how-does-docker-buildkit-work-and-what-caching-and-build-features-does-it-unlock",
+          "title": "How does Docker BuildKit work and what caching and build features does it unlock?",
+          "topic": "docker"
+        },
+        {
+          "id": 541,
+          "slug": "how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning",
+          "title": "How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?",
+          "topic": "cicd"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "How does AWS Lambda SnapStart dramatically reduce cold start latency for Java applications?",
+        "options": [
+          "By rewriting Java bytecode into Python automatically",
+          "By initializing the JVM ahead of time, taking an encrypted memory snapshot, and restoring new environments from that snapshot, typically in well under a second",
+          "By disabling TLS encryption on outgoing connections",
+          "By running functions exclusively on bare-metal mainframes"
+        ],
+        "answerIndex": 1,
+        "explanation": "SnapStart initializes the Java execution environment, takes an immutable Firecracker VM memory snapshot, and caches it. New instances resume directly from the snapshot, bypassing JVM initialization."
+      }
+    },
+    {
+      "id": 656,
+      "slug": "what-is-the-difference-between-aws-lambda-fargate-and-ec2-compute-models",
+      "title": "What is the difference between AWS Lambda, Fargate, and EC2 compute models?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "aws",
+        "lambda",
+        "fargate",
+        "ec2",
+        "compute"
+      ],
+      "path": "serverless-architecture/what-is-the-difference-between-aws-lambda-fargate-and-ec2-compute-models.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/what-is-the-difference-between-aws-lambda-fargate-and-ec2-compute-models.md",
+      "shortAnswer": "They sit at three points on the control-versus-operations spectrum. **EC2** gives you virtual machines: full control of the OS, instance type, and hardware, and full responsibility for patching, scaling, and capacity. **Fargate** runs containers (under ECS or EKS) without you managing hosts: you size each task or Pod in vCPU and memory and pay per second while it runs. **Lambda** runs functions in response to events, scales per request, bills per millisecond of execution (plus requests), and scales to zero - but caps each invocation at 15 minutes and constrains the runtime environment. Choose by workload shape: event-driven and spiky suits Lambda, long-running containerised services suit Fargate, and specialised hardware, steady high utilisation, or OS-level control suits EC2.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 18,
+          "slug": "what-are-jenkins-pipelines",
+          "title": "What are Jenkins Pipelines?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Which AWS compute option is optimal for a web scraping job that runs for 45 continuous minutes twice a day?",
+        "options": [
+          "AWS Lambda",
+          "AWS Fargate or EC2",
+          "AWS API Gateway",
+          "Amazon S3 Select"
+        ],
+        "answerIndex": 1,
+        "explanation": "AWS Lambda enforces a strict maximum execution timeout of 15 minutes. Jobs exceeding 15 minutes must execute on containerized runners like AWS Fargate, ECS, or EC2."
+      }
+    },
+    {
+      "id": 657,
+      "slug": "how-do-you-manage-relational-database-connections-in-serverless-functions-without-port-exhaustion",
+      "title": "How do you manage relational database connections in serverless functions without port exhaustion?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "serverless",
+        "databases",
+        "rds-proxy",
+        "lambda",
+        "connection-pooling"
+      ],
+      "path": "serverless-architecture/how-do-you-manage-relational-database-connections-in-serverless-functions-without-port-exhaustion.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/how-do-you-manage-relational-database-connections-in-serverless-functions-without-port-exhaustion.md",
+      "shortAnswer": "Each concurrent function instance (on Lambda, each execution environment) holds its own connection, so a burst to 2,000 concurrent executions means up to 2,000 connections - far beyond what PostgreSQL or MySQL can serve, since each connection costs server memory and a process or thread. Fix it in layers: **reuse one connection per execution environment** (open it outside the handler), **cap concurrency** to what the database can absorb, put a **connection pooler** such as RDS Proxy or PgBouncer between the functions and the database, or use a **connectionless interface** (the RDS Data API, or HTTP drivers from serverless Postgres providers). A pooler adds a hop and has its own limits, so it complements concurrency control rather than replacing it.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 539,
+          "slug": "what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity",
+          "title": "What are SLSA (Supply-chain Levels for Software Artifacts) frameworks and how do they verify build integrity?",
+          "topic": "cicd"
+        },
+        {
+          "id": 7,
+          "slug": "what-is-the-difference-between-docker-image-and-docker-container",
+          "title": "What is the difference between Docker Image and Docker Container?",
+          "topic": "docker"
+        },
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does a sudden traffic surge in an AWS Lambda function connecting directly to a standard PostgreSQL RDS instance frequently crash the database?",
+        "options": [
+          "PostgreSQL cannot run inside an Amazon VPC",
+          "Each concurrent Lambda microVM opens a separate TCP database connection, quickly exceeding PostgreSQL's `max_connections` limit",
+          "Lambda functions automatically delete SQL tables on startup",
+          "PostgreSQL does not support JSON data"
+        ],
+        "answerIndex": 1,
+        "explanation": "Because Lambda functions run in independent isolated containers, scaling to 1,000 concurrent invocations attempts to open 1,000 direct database connections, exhausting database memory and connection limits."
+      }
+    },
+    {
+      "id": 658,
+      "slug": "what-are-step-functions-and-how-do-serverless-state-machines-manage-distributed-microservice-workflows",
+      "title": "What are Step Functions and how do serverless state machines manage distributed microservice workflows?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "serverless",
+        "step-functions",
+        "workflows",
+        "aws",
+        "orchestration"
+      ],
+      "path": "serverless-architecture/what-are-step-functions-and-how-do-serverless-state-machines-manage-distributed-microservice-workflows.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/what-are-step-functions-and-how-do-serverless-state-machines-manage-distributed-microservice-workflows.md",
+      "shortAnswer": "AWS Step Functions is a managed workflow orchestrator. You describe a process as a state machine in Amazon States Language (JSON or YAML) - tasks, choices, parallel branches, maps, waits - and the service runs each execution, persisting its state between steps and applying declarative **retries**, **catches**, and **timeouts**. Tasks can call Lambda, ECS, or more than 200 AWS services directly through SDK integrations, often with no Lambda at all. **Standard** workflows run for up to a year with exactly-once step execution and full history; **Express** workflows run for up to five minutes at high volume and lower cost with at-least-once (asynchronous) semantics. The trade-off is lock-in to ASL and per-transition pricing that punishes chatty, fine-grained steps.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 533,
+          "slug": "how-does-openid-connect-oidc-eliminate-long-lived-cloud-credentials-in-ci-cd-pipelines",
+          "title": "How does OpenID Connect (OIDC) eliminate long-lived cloud credentials in CI/CD pipelines?",
+          "topic": "cicd"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 285,
+          "slug": "how-do-you-take-a-monthly-release-process-to-daily-deployments",
+          "title": "How do you take a monthly release process to daily deployments?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Which AWS Step Functions workflow type is designed for processing high-volume event streams (like IoT telemetry) running for under 5 minutes with at-least-once execution?",
+        "options": [
+          "Standard Workflows",
+          "Express Workflows",
+          "Batch Workflows",
+          "Singleton Workflows"
+        ],
+        "answerIndex": 1,
+        "explanation": "Express Workflows are built for high-throughput, short-duration event processing workloads up to 5 minutes, offering significant cost savings over Standard Workflows."
+      }
+    },
+    {
+      "id": 659,
+      "slug": "what-are-event-driven-architectures-with-eventbridge-sqs-and-sns-and-how-do-they-decouple-serverless-systems",
+      "title": "What are Event-Driven architectures with EventBridge, SQS, and SNS and how do they decouple serverless systems?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "serverless",
+        "eventbridge",
+        "sqs",
+        "sns",
+        "event-driven"
+      ],
+      "path": "serverless-architecture/what-are-event-driven-architectures-with-eventbridge-sqs-and-sns-and-how-do-they-decouple-serverless-systems.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/what-are-event-driven-architectures-with-eventbridge-sqs-and-sns-and-how-do-they-decouple-serverless-systems.md",
+      "shortAnswer": "They are three different AWS primitives. **SQS** is a durable queue: messages wait until a consumer processes and deletes them, which buffers load and isolates a slow or failed consumer. **SNS** is push-based pub/sub: one publish fans out to many subscribers (SQS queues, Lambda, HTTP endpoints, email/SMS), with attribute- or payload-based filtering. **EventBridge** is an event bus with rich content-based rules, many AWS and SaaS event sources, schema discovery, archive and replay, and scheduling. They decouple producers from consumers in time (the consumer can be down), in scale (the queue absorbs spikes), and in knowledge (the producer does not know who listens) - at the price of eventual consistency and at-least-once delivery that every consumer must handle.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 268,
+          "slug": "how-do-you-use-jenkins-shared-libraries",
+          "title": "How do you use Jenkins shared libraries?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Which AWS service is best suited for routing events based on complex JSON payload attributes (e.g. `department == 'finance' AND amount > 10000`) across SaaS applications and microservices?",
+        "options": [
+          "Amazon SQS Standard",
+          "Amazon EventBridge",
+          "Amazon DynamoDB Streams",
+          "AWS Direct Connect"
+        ],
+        "answerIndex": 1,
+        "explanation": "Amazon EventBridge is an enterprise event bus featuring advanced JSON content-based filtering rules, schema registries, and native integrations with third-party SaaS providers."
+      }
+    },
+    {
+      "id": 660,
+      "slug": "what-is-localstack-and-how-do-you-test-serverless-cloud-services-locally-in-development-and-ci",
+      "title": "What is LocalStack and how do you test serverless cloud services locally in development and CI?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "serverless",
+        "testing",
+        "localstack",
+        "aws",
+        "docker"
+      ],
+      "path": "serverless-architecture/what-is-localstack-and-how-do-you-test-serverless-cloud-services-locally-in-development-and-ci.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/what-is-localstack-and-how-do-you-test-serverless-cloud-services-locally-in-development-and-ci.md",
+      "shortAnswer": "LocalStack is an AWS emulator that runs in a Docker container and exposes S3, Lambda, DynamoDB, SQS, SNS, EventBridge, API Gateway and many other service APIs on a single endpoint (`http://localhost:4566`), so SDKs, the AWS CLI, Terraform, CDK, and SAM can target it instead of a real account. It gives a fast, cheap, isolated loop for integration tests. Two things to know in 2026: since March 2026 the `localstack/localstack` image requires an auth token (a free tier exists for non-commercial use, and the last token-free community release is 4.4.0), and emulation does not reproduce real IAM enforcement, quotas, latency, or every service behaviour - so it complements, rather than replaces, tests against a real ephemeral stack.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 396,
+          "slug": "how-do-you-speed-up-a-slow-ci-cd-pipeline",
+          "title": "How do you speed up a slow CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 397,
+          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+          "title": "Why does a build pass locally but fail in CI?",
+          "topic": "cicd"
+        },
+        {
+          "id": 534,
+          "slug": "what-is-the-difference-between-artifact-promotion-and-rebuilding-binaries-across-environments",
+          "title": "What is the difference between Artifact Promotion and rebuilding binaries across environments?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary architectural value of using LocalStack in CI/CD pipeline integration tests?",
+        "options": [
+          "It automatically converts serverless code into Kubernetes pods",
+          "It emulates AWS cloud APIs locally in Docker, allowing integration tests to execute offline without cloud costs or IAM credential exposure",
+          "It speeds up physical internet connections",
+          "It replaces the need for Linux operating systems"
+        ],
+        "answerIndex": 1,
+        "explanation": "LocalStack mocks AWS services in a local container, allowing test suites to validate S3, DynamoDB, SQS, and Lambda integrations rapidly without cloud expenditure or live AWS credentials."
+      }
+    }
+  ]
+}

@@ -1,0 +1,759 @@
+{
+  "schemaVersion": 1,
+  "slug": "api-gateway-and-service-mesh",
+  "title": "API Gateway and Service Mesh",
+  "group": "Architecture and Scale",
+  "description": "The API edge: gateway responsibilities, security, rate limiting, and documentation as a first-class artifact.",
+  "studyNotes": [
+    "Gateway versus load balancer versus service mesh.",
+    "Token-bucket rate limiting and how limits are communicated to clients.",
+    "OAuth 2.0, OIDC, and where validation happens."
+  ],
+  "questions": [
+    {
+      "id": 76,
+      "slug": "what-is-an-api-gateway",
+      "title": "What is an API Gateway?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "api-gateway-and-service-mesh",
+        "interview-questions"
+      ],
+      "path": "api-gateway-and-service-mesh/what-is-an-api-gateway.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/what-is-an-api-gateway.md",
+      "shortAnswer": "An API gateway is a single entry point for client traffic that routes requests to backend services while handling cross-cutting concerns - authentication, rate limiting, TLS termination, caching, and observability - in one place.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 77,
+      "slug": "what-are-the-benefits-of-using-api-gateway",
+      "title": "What are the benefits of using API Gateway?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "api-gateway-and-service-mesh",
+        "interview-questions"
+      ],
+      "path": "api-gateway-and-service-mesh/what-are-the-benefits-of-using-api-gateway.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/what-are-the-benefits-of-using-api-gateway.md",
+      "shortAnswer": "It centralises cross-cutting concerns so services stay focused on business logic, decouples clients from internal structure, and gives you one place to enforce security, rate limits, and observability.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 78,
+      "slug": "what-is-api-security",
+      "title": "What is API Security?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "api-gateway-and-service-mesh",
+        "interview-questions"
+      ],
+      "path": "api-gateway-and-service-mesh/what-is-api-security.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/what-is-api-security.md",
+      "shortAnswer": "API security is protecting APIs against unauthorised access and abuse through strong authentication, fine-grained authorisation, transport encryption, input validation, rate limiting, and monitoring - guided by the OWASP API Security Top 10.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 79,
+      "slug": "what-is-rate-limiting",
+      "title": "What is Rate Limiting?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "api-gateway-and-service-mesh",
+        "interview-questions"
+      ],
+      "path": "api-gateway-and-service-mesh/what-is-rate-limiting.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/what-is-rate-limiting.md",
+      "shortAnswer": "Rate limiting caps how many requests a client may make in a time window, protecting backends from overload and abuse, ensuring fair use, and controlling cost.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 80,
+      "slug": "what-is-api-documentation",
+      "title": "What is API Documentation?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "api-gateway-and-service-mesh",
+        "interview-questions"
+      ],
+      "path": "api-gateway-and-service-mesh/what-is-api-documentation.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/what-is-api-documentation.md",
+      "shortAnswer": "API documentation describes how to use an API - endpoints, parameters, schemas, authentication, errors, and examples - and is most valuable when generated from a machine-readable specification such as OpenAPI so it cannot drift from the implementation.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 276,
+      "slug": "how-do-you-run-a-service-mesh-in-production-without-the-sidecar-tax",
+      "title": "How do you run a service mesh in production without the sidecar tax?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "api-gateway-and-service-mesh",
+        "interview-questions"
+      ],
+      "path": "api-gateway-and-service-mesh/how-do-you-run-a-service-mesh-in-production-without-the-sidecar-tax.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/how-do-you-run-a-service-mesh-in-production-without-the-sidecar-tax.md",
+      "shortAnswer": "Be honest about what the mesh is for - usually mTLS, retries, and golden signals - then buy only that. In practice: start with an **ambient / sidecar-less** data plane (Istio ambient mode with ztunnel, or Cilium's eBPF mesh) so the per-Pod proxy cost disappears for L4, add L7 proxies only to the namespaces that genuinely need L7 policy, and treat the mesh config as a versioned API with a progressive rollout of its own.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 427,
+      "slug": "how-do-you-debug-a-service-mesh-that-is-breaking-service-to-service-traffic",
+      "title": "How do you debug a service mesh that is breaking service-to-service traffic?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "api-gateway-and-service-mesh",
+        "interview-questions",
+        "kubernetes",
+        "network-security",
+        "container-orchestration-advanced"
+      ],
+      "path": "api-gateway-and-service-mesh/how-do-you-debug-a-service-mesh-that-is-breaking-service-to-service-traffic.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/how-do-you-debug-a-service-mesh-that-is-breaking-service-to-service-traffic.md",
+      "shortAnswer": "Work out which layer is refusing the request, because a mesh adds three new ones. Read the **sidecar's own response flags** first - Envoy tells you exactly why it failed (`UF` upstream failure, `UO` overflow/circuit-breaker, `URX` retry limit, `UAEX` authorization denied, `NR` no route) - then check, in order: **was the sidecar injected at all** (an uninjected Pod cannot participate in mTLS and gets connection resets), **is the mTLS mode consistent** (`STRICT` on one side and plain text on the other is the classic outage), **does an `AuthorizationPolicy` deny it** (they are default-allow until one selects the workload, then default-deny for that workload), and **do `VirtualService`/`DestinationRule` actually route where you think** - `istioctl proxy-config` shows the effective configuration rather than your intent. The single most useful habit: compare the _intended_ config with the _programmed_ config, because a mesh failure is nearly always a divergence between the two.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        },
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 507,
+      "slug": "what-do-the-common-http-status-codes-mean-and-how-do-you-debug-a-502-503-or-504",
+      "title": "What do the common HTTP status codes mean, and how do you debug a 502, 503, or 504?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "api-gateway-and-service-mesh",
+        "interview-questions",
+        "network-security",
+        "incident-management"
+      ],
+      "path": "api-gateway-and-service-mesh/what-do-the-common-http-status-codes-mean-and-how-do-you-debug-a-502-503-or-504.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/what-do-the-common-http-status-codes-mean-and-how-do-you-debug-a-502-503-or-504.md",
+      "shortAnswer": "The class tells you **whose fault it is**: `2xx` success, `3xx` redirection, **`4xx` the client's request is wrong**, **`5xx` the server failed**. The ones you will actually debug are the 5xx family from a proxy, and they are distinguishable: **502 Bad Gateway** means the proxy reached the backend and got an invalid or empty response (the backend crashed, closed the connection, spoke the wrong protocol, or returned malformed headers); **503 Service Unavailable** means the proxy had **no healthy backend to send to** (all targets failing health checks, no endpoints, the pool is empty, or a rate limiter or circuit breaker is shedding load); **504 Gateway Timeout** means the backend accepted the request but did not respond within the proxy's timeout. So the diagnostic shortcut is: **502 = the backend answered badly, 503 = nothing to answer, 504 = answered too slowly.** Then the debugging order is always the same - reproduce with `curl -v`, read the proxy's access log for the upstream status and timing fields, check backend health and endpoints, then look at the backend's own logs and timeouts.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        },
+        {
+          "id": 539,
+          "slug": "what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity",
+          "title": "What are SLSA (Supply-chain Levels for Software Artifacts) frameworks and how do they verify build integrity?",
+          "topic": "cicd"
+        },
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 615,
+      "slug": "what-is-the-difference-between-an-api-gateway-and-a-service-mesh-and-how-do-they-work-together",
+      "title": "What is the difference between an API Gateway and a Service Mesh and how do they work together?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "api-gateway",
+        "service-mesh",
+        "istio",
+        "envoy",
+        "networking"
+      ],
+      "path": "api-gateway-and-service-mesh/what-is-the-difference-between-an-api-gateway-and-a-service-mesh-and-how-do-they-work-together.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/what-is-the-difference-between-an-api-gateway-and-a-service-mesh-and-how-do-they-work-together.md",
+      "shortAnswer": "An API gateway sits at the edge and handles **north-south** traffic - external clients calling your APIs - with client-facing concerns: authentication of end users and API keys, rate limits and quotas, request transformation, versioning, and developer-portal features. A service mesh handles **east-west** traffic between your own services, adding workload identity and mTLS, retries, timeouts, traffic shifting, and uniform telemetry without code changes. They are complementary: the gateway is the front door, and the mesh governs everything behind it. The overlap - both are often Envoy, both can route and retry - is converging through the Kubernetes Gateway API, which configures both.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 517,
+          "slug": "how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation",
+          "title": "How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?",
+          "topic": "docker"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "In enterprise cloud architecture, which tool is responsible for managing East-West communication, including zero-trust mutual TLS (mTLS) between microservices?",
+        "options": [
+          "Public DNS Registrar",
+          "Service Mesh (such as Istio or Linkerd)",
+          "Edge CDN (Content Delivery Network)",
+          "Network Address Translation (NAT) Gateway"
+        ],
+        "answerIndex": 1,
+        "explanation": "Service Meshes govern East-West (service-to-service) internal traffic within clusters, automatically establishing mutual TLS encryption and enforcing service communication policies."
+      }
+    },
+    {
+      "id": 616,
+      "slug": "how-does-envoy-proxy-function-as-the-universal-data-plane-in-modern-cloud-infrastructure",
+      "title": "How does Envoy Proxy function as the universal data plane in modern cloud infrastructure?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "envoy",
+        "proxy",
+        "service-mesh",
+        "data-plane"
+      ],
+      "path": "api-gateway-and-service-mesh/how-does-envoy-proxy-function-as-the-universal-data-plane-in-modern-cloud-infrastructure.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/how-does-envoy-proxy-function-as-the-universal-data-plane-in-modern-cloud-infrastructure.md",
+      "shortAnswer": "Envoy is a C++ L4/L7 proxy (a CNCF graduated project) built to be configured at runtime by a control plane. Its configuration is split into listeners, routes, clusters, endpoints, and secrets, each delivered over the **xDS** APIs as a gRPC stream, so backends, routes, and certificates change without restarts or dropped connections. Because so many control planes speak xDS - Istio, Envoy Gateway, Consul, Contour, Gloo, and several cloud load balancers - Envoy has become the common data plane for gateways and meshes. The price is a large, complex configuration surface that you almost never write by hand.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 19,
+          "slug": "what-is-gitlab-ci",
+          "title": "What is GitLab CI?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What capability of Envoy's Endpoint Discovery Service (EDS) made it superior to traditional reverse proxies in dynamic Kubernetes environments?",
+        "options": [
+          "It eliminates the need for Linux network interfaces",
+          "It dynamically updates target Pod IP addresses in memory via gRPC streams without requiring process restarts or dropped connections",
+          "It compiles PHP scripts into C++ automatically",
+          "It allows containers to run without IP addresses"
+        ],
+        "answerIndex": 1,
+        "explanation": "In rapidly auto-scaling Kubernetes clusters, pod IPs change continuously. Envoy's EDS updates internal routing tables on the fly over gRPC without reloading the proxy process."
+      }
+    },
+    {
+      "id": 617,
+      "slug": "what-is-mutual-tls-mtls-and-how-does-a-service-mesh-automate-certificate-issuance-and-rotation",
+      "title": "What is Mutual TLS (mTLS) and how does a Service Mesh automate certificate issuance and rotation?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "service-mesh",
+        "mtls",
+        "security",
+        "certificates",
+        "istio"
+      ],
+      "path": "api-gateway-and-service-mesh/what-is-mutual-tls-mtls-and-how-does-a-service-mesh-automate-certificate-issuance-and-rotation.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/what-is-mutual-tls-mtls-and-how-does-a-service-mesh-automate-certificate-issuance-and-rotation.md",
+      "shortAnswer": "In ordinary TLS only the server presents a certificate; in **mutual TLS** the client does too, so each side cryptographically proves its identity and the connection is encrypted. A service mesh automates the painful part: its control plane runs a certificate authority, each workload's proxy (or node-level ztunnel) proves which Kubernetes service account it runs as, receives a short-lived X.509 certificate carrying a **SPIFFE ID**, and renews it automatically well before expiry - in Istio the default workload certificate lifetime is 24 hours. The application keeps speaking plain HTTP to its local proxy. The limits: the mesh only secures hops that go through the mesh, and the root of trust (the CA key) becomes one of your most sensitive assets.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 533,
+          "slug": "how-does-openid-connect-oidc-eliminate-long-lived-cloud-credentials-in-ci-cd-pipelines",
+          "title": "How does OpenID Connect (OIDC) eliminate long-lived cloud credentials in CI/CD pipelines?",
+          "topic": "cicd"
+        },
+        {
+          "id": 539,
+          "slug": "what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity",
+          "title": "What are SLSA (Supply-chain Levels for Software Artifacts) frameworks and how do they verify build integrity?",
+          "topic": "cicd"
+        },
+        {
+          "id": 513,
+          "slug": "how-does-docker-multi-stage-building-optimize-container-security-and-image-size",
+          "title": "How does Docker multi-stage building optimize container security and image size?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary operational advantage of delegating mTLS encryption to a Service Mesh sidecar rather than implementing it in application code?",
+        "options": [
+          "Sidecars allow applications to bypass certificate expiration dates",
+          "Developers can write simple HTTP application code while sidecars handle certificate generation, rotation, and encryption transparently without code changes",
+          "Service mesh mTLS requires no CPU compute power",
+          "Sidecars eliminate the need for Kubernetes ServiceAccounts"
+        ],
+        "answerIndex": 1,
+        "explanation": "Offloading mTLS to sidecar proxies frees application teams from managing TLS libraries, private keys, and rotation logic across different programming languages."
+      }
+    },
+    {
+      "id": 618,
+      "slug": "what-are-ambient-mesh-and-sidecarless-service-mesh-architectures-and-why-were-they-developed",
+      "title": "What are Ambient Mesh and Sidecarless service mesh architectures and why were they developed?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "service-mesh",
+        "ambient-mesh",
+        "istio",
+        "ebpf",
+        "cilium"
+      ],
+      "path": "api-gateway-and-service-mesh/what-are-ambient-mesh-and-sidecarless-service-mesh-architectures-and-why-were-they-developed.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/what-are-ambient-mesh-and-sidecarless-service-mesh-architectures-and-why-were-they-developed.md",
+      "shortAnswer": "A sidecarless mesh moves the proxy out of every Pod. Istio's **ambient mode** (generally available since Istio 1.24) splits the data plane into a per-node **ztunnel** that provides mTLS, workload identity, and L4 authorisation for every enrolled Pod, and optional **waypoint** proxies (Envoy) deployed per namespace or per service only where L7 features are needed. Cilium takes a similar approach with eBPF in the kernel plus a per-node Envoy for L7. The motivation was the sidecar tax - memory and CPU per Pod, Pod restarts to join or upgrade the mesh, and lifecycle races - at the cost of a shared, node-level component whose failure or compromise affects every Pod on that node.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Which operational challenge of traditional sidecar service meshes did Istio Ambient Mesh solve by introducing node-level ztunnels?",
+        "options": [
+          "It eliminated the need for Linux operating systems",
+          "It eliminated the requirement to inject sidecar containers and restart every application Pod to enable mTLS",
+          "It forced all microservices to use gRPC exclusively",
+          "It banned the use of network encryption"
+        ],
+        "answerIndex": 1,
+        "explanation": "Ambient mesh uses node-level proxies, allowing clusters to enable zero-trust mTLS encryption without injecting sidecar containers or restarting application workloads."
+      }
+    },
+    {
+      "id": 619,
+      "slug": "what-is-traffic-shadowing-mirroring-and-how-is-it-used-for-zero-risk-production-testing",
+      "title": "What is Traffic Shadowing (Mirroring) and how is it used for zero-risk production testing?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "traffic-shadowing",
+        "mirroring",
+        "envoy",
+        "testing",
+        "canary"
+      ],
+      "path": "api-gateway-and-service-mesh/what-is-traffic-shadowing-mirroring-and-how-is-it-used-for-zero-risk-production-testing.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/what-is-traffic-shadowing-mirroring-and-how-is-it-used-for-zero-risk-production-testing.md",
+      "shortAnswer": "Traffic shadowing copies live requests to a candidate version of a service while the stable version keeps answering the user. The proxy (Envoy via Istio, the Gateway API `RequestMirror` filter, NGINX `mirror`) sends the copy fire-and-forget and discards the candidate's response, so you see how new code behaves on real payloads and real load without users seeing its output. It is low-risk rather than zero-risk: any side effect the candidate performs - database writes, payments, emails, messages - happens for real, and the mirrored load hits shared dependencies.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 536,
+          "slug": "how-do-you-detect-isolate-and-eradicate-flaky-tests-in-a-ci-cd-pipeline",
+          "title": "How do you detect, isolate, and eradicate flaky tests in a CI/CD pipeline?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What critical precaution must engineering teams take when enabling Traffic Shadowing to a new version of a payment service?",
+        "options": [
+          "Disabling all database read operations",
+          "Mocking or disabling external payment gateway calls in the candidate service to prevent real customers from being charged twice",
+          "Converting all HTTPS traffic to plain text HTTP",
+          "Ensuring the candidate service runs in the same container as the production service"
+        ],
+        "answerIndex": 1,
+        "explanation": "Because traffic shadowing replays real production payloads, if the new service connects to real third-party APIs (like Stripe), it will execute duplicate credit card charges unless external calls are mocked."
+      }
+    },
+    {
+      "id": 620,
+      "slug": "how-do-you-implement-canary-releases-with-weighted-traffic-shifting-in-an-api-gateway",
+      "title": "How do you implement Canary Releases with weighted traffic shifting in an API Gateway?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "canary",
+        "traffic-shifting",
+        "api-gateway",
+        "progressive-delivery"
+      ],
+      "path": "api-gateway-and-service-mesh/how-do-you-implement-canary-releases-with-weighted-traffic-shifting-in-an-api-gateway.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/how-do-you-implement-canary-releases-with-weighted-traffic-shifting-in-an-api-gateway.md",
+      "shortAnswer": "Run the new version beside the stable one and let the gateway split requests by **weight** (for example 95/5) at layer 7, so the canary's traffic share is independent of how many replicas each version has. A controller such as Argo Rollouts or Flagger then moves the weights step by step - 1%, 5%, 25%, 50%, 100% - evaluating error rate and latency at each step and resetting the weight to 0 if the canary misbehaves. The limits: weights are statistical (a low-traffic service may never produce a meaningful sample), and both versions must work against the same database schema.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 18,
+          "slug": "what-are-jenkins-pipelines",
+          "title": "What are Jenkins Pipelines?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Why is L7 API Gateway traffic shifting superior to native Kubernetes RollingUpdate deployments for canary testing?",
+        "options": [
+          "Kubernetes rolling updates cannot run in the cloud",
+          "L7 gateways allow routing precise percentages of traffic (e.g. 1%) regardless of how many pod replicas exist, while rolling updates couple traffic to replica count",
+          "Rolling updates require purchasing third-party enterprise licenses",
+          "L7 gateways automatically rewrite application code"
+        ],
+        "answerIndex": 1,
+        "explanation": "In standard Kubernetes, achieving 1% traffic to a canary requires running 99 stable pods and 1 canary pod. L7 gateways route fractional traffic weights across arbitrary replica sizes."
+      }
+    },
+    {
+      "id": 621,
+      "slug": "what-is-fault-injection-testing-and-how-is-it-executed-via-a-service-mesh",
+      "title": "What is Fault Injection testing and how is it executed via a Service Mesh?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "service-mesh",
+        "chaos-engineering",
+        "fault-injection",
+        "envoy"
+      ],
+      "path": "api-gateway-and-service-mesh/what-is-fault-injection-testing-and-how-is-it-executed-via-a-service-mesh.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/what-is-fault-injection-testing-and-how-is-it-executed-via-a-service-mesh.md",
+      "shortAnswer": "Fault injection deliberately adds latency or returns errors on real calls to test whether callers handle a slow or failing dependency - timeouts, retries, circuit breakers, fallbacks - before a real outage tests it for you. A service mesh does this in the proxy (Istio's `VirtualService` `fault` block, or Envoy's fault filter), so no application code changes and the fault can be scoped to a percentage of requests, a header, or a single caller. It exercises the network path only: it cannot simulate a crashed Pod, a full disk, or a slow database query inside the service.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 20,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary benefit of performing Chaos Engineering fault injection at the Service Mesh proxy layer rather than modifying application code?",
+        "options": [
+          "Fault injection causes permanent database corruption",
+          "It allows testing resilience against timeouts and 5xx errors across any programming language without polluting production application source code",
+          "Service mesh fault injection can only be run on local developer laptops",
+          "It guarantees 100% server uptime"
+        ],
+        "answerIndex": 1,
+        "explanation": "Because the service mesh sidecar intercepts network traffic, engineers can inject latency and HTTP failures transparently into any service, regardless of language or framework."
+      }
+    }
+  ]
+}

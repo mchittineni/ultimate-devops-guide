@@ -1,0 +1,555 @@
+{
+  "schemaVersion": 1,
+  "slug": "core-devops-concepts",
+  "title": "Core DevOps Concepts",
+  "group": "Foundations",
+  "description": "The vocabulary every DevOps interview opens with: what DevOps actually changes, why it exists, and how CI, continuous delivery, and continuous deployment differ.",
+  "studyNotes": [
+    "Can you define DevOps without listing tools?",
+    "The precise boundary between continuous delivery and continuous deployment.",
+    "Which business metrics improve, and how you would measure them."
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "slug": "what-is-devops",
+      "title": "What is DevOps?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "core-devops-concepts",
+        "interview-questions"
+      ],
+      "path": "core-devops-concepts/what-is-devops.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-is-devops.md",
+      "shortAnswer": "DevOps is a set of cultural practices, working agreements, and automation that shortens the time between committing a change and running it safely in production, while keeping the system reliable.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 20,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 2,
+      "slug": "what-are-the-benefits-of-devops",
+      "title": "What are the benefits of DevOps?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "core-devops-concepts",
+        "interview-questions"
+      ],
+      "path": "core-devops-concepts/what-are-the-benefits-of-devops.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-are-the-benefits-of-devops.md",
+      "shortAnswer": "Faster and more frequent delivery, lower change failure rate, quicker recovery from incidents, and better collaboration - benefits that compound because small, frequent changes are inherently safer than large, rare ones.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 19,
+          "slug": "what-is-gitlab-ci",
+          "title": "What is GitLab CI?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 3,
+      "slug": "what-is-continuous-integration",
+      "title": "What is Continuous Integration?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "core-devops-concepts",
+        "interview-questions"
+      ],
+      "path": "core-devops-concepts/what-is-continuous-integration.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-is-continuous-integration.md",
+      "shortAnswer": "Continuous Integration is the practice of merging every developer's work into a shared mainline at least daily, where an automated build and test suite verifies each merge within minutes.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 18,
+          "slug": "what-are-jenkins-pipelines",
+          "title": "What are Jenkins Pipelines?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 4,
+      "slug": "what-is-continuous-delivery",
+      "title": "What is Continuous Delivery?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "core-devops-concepts",
+        "interview-questions"
+      ],
+      "path": "core-devops-concepts/what-is-continuous-delivery.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-is-continuous-delivery.md",
+      "shortAnswer": "Continuous Delivery extends CI so that every build that passes the pipeline is a release candidate - deployable to production at any moment by pressing a button. The decision to release stays with a human.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 18,
+          "slug": "what-are-jenkins-pipelines",
+          "title": "What are Jenkins Pipelines?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 5,
+      "slug": "what-is-continuous-deployment",
+      "title": "What is Continuous Deployment?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "core-devops-concepts",
+        "interview-questions"
+      ],
+      "path": "core-devops-concepts/what-is-continuous-deployment.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-is-continuous-deployment.md",
+      "shortAnswer": "Continuous Deployment removes the manual approval from continuous delivery: every change that passes the automated pipeline goes to production automatically, with no human in the loop.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 18,
+          "slug": "what-are-jenkins-pipelines",
+          "title": "What are Jenkins Pipelines?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 285,
+      "slug": "how-do-you-take-a-monthly-release-process-to-daily-deployments",
+      "title": "How do you take a monthly release process to daily deployments?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "core-devops-concepts",
+        "interview-questions"
+      ],
+      "path": "core-devops-concepts/how-do-you-take-a-monthly-release-process-to-daily-deployments.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/how-do-you-take-a-monthly-release-process-to-daily-deployments.md",
+      "shortAnswer": "Attack batch size and the confidence gap together. Make releases smaller and more frequent only as fast as you can make them _safe_: automated tests that people trust, a one-command reversible deploy, decoupling of deploy from release via feature flags, and observability good enough to detect a bad change in minutes. The sequence is measure → automate the tests → shrink the batch → decouple release from deploy → remove the manual gate. Skipping to the last step is how organisations get a monthly outage cadence instead.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 20,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "cicd"
+        },
+        {
+          "id": 396,
+          "slug": "how-do-you-speed-up-a-slow-ci-cd-pipeline",
+          "title": "How do you speed up a slow CI/CD pipeline?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 508,
+      "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+      "title": "What is GitOps and how does it fundamentally change release management?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "core-devops-concepts",
+        "gitops",
+        "argocd",
+        "kubernetes",
+        "declarative"
+      ],
+      "path": "core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md",
+      "shortAnswer": "GitOps is an operational framework where Git is the single source of truth for declared infrastructure and application state, coupled with automated software agents in the target environment that pull changes and continuously reconcile actual state with desired state.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 535,
+          "slug": "what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup",
+          "title": "What are ephemeral preview environments and how do you manage their lifecycle and cleanup?",
+          "topic": "cicd"
+        },
+        {
+          "id": 553,
+          "slug": "what-is-the-difference-between-declarative-and-imperative-infrastructure-as-code",
+          "title": "What is the difference between declarative and imperative Infrastructure as Code?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 555,
+          "slug": "what-is-cloud-drift-and-how-do-you-continuously-detect-and-reconcile-it-in-production",
+          "title": "What is Cloud Drift and how do you continuously detect and reconcile it in production?",
+          "topic": "infrastructure-as-code"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary security benefit of pull-based GitOps compared to push-based CI/CD?",
+        "options": [
+          "Deployments complete faster because containers start simultaneously",
+          "The CI system does not need persistent credentials or firewall access into the target cluster",
+          "Git repositories automatically encrypt all application secrets on push",
+          "Pull-based deployment eliminates the need for Kubernetes RBAC"
+        ],
+        "answerIndex": 1,
+        "explanation": "In pull-based GitOps, an agent running inside the cluster pulls manifests from Git, meaning no external CI system needs cluster admin credentials or open inbound ports."
+      }
+    },
+    {
+      "id": 509,
+      "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+      "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "core-devops-concepts",
+        "progressive-delivery",
+        "canary",
+        "feature-flags",
+        "deployment"
+      ],
+      "path": "core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md",
+      "shortAnswer": "Progressive delivery extends continuous delivery by decoupling deployment (installing code in production) from release (exposing features to users), controlling blast radius through canary rollouts, traffic shifting, and feature flags based on real-time telemetry.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 18,
+          "slug": "what-are-jenkins-pipelines",
+          "title": "What are Jenkins Pipelines?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "How does progressive delivery decouple software deployment from software release?",
+        "options": [
+          "By compiling code directly on the host machine before distribution",
+          "By installing code into production while controlling user exposure through traffic routing and feature flags",
+          "By requiring all deployments to execute exclusively during off-peak weekend hours",
+          "By storing compiled binaries on client machines rather than web servers"
+        ],
+        "answerIndex": 1,
+        "explanation": "Deployment installs the binary/container onto production infrastructure, while release exposes the functionality to users via feature gates and traffic shaping."
+      }
+    },
+    {
+      "id": 510,
+      "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+      "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "core-devops-concepts",
+        "shift-left",
+        "testing",
+        "security",
+        "sdlc"
+      ],
+      "path": "core-devops-concepts/what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc.md",
+      "shortAnswer": "Shift-Left is the practice of moving testing, security audits, compliance, and infrastructure validation earlier into the software development lifecycle, discovering defects when they are orders of magnitude cheaper to fix.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 539,
+          "slug": "what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity",
+          "title": "What are SLSA (Supply-chain Levels for Software Artifacts) frameworks and how do they verify build integrity?",
+          "topic": "cicd"
+        },
+        {
+          "id": 552,
+          "slug": "how-do-you-test-and-validate-infrastructure-as-code-before-applying-changes-to-production",
+          "title": "How do you test and validate Infrastructure as Code before applying changes to production?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 532,
+          "slug": "what-is-pipeline-as-code-and-how-do-modern-ci-systems-validate-and-isolate-pipeline-runs",
+          "title": "What is Pipeline as Code and how do modern CI systems validate and isolate pipeline runs?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary motivation for implementing a Shift-Left approach in DevOps pipelines?",
+        "options": [
+          "Shifting compute workload to developer laptops to save cloud infrastructure costs",
+          "Finding and resolving vulnerabilities and defects earlier when remediation cost and blast radius are lowest",
+          "Eliminating all manual testing and production observability requirements",
+          "Moving production servers geographically closer to end users"
+        ],
+        "answerIndex": 1,
+        "explanation": "Bugs caught in early PR or pre-commit stages avoid customer impact and are significantly cheaper and faster to fix than incidents in production."
+      }
+    },
+    {
+      "id": 511,
+      "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+      "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "core-devops-concepts",
+        "cicd",
+        "continuous-delivery",
+        "continuous-deployment"
+      ],
+      "path": "core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md",
+      "shortAnswer": "In Continuous Delivery, every commit passing automated tests is packaged and ready for release, but promotion to production requires manual business approval; in Continuous Deployment, every passing commit automatically deploys directly to production with no human intervention.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 18,
+          "slug": "what-are-jenkins-pipelines",
+          "title": "What are Jenkins Pipelines?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What distinguishes Continuous Deployment from Continuous Delivery?",
+        "options": [
+          "Continuous Deployment only works with microservices architecture",
+          "Continuous Deployment releases every passing change directly to production without human intervention",
+          "Continuous Delivery does not require automated testing in CI pipelines",
+          "Continuous Delivery builds container images while Continuous Deployment deploys virtual machines"
+        ],
+        "answerIndex": 1,
+        "explanation": "Continuous Delivery guarantees software is always releasable but retains a manual approval step, whereas Continuous Deployment pushes directly to production automatically."
+      }
+    },
+    {
+      "id": 512,
+      "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+      "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "core-devops-concepts",
+        "dora",
+        "metrics",
+        "performance"
+      ],
+      "path": "core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md",
+      "shortAnswer": "DORA's delivery metrics measure throughput (Deployment Frequency, Lead Time for Changes, Failed Deployment Recovery Time) and instability (Change Failure Rate, Rework Rate), and its research consistently finds that the best teams achieve high speed AND high stability together. The metrics are outcomes; the _capabilities_ - technical, process, and cultural practices such as trunk-based development, continuous delivery, loosely coupled architecture, and a generative culture - are what drive them.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 541,
+          "slug": "how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning",
+          "title": "How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?",
+          "topic": "cicd"
+        },
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "According to DORA research, what is the relationship between software delivery speed and production stability?",
+        "options": [
+          "Faster delivery frequency inevitably causes higher change failure rates",
+          "Elite teams achieve both higher deployment frequency and lower change failure rates simultaneously",
+          "Stability can only be maintained by enforcing monthly release change advisory boards",
+          "Lead time for changes has no measurable correlation with mean time to recovery"
+        ],
+        "answerIndex": 1,
+        "explanation": "DORA findings conclusively demonstrate that elite organizations do not compromise stability for speed; small, frequent deployments minimize blast radius and accelerate recovery."
+      }
+    }
+  ]
+}

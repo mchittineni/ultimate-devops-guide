@@ -1,0 +1,768 @@
+{
+  "schemaVersion": 1,
+  "slug": "database-management-in-devops",
+  "title": "Database Management in DevOps",
+  "group": "Architecture and Scale",
+  "description": "Treating schemas as code: version control, migration tooling, backup strategy, and performance tuning.",
+  "studyNotes": [
+    "Running an online schema change with zero downtime.",
+    "Expand/contract migrations and backward compatibility.",
+    "Reading a slow query plan and acting on it."
+  ],
+  "questions": [
+    {
+      "id": 111,
+      "slug": "what-is-database-devops",
+      "title": "What is Database DevOps?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions"
+      ],
+      "path": "database-management-in-devops/what-is-database-devops.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-is-database-devops.md",
+      "shortAnswer": "Database DevOps applies DevOps practices - version control, automated testing, continuous integration, and automated deployment - to database schemas and data, so database changes ship as safely and frequently as application changes.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 112,
+      "slug": "what-is-database-version-control",
+      "title": "What is Database Version Control?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions"
+      ],
+      "path": "database-management-in-devops/what-is-database-version-control.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-is-database-version-control.md",
+      "shortAnswer": "Database version control means keeping schema definitions and change scripts in the same repository as the application, versioned and reviewed, so any environment can be built to a known schema version reproducibly.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 113,
+      "slug": "what-are-database-migration-tools",
+      "title": "What are Database Migration Tools?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions"
+      ],
+      "path": "database-management-in-devops/what-are-database-migration-tools.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-are-database-migration-tools.md",
+      "shortAnswer": "Flyway and Liquibase for the JVM and general use, Alembic for Python, and framework-native tools (Rails, Django, Entity Framework, Prisma) - all of which apply versioned, tracked schema changes in a repeatable order.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 114,
+      "slug": "what-is-database-backup-strategy",
+      "title": "What is Database Backup Strategy?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions"
+      ],
+      "path": "database-management-in-devops/what-is-database-backup-strategy.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-is-database-backup-strategy.md",
+      "shortAnswer": "A database backup strategy combines full backups, continuous transaction-log archiving for point-in-time recovery, off-site immutable copies, and - critically - regularly tested restores, all sized to meet defined RPO and RTO targets.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 115,
+      "slug": "what-is-database-performance-tuning",
+      "title": "What is Database Performance Tuning?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions"
+      ],
+      "path": "database-management-in-devops/what-is-database-performance-tuning.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-is-database-performance-tuning.md",
+      "shortAnswer": "Database performance tuning is the systematic process of finding and removing bottlenecks - through query optimisation, indexing, schema design, configuration, and caching - guided by measurement rather than guesswork.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 285,
+          "slug": "how-do-you-take-a-monthly-release-process-to-daily-deployments",
+          "title": "How do you take a monthly release process to daily deployments?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 286,
+      "slug": "what-does-a-devops-engineer-need-to-know-about-databases",
+      "title": "What does a DevOps engineer need to know about databases?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions"
+      ],
+      "path": "database-management-in-devops/what-does-a-devops-engineer-need-to-know-about-databases.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-does-a-devops-engineer-need-to-know-about-databases.md",
+      "shortAnswer": "Enough to keep one alive and deployable, not enough to be a DBA. Concretely: how to run **schema migrations safely through a pipeline**, how **backups and restores** actually work (and that an untested backup is not a backup), what **replication and failover** give you, where the **connection limits and pooling** boundaries are, and which handful of metrics tell you a database is in trouble before users do.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 417,
+      "slug": "how-do-you-troubleshoot-a-database-that-is-slow-or-timing-out-under-load",
+      "title": "How do you troubleshoot a database that is slow or timing out under load?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions",
+        "performance-testing",
+        "monitoring-and-logging",
+        "scalability-and-high-availability"
+      ],
+      "path": "database-management-in-devops/how-do-you-troubleshoot-a-database-that-is-slow-or-timing-out-under-load.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/how-do-you-troubleshoot-a-database-that-is-slow-or-timing-out-under-load.md",
+      "shortAnswer": "Separate \"the database is slow\" from \"the application cannot get a connection\", because they look identical from the outside and have opposite fixes. Look at **active sessions and what they are waiting on** first - that one view tells you whether you are CPU-bound, I/O-bound, lock-bound, or simply out of connections. Then work down: **connection pool exhaustion** (usually the real cause of timeouts, and adding database capacity makes it worse), **a missing index or a plan regression** on one hot query, **lock and transaction contention** (long transactions, idle-in-transaction sessions), **I/O saturation or storage credit exhaustion**, and only then vertical scale, read replicas, or caching. Fix the query before you buy the hardware.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 418,
+      "slug": "how-do-you-change-a-production-database-schema-without-downtime",
+      "title": "How do you change a production database schema without downtime?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions",
+        "cicd",
+        "devops-tools-and-automation",
+        "incident-management"
+      ],
+      "path": "database-management-in-devops/how-do-you-change-a-production-database-schema-without-downtime.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/how-do-you-change-a-production-database-schema-without-downtime.md",
+      "shortAnswer": "Use **expand/contract** (also called parallel change) so the schema is always compatible with the version of the code either side of a deploy: **expand** - add the new nullable column, table, or index in a backward-compatible migration; **migrate** - deploy code that writes both old and new, then backfill existing rows in batches; **contract** - only after the new code is fully rolled out and proven, stop writing the old field and drop it in a later release. Every migration must be **backward compatible with the previous release**, because a rolling deploy runs both versions at once and a rollback must not break the database. And know which operations take a blocking lock on your engine - `CREATE INDEX CONCURRENTLY`, `lock_timeout`, and batched backfills are what keep the change invisible.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 661,
+      "slug": "what-is-database-schema-migration-as-code-and-how-do-tools-like-flyway-and-liquibase-automate-rollouts",
+      "title": "What is Database Schema Migration as Code and how do tools like Flyway and Liquibase automate rollouts?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions",
+        "databases",
+        "migrations",
+        "flyway",
+        "liquibase",
+        "cicd"
+      ],
+      "path": "database-management-in-devops/what-is-database-schema-migration-as-code-and-how-do-tools-like-flyway-and-liquibase-automate-rollouts.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-is-database-schema-migration-as-code-and-how-do-tools-like-flyway-and-liquibase-automate-rollouts.md",
+      "shortAnswer": "Schema Migration as Code treats database DDL changes as versioned, immutable SQL scripts committed to Git; tools like Flyway track executed migrations via a schema version table (`flyway_schema_history`) and automatically apply new migrations sequentially during CI/CD.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What action does Flyway take if a developer modifies the contents of an old migration file (e.g. `V1__init.sql`) that has already been applied to the production database?",
+        "options": [
+          "It drops all database tables automatically",
+          "It fails the deployment immediately due to a checksum mismatch in `flyway_schema_history`",
+          "It silently ignores the modification and continues",
+          "It converts the database into SQLite"
+        ],
+        "answerIndex": 1,
+        "explanation": "Flyway stores a checksum of every applied migration script. If a historical script is altered, Flyway detects a checksum mismatch and halts to prevent schema corruption."
+      }
+    },
+    {
+      "id": 662,
+      "slug": "what-is-the-expand-and-contract-pattern-for-zero-downtime-database-schema-migrations",
+      "title": "What is the Expand and Contract pattern for zero-downtime database schema migrations?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions",
+        "databases",
+        "zero-downtime",
+        "expand-contract",
+        "migrations"
+      ],
+      "path": "database-management-in-devops/what-is-the-expand-and-contract-pattern-for-zero-downtime-database-schema-migrations.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-is-the-expand-and-contract-pattern-for-zero-downtime-database-schema-migrations.md",
+      "shortAnswer": "The Expand and Contract (Parallel Change) pattern safely rolls out breaking schema changes across three distinct deployment phases (Expand, Migrate/Dual-Write, Contract), ensuring that older and newer application versions can run concurrently without downtime.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why must breaking database schema changes (like renaming a column) follow the Expand and Contract pattern during rolling updates?",
+        "options": [
+          "Because SQL syntax prohibits renaming columns",
+          "Because during rolling updates, old and new application versions run concurrently; direct column renames break running older instances instantly",
+          "To reduce database licensing fees",
+          "Because Kubernetes does not support relational databases"
+        ],
+        "answerIndex": 1,
+        "explanation": "During rolling updates, older pods expecting the old column name run alongside newer pods expecting the new column name. The Expand and Contract pattern maintains backward compatibility."
+      }
+    },
+    {
+      "id": 663,
+      "slug": "what-are-acid-and-base-consistency-models-and-how-do-they-govern-sql-versus-nosql-architectures",
+      "title": "What are ACID and BASE consistency models and how do they govern SQL versus NoSQL architectures?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions",
+        "databases",
+        "acid",
+        "base",
+        "nosql",
+        "sql"
+      ],
+      "path": "database-management-in-devops/what-are-acid-and-base-consistency-models-and-how-do-they-govern-sql-versus-nosql-architectures.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-are-acid-and-base-consistency-models-and-how-do-they-govern-sql-versus-nosql-architectures.md",
+      "shortAnswer": "ACID (Atomicity, Consistency, Isolation, Durability) guarantees strict transactional correctness standard in relational databases; BASE (Basically Available, Soft state, Eventual consistency) prioritizes high availability and partition tolerance standard in distributed NoSQL systems.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 534,
+          "slug": "what-is-the-difference-between-artifact-promotion-and-rebuilding-binaries-across-environments",
+          "title": "What is the difference between Artifact Promotion and rebuilding binaries across environments?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What does the 'Eventual Consistency' property of the BASE model guarantee?",
+        "options": [
+          "Data will be written to disk within exactly 10 milliseconds",
+          "If no further updates are made to a record, all distributed replicas will eventually synchronize and return identical data",
+          "Transactions are guaranteed to never fail",
+          "The database will automatically delete stale data every 24 hours"
+        ],
+        "answerIndex": 1,
+        "explanation": "Eventual consistency concedes that replicas may temporarily serve out-of-sync data during updates, but guarantees that all nodes will converge to identical state once replication catches up."
+      }
+    },
+    {
+      "id": 664,
+      "slug": "what-are-database-indexes-how-do-b-tree-and-gin-indexes-differ-and-what-is-the-write-amplification-penalty",
+      "title": "What are Database Indexes, how do B-Tree and GIN indexes differ, and what is the write amplification penalty?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions",
+        "databases",
+        "indexing",
+        "b-tree",
+        "gin",
+        "performance"
+      ],
+      "path": "database-management-in-devops/what-are-database-indexes-how-do-b-tree-and-gin-indexes-differ-and-what-is-the-write-amplification-penalty.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-are-database-indexes-how-do-b-tree-and-gin-indexes-differ-and-what-is-the-write-amplification-penalty.md",
+      "shortAnswer": "Indexes are auxiliary search trees that accelerate SELECT queries from $O(N)$ sequential scans to $O(\\log N)$ lookups; B-Tree indexes excel at equality and range comparisons, GIN indexes excel at multi-value arrays and JSONB documents, and every index imposes a write amplification penalty on INSERT, UPDATE, and DELETE operations.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 541,
+          "slug": "how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning",
+          "title": "How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?",
+          "topic": "cicd"
+        },
+        {
+          "id": 515,
+          "slug": "how-does-docker-buildkit-work-and-what-caching-and-build-features-does-it-unlock",
+          "title": "How does Docker BuildKit work and what caching and build features does it unlock?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": {
+        "stem": "Which PostgreSQL index type is specifically optimized for querying inside semi-structured JSONB documents and array columns?",
+        "options": [
+          "B-Tree index",
+          "Hash index",
+          "Generalized Inverted Index (GIN)",
+          "BRIN index"
+        ],
+        "answerIndex": 2,
+        "explanation": "GIN (Generalized Inverted Index) indexes decompose composite types (arrays, full-text documents, and JSONB keys), making it the optimal choice for JSONB containment operators (`@>`)."
+      }
+    },
+    {
+      "id": 665,
+      "slug": "what-is-database-sharding-and-what-are-the-trade-offs-of-range-hash-and-directory-based-sharding",
+      "title": "What is Database Sharding and what are the trade-offs of Range, Hash, and Directory-based sharding?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions",
+        "databases",
+        "sharding",
+        "horizontal-scaling",
+        "partitioning"
+      ],
+      "path": "database-management-in-devops/what-is-database-sharding-and-what-are-the-trade-offs-of-range-hash-and-directory-based-sharding.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-is-database-sharding-and-what-are-the-trade-offs-of-range-hash-and-directory-based-sharding.md",
+      "shortAnswer": "Sharding partitions data horizontally across independent database instances; Range sharding divides data by value intervals (risking hotspots); Hash sharding distributes rows uniformly using mathematical hash functions; Directory-based sharding uses a lookup service for dynamic mapping.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What is a major limitation of Hash-Based database sharding when executing queries that span numeric ranges (e.g. `WHERE id BETWEEN 50 AND 100`)?",
+        "options": [
+          "The database engine refuses to execute the query",
+          "The query cannot be localized to a single shard and must scatter-gather query every database shard in the cluster",
+          "Hash sharding permanently corrupts primary keys",
+          "Hash sharding only supports string data types"
+        ],
+        "answerIndex": 1,
+        "explanation": "Because hash functions scatter consecutive numbers across random shards, range queries cannot target one server and must broadcast across all shards, increasing latency."
+      }
+    },
+    {
+      "id": 666,
+      "slug": "what-is-change-data-capture-cdc-and-how-does-debezium-stream-database-changes-into-event-architectures",
+      "title": "What is Change Data Capture (CDC) and how does Debezium stream database changes into event architectures?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions",
+        "databases",
+        "cdc",
+        "debezium",
+        "kafka",
+        "event-driven"
+      ],
+      "path": "database-management-in-devops/what-is-change-data-capture-cdc-and-how-does-debezium-stream-database-changes-into-event-architectures.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-is-change-data-capture-cdc-and-how-does-debezium-stream-database-changes-into-event-architectures.md",
+      "shortAnswer": "Change Data Capture (CDC) reads database transaction logs directly (PostgreSQL WAL, MySQL binlog) to stream row-level insert, update, and delete events into Apache Kafka in real-time, enabling asynchronous event-driven pipelines without polling databases.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why is Change Data Capture (CDC via Debezium) superior to periodic polling queries (`SELECT ... WHERE updated_at > ...`) for syncing databases to Elasticsearch?",
+        "options": [
+          "Polling queries can only run on weekends",
+          "CDC reads transaction logs directly, capturing hard row deletions and intermediate state transitions in real time with near-zero database load",
+          "CDC eliminates the need for Apache Kafka",
+          "Polling queries automatically lock the entire database"
+        ],
+        "answerIndex": 1,
+        "explanation": "Polling cannot detect rows that were deleted (since they no longer exist to be queried) and misses rapid intermediate state updates. CDC reads the commit log directly."
+      }
+    },
+    {
+      "id": 667,
+      "slug": "what-are-database-deadlocks-how-does-the-engine-detect-them-and-how-do-you-design-transactions-to-prevent-them",
+      "title": "What are Database Deadlocks, how does the engine detect them, and how do you design transactions to prevent them?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions",
+        "databases",
+        "deadlocks",
+        "transactions",
+        "locking",
+        "sql"
+      ],
+      "path": "database-management-in-devops/what-are-database-deadlocks-how-does-the-engine-detect-them-and-how-do-you-design-transactions-to-prevent-them.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/what-are-database-deadlocks-how-does-the-engine-detect-them-and-how-do-you-design-transactions-to-prevent-them.md",
+      "shortAnswer": "A deadlock occurs when two transactions hold locks on separate resources and each waits for the other to release its lock, forming a circular wait dependency; database engines detect circular lock wait cycles via dependency graphs and terminate one transaction with an error.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the most effective application design pattern for preventing database deadlocks when transactions must update multiple rows?",
+        "options": [
+          "Increasing the database CPU core count to 64",
+          "Ensuring that all transactions acquire locks on rows in the exact same deterministic order (e.g. sorted by Primary Key)",
+          "Disabling transactions across all application services",
+          "Converting all tables into unindexed heap tables"
+        ],
+        "answerIndex": 1,
+        "explanation": "If every transaction locks rows in the exact same sorted order (e.g. always lock ID 1 before ID 2), circular wait dependencies are mathematically impossible, preventing deadlocks."
+      }
+    }
+  ]
+}

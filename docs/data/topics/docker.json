@@ -1,0 +1,1059 @@
+{
+  "schemaVersion": 1,
+  "slug": "docker",
+  "title": "Docker",
+  "group": "Containers and Kubernetes",
+  "description": "Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the client/daemon architecture underneath `docker run`.",
+  "studyNotes": [
+    "Image layers, the build cache, and how to keep images small.",
+    "Why a container is not a virtual machine.",
+    "Multi-stage builds and running as a non-root user."
+  ],
+  "questions": [
+    {
+      "id": 6,
+      "slug": "what-is-docker",
+      "title": "What is Docker?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/what-is-docker.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-is-docker.md",
+      "shortAnswer": "Docker is a platform for packaging an application together with its dependencies into a portable image, then running that image as an isolated process - a container - on any host with a container runtime.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 13,
+          "slug": "what-is-a-pod-in-kubernetes",
+          "title": "What is a Pod in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 7,
+      "slug": "what-is-the-difference-between-docker-image-and-docker-container",
+      "title": "What is the difference between Docker Image and Docker Container?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/what-is-the-difference-between-docker-image-and-docker-container.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-is-the-difference-between-docker-image-and-docker-container.md",
+      "shortAnswer": "An image is an immutable, read-only template built from a Dockerfile; a container is a running instance of that image with a thin writable layer on top. Image is to container what a class is to an object, or a binary to a process.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 13,
+          "slug": "what-is-a-pod-in-kubernetes",
+          "title": "What is a Pod in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 8,
+      "slug": "what-is-dockerfile",
+      "title": "What is Dockerfile?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/what-is-dockerfile.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-is-dockerfile.md",
+      "shortAnswer": "A Dockerfile is the text recipe for building an image - an ordered list of instructions that Docker executes to produce reproducible, layered, versionable images.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 14,
+          "slug": "what-is-a-service-in-kubernetes",
+          "title": "What is a Service in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 9,
+      "slug": "what-is-docker-compose",
+      "title": "What is Docker Compose?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/what-is-docker-compose.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-is-docker-compose.md",
+      "shortAnswer": "Docker Compose defines and runs multi-container applications from a single YAML file, so an entire local stack - app, database, cache, queue - starts with `docker compose up`.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 13,
+          "slug": "what-is-a-pod-in-kubernetes",
+          "title": "What is a Pod in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 10,
+      "slug": "explain-docker-architecture",
+      "title": "Explain Docker Architecture",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/explain-docker-architecture.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/explain-docker-architecture.md",
+      "shortAnswer": "Docker uses a client/server architecture: the CLI talks over a REST API to the Docker daemon, which builds images, manages containers via a runtime stack (containerd → runc), and pulls or pushes images to registries.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 13,
+          "slug": "what-is-a-pod-in-kubernetes",
+          "title": "What is a Pod in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 252,
+      "slug": "what-are-docker-network-types-bridge-host-overlay-macvlan",
+      "title": "What are Docker network types (Bridge, Host, Overlay, Macvlan)?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/what-are-docker-network-types-bridge-host-overlay-macvlan.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-are-docker-network-types-bridge-host-overlay-macvlan.md",
+      "shortAnswer": "Docker network drivers control container network isolation and connectivity: **Bridge** (default isolated network on a single host), **Host** (shares host network stack directly), **Overlay** (multi-host network across Swarm/cluster nodes), **Macvlan** (assigns a MAC address so containers appear as physical devices), and **None** (disables networking).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 13,
+          "slug": "what-is-a-pod-in-kubernetes",
+          "title": "What is a Pod in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 260,
+      "slug": "how-do-you-reduce-docker-image-size-and-build-time",
+      "title": "How do you reduce Docker image size and build time?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/how-do-you-reduce-docker-image-size-and-build-time.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/how-do-you-reduce-docker-image-size-and-build-time.md",
+      "shortAnswer": "Size comes from multi-stage builds that ship only the artifact, a minimal base image (slim, Alpine, or distroless), and not creating layers you then have to delete. Speed comes from understanding the layer cache: order your Dockerfile so the parts that change least come first, copy dependency manifests before source code, and use BuildKit cache mounts for package managers.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 14,
+          "slug": "what-is-a-service-in-kubernetes",
+          "title": "What is a Service in Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 257,
+          "slug": "how-does-rbac-work-in-kubernetes",
+          "title": "How does RBAC work in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 291,
+      "slug": "how-do-namespaces-cgroups-and-capabilities-isolate-a-container",
+      "title": "How do namespaces, cgroups, and capabilities isolate a container?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/how-do-namespaces-cgroups-and-capabilities-isolate-a-container.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/how-do-namespaces-cgroups-and-capabilities-isolate-a-container.md",
+      "shortAnswer": "Three independent kernel features doing three different jobs. **Namespaces** change what a process can _see_ (its own PID tree, network stack, mounts, hostname, users). **Cgroups** limit what it can _consume_ (CPU, memory, IO, PIDs). **Capabilities**, plus seccomp and LSMs like AppArmor or SELinux, limit what it can _do_ (which privileged operations the kernel will accept). A container is just a normal Linux process with these three constraints applied - which is why it shares the host kernel and why \"container escape\" is a meaningful phrase in a way that \"VM escape\" rarely is.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 255,
+          "slug": "how-do-liveness-readiness-and-startup-probes-differ",
+          "title": "How do liveness, readiness, and startup probes differ?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 256,
+          "slug": "how-do-you-control-which-node-a-pod-runs-on",
+          "title": "How do you control which node a Pod runs on?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 415,
+      "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+      "title": "How do you troubleshoot Docker networking between containers?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions",
+        "network-security",
+        "linux-administration"
+      ],
+      "path": "docker/how-do-you-troubleshoot-docker-networking-between-containers.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/how-do-you-troubleshoot-docker-networking-between-containers.md",
+      "shortAnswer": "Check the three things that cause almost every case, in order: **are both containers on the same user-defined network** (`docker network inspect` - containers on the default bridge get no DNS-based service discovery, only IP), **are you using the container or service name rather than `localhost`** (each container has its own network namespace, so `localhost` is itself), and **is the target process listening on `0.0.0.0` rather than `127.0.0.1`** inside its container. After that: the port you connect to must be the **container's** port, not the host-published one; `-p` is only for host-to-container traffic and is irrelevant between containers on the same network.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 403,
+          "slug": "how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints",
+          "title": "How do you troubleshoot a Kubernetes Service that has no endpoints?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 405,
+          "slug": "how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic",
+          "title": "How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 447,
+          "slug": "how-does-pod-networking-and-service-discovery-work-in-kubernetes",
+          "title": "How does Pod networking and service discovery work in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 416,
+      "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+      "title": "Why does a container fail to start with a permission denied error?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions",
+        "linux-administration",
+        "devsecops",
+        "kubernetes"
+      ],
+      "path": "docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md",
+      "shortAnswer": "Almost always one of five things: **the entrypoint is not executable** (`chmod +x`, or a script copied from Windows with CRLF line endings, which fails as `not found` or `permission denied`), **the image runs as a non-root UID that does not own the files or directory it needs**, **a mounted volume is owned by a different UID on the host** so the container user cannot write to it, **a read-only filesystem or a `noexec` mount**, or **a host security module** - SELinux (`:Z` on the bind mount) or AppArmor - denying the access. Read the exact message: `exec /entrypoint.sh: permission denied` is the file's execute bit, whereas `mkdir /data/cache: permission denied` at runtime is volume ownership. They are unrelated problems.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 442,
+          "slug": "what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes",
+          "title": "What is the difference between a ConfigMap and a Secret in Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 405,
+          "slug": "how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic",
+          "title": "How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 449,
+          "slug": "how-do-you-troubleshoot-a-kubernetes-node-that-is-notready",
+          "title": "How do you troubleshoot a Kubernetes node that is NotReady?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 437,
+      "slug": "what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile",
+      "title": "What is the difference between CMD and ENTRYPOINT in a Dockerfile?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile.md",
+      "shortAnswer": "`ENTRYPOINT` declares **what the container is** - the executable that always runs. `CMD` declares **the default arguments** to that executable, and anything you append to `docker run` replaces them. If you set only `CMD`, the whole command is replaceable; if you set only `ENTRYPOINT`, arguments you pass are appended rather than replacing anything. The idiomatic production pattern is `ENTRYPOINT` in exec form naming the binary, plus `CMD` in exec form holding the default flags - so `docker run image` works out of the box and `docker run image --other-flag` still does something sensible.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 15,
+          "slug": "explain-the-difference-between-docker-swarm-and-kubernetes",
+          "title": "Explain the difference between Docker Swarm and Kubernetes",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 438,
+      "slug": "what-is-the-difference-between-the-copy-and-add-instructions-in-a-dockerfile",
+      "title": "What is the difference between the COPY and ADD instructions in a Dockerfile?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/what-is-the-difference-between-the-copy-and-add-instructions-in-a-dockerfile.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-is-the-difference-between-the-copy-and-add-instructions-in-a-dockerfile.md",
+      "shortAnswer": "Both copy files from the build context into the image, but `ADD` does two extra things: it **auto-extracts local tar archives** and it can **fetch a remote URL**. Those extra behaviours are exactly why the official guidance is to use `COPY` by default - it does one predictable thing. Use `ADD` only when you deliberately want tar extraction (the classic case is `ADD rootfs.tar.xz /` when building a base image). Never use `ADD <url>` to download something: it cannot verify a checksum on older syntax, it bloats the layer with the archive, and `curl`/`wget` in a `RUN` step gives you verification and cleanup in the same layer.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 14,
+          "slug": "what-is-a-service-in-kubernetes",
+          "title": "What is a Service in Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 15,
+          "slug": "explain-the-difference-between-docker-swarm-and-kubernetes",
+          "title": "Explain the difference between Docker Swarm and Kubernetes",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 442,
+          "slug": "what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes",
+          "title": "What is the difference between a ConfigMap and a Secret in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 439,
+      "slug": "how-does-docker-layer-caching-work",
+      "title": "How does Docker layer caching work?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions",
+        "cicd"
+      ],
+      "path": "docker/how-does-docker-layer-caching-work.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/how-does-docker-layer-caching-work.md",
+      "shortAnswer": "Each instruction in a Dockerfile produces a **read-only layer** - a filesystem diff - and the image is those layers stacked by a union filesystem with a thin writable layer on top at runtime. On a rebuild, Docker walks the instructions in order and reuses a cached layer only while **both** the instruction and its parent layer are unchanged. The moment one instruction misses, **every instruction after it is rebuilt**, because each layer's identity depends on the layer beneath it. That single rule drives all the practical advice: put the things that rarely change (base image, package installs) early, and the things that change on every commit (your source code) late.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 450,
+          "slug": "what-is-inside-a-helm-chart-and-how-do-you-customise-one",
+          "title": "What is inside a Helm chart, and how do you customise one?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 440,
+      "slug": "what-is-the-difference-between-a-bind-mount-and-a-volume-in-docker",
+      "title": "What is the difference between a bind mount and a volume in Docker?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/what-is-the-difference-between-a-bind-mount-and-a-volume-in-docker.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-is-the-difference-between-a-bind-mount-and-a-volume-in-docker.md",
+      "shortAnswer": "A **bind mount** maps a specific path on the host into the container - you choose the path, the host owns it, and the container sees whatever is there. A **volume** is storage that **Docker creates and manages** in its own area (`/var/lib/docker/volumes/...` by default) or through a volume driver, referenced by name rather than by host path. Bind mounts are for development (live-reloading your source) and for deliberately reaching host resources; named volumes are what you use for persistent application data in production, because they are portable across hosts through drivers, backed up as a unit, and do not depend on the host's directory layout or permissions.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 257,
+          "slug": "how-does-rbac-work-in-kubernetes",
+          "title": "How does RBAC work in Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 406,
+          "slug": "how-do-you-debug-a-kubernetes-ingress-that-is-not-routing-traffic",
+          "title": "How do you debug a Kubernetes Ingress that is not routing traffic?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 441,
+      "slug": "how-do-you-harden-a-container-image-and-a-dockerfile",
+      "title": "How do you harden a container image and a Dockerfile?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions",
+        "devsecops",
+        "security-and-compliance"
+      ],
+      "path": "docker/how-do-you-harden-a-container-image-and-a-dockerfile.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/how-do-you-harden-a-container-image-and-a-dockerfile.md",
+      "shortAnswer": "Reduce what is in the image, then reduce what the image is allowed to do. Concretely: start from a **minimal, digest-pinned base** (distroless, Alpine, or `-slim`), build in a multi-stage build so no compiler or source ships, run as a **non-root UID with a read-only root filesystem and all capabilities dropped**, keep secrets out of layers entirely (BuildKit secret mounts, never `ENV` or `ARG`), pin dependency versions, and then **scan and sign** the result in CI and enforce the signature at admission. The framing that lands: most container CVEs come from packages the application never uses, so the cheapest security control is having fewer packages, not patching faster.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 442,
+          "slug": "what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes",
+          "title": "What is the difference between a ConfigMap and a Secret in Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 161,
+          "slug": "what-does-a-devsecops-pipeline-look-like-end-to-end",
+          "title": "What does a DevSecOps pipeline look like end to end?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 513,
+      "slug": "how-does-docker-multi-stage-building-optimize-container-security-and-image-size",
+      "title": "How does Docker multi-stage building optimize container security and image size?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "dockerfile",
+        "multi-stage",
+        "security"
+      ],
+      "path": "docker/how-does-docker-multi-stage-building-optimize-container-security-and-image-size.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/how-does-docker-multi-stage-building-optimize-container-security-and-image-size.md",
+      "shortAnswer": "A multi-stage Dockerfile has several `FROM` instructions, each starting a new stage with its own base image. You compile and fetch dependencies in a builder stage that has the full toolchain, then start a fresh, minimal runtime stage (distroless, `scratch`, or a `-slim` image) and `COPY --from=builder` only the finished artefact. Nothing else from the builder - compilers, package managers, source code, caches, build-time credentials - reaches the shipped image, so it is smaller and exposes far less for an attacker or a vulnerability scanner to find. The trade-off is debuggability: a runtime image with no shell needs ephemeral debug containers or a `:debug` variant.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 524,
+          "slug": "what-is-the-difference-between-mutating-and-validating-admission-webhooks-in-kubernetes",
+          "title": "What is the difference between Mutating and Validating Admission Webhooks in Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 709,
+          "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
+          "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 711,
+          "slug": "what-is-runtime-application-self-protection-rasp-and-how-does-it-differ-from-a-perimeter-waf",
+          "title": "What is Runtime Application Self-Protection (RASP) and how does it differ from a perimeter WAF?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does copying an executable into a distroless runtime stage in a multi-stage Dockerfile enhance security?",
+        "options": [
+          "Distroless images automatically encrypt outgoing network packets",
+          "It eliminates shells, package managers, and compilers that attackers exploit during remote code execution",
+          "It prevents the container from ever consuming more than 512MB of RAM",
+          "Distroless images bypass kernel namespace isolation"
+        ],
+        "answerIndex": 1,
+        "explanation": "Excluding shells (`/bin/sh`), package managers, and compilers strips away the utilities attackers rely upon to download payloads and establish reverse shells."
+      }
+    },
+    {
+      "id": 514,
+      "slug": "what-are-linux-cgroups-v2-and-how-do-they-improve-container-resource-isolation-over-cgroups-v1",
+      "title": "What are Linux cgroups v2 and how do they improve container resource isolation over cgroups v1?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "linux",
+        "cgroups",
+        "kernel"
+      ],
+      "path": "docker/what-are-linux-cgroups-v2-and-how-do-they-improve-container-resource-isolation-over-cgroups-v1.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-are-linux-cgroups-v2-and-how-do-they-improve-container-resource-isolation-over-cgroups-v1.md",
+      "shortAnswer": "Control groups (cgroups) are the kernel feature that limits and accounts for a group of processes' CPU, memory, I/O, and PIDs - they are how container resource limits are enforced. cgroups v2 replaces v1's separate hierarchy per controller with **one unified hierarchy** in which every process sits in exactly one cgroup for all controllers. That makes cross-resource behaviour correct - most importantly, buffered writes are charged to the cgroup that dirtied the page cache, so I/O limits actually work - and adds better interfaces: `memory.high` soft throttling before OOM, Pressure Stall Information (PSI), safe delegation to unprivileged users for rootless containers, and cgroup-aware OOM handling. v2 is now the baseline: from Kubernetes 1.35 the kubelet refuses to start on cgroup v1 nodes by default.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 13,
+          "slug": "what-is-a-pod-in-kubernetes",
+          "title": "What is a Pod in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": {
+        "stem": "Which problem with container I/O throttling did Linux cgroups v2 resolve that existed in cgroups v1?",
+        "options": [
+          "cgroups v1 could only throttle network packets, not disk writes",
+          "In v1, buffered page cache writes were not attributed to the container, allowing write starvation of the host",
+          "cgroups v1 prohibited the use of NVMe solid-state storage",
+          "cgroups v2 requires containers to run with root privileges to throttle disk reads"
+        ],
+        "answerIndex": 1,
+        "explanation": "In cgroups v1, asynchronous buffered writes through the page cache lost their cgroup association, preventing effective I/O limits. v2 unified memory and I/O tracking."
+      }
+    },
+    {
+      "id": 515,
+      "slug": "how-does-docker-buildkit-work-and-what-caching-and-build-features-does-it-unlock",
+      "title": "How does Docker BuildKit work and what caching and build features does it unlock?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "buildkit",
+        "cache",
+        "performance"
+      ],
+      "path": "docker/how-does-docker-buildkit-work-and-what-caching-and-build-features-does-it-unlock.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/how-does-docker-buildkit-work-and-what-caching-and-build-features-does-it-unlock.md",
+      "shortAnswer": "BuildKit is the build engine behind `docker build` (the default since Docker Engine 23.0, where `docker build` is an alias for `docker buildx build`). A **frontend** - normally the Dockerfile frontend selected by `# syntax=docker/dockerfile:1` - converts the Dockerfile into **LLB**, a content-addressed graph of build steps. BuildKit then solves that graph: it runs independent steps and stages in parallel, skips stages the target does not need, and caches each step by the hash of its inputs. On top of that it adds `RUN --mount` (cache, secret, SSH, and bind mounts), exportable cache backends for CI, multi-platform builds, and SBOM and provenance attestations. The trade-off is a few more concepts - builders, drivers, exporters - and some features that depend on which builder driver you use.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 14,
+          "slug": "what-is-a-service-in-kubernetes",
+          "title": "What is a Service in Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 257,
+          "slug": "how-does-rbac-work-in-kubernetes",
+          "title": "How does RBAC work in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary security advantage of using BuildKit secret mounts (`--mount=type=secret`) over build arguments (`ARG`)?",
+        "options": [
+          "BuildKit compiles secrets into machine code before sending to the daemon",
+          "Secret mounts provide credentials only during command execution without persisting them in image layers or history",
+          "BuildKit transmits secrets directly over unencrypted DNS records",
+          "ARG variables are accessible only by the root user in the running container"
+        ],
+        "answerIndex": 1,
+        "explanation": "Values passed via ARG are permanently inspectable via `docker history`. BuildKit secret mounts mount temporary in-memory files that disappear once the instruction finishes."
+      }
+    },
+    {
+      "id": 516,
+      "slug": "what-happens-under-the-hood-when-a-container-experiences-an-out-of-memory-oom-kill",
+      "title": "What happens under the hood when a container experiences an Out Of Memory (OOM) kill?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "memory",
+        "oom",
+        "linux-kernel"
+      ],
+      "path": "docker/what-happens-under-the-hood-when-a-container-experiences-an-out-of-memory-oom-kill.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-happens-under-the-hood-when-a-container-experiences-an-out-of-memory-oom-kill.md",
+      "shortAnswer": "A container's memory limit is its cgroup's `memory.max`. When the processes in that cgroup try to allocate past it, the kernel first tries to reclaim memory charged to the cgroup (dropping clean page cache, writing back dirty pages, swapping if allowed). If reclaim cannot get under the limit, the kernel's **memory-cgroup OOM killer** picks a victim inside that cgroup only - the process with the highest `oom_score`, or the whole group if `memory.oom.group` is set - and sends it `SIGKILL`, which cannot be caught. The main process dying ends the container with exit code **137** (128 + 9); Docker records `OOMKilled: true` and Kubernetes records `reason: OOMKilled`. The host and other containers are unaffected - that is the point of the limit - but the application gets no chance to shut down cleanly.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 403,
+          "slug": "how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints",
+          "title": "How do you troubleshoot a Kubernetes Service that has no endpoints?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does a container process killed by the OOM killer typically exit with exit code 137?",
+        "options": [
+          "137 is the standard HTTP error code for memory overload",
+          "Unix processes killed by a signal exit with 128 + signal number; SIGKILL is signal 9 (128 + 9 = 137)",
+          "The Docker daemon reserves exit code 137 for configuration syntax errors",
+          "The kernel sends SIGTERM (signal 15) which maps to code 137"
+        ],
+        "answerIndex": 1,
+        "explanation": "Standard Linux shells and container runtimes report process termination due to a signal as 128 + signal_number. SIGKILL is signal 9, resulting in exit code 137."
+      }
+    },
+    {
+      "id": 517,
+      "slug": "how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation",
+      "title": "How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "networking",
+        "bridge",
+        "macvlan"
+      ],
+      "path": "docker/how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation.md",
+      "shortAnswer": "**Bridge** (the default) gives each container its own network namespace with a veth pair plugged into a Linux bridge on a private subnet; outbound traffic is masqueraded (SNAT) to the host's IP and inbound traffic reaches the container only through published ports, which Docker implements with DNAT firewall rules. **Host** skips the network namespace entirely: the container uses the host's interfaces, IPs, and port space, so there is no NAT, no port mapping, and no network isolation. **Macvlan** gives each container its own MAC address and an IP on the physical LAN through a sub-interface of a host NIC, so it appears as a separate machine on the network, with no NAT - but it needs the network to accept multiple MACs per port, and by default the host itself cannot talk to its macvlan containers.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 520,
+          "slug": "how-does-the-kubernetes-gateway-api-evolve-beyond-standard-ingress-resources",
+          "title": "How does the Kubernetes Gateway API evolve beyond standard Ingress resources?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 527,
+          "slug": "how-does-coredns-resolve-services-in-kubernetes-and-how-do-you-troubleshoot-dns-latency-bottlenecks",
+          "title": "How does CoreDNS resolve services in Kubernetes and how do you troubleshoot DNS latency bottlenecks?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 528,
+          "slug": "what-is-the-container-network-interface-cni-and-how-do-overlay-and-routed-cni-plugins-differ",
+          "title": "What is the Container Network Interface (CNI) and how do overlay and routed CNI plugins differ?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": {
+        "stem": "When running a container with `--network host`, what happens if the containerized app attempts to bind to port 80?",
+        "options": [
+          "Docker automatically remaps port 80 to port 8080 on the host",
+          "The container binds directly to port 80 on the host's network interface and will fail if another host process is using port 80",
+          "Traffic is routed through the default `docker0` bridge via NAT",
+          "The container fails to start because host mode only supports UDP traffic"
+        ],
+        "answerIndex": 1,
+        "explanation": "Host networking shares the host network namespace. There is no port translation or isolation; conflicts with host ports will cause port binding errors."
+      }
+    },
+    {
+      "id": 518,
+      "slug": "why-should-you-avoid-running-containers-as-the-root-user-and-how-do-you-enforce-non-root-execution",
+      "title": "Why should you avoid running containers as the root user and how do you enforce non-root execution?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "security",
+        "user",
+        "least-privilege"
+      ],
+      "path": "docker/why-should-you-avoid-running-containers-as-the-root-user-and-how-do-you-enforce-non-root-execution.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/why-should-you-avoid-running-containers-as-the-root-user-and-how-do-you-enforce-non-root-execution.md",
+      "shortAnswer": "Without user namespaces, UID 0 in a container **is** UID 0 on the host kernel. Capabilities, seccomp, and AppArmor/SELinux narrow what that root can do, but any escape - a kernel bug, a container-runtime bug, a mistaken `hostPath` or Docker socket mount - lands the attacker as root on the node. Running as a non-root UID shrinks that blast radius and also blocks a whole class of in-container abuse (writing to system paths, binding raw sockets, installing tools). Enforce it at every layer: a numeric `USER` in the image, `--user`/`runAsUser` at runtime, admission policy (Pod Security Admission `restricted`, or Kyverno/Gatekeeper) that rejects root, and user namespaces (`userns-remap`, rootless Docker/Podman, or Kubernetes `hostUsers: false`) so that even container root is unprivileged on the host.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 709,
+          "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
+          "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 524,
+          "slug": "what-is-the-difference-between-mutating-and-validating-admission-webhooks-in-kubernetes",
+          "title": "What is the difference between Mutating and Validating Admission Webhooks in Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 13,
+          "slug": "what-is-a-pod-in-kubernetes",
+          "title": "What is a Pod in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary security consequence of running a container process as root without user namespace remapping?",
+        "options": [
+          "The container cannot write files to ephemeral storage",
+          "If the process breaks out of the container via a kernel exploit, it possesses root privileges on the underlying host",
+          "The container will fail Docker health checks automatically",
+          "Network throughput is throttled to prevent DDoS attacks"
+        ],
+        "answerIndex": 1,
+        "explanation": "Because containers share the host kernel, UID 0 in a container is UID 0 on the host. An escape leaves the attacker with full host administrative control."
+      }
+    },
+    {
+      "id": 519,
+      "slug": "what-is-the-difference-between-entrypoint-and-cmd-in-a-dockerfile-and-how-do-they-interact",
+      "title": "What is the difference between ENTRYPOINT and CMD in a Dockerfile and how do they interact?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "dockerfile",
+        "entrypoint",
+        "cmd"
+      ],
+      "path": "docker/what-is-the-difference-between-entrypoint-and-cmd-in-a-dockerfile-and-how-do-they-interact.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-is-the-difference-between-entrypoint-and-cmd-in-a-dockerfile-and-how-do-they-interact.md",
+      "shortAnswer": "`ENTRYPOINT` sets the executable the container always runs; `CMD` sets default arguments (or, with no `ENTRYPOINT`, the default command). At start-up Docker concatenates them - `ENTRYPOINT` followed by `CMD` - and arguments given to `docker run` **replace `CMD`** while leaving `ENTRYPOINT` in place; only `--entrypoint` replaces the executable. The interaction only works as expected in **exec form** (JSON arrays): a shell-form `ENTRYPOINT` ignores `CMD` and `docker run` arguments entirely and wraps the process in `/bin/sh -c`, which can stop `SIGTERM` reaching it.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 13,
+          "slug": "what-is-a-pod-in-kubernetes",
+          "title": "What is a Pod in Kubernetes?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does using the shell form (`ENTRYPOINT my-app`) instead of exec form (`ENTRYPOINT [\"my-app\"]`) frequently cause slow container shutdowns?",
+        "options": [
+          "Shell form forces the container to compile the binary on startup",
+          "The application runs as a child of `/bin/sh`, which does not forward `SIGTERM` signals, forcing Docker to wait for timeout and issue `SIGKILL`",
+          "The shell form disables DNS resolution inside the container",
+          "Docker requires an extra license to stop shell-based containers gracefully"
+        ],
+        "answerIndex": 1,
+        "explanation": "In shell form, `/bin/sh` is PID 1. Standard shells do not forward signals like SIGTERM to child processes, causing `docker stop` to hang for 10 seconds before forcibly killing the container with SIGKILL."
+      }
+    }
+  ]
+}

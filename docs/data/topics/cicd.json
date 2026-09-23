@@ -1,0 +1,1462 @@
+{
+  "schemaVersion": 1,
+  "slug": "cicd",
+  "title": "CI/CD",
+  "group": "Delivery and Automation",
+  "description": "Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deployment distinction interviewers love to test.",
+  "studyNotes": [
+    "Stages of a pipeline you have actually built, in order.",
+    "How you keep pipelines fast and trustworthy.",
+    "Where secrets and artifacts live in your pipeline."
+  ],
+  "questions": [
+    {
+      "id": 16,
+      "slug": "what-is-ci-cd-pipeline",
+      "title": "What is CI/CD Pipeline?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions"
+      ],
+      "path": "cicd/what-is-ci-cd-pipeline.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-is-ci-cd-pipeline.md",
+      "shortAnswer": "A CI/CD pipeline is the automated path from a commit to running software: a sequence of stages that build, test, scan, package, and deploy a change, failing fast and giving the team a single verdict on whether the change is safe.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 17,
+      "slug": "what-is-jenkins",
+      "title": "What is Jenkins?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions"
+      ],
+      "path": "cicd/what-is-jenkins.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-is-jenkins.md",
+      "shortAnswer": "Jenkins is an open-source automation server for building CI/CD pipelines, extended by a very large plugin ecosystem and configured as code through declarative `Jenkinsfile` pipelines stored alongside the application.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 18,
+      "slug": "what-are-jenkins-pipelines",
+      "title": "What are Jenkins Pipelines?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions"
+      ],
+      "path": "cicd/what-are-jenkins-pipelines.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-are-jenkins-pipelines.md",
+      "shortAnswer": "A Jenkins Pipeline is a build workflow defined as code in a `Jenkinsfile`, expressed as stages and steps, versioned with the application, and able to survive controller restarts.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 19,
+      "slug": "what-is-gitlab-ci",
+      "title": "What is GitLab CI?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions"
+      ],
+      "path": "cicd/what-is-gitlab-ci.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-is-gitlab-ci.md",
+      "shortAnswer": "GitLab CI/CD is the pipeline engine built into GitLab, configured by a `.gitlab-ci.yml` file in the repository and executed by GitLab Runners, with the registry, environments, and security scanning integrated into the same product.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 461,
+          "slug": "what-do-you-need-to-know-about-maven-as-a-devops-engineer",
+          "title": "What do you need to know about Maven as a DevOps engineer?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 20,
+      "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+      "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions"
+      ],
+      "path": "cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md",
+      "shortAnswer": "Both keep every change production-ready through an automated pipeline. Continuous delivery stops at a manual approval before production; continuous deployment releases automatically with no human gate.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 461,
+          "slug": "what-do-you-need-to-know-about-maven-as-a-devops-engineer",
+          "title": "What do you need to know about Maven as a DevOps engineer?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 237,
+      "slug": "how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines",
+      "title": "How do you prevent and handle secret leaks in CI/CD pipelines?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions"
+      ],
+      "path": "cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md",
+      "shortAnswer": "Prevent secret leaks by enforcing pre-commit secret scanners (Gitleaks, TruffleHog), using short-lived OIDC federated credentials, masking secrets in pipeline stdout/stderr, and immediately revoking, rotating, and auditing compromised keys if a leak occurs.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 461,
+          "slug": "what-do-you-need-to-know-about-maven-as-a-devops-engineer",
+          "title": "What do you need to know about Maven as a DevOps engineer?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 268,
+      "slug": "how-do-you-use-jenkins-shared-libraries",
+      "title": "How do you use Jenkins shared libraries?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions"
+      ],
+      "path": "cicd/how-do-you-use-jenkins-shared-libraries.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-use-jenkins-shared-libraries.md",
+      "shortAnswer": "A shared library is a versioned Git repository of Groovy code that many Jenkinsfiles import, so pipeline logic is written once instead of copy-pasted into a hundred repositories. It has a fixed layout - `vars/` for the steps you call by name, `src/` for classes, `resources/` for non-Groovy files - and you load it with `@Library('name@version')` or configure it as an implicit global library.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 396,
+      "slug": "how-do-you-speed-up-a-slow-ci-cd-pipeline",
+      "title": "How do you speed up a slow CI/CD pipeline?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "docker",
+        "cloud-cost-optimization",
+        "devops-metrics-and-kpis"
+      ],
+      "path": "cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md",
+      "shortAnswer": "Measure before you optimise - break the wall-clock time into queue time, checkout, dependency resolution, build, test, and publish, and fix the largest bar first. The five changes that recover the most time in practice: **cache dependencies** keyed on the lockfile hash, **build the artefact once** and promote it instead of rebuilding per stage, **parallelise and shard the test suite**, **use BuildKit layer and cache mounts** for image builds, and **scale the agent pool** so jobs stop waiting. The target that matters is pull-request feedback under 10 minutes.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 461,
+          "slug": "what-do-you-need-to-know-about-maven-as-a-devops-engineer",
+          "title": "What do you need to know about Maven as a DevOps engineer?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 397,
+      "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
+      "title": "Why does a build pass locally but fail in CI?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "docker",
+        "configuration-management"
+      ],
+      "path": "cicd/why-does-a-build-pass-locally-but-fail-in-ci.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/why-does-a-build-pass-locally-but-fail-in-ci.md",
+      "shortAnswer": "Because the two environments differ in something you did not declare. The usual culprits, in the order they occur: **uncommitted or untracked files** on the developer machine, **unpinned dependencies** resolving to different versions, a **different toolchain version** (JDK, Node, Python, compiler), **missing environment variables or credentials**, **filesystem and locale differences** (case sensitivity, path separators, timezone), **missing system packages**, and **test-order or concurrency assumptions** that only break on a clean, parallel runner. The permanent fix is to make the build environment declared and identical - a container image or devcontainer used both locally and in CI - so \"works on my machine\" stops being possible.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 398,
+      "slug": "how-do-you-deal-with-flaky-tests-in-a-ci-pipeline",
+      "title": "How do you deal with flaky tests in a CI pipeline?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "devops-culture-and-practices",
+        "devops-metrics-and-kpis"
+      ],
+      "path": "cicd/how-do-you-deal-with-flaky-tests-in-a-ci-pipeline.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-deal-with-flaky-tests-in-a-ci-pipeline.md",
+      "shortAnswer": "Treat flakiness as a defect with an owner, not as background noise. **Measure it** (per-test pass rate across runs, so flakes are visible rather than anecdotal), **quarantine** the worst offenders out of the blocking suite immediately so the pipeline is trustworthy again, **fix the root cause** - almost always time, shared state, ordering, or an unstubbed network call - and only then return the test to the gate. Blanket `retry: 3` is not a fix: it hides real intermittent bugs and doubles your pipeline time.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 461,
+          "slug": "what-do-you-need-to-know-about-maven-as-a-devops-engineer",
+          "title": "What do you need to know about Maven as a DevOps engineer?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 399,
+      "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+      "title": "How do you promote a release across dev, staging, and production?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "devops-tools-and-automation",
+        "configuration-management",
+        "security-and-compliance"
+      ],
+      "path": "cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-promote-a-release-across-dev-staging-and-production.md",
+      "shortAnswer": "Build the artefact **once**, tag it immutably with the Git SHA, and promote that exact digest through environments changing only configuration. Environment differences live outside the artefact - in per-environment values files or parameter stores - and secrets come from a secret manager at deploy time, never from the repository. Each promotion is gated by evidence (tests, smoke checks, soak time), production adds an approval and a change record, and every environment is deployed by the same code path so staging genuinely rehearses production.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 461,
+          "slug": "what-do-you-need-to-know-about-maven-as-a-devops-engineer",
+          "title": "What do you need to know about Maven as a DevOps engineer?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 400,
+      "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+      "title": "How do you design CI/CD for a microservices architecture?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "cloud-native-architecture",
+        "container-orchestration-advanced",
+        "devops-tools-and-automation"
+      ],
+      "path": "cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md",
+      "shortAnswer": "One independently triggered pipeline per service, one shared template so the fifty pipelines are not fifty snowflakes. Each service builds its own immutable image tagged with the Git SHA, publishes to a shared registry, and deploys on its own cadence without waiting for anyone else. The hard parts are not the pipelines - they are **change detection** in a monorepo, **contract testing** so you can deploy one service without integration-testing all forty, **version compatibility** so old and new run side by side during a rollout, and **preventing the release train** from re-forming as a shared staging bottleneck.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 401,
+      "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+      "title": "How do you keep dependencies up to date without breaking the build?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "devsecops",
+        "version-control"
+      ],
+      "path": "cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-keep-dependencies-up-to-date-without-breaking-the-build.md",
+      "shortAnswer": "Automate the upgrade into small, continuous, reviewable pull requests rather than a quarterly \"upgrade everything\" project. Concretely: **pin exact versions with a committed lockfile** so builds are reproducible, run a bot (Renovate or Dependabot) that opens one pull request per dependency on a schedule, let CI prove each one, **group and auto-merge low-risk updates** (patches, dev tooling, lockfile-only) while requiring human review for majors, and hold the line with a **deprecation and SCA gate** so nothing rots silently. Big-bang upgrades break builds; small continuous ones do not.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 402,
+      "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+      "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "version-control",
+        "linux-administration"
+      ],
+      "path": "cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md",
+      "shortAnswer": "Split the problem in two, because the causes are unrelated. If the job **never appears**, the trigger failed - check the webhook delivery on the Git provider first (it records the response code), then Jenkins' reachability, the token, and the branch or path filters. If the job **appears but sits in the queue**, hover the queue item: Jenkins states the reason. It is almost always no executor free, no agent matching the requested label, an agent offline, or a `throttle`/concurrency lock. Fix the immediate blockage, then remove the class of problem - autoscaled ephemeral agents, monitored agent connectivity, and a queue-time alert.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 454,
+      "slug": "what-is-the-difference-between-a-declarative-and-a-scripted-jenkins-pipeline",
+      "title": "What is the difference between a declarative and a scripted Jenkins pipeline?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions"
+      ],
+      "path": "cicd/what-is-the-difference-between-a-declarative-and-a-scripted-jenkins-pipeline.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-is-the-difference-between-a-declarative-and-a-scripted-jenkins-pipeline.md",
+      "shortAnswer": "Both are Groovy, both live in a `Jenkinsfile`, and both run on the same Pipeline engine - the difference is structure. A **declarative** pipeline opens with `pipeline { }` and imposes a fixed skeleton (`agent`, `stages`, `stage`, `steps`, `post`, `environment`, `options`), which Jenkins can validate before execution, render properly in the stage graph (Pipeline Graph View; Blue Ocean is no longer actively developed), and give you built-in `post` conditions, `when` guards, `parallel`, `matrix`, and `options` such as timeouts and retries. A **scripted** pipeline opens with `node { }` and is essentially a Groovy program: you get full imperative control - loops, closures, try/catch, dynamic stage generation - but no schema validation, weaker visualisation, and much more scope to write something unmaintainable. The practical rule teams settle on: **write declarative by default**, and drop into a `script { }` block for the small imperative parts. Reach for fully scripted only when you genuinely need to generate the pipeline structure at runtime.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 461,
+          "slug": "what-do-you-need-to-know-about-maven-as-a-devops-engineer",
+          "title": "What do you need to know about Maven as a DevOps engineer?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 455,
+      "slug": "how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs",
+      "title": "How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "version-control"
+      ],
+      "path": "cicd/how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs.md",
+      "shortAnswer": "There are five mechanisms, and choosing correctly matters more than knowing all of them. **Webhooks** are the default for code changes: the SCM pushes an event the instant a commit or pull request lands, so builds start in seconds and nothing is wasted. **Polling** (`pollSCM`) asks the SCM on a schedule - use it only when the SCM cannot reach your controller (no inbound network path), because it scales badly and adds latency. **Schedules** (`cron`, `triggers { cron('H 2 * * *') }`) are for work that is time-driven rather than change-driven: nightly integration runs, security scans, dependency updates, cache warms. **Upstream/downstream** triggers chain jobs (`build job:` or `upstream()`), which is how \"pipeline B runs after pipeline A succeeds\" works. And **manual/API** triggers - a button, `curl` on the build URL with a token, `workflow_dispatch`, or a repository dispatch event - cover releases and cross-system integration. The rule of thumb: webhook for anything driven by a commit, cron for anything driven by the clock, upstream for anything driven by another pipeline's result, and manual for anything a human must authorise.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 456,
+      "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+      "title": "How do you run and secure a Jenkins controller in production?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "devsecops",
+        "infrastructure-as-code"
+      ],
+      "path": "cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md",
+      "shortAnswer": "Treat the controller as a **stateful, high-value production system**, because it holds credentials to everything you deploy to. That means: **never run builds on the controller** (set its executors to 0 and use ephemeral agents), keep all state in `$JENKINS_HOME` on durable storage and back that up, define the configuration as code (JCasC plus a pinned plugin list) so the controller is rebuildable rather than hand-tuned, put authentication behind your identity provider with **matrix or role-based authorisation** rather than \"logged-in users can do anything\", scope credentials to folders and inject them per job, and keep plugins and the LTS version patched on a schedule. The framing that lands in an interview: **a Jenkins controller is a deployment target with production credentials - if it is compromised, every environment it can reach is compromised**, so its security posture should match the most sensitive thing it can deploy to.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 161,
+          "slug": "what-does-a-devsecops-pipeline-look-like-end-to-end",
+          "title": "What does a DevSecOps pipeline look like end to end?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 457,
+      "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+      "title": "How do you write an efficient and secure GitHub Actions workflow?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "devsecops",
+        "version-control"
+      ],
+      "path": "cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md",
+      "shortAnswer": "Efficiency comes from four things: **`needs`** to express the real dependency graph so independent jobs run in parallel, **`matrix`** to fan out across versions or platforms with `fail-fast` and `max-parallel` tuned, **caching** (`actions/cache`, `setup-*` built-in caches, and registry-backed Docker layer cache) so cold runners are not cold, and **`concurrency`** plus path filters so you never run work nobody needs. Security comes from a different four: **least-privilege `permissions`** at workflow and job level (the default token is far broader than most jobs need), **OIDC federation** to your cloud instead of stored long-lived keys, **pinning third-party actions to a commit SHA** rather than a mutable tag, and treating `pull_request_target` and `workflow_run` as privileged - never checking out and running untrusted PR code in a context that holds secrets. The sentence that ties it together: a workflow is code with production credentials, so it gets the same review, pinning, and least-privilege treatment as anything else you deploy.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 458,
+      "slug": "how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline",
+      "title": "How do you integrate SonarQube and quality gates into a pipeline?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "devsecops",
+        "devops-metrics-and-kpis"
+      ],
+      "path": "cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-integrate-sonarqube-and-quality-gates-into-a-pipeline.md",
+      "shortAnswer": "Run the analysis **after the tests produce a coverage report** (Sonar reads coverage; it does not generate it), send the results to the server with the scanner for your build tool, then **wait for the quality gate and fail the build if it fails** - that last step is the one teams skip, which turns Sonar into a dashboard nobody reads. Concretely: `mvn verify` produces JaCoCo output, `mvn sonar:sonar` uploads it with a project key and a token from your secret store, and `waitForQualityGate abortPipeline: true` (Jenkins) or `sonar-scanner -Dsonar.qualitygate.wait=true` blocks until the server has computed the gate. Configure the gate on **new code** rather than the whole codebase - \"no new bugs, no new vulnerabilities, coverage on new code above 80%, duplicated lines on new code below 3%\" - because a gate on total coverage in a legacy repository is either unreachable or meaningless. And run it on the **pull request**, so the feedback arrives before merge, not after.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 459,
+      "slug": "how-do-you-scale-ci-cd-across-many-services-and-teams",
+      "title": "How do you scale CI/CD across many services and teams?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "platform-engineering",
+        "devops-metrics-and-kpis"
+      ],
+      "path": "cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md",
+      "shortAnswer": "Stop writing pipelines per repository and start shipping **one templated pipeline that many repositories consume**. Concretely: pipeline definitions as versioned, semver-tagged templates (GitHub Actions reusable workflows, GitLab CI `include`, Azure DevOps templates, Jenkins shared libraries) that a service opts into with a handful of parameters; **change detection** so a monorepo builds only affected services and a polyrepo does not rebuild the world; an **elastic, ephemeral runner fleet** (one clean container or Pod per job) sized by queue-wait rather than by guesswork; **shared caches and an artefact repository** so dependency downloads happen once; **ephemeral preview environments** provisioned from the pipeline and destroyed on merge; and central **guardrails** - required checks, OIDC instead of stored keys, signed artefacts - enforced by the template rather than by asking people. The measure of success is not that pipelines exist but that a new service reaches production on day one with a five-line config, and that p50 pipeline duration and queue wait stay flat as the number of services grows.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 461,
+          "slug": "what-do-you-need-to-know-about-maven-as-a-devops-engineer",
+          "title": "What do you need to know about Maven as a DevOps engineer?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 532,
+      "slug": "what-is-pipeline-as-code-and-how-do-modern-ci-systems-validate-and-isolate-pipeline-runs",
+      "title": "What is Pipeline as Code and how do modern CI systems validate and isolate pipeline runs?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "cicd",
+        "pipeline-as-code",
+        "security",
+        "github-actions"
+      ],
+      "path": "cicd/what-is-pipeline-as-code-and-how-do-modern-ci-systems-validate-and-isolate-pipeline-runs.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-is-pipeline-as-code-and-how-do-modern-ci-systems-validate-and-isolate-pipeline-runs.md",
+      "shortAnswer": "Pipeline as Code stores pipeline definitions in version-controlled manifests alongside application code, with modern runners using ephemeral containers, isolated virtual machines, and restricted OIDC tokens to prevent cross-job contamination.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 631,
+          "slug": "what-is-hashicorp-vault-and-how-does-dynamic-secret-generation-eliminate-static-credentials",
+          "title": "What is HashiCorp Vault and how does dynamic secret generation eliminate static credentials?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary operational flaw of managing CI pipelines through manual GUI configuration rather than Pipeline as Code?",
+        "options": [
+          "GUI pipelines cannot compile compiled programming languages like C++ or Go",
+          "Pipeline changes are unversioned, lack code review audit trails, and drift silently between environments",
+          "GUI pipelines cannot connect to GitHub or GitLab",
+          "Pipeline as Code requires proprietary paid hardware"
+        ],
+        "answerIndex": 1,
+        "explanation": "Manual GUI configurations cannot be reviewed in pull requests, tested on feature branches, or rolled back via git history, making changes error-prone and untraceable."
+      }
+    },
+    {
+      "id": 533,
+      "slug": "how-does-openid-connect-oidc-eliminate-long-lived-cloud-credentials-in-ci-cd-pipelines",
+      "title": "How does OpenID Connect (OIDC) eliminate long-lived cloud credentials in CI/CD pipelines?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "cicd",
+        "oidc",
+        "security",
+        "iam",
+        "aws"
+      ],
+      "path": "cicd/how-does-openid-connect-oidc-eliminate-long-lived-cloud-credentials-in-ci-cd-pipelines.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-does-openid-connect-oidc-eliminate-long-lived-cloud-credentials-in-ci-cd-pipelines.md",
+      "shortAnswer": "OIDC allows CI runners to exchange a short-lived cryptographically signed JSON Web Token (JWT) directly for temporary cloud IAM credentials, eliminating the need to store static, long-lived access keys in CI secret stores.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 461,
+          "slug": "what-do-you-need-to-know-about-maven-as-a-devops-engineer",
+          "title": "What do you need to know about Maven as a DevOps engineer?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 631,
+          "slug": "what-is-hashicorp-vault-and-how-does-dynamic-secret-generation-eliminate-static-credentials",
+          "title": "What is HashiCorp Vault and how does dynamic secret generation eliminate static credentials?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "How does OIDC authentication verify that a deployment request originates from the `main` branch of an approved repository?",
+        "options": [
+          "The developer enters an SMS verification code during the pipeline execution",
+          "The cloud provider validates the cryptographic signature of the OIDC JWT and matches claims like `sub` against its IAM trust policy",
+          "The CI system stores the cloud provider's master root password",
+          "OIDC requires an open SSH port on the target cloud virtual machines"
+        ],
+        "answerIndex": 1,
+        "explanation": "The CI provider mints a signed JWT containing claims identifying the repository, branch, and actor. The cloud provider validates the signature and ensures claims match the IAM role trust policy."
+      }
+    },
+    {
+      "id": 534,
+      "slug": "what-is-the-difference-between-artifact-promotion-and-rebuilding-binaries-across-environments",
+      "title": "What is the difference between Artifact Promotion and rebuilding binaries across environments?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "cicd",
+        "artifacts",
+        "build-once",
+        "docker"
+      ],
+      "path": "cicd/what-is-the-difference-between-artifact-promotion-and-rebuilding-binaries-across-environments.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-is-the-difference-between-artifact-promotion-and-rebuilding-binaries-across-environments.md",
+      "shortAnswer": "Artifact Promotion builds, tests, and signs an immutable binary or container image once in CI, and promotes that exact same artifact through Staging to Production, while rebuilding per environment risks deploying untested dependencies or compiler drift.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 461,
+          "slug": "what-do-you-need-to-know-about-maven-as-a-devops-engineer",
+          "title": "What do you need to know about Maven as a DevOps engineer?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "Why is rebuilding a Docker image for production instead of promoting the existing staging image considered dangerous?",
+        "options": [
+          "Docker limits image builds to one per calendar day per organization",
+          "Upstream package dependencies or base image updates may silently introduce untested changes into the production build",
+          "Rebuilding images corrupts the host's Linux kernel modules",
+          "Production images cannot run on Linux servers if built from source"
+        ],
+        "answerIndex": 1,
+        "explanation": "If an image is rebuilt, dynamic dependencies (`apt-get upgrade`, unlocked packages) can differ from the artifact tested in staging, breaking the guarantee of pre-production validation."
+      }
+    },
+    {
+      "id": 535,
+      "slug": "what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup",
+      "title": "What are ephemeral preview environments and how do you manage their lifecycle and cleanup?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "cicd",
+        "kubernetes",
+        "preview-environments",
+        "gitops"
+      ],
+      "path": "cicd/what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup.md",
+      "shortAnswer": "Ephemeral preview environments are isolated, temporary application environments spun up automatically per pull request and destroyed when the PR closes, enabling realistic testing and stakeholder review before merging.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 630,
+          "slug": "what-is-kustomize-and-how-does-it-achieve-overlay-configuration-without-templating",
+          "title": "What is Kustomize and how does it achieve overlay configuration without templating?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 633,
+          "slug": "what-is-crossplane-and-how-does-it-turn-kubernetes-into-a-universal-cloud-infrastructure-control-plane",
+          "title": "What is Crossplane and how does it turn Kubernetes into a universal cloud infrastructure control plane?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary risk of implementing ephemeral pull-request environments without an automated reaper mechanism?",
+        "options": [
+          "Git repositories will lock against incoming commits",
+          "Abandoned or idle environments from merged or inactive PRs will accumulate and inflate cloud infrastructure costs",
+          "Developers will be unable to run unit tests locally",
+          "Docker images will automatically delete themselves"
+        ],
+        "answerIndex": 1,
+        "explanation": "Without automated cleanup (reapers based on PR closure or TTL timers), forgotten preview environments consume cloud compute, IPs, and databases, leading to high cost waste."
+      }
+    },
+    {
+      "id": 536,
+      "slug": "how-do-you-detect-isolate-and-eradicate-flaky-tests-in-a-ci-cd-pipeline",
+      "title": "How do you detect, isolate, and eradicate flaky tests in a CI/CD pipeline?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "cicd",
+        "testing",
+        "flaky-tests",
+        "reliability"
+      ],
+      "path": "cicd/how-do-you-detect-isolate-and-eradicate-flaky-tests-in-a-ci-cd-pipeline.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-detect-isolate-and-eradicate-flaky-tests-in-a-ci-cd-pipeline.md",
+      "shortAnswer": "Flaky tests (tests that non-deterministically pass or fail on the same code commit) are managed by test quarantine suites, randomized test execution ordering, concurrency isolation, and alerting on failure patterns.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 709,
+          "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
+          "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": {
+        "stem": "Why is blindly adding `retry: 3` to failing CI test steps considered an anti-pattern when addressing flaky tests?",
+        "options": [
+          "It causes git merge conflicts automatically",
+          "It masks underlying race conditions and non-deterministic bugs, causing pipeline run times to balloon and real regressions to slip through",
+          "Test runners crash if configured with retries",
+          "Retries violate ISO-27001 compliance standards"
+        ],
+        "answerIndex": 1,
+        "explanation": "Blind retries mask real bugs, quadruple build times, and fail to fix the root cause (such as race conditions or state pollution), eventually failing when the flakiness rate increases."
+      }
+    },
+    {
+      "id": 537,
+      "slug": "what-is-the-difference-between-trunk-based-development-and-gitflow-in-modern-continuous-delivery",
+      "title": "What is the difference between trunk-based development and GitFlow in modern continuous delivery?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "cicd",
+        "git",
+        "gitflow",
+        "trunk-based"
+      ],
+      "path": "cicd/what-is-the-difference-between-trunk-based-development-and-gitflow-in-modern-continuous-delivery.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-is-the-difference-between-trunk-based-development-and-gitflow-in-modern-continuous-delivery.md",
+      "shortAnswer": "Trunk-based development involves all developers merging short-lived feature branches into a single shared branch (trunk) multiple times daily, while GitFlow uses long-lived branches (develop, release, hotfix) with infrequent, high-conflict batch releases.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": {
+        "stem": "How do developers using Trunk-Based Development prevent incomplete features from impacting production users if code is merged daily?",
+        "options": [
+          "By commenting out unfinished source code before merging",
+          "By wrapping unfinished features in Feature Flags (feature toggles) keeping them disabled in production",
+          "By storing unfinished commits on unshared local USB drives",
+          "By disabling CI/CD pipelines during active development"
+        ],
+        "answerIndex": 1,
+        "explanation": "Feature flags decouple deployment from release, allowing unfinished code to be merged continuously to trunk without exposing the functionality to end users until ready."
+      }
+    },
+    {
+      "id": 538,
+      "slug": "how-do-you-secure-ci-cd-runners-against-supply-chain-attacks-and-untrusted-pull-requests",
+      "title": "How do you secure CI/CD runners against supply-chain attacks and untrusted pull requests?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "cicd",
+        "security",
+        "supply-chain",
+        "runners"
+      ],
+      "path": "cicd/how-do-you-secure-ci-cd-runners-against-supply-chain-attacks-and-untrusted-pull-requests.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-secure-ci-cd-runners-against-supply-chain-attacks-and-untrusted-pull-requests.md",
+      "shortAnswer": "Secure runners use sandboxed ephemeral execution, restrict secret exposure on `pull_request_target` triggers, pin actions by full commit SHA instead of mutable tags, and run with unprivileged user permissions and restricted egress networks.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 631,
+          "slug": "what-is-hashicorp-vault-and-how-does-dynamic-secret-generation-eliminate-static-credentials",
+          "title": "What is HashiCorp Vault and how does dynamic secret generation eliminate static credentials?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "Why is pinning third-party CI/CD actions by full 40-character commit SHA more secure than pinning by version tag (like `@v4`)?",
+        "options": [
+          "Commit SHAs download 50% faster than semantic tags",
+          "Git tags are mutable and can be quietly rewritten by an attacker to point to malicious code; commit SHAs are immutable cryptographic hashes",
+          "GitHub Actions rejects any workflow referencing semantic version tags",
+          "Commit SHAs automatically execute automated vulnerability scans"
+        ],
+        "answerIndex": 1,
+        "explanation": "A compromised action maintainer account or compromised repository can retag `v4` to point to a malicious commit that steals secrets. Cryptographic SHAs are immutable."
+      }
+    },
+    {
+      "id": 539,
+      "slug": "what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity",
+      "title": "What are SLSA (Supply-chain Levels for Software Artifacts) frameworks and how do they verify build integrity?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "cicd",
+        "slsa",
+        "supply-chain",
+        "security",
+        "provenance"
+      ],
+      "path": "cicd/what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity.md",
+      "shortAnswer": "SLSA is an industry security framework that prevents software tampering through verifiable build provenance, ensuring that code running in production was built by a trusted build service from an authentic source repository without intermediary tampering.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the primary function of a signed SLSA build provenance attestation?",
+        "options": [
+          "It serves as a software license key verifying enterprise billing",
+          "It provides tamper-evident cryptographic proof detailing which source repository, commit, and build environment generated the binary",
+          "It converts container images into virtual machine snapshots",
+          "It encrypts the application source code so developers cannot read it"
+        ],
+        "answerIndex": 1,
+        "explanation": "Provenance attestations cryptographically link the compiled artifact to its exact source repository, commit hash, and build system, proving the artifact was not modified or replaced post-build."
+      }
+    },
+    {
+      "id": 540,
+      "slug": "what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits",
+      "title": "What is Semantic Release and how does it automate versioning and changelogs from commits?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "cicd",
+        "versioning",
+        "semver",
+        "automation"
+      ],
+      "path": "cicd/what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits.md",
+      "shortAnswer": "Semantic Release analyzes structured Conventional Commits (`feat:`, `fix:`, `feat!:`) on the main branch to automatically calculate the next SemVer version number, generate release notes, and publish packages without human intervention.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 461,
+          "slug": "what-do-you-need-to-know-about-maven-as-a-devops-engineer",
+          "title": "What do you need to know about Maven as a DevOps engineer?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 632,
+          "slug": "what-is-packer-and-how-does-it-automate-immutable-golden-machine-image-generation-across-clouds",
+          "title": "What is Packer and how does it automate immutable golden machine image generation across clouds?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "In a repository configured with Semantic Release, what type of version bump is triggered by a commit containing `BREAKING CHANGE:` in its footer?",
+        "options": [
+          "Patch version bump (e.g. 1.2.3 to 1.2.4)",
+          "Major version bump (e.g. 1.2.3 to 2.0.0)",
+          "Minor version bump (e.g. 1.2.3 to 1.3.0)",
+          "No version bump; the pipeline pauses for manual review"
+        ],
+        "answerIndex": 1,
+        "explanation": "Under the Conventional Commits specification, a `BREAKING CHANGE:` footer or `feat!:` prefix signifies backward-incompatible changes, triggering an automated Major version increment."
+      }
+    },
+    {
+      "id": 541,
+      "slug": "how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning",
+      "title": "How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "cicd",
+        "caching",
+        "performance",
+        "optimization"
+      ],
+      "path": "cicd/how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning.md",
+      "shortAnswer": "Robust CI caching keys cache archives on content hashes of lockfiles (e.g. `package-lock.json`, `go.sum`), isolates caches per branch with fallback to trunk, and ensures caches are read-only for pull requests to prevent cache poisoning.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 460,
+          "slug": "how-do-you-manage-build-artefacts-with-nexus-or-artifactory",
+          "title": "How do you manage build artefacts with Nexus or Artifactory?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "Why should CI dependency caches use the cryptographic hash of the package lockfile in their cache key?",
+        "options": [
+          "Because package managers delete lockfiles if the hash is missing",
+          "To ensure the cache is invalidated and rebuilt only when dependencies actually change, maximizing cache hits otherwise",
+          "To automatically encrypt the node_modules directory with AES-256",
+          "Because CI platforms cannot store files without a hash in the filename"
+        ],
+        "answerIndex": 1,
+        "explanation": "Hashing the lockfile guarantees that as long as dependencies remain identical, builds reuse the cache archive, but any dependency update produces a new cache key."
+      }
+    }
+  ]
+}

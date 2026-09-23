@@ -1,0 +1,781 @@
+{
+  "schemaVersion": 1,
+  "slug": "version-control",
+  "title": "Version Control",
+  "group": "Foundations",
+  "description": "Git mechanics and the branching models teams actually argue about, including how to resolve conflicts calmly.",
+  "studyNotes": [
+    "Git Flow versus trunk-based development, and which suits continuous deployment.",
+    "Merge versus rebase, and when each is safe.",
+    "How you recover from a bad merge or a force push."
+  ],
+  "questions": [
+    {
+      "id": 46,
+      "slug": "what-is-git",
+      "title": "What is Git?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions"
+      ],
+      "path": "version-control/what-is-git.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/what-is-git.md",
+      "shortAnswer": "Git is a distributed version control system that records project history as a graph of immutable commits, giving every clone the full history and enabling cheap branching, offline work, and safe collaboration.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 402,
+          "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+          "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 47,
+      "slug": "what-is-git-branching-strategy",
+      "title": "What is Git Branching Strategy?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions"
+      ],
+      "path": "version-control/what-is-git-branching-strategy.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/what-is-git-branching-strategy.md",
+      "shortAnswer": "A branching strategy is the team's agreement on how branches are created, merged, and released - the main options being trunk-based development, GitHub Flow, Git Flow, and release branching, chosen to match release cadence and risk.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        },
+        {
+          "id": 402,
+          "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+          "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 48,
+      "slug": "what-is-git-flow",
+      "title": "What is Git Flow?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions"
+      ],
+      "path": "version-control/what-is-git-flow.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/what-is-git-flow.md",
+      "shortAnswer": "Git Flow is a branching model with two permanent branches - `main` (released code) and `develop` (integration) - plus feature, release, and hotfix branches, designed for software with scheduled, versioned releases.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        },
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 455,
+          "slug": "how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs",
+          "title": "How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 49,
+      "slug": "what-is-trunk-based-development",
+      "title": "What is Trunk Based Development?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions"
+      ],
+      "path": "version-control/what-is-trunk-based-development.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/what-is-trunk-based-development.md",
+      "shortAnswer": "Trunk-based development is a branching model where all developers integrate into a single shared branch at least daily, using very short-lived branches or direct commits, with unfinished work hidden behind feature flags.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 402,
+          "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+          "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 50,
+      "slug": "how-to-handle-merge-conflicts-in-git",
+      "title": "How to handle merge conflicts in Git?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions"
+      ],
+      "path": "version-control/how-to-handle-merge-conflicts-in-git.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/how-to-handle-merge-conflicts-in-git.md",
+      "shortAnswer": "Fetch the latest target branch, merge or rebase, inspect each conflicted file, resolve by choosing or combining the changes, remove the markers, run the tests, then `git add` and complete the merge or `git rebase --continue`.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 402,
+          "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+          "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+          "topic": "cicd"
+        },
+        {
+          "id": 455,
+          "slug": "how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs",
+          "title": "How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 254,
+      "slug": "how-do-you-use-git-hooks-for-automated-linting-testing-and-commit-validation",
+      "title": "How do you use Git hooks for automated linting, testing, and commit validation?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions"
+      ],
+      "path": "version-control/how-do-you-use-git-hooks-for-automated-linting-testing-and-commit-validation.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/how-do-you-use-git-hooks-for-automated-linting-testing-and-commit-validation.md",
+      "shortAnswer": "Use Git hooks (custom scripts executed automatically on Git events like `pre-commit`, `commit-msg`, and `pre-push`) to shift security and quality checks left by automatically formatting code, running linters, enforcing Conventional Commits formatting, and scanning for leaked credentials before code reaches remote repositories.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 455,
+          "slug": "how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs",
+          "title": "How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?",
+          "topic": "cicd"
+        },
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 402,
+          "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+          "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 263,
+      "slug": "what-is-the-difference-between-git-merge-rebase-and-cherry-pick",
+      "title": "What is the difference between git merge, rebase, and cherry-pick?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions"
+      ],
+      "path": "version-control/what-is-the-difference-between-git-merge-rebase-and-cherry-pick.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/what-is-the-difference-between-git-merge-rebase-and-cherry-pick.md",
+      "shortAnswer": "`merge` joins two branches with a new commit that has two parents, preserving history exactly as it happened. `rebase` replays your commits on top of another branch, creating new commits with new hashes and a linear history. `cherry-pick` copies one specific commit onto the current branch. The rule that governs all three: **never rewrite history that other people have already pulled.**",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 402,
+          "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+          "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+          "topic": "cicd"
+        },
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 455,
+          "slug": "how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs",
+          "title": "How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 264,
+      "slug": "how-do-you-undo-changes-in-git-safely",
+      "title": "How do you undo changes in Git safely?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions"
+      ],
+      "path": "version-control/how-do-you-undo-changes-in-git-safely.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/how-do-you-undo-changes-in-git-safely.md",
+      "shortAnswer": "Match the tool to whether the commit is shared. `git revert` creates a new commit that inverts a previous one and is the **only** safe choice on a pushed branch. `git reset` moves the branch pointer and is for local history you have not shared. `git restore` discards working-tree or staged changes without touching commits. And `git reflog` is the safety net that makes almost any mistake recoverable.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 402,
+          "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+          "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+          "topic": "cicd"
+        },
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 305,
+      "slug": "how-do-you-recover-from-a-bad-git-history-rewrite",
+      "title": "How do you recover from a bad Git history rewrite?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions"
+      ],
+      "path": "version-control/how-do-you-recover-from-a-bad-git-history-rewrite.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/how-do-you-recover-from-a-bad-git-history-rewrite.md",
+      "shortAnswer": "Stop writing to the repository, then recover from a copy of the old object graph - almost always the **reflog** on any clone that still has it, or a `git fsck --lost-found` walk of dangling commits. The rule that makes this survivable: Git does not delete commits on a rewrite, it just stops referencing them, so as long as garbage collection has not run and _some_ clone still points at the old objects, you can restore the branch to its previous commit. Then fix the cause - protect the branch, ban force-push to shared branches, and require `--force-with-lease` where force-push is legitimate.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 402,
+          "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+          "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+          "topic": "cicd"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 499,
+      "slug": "what-is-the-difference-between-git-fetch-git-pull-and-git-clone",
+      "title": "What is the difference between git fetch, git pull, and git clone?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions"
+      ],
+      "path": "version-control/what-is-the-difference-between-git-fetch-git-pull-and-git-clone.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/what-is-the-difference-between-git-fetch-git-pull-and-git-clone.md",
+      "shortAnswer": "**`git clone`** creates a new local repository from a remote: it copies the object database, sets up the `origin` remote, creates remote-tracking branches, and checks out the default branch. You do it once. **`git fetch`** downloads new objects and updates **remote-tracking branches** (`origin/main`) **without touching your working tree or your local branches** - it is always safe, because nothing you have is changed or merged. **`git pull`** is `fetch` followed immediately by an integration step in your current branch - `merge` by default, or `rebase` with `--rebase` - so it _does_ change your working tree and can produce conflicts. The practical habit that follows: **`fetch` then look, then integrate deliberately**. `git fetch && git log --oneline HEAD..origin/main` tells you exactly what is about to arrive before you decide whether to merge or rebase, which is why experienced engineers pull far less often than they fetch.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 402,
+          "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+          "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+          "topic": "cicd"
+        },
+        {
+          "id": 455,
+          "slug": "how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs",
+          "title": "How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?",
+          "topic": "cicd"
+        },
+        {
+          "id": 457,
+          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
+          "title": "How do you write an efficient and secure GitHub Actions workflow?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 577,
+      "slug": "what-is-the-difference-between-git-merge-and-git-rebase-and-when-should-each-be-used",
+      "title": "What is the difference between Git Merge and Git Rebase and when should each be used?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "git",
+        "merge",
+        "rebase",
+        "history"
+      ],
+      "path": "version-control/what-is-the-difference-between-git-merge-and-git-rebase-and-when-should-each-be-used.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/what-is-the-difference-between-git-merge-and-git-rebase-and-when-should-each-be-used.md",
+      "shortAnswer": "Git Merge joins two branches together by creating a new merge commit that preserves exact historical timestamps and branching topology; Git Rebase replays feature branch commits one by one onto the tip of the target branch, creating a clean, linear commit history.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 537,
+          "slug": "what-is-the-difference-between-trunk-based-development-and-gitflow-in-modern-continuous-delivery",
+          "title": "What is the difference between trunk-based development and GitFlow in modern continuous delivery?",
+          "topic": "cicd"
+        },
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Why does the 'Golden Rule of Rebasing' advise against rebasing commits that have already been pushed to a shared branch?",
+        "options": [
+          "Rebasing deletes all automated test configurations",
+          "Rebasing rewrites commit SHA hashes, causing the branch history to diverge and breaking collaboration for other teammates",
+          "Git repositories cannot store rebased code in remote cloud hosts",
+          "Rebasing requires continuous internet connectivity"
+        ],
+        "answerIndex": 1,
+        "explanation": "Rebasing creates brand new commits with new cryptographic hashes. If teammates have based their work on the original commits, rewriting shared history creates severe synchronization conflicts."
+      }
+    },
+    {
+      "id": 578,
+      "slug": "how-does-git-internally-store-data-using-blobs-trees-commits-and-annotated-tags",
+      "title": "How does Git internally store data using Blobs, Trees, Commits, and Annotated Tags?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "git",
+        "internals",
+        "blobs",
+        "trees",
+        "objects"
+      ],
+      "path": "version-control/how-does-git-internally-store-data-using-blobs-trees-commits-and-annotated-tags.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/how-does-git-internally-store-data-using-blobs-trees-commits-and-annotated-tags.md",
+      "shortAnswer": "Git is a content-addressable key-value object database stored under `.git/objects/`, where each object's ID is the hash of its type, size, and content (SHA-1 by default, SHA-256 in repositories created with `--object-format=sha256`). There are four object types: Blobs (raw file contents), Trees (directories and filenames), Commits (tree pointer, parents, author, committer, message), and annotated Tags (a named, optionally signed pointer to another object).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 537,
+          "slug": "what-is-the-difference-between-trunk-based-development-and-gitflow-in-modern-continuous-delivery",
+          "title": "What is the difference between trunk-based development and GitFlow in modern continuous delivery?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 19,
+          "slug": "what-is-gitlab-ci",
+          "title": "What is GitLab CI?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "In Git's internal object database, which object type is responsible for storing a file's name and POSIX execution permissions?",
+        "options": [
+          "The Blob object",
+          "The Tree object",
+          "The Commit object",
+          "The Reflog object"
+        ],
+        "answerIndex": 1,
+        "explanation": "Blobs store only raw file content. The Tree object acts as a directory, recording the mapping between filenames, file permissions (modes), and the corresponding Blob or Sub-tree SHAs."
+      }
+    },
+    {
+      "id": 579,
+      "slug": "how-do-you-recover-lost-commits-using-the-git-reflog",
+      "title": "How do you recover lost commits using the Git Reflog?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "git",
+        "reflog",
+        "troubleshooting",
+        "recovery"
+      ],
+      "path": "version-control/how-do-you-recover-lost-commits-using-the-git-reflog.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/how-do-you-recover-lost-commits-using-the-git-reflog.md",
+      "shortAnswer": "`git reflog` records every update to `HEAD` in the local repository (checkouts, resets, commits, rebases); you recover accidentally deleted commits by identifying the commit SHA before the destructive action and branching from or resetting to it.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 537,
+          "slug": "what-is-the-difference-between-trunk-based-development-and-gitflow-in-modern-continuous-delivery",
+          "title": "What is the difference between trunk-based development and GitFlow in modern continuous delivery?",
+          "topic": "cicd"
+        },
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "An engineer accidentally runs `git reset --hard HEAD~1` and loses an unpushed commit. Which command allows them to find the lost commit hash?",
+        "options": [
+          "`git remote -v`",
+          "`git reflog`",
+          "`git status`",
+          "`git push --force`"
+        ],
+        "answerIndex": 1,
+        "explanation": "`git reflog` logs every historical movement of the `HEAD` pointer, allowing recovery of orphaned commits that are no longer reachable from branch tips."
+      }
+    },
+    {
+      "id": 580,
+      "slug": "how-does-git-bisect-automate-root-cause-debugging-across-hundreds-of-commits",
+      "title": "How does Git Bisect automate root-cause debugging across hundreds of commits?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "git",
+        "bisect",
+        "debugging",
+        "automation"
+      ],
+      "path": "version-control/how-does-git-bisect-automate-root-cause-debugging-across-hundreds-of-commits.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/how-does-git-bisect-automate-root-cause-debugging-across-hundreds-of-commits.md",
+      "shortAnswer": "`git bisect` uses a binary search algorithm through the commit history to pinpoint the exact commit that introduced a bug in $O(\\log N)$ steps, capable of running fully automated with a test script.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 537,
+          "slug": "what-is-the-difference-between-trunk-based-development-and-gitflow-in-modern-continuous-delivery",
+          "title": "What is the difference between trunk-based development and GitFlow in modern continuous delivery?",
+          "topic": "cicd"
+        },
+        {
+          "id": 540,
+          "slug": "what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits",
+          "title": "What is Semantic Release and how does it automate versioning and changelogs from commits?",
+          "topic": "cicd"
+        },
+        {
+          "id": 632,
+          "slug": "what-is-packer-and-how-does-it-automate-immutable-golden-machine-image-generation-across-clouds",
+          "title": "What is Packer and how does it automate immutable golden machine image generation across clouds?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "What requirement must an automated test script satisfy to be used with `git bisect run <script>`?",
+        "options": [
+          "It must be written exclusively in Python",
+          "It must exit with status code 0 if the commit is good/clean, and non-zero (1-127) if the commit is bad/broken",
+          "It must output a JSON report to `/tmp/results.json`",
+          "It must execute in under 5 milliseconds"
+        ],
+        "answerIndex": 1,
+        "explanation": "`git bisect run` relies on standard Unix process exit codes: exit code 0 marks the commit as 'good', exit codes between 1 and 127 mark it as 'bad'."
+      }
+    },
+    {
+      "id": 581,
+      "slug": "what-are-git-submodules-and-how-do-they-differ-from-git-subtrees-and-monorepos",
+      "title": "What are Git submodules and how do they differ from Git subtrees and monorepos?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "git",
+        "submodules",
+        "monorepo",
+        "architecture"
+      ],
+      "path": "version-control/what-are-git-submodules-and-how-do-they-differ-from-git-subtrees-and-monorepos.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/what-are-git-submodules-and-how-do-they-differ-from-git-subtrees-and-monorepos.md",
+      "shortAnswer": "Submodules point to a specific commit SHA of an external repository without embedding its history; Subtrees embed the entire external repository history directly into a subdirectory of the host project; Monorepos place all shared code in a single unified repository.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 537,
+          "slug": "what-is-the-difference-between-trunk-based-development-and-gitflow-in-modern-continuous-delivery",
+          "title": "What is the difference between trunk-based development and GitFlow in modern continuous delivery?",
+          "topic": "cicd"
+        },
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Why do software engineering teams frequently experience CI/CD pipeline failures when first integrating Git submodules?",
+        "options": [
+          "Git submodules cannot store binary files",
+          "Standard `git clone` does not fetch submodule contents by default unless explicitly configured with `--recursive` or `git submodule update --init`",
+          "Submodules only function on macOS development machines",
+          "CI runners block network traffic to all submodules"
+        ],
+        "answerIndex": 1,
+        "explanation": "By default, cloning a repository containing submodules only checks out empty directories. Pipelines must run `git submodule update --init --recursive` to fetch submodule contents."
+      }
+    },
+    {
+      "id": 582,
+      "slug": "what-are-git-hooks-and-how-are-they-used-with-pre-commit-frameworks-to-enforce-quality-gates",
+      "title": "What are Git Hooks and how are they used with pre-commit frameworks to enforce quality gates?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "git",
+        "git-hooks",
+        "pre-commit",
+        "automation"
+      ],
+      "path": "version-control/what-are-git-hooks-and-how-are-they-used-with-pre-commit-frameworks-to-enforce-quality-gates.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/what-are-git-hooks-and-how-are-they-used-with-pre-commit-frameworks-to-enforce-quality-gates.md",
+      "shortAnswer": "Git hooks are custom shell scripts triggered at key execution points (pre-commit, commit-msg, pre-push); frameworks like `pre-commit` manage multi-language hooks to catch formatting errors, secret leaks, and lint issues before code is committed.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 540,
+          "slug": "what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits",
+          "title": "What is Semantic Release and how does it automate versioning and changelogs from commits?",
+          "topic": "cicd"
+        },
+        {
+          "id": 632,
+          "slug": "what-is-packer-and-how-does-it-automate-immutable-golden-machine-image-generation-across-clouds",
+          "title": "What is Packer and how does it automate immutable golden machine image generation across clouds?",
+          "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 537,
+          "slug": "what-is-the-difference-between-trunk-based-development-and-gitflow-in-modern-continuous-delivery",
+          "title": "What is the difference between trunk-based development and GitFlow in modern continuous delivery?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Why can an organization NOT rely solely on local Git `pre-commit` hooks to enforce mandatory security scanning policies?",
+        "options": [
+          "Git hooks cannot run security tools",
+          "Developers can easily bypass client-side hooks using the `--no-verify` flag or forget to install them locally",
+          "Pre-commit hooks only run on Linux servers",
+          "Git hooks require enterprise licenses"
+        ],
+        "answerIndex": 1,
+        "explanation": "Client-side hooks are advisory; developers can bypass them using `git commit --no-verify`. Mandatory security controls must always be duplicated in server-side CI pipelines."
+      }
+    }
+  ]
+}
