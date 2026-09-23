@@ -37,7 +37,35 @@ Agree on case and allowed values, and document them - `Env=prod` and `environmen
 
 **Track compliance as a metric:** percentage of spend that is fully tagged. It is the number that tells you whether the strategy is working.
 
-**Note the limits:** some resources cannot be tagged, and shared costs (NAT gateways, data transfer, cluster control planes) need a documented split rule.
+**Note the limits:** some resources cannot be tagged, and shared costs (NAT gateways, data transfer, cluster control planes) need a documented split rule. Kubernetes workloads need labels plus a tool such as OpenCost, because the cloud bill stops at the node. Tag policies also cannot fix what was never tagged, which is why enforcement at creation matters more than audits.
+
+## Example
+
+```hcl
+# Terraform AWS provider: every resource created through this provider gets the tags.
+provider "aws" {
+  region = "eu-west-1"
+  default_tags {
+    tags = {
+      Owner       = "platform-team"
+      Environment = "production"
+      Application = "checkout-api"
+      CostCenter  = "CC-4471"
+      ManagedBy   = "terraform"
+    }
+  }
+}
+```
+
+```bash
+# Activate the tags for cost allocation (they only report from activation onward).
+aws ce update-cost-allocation-tags-status --cost-allocation-tags-status \
+  TagKey=Owner,Status=Active TagKey=Environment,Status=Active TagKey=CostCenter,Status=Active
+
+# Track the gap: resources missing a required tag.
+aws resourcegroupstaggingapi get-resources --query \
+  'ResourceTagMappingList[?!not_null(Tags[?Key==`CostCenter`].Value | [0])].ResourceARN'
+```
 
 ## Interview tips
 
@@ -51,7 +79,7 @@ Agree on case and allowed values, and document them - `Env=prod` and `environmen
 
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

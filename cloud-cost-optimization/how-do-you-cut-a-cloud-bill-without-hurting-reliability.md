@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**Find out what you are actually paying for.** Aggregate bills lie. Use the Cost and Usage Report (or Azure/GCP equivalents) in a query engine, joined to your tag taxonomy, and split by team, environment, and service. The first pass usually finds that 60-80% of spend sits in a handful of line items, and that a large slice is untagged - which means unowned.
+**Find out what you are actually paying for.** Aggregate bills lie. Use the Cost and Usage Report - on AWS now delivered as CUR 2.0 through Data Exports, with a FOCUS-format export available for cross-cloud reporting - (or Azure/GCP equivalents) in a query engine, joined to your tag taxonomy, and split by team, environment, and service. The first pass usually finds that 60-80% of spend sits in a handful of line items, and that a large slice is untagged - which means unowned.
 
 **The ladder, lowest risk first:**
 
@@ -37,6 +37,7 @@ tags:
 
 ```sql
 -- Top spend by team and service, with untagged exposure made obvious.
+-- (Legacy CUR Athena column names; in CUR 2.0 tags live in a map: resource_tags['user_team'].)
 SELECT
   COALESCE(resource_tags_user_team, 'UNTAGGED') AS team,
   line_item_product_code                        AS service,
@@ -60,7 +61,7 @@ aws logs describe-log-groups \
 # Step 4: commit only to the observed floor.
 aws ce get-savings-plans-purchase-recommendation \
   --savings-plans-type COMPUTE_SP --term-in-years ONE_YEAR \
-  --payment-option NO_UPFRONT --lookback-period-in-days SIXTY
+  --payment-option NO_UPFRONT --lookback-period-in-days SIXTY_DAYS
 ```
 
 ```yaml
@@ -70,11 +71,11 @@ kind: ClusterPolicy
 metadata:
   name: require-cost-tags
 spec:
-  validationFailureAction: Enforce
   rules:
     - name: require-team-label
       match: { any: [{ resources: { kinds: [Deployment, StatefulSet] } }] }
       validate:
+        failureAction: Enforce # per-rule; spec.validationFailureAction is deprecated
         message: "team and cost-center labels are required"
         pattern:
           metadata:

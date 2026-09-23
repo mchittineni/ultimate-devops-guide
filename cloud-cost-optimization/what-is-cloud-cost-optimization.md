@@ -28,6 +28,21 @@ tags:
 
 **The discipline is FinOps:** inform (visibility and allocation), optimise (the levers above), operate (continuous governance). It is a cross-functional practice between engineering, finance, and product - not a quarterly cleanup.
 
+**The trade-off to keep in view.** Every lever touches something else: right-sizing reduces headroom, Spot adds interruptions, commitments reduce flexibility, and removing redundancy lowers availability. Tie each saving to the service's SLO so the reliability cost is explicit.
+
+## Example
+
+```bash
+# Two of the fastest wins, found in minutes.
+aws ec2 describe-volumes --filters Name=status,Values=available \
+  --query 'Volumes[].{id:VolumeId,gb:Size,type:VolumeType}' --output table   # unattached disks
+
+aws compute-optimizer get-ec2-instance-recommendations \
+  --filters name=Finding,values=Overprovisioned \
+  --query 'instanceRecommendations[].[instanceArn,currentInstanceType,recommendationOptions[0].instanceType]' \
+  --output table                                                             # right-sizing candidates
+```
+
 ## Interview tips
 
 - Order the levers by effort-to-saving; waste elimination before commitments is the correct sequence.
