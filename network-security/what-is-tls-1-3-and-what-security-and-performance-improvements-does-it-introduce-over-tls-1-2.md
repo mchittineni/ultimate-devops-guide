@@ -44,7 +44,7 @@ TLS 1.3 removed obsolete primitives and features behind a decade of attacks (pad
 - **Removed CBC Mode Ciphers**: Replaced with Authenticated Encryption with Associated Data (AEAD) ciphers (AES-GCM, ChaCha20-Poly1305).
 - **Removed renegotiation, compression, and arbitrary DH groups**, and cut the cipher-suite list to five, so there is far less to misconfigure or downgrade.
 - **Encrypted more of the handshake**: everything after `ServerHello`, including the server certificate, is encrypted. Encrypted Client Hello (ECH) extends this to the SNI.
-- **Post-quantum ready**: the hybrid `X25519MLKEM768` key exchange that browsers now negotiate by default is a TLS 1.3 key-share group - another reason to make 1.3 the preferred version.
+- **Post-quantum ready**: the hybrid `X25519MLKEM768` key exchange that browsers now negotiate by default is a TLS 1.3 key-share group - another reason to make 1.3 the preferred version. The practical catch is size: the ML-KEM share adds about 1.1 KB, so the `ClientHello` no longer fits in one packet, and middleboxes or load balancers that assume it does have dropped or stalled these handshakes. Test inspection appliances before assuming PQ "just works".
 
 ## Example
 

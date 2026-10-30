@@ -48,7 +48,7 @@ DNSSEC does **not** encrypt DNS queries (they remain visible plaintext). Instead
 - **Last-mile gap**: validation normally happens at the recursive resolver; the path from resolver to the client is unprotected unless you validate locally or use DNS over TLS/HTTPS (which encrypt but do not authenticate the data itself). DNSSEC and DoT/DoH are complementary.
 - **Availability risk**: an expired signature or a botched key rollover makes your domain fail to resolve for every validating resolver - DNSSEC outages are self-inflicted far more often than attacks are prevented. Automate signing (managed DNS such as Route 53 or Cloudflare) and monitor signature expiry.
 - **Algorithms**: prefer ECDSA P-256 (algorithm 13) or Ed25519 (15); RSA/SHA-1 algorithms are deprecated.
-- **Root KSK rollover**: the root zone switches its signing key from KSK-2017 (key tag 20326) to KSK-2024 (key tag 38696) on 11 October 2026; validating resolvers without the new trust anchor will fail to resolve anything.
+- **Root KSK rollover**: the root zone switched its key-signing key from KSK-2017 (key tag 20326) to KSK-2024 (key tag 38696) on 11 October 2026, without widespread disruption; KSK-2017 is revoked in a later step. A validating resolver that still trusts only KSK-2017 cannot validate anything - which is why trust anchors must update automatically (RFC 5011) rather than be pinned in a config file.
 
 ## Example
 
@@ -65,7 +65,7 @@ dig +cd dnssec-failed.org @1.1.1.1    # +cd (checking disabled) returns the unva
 # Walk and diagnose the whole chain of trust (DS in the parent -> DNSKEY -> RRSIG)
 delv example.com A +rtrace
 
-# Resolver operators: is the new root trust anchor (key tag 38696) configured?
+# Resolver operators: is the root trust anchor now in use (key tag 38696) configured?
 unbound-anchor -v   # Unbound; BIND users check managed-keys / trust-anchors
 ```
 
