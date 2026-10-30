@@ -25,6 +25,8 @@ tags:
 - **Layers** for shared dependencies, and container images up to 10 GB for large runtimes; `x86_64` or `arm64` (Graviton) architectures.
 - **VPC attachment** for private resources (now with much-improved cold-start behaviour via Hyperplane ENIs).
 
+**Limits worth knowing by heart:** 15-minute timeout; 128 MB-10,240 MB memory (up to about 6 vCPUs at the top end); `/tmp` ephemeral storage configurable to 10 GB; request/response payload 6 MB synchronous and 1 MB asynchronous (raised from 256 KB in October 2025); 250 MB unzipped for zip packages including layers, 10 GB for images; a default regional concurrency quota of 1,000 (raisable), with each function scaling by up to 1,000 execution environments every 10 seconds.
+
 **Recent additions worth knowing:** SnapStart (Java, Python, .NET) for faster cold starts, billed init duration for all functions since August 2025, Lambda Managed Instances (functions on EC2 capacity for steady workloads), and durable functions for long-running, checkpointed workflows.
 
 **Common triggers:** API Gateway or Function URLs (HTTP), SQS and Kinesis (streams), S3 events, EventBridge (schedules and events), DynamoDB Streams, and Step Functions.
@@ -55,6 +57,7 @@ def handler(event, context):
 - Initialising clients outside the handler is the most common practical optimisation - mention it.
 - Memory tuning affecting CPU (and therefore cost) surprises people; it is a strong detail.
 - Idempotency, DLQs, and retry behaviour show you have run Lambda in production, not just deployed a demo.
+- Quote the limits correctly (15 minutes, 10 GB memory, 6 MB sync / 1 MB async payload) and say what you do when you hit them: Step Functions or durable functions for long work, S3 references for large payloads, containers for steady heavy compute.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

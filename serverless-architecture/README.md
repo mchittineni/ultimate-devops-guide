@@ -11,7 +11,7 @@ tags:
 
 Functions as a service, the operational model behind them, and the design patterns that keep serverless workloads fast and cheap.
 
-**14 questions** · 🟢 Beginner: 6 · 🟡 Intermediate: 7 · 🔴 Advanced: 1
+**15 questions** · 🟢 Beginner: 6 · 🟡 Intermediate: 8 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -31,6 +31,7 @@ Functions as a service, the operational model behind them, and the design patter
 | 658 | [What are Step Functions and how do serverless state machines manage distributed microservice workflows?](./what-are-step-functions-and-how-do-serverless-state-machines-manage-distributed-microservice-workflows.md)                             | 🟡 Intermediate |
 | 659 | [What are Event-Driven architectures with EventBridge, SQS, and SNS and how do they decouple serverless systems?](./what-are-event-driven-architectures-with-eventbridge-sqs-and-sns-and-how-do-they-decouple-serverless-systems.md)               | 🟡 Intermediate |
 | 660 | [What is LocalStack and how do you test serverless cloud services locally in development and CI?](./what-is-localstack-and-how-do-you-test-serverless-cloud-services-locally-in-development-and-ci.md)                                             | 🟢 Beginner     |
+| 776 | [How do AWS Lambda, Google Cloud Run, and Azure Functions compare for serverless workloads?](./how-do-aws-lambda-google-cloud-run-and-azure-functions-compare-for-serverless-workloads.md)                                                         | 🟡 Intermediate |
 
 ## What interviewers probe here
 
