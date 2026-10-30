@@ -109,9 +109,9 @@ docker volume prune                    # DESTRUCTIVE: deletes unused volumes
 
 ## Related Concepts
 
+- [[How do you troubleshoot a Pod stuck in ImagePullBackOff?]] (`#751`): [How do you troubleshoot a Pod stuck in ImagePullBackOff?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)
 - [[What are the main components of Kubernetes architecture?]] (`#12`): [What are the main components of Kubernetes architecture?](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)
 - [[How does RBAC work in Kubernetes?]] (`#257`): [How does RBAC work in Kubernetes?](../kubernetes/how-does-rbac-work-in-kubernetes.md)
-- [[How do you debug a Kubernetes Ingress that is not routing traffic?]] (`#406`): [How do you debug a Kubernetes Ingress that is not routing traffic?](../kubernetes/how-do-you-debug-a-kubernetes-ingress-that-is-not-routing-traffic.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

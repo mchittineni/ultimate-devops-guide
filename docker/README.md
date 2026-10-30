@@ -11,7 +11,7 @@ tags:
 
 Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the client/daemon architecture underneath `docker run`.
 
-**22 questions** · 🟢 Beginner: 9 · 🟡 Intermediate: 10 · 🔴 Advanced: 3
+**23 questions** · 🟢 Beginner: 9 · 🟡 Intermediate: 11 · 🔴 Advanced: 3
 
 ## Questions
 
@@ -39,6 +39,7 @@ Container fundamentals - images versus containers, Dockerfile authoring, Compose
 | 517 | [How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?](./how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation.md)           | 🟡 Intermediate |
 | 518 | [Why should you avoid running containers as the root user and how do you enforce non-root execution?](./why-should-you-avoid-running-containers-as-the-root-user-and-how-do-you-enforce-non-root-execution.md) | 🟢 Beginner     |
 | 519 | [What is the difference between ENTRYPOINT and CMD in a Dockerfile and how do they interact?](./what-is-the-difference-between-entrypoint-and-cmd-in-a-dockerfile-and-how-do-they-interact.md)                 | 🟢 Beginner     |
+| 754 | [What is the difference between Docker and Podman?](./what-is-the-difference-between-docker-and-podman.md)                                                                                                     | 🟡 Intermediate |
 
 ## What interviewers probe here
 

@@ -90,8 +90,8 @@ trivy image api:1.4.0                        # far fewer packages, far fewer fin
 ## Related Concepts
 
 - [[What is the difference between Mutating and Validating Admission Webhooks in Kubernetes?]] (`#524`): [What is the difference between Mutating and Validating Admission Webhooks in Kubernetes?](../kubernetes/what-is-the-difference-between-mutating-and-validating-admission-webhooks-in-kubernetes.md)
+- [[How do you troubleshoot a Pod stuck in ImagePullBackOff?]] (`#751`): [How do you troubleshoot a Pod stuck in ImagePullBackOff?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)
 - [[What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?]] (`#709`): [What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?](../devsecops/what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines.md)
-- [[What is Runtime Application Self-Protection (RASP) and how does it differ from a perimeter WAF?]] (`#711`): [What is Runtime Application Self-Protection (RASP) and how does it differ from a perimeter WAF?](../devsecops/what-is-runtime-application-self-protection-rasp-and-how-does-it-differ-from-a-perimeter-waf.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

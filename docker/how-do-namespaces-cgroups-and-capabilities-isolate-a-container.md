@@ -34,7 +34,7 @@ Being PID 1 has real consequences: PID 1 ignores default signal handlers unless 
 
 **Capabilities - permitted operations.** Linux splits root's power into ~40 capabilities. Docker drops most by default and keeps a small set (`CHOWN`, `NET_BIND_SERVICE`, `SETUID`, `SETGID`, `KILL`, and others). This is why a container "root" cannot load kernel modules (`CAP_SYS_MODULE`) or change the host clock (`CAP_SYS_TIME`). The dangerous ones to grant deliberately: `CAP_SYS_ADMIN` (mount operations - effectively a path to escape), `CAP_NET_ADMIN`, `CAP_SYS_PTRACE`, `CAP_DAC_READ_SEARCH`.
 
-**The layers above capabilities.** **Seccomp** filters syscalls themselves; Docker's default profile blocks around 40 of them. **AppArmor / SELinux** add mandatory access control on files and operations. **User namespaces** are the strongest single hardening step, mapping container UID 0 to an unprivileged host UID, so even a full capability set inside the container is unprivileged outside it - this is the core of rootless containers (Podman rootless, Docker rootless mode).
+**The layers above capabilities.** **Seccomp** filters syscalls themselves; Docker's default profile blocks around 40 of them. **AppArmor / SELinux** add mandatory access control on files and operations. **User namespaces** are the strongest single hardening step, mapping container UID 0 to an unprivileged host UID, so even a full capability set inside the container is unprivileged outside it - this is the core of rootless containers (Podman rootless, Docker rootless mode), and Kubernetes exposes it per Pod with `hostUsers: false`.
 
 **Where isolation ends, and this is the part interviewers push on.** The kernel is shared, so a kernel vulnerability is a cross-container vulnerability. `--privileged` disables essentially all of the above. Mounting `/var/run/docker.sock` gives the container control of the daemon, which is root on the host. `hostPID`, `hostNetwork`, and host path mounts each remove one namespace's protection. Writable `hostPath` mounts of `/` or `/proc` are direct escapes. For genuinely untrusted workloads, process isolation is not enough - use a VM boundary (Firecracker, Kata Containers) or gVisor's user-space kernel.
 
@@ -102,9 +102,9 @@ resources:
 
 ## Related Concepts
 
+- [[How do you troubleshoot a Pod stuck in ImagePullBackOff?]] (`#751`): [How do you troubleshoot a Pod stuck in ImagePullBackOff?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)
 - [[What is Kubernetes?]] (`#11`): [What is Kubernetes?](../kubernetes/what-is-kubernetes.md)
 - [[How do liveness, readiness, and startup probes differ?]] (`#255`): [How do liveness, readiness, and startup probes differ?](../kubernetes/how-do-liveness-readiness-and-startup-probes-differ.md)
-- [[How do you control which node a Pod runs on?]] (`#256`): [How do you control which node a Pod runs on?](../kubernetes/how-do-you-control-which-node-a-pod-runs-on.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -24,7 +24,7 @@ Containers are not lightweight virtual machines. They are ordinary Linux process
 
 Because there is no guest operating system, containers start in milliseconds and a host can run hundreds of them.
 
-The trade-off of sharing the kernel is isolation strength: a kernel vulnerability can cross container boundaries in a way that a hypervisor boundary prevents, and Linux containers need a Linux kernel (Docker Desktop on macOS and Windows runs one in a lightweight VM). Docker is also no longer the only way to build or run OCI images - Podman, Buildah, containerd's `nerdctl`, and Kubernetes (which uses containerd or CRI-O directly) all work with the same images.
+The trade-off of sharing the kernel is isolation strength: a kernel vulnerability can cross container boundaries in a way that a hypervisor boundary prevents, and Linux containers need a Linux kernel (Docker Desktop on macOS and Windows runs one in a lightweight VM). Licensing is worth knowing too: Docker Engine and the CLI are open source, but Docker Desktop requires a paid subscription for commercial use in organisations with more than 250 employees or more than $10 million in annual revenue - a common reason teams standardise on Podman Desktop, Rancher Desktop, or Colima. Docker is also no longer the only way to build or run OCI images - Podman, Buildah, containerd's `nerdctl`, and Kubernetes (which uses containerd or CRI-O directly) all work with the same images.
 
 The core objects: an **image** (immutable, layered template), a **container** (a running instance of an image), a **Dockerfile** (the build recipe), a **registry** (where images are stored and shared), and **volumes** (persistent storage that outlives the container).
 
@@ -49,9 +49,9 @@ docker exec -it web sh
 
 ## Related Concepts
 
+- [[How do you troubleshoot a Pod stuck in ImagePullBackOff?]] (`#751`): [How do you troubleshoot a Pod stuck in ImagePullBackOff?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)
 - [[What is Kubernetes?]] (`#11`): [What is Kubernetes?](../kubernetes/what-is-kubernetes.md)
 - [[What are the main components of Kubernetes architecture?]] (`#12`): [What are the main components of Kubernetes architecture?](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)
-- [[What is a Pod in Kubernetes?]] (`#13`): [What is a Pod in Kubernetes?](../kubernetes/what-is-a-pod-in-kubernetes.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
