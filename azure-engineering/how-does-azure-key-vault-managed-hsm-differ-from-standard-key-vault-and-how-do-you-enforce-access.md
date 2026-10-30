@@ -23,8 +23,6 @@ quiz:
 
 # How Does Azure Key Vault Managed HSM Differ from Standard Key Vault and How Do You Enforce Access?
 
-**Short answer:** Standard Azure Key Vault is a multi-tenant service with FIPS 140-2 Level 2/3 validation. Managed HSM is a fully single-tenant, dedicated Hardware Security Module cluster offering FIPS 140-2 Level 3 protection, automated cryptographic data isolation, and localized RBAC independent of Microsoft tenant administrators.
-
 **Short answer:** Key Vault comes in **Standard** (software-protected keys, multi-tenant) and **Premium** (adds HSM-protected keys in multi-tenant HSMs validated to FIPS 140-3 Level 3). **Managed HSM** is a single-tenant pool of FIPS 140-3 Level 3 HSMs dedicated to you: you own its **security domain** (the key material that lets the HSM be activated or restored), and data-plane access is governed by **Managed HSM local RBAC**, separate from Azure RBAC - so a subscription Owner can manage the resource but cannot use the keys without a local role assignment. It stores keys only (no secrets or certificates) and costs a fixed hourly rate per HSM pool.
 
 ## Detail
@@ -93,7 +91,7 @@ az keyvault role assignment create --hsm-name hsm-telemetry-prod \
 
 - [[How does the Cloud Shared Responsibility Model divide security obligations between IaaS, PaaS, and SaaS?]] (`#543`): [How does the Cloud Shared Responsibility Model divide security obligations between IaaS, PaaS, and SaaS?](../cloud-platforms/how-does-the-cloud-shared-responsibility-model-divide-security-obligations-between-iaas-paas-and-saas.md)
 - [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
-- [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
+- [[What are the different types of cloud services?]] (`#25`): [What are the different types of cloud services?](../cloud-platforms/what-are-the-different-types-of-cloud-services.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

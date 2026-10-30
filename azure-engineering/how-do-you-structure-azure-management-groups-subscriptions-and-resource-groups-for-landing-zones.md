@@ -23,8 +23,6 @@ quiz:
 
 # How Do You Structure Azure Management Groups, Subscriptions, and Resource Groups for Landing Zones?
 
-**Short answer:** Azure Landing Zones organize resources into a hierarchical tree: Management Groups apply enterprise policies and RBAC across multiple subscriptions, Subscriptions act as billing, quota, and identity boundaries, and Resource Groups group logically related assets sharing a common lifecycle.
-
 **Short answer:** Management groups carry policy and RBAC for many subscriptions and should be organized by **governance need** (platform versus application landing zones, corp versus online), not by org chart or environment. Subscriptions are the unit of billing, quota, and blast radius, so each workload gets its own - typically one per environment. Resource groups hold resources that share a lifecycle. The Azure Landing Zones reference architecture encodes this: Platform (identity, management, connectivity), Landing Zones (corp, online), Sandbox, and Decommissioned.
 
 ## Detail
@@ -99,8 +97,8 @@ az policy assignment create --name deny-public-ip \
 ## Related Concepts
 
 - [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
-- [[How does networking differ across AWS, Azure, and GCP?]] (`#282`): [How does networking differ across AWS, Azure, and GCP?](../cloud-platforms/how-does-networking-differ-across-aws-azure-and-gcp.md)
-- [[What are Cloud Availability Zones and how are they engineered for fault independence?]] (`#544`): [What are Cloud Availability Zones and how are they engineered for fault independence?](../cloud-platforms/what-are-cloud-availability-zones-and-how-are-they-engineered-for-fault-independence.md)
+- [[What are the different types of cloud services?]] (`#25`): [What are the different types of cloud services?](../cloud-platforms/what-are-the-different-types-of-cloud-services.md)
+- [[How do you choose a cloud provider for a new workload?]] (`#281`): [How do you choose a cloud provider for a new workload?](../cloud-platforms/how-do-you-choose-a-cloud-provider-for-a-new-workload.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

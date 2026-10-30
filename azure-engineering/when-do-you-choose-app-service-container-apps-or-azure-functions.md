@@ -40,11 +40,14 @@ az containerapp create \
   --name checkout --resource-group rg-checkout-prod-weu \
   --environment cae-prod-weu \
   --image acme.azurecr.io/checkout@sha256:1f4b \
+  --registry-server acme.azurecr.io --registry-identity "$UAMI_ID" \
+  --revisions-mode multiple \
   --ingress external --target-port 8080 \
   --min-replicas 0 --max-replicas 30 \
   --scale-rule-name http-rule --scale-rule-type http \
   --scale-rule-http-concurrency 50 \
-  --user-assigned "$UAMI_ID" # workload identity, no secrets
+  --user-assigned "$UAMI_ID" # managed identity for ACR pulls and Azure calls, no secrets
+# (multiple revisions mode is what allows traffic to be split across revisions)
 
 # Shift 10% of traffic to the new revision, then ramp
 az containerapp ingress traffic set --name checkout --resource-group rg-checkout-prod-weu \

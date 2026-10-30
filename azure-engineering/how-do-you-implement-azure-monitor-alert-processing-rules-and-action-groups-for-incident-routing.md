@@ -23,8 +23,6 @@ quiz:
 
 # How Do You Implement Azure Monitor Alert Processing Rules and Action Groups for Incident Routing?
 
-**Short answer:** Azure Monitor Alert Processing Rules intercept fired alerts to modify behavior—such as suppressing notifications during planned maintenance or dynamically applying Action Groups—while Action Groups define the exact notification recipients and automated remediation webhooks (e.g., PagerDuty, Logic Apps, Runbooks).
-
 **Short answer:** Alert rules decide _whether_ something is wrong; **action groups** decide _who or what is told_ (email, SMS, push, voice, webhooks, Logic Apps, Functions, Automation runbooks, ITSM, Event Hubs); and **alert processing rules** sit between them, applying at fire time to add action groups or suppress notifications for a scope and schedule - for example, silencing a resource group during a maintenance window without disabling any rule. The benefit is centralized, scope-based routing; the risk is a suppression rule that silently hides a real outage.
 
 ## Detail
@@ -110,7 +108,7 @@ az monitor alert-processing-rule create -g rg-monitoring -n apr-sql-maintenance 
 
 - [[What happens when a Kubernetes control-plane node or etcd fails?]] (`#448`): [What happens when a Kubernetes control-plane node or etcd fails?](../kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md)
 - [[How do you troubleshoot a DNS problem in production?]] (`#435`): [How do you troubleshoot a DNS problem in production?](../cloud-engineering/how-do-you-troubleshoot-a-dns-problem-in-production.md)
-- [[How does networking differ across AWS, Azure, and GCP?]] (`#282`): [How does networking differ across AWS, Azure, and GCP?](../cloud-platforms/how-does-networking-differ-across-aws-azure-and-gcp.md)
+- [[How do you perform and roll back a rolling update in Kubernetes?]] (`#410`): [How do you perform and roll back a rolling update in Kubernetes?](../kubernetes/how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
