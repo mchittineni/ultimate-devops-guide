@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Regenerate every index in the repo from the question files themselves.
 
-Rewrites each topic ``README.md`` in full, and replaces the ``TOC`` and ``STATS``
-marker blocks in the root ``README.md``. Run after adding or renaming any
-question; CI fails if the committed indexes differ from what this produces.
+Rewrites each topic ``README.md`` in full, replaces the ``TOC``, ``STATS``, and
+``LANGS`` marker blocks in the root ``README.md``, and the ``LANGS`` and ``BADGES``
+blocks in each translated landing page under ``i18n/``. Run after adding or
+renaming any question, or adding a language to ``scripts/i18n.json``; CI fails if
+the committed indexes differ from what this produces.
 
 Usage:
     python3 scripts/generate_indexes.py            # write indexes
@@ -18,6 +20,8 @@ from lib_content import (
     REPO_ROOT,
     Topic,
     all_questions,
+    i18n_config,
+    landing_page,
     load_topics,
     normalize_markdown,
     replace_block,
@@ -177,6 +181,51 @@ def render_stats(topics: list[Topic]) -> str:
     return "\n".join(lines).strip()
 
 
+def render_language_bar(current: str) -> str:
+    """The "Read in your language" line, linked relative to the page it sits on.
+
+    ``current`` is the page's own language code: it is shown in bold and unlinked.
+    The English README lists only the translations; each translated page lists
+    English first so a reader can always get back to the canonical text.
+    """
+    config = i18n_config()
+    canonical, languages = config["canonical"], config["languages"]
+    on_root = current == canonical["code"]
+
+    def href(code: str) -> str:
+        if code == canonical["code"]:
+            return "../README.md"
+        return f"./i18n/README.{code}.md" if on_root else f"./README.{code}.md"
+
+    entries = [] if on_root else [canonical]
+    entries += languages
+    links = [
+        f"**{lang['name']}**" if lang["code"] == current else f"[{lang['name']}]({href(lang['code'])})"
+        for lang in entries
+    ]
+    label = next((lang["label"] for lang in [canonical, *languages] if lang["code"] == current))
+    line = f"🌐 **{label}:** " + " · ".join(links)
+    return f"{line}\n\n_{canonical['caption']}_" if on_root else line
+
+
+def render_badges(topics: list[Topic]) -> str:
+    """Count badges for the translated landing pages, so their numbers never go stale."""
+    questions = all_questions(topics)
+    counts = difficulty_counts(questions)
+    difficulty = (
+        f"🟢%20{counts['Beginner']}%20·%20🟡%20{counts['Intermediate']}%20·%20"
+        f"🔴%20{counts['Advanced']}"
+    )
+    return "\n".join(
+        [
+            f"![Questions](https://img.shields.io/badge/questions-{len(questions)}-blue)",
+            f"![Topics](https://img.shields.io/badge/topics-{len(topics)}-blueviolet)",
+            f"![Difficulty](https://img.shields.io/badge/difficulty-{difficulty}-lightgrey)",
+            "![License](https://img.shields.io/badge/license-MIT-green)",
+        ]
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="report drift without writing")
@@ -199,10 +248,26 @@ def main() -> int:
     root = root_path.read_text(encoding="utf-8")
     updated = replace_block(root, "TOC", render_root_toc(topics))
     updated = replace_block(updated, "STATS", render_stats(topics))
+    updated = replace_block(updated, "LANGS", render_language_bar(i18n_config()["canonical"]["code"]))
     if normalize_markdown(updated) != normalize_markdown(root):
         drifted.append("README.md")
         if not args.check:
             root_path.write_text(updated, encoding="utf-8")
+
+    for lang in i18n_config()["languages"]:
+        page_path = landing_page(lang["code"])
+        if not page_path.exists():
+            raise SystemExit(
+                f"{page_path.relative_to(REPO_ROOT)}: missing - every language in "
+                "scripts/i18n.json needs a translated landing page"
+            )
+        page = page_path.read_text(encoding="utf-8")
+        updated = replace_block(page, "LANGS", render_language_bar(lang["code"]))
+        updated = replace_block(updated, "BADGES", render_badges(topics))
+        if normalize_markdown(updated) != normalize_markdown(page):
+            drifted.append(str(page_path.relative_to(REPO_ROOT)))
+            if not args.check:
+                page_path.write_text(updated, encoding="utf-8")
 
     if args.check:
         if drifted:

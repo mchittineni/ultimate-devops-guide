@@ -20,6 +20,8 @@ from lib_content import (
     QUESTION_FILE_RE,
     REPO_ROOT,
     all_questions,
+    i18n_config,
+    landing_page,
     load_topics,
     normalize_markdown,
     topic_meta,
@@ -184,7 +186,13 @@ def check_links(errors: list[str]) -> None:
 def check_indexes(topics, errors: list[str]) -> None:
     """Fail if generated indexes are stale relative to the question files."""
     sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from generate_indexes import render_root_toc, render_stats, render_topic_readme
+    from generate_indexes import (
+        render_badges,
+        render_language_bar,
+        render_root_toc,
+        render_stats,
+        render_topic_readme,
+    )
 
     for topic in topics:
         readme = topic.path / "README.md"
@@ -198,17 +206,37 @@ def check_indexes(topics, errors: list[str]) -> None:
             )
 
     root = normalize_markdown((REPO_ROOT / "README.md").read_text(encoding="utf-8"))
-    for marker, payload in (("TOC", render_root_toc(topics)), ("STATS", render_stats(topics))):
+    for marker, payload in (
+        ("TOC", render_root_toc(topics)),
+        ("STATS", render_stats(topics)),
+        ("LANGS", render_language_bar(i18n_config()["canonical"]["code"])),
+    ):
         if normalize_markdown(payload) not in root:
             errors.append(
                 f"README.md: {marker} block is stale - run `python3 scripts/generate_indexes.py`"
             )
 
+    for lang in i18n_config()["languages"]:
+        page_path = landing_page(lang["code"])
+        rel = page_path.relative_to(REPO_ROOT)
+        if not page_path.exists():
+            errors.append(f"{rel}: missing translated landing page for `{lang['code']}`")
+            continue
+        page = normalize_markdown(page_path.read_text(encoding="utf-8"))
+        for marker, payload in (
+            ("LANGS", render_language_bar(lang["code"])),
+            ("BADGES", render_badges(topics)),
+        ):
+            if normalize_markdown(payload) not in page:
+                errors.append(
+                    f"{rel}: {marker} block is stale - run `python3 scripts/generate_indexes.py`"
+                )
+
 
 def check_orphan_files(errors: list[str]) -> None:
     """Catch topic directories that exist on disk but are not registered, and bad filenames."""
     registered = set(topic_meta())
-    skip = {"scripts", "docs", ".git", ".github", "node_modules", "DevOps-Interview-Guide"}
+    skip = {"scripts", "docs", "i18n", ".git", ".github", "node_modules", "DevOps-Interview-Guide"}
     for entry in sorted(p for p in REPO_ROOT.iterdir() if p.is_dir()):
         if entry.name in skip or entry.name.startswith("."):
             continue

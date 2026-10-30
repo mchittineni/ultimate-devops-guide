@@ -21,6 +21,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 QUESTION_FILE_RE = re.compile(r"^([a-z0-9-]+)\.md$")
 TOPIC_META_PATH = Path(__file__).resolve().parent / "topic_meta.json"
+I18N_PATH = Path(__file__).resolve().parent / "i18n.json"
+I18N_DIR = REPO_ROOT / "i18n"
 FRONTMATTER_RE = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)
 
 DIFFICULTIES = ("Beginner", "Intermediate", "Advanced")
@@ -66,6 +68,21 @@ def topic_meta() -> dict:
     topics and the order they appear in every generated index.
     """
     return json.loads(TOPIC_META_PATH.read_text(encoding="utf-8"))
+
+
+def i18n_config() -> dict:
+    """Languages the landing page is translated into, in language-bar order.
+
+    English is canonical: ``README.md`` is the source, and each entry here has a
+    hand-translated ``i18n/README.<code>.md`` landing page on ``main``. Lesson pages
+    are machine-translated onto the translations branch, never committed to ``main``.
+    """
+    return json.loads(I18N_PATH.read_text(encoding="utf-8"))
+
+
+def landing_page(code: str) -> Path:
+    """Path of the translated landing page for a language code."""
+    return I18N_DIR / f"README.{code}.md"
 
 
 def _scalar(raw: str) -> str:

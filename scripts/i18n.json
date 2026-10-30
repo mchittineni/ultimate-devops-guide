@@ -1,0 +1,96 @@
+{
+  "canonical": {
+    "code": "en",
+    "name": "English",
+    "label": "Read in your language",
+    "caption": "Translated landing pages, committed to the repo. English is canonical; lesson pages are machine-translated on the [`translations`](https://github.com/mchittineni/ultimate-devops-guide/tree/translations/i18n) branch."
+  },
+  "translations_branch": "translations",
+  "languages": [
+    {
+      "code": "es",
+      "name": "Español",
+      "english_name": "Spanish",
+      "label": "Lee en tu idioma",
+      "mt_notice": "Esta página se tradujo automáticamente del inglés y puede contener errores. El [original en inglés]({source}) es la versión de referencia."
+    },
+    {
+      "code": "fr",
+      "name": "Français",
+      "english_name": "French",
+      "label": "Lire dans votre langue",
+      "mt_notice": "Cette page a été traduite automatiquement de l'anglais et peut contenir des erreurs. L'[original en anglais]({source}) fait foi."
+    },
+    {
+      "code": "pt",
+      "name": "Português",
+      "english_name": "Brazilian Portuguese",
+      "label": "Leia no seu idioma",
+      "mt_notice": "Esta página foi traduzida automaticamente do inglês e pode conter erros. O [original em inglês]({source}) é a versão de referência."
+    },
+    {
+      "code": "de",
+      "name": "Deutsch",
+      "english_name": "German",
+      "label": "In deiner Sprache lesen",
+      "mt_notice": "Diese Seite wurde maschinell aus dem Englischen übersetzt und kann Fehler enthalten. Maßgeblich ist das [englische Original]({source})."
+    },
+    {
+      "code": "it",
+      "name": "Italiano",
+      "english_name": "Italian",
+      "label": "Leggi nella tua lingua",
+      "mt_notice": "Questa pagina è stata tradotta automaticamente dall'inglese e può contenere errori. Fa fede l'[originale in inglese]({source})."
+    },
+    {
+      "code": "zh-CN",
+      "name": "简体中文",
+      "english_name": "Simplified Chinese",
+      "label": "用你的语言阅读",
+      "mt_notice": "本页由英文机器翻译而成，可能存在错误。请以[英文原文]({source})为准。"
+    },
+    {
+      "code": "ja",
+      "name": "日本語",
+      "english_name": "Japanese",
+      "label": "あなたの言語で読む",
+      "mt_notice": "このページは英語から機械翻訳されたもので、誤りを含む可能性があります。正式な内容は[英語の原文]({source})を参照してください。"
+    },
+    {
+      "code": "ko",
+      "name": "한국어",
+      "english_name": "Korean",
+      "label": "당신의 언어로 읽기",
+      "mt_notice": "이 페이지는 영어에서 기계 번역되었으며 오류가 있을 수 있습니다. [영어 원문]({source})이 기준입니다."
+    },
+    {
+      "code": "hi",
+      "name": "हिन्दी",
+      "english_name": "Hindi",
+      "label": "अपनी भाषा में पढ़ें",
+      "mt_notice": "यह पृष्ठ अंग्रेज़ी से मशीन द्वारा अनुवादित है और इसमें त्रुटियाँ हो सकती हैं। [अंग्रेज़ी मूल]({source}) ही मानक संस्करण है।"
+    },
+    {
+      "code": "ar",
+      "name": "العربية",
+      "english_name": "Modern Standard Arabic",
+      "label": "اقرأ بلغتك",
+      "dir": "rtl",
+      "mt_notice": "تُرجمت هذه الصفحة آليًا من الإنجليزية وقد تحتوي على أخطاء. [النص الإنجليزي الأصلي]({source}) هو المرجع المعتمد."
+    },
+    {
+      "code": "ru",
+      "name": "Русский",
+      "english_name": "Russian",
+      "label": "Читать на вашем языке",
+      "mt_notice": "Эта страница переведена с английского автоматически и может содержать ошибки. Эталонной является [английская версия]({source})."
+    },
+    {
+      "code": "tr",
+      "name": "Türkçe",
+      "english_name": "Turkish",
+      "label": "Kendi dilinde oku",
+      "mt_notice": "Bu sayfa İngilizceden makine çevirisiyle çevrilmiştir ve hatalar içerebilir. Esas alınan sürüm [İngilizce orijinaldir]({source})."
+    }
+  ]
+}
