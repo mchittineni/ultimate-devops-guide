@@ -11,7 +11,7 @@ tags:
 
 The human half of DevOps - shared ownership, blamelessness, knowledge sharing, and collaboration that survives incidents.
 
-**11 questions** · 🟢 Beginner: 7 · 🟡 Intermediate: 3 · 🔴 Advanced: 1
+**12 questions** · 🟢 Beginner: 7 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -28,6 +28,7 @@ The human half of DevOps - shared ownership, blamelessness, knowledge sharing, a
 | 683 | [What are Team Topologies patterns and how do Stream-Aligned and Platform teams interact?](./what-are-team-topologies-patterns-and-how-do-stream-aligned-and-platform-teams-interact.md)                                 | 🟡 Intermediate |
 | 684 | [What is Conway's Law and how does the Reverse Conway Maneuver architect microservices?](./what-is-conway-s-law-and-how-does-the-reverse-conway-maneuver-architect-microservices.md)                                     | 🟡 Intermediate |
 | 685 | [What are ChatOps and GitOps and how do they make operational modifications auditable and collaborative?](./what-are-chatops-and-gitops-and-how-do-they-make-operational-modifications-auditable-and-collaborative.md)   | 🟢 Beginner     |
+| 785 | [What is the Westrum organizational culture model and how does DORA use it?](./what-is-the-westrum-organizational-culture-model-and-how-does-dora-use-it.md)                                                             | 🟡 Intermediate |
 
 ## What interviewers probe here
 

@@ -19,7 +19,7 @@ quiz:
     - "Remote teams are incapable of delivering enterprise software"
     - "Teams must use identical programming languages to collaborate"
   answer: 2
-  explanation: "Project Aristotle proved that psychological safety outweighed all other factors (including individual talent, seniority, and workload) in determining team success and innovation."
+  explanation: "Project Aristotle found psychological safety to be the most important of the five team dynamics it identified, ahead of dependability, structure and clarity, meaning, and impact; who was on the team mattered less than how the team worked together."
 ---
 
 # What is Psychological Safety and why is it the strongest predictor of high-performing engineering teams?
