@@ -29,7 +29,7 @@ tags:
 | Deleted by accident             | Recoverable from Git                           | Needs an audit-log restore             |
 | Release-specific features       | Environments, approvals, gates (all available) | Classic Release has the older gates UI |
 
-That last row answers a related question - _"a team member deleted the pipeline; how do you recreate it and prevent it recurring?"_ With YAML the definition is in the repository, so recreating it is pointing a new pipeline at the existing file; prevention is branch protection on the file plus restricting who can delete pipeline definitions. With a classic pipeline you are relying on the audit log and someone's memory, which is the strongest practical argument for YAML.
+That last row answers a related question - _"a team member deleted the pipeline; how do you recreate it and prevent it recurring?"_ With YAML the definition is in the repository, so recreating it is pointing a new pipeline at the existing file; prevention is branch protection on the file plus restricting who can delete pipeline definitions. With a classic pipeline you are relying on the audit log and someone's memory, which is the strongest practical argument for YAML. Microsoft's direction agrees: new organisations have classic build and release pipeline creation disabled by default, and new features land in YAML only.
 
 ### Structure: stages, jobs, steps
 
@@ -74,7 +74,7 @@ A **service connection** is how the pipeline authenticates to Azure, ACR, Kubern
 | Cost                   | Free minutes then per-parallel-job | Your compute, plus a cheaper parallel-job licence |
 | Speed                  | Fixed size, cold start             | Bigger machines, warm caches                      |
 
-Self-hosted agents in a **Kubernetes** or container pool give you clean-per-job isolation with private network access - the best of both. Whatever you choose, keep them ephemeral where possible and never run a self-hosted agent that a fork's pull request can reach.
+Self-hosted agents in a **Kubernetes** or container pool give you clean-per-job isolation with private network access - the best of both. **Managed DevOps Pools** (GA late 2024) are now the usual middle ground: Microsoft runs and scales the agent VMs, but they are injected into **your** VNet, can use your images, and can stay warm - private network reach without patching agent hosts, and the successor to VM scale set agent pools. Whatever you choose, keep them ephemeral where possible and never run a self-hosted agent that a fork's pull request can reach.
 
 ### The rest of the toolchain
 
@@ -239,7 +239,7 @@ az devops invoke --area distributedtask --resource environmentdeploymentrecords 
 
 - [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
 - [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
-- [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+- [[What are Pod Security Standards and how does Pod Security Admission enforce them?]] (`#753`): [What are Pod Security Standards and how does Pod Security Admission enforce them?](../kubernetes/what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

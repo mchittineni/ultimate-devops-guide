@@ -23,8 +23,6 @@ quiz:
 
 # How Do You Secure Azure Kubernetes Service (AKS) Using Azure Private Clusters and Calico CNI?
 
-**Short answer:** An AKS Private Cluster ensures the Kubernetes API server has no public IP and is accessible only through private endpoints within a VNet or peered network. Calico CNI complements this by enforcing fine-grained east-west network security policies between pods.
-
 **Short answer:** A **private cluster** removes the public endpoint from the AKS API server: `kubectl` reaches it through a private endpoint in your VNet (or, with API Server VNet Integration, an internal IP in a delegated subnet), resolved through a private DNS zone. **Calico** is one of AKS's network policy engines and enforces Kubernetes `NetworkPolicy` (and Calico's own richer policies) for east-west traffic between Pods. Together they close the two biggest exposures - a publicly reachable control plane and a flat Pod network - at the cost of harder access for CI and operators. For new clusters, Azure CNI powered by Cilium is now Microsoft's recommended policy engine; Calico remains supported.
 
 ## Detail
@@ -108,6 +106,26 @@ spec:
         - podSelector:
             matchLabels:
               app: backend
+      ports:
+        - protocol: TCP
+          port: 5432
+---
+# default-deny also blocks EGRESS, so the backend needs a matching egress allow
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backend-to-db
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app: postgres
       ports:
         - protocol: TCP
           port: 5432

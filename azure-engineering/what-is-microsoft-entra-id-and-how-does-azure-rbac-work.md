@@ -25,6 +25,8 @@ tags:
 
 **Layered controls beyond RBAC.** Azure Policy decides whether a resource _may exist_ in a given shape; RBAC decides who may act. Resource locks (`CanNotDelete`, `ReadOnly`) protect against accidents even by owners. All three are complementary, and interviews often probe whether you know that RBAC alone cannot enforce configuration standards.
 
+**Conditions and limits.** Role assignments can carry **conditions** (Azure ABAC) - for example, Storage Blob Data Reader only on blobs tagged `project=alpha`, or delegating `User Access Administrator` while restricting which roles the delegate may assign. Subscriptions are limited to 4,000 role assignments, another reason to assign to groups.
+
 **Common pitfalls worth naming:** role assignments at subscription scope that should have been at resource-group scope; guest users inheriting more than intended; service principals with `Contributor` on a whole subscription used by pipelines; and forgetting that RBAC changes can take a few minutes to propagate.
 
 ## Example

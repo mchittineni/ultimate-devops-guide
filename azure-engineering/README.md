@@ -11,7 +11,7 @@ tags:
 
 Depth on Azure: the resource hierarchy, Entra ID and RBAC, VNet and private endpoint design, AKS, Bicep, Azure Policy and landing zones, Azure Monitor with KQL, and the compute options.
 
-**19 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 14 · 🔴 Advanced: 4
+**20 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 15 · 🔴 Advanced: 4
 
 ## Questions
 
@@ -36,6 +36,7 @@ Depth on Azure: the resource hierarchy, Entra ID and RBAC, VNet and private endp
 | 742 | [How Does Azure Key Vault Managed HSM Differ from Standard Key Vault and How Do You Enforce Access?](./how-does-azure-key-vault-managed-hsm-differ-from-standard-key-vault-and-how-do-you-enforce-access.md) | 🔴 Advanced     |
 | 743 | [How Do You Use Azure Traffic Manager and Azure Front Door for Global Traffic Routing?](./how-do-you-use-azure-traffic-manager-and-azure-front-door-for-global-traffic-routing.md)                           | 🟡 Intermediate |
 | 744 | [How Do You Implement Azure Monitor Alert Processing Rules and Action Groups for Incident Routing?](./how-do-you-implement-azure-monitor-alert-processing-rules-and-action-groups-for-incident-routing.md)   | 🟡 Intermediate |
+| 756 | [How do you choose Azure Storage redundancy and secure a storage account?](./how-do-you-choose-azure-storage-redundancy-and-secure-a-storage-account.md)                                                     | 🟡 Intermediate |
 
 ## What interviewers probe here
 

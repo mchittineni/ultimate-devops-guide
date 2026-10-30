@@ -11,7 +11,7 @@ tags:
 
 # How do you architect an end-to-end production DevOps project on Azure?
 
-**Short answer:** Architect an end-to-end production DevOps project on Azure by provisioning a Hub-and-Spoke Virtual Network topology using Bicep/Terraform, deploying Azure Kubernetes Service (AKS) with Workload Identity and Entra ID RBAC, running Azure SQL Managed Instance over Private Endpoints, automating CI/CD via Azure DevOps Pipelines, and monitoring with Azure Monitor and Log Analytics.
+**Short answer:** Architect an end-to-end production DevOps project on Azure by provisioning a Hub-and-Spoke Virtual Network topology using Bicep/Terraform, deploying Azure Kubernetes Service (AKS) with Workload Identity and Entra ID RBAC, running Azure SQL Database over Private Endpoints, automating CI/CD via Azure DevOps Pipelines, and monitoring with Azure Monitor and Log Analytics.
 
 ## Detail
 
@@ -122,6 +122,7 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2024-09-01' = {
         availabilityZones: ['1', '2', '3']
       }
     ]
+    // the cluster identity also needs Network Contributor on the subnet (role assignment omitted)
     oidcIssuerProfile: {
       enabled: true // oidcIssuerProfile sits under properties, not securityProfile
     }
@@ -145,8 +146,8 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2024-09-01' = {
 ## Related Concepts
 
 - [[What is Cloud Computing?]] (`#21`): [What is Cloud Computing?](../cloud-platforms/what-is-cloud-computing.md)
-- [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
 - [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
+- [[What is Google Cloud Platform (GCP)?]] (`#24`): [What is Google Cloud Platform (GCP)?](../cloud-platforms/what-is-google-cloud-platform-gcp.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**Hub and spoke, and why peering shapes the design.** VNet peering is not transitive: two spokes peered to the same hub cannot reach each other unless you route through a network virtual appliance in the hub (user-defined routes) or connect them directly. Azure Virtual WAN automates this for large estates. Deciding early whether spoke-to-spoke traffic must be inspected determines whether you need Firewall in the hub at all.
+**Hub and spoke, and why peering shapes the design.** VNet peering is not transitive: two spokes peered to the same hub cannot reach each other unless you route through a network virtual appliance in the hub (user-defined routes) or connect them directly. Azure Virtual WAN automates this for large estates, and **Azure Virtual Network Manager** can create and maintain hub-and-spoke or mesh peering across subscriptions from network groups, plus **security admin rules** that sit above every NSG and cannot be overridden by workload teams. Deciding early whether spoke-to-spoke traffic must be inspected determines whether you need Firewall in the hub at all.
 
 **Subnets and NSGs.** Subnets are per-tier (web, app, data), each with an NSG whose rules should reference application security groups or service tags (`Sql`, `AzureMonitor`, `Internet`) rather than raw CIDRs - service tags are maintained by Microsoft and survive IP changes. Some services require dedicated, delegated subnets (Azure Firewall, Bastion, gateway subnets, App Service integration), each with naming and minimum-size requirements, so leave room.
 
@@ -25,7 +25,7 @@ tags:
 
 **Address planning.** Non-overlapping RFC 1918 space across hubs, spokes, and on-premises, sized for growth - and for AKS, sized for the networking model you choose (Azure CNI consumes a VNet IP per Pod; overlay modes conserve address space). Azure reserves five addresses per subnet, so a /29 is smaller than it looks.
 
-**Observability.** VNet flow logs with Traffic Analytics, NSG rule hit counts, Connection Monitor for hybrid paths, and Network Watcher's next-hop and effective-rules tools - which are the fastest way to answer "why can this VM not reach that endpoint?" during an incident.
+**Observability.** VNet flow logs with Traffic Analytics (they replace NSG flow logs, which can no longer be created and retire in September 2027), NSG rule hit counts, Connection Monitor for hybrid paths, and Network Watcher's next-hop and effective-rules tools - which are the fastest way to answer "why can this VM not reach that endpoint?" during an incident.
 
 ## Example
 
@@ -62,6 +62,7 @@ resource nsgApp 'Microsoft.Network/networkSecurityGroups@2023-11-01' = {
           direction: 'Outbound'
           access: 'Allow'
           protocol: 'Tcp'
+          sourcePortRange: '*'
           sourceAddressPrefix: 'VirtualNetwork'
           destinationAddressPrefix: 'Sql' // service tag, not a CIDR
           destinationPortRange: '1433'

@@ -23,8 +23,6 @@ quiz:
 
 # How Do You Use Azure Traffic Manager and Azure Front Door for Global Traffic Routing?
 
-**Short answer:** Azure Traffic Manager is a DNS-based global traffic balancer operating at Layer 4, routing clients via DNS responses. Azure Front Door is an anycast Layer 7 global reverse proxy combining HTTP/HTTPS routing, global load balancing, SSL offload, CDN caching, and integrated Web Application Firewall (WAF) capabilities.
-
 **Short answer:** **Traffic Manager** is DNS-based: it answers the DNS query for your name with the endpoint chosen by its routing method (priority, weighted, performance, geographic, multivalue, subnet) and never sees the traffic itself, so it works for any protocol but fails over only as fast as DNS caches expire. **Front Door** is a global Layer 7 reverse proxy on Microsoft's edge: clients connect to an anycast edge location, which terminates TLS, applies WAF and caching, and forwards over the Microsoft backbone to the healthiest origin - so failover does not depend on DNS, but it only handles HTTP/HTTPS.
 
 ## Detail
@@ -93,9 +91,9 @@ az afd origin create -g rg-global --profile-name fd-web --origin-group-name app 
 
 ## Related Concepts
 
-- [[What are the different types of cloud services?]] (`#25`): [What are the different types of cloud services?](../cloud-platforms/what-are-the-different-types-of-cloud-services.md)
+- [[What is Azure?]] (`#23`): [What is Azure?](../cloud-platforms/what-is-azure.md)
 - [[How does networking differ across AWS, Azure, and GCP?]] (`#282`): [How does networking differ across AWS, Azure, and GCP?](../cloud-platforms/how-does-networking-differ-across-aws-azure-and-gcp.md)
-- [[How do you manage DNS and global traffic routing?]] (`#220`): [How do you manage DNS and global traffic routing?](../cloud-engineering/how-do-you-manage-dns-and-global-traffic-routing.md)
+- [[What are the core differences between Cloud Object Storage, Block Storage, and File Storage?]] (`#545`): [What are the core differences between Cloud Object Storage, Block Storage, and File Storage?](../cloud-platforms/what-are-the-core-differences-between-cloud-object-storage-block-storage-and-file-storage.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

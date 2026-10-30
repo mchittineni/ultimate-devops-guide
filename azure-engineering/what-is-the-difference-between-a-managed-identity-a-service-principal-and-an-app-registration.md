@@ -150,8 +150,8 @@ az monitor activity-log list --caller "$APP_ID" --start-time "$(date -u -d '-7 d
 ## Related Concepts
 
 - [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
+- [[What are Pod Security Standards and how does Pod Security Admission enforce them?]] (`#753`): [What are Pod Security Standards and how does Pod Security Admission enforce them?](../kubernetes/what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them.md)
 - [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
-- [[What is AWS (Amazon Web Services)?]] (`#22`): [What is AWS (Amazon Web Services)?](../cloud-platforms/what-is-aws-amazon-web-services.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

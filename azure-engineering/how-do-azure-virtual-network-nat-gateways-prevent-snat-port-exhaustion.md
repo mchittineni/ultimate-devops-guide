@@ -23,8 +23,6 @@ quiz:
 
 # How Do Azure Virtual Network NAT Gateways Prevent SNAT Port Exhaustion?
 
-**Short answer:** Azure Virtual Network NAT Gateway provides high-performance, fully managed outbound internet connectivity with dynamic SNAT port allocation across up to 16 public IP addresses, eliminating the static pre-allocation bottlenecks that cause SNAT port exhaustion on Azure Load Balancers.
-
 **Short answer:** NAT Gateway attaches to subnets and gives all their outbound flows a shared pool of SNAT ports - 64,512 per public IP, up to 16 IPs - allocated **on demand** to whichever VM or Pod needs them. Load Balancer outbound rules and the old implicit default outbound access instead **pre-allocate** a fixed slice of ports per backend instance, so one busy instance can exhaust its slice while ports sit idle elsewhere. NAT Gateway removes that per-instance ceiling; it does not remove the need to reuse connections.
 
 ## Detail
@@ -88,7 +86,7 @@ az monitor metrics list \
 
 - [[What are Cloud Egress fees and how do you architect networks to minimize them?]] (`#547`): [What are Cloud Egress fees and how do you architect networks to minimize them?](../cloud-platforms/what-are-cloud-egress-fees-and-how-do-you-architect-networks-to-minimize-them.md)
 - [[How does the Kubernetes Gateway API evolve beyond standard Ingress resources?]] (`#520`): [How does the Kubernetes Gateway API evolve beyond standard Ingress resources?](../kubernetes/how-does-the-kubernetes-gateway-api-evolve-beyond-standard-ingress-resources.md)
-- [[How does CoreDNS resolve services in Kubernetes and how do you troubleshoot DNS latency bottlenecks?]] (`#527`): [How does CoreDNS resolve services in Kubernetes and how do you troubleshoot DNS latency bottlenecks?](../kubernetes/how-does-coredns-resolve-services-in-kubernetes-and-how-do-you-troubleshoot-dns-latency-bottlenecks.md)
+- [[What is the difference between Service types ClusterIP, NodePort, LoadBalancer, and ExternalName?]] (`#531`): [What is the difference between Service types ClusterIP, NodePort, LoadBalancer, and ExternalName?](../kubernetes/what-is-the-difference-between-service-types-clusterip-nodeport-loadbalancer-and-externalname.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
