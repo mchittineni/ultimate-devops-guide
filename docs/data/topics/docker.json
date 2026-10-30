@@ -33,6 +33,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 11,
           "slug": "what-is-kubernetes",
           "title": "What is Kubernetes?",
@@ -42,12 +48,6 @@
           "id": 12,
           "slug": "what-are-the-main-components-of-kubernetes-architecture",
           "title": "What are the main components of Kubernetes architecture?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 13,
-          "slug": "what-is-a-pod-in-kubernetes",
-          "title": "What is a Pod in Kubernetes?",
           "topic": "kubernetes"
         }
       ],
@@ -76,6 +76,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 11,
           "slug": "what-is-kubernetes",
           "title": "What is Kubernetes?",
@@ -85,12 +91,6 @@
           "id": 12,
           "slug": "what-are-the-main-components-of-kubernetes-architecture",
           "title": "What are the main components of Kubernetes architecture?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 13,
-          "slug": "what-is-a-pod-in-kubernetes",
-          "title": "What is a Pod in Kubernetes?",
           "topic": "kubernetes"
         }
       ],
@@ -119,6 +119,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 11,
           "slug": "what-is-kubernetes",
           "title": "What is Kubernetes?",
@@ -128,12 +134,6 @@
           "id": 12,
           "slug": "what-are-the-main-components-of-kubernetes-architecture",
           "title": "What are the main components of Kubernetes architecture?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 14,
-          "slug": "what-is-a-service-in-kubernetes",
-          "title": "What is a Service in Kubernetes?",
           "topic": "kubernetes"
         }
       ],
@@ -162,6 +162,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 11,
           "slug": "what-is-kubernetes",
           "title": "What is Kubernetes?",
@@ -171,12 +177,6 @@
           "id": 12,
           "slug": "what-are-the-main-components-of-kubernetes-architecture",
           "title": "What are the main components of Kubernetes architecture?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 13,
-          "slug": "what-is-a-pod-in-kubernetes",
-          "title": "What is a Pod in Kubernetes?",
           "topic": "kubernetes"
         }
       ],
@@ -205,6 +205,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 11,
           "slug": "what-is-kubernetes",
           "title": "What is Kubernetes?",
@@ -214,12 +220,6 @@
           "id": 12,
           "slug": "what-are-the-main-components-of-kubernetes-architecture",
           "title": "What are the main components of Kubernetes architecture?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 13,
-          "slug": "what-is-a-pod-in-kubernetes",
-          "title": "What is a Pod in Kubernetes?",
           "topic": "kubernetes"
         }
       ],
@@ -291,6 +291,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 12,
           "slug": "what-are-the-main-components-of-kubernetes-architecture",
           "title": "What are the main components of Kubernetes architecture?",
@@ -300,12 +306,6 @@
           "id": 14,
           "slug": "what-is-a-service-in-kubernetes",
           "title": "What is a Service in Kubernetes?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 257,
-          "slug": "how-does-rbac-work-in-kubernetes",
-          "title": "How does RBAC work in Kubernetes?",
           "topic": "kubernetes"
         }
       ],
@@ -334,6 +334,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 11,
           "slug": "what-is-kubernetes",
           "title": "What is Kubernetes?",
@@ -343,12 +349,6 @@
           "id": 255,
           "slug": "how-do-liveness-readiness-and-startup-probes-differ",
           "title": "How do liveness, readiness, and startup probes differ?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 256,
-          "slug": "how-do-you-control-which-node-a-pod-runs-on",
-          "title": "How do you control which node a Pod runs on?",
           "topic": "kubernetes"
         }
       ],
@@ -431,15 +431,15 @@
           "topic": "kubernetes"
         },
         {
-          "id": 405,
-          "slug": "how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic",
-          "title": "How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?",
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
           "topic": "kubernetes"
         },
         {
-          "id": 449,
-          "slug": "how-do-you-troubleshoot-a-kubernetes-node-that-is-notready",
-          "title": "How do you troubleshoot a Kubernetes node that is NotReady?",
+          "id": 753,
+          "slug": "what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them",
+          "title": "What are Pod Security Standards and how does Pod Security Admission enforce them?",
           "topic": "kubernetes"
         }
       ],
@@ -468,6 +468,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 11,
           "slug": "what-is-kubernetes",
           "title": "What is Kubernetes?",
@@ -477,12 +483,6 @@
           "id": 12,
           "slug": "what-are-the-main-components-of-kubernetes-architecture",
           "title": "What are the main components of Kubernetes architecture?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 15,
-          "slug": "explain-the-difference-between-docker-swarm-and-kubernetes",
-          "title": "Explain the difference between Docker Swarm and Kubernetes",
           "topic": "kubernetes"
         }
       ],
@@ -511,6 +511,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 14,
           "slug": "what-is-a-service-in-kubernetes",
           "title": "What is a Service in Kubernetes?",
@@ -520,12 +526,6 @@
           "id": 15,
           "slug": "explain-the-difference-between-docker-swarm-and-kubernetes",
           "title": "Explain the difference between Docker Swarm and Kubernetes",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 442,
-          "slug": "what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes",
-          "title": "What is the difference between a ConfigMap and a Secret in Kubernetes?",
           "topic": "kubernetes"
         }
       ],
@@ -555,6 +555,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 450,
           "slug": "what-is-inside-a-helm-chart-and-how-do-you-customise-one",
           "title": "What is inside a Helm chart, and how do you customise one?",
@@ -565,12 +571,6 @@
           "slug": "how-do-you-rotate-secrets-without-downtime",
           "title": "How do you rotate secrets without downtime?",
           "topic": "devsecops"
-        },
-        {
-          "id": 12,
-          "slug": "what-are-the-main-components-of-kubernetes-architecture",
-          "title": "What are the main components of Kubernetes architecture?",
-          "topic": "kubernetes"
         }
       ],
       "quiz": null
@@ -598,6 +598,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 12,
           "slug": "what-are-the-main-components-of-kubernetes-architecture",
           "title": "What are the main components of Kubernetes architecture?",
@@ -607,12 +613,6 @@
           "id": 257,
           "slug": "how-does-rbac-work-in-kubernetes",
           "title": "How does RBAC work in Kubernetes?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 406,
-          "slug": "how-do-you-debug-a-kubernetes-ingress-that-is-not-routing-traffic",
-          "title": "How do you debug a Kubernetes Ingress that is not routing traffic?",
           "topic": "kubernetes"
         }
       ],
@@ -655,10 +655,10 @@
           "topic": "kubernetes"
         },
         {
-          "id": 161,
-          "slug": "what-does-a-devsecops-pipeline-look-like-end-to-end",
-          "title": "What does a DevSecOps pipeline look like end to end?",
-          "topic": "devsecops"
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
         }
       ],
       "quiz": null
@@ -695,15 +695,15 @@
           "topic": "kubernetes"
         },
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 709,
           "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
           "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
-          "topic": "devsecops"
-        },
-        {
-          "id": 711,
-          "slug": "what-is-runtime-application-self-protection-rasp-and-how-does-it-differ-from-a-perimeter-waf",
-          "title": "What is Runtime Application Self-Protection (RASP) and how does it differ from a perimeter WAF?",
           "topic": "devsecops"
         }
       ],
@@ -745,6 +745,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 11,
           "slug": "what-is-kubernetes",
           "title": "What is Kubernetes?",
@@ -754,12 +760,6 @@
           "id": 12,
           "slug": "what-are-the-main-components-of-kubernetes-architecture",
           "title": "What are the main components of Kubernetes architecture?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 13,
-          "slug": "what-is-a-pod-in-kubernetes",
-          "title": "What is a Pod in Kubernetes?",
           "topic": "kubernetes"
         }
       ],
@@ -857,6 +857,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 11,
           "slug": "what-is-kubernetes",
           "title": "What is Kubernetes?",
@@ -866,12 +872,6 @@
           "id": 12,
           "slug": "what-are-the-main-components-of-kubernetes-architecture",
           "title": "What are the main components of Kubernetes architecture?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 403,
-          "slug": "how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints",
-          "title": "How do you troubleshoot a Kubernetes Service that has no endpoints?",
           "topic": "kubernetes"
         }
       ],
@@ -1025,6 +1025,12 @@
       ],
       "related": [
         {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 11,
           "slug": "what-is-kubernetes",
           "title": "What is Kubernetes?",
@@ -1034,12 +1040,6 @@
           "id": 12,
           "slug": "what-are-the-main-components-of-kubernetes-architecture",
           "title": "What are the main components of Kubernetes architecture?",
-          "topic": "kubernetes"
-        },
-        {
-          "id": 13,
-          "slug": "what-is-a-pod-in-kubernetes",
-          "title": "What is a Pod in Kubernetes?",
           "topic": "kubernetes"
         }
       ],
@@ -1053,6 +1053,59 @@
         ],
         "answerIndex": 1,
         "explanation": "In shell form, `/bin/sh` is PID 1. Standard shells do not forward signals like SIGTERM to child processes, causing `docker stop` to hang for 10 seconds before forcibly killing the container with SIGKILL."
+      }
+    },
+    {
+      "id": 754,
+      "slug": "what-is-the-difference-between-docker-and-podman",
+      "title": "What is the difference between Docker and Podman?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/what-is-the-difference-between-docker-and-podman.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-is-the-difference-between-docker-and-podman.md",
+      "shortAnswer": "Both build and run the same OCI images with largely the same CLI, so `alias docker=podman` works for most day-to-day commands. The difference is architecture: **Docker** is client/server - the `docker` CLI sends every request to a long-running daemon (`dockerd`, usually root), which supervises containers through containerd. **Podman** is **daemonless** - the CLI starts each container itself through a small monitor process (`conmon`) and an OCI runtime (`crun` or `runc`), and it runs **rootless by default**, so there is no privileged daemon socket to protect. Podman also has native **pods** (shared network namespace, like Kubernetes) and integrates with **systemd** through Quadlet files. Docker's strengths are ecosystem and polish: Compose, Docker Desktop, BuildKit, and near-universal CI support.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": {
+        "stem": "What is the main architectural difference between Docker and Podman?",
+        "options": [
+          "Podman cannot run OCI images built by Docker",
+          "Docker routes commands through a long-running daemon, while Podman forks containers directly from the CLI with no central daemon",
+          "Podman only runs on Windows",
+          "Docker does not use namespaces or cgroups"
+        ],
+        "answerIndex": 1,
+        "explanation": "Docker's CLI talks to dockerd, which supervises containers. Podman's CLI starts each container itself (via conmon and an OCI runtime), so there is no root daemon to compromise, and rootless operation is the default."
       }
     }
   ]

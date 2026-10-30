@@ -407,6 +407,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "sli",
         "slo",
@@ -464,6 +465,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "burn-rate",
         "alerting",
@@ -521,6 +523,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "toil",
         "automation",
@@ -577,6 +580,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "monitoring",
         "golden-signals",
@@ -633,6 +637,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "post-mortem",
         "incident-management",
@@ -693,6 +698,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "chaos-engineering",
         "gameday",
         "resilience",
@@ -749,6 +755,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "on-call",
         "pagerduty",
@@ -806,6 +813,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "runbooks",
         "automation",

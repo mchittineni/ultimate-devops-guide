@@ -390,7 +390,7 @@
       ],
       "path": "backup-and-disaster-recovery/what-is-the-3-2-1-backup-rule-and-how-is-it-modernized-for-cloud-and-ransomware-protection.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/what-is-the-3-2-1-backup-rule-and-how-is-it-modernized-for-cloud-and-ransomware-protection.md",
-      "shortAnswer": "The classic 3-2-1 rule mandates 3 copies of data on 2 different media types with 1 copy stored offsite; modern cloud architectures extend this with 3-2-1-1-0 by adding an immutable/WORM (Write Once Read Many) air-gapped copy and zero-error automated restore validation.",
+      "shortAnswer": "The classic 3-2-1 rule is three copies of the data, on two different media types, with one copy off-site. The modern **3-2-1-1-0** version adds **one immutable or logically air-gapped copy** that no production credential can delete or overwrite, and **zero errors** in automated restore tests. The additions exist because ransomware operators now go after the backups first.",
       "sections": [
         "Detail",
         "Example",
@@ -399,21 +399,21 @@
       ],
       "related": [
         {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
           "id": 3,
           "slug": "what-is-continuous-integration",
           "title": "What is Continuous Integration?",
-          "topic": "core-devops-concepts"
-        },
-        {
-          "id": 4,
-          "slug": "what-is-continuous-delivery",
-          "title": "What is Continuous Delivery?",
-          "topic": "core-devops-concepts"
-        },
-        {
-          "id": 5,
-          "slug": "what-is-continuous-deployment",
-          "title": "What is Continuous Deployment?",
           "topic": "core-devops-concepts"
         }
       ],

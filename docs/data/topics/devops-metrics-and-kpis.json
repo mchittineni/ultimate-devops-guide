@@ -321,7 +321,7 @@
           "Frequent deployments make software development more expensive"
         ],
         "answerIndex": 0,
-        "explanation": "DORA research proved that elite teams achieve both higher deployment frequency AND lower change failure rates simultaneously, because small batches are easier to review, test, and debug."
+        "explanation": "DORA survey research has repeatedly found that the highest-performing teams achieve both higher deployment frequency AND lower change failure rates simultaneously, because small batches are easier to review, test, and debug."
       }
     },
     {
@@ -342,7 +342,7 @@
       ],
       "path": "devops-metrics-and-kpis/how-is-lead-time-for-changes-measured-and-how-do-you-eliminate-pipeline-queue-bottlenecks.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devops-metrics-and-kpis/how-is-lead-time-for-changes-measured-and-how-do-you-eliminate-pipeline-queue-bottlenecks.md",
-      "shortAnswer": "Lead Time for Changes measures the clock time from when a developer commits code to when that commit runs in production; bottlenecks are eliminated by auto-scaling CI runners, parallelizing test suites, and abolishing manual Change Advisory Boards (CABs).",
+      "shortAnswer": "Lead Time for Changes measures the clock time from when a developer commits code to when that commit runs in production; bottlenecks are eliminated by auto-scaling CI runners, parallelizing test suites, and replacing manual Change Advisory Boards (CABs) with peer review and automated, auditable gates.",
       "sections": [
         "Detail",
         "Example",
@@ -378,7 +378,7 @@
           "They speed up continuous integration build times"
         ],
         "answerIndex": 1,
-        "explanation": "Rigorous empirical research by DORA found that manual CAB approvals introduce massive delays (lead time inflation) with zero statistical correlation with improved system reliability."
+        "explanation": "DORA's survey research (2019 onwards) found heavyweight external change approval was associated with worse lead time and deployment frequency and no evidence of a lower change failure rate. It is a correlation from survey data, but a consistent one."
       }
     },
     {
@@ -608,6 +608,109 @@
         "answerIndex": 2,
         "explanation": "Extraneous cognitive load represents tasks that do not add direct business value (such as fighting with complex Kubernetes manifests or IAM policies). Platform teams eliminate this waste through Golden Paths."
       }
+    },
+    {
+      "id": 786,
+      "slug": "what-are-the-space-and-devex-frameworks-and-how-do-they-complement-dora-metrics",
+      "title": "What are the SPACE and DevEx frameworks and how do they complement DORA metrics?",
+      "topic": "devops-metrics-and-kpis",
+      "category": "DevOps Metrics and KPIs",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devops-metrics-and-kpis",
+        "interview-questions",
+        "developer-productivity",
+        "space",
+        "devex",
+        "dora"
+      ],
+      "path": "devops-metrics-and-kpis/what-are-the-space-and-devex-frameworks-and-how-do-they-complement-dora-metrics.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devops-metrics-and-kpis/what-are-the-space-and-devex-frameworks-and-how-do-they-complement-dora-metrics.md",
+      "shortAnswer": "DORA measures the outcome of the delivery _system_ (throughput and instability). **SPACE** (2021) is a framework for measuring developer productivity across five dimensions - Satisfaction and well-being, Performance, Activity, Communication and collaboration, Efficiency and flow - insisting that no single metric captures productivity. **DevEx** (2023) narrows that to the three things that shape how work _feels_ to developers: feedback loops, cognitive load, and flow state. Used together, DORA tells you _what_ is happening to delivery and SPACE/DevEx tell you _why_.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 396,
+          "slug": "how-do-you-speed-up-a-slow-ci-cd-pipeline",
+          "title": "How do you speed up a slow CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 459,
+          "slug": "how-do-you-scale-ci-cd-across-many-services-and-teams",
+          "title": "How do you scale CI/CD across many services and teams?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Which statement best describes how the SPACE framework should be applied?",
+        "options": [
+          "Pick the single SPACE dimension that is easiest to automate and use it to rank engineers",
+          "Measure several dimensions at once, mixing system data with survey data, and never rely on activity counts alone",
+          "Replace DORA metrics entirely with lines of code and commit counts",
+          "Use it only for individual performance reviews"
+        ],
+        "answerIndex": 1,
+        "explanation": "SPACE's core guidance is to use metrics from at least three of its five dimensions together, combine perceptual (survey) and system data, and avoid treating activity metrics such as commits or PR counts as productivity on their own."
+      }
+    },
+    {
+      "id": 787,
+      "slug": "how-do-you-measure-the-impact-of-ai-coding-assistants-on-software-delivery",
+      "title": "How do you measure the impact of AI coding assistants on software delivery?",
+      "topic": "devops-metrics-and-kpis",
+      "category": "DevOps Metrics and KPIs",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "devops-metrics-and-kpis",
+        "interview-questions",
+        "ai-assisted-development",
+        "dora",
+        "developer-productivity"
+      ],
+      "path": "devops-metrics-and-kpis/how-do-you-measure-the-impact-of-ai-coding-assistants-on-software-delivery.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devops-metrics-and-kpis/how-do-you-measure-the-impact-of-ai-coding-assistants-on-software-delivery.md",
+      "shortAnswer": "Measure the delivery system, not the tool. Track adoption, then the DORA metrics (throughput _and_ instability, especially change failure rate and rework rate), then developer-experience survey data and code-review load, compared against a baseline or a non-adopting cohort. Self-reported speed-ups and vendor metrics such as \"acceptance rate\" or \"percentage of code written by AI\" are inputs, not outcomes - DORA's research shows AI can raise throughput while also raising instability.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 396,
+          "slug": "how-do-you-speed-up-a-slow-ci-cd-pipeline",
+          "title": "How do you speed up a slow CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 398,
+          "slug": "how-do-you-deal-with-flaky-tests-in-a-ci-pipeline",
+          "title": "How do you deal with flaky tests in a CI pipeline?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
     }
   ]
 }

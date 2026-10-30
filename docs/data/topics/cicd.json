@@ -1457,6 +1457,61 @@
         "answerIndex": 1,
         "explanation": "Hashing the lockfile guarantees that as long as dependencies remain identical, builds reuse the cache archive, but any dependency update produces a new cache key."
       }
+    },
+    {
+      "id": 762,
+      "slug": "how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline",
+      "title": "How do you roll back a failed deployment in a CI/CD pipeline?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "deployment",
+        "rollback"
+      ],
+      "path": "cicd/how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline.md",
+      "shortAnswer": "Make rollback a **redeploy of the previous known-good artefact**, not a rebuild and not a hand-made fix: because you built once and deployed by digest, the last good version is already in the registry and the pipeline only has to point the environment back at it. Detect the failure automatically (health checks, error rate, latency, SLO burn rate) and let progressive delivery **abort and revert** a canary or blue/green rollout before most users see it. Turn features off with a **flag** when the code is fine but the feature is not - the fastest rollback of all. The hard limit is state: code rolls back, **data and schema do not**, so migrations must be backward compatible (expand/contract) or rollback is impossible. And rehearse it - an untested rollback path fails on the day you need it.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 509,
+          "slug": "what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies",
+          "title": "What is progressive delivery and how does it differ from traditional deployment strategies?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 511,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 428,
+          "slug": "how-do-you-troubleshoot-a-gitops-pipeline-that-will-not-sync",
+          "title": "How do you troubleshoot a GitOps pipeline that will not sync?",
+          "topic": "devops-tools-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "A release included a database migration that dropped a column the previous application version still reads. Why does redeploying the previous image not fix the outage?",
+        "options": [
+          "Container registries delete old images after a deployment",
+          "Rollback restores code, not data or schema - the old version now runs against a schema it is incompatible with, so migrations must follow expand/contract to keep the previous version working",
+          "Kubernetes cannot run two image versions at once",
+          "The previous image must be rebuilt from source first"
+        ],
+        "answerIndex": 1,
+        "explanation": "Redeploying an artefact only changes code. Schema and data changes persist, so a destructive migration makes the previous version incompatible. Expand/contract migrations - additive first, destructive only after the old version is gone - keep rollback possible."
+      }
     }
   ]
 }

@@ -313,10 +313,10 @@
           "topic": "site-reliability-engineering"
         },
         {
-          "id": 17,
-          "slug": "what-is-jenkins",
-          "title": "What is Jenkins?",
-          "topic": "cicd"
+          "id": 645,
+          "slug": "what-is-a-blameless-post-mortem-and-how-do-you-write-effective-incident-reviews-that-drive-systemic-changes",
+          "title": "What is a Blameless Post-Mortem and how do you write effective incident reviews that drive systemic changes?",
+          "topic": "site-reliability-engineering"
         }
       ],
       "quiz": null
@@ -403,22 +403,22 @@
       ],
       "related": [
         {
-          "id": 232,
-          "slug": "what-is-the-difference-between-sre-devops-and-platform-engineering",
-          "title": "What is the difference between SRE, DevOps, and Platform Engineering?",
+          "id": 641,
+          "slug": "what-is-the-difference-between-sli-slo-sla-and-error-budgets-in-sre-practice",
+          "title": "What is the difference between SLI, SLO, SLA, and Error Budgets in SRE practice?",
           "topic": "site-reliability-engineering"
         },
         {
-          "id": 399,
-          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
-          "title": "How do you promote a release across dev, staging, and production?",
-          "topic": "cicd"
+          "id": 647,
+          "slug": "how-do-on-call-rotations-and-escalation-policies-ensure-rapid-incident-triage-without-engineer-burnout",
+          "title": "How do On-Call rotations and escalation policies ensure rapid incident triage without engineer burnout?",
+          "topic": "site-reliability-engineering"
         },
         {
-          "id": 535,
-          "slug": "what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup",
-          "title": "What are ephemeral preview environments and how do you manage their lifecycle and cleanup?",
-          "topic": "cicd"
+          "id": 645,
+          "slug": "what-is-a-blameless-post-mortem-and-how-do-you-write-effective-incident-reviews-that-drive-systemic-changes",
+          "title": "What is a Blameless Post-Mortem and how do you write effective incident reviews that drive systemic changes?",
+          "topic": "site-reliability-engineering"
         }
       ],
       "quiz": null
@@ -605,6 +605,12 @@
       ],
       "related": [
         {
+          "id": 645,
+          "slug": "what-is-a-blameless-post-mortem-and-how-do-you-write-effective-incident-reviews-that-drive-systemic-changes",
+          "title": "What is a Blameless Post-Mortem and how do you write effective incident reviews that drive systemic changes?",
+          "topic": "site-reliability-engineering"
+        },
+        {
           "id": 96,
           "slug": "what-is-site-reliability-engineering",
           "title": "What is Site Reliability Engineering?",
@@ -615,12 +621,6 @@
           "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
           "title": "How do you run and secure a Jenkins controller in production?",
           "topic": "cicd"
-        },
-        {
-          "id": 233,
-          "slug": "how-do-you-design-alerts-that-page-a-human",
-          "title": "How do you design alerts that page a human?",
-          "topic": "site-reliability-engineering"
         }
       ],
       "quiz": null
@@ -1268,15 +1268,15 @@
           "topic": "site-reliability-engineering"
         },
         {
-          "id": 96,
-          "slug": "what-is-site-reliability-engineering",
-          "title": "What is Site Reliability Engineering?",
+          "id": 641,
+          "slug": "what-is-the-difference-between-sli-slo-sla-and-error-budgets-in-sre-practice",
+          "title": "What is the difference between SLI, SLO, SLA, and Error Budgets in SRE practice?",
           "topic": "site-reliability-engineering"
         },
         {
-          "id": 97,
-          "slug": "what-are-service-level-objectives-slos",
-          "title": "What are Service Level Objectives (SLOs)?",
+          "id": 96,
+          "slug": "what-is-site-reliability-engineering",
+          "title": "What is Site Reliability Engineering?",
           "topic": "site-reliability-engineering"
         }
       ],
@@ -2679,6 +2679,12 @@
       ],
       "related": [
         {
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
+        },
+        {
           "id": 400,
           "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
           "title": "How do you design CI/CD for a microservices architecture?",
@@ -2688,12 +2694,6 @@
           "id": 1,
           "slug": "what-is-devops",
           "title": "What is DevOps?",
-          "topic": "core-devops-concepts"
-        },
-        {
-          "id": 508,
-          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
-          "title": "What is GitOps and how does it fundamentally change release management?",
           "topic": "core-devops-concepts"
         }
       ],
@@ -3601,9 +3601,9 @@
           "topic": "cicd"
         },
         {
-          "id": 16,
-          "slug": "what-is-ci-cd-pipeline",
-          "title": "What is CI/CD Pipeline?",
+          "id": 762,
+          "slug": "how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline",
+          "title": "How do you roll back a failed deployment in a CI/CD pipeline?",
           "topic": "cicd"
         }
       ],
@@ -3695,15 +3695,15 @@
           "topic": "cicd"
         },
         {
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
+        },
+        {
           "id": 396,
           "slug": "how-do-you-speed-up-a-slow-ci-cd-pipeline",
           "title": "How do you speed up a slow CI/CD pipeline?",
-          "topic": "cicd"
-        },
-        {
-          "id": 457,
-          "slug": "how-do-you-write-an-efficient-and-secure-github-actions-workflow",
-          "title": "How do you write an efficient and secure GitHub Actions workflow?",
           "topic": "cicd"
         }
       ],
@@ -3903,10 +3903,10 @@
           "topic": "cicd"
         },
         {
-          "id": 459,
-          "slug": "how-do-you-scale-ci-cd-across-many-services-and-teams",
-          "title": "How do you scale CI/CD across many services and teams?",
-          "topic": "cicd"
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
         }
       ],
       "quiz": null
@@ -4001,15 +4001,15 @@
           "topic": "core-devops-concepts"
         },
         {
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
+        },
+        {
           "id": 456,
           "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
           "title": "How do you run and secure a Jenkins controller in production?",
-          "topic": "cicd"
-        },
-        {
-          "id": 535,
-          "slug": "what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup",
-          "title": "What are ephemeral preview environments and how do you manage their lifecycle and cleanup?",
           "topic": "cicd"
         }
       ],

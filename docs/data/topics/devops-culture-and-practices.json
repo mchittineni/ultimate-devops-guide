@@ -386,7 +386,7 @@
           "Teams must use identical programming languages to collaborate"
         ],
         "answerIndex": 1,
-        "explanation": "Project Aristotle proved that psychological safety outweighed all other factors (including individual talent, seniority, and workload) in determining team success and innovation."
+        "explanation": "Project Aristotle found psychological safety to be the most important of the five team dynamics it identified, ahead of dependability, structure and clarity, meaning, and impact; who was on the team mattered less than how the team worked together."
       }
     },
     {
@@ -560,6 +560,52 @@
         "answerIndex": 1,
         "explanation": "Direct SSH access leaves no team-wide audit trail. ChatOps and GitOps ensure every modification is recorded in public chat channels or version-controlled PR reviews."
       }
+    },
+    {
+      "id": 785,
+      "slug": "what-is-the-westrum-organizational-culture-model-and-how-does-dora-use-it",
+      "title": "What is the Westrum organizational culture model and how does DORA use it?",
+      "topic": "devops-culture-and-practices",
+      "category": "DevOps Culture and Practices",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devops-culture-and-practices",
+        "interview-questions",
+        "culture",
+        "westrum",
+        "dora"
+      ],
+      "path": "devops-culture-and-practices/what-is-the-westrum-organizational-culture-model-and-how-does-dora-use-it.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devops-culture-and-practices/what-is-the-westrum-organizational-culture-model-and-how-does-dora-use-it.md",
+      "shortAnswer": "Sociologist Ron Westrum classified organisations by how information flows through them: **pathological** (power-oriented), **bureaucratic** (rule-oriented), and **generative** (performance-oriented). DORA adopted the model because it can be measured with a short survey, and its research has repeatedly found that generative cultures are associated with better software delivery and organisational performance, and with less burnout.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 398,
+          "slug": "how-do-you-deal-with-flaky-tests-in-a-ci-pipeline",
+          "title": "How do you deal with flaky tests in a CI pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
     }
   ]
 }

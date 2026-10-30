@@ -608,6 +608,118 @@
         "answerIndex": 1,
         "explanation": "Compliance as Code turns static compliance rules into continuous automated tests in CI/CD and runtime, preventing drift and ensuring continuous compliance."
       }
+    },
+    {
+      "id": 766,
+      "slug": "what-are-cspm-and-cnapp-and-how-do-they-find-cloud-misconfigurations",
+      "title": "What are CSPM and CNAPP, and how do they find cloud misconfigurations?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security-and-compliance",
+        "cspm",
+        "cnapp",
+        "cloud-security"
+      ],
+      "path": "security-and-compliance/what-are-cspm-and-cnapp-and-how-do-they-find-cloud-misconfigurations.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-are-cspm-and-cnapp-and-how-do-they-find-cloud-misconfigurations.md",
+      "shortAnswer": "**CSPM** (Cloud Security Posture Management) continuously reads your cloud accounts' configuration through the provider APIs and compares it with rules - CIS Benchmarks, PCI DSS, your own policies - to flag misconfigurations such as public buckets, open security groups, unencrypted volumes, disabled logging, and over-privileged identities. **CNAPP** (Cloud-Native Application Protection Platform) is the consolidated category that bundles CSPM with workload protection (CWPP), identity entitlement analysis (CIEM), Kubernetes posture (KSPM), IaC and image scanning, and increasingly data and AI posture, then correlates them into **attack paths**. Native options are AWS Security Hub and Config, Microsoft Defender for Cloud, and Google Security Command Center; commercial CNAPPs include Wiz, Prisma Cloud, Orca, and Sysdig. The value is not the finding count - it is prioritising the few combinations that actually lead to your data.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 491,
+          "slug": "how-do-you-manage-tls-certificates-in-production",
+          "title": "How do you manage TLS certificates in production?",
+          "topic": "network-security"
+        },
+        {
+          "id": 713,
+          "slug": "how-do-you-design-and-execute-threat-modeling-for-cloud-native-infrastructure",
+          "title": "How Do You Design and Execute Threat Modeling for Cloud-Native Infrastructure?",
+          "topic": "secops"
+        },
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": {
+        "stem": "A CSPM reports 4,000 findings. Which prioritisation approach best reflects how modern CNAPP tools rank risk?",
+        "options": [
+          "Fix findings alphabetically by resource name",
+          "Rank by attack path: combine misconfiguration, exposure to the internet, exploitable vulnerabilities, and privileged identities on the same resource, and fix the combinations that lead to sensitive data first",
+          "Fix only findings older than one year",
+          "Disable all rules that produce more than ten findings"
+        ],
+        "answerIndex": 1,
+        "explanation": "Individual findings are rarely the risk; toxic combinations are. A public VM with a critical CVE and an admin role that can read customer data is an attack path, while the same CVE on an isolated, unprivileged host is backlog."
+      }
+    },
+    {
+      "id": 767,
+      "slug": "what-is-the-nist-cybersecurity-framework-csf-2-0-and-how-is-it-used",
+      "title": "What is the NIST Cybersecurity Framework (CSF) 2.0 and how is it used?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security-and-compliance",
+        "nist",
+        "governance",
+        "compliance"
+      ],
+      "path": "security-and-compliance/what-is-the-nist-cybersecurity-framework-csf-2-0-and-how-is-it-used.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-is-the-nist-cybersecurity-framework-csf-2-0-and-how-is-it-used.md",
+      "shortAnswer": "The NIST CSF is a voluntary, outcome-based framework for managing cybersecurity risk, published as **version 2.0 in February 2024**. It organises outcomes into six **Functions** - **Govern, Identify, Protect, Detect, Respond, Recover** - broken into Categories and Subcategories (for example `PR.AA` identity management and access control). Organisations use it by writing a **Current Profile** (where we are), a **Target Profile** (where we need to be, given our risk), and a prioritised plan to close the gap, with **Tiers** describing how rigorous their risk practices are. It is not a certification and not a control catalogue: it says _what_ outcomes to achieve and points, through Informative References, to catalogues such as NIST SP 800-53, ISO/IEC 27001, and the CIS Controls for _how_.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 707,
+          "slug": "what-is-policy-as-code-and-how-do-opa-gatekeeper-and-kyverno-enforce-cluster-governance",
+          "title": "What is Policy as Code and how do OPA Gatekeeper and Kyverno enforce cluster governance?",
+          "topic": "devsecops"
+        },
+        {
+          "id": 491,
+          "slug": "how-do-you-manage-tls-certificates-in-production",
+          "title": "How do you manage TLS certificates in production?",
+          "topic": "network-security"
+        },
+        {
+          "id": 429,
+          "slug": "how-do-you-rotate-secrets-without-downtime",
+          "title": "How do you rotate secrets without downtime?",
+          "topic": "devsecops"
+        }
+      ],
+      "quiz": {
+        "stem": "Which function did NIST CSF 2.0 add to the five functions of CSF 1.1?",
+        "options": [
+          "Deploy",
+          "Govern - covering risk strategy, roles and responsibilities, policy, oversight, and cybersecurity supply chain risk management",
+          "Encrypt",
+          "Audit"
+        ],
+        "answerIndex": 1,
+        "explanation": "CSF 2.0 (February 2024) added Govern to Identify, Protect, Detect, Respond, and Recover, making governance and supply-chain risk explicit and placing it at the centre of the framework."
+      }
     }
   ]
 }

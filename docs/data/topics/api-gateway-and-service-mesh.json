@@ -285,7 +285,7 @@
       ],
       "path": "api-gateway-and-service-mesh/how-do-you-debug-a-service-mesh-that-is-breaking-service-to-service-traffic.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/how-do-you-debug-a-service-mesh-that-is-breaking-service-to-service-traffic.md",
-      "shortAnswer": "Work out which layer is refusing the request, because a mesh adds three new ones. Read the **sidecar's own response flags** first - Envoy tells you exactly why it failed (`UF` upstream failure, `UO` overflow/circuit-breaker, `URX` retry limit, `UAEX` authorization denied, `NR` no route) - then check, in order: **was the sidecar injected at all** (an uninjected Pod cannot participate in mTLS and gets connection resets), **is the mTLS mode consistent** (`STRICT` on one side and plain text on the other is the classic outage), **does an `AuthorizationPolicy` deny it** (they are default-allow until one selects the workload, then default-deny for that workload), and **do `VirtualService`/`DestinationRule` actually route where you think** - `istioctl proxy-config` shows the effective configuration rather than your intent. The single most useful habit: compare the _intended_ config with the _programmed_ config, because a mesh failure is nearly always a divergence between the two.",
+      "shortAnswer": "Work out which layer is refusing the request, because a mesh adds three new ones. Read the **sidecar's own response flags** first - Envoy tells you exactly why it failed (`UF` upstream failure, `UO` overflow/circuit-breaker, `URX` retry limit, `NR` no route, `UAEX` denied by external authorization - and a `403` whose response details read `rbac_access_denied_matched_policy[...]` is an `AuthorizationPolicy` denial) - then check, in order: **was the sidecar injected at all** (an uninjected Pod cannot participate in mTLS and gets connection resets), **is the mTLS mode consistent** (`STRICT` on one side and plain text on the other is the classic outage), **does an `AuthorizationPolicy` deny it** (they are default-allow until one selects the workload, then default-deny for that workload), and **do `VirtualService`/`DestinationRule` actually route where you think** - `istioctl proxy-config` shows the effective configuration rather than your intent. The single most useful habit: compare the _intended_ config with the _programmed_ config, because a mesh failure is nearly always a divergence between the two.",
       "sections": [
         "Detail",
         "Example",
@@ -300,16 +300,16 @@
           "topic": "docker"
         },
         {
-          "id": 400,
-          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
-          "title": "How do you design CI/CD for a microservices architecture?",
-          "topic": "cicd"
-        },
-        {
           "id": 416,
           "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
           "title": "Why does a container fail to start with a permission denied error?",
           "topic": "docker"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
         }
       ],
       "quiz": null
@@ -753,6 +753,62 @@
         ],
         "answerIndex": 1,
         "explanation": "Because the service mesh sidecar intercepts network traffic, engineers can inject latency and HTTP failures transparently into any service, regardless of language or framework."
+      }
+    },
+    {
+      "id": 765,
+      "slug": "how-do-you-authenticate-api-clients-with-oauth-2-0-and-oidc-at-the-api-gateway",
+      "title": "How do you authenticate API clients with OAuth 2.0 and OIDC at the API gateway?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "api-gateway-and-service-mesh",
+        "oauth2",
+        "oidc",
+        "jwt"
+      ],
+      "path": "api-gateway-and-service-mesh/how-do-you-authenticate-api-clients-with-oauth-2-0-and-oidc-at-the-api-gateway.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/how-do-you-authenticate-api-clients-with-oauth-2-0-and-oidc-at-the-api-gateway.md",
+      "shortAnswer": "The identity provider (Entra ID, Okta, Auth0, Keycloak, Cognito) issues **access tokens**; the gateway **validates** them on every request and forwards a verified identity downstream. For JWT access tokens that means checking the **signature** against the issuer's JWKS (cached, with `kid`-based key rotation), the **issuer**, the **audience**, **expiry and not-before** with small clock skew, the allowed **algorithm**, and the **scopes** the route requires. Pick the grant by client type: **authorization code with PKCE** for browser and mobile apps acting for a user, **client credentials** for service-to-service, and the **device authorization grant** for TVs and CLIs - never the deprecated implicit or password grants. The gateway handles coarse authorisation (valid token, right scope); **object-level** checks (\"does this order belong to this user?\") stay in the service.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 533,
+          "slug": "how-does-openid-connect-oidc-eliminate-long-lived-cloud-credentials-in-ci-cd-pipelines",
+          "title": "How does OpenID Connect (OIDC) eliminate long-lived cloud credentials in CI/CD pipelines?",
+          "topic": "cicd"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "A gateway validates a JWT access token's signature and expiry. Which additional check prevents a token issued for a different API by the same identity provider from being accepted?",
+        "options": [
+          "Checking that the token is base64-encoded",
+          "Validating the audience (`aud`) claim against this API's identifier, along with the issuer (`iss`)",
+          "Checking the token length",
+          "Requiring the token in a query parameter"
+        ],
+        "answerIndex": 1,
+        "explanation": "Signature and expiry prove the token is genuine and current, not that it was meant for you. Without an audience check, any valid token from the same issuer - for any API - is accepted."
       }
     }
   ]

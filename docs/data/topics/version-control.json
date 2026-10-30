@@ -776,6 +776,62 @@
         "answerIndex": 1,
         "explanation": "Client-side hooks are advisory; developers can bypass them using `git commit --no-verify`. Mandatory security controls must always be duplicated in server-side CI pipelines."
       }
+    },
+    {
+      "id": 760,
+      "slug": "how-do-you-sign-git-commits-and-enforce-signed-commits",
+      "title": "How do you sign Git commits and enforce signed commits?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions",
+        "git",
+        "security",
+        "supply-chain"
+      ],
+      "path": "version-control/how-do-you-sign-git-commits-and-enforce-signed-commits.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/how-do-you-sign-git-commits-and-enforce-signed-commits.md",
+      "shortAnswer": "Git can attach a cryptographic signature to commits and tags with a **GPG key**, an **SSH key** (Git 2.34+), or an **X.509 certificate** (including keyless Sigstore certificates via `gitsign`). You set `gpg.format`, `user.signingkey`, and `commit.gpgsign=true`, and the forge shows the commit as \"Verified\" when the key is registered to the committer's account. Enforcement happens on the server: a branch protection rule or ruleset that **requires signed commits**, or a GitLab push rule that rejects unsigned ones. The reason it matters: Git's author and committer fields are just text - anyone can commit as `ceo@example.com` - and a signature is the only thing that ties a commit to a key the person controls.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 538,
+          "slug": "how-do-you-secure-ci-cd-runners-against-supply-chain-attacks-and-untrusted-pull-requests",
+          "title": "How do you secure CI/CD runners against supply-chain attacks and untrusted pull requests?",
+          "topic": "cicd"
+        },
+        {
+          "id": 539,
+          "slug": "what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity",
+          "title": "What are SLSA (Supply-chain Levels for Software Artifacts) frameworks and how do they verify build integrity?",
+          "topic": "cicd"
+        },
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "What does a valid signature on a Git commit actually prove?",
+        "options": [
+          "That the code in the commit has been reviewed and is safe",
+          "That the commit was created by the holder of the signing key and has not been altered since it was signed",
+          "That the commit passed CI",
+          "That the author email in the commit is the real author"
+        ],
+        "answerIndex": 1,
+        "explanation": "A commit signature binds the commit object (tree, parents, metadata, message) to a key. It proves possession of that key and integrity of the commit, not code quality or review. The author field itself is unauthenticated text, which is exactly why signing matters: anyone can set user.email to someone else's address."
+      }
     }
   ]
 }

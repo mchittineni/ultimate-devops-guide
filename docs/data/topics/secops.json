@@ -217,10 +217,10 @@
           "topic": "core-devops-concepts"
         },
         {
-          "id": 16,
-          "slug": "what-is-ci-cd-pipeline",
-          "title": "What is CI/CD Pipeline?",
-          "topic": "cicd"
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
         }
       ],
       "quiz": null

@@ -383,15 +383,15 @@
           "topic": "scripting-and-automation"
         },
         {
+          "id": 780,
+          "slug": "how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq",
+          "title": "How do you process JSON and YAML on the command line with jq and yq?",
+          "topic": "scripting-and-automation"
+        },
+        {
           "id": 50,
           "slug": "how-to-handle-merge-conflicts-in-git",
           "title": "How to handle merge conflicts in Git?",
-          "topic": "version-control"
-        },
-        {
-          "id": 263,
-          "slug": "what-is-the-difference-between-git-merge-rebase-and-cherry-pick",
-          "title": "What is the difference between git merge, rebase, and cherry-pick?",
           "topic": "version-control"
         }
       ],
@@ -894,10 +894,10 @@
           "topic": "scripting-and-automation"
         },
         {
-          "id": 46,
-          "slug": "what-is-git",
-          "title": "What is Git?",
-          "topic": "version-control"
+          "id": 780,
+          "slug": "how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq",
+          "title": "How do you process JSON and YAML on the command line with jq and yq?",
+          "topic": "scripting-and-automation"
         }
       ],
       "quiz": {
@@ -1023,6 +1023,113 @@
         ],
         "answerIndex": 1,
         "explanation": "For listening sockets, `Recv-Q` represents the number of established TCP connections waiting in the socket backlog queue to be accepted by the application process."
+      }
+    },
+    {
+      "id": 778,
+      "slug": "how-do-linux-file-permissions-umask-and-the-setuid-setgid-and-sticky-bits-work",
+      "title": "How do Linux file permissions, umask, and the setuid, setgid, and sticky bits work?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "path": "linux-administration/how-do-linux-file-permissions-umask-and-the-setuid-setgid-and-sticky-bits-work.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-do-linux-file-permissions-umask-and-the-setuid-setgid-and-sticky-bits-work.md",
+      "shortAnswer": "Every file has an owner, a group, and three permission triplets - **user, group, other** - each of **read (4), write (2), execute (1)**, so `chmod 640` means owner read-write, group read, others nothing. The kernel checks exactly one triplet: the owner's if you own the file, else the group's if you are in its group, else other's. On a **directory** the bits mean something different: `r` lists names, `w` creates, deletes, and renames entries, and `x` lets you traverse into it - which is why deleting a file depends on the directory's permissions, not the file's. **umask** removes bits from the default mode of new files (`0666`) and directories (`0777`), so a umask of `022` yields `644` and `755`. Three special bits sit in front: **setuid (4)** runs an executable as its owner (`passwd`), **setgid (2)** runs as the file's group or, on a directory, makes new files inherit the directory's group, and the **sticky bit (1)** on a directory lets only a file's owner delete it (`/tmp`). Beyond the classic model come **ACLs** for per-user grants, **capabilities** to replace setuid-root, and SELinux/AppArmor as a mandatory layer on top.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 266,
+          "slug": "how-do-you-write-a-production-grade-bash-script",
+          "title": "How do you write a production-grade Bash script?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "A directory is mode `drwxrwxrwt` (1777). What does the trailing `t` change compared with plain 777?",
+        "options": [
+          "Files in it are deleted automatically at reboot",
+          "Any user can create files, but only a file's owner, the directory's owner, or root can delete or rename it",
+          "Programs in it run with the directory owner's privileges",
+          "New files inherit the directory's group"
+        ],
+        "answerIndex": 1,
+        "explanation": "The sticky bit on a directory restricts unlink and rename to the file owner, the directory owner, or root - which is why /tmp is world-writable without letting users delete each other's files. Inheriting the group is setgid, not sticky."
+      }
+    },
+    {
+      "id": 779,
+      "slug": "what-is-the-difference-between-iptables-nftables-firewalld-and-ufw",
+      "title": "What is the difference between iptables, nftables, firewalld, and ufw?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions",
+        "network-security"
+      ],
+      "path": "linux-administration/what-is-the-difference-between-iptables-nftables-firewalld-and-ufw.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-is-the-difference-between-iptables-nftables-firewalld-and-ufw.md",
+      "shortAnswer": "They sit at two different layers. **Netfilter** is the packet-filtering framework inside the kernel. **iptables** and **nftables** are the two rule languages and kernel interfaces for it: iptables is the older one, with separate tools per family (`iptables`, `ip6tables`, `arptables`, `ebtables`) and rules evaluated as linear lists; **nftables** (`nft`) replaced it with one tool and one table model for IPv4, IPv6, ARP, and bridging, native **sets and maps** so a thousand addresses are one lookup instead of a thousand rules, and atomic replacement of the whole ruleset. **firewalld** (RHEL, Fedora, SUSE) and **ufw** (Ubuntu) are **front-ends** that generate those rules from a simpler model - firewalld with zones and services managed over D-Bus, ufw with a minimal allow/deny syntax. On current distributions the `iptables` command is usually **iptables-nft**, a compatibility layer writing nftables rules, and firewalld uses the nftables backend by default. The operational rule: pick **one** manager per host, because two tools writing rules (or Docker and Kubernetes adding their own) is the usual cause of \"my rule is there but traffic is still blocked\".",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 502,
+          "slug": "what-bash-scripting-exercises-come-up-in-devops-interviews",
+          "title": "What Bash scripting exercises come up in DevOps interviews?",
+          "topic": "scripting-and-automation"
+        },
+        {
+          "id": 430,
+          "slug": "how-do-you-patch-hundreds-of-servers-safely",
+          "title": "How do you patch hundreds of servers safely?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 301,
+          "slug": "when-do-you-use-bash-and-when-do-you-use-python",
+          "title": "When do you use Bash and when do you use Python?",
+          "topic": "scripting-and-automation"
+        }
+      ],
+      "quiz": {
+        "stem": "On a current RHEL, Debian, or Ubuntu host, what usually happens when you run an `iptables` command?",
+        "options": [
+          "It programs the legacy x_tables kernel backend directly, bypassing nftables",
+          "It is the iptables-nft compatibility layer, which translates the rule into nftables objects in the kernel",
+          "It fails, because iptables has been removed from the kernel",
+          "It edits firewalld's XML zone files"
+        ],
+        "answerIndex": 1,
+        "explanation": "Modern distributions ship iptables-nft: the familiar iptables syntax, translated into nftables rules. Mixing it with iptables-legacy, or hand-written nft tables, is what produces rules that seem to be ignored."
       }
     }
   ]

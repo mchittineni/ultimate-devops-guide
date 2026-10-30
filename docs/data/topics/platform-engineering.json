@@ -368,7 +368,7 @@
       ],
       "path": "platform-engineering/how-do-you-orchestrate-and-autoscale-gpu-workloads-in-kubernetes.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/how-do-you-orchestrate-and-autoscale-gpu-workloads-in-kubernetes.md",
-      "shortAnswer": "Orchestrate GPU workloads in Kubernetes using the NVIDIA GPU Operator (for driver injection and container runtime configuration), partition GPUs via Multi-Instance GPU (MIG) or Time-Slicing, and autoscale GPU nodes using Karpenter or KEDA based on GPU duty cycle and VRAM utilization metrics.",
+      "shortAnswer": "Orchestrate GPU workloads in Kubernetes using the NVIDIA GPU Operator (for driver injection and container runtime configuration), partition GPUs via Multi-Instance GPU (MIG) or Time-Slicing, scale the workload Pods with KEDA or HPA on a demand signal (queue depth, pending requests, latency), and let Karpenter or Cluster Autoscaler add and remove GPU nodes in response to the Pods that cannot be scheduled. Dynamic Resource Allocation (GA in Kubernetes 1.34) is the newer, attribute-based way to request devices.",
       "sections": [
         "Detail",
         "Example",
@@ -389,9 +389,9 @@
           "topic": "infrastructure-as-code"
         },
         {
-          "id": 26,
-          "slug": "what-is-infrastructure-as-code",
-          "title": "What is Infrastructure as Code?",
+          "id": 463,
+          "slug": "how-do-you-write-and-structure-a-reusable-terraform-module",
+          "title": "How do you write and structure a reusable Terraform module?",
           "topic": "infrastructure-as-code"
         }
       ],
@@ -411,7 +411,7 @@
       ],
       "path": "platform-engineering/how-do-you-deploy-and-scale-llm-inference-serving-with-vllm-or-triton-on-kubernetes.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/platform-engineering/how-do-you-deploy-and-scale-llm-inference-serving-with-vllm-or-triton-on-kubernetes.md",
-      "shortAnswer": "Deploy LLM inference engines (such as vLLM or Triton Inference Server) on Kubernetes by mounting model weights via fast local NVMe caches or streaming from S3/OCI, enabling PagedAttention for KV cache optimization, using tensor parallelism across multiple GPUs, and managing zero-downtime model deployments with progressive traffic routing.",
+      "shortAnswer": "Deploy LLM inference engines (such as vLLM or Triton Inference Server) on Kubernetes by mounting model weights via fast local NVMe caches or streaming from S3/OCI, relying on the engine's KV-cache management (vLLM's PagedAttention, on by default) and continuous batching for throughput, using tensor parallelism when a model does not fit on one GPU, autoscaling on queue depth or time-to-first-token rather than GPU utilisation, and managing zero-downtime model deployments with progressive traffic routing.",
       "sections": [
         "Detail",
         "Example",
@@ -420,16 +420,16 @@
       ],
       "related": [
         {
-          "id": 422,
-          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
-          "title": "How do you structure Terraform code for multiple environments and providers?",
-          "topic": "infrastructure-as-code"
-        },
-        {
           "id": 634,
           "slug": "what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs",
           "title": "What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?",
           "topic": "devops-tools-and-automation"
+        },
+        {
+          "id": 422,
+          "slug": "how-do-you-structure-terraform-code-for-multiple-environments-and-providers",
+          "title": "How do you structure Terraform code for multiple environments and providers?",
+          "topic": "infrastructure-as-code"
         },
         {
           "id": 463,

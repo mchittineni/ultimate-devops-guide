@@ -168,16 +168,16 @@
           "topic": "core-devops-concepts"
         },
         {
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
+        },
+        {
           "id": 540,
           "slug": "what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits",
           "title": "What is Semantic Release and how does it automate versioning and changelogs from commits?",
           "topic": "cicd"
-        },
-        {
-          "id": 1,
-          "slug": "what-is-devops",
-          "title": "What is DevOps?",
-          "topic": "core-devops-concepts"
         }
       ],
       "quiz": null

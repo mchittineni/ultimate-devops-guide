@@ -239,7 +239,7 @@
       ],
       "path": "kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff.md",
-      "shortAnswer": "Troubleshoot a `Pending` pod by inspecting cluster scheduling (CPU/memory capacity, node selectors, taints/tolerations, PVC binding), and troubleshoot `CrashLoopBackOff` by checking application runtime logs (`kubectl logs --previous`), failing readiness/liveness probes, missing secrets, or exit codes like `137` (OOMKilled).",
+      "shortAnswer": "Troubleshoot a `Pending` pod by inspecting cluster scheduling (CPU/memory capacity, node selectors, taints/tolerations, PVC binding), and troubleshoot `CrashLoopBackOff` by checking the previous container's logs (`kubectl logs --previous`), its exit code (`137` = SIGKILL, usually OOMKilled), failing liveness or startup probes, and missing ConfigMaps or Secrets. A failing readiness probe never causes a crash loop - it only removes the Pod from Service endpoints.",
       "sections": [
         "Detail",
         "Example",
@@ -260,9 +260,9 @@
           "topic": "container-orchestration-advanced"
         },
         {
-          "id": 413,
-          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
-          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "id": 622,
+          "slug": "how-does-the-kubernetes-controller-pattern-implement-declarative-reconciliation-loops",
+          "title": "How does the Kubernetes Controller Pattern implement declarative reconciliation loops?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -768,7 +768,7 @@
       ],
       "path": "kubernetes/how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md",
-      "shortAnswer": "Understand which mechanism evicted the Pod, because the fixes differ. **The kubelet** evicts under node pressure (memory, disk, inodes, PIDs) and chooses victims by **QoS class** - `BestEffort` first, then `Burstable` exceeding its requests, `Guaranteed` last. **The scheduler** preempts lower-`PriorityClass` Pods to make room for higher ones. **The API server** performs graceful eviction for `drain`, honouring PodDisruptionBudgets. The durable fixes are: set realistic requests and limits so QoS is not accidental, reserve capacity for the system (`--system-reserved`, `--kube-reserved`), give critical workloads a `PriorityClass` and everything else a lower one, protect availability with PDBs, and let the cluster autoscaler add nodes before pressure rather than after.",
+      "shortAnswer": "Understand which mechanism evicted the Pod, because the fixes differ. **The kubelet** evicts under node pressure (memory, disk, inodes, PIDs) and ranks victims by whether usage exceeds requests, then by Pod priority, then by usage relative to requests - which in practice means `BestEffort` first, `Burstable` over its requests next, and `Guaranteed` last. **The scheduler** preempts lower-`PriorityClass` Pods to make room for higher ones. **The API server** performs graceful eviction for `drain`, honouring PodDisruptionBudgets. The durable fixes are: set realistic requests and limits so QoS is not accidental, reserve capacity for the system (`--system-reserved`, `--kube-reserved`), give critical workloads a `PriorityClass` and everything else a lower one, protect availability with PDBs, and let the cluster autoscaler add nodes before pressure rather than after.",
       "sections": [
         "Detail",
         "Example",
@@ -1124,7 +1124,7 @@
       ],
       "path": "kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md",
-      "shortAnswer": "Running workloads keep running. The control plane is the _reconciliation_ layer, not the data path: kubelets keep their Pods alive from their local state, kube-proxy's rules stay programmed, and traffic keeps flowing through Services and load balancers. What you lose is **change** - no new scheduling, no rollouts, no scaling, no `kubectl`, no Service/endpoint updates, and no self-healing, so a Pod or node that fails during the outage is _not_ replaced. With three control-plane nodes, losing one is a non-event: the API servers are stateless and behind a load balancer, the controller-manager and scheduler re-elect a leader in seconds, and etcd still has 2 of 3 for quorum. Losing **two of three** is the real failure - etcd loses quorum and goes **read-only**, so the whole control plane stops accepting writes even though the API may still answer reads.",
+      "shortAnswer": "Running workloads keep running. The control plane is the _reconciliation_ layer, not the data path: kubelets keep their Pods alive from their local state, kube-proxy's rules stay programmed, and traffic keeps flowing through Services and load balancers. What you lose is **change** - no new scheduling, no rollouts, no scaling, no `kubectl`, no Service/endpoint updates, and no self-healing, so a Pod or node that fails during the outage is _not_ replaced. With three control-plane nodes, losing one is a non-event: the API servers are stateless and behind a load balancer, the controller-manager and scheduler re-elect a leader in seconds, and etcd still has 2 of 3 for quorum. Losing **two of three** is the real failure - etcd loses quorum and goes **read-only**, so the whole control plane stops accepting writes; the API server may still serve some reads from its watch cache, but anything needing a quorum read times out too.",
       "sections": [
         "Detail",
         "Example",
@@ -1868,6 +1868,167 @@
         ],
         "answerIndex": 1,
         "explanation": "ExternalName services have no selector or endpoints; CoreDNS simply returns a CNAME record redirecting client DNS resolution directly to the external hostname."
+      }
+    },
+    {
+      "id": 751,
+      "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+      "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "docker"
+      ],
+      "path": "kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md",
+      "shortAnswer": "`ImagePullBackOff` means the kubelet tried to pull the image, failed (`ErrImagePull`), and is now waiting before it tries again, with the delay doubling up to five minutes. The cause is always in the Pod's events, and it is nearly always one of five things: **a wrong image name or tag**, **missing or wrong registry credentials**, **the node cannot reach the registry** (DNS, proxy, firewall, private endpoint), **registry rate limiting** (Docker Hub's anonymous limits are the classic case), or **no image for the node's CPU architecture**. Read the event message, then reproduce the pull from the node with `crictl pull` to separate a Kubernetes configuration problem from a network or registry problem.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 6,
+          "slug": "what-is-docker",
+          "title": "What is Docker?",
+          "topic": "docker"
+        },
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": {
+        "stem": "A Pod shows `ImagePullBackOff` and its events contain `pull access denied ... repository does not exist or may require authorization`. What is the most likely cause?",
+        "options": [
+          "The node has run out of memory",
+          "The image name or tag is wrong, or the kubelet has no valid credentials for a private registry",
+          "The readiness probe is failing",
+          "The container's entrypoint is not executable"
+        ],
+        "answerIndex": 1,
+        "explanation": "Registries return the same 'not found or unauthorized' response for a missing repository and for missing credentials, so check the exact image reference first, then the imagePullSecrets or node IAM role."
+      }
+    },
+    {
+      "id": 752,
+      "slug": "what-is-the-difference-between-a-deployment-and-a-replicaset-in-kubernetes",
+      "title": "What is the difference between a Deployment and a ReplicaSet in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/what-is-the-difference-between-a-deployment-and-a-replicaset-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-the-difference-between-a-deployment-and-a-replicaset-in-kubernetes.md",
+      "shortAnswer": "A **ReplicaSet** has one job: keep N Pods matching a label selector running, creating or deleting Pods from its template to close the gap. A **Deployment** manages ReplicaSets on top of that: every change to the Pod template creates a **new ReplicaSet**, and the Deployment shifts replicas from the old one to the new one at a controlled pace, keeping old ReplicaSets around so it can roll back. So you create Deployments and let them own ReplicaSets; you almost never create a ReplicaSet directly, because a bare ReplicaSet ignores template changes for existing Pods and has no rollout or rollback.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 413,
+          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
+          "title": "How do you run and scale a stateful application on Kubernetes?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "You change the container image in a Deployment's Pod template. What does the Deployment controller do?",
+        "options": [
+          "It edits the existing ReplicaSet's template, which restarts all Pods at once",
+          "It creates a new ReplicaSet for the new template and scales it up while scaling the old one down",
+          "It deletes the Deployment and recreates it",
+          "It patches the running containers in place without creating Pods"
+        ],
+        "answerIndex": 1,
+        "explanation": "Each distinct Pod template gets its own ReplicaSet (named with the pod-template-hash). A rollout shifts replicas from the old ReplicaSet to the new one within maxSurge and maxUnavailable, and keeps old ReplicaSets for rollback."
+      }
+    },
+    {
+      "id": 753,
+      "slug": "what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them",
+      "title": "What are Pod Security Standards and how does Pod Security Admission enforce them?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "devsecops"
+      ],
+      "path": "kubernetes/what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them.md",
+      "shortAnswer": "The **Pod Security Standards** are three Kubernetes-defined policy levels for Pod `securityContext` and host access: **`privileged`** (no restrictions), **`baseline`** (blocks known privilege escalations such as `privileged: true`, `hostNetwork`, `hostPID`, `hostPath`, and added dangerous capabilities), and **`restricted`** (baseline plus hardening: must run as non-root, `allowPrivilegeEscalation: false`, drop `ALL` capabilities, a `RuntimeDefault` or `Localhost` seccomp profile). **Pod Security Admission** is the built-in admission controller (GA since 1.25, replacing PodSecurityPolicy, which was removed in 1.25) that applies a level per namespace through labels, in three modes: `enforce` rejects violating Pods, `warn` returns a warning to the client, and `audit` writes an audit annotation. It is simple and always available, but it is namespace-granular with no per-workload exceptions, so finer policy still needs Kyverno, Gatekeeper, or `ValidatingAdmissionPolicy`.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 453,
+          "slug": "how-do-you-run-a-multi-tenant-kubernetes-cluster",
+          "title": "How do you run a multi-tenant Kubernetes cluster?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 623,
+          "slug": "what-are-custom-resource-definitions-crds-and-how-do-custom-operators-extend-the-kubernetes-api",
+          "title": "What are Custom Resource Definitions (CRDs) and how do Custom Operators extend the Kubernetes API?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "A namespace is labelled `pod-security.kubernetes.io/enforce: restricted`. What happens to an existing Deployment whose Pods run as root?",
+        "options": [
+          "Its running Pods are evicted immediately",
+          "Running Pods keep running, but new Pods it tries to create are rejected at admission",
+          "The Deployment object itself is deleted",
+          "Nothing, because Pod Security Admission only audits"
+        ],
+        "answerIndex": 1,
+        "explanation": "Pod Security Admission evaluates Pods when they are created or updated. Existing Pods are not touched, but the ReplicaSet's next Pod creation (scale-up, rollout, node drain) is denied - which is why you roll out with warn and audit modes first."
       }
     }
   ]

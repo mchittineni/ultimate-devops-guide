@@ -356,6 +356,52 @@
         }
       ],
       "quiz": null
+    },
+    {
+      "id": 777,
+      "slug": "how-do-you-manage-cloud-service-quotas-and-capacity-limits",
+      "title": "How do you manage cloud service quotas and capacity limits?",
+      "topic": "cloud-engineering",
+      "category": "Cloud Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cloud-engineering",
+        "interview-questions",
+        "quotas",
+        "capacity-planning",
+        "aws"
+      ],
+      "path": "cloud-engineering/how-do-you-manage-cloud-service-quotas-and-capacity-limits.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-engineering/how-do-you-manage-cloud-service-quotas-and-capacity-limits.md",
+      "shortAnswer": "Treat limits as three different things. **Quotas** are per-account (or subscription, or project) ceilings you can usually raise on request: vCPUs, IP addresses, Lambda concurrency. **API rate limits** throttle control-plane calls. **Physical capacity** is whether the provider actually has the instance type in that zone right now, which no quota increase fixes. Manage them by monitoring utilisation against every quota that matters, alerting at 70-80%, raising limits ahead of launches and **in your DR region**, managing quota values as code for new accounts, and reserving capacity (capacity reservations, GPU capacity blocks) for anything you cannot afford to be refused.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 533,
+          "slug": "how-does-openid-connect-oidc-eliminate-long-lived-cloud-credentials-in-ci-cd-pipelines",
+          "title": "How does OpenID Connect (OIDC) eliminate long-lived cloud credentials in CI/CD pipelines?",
+          "topic": "cicd"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 783,
+          "slug": "what-are-the-three-ways-of-devops",
+          "title": "What are the Three Ways of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
     }
   ]
 }

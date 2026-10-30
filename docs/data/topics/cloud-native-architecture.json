@@ -125,15 +125,15 @@
           "topic": "cicd"
         },
         {
-          "id": 2,
-          "slug": "what-are-the-benefits-of-devops",
-          "title": "What are the benefits of DevOps?",
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
           "topic": "core-devops-concepts"
         },
         {
-          "id": 3,
-          "slug": "what-is-continuous-integration",
-          "title": "What is Continuous Integration?",
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
           "topic": "core-devops-concepts"
         }
       ],
@@ -624,10 +624,10 @@
           "topic": "core-devops-concepts"
         },
         {
-          "id": 397,
-          "slug": "why-does-a-build-pass-locally-but-fail-in-ci",
-          "title": "Why does a build pass locally but fail in CI?",
-          "topic": "cicd"
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
         }
       ],
       "quiz": {
@@ -754,6 +754,52 @@
         "answerIndex": 1,
         "explanation": "If Service B queries Service A's database directly, Service A cannot alter its internal schema without breaking Service B, completely undermining the independence of microservice deployments."
       }
+    },
+    {
+      "id": 775,
+      "slug": "what-is-the-transactional-outbox-pattern-and-how-do-idempotent-consumers-complete-it",
+      "title": "What is the transactional outbox pattern and how do idempotent consumers complete it?",
+      "topic": "cloud-native-architecture",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cloud-native-architecture",
+        "interview-questions",
+        "outbox",
+        "event-driven",
+        "idempotency"
+      ],
+      "path": "cloud-native-architecture/what-is-the-transactional-outbox-pattern-and-how-do-idempotent-consumers-complete-it.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cloud-native-architecture/what-is-the-transactional-outbox-pattern-and-how-do-idempotent-consumers-complete-it.md",
+      "shortAnswer": "A service that must both change its database and publish an event has a **dual-write** problem: if it commits and then crashes before publishing, the event is lost; if it publishes first and the commit fails, consumers act on something that never happened. The **transactional outbox** fixes this by writing the event into an `outbox` table **in the same local transaction** as the state change, and having a separate relay (a poller or change data capture such as Debezium) publish rows from that table to the broker. The relay can publish a row more than once, so delivery is at-least-once. **Idempotent consumers** - which record processed message IDs or apply changes in a naturally idempotent way - finish the job, giving you effectively-once processing end to end.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
     }
   ]
 }

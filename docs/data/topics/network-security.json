@@ -930,6 +930,62 @@
         "answerIndex": 1,
         "explanation": "OpenVPN operates in userspace using `tun/tap` devices, copying packets between kernel and user memory. WireGuard runs in-kernel with optimized stream ciphers, delivering near line-rate speeds."
       }
+    },
+    {
+      "id": 764,
+      "slug": "how-do-you-plan-a-migration-to-post-quantum-cryptography",
+      "title": "How do you plan a migration to post-quantum cryptography?",
+      "topic": "network-security",
+      "category": "Network Security",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "network-security",
+        "post-quantum",
+        "cryptography",
+        "tls"
+      ],
+      "path": "network-security/how-do-you-plan-a-migration-to-post-quantum-cryptography.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/network-security/how-do-you-plan-a-migration-to-post-quantum-cryptography.md",
+      "shortAnswer": "Start with an **inventory**, because you cannot migrate cryptography you have not found; then prioritise by **data lifetime**, fixing key exchange first because of \"harvest now, decrypt later\"; then roll out **hybrid** schemes (classical plus post-quantum, such as the TLS group `X25519MLKEM768`) through the components you already patch - TLS libraries, load balancers, CDNs, service meshes, VPNs - while building **crypto agility** so the next change is configuration, not a rewrite. The standards are settled enough to act on: NIST published ML-KEM (FIPS 203) for key establishment and ML-DSA (FIPS 204) and SLH-DSA (FIPS 205) for signatures in August 2024, and its transition plan (NIST IR 8547) deprecates quantum-vulnerable public-key algorithms such as RSA and ECC after 2030 and disallows them after 2035.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 415,
+          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
+          "title": "How do you troubleshoot Docker networking between containers?",
+          "topic": "docker"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Why do most organisations migrate TLS key exchange to post-quantum algorithms before migrating certificate signatures?",
+        "options": [
+          "Because post-quantum signatures are already mandatory in all browsers",
+          "Because recorded traffic can be decrypted later ('harvest now, decrypt later'), while a forged signature only matters once a quantum computer exists at the moment of the attack",
+          "Because key exchange uses symmetric cryptography only",
+          "Because certificates cannot be changed until 2035"
+        ],
+        "answerIndex": 1,
+        "explanation": "Confidentiality has a long tail: traffic captured today can be broken retroactively. Authentication only needs to resist attackers at connection time, so signature migration can follow once PQ certificates are practical."
+      }
     }
   ]
 }
