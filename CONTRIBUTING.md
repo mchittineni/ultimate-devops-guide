@@ -118,6 +118,25 @@ Fill in the [pull request template](./.github/pull_request_template.md). CI runs
 3. Create `topic-slug/README.md` with frontmatter containing the topic `title` - the generator reads the display name from there, then rewrites the rest of the file.
 4. Add your question files, then run the generator and validator.
 
+## Translations
+
+English is canonical. Everything else is derived from it in one of two ways:
+
+| What                                         | Where                             | How it is made                                                                                                               |
+| -------------------------------------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Landing pages** - one per language         | `i18n/README.<code>.md` on `main` | Translated by hand, reviewed like any other change.                                                                          |
+| **Lessons** - every topic index and question | `i18n/<code>/` on `translations`  | Machine-translated by the [Translate Lessons](./.github/workflows/translate-lessons.yml) workflow after each push to `main`. |
+
+- **To fix a lesson translation, fix the English original.** The workflow retranslates any page whose English source changed; the `translations` branch is rebuilt and force-pushed on every run, so edits made there are lost.
+- **To fix a landing page,** edit `i18n/README.<code>.md` directly. Leave the `LANGS` and `BADGES` marker blocks alone - `generate_indexes.py` writes them, and CI fails if they drift.
+- **To add a language:** add an entry to `scripts/i18n.json` (code, native `name`, the `english_name` the translator is prompted with, the localised `label` for the language bar, and the `mt_notice` shown on machine-translated pages, with `{source}` where the link to the English original goes). Copy an existing `i18n/README.<code>.md` for the new code and translate it, then run `generate_indexes.py`. The language bar on every page picks it up, and the next workflow run translates the lessons.
+
+The workflow needs an `ANTHROPIC_API_KEY` repository secret and skips without one; the `TRANSLATE_MODEL` repository variable overrides the model. To preview what a run would translate, without calling the API:
+
+```bash
+python3 scripts/translate_lessons.py --lang es --dry-run
+```
+
 ## Style
 
 - British or American spelling is fine; be consistent within a file.
