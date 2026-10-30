@@ -46,7 +46,8 @@ tags:
 
 ```bash
 # 0. Freeze. Lock the branch in the forge, tell the team to stop pulling.
-gh api -X POST repos/acme/app/branches/main/protection/enforce_admins  # or lock the branch in the UI / a ruleset
+#    GitHub: branch protection "Lock branch" (lock_branch: true) or a ruleset that restricts updates,
+#    applied to admins too. GitLab: set the protected branch's "Allowed to push and merge" to No one.
 
 # 1. Reflog: the fastest recovery, on any clone that has not fetched since.
 git reflog show main
@@ -69,8 +70,8 @@ git checkout main
 git reset --hard a91b3de
 git push --force-with-lease origin main    # lease, so you cannot repeat the mistake
 
-# 5. Replay anything legitimate that landed after the rewrite.
-git cherry-pick 8f2a1c9^..8f2a1c9
+# 5. Replay anything legitimate that landed after the rewrite (identified from step 1).
+git cherry-pick -x <legit-sha-1> <legit-sha-2>
 ```
 
 ```bash
