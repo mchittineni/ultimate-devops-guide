@@ -11,7 +11,7 @@ tags:
 
 The operating system under everything - commands, shell scripting, systemd, service management, and the filesystem hierarchy.
 
-**21 questions** · 🟢 Beginner: 8 · 🟡 Intermediate: 11 · 🔴 Advanced: 2
+**23 questions** · 🟢 Beginner: 9 · 🟡 Intermediate: 12 · 🔴 Advanced: 2
 
 ## Questions
 
@@ -38,6 +38,8 @@ The operating system under everything - commands, shell scripting, systemd, serv
 | 574 | [What is the difference between process states D (uninterruptible sleep) and S (interruptible sleep)?](./what-is-the-difference-between-process-states-d-uninterruptible-sleep-and-s-interruptible-sleep.md)                                   | 🔴 Advanced     |
 | 575 | [How does systemd manage service lifecycles, cgroups, and journal logging?](./how-does-systemd-manage-service-lifecycles-cgroups-and-journal-logging.md)                                                                                       | 🟡 Intermediate |
 | 576 | [What is the difference between TCP and UDP and how do you diagnose packet loss and latency with ss, ip, and tcpdump?](./what-is-the-difference-between-tcp-and-udp-and-how-do-you-diagnose-packet-loss-and-latency-with-ss-ip-and-tcpdump.md) | 🟡 Intermediate |
+| 778 | [How do Linux file permissions, umask, and the setuid, setgid, and sticky bits work?](./how-do-linux-file-permissions-umask-and-the-setuid-setgid-and-sticky-bits-work.md)                                                                     | 🟢 Beginner     |
+| 779 | [What is the difference between iptables, nftables, firewalld, and ufw?](./what-is-the-difference-between-iptables-nftables-firewalld-and-ufw.md)                                                                                              | 🟡 Intermediate |
 
 ## What interviewers probe here
 

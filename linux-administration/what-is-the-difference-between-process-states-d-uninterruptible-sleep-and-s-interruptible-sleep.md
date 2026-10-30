@@ -75,7 +75,7 @@ dmesg -T | grep -A5 'blocked for more than'          # hung_task warnings, with 
 
 - [[What do you use Python for as a DevOps engineer?]] (`#267`): [What do you use Python for as a DevOps engineer?](../scripting-and-automation/what-do-you-use-python-for-as-a-devops-engineer.md)
 - [[When do you use Bash and when do you use Python?]] (`#301`): [When do you use Bash and when do you use Python?](../scripting-and-automation/when-do-you-use-bash-and-when-do-you-use-python.md)
-- [[What is Git?]] (`#46`): [What is Git?](../version-control/what-is-git.md)
+- [[How do you process JSON and YAML on the command line with jq and yq?]] (`#780`): [How do you process JSON and YAML on the command line with jq and yq?](../scripting-and-automation/how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
