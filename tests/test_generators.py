@@ -10,6 +10,7 @@ import json
 import re
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from typing import ClassVar
@@ -90,30 +91,60 @@ class KnowledgeGraphRenderingTests(unittest.TestCase):
         self.assertIn('integrity="sha384-', html)
 
 
+def run_script(script: str, *args: str) -> subprocess.CompletedProcess:
+    return subprocess.run(
+        [sys.executable, str(SCRIPTS / script), *args],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+
 class CommittedOutputIsFreshTests(unittest.TestCase):
     """Each generator's --check mode must pass against the committed files."""
 
-    def run_check(self, script: str, *args: str) -> None:
-        result = subprocess.run(
-            [sys.executable, str(SCRIPTS / script), *args],
-            cwd=REPO_ROOT,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
+    def assert_check_passes(self, script: str, *args: str) -> None:
+        result = run_script(script, *args)
         self.assertEqual(result.returncode, 0, msg=result.stdout + result.stderr)
 
     def test_indexes(self):
-        self.run_check("generate_indexes.py", "--check")
+        self.assert_check_passes("generate_indexes.py", "--check")
 
     def test_knowledge_graph(self):
-        self.run_check("build_knowledge_graph.py", "--check")
+        self.assert_check_passes("build_knowledge_graph.py", "--check")
 
     def test_quiz_feed(self):
-        self.run_check("build_quiz_data.py", "--check", "--quiet")
+        self.assert_check_passes("build_quiz_data.py", "--check", "--quiet")
 
     def test_content_validation(self):
-        self.run_check("validate_content.py", "--quiet")
+        self.assert_check_passes("validate_content.py", "--quiet")
+
+
+class CheckModeDetectsStaleOutputTests(unittest.TestCase):
+    """--check must fail on stale or missing output, and must not write anything."""
+
+    def assert_check_fails(self, script: str, *args: str) -> None:
+        result = run_script(script, "--check", *args)
+        self.assertEqual(result.returncode, 1, msg=result.stdout + result.stderr)
+
+    def test_knowledge_graph_stale_output(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            stale = Path(tmp) / "index.html"
+            stale.write_text("<!DOCTYPE html><p>stale</p>", encoding="utf-8")
+            self.assert_check_fails("build_knowledge_graph.py", "--output", str(stale))
+            self.assertEqual(stale.read_text(encoding="utf-8"), "<!DOCTYPE html><p>stale</p>")
+
+    def test_knowledge_graph_missing_output(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            missing = Path(tmp) / "index.html"
+            self.assert_check_fails("build_knowledge_graph.py", "--output", str(missing))
+            self.assertFalse(missing.exists())
+
+    def test_quiz_feed_missing_output(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assert_check_fails("build_quiz_data.py", "--quiet", "--output-dir", tmp)
+            self.assertEqual(list(Path(tmp).iterdir()), [])
 
 
 if __name__ == "__main__":
