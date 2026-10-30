@@ -18,6 +18,7 @@ tags:
 | Need                                                              | Choose    | Why                                             |
 | ----------------------------------------------------------------- | --------- | ----------------------------------------------- |
 | Standard OLTP, familiar engine, < ~64 TB                          | Cloud SQL | cheapest, standard SQL, easy migration          |
+| PostgreSQL, but heavier OLTP or mixed OLTP + analytics            | AlloyDB   | PostgreSQL-compatible, faster, columnar engine  |
 | Global writes, > single-node throughput, 99.999% multi-region SLA | Spanner   | horizontal scale with strong consistency        |
 | Aggregations over billions of rows                                | BigQuery  | columnar scan, elastic compute                  |
 | Key-value at massive scale, time series                           | Bigtable  | not relational, but the honest answer sometimes |
@@ -25,13 +26,15 @@ tags:
 
 **Cloud SQL's ceiling is a single writer.** Read replicas scale reads; write throughput does not scale horizontally. High availability is a regional standby with failover in the tens of seconds, so applications still need retry and connection handling. Cloud SQL Enterprise Plus raises the performance and HA ceiling, and Cloud SQL Auth Proxy or Private Service Connect keeps access private. Plan for maintenance windows - managed does not mean invisible.
 
-**Spanner's price is design discipline.** You get horizontal scale with external consistency (TrueTime), but schema and key design decide whether you succeed: monotonically increasing keys create hotspots, so use UUIDs or bit-reversed sequences; interleaved tables co-locate parent and child rows for efficient joins. It is not a drop-in PostgreSQL replacement even with the PostgreSQL interface, and its cost floor is much higher than Cloud SQL's - choose it for a scale or consistency requirement you can name.
+**AlloyDB is the middle option interviewers increasingly expect.** It is PostgreSQL-compatible (extensions and drivers work), separates compute from a distributed storage layer, adds an in-memory columnar engine that accelerates analytical queries on live operational data, and offers read pool instances and fast failover. It is still a single-primary design, so it raises Cloud SQL's performance ceiling rather than removing the single-writer limit - that is Spanner's job.
+
+**Spanner's price is design discipline.** You get horizontal scale with external consistency (TrueTime), but schema and key design decide whether you succeed: monotonically increasing keys create hotspots, so use UUIDs or bit-reversed sequences; interleaved tables co-locate parent and child rows for efficient joins. It is not a drop-in PostgreSQL replacement even with the PostgreSQL interface, and although granular instances (from 100 processing units) and the Standard/Enterprise/Enterprise Plus editions have lowered the entry price, its cost floor is still well above Cloud SQL's - choose it for a scale or consistency requirement you can name.
 
 **BigQuery is analytics, not OLTP.** No indexes or point updates in the transactional sense; partitioning and clustering are how you keep scans small. Cost control is the operational discipline: always filter on the partition column, avoid `SELECT *`, set custom quotas per project, and choose between on-demand (per TB scanned) and capacity/slot reservations once volume is predictable. Materialised views and BI Engine handle repeated dashboard queries.
 
 **Analytics without a pipeline.** BigQuery federated queries and Datastream let you analyse Cloud SQL data without building ETL, and change streams from Spanner or CDC into BigQuery is the standard pattern for near-real-time analytics. The interview point is that "which database" is usually answered as "an OLTP store plus a warehouse, with CDC between them" rather than one system doing both.
 
-**Operational realities to mention:** point-in-time recovery and tested restores in Cloud SQL; backup and export policies in BigQuery (a dropped table is recoverable only within the time-travel window, seven days by default); and IAM at dataset/table/column level plus policy tags for column-level security in BigQuery, which is how regulated data is handled.
+**Operational realities to mention:** point-in-time recovery and tested restores in Cloud SQL; backup and export policies in BigQuery (a dropped table is recoverable only within the time-travel window - seven days by default, configurable down to two - plus a further seven-day fail-safe period that only Google support can restore from); and IAM at dataset/table/column level plus policy tags for column-level security in BigQuery, which is how regulated data is handled.
 
 ## Example
 

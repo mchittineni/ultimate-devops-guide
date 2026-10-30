@@ -81,7 +81,7 @@ gcloud secrets create db-pass \
   --replication-policy=automatic \
   --topics=projects/PROJECT_ID/topics/secret-rotation \
   --rotation-period=2592000s \
-  --next-rotation-time="2026-10-01T00:00:00Z"
+  --next-rotation-time="2026-12-01T00:00:00Z" # must be in the future
 
 # The handler adds a new version; least-privilege read access on this one secret only
 printf '%s' "$NEW_PASSWORD" | gcloud secrets versions add db-pass --data-file=-

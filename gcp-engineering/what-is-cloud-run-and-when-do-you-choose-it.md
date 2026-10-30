@@ -17,7 +17,9 @@ tags:
 
 **The contract is simple.** Your container listens on `$PORT`, is stateless, and tolerates being started and stopped at any time. Cloud Run gives you concurrency per instance (default up to 80 simultaneous requests, unlike single-concurrency FaaS models), request timeouts up to an hour, HTTP/2 and gRPC, WebSockets, and traffic splitting between revisions for canary releases.
 
-**Services versus Jobs.** Cloud Run _services_ respond to requests or events; Cloud Run _jobs_ run to completion with parallel task arrays - the right home for batch work that used to be a Kubernetes Job. Both share the same container contract and IAM model.
+**Services versus Jobs.** Cloud Run _services_ respond to requests or events; Cloud Run _jobs_ run to completion with parallel task arrays - the right home for batch work that used to be a Kubernetes Job. Both share the same container contract and IAM model. A third shape, **worker pools**, runs always-on instances with no HTTP endpoint for pull-based work such as Pub/Sub pull or Kafka consumers.
+
+**Two billing models.** Request-based billing (the default) charges only while an instance is handling requests, with CPU throttled outside them; instance-based billing ("CPU always allocated") charges for the instance's whole lifetime but lets background threads run between requests and is cheaper per vCPU-second for steady traffic. Work that continues after the response is sent - async flushing, background tasks - silently stalls under request-based billing, which is a classic Cloud Run bug.
 
 **Scale to zero, and its price.** A cold start pays image pull and application initialisation. Mitigations: minimum instances (paid, keeps warm capacity), startup CPU boost, lean images, and lazy initialisation. For latency-sensitive user-facing APIs, set minimum instances rather than accepting cold starts - the cost is usually small relative to the engineering effort of the alternative.
 
