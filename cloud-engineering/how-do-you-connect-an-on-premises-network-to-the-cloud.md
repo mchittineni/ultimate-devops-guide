@@ -15,11 +15,11 @@ tags:
 
 ## Detail
 
-| Option            | Set-up time  | Bandwidth                 | Latency             | Typical use                               |
-| ----------------- | ------------ | ------------------------- | ------------------- | ----------------------------------------- |
-| Site-to-site VPN  | hours        | up to ~1–5 Gbps aggregate | variable (internet) | dev, small offices, backup path           |
-| Dedicated circuit | weeks–months | 1–100 Gbps                | consistent          | production, migrations, latency-sensitive |
-| SD-WAN / partner  | days–weeks   | flexible                  | good                | many branch sites                         |
+| Option            | Set-up time  | Bandwidth                                   | Latency             | Typical use                               |
+| ----------------- | ------------ | ------------------------------------------- | ------------------- | ----------------------------------------- |
+| Site-to-site VPN  | hours        | up to ~1–5 Gbps aggregate                   | variable (internet) | dev, small offices, backup path           |
+| Dedicated circuit | weeks–months | 1–100 Gbps (400 Gbps at some AWS locations) | consistent          | production, migrations, latency-sensitive |
+| SD-WAN / partner  | days–weeks   | flexible                                    | good                | many branch sites                         |
 
 **Redundancy is the design requirement.** A single circuit is a single point of failure with a multi-week repair time - the standard is two circuits at different physical locations and, ideally, different providers, plus a VPN as a tertiary path. Provider SLAs on private circuits are usually contingent on having redundant connections, which is a detail worth knowing.
 
