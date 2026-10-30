@@ -6,6 +6,7 @@ difficulty: "Beginner"
 tags:
   - devops
   - interview-questions
+  - infrastructure-monitoring
   - monitoring
   - synthetic
   - blackbox
@@ -31,7 +32,7 @@ Real User Monitoring (RUM) only works when users are actively clicking on your s
 
 ### How Synthetic Probes Solve This
 
-Probing agents run in 20 global AWS/GCP regions outside your network:
+Probing agents run from many locations outside your network (hosted services such as Checkly, Datadog Synthetics, or Grafana Cloud Synthetic Monitoring typically offer dozens of public cloud regions, plus private locations inside your own network):
 
 1. **API & Endpoint Checks**: Sends HTTP `GET /health` every 60 seconds; checks status code, response payload string, and TLS certificate expiration.
 2. **Multi-Step Browser Journeys**: Headless Chromium (Playwright/Puppeteer) scripts that:
@@ -68,10 +69,10 @@ test("checkout journey", async ({ page }) => {
 
 ## Interview tips
 
-- Limitation of RUM: zero traffic during catastrophic outages means zero RUM errors emitted.
-- Automated headless browsers (Playwright) executing multi-step user transactions.
-- Probing from multiple global geographic regions.
-- Detecting localized CDN, DNS, and ISP routing failures proactively.
+- Lead with the RUM blind spot: if users cannot reach you, RUM emits nothing - synthetics fill exactly that gap, and also cover low-traffic hours when real-traffic SLIs are too sparse to alert on.
+- Distinguish uptime/API checks (cheap, every minute) from browser journeys (Playwright, expensive, every 5-15 minutes); keep journeys to the few revenue-critical paths.
+- Page only when several locations fail, and track probe results as their own SLI so one flaky region does not burn the real error budget.
+- Treat checks as code: store scripts in Git, run them in CI against staging, and use the same script in production (monitoring-as-code).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

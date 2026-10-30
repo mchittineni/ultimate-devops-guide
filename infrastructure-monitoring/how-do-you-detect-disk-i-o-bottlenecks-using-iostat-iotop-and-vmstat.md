@@ -6,6 +6,7 @@ difficulty: "Intermediate"
 tags:
   - devops
   - interview-questions
+  - infrastructure-monitoring
   - linux
   - disk-io
   - performance
@@ -69,10 +70,10 @@ rate(node_pressure_io_waiting_seconds_total[5m])                         # I/O p
 
 ## Interview tips
 
-- `vmstat` showing high `%wa` (CPU wait) and blocked processes (`b`).
-- `iostat -xz` measuring `%util` (saturation) and `await` (I/O latency in ms).
-- `await` thresholds: single-digit ms for SSD/NVMe vs tens of ms indicating queue buildup.
-- `iotop` to identify the rogue process consuming I/O bandwidth.
+- Walk the funnel: `vmstat` (is anything blocked on I/O?), `iostat -xz` (which device, how slow, how queued?), `iotop`/`pidstat -d` (which process?).
+- Latency (`r_await`/`w_await`) and queue depth (`aqu-sz`) are the real signals; say explicitly that `%util` is only meaningful for single-queue devices.
+- Set expectations by media: sub-millisecond to low single-digit ms for NVMe/SSD, 5-15 ms for spinning disks; tens of ms on SSD means queueing.
+- On cloud, check the volume's provisioned IOPS/throughput and burst credits before blaming the application - throttled volumes show high latency at modest `%util`.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

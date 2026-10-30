@@ -54,7 +54,7 @@ Every alert needs an owner, a runbook link, and a reason it is actionable. An al
 
 ### The hybrid and legacy realities
 
-Legacy estates are rarely uniform, so expect to handle: **hosts you cannot install an agent on** (use SNMP, or an external check), **an application you cannot rebuild** (parse its logs, and use a sidecar or exporter to translate them into metrics), **on-premises plus cloud** (one metrics backend with a remote-write or an agent per site, and consistent labels for `env`, `site`, `service` so a single dashboard spans both), and **Windows services** alongside Linux. Pick one backend and normalise labels early - two monitoring systems with different naming is the outcome you are trying to avoid, and it is the default if each team chooses its own.
+Legacy estates are rarely uniform, so expect to handle: **hosts you cannot install an agent on** (use SNMP, or an external check), **an application you cannot rebuild** (parse its logs, use a sidecar or exporter to translate them into metrics, or attach eBPF auto-instrumentation such as OpenTelemetry eBPF Instrumentation/Beyla on Linux to get per-route RED metrics and spans with no code or restart), **on-premises plus cloud** (one metrics backend with a remote-write or an agent per site, and consistent labels for `env`, `site`, `service` so a single dashboard spans both), and **Windows services** alongside Linux. Pick one backend and normalise labels early - two monitoring systems with different naming is the outcome you are trying to avoid, and it is the default if each team chooses its own.
 
 ### What "done" looks like
 

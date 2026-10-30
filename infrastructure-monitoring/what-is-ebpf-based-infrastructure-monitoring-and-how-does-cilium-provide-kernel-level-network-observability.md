@@ -6,6 +6,7 @@ difficulty: "Advanced"
 tags:
   - devops
   - interview-questions
+  - infrastructure-monitoring
   - monitoring
   - ebpf
   - cilium
@@ -40,7 +41,11 @@ Cilium implements pod networking and network policy with in-kernel eBPF programs
    - L7 visibility: HTTP methods, paths, and status codes (and DNS, gRPC, Kafka) are parsed by a per-node Envoy proxy that eBPF redirects the relevant flows to - sidecar-free, but not purely in-kernel, and it must be enabled per workload via L7 policy or visibility settings.
 3. **Runtime Security (Tetragon)**: Cilium's sister project Tetragon uses eBPF to observe and optionally block process executions and file access inside containers (e.g. an NGINX container spawning `/bin/bash` or touching `/etc/shadow`) in the kernel, before the action completes.
 
-**Trade-offs.** eBPF requires a reasonably modern kernel (features vary by version), debugging the datapath needs new skills (`cilium-dbg`, `bpftool`, Hubble), and L7 visibility still costs proxy CPU. Retaining every flow is expensive, so Hubble flow export is usually filtered or aggregated into metrics.
+### Beyond Cilium: eBPF for application telemetry
+
+eBPF is also used to generate application-level telemetry without code changes. **OpenTelemetry eBPF Instrumentation (OBI)** - Grafana Beyla, donated to OpenTelemetry in 2025 - hooks HTTP/gRPC/SQL calls at the kernel and library level to emit RED metrics and spans for any language; **Pixie** and **Coroot** build service maps the same way; **Parca** and the OpenTelemetry eBPF profiler do continuous CPU profiling. The limitation is depth: eBPF sees protocol boundaries, not business context, so it is a fast baseline that complements, rather than replaces, SDK instrumentation (and encrypted traffic needs uprobes on the TLS library to be visible at L7).
+
+**Trade-offs.** eBPF requires a reasonably modern kernel (features vary by version; tools built on CO-RE need kernel BTF, standard on most distributions since roughly 5.x), debugging the datapath needs new skills (`cilium-dbg`, `bpftool`, Hubble), and L7 visibility still costs proxy CPU. Retaining every flow is expensive, so Hubble flow export is usually filtered or aggregated into metrics.
 
 ## Example
 
@@ -54,16 +59,16 @@ hubble observe --namespace prod --verdict DROPPED --follow
 # HTTP 5xx responses seen at L7 (requires L7 visibility for that workload)
 hubble observe --namespace prod --protocol http --http-status 5+
 
-# DNS lookups that failed
+# DNS requests dropped by network policy (a common cause of "random" timeouts)
 hubble observe --namespace prod --protocol dns --verdict DROPPED
 ```
 
 ## Interview tips
 
-- eBPF executing sandboxed code directly inside the Linux kernel.
-- Bypassing iptables and sidecar proxy resource overhead.
-- Cilium and Hubble providing deep L3/L4/L7 flow observability.
-- Detecting TCP connection resets, drops, and DNS latency with zero app modifications.
+- Explain the safety model: the kernel verifier checks every eBPF program (bounded loops, memory safety) before it is JIT-compiled, which is why it is safer than a kernel module.
+- Be precise about L7: Cilium does L3/L4 in eBPF, but HTTP/gRPC/Kafka parsing goes through a per-node Envoy - "no sidecar" is not the same as "all in the kernel".
+- Hubble's killer use is drop reasons: `hubble observe --verdict DROPPED` answers "is network policy blocking this?" in seconds.
+- Mention eBPF auto-instrumentation (OBI/Beyla) as a way to get RED metrics for services nobody has instrumented, and its limit - no business context.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

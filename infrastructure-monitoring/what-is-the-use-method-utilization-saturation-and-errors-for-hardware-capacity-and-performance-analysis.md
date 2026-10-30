@@ -6,6 +6,7 @@ difficulty: "Beginner"
 tags:
   - devops
   - interview-questions
+  - infrastructure-monitoring
   - monitoring
   - use-method
   - performance
@@ -64,10 +65,10 @@ dmesg -T | grep -iE 'error|fail|oom' | tail   # errors
 
 ## Interview tips
 
-- USE checklist: Utilization (% busy), Saturation (queued work), Errors.
-- Applying USE to all resources: CPU, Memory, Disk, Network.
-- Saturation being the key indicator of performance degradation.
-- Formulated by Brendan Gregg.
+- State it as a procedure, not a definition: list every resource, then check errors first (cheap and conclusive), then saturation, then utilisation.
+- Saturation is the signal that predicts latency; utilisation alone misleads on parallel hardware (NVMe, hyperthreads) and averages hide one hot core.
+- Include software resources - thread pools, connection pools, file descriptors, locks - and container limits (CPU throttling is saturation of a cgroup quota).
+- Pair it with RED: USE finds the bottlenecked resource, RED tells you whether users are hurting. Mention PSI as the modern direct saturation metric on Linux.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
