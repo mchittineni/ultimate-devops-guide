@@ -99,8 +99,9 @@ resource "aws_launch_template" "api" {
 }
 
 resource "aws_autoscaling_group" "api" {
-  min_size = 6
-  max_size = 60
+  min_size            = 6
+  max_size            = 60
+  vpc_zone_identifier = var.private_subnet_ids # an ASG needs subnets (or AZs) to launch into
   launch_template {
     id      = aws_launch_template.api.id
     version = aws_launch_template.api.latest_version # a concrete version, so a change triggers the refresh

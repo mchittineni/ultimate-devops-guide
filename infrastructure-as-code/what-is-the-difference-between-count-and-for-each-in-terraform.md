@@ -92,12 +92,12 @@ variable "services" {
 }
 
 resource "aws_instance" "svc" {
-  for_each      = var.services # keys are identity: api / worker / batch
-  ami           = data.aws_ami.al2023.id
-  instance_type = each.value.instance_type
+  for_each          = var.services # keys are identity: api / worker / batch
+  ami               = data.aws_ami.al2023.id
+  instance_type     = each.value.instance_type
   availability_zone = each.value.az
-  monitoring    = each.value.monitoring
-  tags          = { Name = "svc-${each.key}", Service = each.key }
+  monitoring        = each.value.monitoring
+  tags              = { Name = "svc-${each.key}", Service = each.key }
 }
 
 # addressed by name, so removing "worker" touches only aws_instance.svc["worker"]

@@ -135,10 +135,12 @@ variable "subnets" {
     newbits = number
     public  = optional(bool, false) # optional with a default: safe to add later
   }))
+  # keep newbits equal across tiers: the netnum arithmetic in main.tf assumes it
+  # (for mixed sizes, use the hashicorp/subnets/cidr module to avoid overlaps)
   default = {
     public  = { newbits = 4, public = true }
     private = { newbits = 4 }
-    data    = { newbits = 6 }
+    data    = { newbits = 4 }
   }
 }
 
