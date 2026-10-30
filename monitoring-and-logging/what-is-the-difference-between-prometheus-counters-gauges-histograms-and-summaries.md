@@ -6,6 +6,7 @@ difficulty: "Beginner"
 tags:
   - devops
   - interview-questions
+  - monitoring-and-logging
   - prometheus
   - metrics
   - histogram
@@ -41,7 +42,9 @@ Selecting the right metric type is critical for accurate PromQL querying:
 4. **Summary**: Directly calculates streaming quantiles (p50, p90, p99) on the client side.
    - **Disadvantage**: **Cannot be aggregated** across multiple instances (you cannot mathematically average p99 percentiles from 10 different servers).
 
-**Histogram trade-offs.** Classic histograms only estimate quantiles by interpolating within a bucket, so accuracy depends on choosing buckets around your SLO thresholds, and every bucket is a separate series (cardinality cost). **Native histograms** in Prometheus use exponential buckets stored as a single series, giving better resolution at lower cost, but they need client and server support end to end. Summaries remain useful for a single-instance, fixed-quantile need where aggregation is never required.
+**Histogram trade-offs.** Classic histograms only estimate quantiles by interpolating within a bucket, so accuracy depends on choosing buckets around your SLO thresholds, and every bucket is a separate series (cardinality cost). **Native histograms** in Prometheus use exponential buckets stored as a single series, giving better resolution at lower cost; they are stable since Prometheus 3.8 but still opt-in (`scrape_native_histograms: true`, protobuf scraping), and need client library and remote-write backend support end to end. Queries change slightly: `histogram_quantile(0.99, sum(rate(http_request_duration_seconds[5m])))` with no `_bucket` suffix and no `by (le)`.
+
+**Counter gotchas.** `rate()` handles resets by treating any decrease as a restart, and extrapolates to the window edges, so `increase()` over a short window can return non-integer values. Use a range at least 4x the scrape interval so each window contains enough samples. For gauges use `deriv()` or `delta()`, never `rate()`. Summaries remain useful for a single-instance, fixed-quantile need where aggregation is never required.
 
 ## Example
 
@@ -77,9 +80,9 @@ histogram_quantile(0.99, sum by (le) (rate(http_request_duration_seconds_bucket[
 
 ## Related Concepts
 
+- [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 - [[How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?]] (`#687`): [How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?](../infrastructure-monitoring/how-does-node-exporter-collect-linux-host-hardware-and-os-metrics-for-prometheus.md)
 - [[What is Multi-Window Multi-Burn-Rate alerting and why does it eliminate alert fatigue?]] (`#642`): [What is Multi-Window Multi-Burn-Rate alerting and why does it eliminate alert fatigue?](../site-reliability-engineering/what-is-multi-window-multi-burn-rate-alerting-and-why-does-it-eliminate-alert-fatigue.md)
-- [[What are the Four Golden Signals of Monitoring and how do you monitor them in distributed systems?]] (`#644`): [What are the Four Golden Signals of Monitoring and how do you monitor them in distributed systems?](../site-reliability-engineering/what-are-the-four-golden-signals-of-monitoring-and-how-do-you-monitor-them-in-distributed-systems.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

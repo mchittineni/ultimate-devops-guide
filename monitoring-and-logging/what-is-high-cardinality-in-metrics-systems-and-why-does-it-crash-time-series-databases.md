@@ -6,6 +6,7 @@ difficulty: "Intermediate"
 tags:
   - devops
   - interview-questions
+  - monitoring-and-logging
   - monitoring
   - prometheus
   - cardinality
@@ -28,7 +29,7 @@ quiz:
 
 ## Detail
 
-In time-series databases like Prometheus, M3DB, or Cortex, every unique combination of key-value label pairs constitutes a distinct time-series stream stored in RAM:
+In time-series databases like Prometheus, Mimir, M3DB, or Cortex, every unique combination of key-value label pairs constitutes a distinct time series, and every active series is held in memory:
 
 $$\text{Total Series} = \text{Metric} \times (\text{Label}_1 \text{ values}) \times (\text{Label}_2 \text{ values}) \times \dots$$
 
@@ -67,7 +68,8 @@ scrape_configs:
 ## Interview tips
 
 - Cardinality being the number of unique time-series created by label combinations.
-- Unbounded dimensions (user IDs, IPs, UUIDs) triggering exponential series creation.
+- Unbounded dimensions (user IDs, IPs, UUIDs) multiplying series counts: each label's value count multiplies the total, so the growth is combinatorial, not linear.
+- Histograms amplify it: a classic histogram with 12 buckets on a route label costs 14 series per route per instance (buckets plus `_sum` and `_count`).
 - TSDB memory exhaustion (OOM kill) and inverted index bloating.
 - Moving high-cardinality metadata into logs or distributed traces instead of metric labels.
 
@@ -77,7 +79,7 @@ scrape_configs:
 
 - [[How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?]] (`#687`): [How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?](../infrastructure-monitoring/how-does-node-exporter-collect-linux-host-hardware-and-os-metrics-for-prometheus.md)
 - [[What are the Four Golden Signals of Monitoring and how do you monitor them in distributed systems?]] (`#644`): [What are the Four Golden Signals of Monitoring and how do you monitor them in distributed systems?](../site-reliability-engineering/what-are-the-four-golden-signals-of-monitoring-and-how-do-you-monitor-them-in-distributed-systems.md)
-- [[What is eBPF-based infrastructure monitoring and how does Cilium provide kernel-level network observability?]] (`#689`): [What is eBPF-based infrastructure monitoring and how does Cilium provide kernel-level network observability?](../infrastructure-monitoring/what-is-ebpf-based-infrastructure-monitoring-and-how-does-cilium-provide-kernel-level-network-observability.md)
+- [[What is the USE Method (Utilization, Saturation, and Errors) for hardware capacity and performance analysis?]] (`#686`): [What is the USE Method (Utilization, Saturation, and Errors) for hardware capacity and performance analysis?](../infrastructure-monitoring/what-is-the-use-method-utilization-saturation-and-errors-for-hardware-capacity-and-performance-analysis.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

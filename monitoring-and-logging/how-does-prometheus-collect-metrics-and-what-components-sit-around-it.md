@@ -35,19 +35,20 @@ Pull has real advantages: the monitoring system knows the intended target list, 
 
 ### The components, and what each is actually for
 
-| Component                     | Runs where                       | What it does                                                                                      | When you need it               |
-| ----------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------ |
-| **Prometheus server**         | Central, per cluster or per team | Scrape, store, evaluate rules                                                                     | Always                         |
-| **node_exporter**             | A DaemonSet or on every host     | Host metrics: CPU, memory, disk, filesystem, network, load                                        | Always, for infrastructure     |
-| **kube-state-metrics**        | One Deployment per cluster       | Kubernetes **object state** from the API: Deployment replicas, Pod phase, PVC status, Job success | Always, on Kubernetes          |
-| **cAdvisor** (in the kubelet) | Every node                       | **Container resource usage**: CPU, memory working set, throttling                                 | Built in - no separate install |
-| **Alertmanager**              | 2-3 replicas, clustered          | Dedupe, group, inhibit, silence, route notifications                                              | As soon as you alert           |
-| **Pushgateway**               | One instance                     | Holds metrics pushed by short-lived jobs until scraped                                            | **Only** for batch jobs        |
-| **blackbox_exporter**         | Central                          | Probes URLs, TCP ports, DNS, ICMP, and **TLS expiry** from outside                                | For user-facing endpoints      |
-| **Client library**            | Inside your app                  | Native `/metrics` with your business and RED metrics                                              | For anything you own           |
-| **Grafana**                   | Central                          | Dashboards and ad-hoc querying                                                                    | Always                         |
-| **Thanos / Mimir / Cortex**   | Alongside                        | Long-term storage, global query across Prometheis, downsampling, HA dedupe                        | Beyond one cluster or 15 days  |
-| **Prometheus Operator**       | Per cluster                      | CRDs (`ServiceMonitor`, `PodMonitor`, `PrometheusRule`) so teams declare scraping                 | Kubernetes at any scale        |
+| Component                     | Runs where                       | What it does                                                                                         | When you need it               |
+| ----------------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------ |
+| **Prometheus server**         | Central, per cluster or per team | Scrape, store, evaluate rules                                                                        | Always                         |
+| **node_exporter**             | A DaemonSet or on every host     | Host metrics: CPU, memory, disk, filesystem, network, load                                           | Always, for infrastructure     |
+| **kube-state-metrics**        | One Deployment per cluster       | Kubernetes **object state** from the API: Deployment replicas, Pod phase, PVC status, Job success    | Always, on Kubernetes          |
+| **cAdvisor** (in the kubelet) | Every node                       | **Container resource usage**: CPU, memory working set, throttling                                    | Built in - no separate install |
+| **Alertmanager**              | 2-3 replicas, clustered          | Dedupe, group, inhibit, silence, route notifications                                                 | As soon as you alert           |
+| **Pushgateway**               | One instance                     | Holds metrics pushed by short-lived jobs until scraped                                               | **Only** for batch jobs        |
+| **blackbox_exporter**         | Central                          | Probes URLs, TCP ports, DNS, ICMP, and **TLS expiry** from outside                                   | For user-facing endpoints      |
+| **Client library**            | Inside your app                  | Native `/metrics` with your business and RED metrics                                                 | For anything you own           |
+| **Grafana**                   | Central                          | Dashboards and ad-hoc querying                                                                       | Always                         |
+| **Thanos / Mimir / Cortex**   | Alongside                        | Long-term storage, global query across Prometheis, downsampling, HA dedupe                           | Beyond one cluster or 15 days  |
+| **Prometheus Operator**       | Per cluster                      | CRDs (`ServiceMonitor`, `PodMonitor`, `PrometheusRule`) so teams declare scraping                    | Kubernetes at any scale        |
+| **Agent-mode scrapers**       | Per cluster or edge site         | Prometheus `--agent`, Grafana Alloy, or an OTel Collector: scrape and `remote_write`, no local query | Central backend, many clusters |
 
 **The most-confused pair**: `kube-state-metrics` reports **desired versus actual state of API objects** (`kube_deployment_status_replicas_available`), while **cAdvisor** reports **actual resource consumption of containers** (`container_memory_working_set_bytes`). "Is my Deployment fully rolled out?" is kube-state-metrics; "is this container about to be OOM-killed?" is cAdvisor. You need both.
 
@@ -76,7 +77,7 @@ Prometheus evaluates rules and fires; **Alertmanager** decides what a human sees
 - **Silences** - time-boxed mutes during maintenance, with a matcher and an owner.
 - **Routing** - a tree matching on labels, so `severity: page` goes to PagerDuty and `severity: ticket` goes to Slack, with per-team receivers.
 
-Run it as a **cluster of 2-3 replicas** (they gossip so duplicate alerts from HA Prometheus pairs produce one notification), and always include a **dead-man's-switch**: an always-firing alert whose _absence_ of notification tells you the monitoring pipeline itself has failed. Monitoring that cannot detect its own outage is the most common gap in a real setup.
+Run it as a **cluster of 2-3 replicas** (they gossip so duplicate alerts from HA Prometheus pairs produce one notification), and always include a **dead-man's-switch**: an always-firing alert routed to an external heartbeat service (Healthchecks.io, PagerDuty or Grafana IRM heartbeats, Dead Man's Snitch) that pages when the notifications _stop_ arriving, because a broken Prometheus or Alertmanager cannot report its own death. Monitoring that cannot detect its own outage is the most common gap in a real setup.
 
 ### Installing it, and what "set up" should mean
 
@@ -193,8 +194,8 @@ curl -s http://alertmanager:9093/api/v2/silences | jq '.[] | {matchers, endsAt, 
 ## Related Concepts
 
 - [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
+- [[How do you monitor a Kubernetes cluster end to end?]] (`#772`): [How do you monitor a Kubernetes cluster end to end?](../infrastructure-monitoring/how-do-you-monitor-a-kubernetes-cluster-end-to-end.md)
 - [[What is Infrastructure Monitoring?]] (`#131`): [What is Infrastructure Monitoring?](../infrastructure-monitoring/what-is-infrastructure-monitoring.md)
-- [[What are Monitoring Tools?]] (`#132`): [What are Monitoring Tools?](../infrastructure-monitoring/what-are-monitoring-tools.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -21,7 +21,9 @@ tags:
 
 **Metric types:** counter (monotonic, use with `rate()`), gauge (goes up and down), histogram (bucketed observations, enables percentile estimation), and summary (client-side quantiles).
 
-**Prometheus 3** (released late 2024) brought a new UI, UTF-8 metric and label names, a native OTLP receiver, and remote-write 2.0; native histograms are the direction for latency metrics. Existing PromQL largely carries over, but check the migration guide for changed defaults when upgrading from 2.x.
+**Prometheus 3** (released late 2024) brought a new UI, UTF-8 metric and label names, a native OTLP receiver, and remote-write 2.0. Native histograms became stable in 3.8 (late 2025) but are still opt-in per scrape config (`scrape_native_histograms: true`). Existing PromQL largely carries over, but 3.0 changed some semantics: range selectors are now left-open (a sample exactly at the window start is excluded), the regex `.` also matches newlines, and `le`/`quantile` label values are normalised (`1` becomes `1.0`), so check the migration guide before upgrading from 2.x.
+
+**Single-node by design.** One Prometheus server stores data on local disk with no replication or clustering. High availability is two identical servers scraping the same targets (Alertmanager deduplicates their alerts), and durable, global storage is delegated to a remote-write backend.
 
 **Service discovery** integrates with Kubernetes, EC2, Consul, and file-based configs, so targets appear and disappear automatically as pods are scheduled.
 
@@ -44,7 +46,7 @@ sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total
 
 - Explain the pull model and why it is a deliberate design choice.
 - Cardinality is the top operational pitfall - mention it before you are asked.
-- Prometheus is not durable long-term storage by itself; name Thanos/Mimir/Cortex for that.
+- Prometheus is not durable long-term storage by itself; name Thanos/Mimir/Cortex (or a managed service) for that.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

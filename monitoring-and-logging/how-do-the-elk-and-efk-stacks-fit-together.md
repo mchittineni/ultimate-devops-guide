@@ -229,8 +229,8 @@ curl -s 'http://es:9200/_cat/indices/.kibana*?v'               # Kibana's own ob
 ## Related Concepts
 
 - [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
+- [[How do you monitor a Kubernetes cluster end to end?]] (`#772`): [How do you monitor a Kubernetes cluster end to end?](../infrastructure-monitoring/how-do-you-monitor-a-kubernetes-cluster-end-to-end.md)
 - [[What is Infrastructure Monitoring?]] (`#131`): [What is Infrastructure Monitoring?](../infrastructure-monitoring/what-is-infrastructure-monitoring.md)
-- [[What is Log Management?]] (`#135`): [What is Log Management?](../infrastructure-monitoring/what-is-log-management.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

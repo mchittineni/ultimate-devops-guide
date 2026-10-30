@@ -6,6 +6,7 @@ difficulty: "Beginner"
 tags:
   - devops
   - interview-questions
+  - monitoring-and-logging
   - observability
   - metrics
   - logs
@@ -49,7 +50,7 @@ Modern observability connects these via correlation:
 - **Exemplars** attach a sample trace ID to a metric data point, so a latency spike on a graph links to a real slow request.
 - **Metrics from traces and logs**: span metrics (RED metrics generated from spans) and log-derived metrics mean one signal is often computed from another.
 - **Wide events**: a structured log line with many attributes per request is, functionally, a span - which is why some tools store them the same way.
-- **Profiles** are increasingly treated as a fourth signal; OpenTelemetry has added a profiling signal, though it is less mature than the other three.
+- **Profiles** are increasingly treated as a fourth signal; OpenTelemetry's profiles signal entered public alpha in 2026 (traces, metrics, and logs are stable), and continuous profilers such as Grafana Pyroscope, Parca, and the eBPF-based OpenTelemetry profiling agent already link flame graphs to spans.
 
 The limitation of the "three pillars" framing is that it encourages three separate tools and three bills; the value is in the correlation, not in having all three.
 
@@ -79,17 +80,18 @@ The OpenTelemetry logging instrumentation (`opentelemetry-instrumentation-loggin
 
 ## Interview tips
 
-- Metrics for detection/alerting; Traces for distributed path localization; Logs for root-cause context.
-- Limitations of high-cardinality logs at scale.
-- Correlation using OpenTelemetry TraceID and SpanID injected into logs.
+- Metrics for detection/alerting; traces for localising the failing hop; logs for root-cause context. Say how you move between them, not just what they are.
+- Cost profile differs: metrics are cheap per request because they aggregate; logs and traces cost per event, which is why traces are sampled and logs are filtered.
+- Correlation is the real answer: TraceID/SpanID in every log line, exemplars on latency histograms, and shared resource attributes (`service.name`, `k8s.pod.name`) across all signals.
+- If the interviewer pushes on "pillars", mention the critique: observability is the ability to ask new questions of high-cardinality data, not owning three tools.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
 ## Related Concepts
 
+- [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 - [[What are Monitoring Tools?]] (`#132`): [What are Monitoring Tools?](../infrastructure-monitoring/what-are-monitoring-tools.md)
 - [[What are Monitoring Best Practices?]] (`#133`): [What are Monitoring Best Practices?](../infrastructure-monitoring/what-are-monitoring-best-practices.md)
-- [[What is Application Performance Monitoring?]] (`#134`): [What is Application Performance Monitoring?](../infrastructure-monitoring/what-is-application-performance-monitoring.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

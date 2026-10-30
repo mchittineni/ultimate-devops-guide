@@ -6,6 +6,7 @@ difficulty: "Intermediate"
 tags:
   - devops
   - interview-questions
+  - monitoring-and-logging
   - logging
   - json
   - retention
@@ -19,7 +20,7 @@ quiz:
     - "Converting all JSON logs into XML"
     - "Restricting logging access to senior managers only"
   answer: 2
-  explanation: "Health check probes from Kubernetes readiness and liveness checks execute every few seconds across thousands of pods, generating up to 60% of total cluster log volume with zero diagnostic value."
+  explanation: "Kubernetes liveness and readiness probes hit every pod every few seconds, so their access-log lines are often a large share of cluster log volume while carrying almost no diagnostic value; dropping them at the node agent saves ingest, indexing, and storage."
 ---
 
 # What are structured logging best practices and how do you design log retention policies for cost control?
@@ -54,6 +55,9 @@ Unstructured plain text logs (`2026-09-23 error happened in db`) require expensi
    - **Cold / Glacier Tier (Object Storage S3/GCS)**: Compressed raw archives for 1-7 years for regulatory compliance.
 3. **Drop or Sample Repetitive Success Logs**: In high-throughput services, drop health-check endpoint logs (`/healthz`) at the collector agent before ingestion.
 4. **Keep Sensitive Data Out**: The `user_id` above is a pseudonymous ID, not an email; never log tokens, passwords, or full request bodies. Redact at the source, with collector-side redaction as a safety net.
+5. **Keep high-cardinality fields out of index labels**: in Loki, `trace_id` or `user_id` belong in the log body or structured metadata, not stream labels; in Elasticsearch, map free-text fields as `text` only when you search them, and use `keyword` or disable indexing for the rest.
+
+**Field naming.** Pick one schema and enforce it in the logging library rather than per team: OpenTelemetry semantic conventions (`service.name`, `trace_id`, `http.response.status_code`) or Elastic Common Schema. A consistent schema is what makes cross-service queries and dashboards possible.
 
 **Trade-off.** Retention cuts are irreversible: the 30-day log you deleted is the one a security investigation needs on day 45. Decide retention per log class (debug, access, audit) with security and compliance, rather than one global number chosen for cost.
 
@@ -78,18 +82,18 @@ limits_config:
 
 ## Interview tips
 
-- Structured JSON eliminating regex parsing fragility.
-- Standard metadata fields (timestamp, level, service, trace_id).
-- Dropping health checks and debug logs before transmission.
-- Hot, warm, cold storage tiering to object storage for cost reduction.
+- Lead with why: structured JSON removes regex parsing, which is both expensive and silently fragile when a developer changes a log message.
+- Name the standard fields (timestamp, level, service, trace_id) and say they are enforced by a shared logging library, not by convention.
+- Cost answers in order of impact: do not emit it (log levels), drop it at the agent (health checks, debug), then tier and expire what you keep.
+- Expect the follow-up "who decides retention?" - security and compliance per log class, not the platform team alone; audit logs often have a legal minimum.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
 ## Related Concepts
 
+- [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 - [[What are Monitoring Tools?]] (`#132`): [What are Monitoring Tools?](../infrastructure-monitoring/what-are-monitoring-tools.md)
 - [[What are Monitoring Best Practices?]] (`#133`): [What are Monitoring Best Practices?](../infrastructure-monitoring/what-are-monitoring-best-practices.md)
-- [[What is Application Performance Monitoring?]] (`#134`): [What is Application Performance Monitoring?](../infrastructure-monitoring/what-is-application-performance-monitoring.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
