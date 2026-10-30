@@ -63,7 +63,7 @@ Amazon S3 holds critical backups, database dumps, and enterprise data lakes. Att
 
 ### Real-World Production Scenario
 
-A malicious insider with compromised administrative credentials logs into an organization's AWS account and issues an automated script to delete all customer backup buckets. Because S3 Object Lock in Compliance Mode was enabled with a 90-day retention period, the AWS API returns `Access Denied` on every deletion attempt, completely foiling the ransomware attack.
+A malicious insider with compromised administrative credentials logs into an organization's AWS account and issues an automated script to delete all customer backup buckets. Because S3 Object Lock in Compliance Mode was enabled with a 90-day retention period, the AWS API returns `Access Denied` on every deletion attempt of a locked version, so the destructive half of the attack fails. Note what Object Lock does **not** stop: reading and exfiltrating the data (the double-extortion half - that is IAM, KMS key policies, and GuardDuty S3 protection), or an attacker adding a lifecycle rule that expires current versions (locked versions survive, but unlocked buckets in the same account do not).
 
 ## Example
 
@@ -94,6 +94,7 @@ aws s3api delete-object --bucket acme-backups --key db/2026-09-20.dump --version
 - Explain that MFA Delete requires root credentials to configure and cannot be toggled via the standard AWS Web Console.
 - Mention cross-account replication (with Object Lock on the destination) as the hedge against root credential compromise - replication alone also replicates deletes of new versions if configured to, so the destination needs its own retention.
 - Know the newer threat: SSE-C re-encryption attacks, and the April 2026 default that disables SSE-C on new buckets.
+- Name the indirect deletion paths an attacker uses when `DeleteObject` is blocked - `PutLifecycleConfiguration` with an expiration rule, `PutBucketPolicy` to lock you out, and `PutBucketVersioning` to suspend versioning - and deny them with an SCP for everyone except a break-glass role.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

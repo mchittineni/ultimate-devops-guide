@@ -29,7 +29,7 @@ tags:
 | Typical use | Autoscaling triggers, on-call alerts, dashboards, log search            | Security investigation, forensics, "who deleted the bucket?" | Drift detection, compliance evidence, resource inventory |
 | Cost driver | Ingested/stored log volume, custom metrics, dashboards, alarms          | Management events free (one trail); data events per event    | Per configuration item recorded, per rule evaluation     |
 
-Also in the same family and often confused: **EventBridge** (formerly CloudWatch Events) routes events to targets in near real time - the mechanism for reacting automatically; **X-Ray** is distributed tracing; **Security Hub** aggregates findings from Config, GuardDuty, and Inspector; and **CloudWatch Logs Insights** is the query engine over your logs.
+Also in the same family and often confused: **EventBridge** (formerly CloudWatch Events) routes events to targets in near real time - the mechanism for reacting automatically; **X-Ray** is distributed tracing (instrument with OpenTelemetry via the AWS Distro for OpenTelemetry rather than the legacy X-Ray SDKs, which AWS has moved to maintenance mode; CloudWatch Application Signals builds service-level dashboards and SLOs on top of those traces); **Security Hub** aggregates findings from Config, GuardDuty, and Inspector; and **CloudWatch Logs Insights** is the query engine over your logs.
 
 ### CloudWatch: the part most candidates get wrong
 
@@ -139,7 +139,7 @@ aws configservice select-resource-config \
                 AND configuration.encrypted = false"
 ```
 
-```json
+```jsonc
 // EventBridge: react in near real time instead of noticing at the next audit
 {
   "source": ["aws.config"],

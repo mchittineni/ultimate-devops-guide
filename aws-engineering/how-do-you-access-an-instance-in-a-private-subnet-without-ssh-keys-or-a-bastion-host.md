@@ -117,7 +117,7 @@ resource "aws_vpc_endpoint" "ssm" {
 }
 ```
 
-```json
+```jsonc
 // Tag-scoped session access: this role cannot open a session on production
 {
   "Version": "2012-10-17",

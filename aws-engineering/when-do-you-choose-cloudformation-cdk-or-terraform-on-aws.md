@@ -39,7 +39,7 @@ tags:
 ```hcl
 # Terraform: remote state with locking and a plan gate is the part that matters
 terraform {
-  required_version = "~> 1.9"
+  required_version = ">= 1.10" # use_lockfile needs 1.10+
   backend "s3" {
     bucket       = "acme-tfstate-prod"
     key          = "checkout/terraform.tfstate"

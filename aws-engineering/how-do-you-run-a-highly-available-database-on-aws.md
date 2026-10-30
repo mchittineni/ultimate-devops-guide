@@ -25,7 +25,7 @@ tags:
 
 **Backups are separate from HA.** Multi-AZ protects against infrastructure failure, not against a bad migration or a dropped table. Automated backups with point-in-time recovery, a retention period matching your RPO, snapshot copies to a second region and ideally a second account (protecting against account compromise), and a _restore_ rehearsal - restore time is what your RTO actually depends on, and it is frequently much longer than teams assume.
 
-**Cross-region.** Aurora Global Database offers sub-second-typical replication with promotion in minutes; cross-region read replicas are cheaper and slower. Decide whether you need cross-region disaster recovery or active-active, because active-active with a relational engine means resolving write conflicts, which is an application design problem.
+**Cross-region.** Aurora Global Database offers sub-second-typical replication with promotion in minutes; cross-region read replicas are cheaper and slower. Decide whether you need cross-region disaster recovery or active-active, because active-active with a relational engine means resolving write conflicts, which is an application design problem. The exception is **Aurora DSQL** (GA 2025): a serverless, PostgreSQL-compatible distributed SQL database with active-active multi-Region writes and strong consistency, bought at the price of optimistic concurrency (transactions can fail at commit and must be retried) and a subset of PostgreSQL features - a new design, not a migration target for an existing schema.
 
 ## Example
 
@@ -42,6 +42,8 @@ resource "aws_rds_cluster" "orders" {
   engine                 = "aurora-postgresql"
   engine_version         = data.aws_rds_engine_version.pg.version
   database_name          = "orders"
+  master_username        = "orders_admin"
+  manage_master_user_password = true # password generated and rotated in Secrets Manager
   availability_zones     = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
   db_subnet_group_name   = module.vpc.database_subnet_group_name
 

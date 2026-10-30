@@ -67,7 +67,7 @@ Drift degrades security compliance and can cause future IaC deployments to fail 
 
 ### Real-World Production Scenario
 
-During a security audit, a DevOps team discovers an engineer manually opened port 22 to `0.0.0.0/0` on a production security group to debug an outage. An AWS Config rule running daily drift checks identifies the discrepancy against the CloudFormation template, fires an EventBridge alert, and triggers an automated Lambda function that removes the rogue ingress rule within 60 seconds.
+During a security audit, a DevOps team discovers an engineer manually opened port 22 to `0.0.0.0/0` on a production security group to debug an outage. The daily drift check would only have found it hours later, so the team layers two controls: a change-triggered AWS Config rule (`restricted-ssh`) evaluates the security group within minutes of the edit and, through an SSM Automation remediation, removes the rogue ingress rule; the scheduled stack drift check remains the catch-all that proves every other property still matches the template. Fast, narrow auto-remediation for high-risk drift plus slow, broad detection for everything else is the pattern to describe.
 
 ## Example
 
@@ -75,6 +75,8 @@ During a security audit, a DevOps team discovers an engineer manually opened por
 # 1. Detect drift for a stack and wait for the result
 ID=$(aws cloudformation detect-stack-drift --stack-name payments-prod \
   --query StackDriftDetectionId --output text)
+until [ "$(aws cloudformation describe-stack-drift-detection-status --stack-drift-detection-id "$ID" \
+  --query DetectionStatus --output text)" != "DETECTION_IN_PROGRESS" ]; do sleep 5; done
 aws cloudformation describe-stack-drift-detection-status --stack-drift-detection-id "$ID" \
   --query '[DetectionStatus,StackDriftStatus,DriftedStackResourceCount]'
 
@@ -84,10 +86,12 @@ aws cloudformation describe-stack-resource-drifts --stack-name payments-prod \
   --query 'StackResourceDrifts[].[LogicalResourceId,PropertyDifferences[].PropertyPath]'
 
 # 3. Revert drift safely: a drift-aware change set, reviewed before execution
+CHANGE_SET="revert-drift-$(date +%s)"
 aws cloudformation create-change-set --stack-name payments-prod \
-  --change-set-name revert-drift-$(date +%s) \
+  --change-set-name "$CHANGE_SET" \
   --use-previous-template --deployment-mode REVERT_DRIFT \
   --capabilities CAPABILITY_NAMED_IAM
+aws cloudformation wait change-set-create-complete --stack-name payments-prod --change-set-name "$CHANGE_SET"
 aws cloudformation describe-change-set --stack-name payments-prod \
   --change-set-name "$CHANGE_SET" --query 'Changes[].ResourceChange.[LogicalResourceId,Action]'
 aws cloudformation execute-change-set --stack-name payments-prod --change-set-name "$CHANGE_SET"

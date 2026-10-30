@@ -80,7 +80,7 @@ ECS is simpler, AWS-native, has no control-plane charge, integrates directly wit
 
 ## Example
 
-```json
+```jsonc
 // Task definition: note the TWO roles, secrets by ARN, and a container health check
 {
   "family": "payments",

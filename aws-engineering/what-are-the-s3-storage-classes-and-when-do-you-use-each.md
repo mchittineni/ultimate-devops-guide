@@ -32,7 +32,7 @@ tags:
 
 **Durability versus availability.** 11 nines of durability is a design property of replication within the region and is not a promise that your bucket is reachable - the availability SLA is separate and lower. And durability does not protect against deletion: versioning, MFA delete or bucket policies denying delete, Object Lock for compliance retention, and cross-region replication for regional loss are the actual protections. "S3 is durable, so we do not need backups" is a wrong answer.
 
-**Intelligent-Tiering is the sane default for unknown patterns.** It moves objects between frequent, infrequent, and (optionally) archive tiers automatically with no retrieval fees between the instant-access tiers, charging a small monitoring fee per object. For large objects with unpredictable access it is usually cheaper than guessing; for millions of tiny objects the monitoring fee can dominate.
+**Intelligent-Tiering is the sane default for unknown patterns.** It moves objects between frequent, infrequent, and (optionally) archive tiers automatically with no retrieval fees between the instant-access tiers, charging a small monitoring fee per object. For large objects with unpredictable access it is usually cheaper than guessing. Objects under 128 KB are never monitored or moved - they stay in the frequent tier with no monitoring fee - so Intelligent-Tiering saves nothing on small-object workloads; aggregate those instead.
 
 **Requester-side costs matter as much as storage.** Cross-region and internet egress, request charges (`GET`/`PUT`/`LIST`), and NAT processing when accessing S3 from private subnets without a gateway endpoint. Adding a free S3 gateway VPC endpoint is one of the highest-return single changes on many AWS bills.
 
@@ -43,7 +43,7 @@ tags:
   "Rules": [
     {
       "ID": "logs-tiering",
-      "Filter": { "Prefix": "logs/", "ObjectSizeGreaterThan": 131072 },
+      "Filter": { "And": { "Prefix": "logs/", "ObjectSizeGreaterThan": 131072 } },
       "Status": "Enabled",
       "Transitions": [
         { "Days": 30, "StorageClass": "STANDARD_IA" },

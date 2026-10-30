@@ -26,7 +26,7 @@ tags:
 | Default encryption   | SSE-S3, or SSE-KMS for regulated data               | Encryption at rest without relying on clients to ask                                                    |
 | Bucket policy        | Deny non-TLS, deny unencrypted PUT, restrict source | Enforces the baseline even for principals with broad IAM permissions                                    |
 | Versioning           | Enabled + MFA delete on critical buckets            | Recovers from overwrite and accidental delete; the basis of ransomware recovery                         |
-| Object Lock          | Compliance or Governance mode where required        | Immutability for audit logs and backups; **must be enabled at bucket creation**                         |
+| Object Lock          | Compliance or Governance mode where required        | Immutability for audit logs and backups; requires versioning, can be enabled on existing buckets        |
 | Logging              | Server access logs and/or CloudTrail data events    | Object-level audit trail                                                                                |
 | Public access checks | Access Analyzer for S3, Config rules                | Continuous detection of drift, not a one-off review                                                     |
 
@@ -64,7 +64,7 @@ ExpiredObjectDeleteMarker          tidies versioning artefacts
 
 Three details that separate a real answer:
 
-- **Minimum durations and per-object charges.** Standard-IA and One Zone-IA bill a 30-day minimum; Glacier Flexible 90 days; Deep Archive 180. There is also a per-object transition request charge, so transitioning millions of tiny objects can cost more than the storage you save. The rule of thumb: do not transition objects under ~128 KB.
+- **Minimum durations and per-object charges.** Standard-IA and One Zone-IA bill a 30-day minimum; Glacier Flexible 90 days; Deep Archive 180. There is also a per-object transition request charge, so transitioning millions of tiny objects can cost more than the storage you save. The rule of thumb: do not transition objects under ~128 KB - and since September 2024 lifecycle rules skip objects smaller than 128 KB by default unless you set an `ObjectSizeGreaterThan` filter explicitly.
 - **Versioned buckets need noncurrent rules.** A bucket with versioning on and no noncurrent expiry grows forever, invisibly - "we delete objects but storage keeps rising" is always this. The scenario _"in a versioned bucket, how do you delete objects and all their older versions after 10 days?"_ is answered with `Expiration: 10 days` **plus** `NoncurrentVersionExpiration: 10 days` **plus** `ExpiredObjectDeleteMarker: true` (in its own rule, because it cannot share an `Expiration` with `Days`).
 - **Intelligent-Tiering** as the default for unpredictable access patterns: it moves objects between frequent and infrequent tiers automatically for a small monitoring fee per object, with no retrieval charges, which removes the need to guess. Prefer it over hand-written transitions unless you know the access pattern.
 

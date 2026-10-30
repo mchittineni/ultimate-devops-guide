@@ -79,7 +79,7 @@ The management (payer) account holds nothing but Organizations, billing, and the
 
 - Lead with "the account is the blast-radius boundary" - it justifies everything else.
 - Naming the log-archive account that workload accounts cannot write to shows you think about an attacker with admin.
-- Expect: "how do you stop an engineer spinning up GPUs in an unapproved region?" - a region-deny SCP plus budgets in the account baseline.
+- Expect: "how do you stop an engineer spinning up GPUs in an unapproved region?" - a region-deny SCP plus budgets in the account baseline. Note that the `NotAction` list of global services in the example is abbreviated; start from AWS's published region-deny example (or Control Tower's Region deny control), or you will break global services such as billing and support tooling.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

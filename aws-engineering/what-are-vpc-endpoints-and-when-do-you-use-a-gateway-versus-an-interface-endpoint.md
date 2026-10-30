@@ -88,7 +88,7 @@ resource "aws_vpc_endpoint" "s3" {
       Principal = "*"
       Action    = ["s3:GetObject", "s3:PutObject", "s3:ListBucket"]
       Resource  = ["arn:aws:s3:::acme-*", "arn:aws:s3:::acme-*/*",
-                   "arn:aws:s3:::prod-*-ecr-layers/*"]  # ECR layer bucket
+                   "arn:aws:s3:::prod-${var.region}-starport-layer-bucket/*"]  # where ECR serves image layers
     }]
   })
 }
@@ -125,7 +125,7 @@ resource "aws_security_group" "endpoints" {
 }
 ```
 
-```json
+```jsonc
 // Bucket policy: require that access arrives through OUR endpoint.
 // Leaked credentials used from outside the VPC then fail.
 {

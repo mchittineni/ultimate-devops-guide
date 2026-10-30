@@ -62,7 +62,7 @@ In Kubernetes, EFS is how you get `ReadWriteMany` - the answer to "how do you im
 
 ### S3 is not a filesystem
 
-Worth stating explicitly, because treating it as one causes real problems: there are no real directories (only key prefixes), no partial writes or appends (you replace the whole object), rename is a copy-then-delete, listing a huge prefix is paginated and slow, and consistency is strong for reads after writes but there is no locking. Tools that mount S3 as a filesystem (`s3fs`, Mountpoint for Amazon S3) exist and are genuinely useful for read-heavy analytics, but they cannot make S3 behave like a POSIX filesystem for a database - do not put a database on it.
+Worth stating explicitly, because treating it as one causes real problems: there are no real directories (only key prefixes), no partial writes or appends (you replace the whole object), rename is a copy-then-delete, listing a huge prefix is paginated and slow, and consistency is strong for reads after writes but there is no file locking - the nearest thing is **conditional writes** (`If-None-Match` / `If-Match` on `PutObject`), which give compare-and-swap semantics and are what Terraform's native S3 state locking (`use_lockfile`) relies on. The exception that proves the rule is **S3 Express One Zone** (directory buckets): single-digit-millisecond latency, appends to existing objects, and atomic rename - but single-AZ, so it is a performance tier, not a filesystem replacement. Tools that mount S3 as a filesystem (`s3fs`, Mountpoint for Amazon S3) exist and are genuinely useful for read-heavy analytics, but they cannot make S3 behave like a POSIX filesystem for a database - do not put a database on it.
 
 ### The other options, so the answer is complete
 
@@ -76,7 +76,7 @@ Worth stating explicitly, because treating it as one causes real problems: there
 Choosing, on a real system
 
   Boot volume, PostgreSQL data directory     -> EBS gp3          (low latency, one writer)
-  Redis persistence / build scratch space    -> instance store   (ephemeral, fastest)
+  Cache data / build scratch space           -> instance store   (ephemeral, fastest)
   User uploads read by 12 app replicas       -> S3               (API access, cheapest)
   Legacy CMS that writes to /var/www/shared  -> EFS              (many writers, POSIX)
   Windows app needing an SMB share           -> FSx for Windows  (AD-integrated SMB)

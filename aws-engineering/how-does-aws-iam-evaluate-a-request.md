@@ -25,7 +25,7 @@ tags:
 
 **The mental model is intersection, not union.** Adding a policy can only ever grant within what the surrounding boundaries already permit. This is why an administrator with `AdministratorAccess` still cannot act if an SCP denies the action - a fact that surprises people during incidents.
 
-**Cross-account needs both sides.** For account B's role to read a bucket in account A, account A's bucket policy must allow the principal _and_ account B's identity policy must allow the action. One side alone is insufficient. This symmetry is the most commonly missed detail in interviews.
+**Cross-account needs both sides.** For account B's role to read a bucket in account A, account A's bucket policy must allow the principal _and_ account B's identity policy must allow the action. One side alone is insufficient. This symmetry is the most commonly missed detail in interviews. The contrast completes it: **within one account**, an `Allow` in _either_ the identity policy or the resource policy is enough - except for KMS key policies and IAM role trust policies, which must allow the principal themselves.
 
 **Roles over users, always.** Human access via identity-centre federation with short-lived sessions; workload access via instance profiles, EKS IAM Roles for Service Accounts (or EKS Pod Identity), or OIDC federation from CI. Long-lived access keys are the root cause of a large share of cloud incidents; if one must exist, scope it narrowly and rotate it automatically.
 

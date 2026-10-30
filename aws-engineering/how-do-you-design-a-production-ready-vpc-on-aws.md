@@ -19,7 +19,7 @@ tags:
 
 **Availability Zones and NAT cost.** Use three AZs for quorum-based systems and to survive one AZ loss without capacity panic. With classic zonal NAT gateways, one per AZ avoids cross-AZ data charges and removes a single AZ as a dependency for all egress; the **regional NAT gateway** mode (late 2025) gives the same per-AZ behaviour as a single resource that expands into the AZs where you have workloads and needs no public subnet - but each one costs an hourly fee plus per-GB processing, and NAT data processing is a top-three surprise on many AWS bills. Gateway endpoints for S3 and DynamoDB are free and remove that traffic from NAT entirely; interface endpoints for other services cost per hour per AZ but often still win against NAT charges.
 
-**CIDR planning is the decision you cannot undo cheaply.** Pick a /16 from RFC 1918 space that does not overlap your on-premises networks, other accounts, or acquisitions. Subnets should be large enough for EKS, where each Pod consumes a VPC IP address with the AWS VPC CNI - /20 per AZ for a Pod subnet is common, and IP exhaustion is the single most frequent EKS scaling wall. Secondary CIDRs can be added later, but not overlapping ones.
+**CIDR planning is the decision you cannot undo cheaply.** Pick a /16 from RFC 1918 space that does not overlap your on-premises networks, other accounts, or acquisitions. Subnets should be large enough for EKS, where each Pod consumes a VPC IP address with the AWS VPC CNI - /20 per AZ for a Pod subnet is common, and IP exhaustion is the single most frequent EKS scaling wall. The mitigations are a secondary CIDR from `100.64.0.0/10` with VPC CNI custom networking (Pods get addresses outside the routable range), prefix delegation (a /28 per ENI slot, which raises Pod density per node), or an IPv6 cluster. Secondary CIDRs can be added later, but not overlapping ones - and central allocation with **VPC IPAM** is how you keep it that way across accounts.
 
 **Security groups over NACLs.** Security groups are stateful and can reference other security groups, so "the app tier may reach the database tier" is expressed as identity rather than as addresses that change. Network ACLs are stateless, per-subnet, and mainly useful as a coarse, rarely-changed guardrail (for example, denying a known-bad range).
 
@@ -45,11 +45,31 @@ module "vpc" {
   single_nat_gateway     = false # one per AZ: no cross-AZ charge, no shared failure
   one_nat_gateway_per_az = true
 
-  enable_flow_log                      = true
-  flow_log_destination_type            = "s3"
-  create_flow_log_cloudwatch_log_group = false
+  enable_flow_log           = true
+  flow_log_destination_type = "s3"
+  flow_log_destination_arn  = aws_s3_bucket.flow_logs.arn # required for the S3 destination
 
   tags = { environment = "prod", owner = "platform" }
+}
+
+# Gateway endpoints are a separate submodule in v6 of the module
+module "vpc_endpoints" {
+  source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
+  version = "~> 6.0"
+
+  vpc_id = module.vpc.vpc_id
+  endpoints = {
+    s3 = {
+      service         = "s3"
+      service_type    = "Gateway"
+      route_table_ids = concat(module.vpc.private_route_table_ids, module.vpc.database_route_table_ids)
+    }
+    dynamodb = {
+      service         = "dynamodb"
+      service_type    = "Gateway"
+      route_table_ids = module.vpc.private_route_table_ids
+    }
+  }
 }
 ```
 
