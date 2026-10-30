@@ -31,7 +31,7 @@ tags:
 - **Caching and artifacts** - speed up builds and pass outputs between jobs.
 - **Concurrency groups** - cancel superseded runs and serialise deployments.
 
-**Security.** Set `permissions:` explicitly at the minimum required - repositories and organisations created before February 2023 still default the `GITHUB_TOKEN` to read-write, and even a read-only default is broader than most jobs need. Pin third-party actions to a commit SHA, not a mutable tag. Be extremely careful with `pull_request_target`, which runs with write access in the context of a fork's code. Restrict which actions are allowed at the organisation level.
+**Security.** Set `permissions:` explicitly at the minimum required - repositories and organisations created before February 2023 still default the `GITHUB_TOKEN` to read-write, and even a read-only default is broader than most jobs need. Pin third-party actions to a commit SHA, not a mutable tag. Be extremely careful with `pull_request_target`: it runs in the context of the base repository, with its secrets and a write-capable token, so a workflow that checks out and builds the fork's code under it hands those credentials to whoever opened the pull request (the "pwn request" pattern). Treat anything from a fork as untrusted input, including branch names and PR titles interpolated into `run:` steps, which are a script-injection vector - pass them through `env:` instead. Restrict which actions are allowed at the organisation level.
 
 ## Example
 
@@ -65,7 +65,7 @@ jobs:
 ## Interview tips
 
 - OIDC instead of stored cloud keys is the security answer interviewers are listening for.
-- Pinning actions to a SHA is a supply-chain detail that distinguishes serious users.
+- Pinning actions to a SHA is a supply-chain detail that distinguishes serious users - the March 2025 `tj-actions/changed-files` compromise, where the attacker repointed existing version tags at malicious code that dumped CI secrets into workflow logs, is the example to cite.
 - Environments with required reviewers is how approval gates are done properly - not a manual step in a script.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

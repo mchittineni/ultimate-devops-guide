@@ -49,7 +49,7 @@ spec:
       required: [name, owner]
       properties:
         name: { type: string, pattern: "^[a-z][a-z0-9-]{2,30}$" }
-        owner: { type: string, ui:field: OwnerPicker }
+        owner: { type: string, "ui:field": OwnerPicker }
   steps:
     - id: fetch
       action: fetch:template

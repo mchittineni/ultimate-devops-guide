@@ -66,7 +66,7 @@ Internal targets that sit behind it
 
 - [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
 - [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What is the difference between DevOps and Agile?]] (`#784`): [What is the difference between DevOps and Agile?](../core-devops-concepts/what-is-the-difference-between-devops-and-agile.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

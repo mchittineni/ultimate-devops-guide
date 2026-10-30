@@ -91,7 +91,7 @@ spec:
 
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What are the Three Ways of DevOps?]] (`#783`): [What are the Three Ways of DevOps?](../core-devops-concepts/what-are-the-three-ways-of-devops.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

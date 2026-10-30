@@ -26,7 +26,7 @@ tags:
 **Sampling.** Tracing every request at scale is prohibitively expensive.
 
 - **Head-based** - the decision is made at the start, propagated through the trace. Cheap and simple, but you may discard the rare failing request.
-- **Tail-based** - buffer the complete trace, then decide. Lets you keep 100% of errors and slow requests while sampling the boring ones. More useful, and considerably more infrastructure.
+- **Tail-based** - buffer the complete trace, then decide. Lets you keep 100% of errors and slow requests while sampling the boring ones. More useful, and considerably more infrastructure: in the OpenTelemetry Collector it is the `tail_sampling` processor, and every span of a trace must reach the same Collector instance, so a scaled-out deployment needs a first tier using the `loadbalancing` exporter to route by trace ID.
 
 **Practices:** instrument with OpenTelemetry rather than a vendor SDK; propagate context through asynchronous boundaries (queues and background jobs are where propagation usually breaks); add business attributes such as tenant, user tier, and feature-flag state to spans, which is what makes traces answer product-shaped questions; and include `trace_id` in every log line so a trace links directly to its logs.
 
