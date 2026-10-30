@@ -41,7 +41,7 @@ Executes the following automated phases:
 1. **`dependency`**: Downloads required Galaxy collections and roles.
 2. **`cleanup` / `destroy`**: Clears any leftovers from a previous run.
 3. **`syntax`**: `ansible-playbook --syntax-check` on the converge playbook.
-4. **`create`** and **`prepare`**: Launch clean ephemeral instances (Podman/Docker containers or VMs via the `molecule-plugins` drivers, or your own playbooks with the default `delegated` driver) and prepare them.
+4. **`create`** and **`prepare`**: Launch clean ephemeral instances (Podman/Docker containers or VMs via the `molecule-plugins` drivers, or your own `create.yml`/`destroy.yml` playbooks with the built-in `default` driver, formerly called `delegated`) and prepare them.
 5. **`converge`**: Applies the role against the instances.
 6. **`idempotence`**: Runs the role a second time and **fails if any task reports 'changed'**!
 7. **`side_effect`** (optional): Simulate failures - restart a service, kill a node - before verifying.

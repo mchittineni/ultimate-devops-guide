@@ -55,7 +55,8 @@ ansible-playbook -i inventories/prod patch.yml --limit web   # hosts drift if a 
 # Immutable: bake a new image, then replace instances
 packer build -var "git_sha=$(git rev-parse --short HEAD)" web.pkr.hcl   # new AMI
 terraform apply -var "web_ami_id=ami-0new123"                           # new launch template version
-aws autoscaling start-instance-refresh --auto-scaling-group-name web   --preferences '{"MinHealthyPercentage": 90}'                          # roll the fleet
+aws autoscaling start-instance-refresh --auto-scaling-group-name web \
+  --preferences '{"MinHealthyPercentage": 90}'                          # roll the fleet
 # rollback = apply the previous AMI id and refresh again
 ```
 
