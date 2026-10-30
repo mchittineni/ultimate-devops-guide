@@ -14,7 +14,7 @@ tags:
 
 # How do you debug a service mesh that is breaking service-to-service traffic?
 
-**Short answer:** Work out which layer is refusing the request, because a mesh adds three new ones. Read the **sidecar's own response flags** first - Envoy tells you exactly why it failed (`UF` upstream failure, `UO` overflow/circuit-breaker, `URX` retry limit, `UAEX` authorization denied, `NR` no route) - then check, in order: **was the sidecar injected at all** (an uninjected Pod cannot participate in mTLS and gets connection resets), **is the mTLS mode consistent** (`STRICT` on one side and plain text on the other is the classic outage), **does an `AuthorizationPolicy` deny it** (they are default-allow until one selects the workload, then default-deny for that workload), and **do `VirtualService`/`DestinationRule` actually route where you think** - `istioctl proxy-config` shows the effective configuration rather than your intent. The single most useful habit: compare the _intended_ config with the _programmed_ config, because a mesh failure is nearly always a divergence between the two.
+**Short answer:** Work out which layer is refusing the request, because a mesh adds three new ones. Read the **sidecar's own response flags** first - Envoy tells you exactly why it failed (`UF` upstream failure, `UO` overflow/circuit-breaker, `URX` retry limit, `NR` no route, `UAEX` denied by external authorization - and a `403` whose response details read `rbac_access_denied_matched_policy[...]` is an `AuthorizationPolicy` denial) - then check, in order: **was the sidecar injected at all** (an uninjected Pod cannot participate in mTLS and gets connection resets), **is the mTLS mode consistent** (`STRICT` on one side and plain text on the other is the classic outage), **does an `AuthorizationPolicy` deny it** (they are default-allow until one selects the workload, then default-deny for that workload), and **do `VirtualService`/`DestinationRule` actually route where you think** - `istioctl proxy-config` shows the effective configuration rather than your intent. The single most useful habit: compare the _intended_ config with the _programmed_ config, because a mesh failure is nearly always a divergence between the two.
 
 ## Detail
 
@@ -29,15 +29,17 @@ tags:
 
 Envoy access logs carry a response-flag field that names the failure. Learn the common ones:
 
-| Flag            | Meaning                                     | Where to look                                           |
-| --------------- | ------------------------------------------- | ------------------------------------------------------- |
-| `UF`, `UC`      | Upstream connection failure / termination   | Backend down, wrong port, mTLS mismatch                 |
-| `UO`            | Upstream overflow - circuit breaker tripped | `DestinationRule` connection pool limits                |
-| `URX`           | Retry limit exceeded                        | Retry policy plus a genuinely failing upstream          |
-| `UT`            | Upstream request timeout                    | `VirtualService` timeout versus real dependency latency |
-| `NR`            | No route configured                         | `VirtualService` host/port mismatch                     |
-| `RBAC` / `UAEX` | Denied by authorization policy              | `AuthorizationPolicy`                                   |
-| `DC`            | Downstream connection termination           | Client gave up, or its own timeout is shorter           |
+| Flag       | Meaning                                        | Where to look                                            |
+| ---------- | ---------------------------------------------- | -------------------------------------------------------- |
+| `UF`, `UC` | Upstream connection failure / termination      | Backend down, wrong port, mTLS mismatch                  |
+| `UO`       | Upstream overflow - circuit breaker tripped    | `DestinationRule` connection pool limits                 |
+| `URX`      | Retry limit exceeded                           | Retry policy plus a genuinely failing upstream           |
+| `UT`       | Upstream request timeout                       | `VirtualService` timeout versus real dependency latency  |
+| `NR`       | No route configured                            | `VirtualService` host/port mismatch                      |
+| `UAEX`     | Denied by external authorization (`ext_authz`) | `CUSTOM` `AuthorizationPolicy` / the external authorizer |
+| `DC`       | Downstream connection termination              | Client gave up, or its own timeout is shorter            |
+
+Note that an `ALLOW`/`DENY` `AuthorizationPolicy` rejection has **no** response flag of its own: it shows as `403` (HTTP) or a reset connection (TCP) with `%RESPONSE_CODE_DETAILS%` = `rbac_access_denied_matched_policy[none]` (or the name of the matching `DENY` policy) - so log that field too.
 
 A `503` with `UF` and an `upstream_reset_before_response_started{connection_failure,TLS_error}` message is almost always mTLS: one side speaks TLS and the other does not.
 
@@ -131,7 +133,7 @@ spec:
 
 ## Interview tips
 
-- Say first that a mesh adds layers, so the job is identifying **which** layer refused the request - and that Envoy's response flags tell you directly. Naming `UF`, `UO`, `NR`, `RBAC` is the single strongest signal in this answer.
+- Say first that a mesh adds layers, so the job is identifying **which** layer refused the request - and that Envoy's response flags tell you directly. Naming `UF`, `UO`, `NR`, `UAEX`, and the `rbac_access_denied_matched_policy` response detail is the single strongest signal in this answer.
 - "Compare intended configuration with programmed configuration" is the sentence that shows mesh experience. `istioctl proxy-status` and `proxy-config` are how you do it.
 - The mTLS `STRICT` migration story is the best war story: go `PERMISSIVE` first, verify from telemetry, then `STRICT` per namespace. Straight to `STRICT` breaks every uninjected client.
 - Get the `AuthorizationPolicy` semantics exactly right - default-allow until one policy selects the workload, then default-deny for it. Mention the ingress gateway's own identity as the thing people forget to allow.
@@ -145,8 +147,8 @@ spec:
 ## Related Concepts
 
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
-- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
