@@ -29,6 +29,12 @@ Picture an outage on a timeline:
 
 **How they are set.** Not by engineers guessing - by business impact analysis. Quantify cost per hour of downtime and cost per unit of lost data (revenue, regulatory exposure, reputational harm), then compare with the cost of each DR strategy. Different systems in the same company legitimately get different targets: a payments ledger might be RPO 0 / RTO 5 min, while an internal reporting tool is RPO 24h / RTO 48h.
 
+**Doing the math.** Interviewers often ask you to check a design against the targets, so work from the worst case:
+
+- **Worst-case RPO** = backup (or snapshot) interval + time to complete and copy the backup off-site. Example: snapshots every 4 hours that take 20 minutes to copy to the DR region give a worst-case RPO of about 4 h 20 min, so they **fail** a 1-hour RPO. Continuous log shipping every 5 minutes (RDS point-in-time recovery) passes it. With async replication, RPO is the replication lag at the moment of failure, so alert on lag and do not quote the average.
+- **RTO is a sum of phases**: detect + decide/declare + recover (restore or promote) + validate + shift traffic (including DNS TTL). Example: 5 min to detect, 15 min to get a decision, 90 min to restore a 2 TB database at a measured ~400 MB/s, 15 min of validation, and 5 min for traffic to move add up to **about 2 h 10 min**. That blows a 1-hour RTO even though the "restore" step alone looks fine. The decision step is the one teams forget to time.
+- **Restore throughput is the hidden term.** Measure it in a real test. Snapshot restores on many block stores are lazy-loaded, so a volume is "available" long before it performs at full speed unless you pre-warm it (for example with EBS fast snapshot restore).
+
 **Related terms:** MTD (maximum tolerable downtime, of which RTO is a component), and the actual measured RPA/RTA - what you achieved in the last test versus what you promised.
 
 ## Example
@@ -44,6 +50,7 @@ Picture an outage on a timeline:
 - Emphasise that these are _business_ decisions costed by engineering, not aspirations.
 - Note the synchronous-replication latency cost - it shows you understand the trade-off, not just the term.
 - Mention measuring actual achieved values during DR tests, and reporting the gap.
+- Be ready to do the arithmetic: worst-case RPO is the backup interval plus copy time, and RTO is detect plus decide plus restore plus validate plus traffic shift. Leaving out the human decision time is the classic miss.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
