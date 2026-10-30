@@ -28,10 +28,10 @@ WIKILINK_RE = re.compile(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]")
 SHORT_ANSWER_RE = re.compile(r"^\*\*Short answer:\*\*\s*(.+?)\s*$", re.M)
 
 DIFFICULTY_COLORS = {
-    "Beginner": "#10b981",      # Emerald Green
+    "Beginner": "#10b981",  # Emerald Green
     "Intermediate": "#f59e0b",  # Amber Yellow
-    "Advanced": "#ef4444",      # Rose Red
-    "Topic": "#06b6d4",         # Cyan / Terminal Teal
+    "Advanced": "#ef4444",  # Rose Red
+    "Topic": "#06b6d4",  # Cyan / Terminal Teal
 }
 
 GROUP_COLORS = {
@@ -83,17 +83,19 @@ def build_graph_data(repo_root: Path = REPO_ROOT) -> dict:
     # 1. Add Topic Nodes
     for t in topics:
         t_group = meta.get(t.directory, {}).get("group", "Other")
-        nodes.append({
-            "id": f"topic:{t.directory}",
-            "label": t.title,
-            "group": "Topic Hub",
-            "section": t_group,
-            "val": 16,
-            "color": GROUP_COLORS.get(t_group, DIFFICULTY_COLORS["Topic"]),
-            "url": f"./{t.directory}/README.md",
-            "category": t.title,
-            "type": "topic"
-        })
+        nodes.append(
+            {
+                "id": f"topic:{t.directory}",
+                "label": t.title,
+                "group": "Topic Hub",
+                "section": t_group,
+                "val": 16,
+                "color": GROUP_COLORS.get(t_group, DIFFICULTY_COLORS["Topic"]),
+                "url": f"./{t.directory}/README.md",
+                "category": t.title,
+                "type": "topic",
+            }
+        )
 
     # Path to Node ID map and Title to Path map
     path_to_id = {q.path.resolve(): f"q:{q.id}" for q in questions}
@@ -123,40 +125,38 @@ def build_graph_data(repo_root: Path = REPO_ROOT) -> dict:
                 "options": [
                     clean_ans_summary,
                     f"It represents an obsolete anti-pattern prohibited in modern {q.category} architectures.",
-                    f"It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
-                    f"It strictly applies only to single-node legacy servers without distributed high availability."
+                    "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+                    "It strictly applies only to single-node legacy servers without distributed high availability.",
                 ],
                 "answer": 1,
-                "explanation": f"{q.title}: {clean_ans}"
+                "explanation": f"{q.title}: {clean_ans}",
             }
 
-        nodes.append({
-            "id": node_id,
-            "label": f"#{q.id} {q.title}",
-            "title": q.title,
-            "group": q.difficulty,
-            "section": t_group,
-            "val": 6 if q.difficulty == "Advanced" else (4 if q.difficulty == "Intermediate" else 3),
-            "color": DIFFICULTY_COLORS.get(q.difficulty, "#3b82f6"),
-            "url": f"./{q.path.relative_to(repo_root)}",
-            "category": q.category,
-            "difficulty": q.difficulty,
-            "tags": q.tags,
-            "type": "question",
-            "quiz": quiz_data
-        })
-
+        nodes.append(
+            {
+                "id": node_id,
+                "label": f"#{q.id} {q.title}",
+                "title": q.title,
+                "group": q.difficulty,
+                "section": t_group,
+                "val": 6 if q.difficulty == "Advanced" else (4 if q.difficulty == "Intermediate" else 3),
+                "color": DIFFICULTY_COLORS.get(q.difficulty, "#3b82f6"),
+                "url": f"./{q.path.relative_to(repo_root)}",
+                "category": q.category,
+                "difficulty": q.difficulty,
+                "tags": q.tags,
+                "type": "question",
+                "quiz": quiz_data,
+            }
+        )
 
         # Connect Question to its Topic Node
         edge_key = (topic_node_id, node_id, "topic")
         if edge_key not in edge_set:
             edge_set.add(edge_key)
-            edges.append({
-                "source": topic_node_id,
-                "target": node_id,
-                "type": "topic-link",
-                "color": "rgba(6, 182, 212, 0.4)"
-            })
+            edges.append(
+                {"source": topic_node_id, "target": node_id, "type": "topic-link", "color": "rgba(6, 182, 212, 0.4)"}
+            )
 
         # 3. Extract Explicit Markdown Links and [[wikilinks]] between Questions
         for linked_path in extract_internal_links(q.path, q.body, title_to_path_map):
@@ -165,19 +165,21 @@ def build_graph_data(repo_root: Path = REPO_ROOT) -> dict:
                 e_key = (node_id, target_id, "cross-link")
                 if e_key not in edge_set and (target_id, node_id, "cross-link") not in edge_set:
                     edge_set.add(e_key)
-                    edges.append({
-                        "source": node_id,
-                        "target": target_id,
-                        "type": "cross-link",
-                        "color": "rgba(59, 130, 246, 0.6)"
-                    })
+                    edges.append(
+                        {
+                            "source": node_id,
+                            "target": target_id,
+                            "type": "cross-link",
+                            "color": "rgba(59, 130, 246, 0.6)",
+                        }
+                    )
 
     # 4. Connect Questions sharing identical specific tags (Tag Similarity Edges)
     tag_map: dict[str, list[str]] = {}
     for q in questions:
         for tag in q.tags:
             if tag in {"devops", "interview-questions"}:
-                continue # Skip generic tags
+                continue  # Skip generic tags
             tag_map.setdefault(tag, []).append(f"q:{q.id}")
 
     for tag, q_ids in tag_map.items():
@@ -188,12 +190,9 @@ def build_graph_data(repo_root: Path = REPO_ROOT) -> dict:
                     e_key = (src, tgt, f"tag:{tag}")
                     if e_key not in edge_set and (tgt, src, f"tag:{tag}") not in edge_set:
                         edge_set.add(e_key)
-                        edges.append({
-                            "source": src,
-                            "target": tgt,
-                            "type": "tag-link",
-                            "color": "rgba(245, 158, 11, 0.2)"
-                        })
+                        edges.append(
+                            {"source": src, "target": tgt, "type": "tag-link", "color": "rgba(245, 158, 11, 0.2)"}
+                        )
 
     return {"nodes": nodes, "links": edges}
 
@@ -204,6 +203,19 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DevOps & Cloud Engineering Knowledge Graph</title>
+  <meta name="description" content="{description}">
+  <meta name="theme-color" content="#eef2f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0f19" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="{site_url}">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DevOps & Cloud Engineering Knowledge Graph">
+  <meta property="og:description" content="{description}">
+  <meta property="og:url" content="{site_url}">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap">
 
   <!-- Resolve the theme before first paint so the page never flashes the
        wrong palette. Must stay inline and ahead of the stylesheet. -->
@@ -223,8 +235,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js" integrity="sha384-SIcVySj+Cd1g+cwoLNCdr/osXU15HLXCxfaSzFNkZICYeKS7I2YxhyggCijT8JHA" crossorigin="anonymous"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
-
     /* ---------------------------------------------------------------
        Theme tokens. Light is the bare :root default; dark is layered on
        twice so both the "system" default and an explicit toggle win:
@@ -350,7 +360,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       overflow: hidden;
       -webkit-text-size-adjust: 100%;
     }}
-    
+
     /* Header Panel */
     #header {{
       position: absolute;
@@ -598,6 +608,25 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       width: 100%;
       height: 100vh;
       height: 100dvh;
+    }}
+
+    /* Shown when the CDN library or WebGL is unavailable, so the page never
+       renders as a silent blank canvas. */
+    #graph-fallback, #graph-noscript {{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 420px;
+      padding: 18px 22px;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      color: var(--text-body);
+      text-align: center;
+    }}
+    #graph-fallback a, #graph-noscript a {{
+      color: var(--accent-fg);
     }}
 
     /* ---------------------------------------------------------------
@@ -1005,11 +1034,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       </div>
     </div>
     <h1>⚡ DevOps Knowledge Graph</h1>
-    <p>Interactive 3D infrastructure map linking 750 DevOps interview questions, platform topics, and architecture wikilinks.</p>
-    
+    <p>Interactive 3D infrastructure map linking {question_count} DevOps interview questions, platform topics, and architecture wikilinks.</p>
+
     <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="search-input" placeholder="Filter questions or topics (e.g. docker, kubernetes)...">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input type="search" id="search-input" aria-label="Filter questions or topics" placeholder="Filter questions or topics (e.g. docker, kubernetes)...">
     </div>
 
     <div class="actions-row">
@@ -1032,7 +1061,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <div class="stats-bar">
       <span>NODES: <strong id="node-count">0</strong></span>
       <span>EDGES: <strong id="edge-count">0</strong></span>
-      <span>TOPICS: <strong>40</strong></span>
+      <span>TOPICS: <strong>{topic_count}</strong></span>
     </div>
   </div>
 
@@ -1045,7 +1074,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       </div>
       <h3 id="card-title">Node Info</h3>
       <p id="card-desc"></p>
-      
+
       <!-- Interactive Quiz Section -->
       <div id="card-quiz" style="display:none;">
         <div class="quiz-stem-wrapper">
@@ -1076,6 +1105,16 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   </div>
 
   <div id="graph"></div>
+  <div id="graph-fallback" role="alert" hidden>
+    The 3D graph needs JavaScript and WebGL. Browse every question in the
+    <a href="https://github.com/mchittineni/ultimate-devops-guide#-all-questions">repository index</a> instead.
+  </div>
+  <noscript>
+    <div id="graph-noscript" role="alert">
+      The 3D graph needs JavaScript and WebGL. Browse every question in the
+      <a href="https://github.com/mchittineni/ultimate-devops-guide#-all-questions">repository index</a> instead.
+    </div>
+  </noscript>
 
   <script>
     const gData = {graph_json};
@@ -1149,6 +1188,19 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }};
 
     let graphTheme = GRAPH_THEME[document.documentElement.getAttribute('data-theme')] || GRAPH_THEME.dark;
+
+    const supportsWebGL = (() => {{
+      try {{
+        const canvas = document.createElement('canvas');
+        return !!(canvas.getContext('webgl2') || canvas.getContext('webgl'));
+      }} catch (e) {{
+        return false;
+      }}
+    }})();
+    if (typeof ForceGraph3D !== 'function' || !supportsWebGL) {{
+      document.getElementById('graph-fallback').hidden = false;
+      throw new Error('3D graph unavailable: library failed to load or WebGL is unsupported');
+    }}
 
     const Graph = ForceGraph3D()
       (document.getElementById('graph'))
@@ -1416,21 +1468,54 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 """
 
 
+SITE_URL = "https://mchittineni.github.io/ultimate-devops-guide/"
+
+
+def embed_json(data: dict) -> str:
+    """Serialise graph data for an inline ``<script>``.
+
+    Compact separators keep the page small; escaping ``<``, ``>`` and ``&`` stops a
+    title containing ``</script>`` from breaking out of the script element.
+    """
+    text = json.dumps(data, separators=(",", ":"), ensure_ascii=False)
+    return text.replace("<", r"\u003c").replace(">", r"\u003e").replace("&", r"\u0026")
+
+
+def render_html(graph_data: dict) -> str:
+    question_count = sum(1 for node in graph_data["nodes"] if node.get("type") != "topic")
+    topic_count = len(graph_data["nodes"]) - question_count
+    description = (
+        f"Interactive 3D map of {question_count} DevOps, SRE, cloud and platform engineering "
+        f"interview questions across {topic_count} topics, with a built-in quiz."
+    )
+    return HTML_TEMPLATE.format(
+        graph_json=embed_json(graph_data),
+        question_count=question_count,
+        topic_count=topic_count,
+        description=description,
+        site_url=SITE_URL,
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", "-o", default="docs/index.html", help="Target output HTML file path")
+    parser.add_argument("--check", action="store_true", help="do not write; exit 1 if the output is stale")
     args = parser.parse_args()
 
     graph_data = build_graph_data()
-
+    html_content = render_html(graph_data)
     output_path = REPO_ROOT / args.output
+
+    if args.check:
+        current = output_path.read_text(encoding="utf-8") if output_path.exists() else ""
+        if current != html_content:
+            print(f"{args.output} is stale - run `python3 scripts/build_knowledge_graph.py`", file=sys.stderr)
+            return 1
+        print("Knowledge graph is up to date.")
+        return 0
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
-
-    # Escape HTML-significant characters in JSON to prevent script breakout
-    json_str = json.dumps(graph_data, indent=2)
-    json_str = json_str.replace('<', r'\u003c').replace('>', r'\u003e').replace('&', r'\u0026')
-
-    html_content = HTML_TEMPLATE.format(graph_json=json_str)
     output_path.write_text(html_content, encoding="utf-8")
 
     print(f"Successfully generated DevOps Knowledge Graph UI at: {output_path}")

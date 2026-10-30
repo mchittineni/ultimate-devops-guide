@@ -33,7 +33,7 @@ def write_question(
     quiz: dict,  # {"stem": ..., "options": [...], "answer": 1-based int, "explanation": ...}
 ) -> Path:
     # Ensure mandatory tags
-    all_tags = list(dict.fromkeys(["devops", "interview-questions"] + tags))
+    all_tags = list(dict.fromkeys(["devops", "interview-questions", *tags]))
 
     slug = slugify(title)
     target_dir = REPO_ROOT / topic_dir
@@ -65,7 +65,7 @@ quiz:
     if related:
         related_lines = "\n".join(f"- [{name}]({path})" for name, path in related)
     else:
-        related_lines = f"- [DevOps Roadmap](../README.md)"
+        related_lines = "- [DevOps Roadmap](../README.md)"
 
     # Format interview tips
     tips_lines = "\n".join(f"- {tip}" for tip in listen_for)
@@ -91,7 +91,6 @@ quiz:
 
 <!-- END GENERATED RELATED TOPICS -->
 """
-
 
     target_file.write_text(content, encoding="utf-8")
     return target_file

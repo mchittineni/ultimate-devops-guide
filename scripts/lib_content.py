@@ -139,9 +139,9 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
         lines.append((len(raw_line) - len(raw_line.lstrip(" ")), stripped))
 
     if not lines:
-        return {}, text[match.end():]
+        return {}, text[match.end() :]
     data, _ = _parse_block(lines, 0, lines[0][0])
-    return (data if isinstance(data, dict) else {}), text[match.end():]
+    return (data if isinstance(data, dict) else {}), text[match.end() :]
 
 
 def topic_title(directory: str, readme_text: str | None = None) -> str:
@@ -163,9 +163,7 @@ def load_topics(root: Path = REPO_ROOT) -> list[Topic]:
         topic = Topic(
             directory=directory,
             order=int(meta_entry.get("order", 0)),
-            title=topic_title(
-                directory, readme.read_text(encoding="utf-8") if readme.exists() else None
-            ),
+            title=topic_title(directory, readme.read_text(encoding="utf-8") if readme.exists() else None),
         )
         for md in sorted(entry.glob("*.md")):
             if md.name == "README.md":
@@ -216,9 +214,7 @@ def normalize_markdown(text: str) -> str:
 def replace_block(text: str, marker: str, payload: str) -> str:
     """Replace content between ``<!-- MARKER:START -->``/``<!-- MARKER:END -->``."""
     start, end = f"<!-- {marker}:START -->", f"<!-- {marker}:END -->"
-    pattern = re.compile(
-        re.escape(start) + r".*?" + re.escape(end), re.DOTALL
-    )
+    pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.DOTALL)
     # Blank lines around the markers keep the output stable under Prettier.
     block = f"{start}\n\n{payload.strip()}\n\n{end}"
     if not pattern.search(text):
