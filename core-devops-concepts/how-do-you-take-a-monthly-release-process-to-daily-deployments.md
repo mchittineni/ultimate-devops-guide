@@ -76,7 +76,7 @@ spec:
 # deployment frequency, lead time, change failure rate, time to restore
 git log --since='90 days ago' --grep='^deploy' --oneline | wc -l
 gh pr list --state merged --limit 200 --json mergedAt,createdAt \
-  | jq '[.[] | (.mergedAt|fromdate) - (.createdAt|fromdate)] | add/length/3600' # lead time hrs
+  | jq '[.[] | (.mergedAt|fromdate) - (.createdAt|fromdate)] | add/length/3600' # mean PR open-to-merge hours (one segment of lead time)
 ```
 
 ## Interview tips

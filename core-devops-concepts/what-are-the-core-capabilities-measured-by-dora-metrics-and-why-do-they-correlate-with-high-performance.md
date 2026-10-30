@@ -18,7 +18,7 @@ quiz:
     - "Stability can only be maintained by enforcing monthly release change advisory boards"
     - "Lead time for changes has no measurable correlation with mean time to recovery"
   answer: 2
-  explanation: "DORA findings conclusively demonstrate that elite organizations do not compromise stability for speed; small, frequent deployments minimize blast radius and accelerate recovery."
+  explanation: "DORA's survey data has consistently shown that top performers do not trade stability for speed (a strong correlation, not a controlled experiment); small, frequent deployments minimize blast radius and accelerate recovery."
 ---
 
 # What are the core capabilities measured by DORA metrics and why do they correlate with high performance?
@@ -45,6 +45,8 @@ DORA's research model links roughly thirty capabilities to delivery performance,
 - **Process**: small batches, streamlined change approval (peer review over change advisory boards), visibility of work, customer feedback.
 - **Cultural**: generative (Westrum) culture, learning climate, job satisfaction, transformational leadership.
 - **AI era (2025)**: the DORA AI Capabilities Model adds items such as a clear AI stance, healthy data ecosystems, and strong version control practices, finding that AI amplifies whatever the team already does well or badly.
+
+**What DORA says about AI.** The 2024 report found that a 25% increase in AI adoption was associated with an estimated 1.5% _drop_ in delivery throughput and a 7.2% drop in delivery stability, despite gains in documentation quality, code quality, and review speed. The 2025 report (around 90% of respondents using AI) found throughput now rises with AI adoption, but instability still rises too - AI speeds up code generation faster than teams' testing, review, and small-batch discipline can absorb it.
 
 The crucial insight is that speed and reliability are not trade-offs. Small batch sizes reduce blast radius, make code reviews faster, and make debugging easier - so the same capabilities improve both.
 
@@ -74,14 +76,15 @@ SELECT service,
 - Small batch sizes as the root enabler of high performance.
 - Distinguishing metrics (outcomes) from capabilities (what you change to move them).
 - Knowing the tiers were retired in 2025 and the data is correlational.
+- If asked about AI: DORA's finding is that AI amplifies existing strengths and weaknesses - throughput gains show up, but instability rises unless small batches, testing, and platform quality keep up.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
 ## Related Concepts
 
 - [[How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?]] (`#541`): [How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?](../cicd/how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning.md)
+- [[What is the Westrum organizational culture model and how does DORA use it?]] (`#785`): [What is the Westrum organizational culture model and how does DORA use it?](../devops-culture-and-practices/what-is-the-westrum-organizational-culture-model-and-how-does-dora-use-it.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

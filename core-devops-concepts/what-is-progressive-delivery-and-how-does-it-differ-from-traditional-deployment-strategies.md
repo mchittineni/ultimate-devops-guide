@@ -76,9 +76,9 @@ spec:
 
 ## Related Concepts
 
+- [[How do you roll back a failed deployment in a CI/CD pipeline?]] (`#762`): [How do you roll back a failed deployment in a CI/CD pipeline?](../cicd/how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline.md)
 - [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
 - [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
-- [[What are Jenkins Pipelines?]] (`#18`): [What are Jenkins Pipelines?](../cicd/what-are-jenkins-pipelines.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

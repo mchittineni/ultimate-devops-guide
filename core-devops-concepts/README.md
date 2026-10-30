@@ -11,7 +11,7 @@ tags:
 
 The vocabulary every DevOps interview opens with: what DevOps actually changes, why it exists, and how CI, continuous delivery, and continuous deployment differ.
 
-**11 questions** · 🟢 Beginner: 6 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
+**13 questions** · 🟢 Beginner: 8 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -28,6 +28,8 @@ The vocabulary every DevOps interview opens with: what DevOps actually changes, 
 | 510 | [What is Shift-Left and how is it practically implemented across the SDLC?](./what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc.md)                                                               | 🟢 Beginner     |
 | 511 | [What is the difference between Continuous Delivery and Continuous Deployment?](./what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)                                                       | 🟢 Beginner     |
 | 512 | [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](./what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md) | 🟡 Intermediate |
+| 783 | [What are the Three Ways of DevOps?](./what-are-the-three-ways-of-devops.md)                                                                                                                                             | 🟢 Beginner     |
+| 784 | [What is the difference between DevOps and Agile?](./what-is-the-difference-between-devops-and-agile.md)                                                                                                                 | 🟢 Beginner     |
 
 ## What interviewers probe here
 
