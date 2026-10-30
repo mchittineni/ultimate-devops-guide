@@ -54,7 +54,14 @@ tags:
         "interval": 15,
         "retries": 3
       },
-      "logConfiguration": { "logDriver": "awslogs", "options": { "awslogs-group": "/ecs/api" } }
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/api",
+          "awslogs-region": "eu-west-1",
+          "awslogs-stream-prefix": "api"
+        }
+      }
     }
   ]
 }

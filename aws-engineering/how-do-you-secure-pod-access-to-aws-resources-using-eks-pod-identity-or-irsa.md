@@ -23,11 +23,11 @@ Introduced at AWS re:Invent 2023, EKS Pod Identity simplifies IAM authentication
 
 - **Mechanism:** Uses the EKS Pod Identity Agent DaemonSet running on worker nodes. The agent intercepts AWS SDK credential calls from pods via a local link endpoint (`169.254.170.23`).
 - **Advantages over IRSA:**
-- No OIDC provider configuration required per cluster.
-- IAM Trust Policy trusts the `pods.eks.amazonaws.com` service principal rather than individual OIDC URLs.
-- Simplifies multi-cluster IAM role sharing across environments.
-- Adds session tags (cluster, namespace, service account) automatically, so one role can use ABAC conditions such as `aws:PrincipalTag/kubernetes-namespace`.
-- Supports cross-account access natively: an association can name a target role in another account, and EKS performs the role chaining.
+  - No OIDC provider configuration required per cluster.
+  - IAM Trust Policy trusts the `pods.eks.amazonaws.com` service principal rather than individual OIDC URLs.
+  - Simplifies multi-cluster IAM role sharing across environments.
+  - Adds session tags (cluster, namespace, service account) automatically, so one role can use ABAC conditions such as `aws:PrincipalTag/kubernetes-namespace`.
+  - Supports cross-account access natively: an association can name a target role in another account, and EKS performs the role chaining.
 
 **Limitations.** Pod Identity requires the `eks-pod-identity-agent` add-on on EC2-based nodes and does not work for Pods on Fargate, and it only exists on EKS - so IRSA remains the answer for Fargate Pods and for self-managed or non-EKS clusters. Both require a reasonably current AWS SDK in the container.
 

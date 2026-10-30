@@ -39,7 +39,7 @@ AWS provides multi-layered guardrails: **Service Control Policies (SCPs)** and *
 - Act as **guardrails**: they define the maximum permissions that any principal (including the member account's `root` user) can exercise within an account. They do **not** apply to the management account or to service-linked roles.
 - **Do not grant permissions**: an explicit identity-based policy is still required.
 - Common use cases: preventing disabling of CloudTrail, blocking unapproved AWS regions, or enforcing that S3 buckets cannot be made public.
-- **Resource control policies (RCPs)** are the resource-side counterpart: they cap what any principal - including ones outside your organization - can do to resources in your accounts (for example, S3 or KMS access only from your organization).
+- **Resource control policies (RCPs)** are the resource-side counterpart: they cap what any principal - including ones outside your organization - can do to resources in your accounts (for example, S3 or KMS access only from your organization). **Declarative policies** (EC2/VPC settings such as blocking public AMI sharing or enforcing IMDSv2) go further and enforce configuration at the service level, so they hold even for API calls an SCP cannot see.
 
 ### IAM Permission Boundaries
 

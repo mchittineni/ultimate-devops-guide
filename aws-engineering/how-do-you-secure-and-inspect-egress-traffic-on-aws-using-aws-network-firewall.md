@@ -66,6 +66,8 @@ In multi-VPC estates the usual pattern is a central **inspection VPC** attached 
 - **Stateless Rules**: High-speed 5-tuple filtering (source/dest IP, port, protocol) evaluated before stateful engines.
 - **TLS inspection** (optional): decrypts and re-encrypts traffic with your certificate for payload inspection - powerful, but it adds certificate management and breaks certificate-pinned clients.
 
+**Pair it with DNS-layer filtering.** Route 53 Resolver **DNS Firewall** blocks resolution of disallowed or known-malicious domains (AWS-managed threat lists, including DNS-tunnelling detection) at a fraction of the cost, and catches exfiltration over DNS that an SNI rule never sees. DNS Firewall alone is bypassable by connecting to a raw IP, so the robust design is both: DNS Firewall for resolution, Network Firewall for the connection.
+
 **Limitations.** SNI filtering sees the hostname the client claims, so a malicious client can lie or use encrypted ClientHello; domain filtering is a strong control for well-behaved workloads, not a guarantee. The firewall is also billed per endpoint-hour per AZ plus per GB, on top of NAT.
 
 ### Real-World Production Scenario

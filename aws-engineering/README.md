@@ -11,7 +11,7 @@ tags:
 
 Depth on AWS: VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage classes, highly available databases, multi-account organisations, and IaC choices.
 
-**36 questions** · 🟢 Beginner: 6 · 🟡 Intermediate: 20 · 🔴 Advanced: 10
+**37 questions** · 🟢 Beginner: 6 · 🟡 Intermediate: 20 · 🔴 Advanced: 11
 
 ## Questions
 
@@ -53,6 +53,7 @@ Depth on AWS: VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling w
 | 736 | [How Do You Protect S3 Buckets from Accidental Deletion and Ransomware Attacks?](./how-do-you-protect-s3-buckets-from-accidental-deletion-and-ransomware-attacks.md)                                   | 🟡 Intermediate |
 | 737 | [How Do You Implement Blue-Green and Canary Deployments on Amazon ECS with CodeDeploy?](./how-do-you-implement-blue-green-and-canary-deployments-on-amazon-ecs-with-codedeploy.md)                     | 🟡 Intermediate |
 | 738 | [How Do You Implement Automated Drift Detection and Remediation in AWS CloudFormation?](./how-do-you-implement-automated-drift-detection-and-remediation-in-aws-cloudformation.md)                     | 🟡 Intermediate |
+| 755 | [How do you upgrade an Amazon EKS cluster safely?](./how-do-you-upgrade-an-amazon-eks-cluster-safely.md)                                                                                               | 🔴 Advanced     |
 
 ## What interviewers probe here
 

@@ -55,7 +55,7 @@ sg-app    inbound 8080 from sg-web      <- not a CIDR: "whatever the web tier is
 sg-db     inbound 5432 from sg-app      <- the database only accepts the app tier
 ```
 
-The rule keeps working as instances scale, get replaced, or change IP, and it makes the security posture readable. It works within a VPC and across peered VPCs in the same region. This chaining is what interviewers mean when they ask how the security groups are "wired" in a three-tier architecture - and a candidate who answers with CIDR ranges instead of SG references is signalling less experience.
+The rule keeps working as instances scale, get replaced, or change IP, and it makes the security posture readable. It works within a VPC, across peered VPCs in the same region, and (since 2024, when enabled on the attachment) across VPCs attached to the same Transit Gateway in a region. This chaining is what interviewers mean when they ask how the security groups are "wired" in a three-tier architecture - and a candidate who answers with CIDR ranges instead of SG references is signalling less experience.
 
 Self-referencing (`sg-cluster` allowing traffic from `sg-cluster`) is the idiomatic way to let members of a cluster talk to each other.
 

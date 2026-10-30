@@ -108,6 +108,7 @@ resource "aws_autoscaling_group" "app" {
     launch_template {
       launch_template_specification {
         launch_template_id = aws_launch_template.app.id
+        version            = aws_launch_template.app.latest_version # explicit, so a new AMI version is picked up
       }
       override {
         instance_type = "m7i.large"
@@ -131,7 +132,8 @@ resource "aws_autoscaling_group" "app" {
       checkpoint_delay       = 600    # pause to validate between batches
       auto_rollback          = true
     }
-    triggers = ["launch_template"]
+    # a launch template or mixed_instances_policy change always triggers a refresh;
+    # `triggers` only lists additional properties (e.g. ["tag"])
   }
 }
 ```

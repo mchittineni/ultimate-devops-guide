@@ -84,16 +84,19 @@ A financial application stores customer tax documents in Amazon S3. The app requ
 # Envelope encryption by hand, to show the mechanism (use the AWS Encryption SDK in real code)
 aws kms generate-data-key --key-id alias/tax-docs --key-spec AES_256 \
   --encryption-context department=finance,doc=tax-2026-0042 > dk.json
-jq -r .Plaintext dk.json | base64 -d > dek.bin            # plaintext DEK: memory only
+jq -r .Plaintext dk.json > dek.b64                        # plaintext DEK (base64): memory only in real code
 jq -r .CiphertextBlob dk.json | base64 -d > dek.enc       # store next to the data
+rm dk.json
 
-openssl enc -aes-256-cbc -pbkdf2 -in tax.pdf -out tax.pdf.enc -pass file:dek.bin  # demo cipher only
-shred -u dek.bin                                          # discard the plaintext key
+openssl enc -aes-256-cbc -pbkdf2 -in tax.pdf -out tax.pdf.enc -pass file:dek.b64  # demo cipher only
+shred -u dek.b64                                          # discard the plaintext key
 
 # Decrypt: KMS checks IAM + key policy + the SAME encryption context, then returns the DEK
 aws kms decrypt --ciphertext-blob fileb://dek.enc \
   --encryption-context department=finance,doc=tax-2026-0042 \
-  --query Plaintext --output text | base64 -d > dek.bin
+  --query Plaintext --output text > dek.b64
+openssl enc -d -aes-256-cbc -pbkdf2 -in tax.pdf.enc -out tax.pdf -pass file:dek.b64
+shred -u dek.b64
 ```
 
 ```sql
