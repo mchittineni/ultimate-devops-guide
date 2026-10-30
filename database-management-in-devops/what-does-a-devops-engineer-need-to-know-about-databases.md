@@ -39,7 +39,9 @@ tags:
 -- V1: additive only. Old code ignores the column; new code writes it.
 ALTER TABLE orders ADD COLUMN currency text DEFAULT 'USD' NOT NULL;
 
--- V2: index without locking the table (PostgreSQL). Never CREATE INDEX plainly in prod.
+-- V2: index without blocking writes (PostgreSQL). Never CREATE INDEX plainly on a busy table.
+-- CONCURRENTLY cannot run inside a transaction, so keep it in its own migration file
+-- (Flyway runs it non-transactionally; in Liquibase set runInTransaction:false).
 CREATE INDEX CONCURRENTLY idx_orders_currency ON orders (currency);
 
 -- V3: only once no running version reads the old column.

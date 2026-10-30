@@ -22,10 +22,14 @@ tags:
 | **Alembic**                          | Python/SQLAlchemy | Python scripts       | Autogenerate from model diffs; branching and merge support                                                                     |
 | **Django / Rails migrations**        | Framework-native  | Python / Ruby DSL    | Tight ORM integration, generated from model changes                                                                            |
 | **Entity Framework Core**            | .NET              | C#                   | `dotnet ef migrations` workflow                                                                                                |
-| **Prisma Migrate / Atlas**           | Node, polyglot    | Declarative schema   | Modern declarative-to-migration workflow, good CI integration                                                                  |
+| **Prisma Migrate**                   | Node/TypeScript   | Prisma schema        | Generates SQL migrations from the ORM schema; `migrate deploy` applies them in CI                                              |
+| **Atlas**                            | Polyglot (Go CLI) | HCL, SQL, or ORM     | Schema-as-code: diffs desired vs actual to plan a change, generates versioned migrations, and lints them for destructive ops   |
+| **golang-migrate / Sqitch**          | Go, any (Sqitch)  | Plain SQL            | Minimal up/down runners; Sqitch orders changes by declared dependencies rather than version numbers                            |
 | **gh-ost / pt-online-schema-change** | MySQL             | N/A                  | Online schema change for very large tables without long locks                                                                  |
 
 **How they work.** Each tool maintains a metadata table recording applied versions with checksums. On run, it compares the scripts on disk with that table and applies what is missing, in a transaction where the engine supports transactional DDL (PostgreSQL does; MySQL largely does not - a critical difference when a migration fails halfway).
+
+**Versioned versus declarative.** Flyway, Liquibase, and most framework tools are _versioned_: you write each change and the tool replays them in order. Atlas (and Prisma, Redgate's state-based mode, SQL Server DACPACs) can work _declaratively_: you describe the target schema and the tool computes the change - convenient, but the generated plan must be reviewed, because a rename can surface as drop-and-add. A common hybrid is to author declaratively, generate a versioned migration, and commit and review that.
 
 **Choosing one:** match your language ecosystem, decide whether you need database-agnostic changelogs (Liquibase) or prefer raw SQL you can read and reason about (Flyway), and check support for your CI/CD flow and for the online-change tooling your database size demands.
 

@@ -18,7 +18,7 @@ tags:
 **Two approaches**
 
 - **Migration-based (imperative).** A numbered sequence of change scripts (`V1__init.sql`, `V2__add_orders.sql`). The tool tracks which have been applied in a metadata table and runs the missing ones in order. Explicit, auditable, and the dominant approach - Flyway, Liquibase, Alembic, Rails migrations.
-- **State-based (declarative).** You maintain the desired schema definition; the tool computes the diff against the target database and generates the change script. Convenient for development, but generated scripts need review before production - an automated diff will happily generate a destructive statement.
+- **State-based (declarative).** You maintain the desired schema definition; the tool computes the diff against the target database and generates the change script - Atlas (`atlas schema apply`), Redgate SQL Source Control, SQL Server Database Projects (DACPAC), and Skeema for MySQL work this way. Convenient for development, but generated scripts need review before production - an automated diff will happily generate a destructive statement, and it cannot tell a rename from a drop plus an add.
 
 Many teams use both: declarative for authoring, with the generated migration committed and reviewed.
 
@@ -29,6 +29,7 @@ Many teams use both: declarative for authoring, with the generated migration com
 - **Rollback plans** exist, whether as a down script or a documented forward-fix. In practice, forward-fix is safer for data-destructive changes.
 - **Reference data** (lookup tables, feature configuration) is versioned too.
 - The **same scripts run in every environment**, in the same order, through the same automation.
+- **Drift is detected**, not assumed away: a hotfix applied by hand in production means the history table no longer describes the schema. Compare live schema against the expected one on a schedule (Atlas `schema diff`, Liquibase `diff`, Flyway's drift reports in paid editions) and fold any emergency change back into a migration.
 
 ## Example
 
