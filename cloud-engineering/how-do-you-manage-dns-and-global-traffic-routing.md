@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**TTL is your failover floor.** DNS-based failover cannot be faster than the record's TTL plus resolver and client caching - and some clients (notably JVMs with default settings, and some libraries) cache far longer than the TTL instructs. Use 60 seconds for failover-relevant records, accept the extra query volume, and never rely on DNS alone for sub-minute recovery.
+**TTL is your failover floor.** DNS-based failover cannot be faster than the record's TTL plus resolver and client caching - and some clients cache far longer than the TTL instructs: older JVMs or JVMs running with a security manager cache successful lookups forever (modern JDKs default to 30 seconds via `networkaddress.cache.ttl`), and even a well-behaved client keeps pooled connections to the old IP until they are closed. Use 60 seconds for failover-relevant records, accept the extra query volume, and never rely on DNS alone for sub-minute recovery.
 
 **Routing policies and what each is for:** simple (one target), weighted (canary and blue/green splits, gradual migration between providers), latency-based (send users to the nearest healthy region), geolocation/geoproximity (data residency and localised content), failover (active-passive with health checks), and multi-value with health checks (crude client-side load spreading). Health checks are what makes any of them resilient - a routing policy without health checks happily sends traffic into a dead region.
 
@@ -72,7 +72,7 @@ resource "aws_route53_record" "caa" {
 
 ## Interview tips
 
-- "TTL plus client caching is the floor on DNS failover" is the key technical point; name the JVM caching gotcha.
+- "TTL plus client caching is the floor on DNS failover" is the key technical point; name the JVM caching and long-lived connection-pool gotchas.
 - Recommend an anycast global load balancer when the RTO requirement is seconds - DNS is the coarse tool.
 - Expect: "what is subdomain takeover?" - a dangling CNAME to a deprovisioned resource that an attacker can claim; monitor for it.
 

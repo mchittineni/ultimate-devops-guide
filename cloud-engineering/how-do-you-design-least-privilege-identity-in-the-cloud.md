@@ -19,13 +19,13 @@ tags:
 
 **Least privilege is derived, not designed.** Start from a broad-but-bounded role in a non-production environment, capture what the workload actually calls from audit logs over a few weeks, then generate a tight policy from that data - AWS IAM Access Analyzer policy generation, GCP IAM Recommender, and Azure's least-privilege recommendations all do this. Hand-written least privilege is either too tight (breaks at 3am) or, more often, quietly too broad.
 
-**Guardrails above grants.** Organisation-level deny rules (SCPs, Azure Policy deny, GCP org policy and IAM Deny) cap what any grant can achieve, including for administrators. This two-layer model - a permissive-enough grant inside a hard boundary - is more robust than trying to make every individual policy perfect.
+**Guardrails above grants.** Organisation-level deny rules (SCPs, Azure Policy deny, GCP org policy and IAM Deny) cap what any grant can achieve, including for administrators. On AWS, SCPs cap your own principals while **Resource Control Policies** (RCPs, since late 2024) cap what can be done _to_ your resources by anyone - together they form a data perimeter (only your identities, on your resources, from your networks). This two-layer model - a permissive-enough grant inside a hard boundary - is more robust than trying to make every individual policy perfect.
 
 **Break-glass access, designed deliberately.** A small number of highly privileged emergency identities, with credentials split and stored offline, MFA, alerting on every use, and a documented review after each use. The failure mode to avoid is the opposite extremes: no break-glass path (so someone weakens the guardrails during an incident) or an unmonitored one.
 
 **Attribute-based access scales better than role explosion.** Tag/label resources with team and environment, and write conditions that compare the principal's attributes to the resource's (`aws:PrincipalTag/team` = `aws:ResourceTag/team`). One policy then serves many teams, instead of one role per team per environment.
 
-**Review continuously, and prove it.** Quarterly access reviews driven by the identity provider, automatic removal on role change and departure, last-used data to retire unused permissions and identities, and alerting on the creation of new long-lived keys, on `iam:*` policy changes, and on root/global-admin use. Auditors want evidence of the review, so make the process produce artefacts.
+**Review continuously, and prove it.** Quarterly access reviews driven by the identity provider, automatic removal on role change and departure, last-used data to retire unused permissions and identities (IAM Access Analyzer's unused-access findings automate this on AWS), and alerting on the creation of new long-lived keys, on `iam:*` policy changes, and on root/global-admin use. Auditors want evidence of the review, so make the process produce artefacts.
 
 **The multi-cloud version.** Federate all clouds to one identity provider so joiner/mover/leaver is a single process, and keep per-cloud authorisation native - trying to abstract IAM across providers into one model loses fidelity and creates a second system to secure.
 
