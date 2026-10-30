@@ -75,10 +75,10 @@ velero backup create pre-migration --include-namespaces prod,data \
   --default-volumes-to-fs-backup                # file-level (Kopia): restorable elsewhere
 velero backup describe pre-migration --details
 
-# 3. On the target cluster: restore, remapping storage classes as you go
+# 3. On the target cluster: restore. PVCs bind because the StorageClass NAME is the same in
+#    both clusters (overlay below); otherwise remap with Velero's change-storage-class ConfigMap.
 velero restore create --from-backup pre-migration \
-  --namespace-mappings prod:prod \
-  --exclude-resources services.v1,ingresses.networking.k8s.io   # rewrite these per provider
+  --exclude-resources services,ingresses.networking.k8s.io   # rewrite these per provider
 kubectl apply -k ./clusters/gke-prod/overlays   # provider-specific edges from Git
 
 # 4. Verify the boring things that break late

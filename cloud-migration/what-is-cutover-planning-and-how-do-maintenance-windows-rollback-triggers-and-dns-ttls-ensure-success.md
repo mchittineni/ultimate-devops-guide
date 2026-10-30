@@ -82,9 +82,9 @@ curl -s "$PROM/api/v1/query" --data-urlencode \
 
 ## Related Concepts
 
+- [[How do you roll back a failed deployment in a CI/CD pipeline?]] (`#762`): [How do you roll back a failed deployment in a CI/CD pipeline?](../cicd/how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline.md)
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
-- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
