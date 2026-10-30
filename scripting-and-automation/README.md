@@ -11,7 +11,7 @@ tags:
 
 The scripting layer under every pipeline - defensive Bash for orchestration, and Python for cloud APIs, structured data, and the tooling Bash cannot carry.
 
-**6 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 4 · 🔴 Advanced: 1
+**8 questions** · 🟢 Beginner: 1 · 🟡 Intermediate: 6 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -23,6 +23,8 @@ The scripting layer under every pipeline - defensive Bash for orchestration, and
 | 302 | [How do you turn a pile of ad hoc scripts into maintainable automation?](./how-do-you-turn-a-pile-of-ad-hoc-scripts-into-maintainable-automation.md) | 🔴 Advanced     |
 | 502 | [What Bash scripting exercises come up in DevOps interviews?](./what-bash-scripting-exercises-come-up-in-devops-interviews.md)                       | 🟡 Intermediate |
 | 503 | [What Python exercises come up in DevOps interviews?](./what-python-exercises-come-up-in-devops-interviews.md)                                       | 🟡 Intermediate |
+| 780 | [How do you process JSON and YAML on the command line with jq and yq?](./how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq.md)     | 🟡 Intermediate |
+| 781 | [How do you test and lint shell and Python automation scripts?](./how-do-you-test-and-lint-shell-and-python-automation-scripts.md)                   | 🟡 Intermediate |
 
 ## What interviewers probe here
 

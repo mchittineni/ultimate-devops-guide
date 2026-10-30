@@ -21,7 +21,15 @@ tags:
 - `-u` - error on an undefined variable. This is what stops `rm -rf "$PREFIX/"` from becoming `rm -rf /` when `PREFIX` is unset.
 - `-o pipefail` - a pipeline returns the first non-zero status rather than the status of the last command. Without it, `curl bad-url | jq .` reports success because `jq` succeeded.
 
-Know `-e`'s limits: it does not fire inside conditions, `&&`/`||` chains, or most function calls used in a test. Explicit error checks still matter.
+Know `-e`'s limits, because "strict mode" is less strict than it sounds:
+
+- It does not fire for a command tested by `if`, `while`, `!`, or on the left of `&&`/`||` - and that suppression applies to **everything inside a function** called from such a context, so `if deploy; then` silently disables `-e` for the whole of `deploy`.
+- `local out=$(cmd)` (and `export`/`readonly` with a substitution) returns the status of `local`, not of `cmd`, so the failure is masked. Declare first, assign second - ShellCheck flags this as SC2155.
+- Command substitutions do not inherit `-e` unless you also `shopt -s inherit_errexit` (Bash 4.4+).
+- `(( count++ ))` returns 1 when `count` was 0, which kills the script. Use `(( ++count ))` or `count=$((count + 1))`.
+- `grep` exits 1 on "no match", so `matches=$(grep ... | wc -l)` aborts under `pipefail` when nothing matched - wrap it in `{ grep ... || true; }`.
+
+Explicit error checks on the commands that matter still beat relying on `-e` alone.
 
 **Quoting is where real bugs live.** `$var` unquoted is subject to word splitting and glob expansion, so a filename with a space becomes two arguments. Quote everything: `"$var"`, `"$@"` (never `$*`), `"${array[@]}"`. Use `"${var:?message}"` to fail loudly on a required variable and `"${var:-default}"` to supply a fallback.
 
@@ -115,6 +123,7 @@ bash -x promote.sh --env staging --image api:1.4.0   # trace execution
 ## Interview tips
 
 - Open with `set -euo pipefail` and explain all three parts separately. It is the fastest way to signal you write scripts that run unattended.
+- Then volunteer where it does not protect you - `-e` is suppressed inside `if`-tested functions, and `local x=$(cmd)` masks the failure. Knowing the pitfalls is what separates someone who has debugged strict mode from someone who copied it.
 - "What is the difference between `&` and `&&`?" is asked literally. Background versus conditional-on-success.
 - Idempotency comes up as "what if this runs twice?" Have a concrete answer - `mkdir -p`, existence checks, declarative `kubectl apply`.
 - Mention `trap ... EXIT` for cleanup. Very few candidates do, and it is exactly what separates a script from a one-off command.
