@@ -11,7 +11,7 @@ tags:
 
 # How do you orchestrate and autoscale GPU workloads in Kubernetes?
 
-**Short answer:** Orchestrate GPU workloads in Kubernetes using the NVIDIA GPU Operator (for driver injection and container runtime configuration), partition GPUs via Multi-Instance GPU (MIG) or Time-Slicing, and autoscale GPU nodes using Karpenter or KEDA based on GPU duty cycle and VRAM utilization metrics.
+**Short answer:** Orchestrate GPU workloads in Kubernetes using the NVIDIA GPU Operator (for driver injection and container runtime configuration), partition GPUs via Multi-Instance GPU (MIG) or Time-Slicing, scale the workload Pods with KEDA or HPA on a demand signal (queue depth, pending requests, latency), and let Karpenter or Cluster Autoscaler add and remove GPU nodes in response to the Pods that cannot be scheduled. Dynamic Resource Allocation (GA in Kubernetes 1.34) is the newer, attribute-based way to request devices.
 
 ## Detail
 
@@ -103,7 +103,8 @@ data:
 ## Interview tips
 
 - Differentiate clearly between **MIG** (hardware-level isolation for A100/H100) and **Time-Slicing** (software-level sharing across all GPU architectures).
-- Explain why standard HPA (CPU/Memory scaling) fails for GPU workloads: GPUs require scaling based on VRAM consumption, queue length, or DCGM metrics (`DCGM_FI_DEV_GPU_UTIL`).
+- Explain why standard HPA (CPU/Memory scaling) fails for GPU workloads: the CPU is mostly idle while the GPU is the bottleneck. Scale on demand signals - queue length, pending requests, latency (TTFT for LLMs) - rather than `DCGM_FI_DEV_GPU_UTIL`, which reads near 100% whenever any kernel is running and VRAM, which inference servers pre-allocate, so neither says much about headroom.
+- Separate the two loops: KEDA/HPA scales Pods, Karpenter or Cluster Autoscaler scales nodes in response to unschedulable Pods - and GPU nodes take minutes to become ready, so keep a warm minimum for latency-sensitive services.
 - Emphasize node provisioning with **Karpenter**: Karpenter handles heterogeneous GPU instance constraints much faster than legacy Cluster Autoscaler.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
@@ -112,7 +113,7 @@ data:
 
 - [[What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?]] (`#634`): [What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?](../devops-tools-and-automation/what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs.md)
 - [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
-- [[What is Infrastructure as Code?]] (`#26`): [What is Infrastructure as Code?](../infrastructure-as-code/what-is-infrastructure-as-code.md)
+- [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
