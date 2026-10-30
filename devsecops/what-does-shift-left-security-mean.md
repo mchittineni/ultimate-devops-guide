@@ -44,6 +44,7 @@ tags:
 
 ```yaml
 # Pull request pipeline: fast checks, diff-scoped, blocking only on real risk.
+# Assumes trivy, checkov, semgrep, and syft are installed on the runner (or use their official actions).
 name: security
 on: pull_request
 
@@ -86,10 +87,10 @@ repos:
     hooks: [{ id: checkov, args: [--quiet, --compact] }]
 ```
 
-```yaml
-# Suppressions carry a reason and an expiry - never a bare ignore.
-# .trivyignore
-CVE-2026-12345 exp:2026-10-01 # dev-only dependency, not in the runtime image - ticket SEC-412
+```text
+# .trivyignore - suppressions carry a reason and an expiry, never a bare ignore.
+# dev-only dependency, not in the runtime image - ticket SEC-412
+CVE-2026-12345 exp:2027-01-31
 ```
 
 ## Interview tips

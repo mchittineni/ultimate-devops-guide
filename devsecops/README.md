@@ -11,7 +11,7 @@ tags:
 
 Security built into the delivery pipeline: scanning layers, SBOMs and supply-chain provenance, image signing, secretless pipelines, and vulnerability triage that does not stall delivery.
 
-**19 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 11 · 🔴 Advanced: 5
+**20 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 11 · 🔴 Advanced: 6
 
 ## Questions
 
@@ -36,6 +36,7 @@ Security built into the delivery pipeline: scanning layers, SBOMs and supply-cha
 | 709 | [What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?](./what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines.md)                         | 🟡 Intermediate |
 | 710 | [What are Threat Modeling frameworks (STRIDE, PASTA) and how do they embed security into early sprint design?](./what-are-threat-modeling-frameworks-stride-pasta-and-how-do-they-embed-security-into-early-sprint-design.md)                    | 🟡 Intermediate |
 | 711 | [What is Runtime Application Self-Protection (RASP) and how does it differ from a perimeter WAF?](./what-is-runtime-application-self-protection-rasp-and-how-does-it-differ-from-a-perimeter-waf.md)                                             | 🔴 Advanced     |
+| 763 | [How do you secure LLM applications and AI agents against prompt injection?](./how-do-you-secure-llm-applications-and-ai-agents-against-prompt-injection.md)                                                                                     | 🔴 Advanced     |
 
 ## What interviewers probe here
 

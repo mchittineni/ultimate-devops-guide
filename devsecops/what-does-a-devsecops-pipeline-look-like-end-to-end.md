@@ -48,6 +48,7 @@ jobs:
         with: { fetch-depth: 0 } # gitleaks needs history
       - name: Secret scan
         uses: gitleaks/gitleaks-action@v3
+        env: { GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}" } # needed to scan pull requests
       - name: Dependency review (blocks new vulnerable deps)
         uses: actions/dependency-review-action@v5
         with: { fail-on-severity: high }

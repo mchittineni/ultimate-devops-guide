@@ -37,7 +37,7 @@ Without image signing, anyone with write access to your container registry can o
 2. Cosign requests an ephemeral certificate from Fulcio (Sigstore CA) using GitHub OIDC token.
 3. Cosign signs the image digest using an ephemeral key pair.
 4. The signature and public certificate are published to Rekor (an immutable transparency log).
-5. The signature is stored in the registry next to the image (as an OCI artifact referencing the digest).
+5. The signature, certificate, and Rekor proof are stored in the registry as one Sigstore bundle - in cosign v3 an OCI 1.1 referrer of the image digest (older releases used a `sha256-<digest>.sig` tag).
 ```
 
 ### Kubernetes Admission Enforcement (Kyverno)
