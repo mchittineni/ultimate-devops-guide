@@ -50,7 +50,8 @@ A structured workshop that maps every step from customer request to production r
 - Process Time (active work).
 - Lead/Wait Time (idle queues).
 - Quality (% Complete & Accurate).
-  Because wait time dominates, shrinking queues (smaller batches, WIP limits, faster reviews, removing hand-offs) shortens lead time far more than making the active work faster.
+
+Because wait time dominates, shrinking queues (smaller batches, WIP limits, faster reviews, removing hand-offs) shortens lead time far more than making the active work faster.
 
 **Limitations.** "Active" versus "waiting" is rarely recorded precisely - tickets left "In Progress" while someone waits on a reviewer inflate active time - so treat the figure as a rough diagnostic and look at trends. And 100% flow efficiency is not the goal: some slack is what lets a team absorb urgent work without everything else stalling.
 
