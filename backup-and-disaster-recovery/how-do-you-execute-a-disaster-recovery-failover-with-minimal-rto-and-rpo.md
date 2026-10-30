@@ -30,10 +30,11 @@ Disaster Recovery strategies are evaluated on two core metrics:
 ### Step-by-Step Production Failover Runbook Execution
 
 1. **Detection & Declaration:** Automated synthetic monitoring or health checks alert on primary region outage. Incident Commander officially declares DR activation.
-2. **Database Promotion:** Promote cross-region read replica (e.g. Amazon Aurora Global Database or RDS Read Replica) to standalone primary write master.
-3. **Traffic Shift:** Update Route 53 Failover Routing Policy or Cloudflare DNS records to direct incoming user requests to secondary region endpoints.
-4. **Workload Auto-Scaling:** Scale up secondary compute resources (EKS/ECS/EC2 ASGs) to match peak production traffic load.
-5. **Post-Failover Audit & Failback:** Once primary region recovers, synchronize delta data and execute planned failback runbook.
+2. **Fence the old primary first:** stop writes in the failed region (revoke its write path, pause its workers or queues) so that if it comes back it cannot accept writes beside the new primary and cause split-brain.
+3. **Database Promotion:** Promote cross-region read replica (e.g. Amazon Aurora Global Database or RDS Read Replica) to standalone primary write master.
+4. **Traffic Shift:** Let Route 53 failover records (driven by health checks) or Cloudflare load-balancing pools move incoming requests to the secondary region's endpoints. Do not depend on editing records during the incident: Route 53's record-change API is a control plane that lives in one region. Health checks, Application Recovery Controller routing controls, and ARC Region switch plans (which sequence the database promotion, scaling, and traffic steps as one rehearsed plan) work through the data plane and are built for this.
+5. **Workload Auto-Scaling:** Scale up secondary compute resources (EKS/ECS/EC2 ASGs) to match peak production traffic load.
+6. **Post-Failover Audit & Failback:** Once primary region recovers, synchronize delta data and execute planned failback runbook.
 
 ## Example
 
