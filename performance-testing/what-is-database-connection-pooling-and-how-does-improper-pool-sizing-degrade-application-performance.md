@@ -84,7 +84,7 @@ default_pool_size = 20
 - CPU context switching and disk lock contention on oversized pools.
 - Connection poolers like PgBouncer or HikariCP.
 - Multiply pool size by replica count and compare it with `max_connections` - it is the most common real outage in this area, especially during a deploy when old and new pods overlap.
-- Transaction pooling breaks session state (session-level prepared statements, `SET`, advisory locks), so mention that trade-off when you recommend PgBouncer.
+- Transaction pooling breaks session state (`SET`, session advisory locks, `LISTEN`, temporary tables), so mention that trade-off when you recommend PgBouncer. Protocol-level prepared statements were the classic casualty; PgBouncer 1.21+ can track them in transaction mode (`max_prepared_statements`), but SQL-level `PREPARE` still breaks.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

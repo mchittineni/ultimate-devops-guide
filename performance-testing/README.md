@@ -11,7 +11,7 @@ tags:
 
 Load, stress, soak, and spike testing - how to design them, which tools to use, and how to read the results.
 
-**12 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 3 · 🔴 Advanced: 4
+**13 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 4 · 🔴 Advanced: 4
 
 ## Questions
 
@@ -29,6 +29,7 @@ Load, stress, soak, and spike testing - how to design them, which tools to use, 
 | 612 | [How do you test and tune Linux kernel TCP networking parameters for high-throughput, low-latency workloads?](./how-do-you-test-and-tune-linux-kernel-tcp-networking-parameters-for-high-throughput-low-latency-workloads.md) | 🔴 Advanced     |
 | 613 | [What is Database Connection Pooling and how does improper pool sizing degrade application performance?](./what-is-database-connection-pooling-and-how-does-improper-pool-sizing-degrade-application-performance.md)          | 🟡 Intermediate |
 | 614 | [How do you profile CPU, memory, and I/O bottlenecks in production with eBPF and flame graphs?](./how-do-you-profile-cpu-memory-and-i-o-bottlenecks-in-production-with-ebpf-and-flame-graphs.md)                              | 🔴 Advanced     |
+| 771 | [What is Little's Law and how do you use it in load testing and capacity planning?](./what-is-little-s-law-and-how-do-you-use-it-in-load-testing-and-capacity-planning.md)                                                    | 🟡 Intermediate |
 
 ## What interviewers probe here
 
