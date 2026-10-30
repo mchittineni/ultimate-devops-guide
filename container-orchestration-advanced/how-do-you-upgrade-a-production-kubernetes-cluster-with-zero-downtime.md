@@ -21,7 +21,7 @@ tags:
 ### Before the upgrade
 
 1. **Read the release notes and the deprecation guide for every version you are crossing.** Kubernetes supports **one minor version at a time** (n → n+1) and a kubelet may trail the API server by up to three minor versions (two before Kubernetes 1.28), but never be newer. Skipping is unsupported and, on managed platforms, blocked.
-2. **Scan for removed and deprecated APIs** - this is the step that prevents most upgrade incidents. `kubent` or Pluto over live objects _and_ over your Git manifests and Helm charts, because the chart you deploy tomorrow matters as much as the object running today. Historically the finds were `policy/v1beta1 PodDisruptionBudget` and `batch/v1beta1 CronJob` (removed in 1.25); in recent releases they are things like `flowcontrol.apiserver.k8s.io/v1beta3` (removed in 1.32), beta DRA APIs, and long-tail CRDs. Not every breaking change is an API, either: from 1.35 the kubelet refuses to start on cgroup v1 nodes by default, and kube-proxy's IPVS mode is deprecated - so read the "urgent upgrade notes" as well as running the scanners.
+2. **Scan for removed and deprecated APIs** - this is the step that prevents most upgrade incidents. `kubent` or Pluto over live objects _and_ over your Git manifests and Helm charts, because the chart you deploy tomorrow matters as much as the object running today. Historically the finds were `policy/v1beta1 PodDisruptionBudget` and `batch/v1beta1 CronJob` (removed in 1.25); in recent releases they are things like `flowcontrol.apiserver.k8s.io/v1beta3` (removed in 1.32), beta DRA APIs, and long-tail CRDs. Not every breaking change is an API, either: from 1.35 the kubelet refuses to start on cgroup v1 nodes by default, 1.35 is the last release that supports containerd 1.x (move nodes to containerd 2.x before 1.36; the `kubelet_cri_losing_support` metric flags them), and kube-proxy's IPVS mode is deprecated - so read the "urgent upgrade notes" as well as running the scanners.
 3. **Check add-on compatibility** - CNI, CSI drivers, ingress controller, metrics-server, cluster autoscaler or Karpenter, service mesh, and any webhook. A failing admission webhook after an upgrade blocks every write to the cluster, which is as close to a full outage as Kubernetes gets. Also verify controller RBAC still matches, and that mutating/validating webhooks have `failurePolicy` you can live with.
 4. **Back up state.** On self-managed clusters, snapshot etcd (`etcdctl snapshot save`) and verify the snapshot restores. On managed clusters the control plane is the provider's problem, but back up cluster resources and PVs anyway (Velero) - your objects and data are yours. See [how do you execute a Disaster Recovery failover with minimal RTO and RPO](../backup-and-disaster-recovery/how-do-you-execute-a-disaster-recovery-failover-with-minimal-rto-and-rpo.md).
 5. **Verify the workloads can survive node replacement**: replica count above one, PodDisruptionBudgets that allow progress (a PDB requiring 100% availability blocks drains for ever), readiness probes that mean something, graceful shutdown with `preStop` and a sensible `terminationGracePeriodSeconds`, and topology spread across zones. Any singleton Pod without a PDB will have a gap - decide consciously whether that is acceptable.
@@ -45,7 +45,7 @@ tags:
 - **A drain that never finishes** - a PDB that cannot be satisfied, a Pod with no controller (bare Pod), or a StatefulSet with one replica. `kubectl drain` waits rather than violating the budget; decide per workload whether to accept the disruption or fix the redundancy first.
 - **Long-lived connections** dropped on node replacement even with correct rolling - WebSockets, gRPC streams, and database sessions need client reconnection and a `preStop` grace window.
 - **Zonal volumes** - a Pod with an EBS-backed PVC can only be rescheduled into the same availability zone; if the new node group lacks capacity there, the Pod stays `Pending`. See [how do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md).
-- **No control-plane rollback.** Kubernetes control-plane upgrades are one-way on every managed platform. Your rollback plan is either "restore etcd from snapshot" (self-managed) or "build a new cluster at the old version and fail traffic back" - which is why the deprecation scan and the rehearsal matter so much, and why staying close to the current version is a reliability strategy rather than a chore.
+- **Little or no control-plane rollback.** Minor-version control-plane upgrades are traditionally one-way. The exception emerging from upstream's compatibility-version work (KEP-4330) is GKE's two-step minor upgrade: the new binaries first run in an emulated previous-version mode for a soak period, during which you can roll back; once the second step completes, you cannot. Your rollback plan is either "restore etcd from snapshot" (self-managed) or "build a new cluster at the old version and fail traffic back" - which is why the deprecation scan and the rehearsal matter so much, and why staying close to the current version is a reliability strategy rather than a chore.
 
 ### The strategic answer
 
@@ -96,8 +96,11 @@ spec:
   template:
     spec:
       terminationGracePeriodSeconds: 60
-      lifecycle:
-        preStop: { exec: { command: ["sh", "-c", "sleep 10"] } } # drain endpoints first
+      containers:
+        - name: checkout
+          image: registry.example.com/checkout:1.9.0
+          lifecycle: # lifecycle hooks are per container, not per Pod
+            preStop: { sleep: { seconds: 10 } } # drain endpoints first
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: topology.kubernetes.io/zone

@@ -12,7 +12,7 @@ tags:
   - pvc
   - ebs
 quiz:
-  stem: "Which CSI component is responsible for calling cloud provider APIs to format a raw volume and bind-mount it into a Pod's local container directory?"
+  stem: "Which CSI component formats a newly attached volume and bind-mounts it into a Pod's directory on the node?"
   options:
     - "The central `csi-provisioner` controller"
     - "The node-level CSI plugin executing `NodeStageVolume` and `NodePublishVolume`"

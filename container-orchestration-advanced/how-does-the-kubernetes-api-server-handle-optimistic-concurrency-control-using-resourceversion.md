@@ -38,7 +38,7 @@ quiz:
 
 **Rules worth knowing.**
 
-- `resourceVersion` is **opaque**. Clients may compare two values for equality but must not parse it or assume ordering; etcd revisions are an implementation detail.
+- `resourceVersion` was historically documented as **opaque**: compare for equality only, never parse or order. Since Kubernetes 1.35 (KEP-5504, Comparable Resource Version) it is defined as a monotonically increasing integer for built-in types, and client-go ships a comparison helper - so "is this object newer than that one?" is now a supported question. Custom or aggregated API servers may still not guarantee it, so use the helper (which reports non-comparable values) rather than hand-parsing.
 - An update that omits `resourceVersion` is an unconditional overwrite for most resources - which is exactly the lost-update risk.
 - **Patches avoid most conflicts.** JSON merge patch and strategic merge patch are applied by the server to the latest version, so a patch that touches only its own fields does not need `resourceVersion` (you can include it to make the patch conditional).
 - **Server-side apply** adds field ownership on top: each field records its manager, and a conflict is reported when you try to change a field another manager owns, unless you `--force-conflicts`. That is a different, field-level 409 from the whole-object `resourceVersion` conflict.
@@ -77,7 +77,7 @@ err := retry.RetryOnConflict(retry.DefaultRetry, func() error {
 ## Interview tips
 
 - Describe it as compare-and-swap: the `resourceVersion` you read must still be current when you write, or you get 409 Conflict.
-- Say that `resourceVersion` is opaque and must not be parsed or ordered by clients.
+- Say that `resourceVersion` used to be strictly opaque, and that since 1.35 it is a comparable integer for built-in types - use client-go's comparison helper rather than parsing it yourself.
 - Contrast full updates with patches and server-side apply - patches sidestep most conflicts, and SSA adds field-level ownership conflicts.
 - Mention `retry.RetryOnConflict` and that controllers must be idempotent because retries are normal.
 - Connect it to watches: resuming from a `resourceVersion`, and `410 Gone` when it has been compacted.
