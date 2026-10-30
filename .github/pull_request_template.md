@@ -27,5 +27,6 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for the full format.
 - [ ] Ran `python3 scripts/generate_indexes.py`, `python3 scripts/inject_wikilinks.py`, and `python3 scripts/build_knowledge_graph.py` (indexes, related-topic blocks, and graph HTML are generated - do not hand-edit topic READMEs, graph HTML, or the root TOC).
 - [ ] Ran `python3 scripts/validate_content.py` and it passed.
 - [ ] Ran `npx prettier@3 --write "**/*.md"` and `npx markdownlint-cli2 "**/*.md"` with no issues.
+- [ ] **Changed `scripts/` only**: ran `python3 -m unittest discover -s tests` and `ruff check scripts tests` with no failures.
 - [ ] Versions, APIs, and product names are current - nothing deprecated, removed, or renamed is presented as current practice.
 - [ ] Content is accurate, and any code examples actually work.

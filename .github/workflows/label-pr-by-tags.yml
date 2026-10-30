@@ -1,7 +1,10 @@
 name: Label PR by Content Tags
 
+# pull_request_target gives fork PRs a token that can label them. It is safe here because the
+# job never checks out or runs PR code: it reads changed Markdown through the API as data and
+# only turns sanitised frontmatter tags into labels.
 on:
-  pull_request_target:
+  pull_request_target: # zizmor: ignore[dangerous-triggers]
     branches: [main]
     types:
       - opened
@@ -30,6 +33,7 @@ jobs:
     # Forks of this repo inherit the workflow but not its label vocabulary; skip there.
     if: github.repository == 'mchittineni/ultimate-devops-guide'
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - name: Apply labels
