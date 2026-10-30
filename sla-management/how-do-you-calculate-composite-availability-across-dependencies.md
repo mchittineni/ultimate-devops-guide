@@ -43,9 +43,12 @@ serial(0.9999, 0.9999, 0.9995, 0.9995)      # 0.99880 -> 99.88%
 # Redundant app tier and database, still serial through CDN and LB
 serial(0.9999, 0.9999, parallel(0.9995), parallel(0.9995))  # ~0.99980 -> 99.98%
 
-# Honest version: both replicas share one deployment pipeline (99.99%) and
-# failover costs ~2 min per event; add the shared component as a serial term
-serial(0.9999, 0.9999, parallel(0.9995), parallel(0.9995), 0.9999)  # ~99.97%
+# Honest version: both replicas share one deployment pipeline (99.99%);
+# add the shared component as a serial term
+honest = serial(0.9999, 0.9999, parallel(0.9995), parallel(0.9995), 0.9999)  # ~99.97%
+
+# ...and charge failover time as downtime: e.g. 4 failovers/month x 2 min each
+honest - (4 * 2) / 43_200                                                     # ~99.95%
 ```
 
 ## Interview tips

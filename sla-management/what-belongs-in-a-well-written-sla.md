@@ -64,8 +64,8 @@ labelled Beta. Claims must be filed within 30 days of month end.
 ## Related Concepts
 
 - [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
+- [[What is the difference between DevOps and Agile?]] (`#784`): [What is the difference between DevOps and Agile?](../core-devops-concepts/what-is-the-difference-between-devops-and-agile.md)
 - [[What is Semantic Release and how does it automate versioning and changelogs from commits?]] (`#540`): [What is Semantic Release and how does it automate versioning and changelogs from commits?](../cicd/what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits.md)
-- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
