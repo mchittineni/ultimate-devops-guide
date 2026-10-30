@@ -11,7 +11,7 @@ tags:
 
 Shifting security left: DevSecOps practice, infrastructure and container hardening, and compliance expressed as code.
 
-**12 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 8 · 🔴 Advanced: 2
+**14 questions** · 🟢 Beginner: 2 · 🟡 Intermediate: 10 · 🔴 Advanced: 2
 
 ## Questions
 
@@ -29,6 +29,8 @@ Shifting security left: DevSecOps practice, infrastructure and container hardeni
 | 566 | [What are envelope encryption and Key Management Service (KMS) best practices?](./what-are-envelope-encryption-and-key-management-service-kms-best-practices.md)                                                 | 🟡 Intermediate |
 | 567 | [How do you achieve Zero Trust Architecture in modern distributed cloud environments?](./how-do-you-achieve-zero-trust-architecture-in-modern-distributed-cloud-environments.md)                                 | 🟡 Intermediate |
 | 568 | [What are SOC 2, ISO 27001, and HIPAA compliance frameworks and how is Compliance as Code implemented?](./what-are-soc-2-iso-27001-and-hipaa-compliance-frameworks-and-how-is-compliance-as-code-implemented.md) | 🟡 Intermediate |
+| 766 | [What are CSPM and CNAPP, and how do they find cloud misconfigurations?](./what-are-cspm-and-cnapp-and-how-do-they-find-cloud-misconfigurations.md)                                                              | 🟡 Intermediate |
+| 767 | [What is the NIST Cybersecurity Framework (CSF) 2.0 and how is it used?](./what-is-the-nist-cybersecurity-framework-csf-2-0-and-how-is-it-used.md)                                                               | 🟡 Intermediate |
 
 ## What interviewers probe here
 

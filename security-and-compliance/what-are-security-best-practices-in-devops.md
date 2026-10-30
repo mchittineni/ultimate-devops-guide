@@ -33,15 +33,18 @@ tags:
 
 ```yaml
 # GitHub Actions: no static cloud keys, minimum token scope
-permissions:
-  contents: read
-  id-token: write # OIDC only
-
-steps:
-  - uses: aws-actions/configure-aws-credentials@v6
-    with:
-      role-to-assume: arn:aws:iam::123456789012:role/gha-deploy
-      aws-region: eu-west-1 # short-lived credentials, no secrets stored
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # OIDC only
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v6 # pin to a commit SHA in production
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/gha-deploy
+          aws-region: eu-west-1 # short-lived credentials, no secrets stored
+      - run: aws sts get-caller-identity
 ```
 
 ## Interview tips
