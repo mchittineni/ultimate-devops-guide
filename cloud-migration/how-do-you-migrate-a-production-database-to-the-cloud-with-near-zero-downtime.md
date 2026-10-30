@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**Decide the shape of the move first.** A **homogeneous** migration (PostgreSQL to RDS PostgreSQL) can use native logical replication and is mostly an operations problem. A **heterogeneous** one (Oracle to PostgreSQL) is a schema and application-rewrite project wearing a migration costume: stored procedures, sequences, data types, collation, and SQL dialect all change, and the tooling (AWS SCT, ora2pg) converts perhaps 80% automatically. Never quote a near-zero-downtime figure for a heterogeneous move without a full functional test cycle behind it.
+**Decide the shape of the move first.** A **homogeneous** migration (PostgreSQL to RDS PostgreSQL) can use native logical replication and is mostly an operations problem. A **heterogeneous** one (Oracle to PostgreSQL) is a schema and application-rewrite project wearing a migration costume: stored procedures, sequences, data types, collation, and SQL dialect all change, and the tooling (AWS DMS Schema Conversion - the managed successor to the desktop SCT - or ora2pg) converts perhaps 80% automatically. Never quote a near-zero-downtime figure for a heterogeneous move without a full functional test cycle behind it.
 
 **The pipeline, in order:**
 
