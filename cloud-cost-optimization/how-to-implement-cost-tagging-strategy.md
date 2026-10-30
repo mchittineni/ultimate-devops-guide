@@ -33,7 +33,7 @@ Agree on case and allowed values, and document them - `Env=prod` and `environmen
 - **Policy as code** - AWS Service Control Policies or Tag Policies, Azure Policy `deny` or `modify` effects, or OPA in the pipeline to reject untagged resources.
 - **Remediation** - periodic jobs that report or auto-tag stragglers from account or resource-group defaults.
 
-**Then use them.** Activate cost-allocation tags in the billing console (untagged historical data cannot be backfilled), build per-team and per-environment cost dashboards, set budgets with alerts per owner, and publish a monthly showback or chargeback report.
+**Then use them.** Activate cost-allocation tags in the billing console - they only appear in Cost Explorer and the CUR after activation. Since 2024 AWS lets the management account **backfill** activation for up to 12 months, but that only helps where the tag was actually on the resource at the time; a resource that was never tagged cannot be attributed retroactively. Then build per-team and per-environment cost dashboards, set budgets with alerts per owner, and publish a monthly showback or chargeback report.
 
 **Track compliance as a metric:** percentage of spend that is fully tagged. It is the number that tells you whether the strategy is working.
 
@@ -58,11 +58,13 @@ provider "aws" {
 ```
 
 ```bash
-# Activate the tags for cost allocation (they only report from activation onward).
+# Activate the tags for cost allocation (reported from activation; backfill up to 12 months from the Billing console).
 aws ce update-cost-allocation-tags-status --cost-allocation-tags-status \
   TagKey=Owner,Status=Active TagKey=Environment,Status=Active TagKey=CostCenter,Status=Active
 
-# Track the gap: resources missing a required tag.
+# Track the gap: resources missing a required tag. Caveat: the Tagging API only returns
+# resources that have (or once had) at least one tag - use the AWS Config `required-tags`
+# managed rule for a complete compliance view.
 aws resourcegroupstaggingapi get-resources --query \
   'ResourceTagMappingList[?!not_null(Tags[?Key==`CostCenter`].Value | [0])].ResourceARN'
 ```
@@ -70,7 +72,7 @@ aws resourcegroupstaggingapi get-resources --query \
 ## Interview tips
 
 - "Enforce in IaC, verify with policy, report the gap" is the three-part answer.
-- Mention that cost-allocation tags apply going forward only - a genuinely useful practical detail.
+- Mention that cost-allocation tags must be activated, and that AWS backfill (up to 12 months) only recovers spend for resources that were already tagged - a genuinely useful practical detail.
 - Untagged-spend percentage as a tracked KPI shows you have run this programme, not just designed it.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

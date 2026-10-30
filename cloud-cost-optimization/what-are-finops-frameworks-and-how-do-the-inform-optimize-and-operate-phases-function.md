@@ -54,7 +54,7 @@ The phases are iterative, not sequential - teams cycle through them continuously
 
 ### Beyond the phases
 
-The framework also defines **principles** (teams take ownership of their usage, decisions are driven by business value, FinOps data should be accessible and timely), **personas** (engineering, finance, product, leadership, procurement), and **domains and capabilities** such as allocation, forecasting, and anomaly management. Recent revisions widened the scope beyond public cloud to SaaS, licensing, data centres, and AI spend, and the FinOps Foundation's **FOCUS** specification standardises billing data across providers.
+The framework also defines **principles** (teams take ownership of their usage, decisions are driven by business value, FinOps data should be accessible and timely), **personas** (engineering, finance, product, leadership, procurement), and four **domains** - Understand Usage & Cost, Quantify Business Value, Optimize Usage & Cost, and Manage the FinOps Practice - each broken into **capabilities** such as allocation, forecasting, anomaly management, and rate optimisation. The 2025 framework update dropped "Cloud" from the domain names and introduced **Scopes**: named segments of technology spend (public cloud, SaaS, data centre, AI, licensing) to which the same practice applies. The FinOps Foundation's **FOCUS** specification standardises billing data across providers, and recent versions extend it to SaaS and other non-cloud invoices.
 
 **Common pitfalls.** Treating FinOps as a finance-only cost-cutting exercise (engineers ignore it), optimising rates before usage (buying discounts on waste), and reporting absolute spend without unit economics (a growing business should expect its bill to grow).
 
@@ -78,7 +78,7 @@ Result    cost per 1k queries back to $0.31 while query volume grew 18%
 - Walk the phases with concrete activities, and say they are iterative, at different maturity per capability.
 - Order matters: optimise usage before rates, or you commit to waste.
 - Unit economics is the mature measure - cost per transaction or customer, not raw spend.
-- Mention FOCUS and the broader scope (SaaS, AI) to show you know how the framework has evolved.
+- Mention the four domains, 2025's Scopes (SaaS, data centre, AI), and FOCUS to show you know how the framework has evolved.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
