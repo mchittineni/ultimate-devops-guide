@@ -52,7 +52,7 @@ cat /etc/resolv.conf
 
 dig +short checkout.prod.svc.cluster.local      # internal name
 dig +short api.example.com.                     # external, fully qualified (trailing dot)
-dig @10.96.0.10 +short checkout.prod.svc        # bypass the Pod's resolver config
+dig @10.96.0.10 +short checkout.prod.svc.cluster.local   # bypass resolv.conf (dig ignores the search list unless you pass +search)
 dig +time=2 +tries=1 slow.example.com           # is it failing, or just slow?
 
 # Is the DNS service itself healthy?

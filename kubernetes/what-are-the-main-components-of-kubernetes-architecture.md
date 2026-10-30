@@ -29,6 +29,8 @@ tags:
 - **kube-proxy** - programmes iptables or nftables rules (IPVS mode still exists but is deprecated) so Service virtual IPs route to healthy pod endpoints. Some CNIs, such as Cilium, replace it with eBPF.
 - **container runtime** - containerd or CRI-O, which actually runs the containers via the CRI.
 
+In kubeadm-built clusters the control-plane components themselves run as **static Pods** - manifests in `/etc/kubernetes/manifests` that the kubelet starts directly, without the API server. On EKS, GKE, and AKS the control plane is hidden and run by the provider. Each kubelet also renews a `Lease` in `kube-node-lease` every few seconds as a cheap heartbeat, which is how the node controller decides a node is `NotReady`.
+
 **Add-ons** - CoreDNS for cluster DNS, a CNI plugin for pod networking, and metrics-server for autoscaling inputs.
 
 **How they coordinate.** No component calls another directly. Each one **watches** the API server for the objects it cares about and writes its results back, so the scheduler, controllers, and kubelets are loosely coupled and can restart independently - a scheduler outage stops new placements but leaves running Pods untouched. The trade-off is that the API server and etcd are on every path: a slow etcd or an overloaded API server degrades the whole control plane, which is why production clusters run three or five etcd members on fast disks and why API Priority and Fairness exists to stop one noisy client starving the rest.

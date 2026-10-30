@@ -56,6 +56,7 @@ With `Immediate`, the driver provisions the disk as soon as the PVC is created -
 
 - **`reclaimPolicy`**: `Delete` destroys the underlying disk when the PVC is deleted - fine for caches, dangerous for databases. `Retain` keeps the PV and the data as `Released`, so an operator must clean it up or re-bind it deliberately. Dynamic provisioning defaults to `Delete`; set `Retain` on any class that backs real data.
 - **Expansion**: with `allowVolumeExpansion: true`, editing the PVC's `resources.requests.storage` grows the volume online (many drivers no longer require a Pod restart to resize the filesystem). You cannot shrink a PVC.
+- **Changing performance, not size**: a `VolumeAttributesClass` (GA in Kubernetes 1.34) holds driver parameters such as IOPS and throughput; pointing a PVC's `volumeAttributesClassName` at a different class asks the CSI driver to modify the live volume - for example, raising a gp3 volume's IOPS - without recreating it. Support depends on the driver.
 - **Snapshots**: `VolumeSnapshotClass` + `VolumeSnapshot` capture point-in-time state, and a new PVC can be created with `dataSource` pointing at a snapshot - the standard clone/restore path. Snapshots are per-volume and usually not application-consistent on their own, so quiesce or use the database's own backup for anything transactional.
 
 ### StatefulSets and `volumeClaimTemplates`

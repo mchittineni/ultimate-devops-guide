@@ -81,7 +81,9 @@ spec:
     rollingUpdate:
       maxUnavailable: 0 # never lose capacity...
       maxSurge: 2 # ...at the cost of 2 extra Pods' headroom
+  selector: { matchLabels: { app: checkout } }
   template:
+    metadata: { labels: { app: checkout } }
     spec:
       terminationGracePeriodSeconds: 45
       containers:
@@ -92,7 +94,7 @@ spec:
             periodSeconds: 5
           lifecycle:
             preStop:
-              exec: { command: ["sh", "-c", "sleep 5"] } # let endpoints drain first
+              sleep: { seconds: 5 } # native sleep action (GA 1.34): let endpoints drain first
 ```
 
 ```bash

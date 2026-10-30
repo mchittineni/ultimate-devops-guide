@@ -37,7 +37,7 @@ search default.svc.cluster.local svc.cluster.local cluster.local
 options ndots:5
 ```
 
-`10.96.0.10` is the `kube-dns` Service's ClusterIP; kube-proxy (or the CNI's eBPF replacement) load-balances it across CoreDNS Pods. CoreDNS's Corefile decides what happens next: the `kubernetes cluster.local` block answers cluster names from its in-memory view of the API, `cache` holds answers for their TTL (30 s by default for cluster records), and `forward . /etc/resolv.conf` sends everything else to the node's upstream resolver.
+`10.96.0.10` is the `kube-dns` Service's ClusterIP; kube-proxy (or the CNI's eBPF replacement) load-balances it across CoreDNS Pods. CoreDNS's Corefile decides what happens next: the `kubernetes cluster.local` block answers cluster names from its in-memory view of the API, `cache 30` holds answers for at most 30 s (records served by the `kubernetes` plugin carry a 5 s TTL by default, so cluster names are effectively cached for 5 s), and `forward . /etc/resolv.conf` sends everything else to the node's upstream resolver.
 
 ### The `ndots:5` problem
 
@@ -53,7 +53,7 @@ That is four round trips instead of one, and most resolvers (glibc included) sen
 ### Other bottlenecks
 
 - **Capacity.** Two CoreDNS replicas serving a large cluster will queue and drop under bursts. Scale with the `cluster-proportional-autoscaler` (replicas proportional to nodes or cores) or an HPA, and give CoreDNS enough CPU - it is latency-sensitive, so avoid a tight CPU limit.
-- **Conntrack races.** Parallel A and AAAA queries from the same socket over UDP can race in the kernel's conntrack NAT insertion; one packet is dropped and the client waits for its five-second retry. Fixes: NodeLocal DNSCache, `options single-request-reopen` (glibc), or TCP for DNS.
+- **Conntrack races.** Parallel A and AAAA queries from the same socket over UDP can race in the kernel's conntrack NAT insertion; one packet is dropped and the client waits for its five-second retry. Fixes: NodeLocal DNSCache, `options single-request-reopen` (glibc only - musl-based Alpine images ignore it), or TCP for DNS.
 - **Upstream latency.** Slow or rate-limited upstream resolvers (for example, per-ENI query limits on cloud VPC resolvers) show up as `forward` plugin latency. Caching and NodeLocal DNSCache reduce the number of queries that reach them.
 
 ### Remediation options

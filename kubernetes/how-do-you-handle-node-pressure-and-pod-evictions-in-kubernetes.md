@@ -13,7 +13,7 @@ tags:
 
 # How do you handle node pressure and Pod evictions in Kubernetes?
 
-**Short answer:** Understand which mechanism evicted the Pod, because the fixes differ. **The kubelet** evicts under node pressure (memory, disk, inodes, PIDs) and chooses victims by **QoS class** - `BestEffort` first, then `Burstable` exceeding its requests, `Guaranteed` last. **The scheduler** preempts lower-`PriorityClass` Pods to make room for higher ones. **The API server** performs graceful eviction for `drain`, honouring PodDisruptionBudgets. The durable fixes are: set realistic requests and limits so QoS is not accidental, reserve capacity for the system (`--system-reserved`, `--kube-reserved`), give critical workloads a `PriorityClass` and everything else a lower one, protect availability with PDBs, and let the cluster autoscaler add nodes before pressure rather than after.
+**Short answer:** Understand which mechanism evicted the Pod, because the fixes differ. **The kubelet** evicts under node pressure (memory, disk, inodes, PIDs) and ranks victims by whether usage exceeds requests, then by Pod priority, then by usage relative to requests - which in practice means `BestEffort` first, `Burstable` over its requests next, and `Guaranteed` last. **The scheduler** preempts lower-`PriorityClass` Pods to make room for higher ones. **The API server** performs graceful eviction for `drain`, honouring PodDisruptionBudgets. The durable fixes are: set realistic requests and limits so QoS is not accidental, reserve capacity for the system (`--system-reserved`, `--kube-reserved`), give critical workloads a `PriorityClass` and everything else a lower one, protect availability with PDBs, and let the cluster autoscaler add nodes before pressure rather than after.
 
 ## Detail
 
@@ -21,7 +21,7 @@ tags:
 
 | Mechanism                  | Trigger                                                                      | Victim selection                                              | Respects PDB |
 | -------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------ |
-| **Kubelet node-pressure**  | `memory.available`, `nodefs.available`, `imagefs.available`, `pid.available` | QoS class, then usage above requests, then Pod priority       | No           |
+| **Kubelet node-pressure**  | `memory.available`, `nodefs.available`, `imagefs.available`, `pid.available` | Usage above requests, then priority, then usage vs requests   | No           |
 | **Scheduler preemption**   | A pending higher-priority Pod cannot be scheduled                            | Lowest `PriorityClass` first                                  | Best effort  |
 | **API eviction (`drain`)** | Node maintenance, upgrade, scale-down                                        | Whatever you drained                                          | Yes          |
 | **OOM killer (in-kernel)** | Container exceeds its memory limit                                           | The offending process; container restarts, Pod is not evicted | n/a          |
@@ -82,14 +82,18 @@ kind: Deployment
 metadata: { name: checkout, namespace: prod }
 spec:
   replicas: 6
+  selector: { matchLabels: { app: checkout } }
   template:
+    metadata: { labels: { app: checkout } }
     spec:
       priorityClassName: production # batch workloads sit below this
       containers:
         - name: api
+          image: registry.example.com/checkout:1.9.0
           resources:
             requests: { cpu: "500m", memory: 1Gi }
-            limits: { memory: 1Gi } # == request -> Guaranteed, evicted last
+            limits: { cpu: "500m", memory: 1Gi } # CPU AND memory == requests -> Guaranteed
+          volumeMounts: [{ name: scratch, mountPath: /scratch }]
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: topology.kubernetes.io/zone

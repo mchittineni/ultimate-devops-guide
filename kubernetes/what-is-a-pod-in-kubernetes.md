@@ -36,17 +36,18 @@ metadata:
   name: app
 spec:
   initContainers:
-    - name: migrate
+    - name: migrate # classic init container: runs to completion first
       image: myapp:1.4.0
       command: ["./migrate", "up"]
+    - name: log-shipper # native sidecar: starts before the app, stops after it
+      image: fluent/fluent-bit:4.0
+      restartPolicy: Always
+      volumeMounts: [{ name: logs, mountPath: /var/log/app, readOnly: true }]
   containers:
     - name: app
       image: myapp:1.4.0
       ports: [{ containerPort: 8080 }]
       volumeMounts: [{ name: logs, mountPath: /var/log/app }]
-    - name: log-shipper # sidecar, same volume
-      image: fluent/fluent-bit:4.0
-      volumeMounts: [{ name: logs, mountPath: /var/log/app, readOnly: true }]
   volumes:
     - name: logs
       emptyDir: {}

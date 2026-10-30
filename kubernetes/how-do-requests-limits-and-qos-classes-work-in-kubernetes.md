@@ -36,6 +36,8 @@ CPU limits deserve their own warning. A limit of `500m` means 50 ms of CPU per 1
 
 Memory is the opposite: because it cannot be reclaimed, an unbounded container can consume the node and take healthy neighbours with it. Always bound memory.
 
+**Pod-level resources.** Requests and limits have traditionally been per container. Since Kubernetes 1.34 (beta, on by default) you can also set `spec.resources` on the Pod itself, giving all its containers a shared budget - useful when a sidecar's usage fluctuates against the main container's. Per-container values, where set, must fit inside the Pod-level ones.
+
 ### QoS classes and eviction order
 
 | Class        | How you get it                                                     | Consequence                                                                  |
@@ -77,7 +79,8 @@ spec:
             limits: { memory: "512Mi" } # memory bounded == request; no CPU limit
           env:
             - { name: GOMEMLIMIT, value: "460MiB" } # runtime respects the cgroup
-      # a latency-sensitive Pod that must survive node pressure -> Guaranteed
+      # This Pod is Burstable (no CPU limit). For Guaranteed, every container needs
+      # CPU and memory limits equal to its requests.
 ---
 apiVersion: v1
 kind: LimitRange
