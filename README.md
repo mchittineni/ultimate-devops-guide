@@ -2,7 +2,11 @@
 
 # ⚙️ Cloud, DevOps, Platform & SRE Guide
 
-**750 questions across 40 topics - answered to the depth an interviewer actually expects.**
+<!-- HEADLINE:START -->
+
+**787 questions across 40 topics - answered to the depth an interviewer actually expects.**
+
+<!-- HEADLINE:END -->
 
 Role tracks: **DevOps** (junior → senior) · **DevSecOps** · **SecOps** · **SRE** · **SLO** · **SLA** · **AWS** · **Azure** · **GCP** · **Cloud** · **Platform Engineering**
 
@@ -18,10 +22,16 @@ _Translated landing pages, committed to the repo. English is canonical; lesson p
 
 [![Validate](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/validate-and-format.yml/badge.svg)](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/validate-and-format.yml)
 [![Deploy Knowledge Graph](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/knowledge-graph.yml/badge.svg)](https://github.com/mchittineni/ultimate-devops-guide/actions/workflows/knowledge-graph.yml)
-![Questions](https://img.shields.io/badge/questions-750-blue)
+
+<!-- BADGES:START -->
+
+![Questions](https://img.shields.io/badge/questions-787-blue)
 ![Topics](https://img.shields.io/badge/topics-40-blueviolet)
-![Difficulty](https://img.shields.io/badge/difficulty-🟢%20173%20·%20🟡%20370%20·%20🔴%20207-lightgrey)
+![Difficulty](https://img.shields.io/badge/difficulty-🟢%20177%20·%20🟡%20394%20·%20🔴%20216-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
+
+<!-- BADGES:END -->
+
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 [![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=000000)](https://buymeacoffee.com/mchittineni)
@@ -41,7 +51,7 @@ Explore the entire repository visually through our **Interactive 3D Telemetry Gr
 
 👉 **[Launch Interactive 3D Knowledge Graph](https://mchittineni.github.io/ultimate-devops-guide/)**
 
-- **Visual Infrastructure Mapping**: Explore relationship edges connecting all 750 questions across 40 topics.
+- **Visual Infrastructure Mapping**: Explore relationship edges connecting every question and topic in the repository.
 - **Cross-Topic Concept Wikilinks**: Discover cross-cutting concepts between Docker, Kubernetes, CI/CD, IaC, and SRE.
 - **Filterable Telemetry**: Filter nodes live by difficulty, domain group, or specific keywords.
 
