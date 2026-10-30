@@ -6,6 +6,7 @@ difficulty: "Intermediate"
 tags:
   - devops
   - interview-questions
+  - site-reliability-engineering
   - chaos-engineering
   - gameday
   - resilience
@@ -70,10 +71,11 @@ Hypothesis: "with one of six checkout pods killed every 10 minutes, the p99 stay
 
 ## Interview tips
 
-- Scientific method: steady state baseline -> hypothesis -> blast radius control -> experiment.
-- Not random destruction; targeted hypothesis testing.
-- GameDays involving cross-functional engineering, operations, and leadership.
-- Surfacing hidden cascading timeouts and failover bugs in controlled environments.
+- Walk the method: steady state, hypothesis, minimal blast radius, run with abort conditions, learn and fix. "Not random destruction" is the point being tested.
+- Name the tooling landscape: Chaos Mesh and LitmusChaos (CNCF, Kubernetes-native), AWS Fault Injection Service and Azure Chaos Studio (managed, with stop conditions tied to CloudWatch/Azure Monitor alarms), Gremlin and Steadybit (commercial).
+- Tie it to SLOs: experiments spend error budget deliberately, and the steady-state metric should be the SLI.
+- GameDays test people and process too - paging, runbooks, dashboards, communication - which is often where the real gaps are.
+- Typical findings worth citing: missing timeouts and retries with no backoff, connection pools that never recover after a failover, and alerts that did not fire.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

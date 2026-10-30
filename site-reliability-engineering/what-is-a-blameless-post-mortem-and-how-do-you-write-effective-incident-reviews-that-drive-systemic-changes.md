@@ -6,6 +6,7 @@ difficulty: "Beginner"
 tags:
   - devops
   - interview-questions
+  - site-reliability-engineering
   - sre
   - post-mortem
   - incident-management
@@ -49,13 +50,13 @@ Punishing engineers for human error ('human error' is a symptom, not a cause) en
 ```markdown
 # Post-incident review: checkout 5xx, 2026-08-07
 
-**Impact:** 27 min, ~40% of checkout requests failed, 2,100 customers, 31% of the monthly error budget.
+**Impact:** 29 min, ~40% of checkout requests failed, 2,100 customers, 31% of the monthly error budget.
 
 ## Timeline (UTC)
 - 09:02 release 1.9.0 starts canary
 - 09:04 burn-rate page fires (detect: 2 min)
 - 09:12 incident declared, IC assigned
-- 09:23 rollback complete; 09:31 error rate at baseline (mitigate: 27 min)
+- 09:23 rollback complete; 09:31 error rate at baseline (mitigate: 27 min after detection)
 
 ## Contributing factors
 - The migration took a table lock that the staging dataset was too small to reveal.
@@ -73,10 +74,11 @@ Punishing engineers for human error ('human error' is a symptom, not a cause) en
 
 ## Interview tips
 
-- Assuming people act with good intentions given the context and tooling available.
-- Blaming systems, guardrails, and tooling rather than punishing humans.
-- Avoiding hindsight bias ('they should have known').
-- Actionable engineering items prioritized in sprint backlogs.
+- Define blameless precisely: assume people made reasonable decisions with the information and tools they had, then ask why the system made the bad outcome easy.
+- Prefer "contributing factors" to a single root cause - complex outages rarely have one, and the single-cause framing tends to stop at the last human action.
+- Action items must be specific, owned, dated, and tracked; a review with "be more careful" as an action has failed.
+- Mention the triggers for a review (any user-visible SLO impact, a page that needed escalation, a data-loss near miss) and that near misses are worth reviewing too.
+- Expect the follow-up "how do you know reviews work?" - repeat-incident rate and action-item completion rate.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

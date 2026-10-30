@@ -6,6 +6,7 @@ difficulty: "Beginner"
 tags:
   - devops
   - interview-questions
+  - site-reliability-engineering
   - sre
   - sli
   - slo
