@@ -53,7 +53,7 @@ Monthly Uptime Percentage       Service Credit Percentage
 
 ### Real-World Production Scenario
 
-An enterprise running on AWS experiences 4 hours of unannounced us-east-1 regional RDS unavailability in July, dropping monthly database uptime to 99.45% against an SLA commitment of 99.95%. The enterprise submits a claim within 30 days including RDS connection failure logs. AWS approves the claim and grants a 10% credit against July's RDS charges, applied as a discount on the August invoice.
+An enterprise running on AWS experiences 4 hours of unannounced us-east-1 regional RDS unavailability in July, dropping monthly database uptime to 99.46% (240 of 44,640 minutes) against an SLA commitment of 99.95%. The enterprise submits a claim within 30 days including RDS connection failure logs. AWS approves the claim and grants a 10% credit against July's RDS charges, applied as a discount on the August invoice.
 
 ## Example
 
