@@ -74,7 +74,7 @@ spec:
   ports:
     - port: 80
       targetPort: 8080
-  trafficDistribution: PreferClose
+  trafficDistribution: PreferClose # GA in 1.33; 1.34+ also offers the explicit PreferSameZone / PreferSameNode
 ```
 
 ## Interview tips
