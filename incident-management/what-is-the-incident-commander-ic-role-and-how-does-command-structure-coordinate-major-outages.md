@@ -58,10 +58,11 @@ IC opening script (first 5 minutes of a SEV-1)
 
 ## Interview tips
 
-- The IC directs the response and does NOT write code or run commands.
-- Maintaining global situational awareness and avoiding tunnel vision.
-- Role delegation: Operations Lead, Comms Lead, Scribe.
-- Shielding technical responders from executive and customer inquiries.
+- The IC coordinates and decides; they do not debug. Say why: hands-on work destroys situational awareness and nobody else is watching the whole incident.
+- Name the roles and what each owns: ops lead (all production changes), comms lead (stakeholders and status page), scribe (timeline).
+- Describe the rhythm: state impact and roles, set a check-in time, ask for reports against hypotheses, and hand over explicitly ("you are now IC") after a few hours.
+- Authority is the point: the IC can pull in any engineer, approve risky mitigations, and tell executives to use the comms channel rather than the bridge.
+- Mention that ICs are trained and rotated (a dedicated IC on-call for SEV-1s at larger companies), not chosen ad hoc.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
@@ -69,7 +70,7 @@ IC opening script (first 5 minutes of a SEV-1)
 
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What are the Three Ways of DevOps?]] (`#783`): [What are the Three Ways of DevOps?](../core-devops-concepts/what-are-the-three-ways-of-devops.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

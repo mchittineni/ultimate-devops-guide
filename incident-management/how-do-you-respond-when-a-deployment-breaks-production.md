@@ -48,7 +48,7 @@ When any of these apply, the mitigation is a **compensating change** (a forward 
 
 This is the part interviewers actually weigh, because it is the difference between firefighting and engineering. The scenario in the classic version of this question - "the release passed every test but the database connection failed in production" - has a specific lesson: **the pipeline tested the code, not the deployed system in its real environment.** So the follow-ups are structural:
 
-- Was the failure **environment-specific configuration** (a connection string, a secret, a security group, a firewall rule)? Then the gate is a post-deploy **smoke test that exercises the real dependency**, run automatically before traffic shifts - a health check that touches the database, a synthetic transaction on the critical journey.
+- Was the failure **environment-specific configuration** (a connection string, a secret, a security group, a firewall rule)? Then the gate is a post-deploy **smoke test that exercises the real dependency**, run automatically before traffic shifts - a start-up check that the database pool initialised, a synthetic transaction on the critical journey. Be careful where that check lives: a startup probe (or a one-time check at boot) that refuses to go ready without the dependency is right; a readiness probe that fails on every transient database blip is a trap, because when the shared database hiccups every replica goes unready at once and a partial degradation becomes a total outage.
 - Was it **untested integration**? Add a contract or integration test against a real instance of the dependency, not a mock.
 - Was it **load-dependent**? A canary with metric-based promotion catches what a functional test cannot, because it exposes the change to real traffic at a small percentage.
 - Was it **caught late by a human watching graphs**? Automate the verdict: error-budget burn or an SLO-based alarm that triggers the rollback without a human decision.
@@ -75,7 +75,7 @@ Blameless, within a few days, with a timeline captured while it is fresh: when t
        real dependency in the real environment.
 
 Follow-ups (owner, date - not "be more careful"):
-  1. Readiness probe must verify the DB connection            @dana  14 Aug
+  1. Startup probe fails until the DB pool has initialised    @dana  14 Aug
   2. Post-deploy smoke test hits a real query before traffic  @kai   14 Aug
   3. Canary promotion gated on 5xx rate, auto-rollback        @sam   21 Aug
   4. CI fails if a referenced secret key is missing per env   @dana  21 Aug
@@ -105,7 +105,7 @@ kubectl -n prod logs -l app=checkout --since=2m | grep -c ' 5[0-9][0-9] '
 - Order the mitigation levers by speed - feature flag, traffic shift, rollback, shed load - and note that a flag is the fastest because it needs no deploy.
 - Say "freeze the pipeline" early. It is a small, concrete action that shows you have actually run an incident with other engineers deploying around you.
 - The rollback-cannot-undo list (migrations, data format, consumed messages, cache, third-party side effects) is what marks a senior answer. Follow it immediately with expand/contract as the practice that keeps rollback available.
-- If the interviewer gives the classic "passed all tests but the database failed" setup, name the real gap: the pipeline validated code, not the deployed system against its real dependencies. Then propose a dependency-touching readiness probe and a post-deploy smoke test.
+- If the interviewer gives the classic "passed all tests but the database failed" setup, name the real gap: the pipeline validated code, not the deployed system against its real dependencies. Then propose a start-up dependency check (not a readiness probe that flaps with the database) and a post-deploy smoke test.
 - In a GitOps context, be precise: a manual `kubectl rollout undo` gets reconciled away, so the rollback is `git revert`.
 - Frame the review around time-to-detect and time-to-mitigate, and prefer one automated gate over several human reminders.
 - Have a real story with numbers - what broke, how long, what you changed afterwards - and be willing to say what you would do differently. That self-critique is usually what earns the mark. See [what is an incident response plan](./what-is-an-incident-response-plan.md).

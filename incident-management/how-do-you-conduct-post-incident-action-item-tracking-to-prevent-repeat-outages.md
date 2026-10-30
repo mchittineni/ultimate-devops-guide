@@ -55,10 +55,11 @@ curl -s -u "$JIRA_USER:$JIRA_TOKEN" -G "https://acme.atlassian.net/rest/api/3/se
 
 ## Interview tips
 
-- The pattern of repeat outages caused by neglected action items.
-- Action items must be specific, testable engineering tasks, not vague aspirations.
-- Strict SLAs (e.g. 14-30 days for Sev-1 actions).
-- Halting feature releases if teams fail to resolve high-severity incident action items.
+- Name the failure mode first: repeat incidents whose fix was written down and never shipped. Linking tickets to incidents makes that visible.
+- Action items must be specific, testable, singly owned, and dated - "improve monitoring" is not an action item.
+- Use due-date targets by severity (for example 14-30 days for SEV-1 items) and review overdue items weekly with leadership.
+- Give the escalation lever: overdue critical items count against the error budget policy, so feature work pauses until they are done.
+- Measure outcomes, not activity: action-item completion rate and repeat-incident rate per service. Incident tools (incident.io, Rootly, FireHydrant, PagerDuty) can sync follow-ups to Jira or Linear automatically.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

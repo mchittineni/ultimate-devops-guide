@@ -6,6 +6,7 @@ difficulty: "Intermediate"
 tags:
   - devops
   - interview-questions
+  - incident-management
   - automation
   - self-healing
   - remediation
