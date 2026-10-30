@@ -34,7 +34,8 @@ tags:
 - **Mutable default arguments** - `def f(items=[])` shares one list across every call. Use `None` and create inside.
 - **Generators** - `yield` streams items lazily instead of building a list in memory. The correct answer to "how would you process a 10 GB log file in Python."
 - **Context managers** - `with open(...)` guarantees cleanup; the same pattern applies to locks and connections.
-- **Virtual environments and pinning** - `venv` plus a lock file (`pip-tools`, `poetry`, or `uv`). Unpinned dependencies in automation is the failure interviewers probe for.
+- **Virtual environments and pinning** - `venv` plus a lock file (`pip-tools`, `poetry`, or `uv`). Unpinned dependencies in automation is the failure interviewers probe for. `uv` has become the common default: it manages the interpreter version too, locks with `uv lock`, and runs single-file scripts that declare their own dependencies inline (PEP 723) with `uv run script.py`.
+- **Interpreter lifecycle** - each CPython minor version gets five years of support; 3.9 reached end of life in October 2025 and 3.10 does in October 2026. Automation baked into an old base image quietly runs on an unsupported interpreter, so pin the version in the image and upgrade it deliberately.
 
 **Error handling is the difference between a script and a tool.** Catch specific exceptions (`ClientError`, not bare `except:`), retry transient failures with exponential backoff and jitter, log with the `logging` module rather than `print`, and exit with meaningful codes so a pipeline can branch on them.
 
