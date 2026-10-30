@@ -26,7 +26,7 @@ Modern Jenkins practice:
 - **Kubernetes plugin** - spin up a fresh agent pod per build, so builds are isolated and the fleet scales to zero.
 - **Configuration as Code (JCasC)** - the controller's own configuration expressed in YAML.
 
-The trade-off versus hosted options like GitHub Actions or GitLab CI is that you operate Jenkins yourself: upgrades, plugin compatibility, agent capacity, and security hardening are your responsibility. That includes the runtime: current LTS releases require Java 21 or newer on the controller and agents (Java 17 support ended with 2.555.1), and plugin CVEs are the most common Jenkins vulnerability class, so you need a patch cadence.
+The trade-off versus hosted options like GitHub Actions or GitLab CI is that you operate Jenkins yourself: upgrades, plugin compatibility, agent capacity, and security hardening are your responsibility. That includes the runtime: current LTS releases require Java 21 or newer on the controller and agents (2.555.1, April 2026, was the first LTS to drop Java 17; Java 25 is also supported), and plugin CVEs are the most common Jenkins vulnerability class, so you need a patch cadence.
 
 ## Example
 
@@ -53,7 +53,10 @@ pipeline {
       steps { sh "kubectl set image deploy/app app=${IMAGE}" }
     }
   }
-  post { always { junit 'reports/**/*.xml' }; failure { slackSend "Build ${env.BUILD_URL} failed" } }
+  post {
+    always  { junit 'reports/**/*.xml' }
+    failure { slackSend message: "Build ${env.BUILD_URL} failed" }
+  }
 }
 ```
 

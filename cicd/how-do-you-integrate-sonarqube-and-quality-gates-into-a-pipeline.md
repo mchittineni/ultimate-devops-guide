@@ -66,7 +66,7 @@ Two ordering rules people get wrong: analysis must come **after** tests (no cove
 
 ### SonarQube is not a security scanner
 
-Sonar finds a class of security-relevant bugs (injection patterns, hardcoded secrets, unsafe deserialisation) - it is SAST-adjacent - but the core product does **not** cover dependency vulnerabilities, container image CVEs, or IaC misconfiguration. (Sonar now sells SCA as part of its paid Advanced Security add-on for Enterprise Edition and SonarQube Cloud, but most pipelines still run a dedicated scanner.) A complete pipeline pairs it with SCA (Snyk, Dependabot, OWASP Dependency-Check), image scanning (Trivy, Grype), IaC scanning (Checkov, tfsec), and secret scanning (gitleaks). Saying that boundary out loud is what distinguishes someone who has built a pipeline from someone who has installed a plugin.
+Sonar finds a class of security-relevant bugs (injection patterns, hardcoded secrets, unsafe deserialisation) - it is SAST-adjacent - but the core product does **not** cover dependency vulnerabilities, container image CVEs, or IaC misconfiguration. (Sonar now sells SCA as part of its paid Advanced Security add-on for Enterprise Edition and SonarQube Cloud, but most pipelines still run a dedicated scanner.) A complete pipeline pairs it with SCA (Snyk, Dependabot, OWASP Dependency-Check), image scanning (Trivy, Grype), IaC scanning (Checkov, `trivy config`), and secret scanning (gitleaks). Saying that boundary out loud is what distinguishes someone who has built a pipeline from someone who has installed a plugin.
 
 ### When a developer asks you to remove the gate because it is slow
 

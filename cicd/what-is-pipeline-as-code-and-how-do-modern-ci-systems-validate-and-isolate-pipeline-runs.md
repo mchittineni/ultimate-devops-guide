@@ -66,7 +66,8 @@ jobs:
           persist-credentials: false
       - name: Run actionlint
         run: |
-          bash <(curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          # pin the script to a release tag and pass the version - never execute a moving branch
+          bash <(curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.12/scripts/download-actionlint.bash) 1.7.12
           ./actionlint -color
 ```
 

@@ -39,7 +39,7 @@ The behavioural difference candidates are asked about most: **where does a synta
 - **`post`** - the reason declarative exists for most teams: `always` for cleanup and `junit`/`archiveArtifacts`, `failure` for notifications, `cleanWs()` at the end. In scripted you hand-roll this in `finally` and people forget.
 - **`when`** - `branch`, `changeset`, `expression`, `tag`, `anyOf`/`allOf`, plus `beforeAgent true` so you do not spin up an agent just to decide to skip.
 - **`parallel` and `matrix`** - `matrix` expands axes (OS × version) into parallel stages with `excludes`, which replaces a lot of hand-written scripted loops.
-- **`input`** - a manual gate. Put it in a stage with `agent none` and a `timeout`, or an abandoned approval holds an agent indefinitely.
+- **`input`** - a manual gate. Use the stage-level `input { }` directive (it pauses before the stage's `agent` is allocated) with a stage `timeout`, or an abandoned approval holds an executor indefinitely.
 
 ### Where scripted still earns its place
 
@@ -73,7 +73,7 @@ pipeline {
     stage('Build & test') {
       agent { docker { image 'maven:3.9-eclipse-temurin-21'; args '-v $HOME/.m2:/root/.m2' } }
       steps { sh 'mvn -B verify' }
-      post { always { junit 'target/surefire-reports/*.xml' } }
+      post { always { junit 'target/surefire-reports/*.xml'; cleanWs() } }
     }
 
     stage('Quality & security') {                 // independent checks, run together
@@ -91,17 +91,15 @@ pipeline {
 
     stage('Deploy to prod') {
       when { branch 'main'; beforeAgent true }    // decide before allocating an agent
-      steps {
-        timeout(time: 1, unit: 'HOURS') {
-          input message: 'Deploy to production?', ok: 'Ship it'
-        }
-        node('deployer') { sh "helm upgrade --install api ./chart --set image.tag=${env.GIT_COMMIT.take(12)} --atomic" }
-      }
+      options { timeout(time: 1, unit: 'HOURS') } // an abandoned approval times out
+      input { message 'Deploy to production?'; ok 'Ship it' } // waits BEFORE the agent is allocated
+      agent { label 'deployer' }
+      steps { sh "helm upgrade --install api ./chart --set image.tag=${env.GIT_COMMIT.take(12)} --atomic" }
+      post { always { cleanWs() } }
     }
   }
   post {
-    failure  { slackSend channel: '#deploys', message: "FAILED ${env.JOB_NAME} #${env.BUILD_NUMBER}" }
-    always   { node('linux') { cleanWs() } }
+    failure { slackSend channel: '#deploys', message: "FAILED ${env.JOB_NAME} #${env.BUILD_NUMBER}" }
   }
 }
 ```
