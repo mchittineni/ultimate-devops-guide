@@ -11,7 +11,7 @@ tags:
 
 Microservices, service mesh, event-driven design, and the Twelve-Factor principles that make apps portable.
 
-**15 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 8 · 🔴 Advanced: 4
+**16 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 8 · 🔴 Advanced: 5
 
 ## Questions
 
@@ -32,6 +32,7 @@ Microservices, service mesh, event-driven design, and the Twelve-Factor principl
 | 606 | [What is the Strangler Fig pattern and how is it used to safely decommission monolithic applications?](./what-is-the-strangler-fig-pattern-and-how-is-it-used-to-safely-decommission-monolithic-applications.md)                   | 🟢 Beginner     |
 | 607 | [What are Event Sourcing and CQRS patterns and when are they appropriate?](./what-are-event-sourcing-and-cqrs-patterns-and-when-are-they-appropriate.md)                                                                           | 🔴 Advanced     |
 | 608 | [What is Database per Service pattern and how do you handle cross-service queries and joins?](./what-is-database-per-service-pattern-and-how-do-you-handle-cross-service-queries-and-joins.md)                                     | 🟡 Intermediate |
+| 775 | [What is the transactional outbox pattern and how do idempotent consumers complete it?](./what-is-the-transactional-outbox-pattern-and-how-do-idempotent-consumers-complete-it.md)                                                 | 🔴 Advanced     |
 
 ## What interviewers probe here
 

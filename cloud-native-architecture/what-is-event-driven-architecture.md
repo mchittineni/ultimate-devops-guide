@@ -49,6 +49,8 @@ tags:
 }
 ```
 
+The envelope above mirrors the CNCF **CloudEvents** specification (`id`, `source`, `type`, `specversion`, `time`), which Azure Event Grid, Knative Eventing, and Google Eventarc use natively (EventBridge has its own envelope but can map to it) - using it keeps event metadata consistent across brokers.
+
 ## Interview tips
 
 - Idempotent consumers is the answer to at-least-once delivery - raise it before you are asked.
