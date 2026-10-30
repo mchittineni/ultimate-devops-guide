@@ -38,6 +38,8 @@ sum(rate(http_request_duration_seconds_bucket{le="0.3",job="api"}[5m]))
 / sum(rate(http_request_duration_seconds_count{job="api"}[5m]))
 ```
 
+The threshold must be an actual bucket boundary (`le="0.3"`); with classic histograms you cannot measure a threshold you did not create a bucket for, so choose buckets from the SLO, not the other way round. Native histograms remove that constraint via `histogram_fraction(0, 0.3, ...)`.
+
 ## Interview tips
 
 - The good/valid ratio formulation is the phrasing SRE interviewers expect.

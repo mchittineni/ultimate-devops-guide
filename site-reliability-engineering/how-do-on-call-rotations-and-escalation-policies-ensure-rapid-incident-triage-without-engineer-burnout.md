@@ -6,6 +6,7 @@ difficulty: "Beginner"
 tags:
   - devops
   - interview-questions
+  - site-reliability-engineering
   - sre
   - on-call
   - pagerduty
@@ -79,10 +80,11 @@ resource "pagerduty_escalation_policy" "checkout" {
 
 ## Interview tips
 
-- Primary and secondary escalation tiers with timeouts.
-- Capping alert volume to prevent fatigue (< 2 pages per shift).
-- Paging only for actionable incidents requiring real human intervention.
-- Follow-the-sun models to reduce sleep disruption.
+- Describe the escalation chain concretely: primary acknowledges within minutes, secondary auto-paged on no-ack, then a manager or incident commander - and that the policy is managed as code.
+- Quote the Google SRE load guidance: at most about two incidents per 12-hour shift, so each one gets a proper follow-up and post-mortem.
+- Make the feedback loop explicit: every page is reviewed weekly (actionable? urgent? real?), and noisy alerts are fixed or deleted.
+- Rotation size matters: fewer than about six engineers per single-site rotation means people are on call too often; follow-the-sun only works with real ownership at each site.
+- Mention humane mechanics: handover notes, compensation or time off in lieu, and a protected rest period after a night incident.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

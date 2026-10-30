@@ -6,6 +6,7 @@ difficulty: "Intermediate"
 tags:
   - devops
   - interview-questions
+  - site-reliability-engineering
   - sre
   - burn-rate
   - alerting
@@ -46,7 +47,9 @@ To avoid false alarms from transient blips:
 - The long window provides significance (a brief blip cannot push a 1-hour average over 14.4x); the short window makes the alert **reset quickly** once the burn stops, instead of firing for the next hour.
 - Combined with a short `for:` duration, a spike that ends before the condition has held stops alerting without paging anyone.
 
-**Limitations.** It needs enough traffic for the ratios to be meaningful - on a service with a handful of requests per minute, one failure is a huge burn rate. And it only works for SLOs you have actually defined; a failure mode the SLI does not capture will never burn budget.
+**Where the thresholds come from.** Burn rate = (fraction of budget consumed) x (SLO window / alert window). For "page when 2% of a 30-day budget is gone in 1 hour": 0.02 x 720 h / 1 h = 14.4. The alert threshold on the error ratio is then burn rate x (1 - SLO), so 14.4 x 0.001 = 1.44% errors for a 99.9% SLO. The same burn-rate numbers work for any SLO target; only the multiplication by the budget changes.
+
+**Limitations.** It needs enough traffic for the ratios to be meaningful - on a service with a handful of requests per minute, one failure is a huge burn rate (use synthetic traffic, a minimum-request-count guard such as `and sum(rate(requests[1h])) > 1`, or longer windows). And it only works for SLOs you have actually defined; a failure mode the SLI does not capture will never burn budget.
 
 ## Example
 
@@ -80,10 +83,11 @@ groups:
 
 ## Interview tips
 
-- Replacing threshold alerts (CPU > 80%) with budget burn rate alerts.
-- Burn rate measuring speed of error budget consumption.
-- Requiring both long and short windows to avoid waking humans for transient blips.
-- Paging only when budget will be exhausted within hours.
+- Define burn rate as "how many times faster than sustainable you are spending the budget", and derive 14.4 out loud (2% of 30 days in 1 hour).
+- Explain both windows: the long window gives significance, the short window makes the alert reset quickly once the burn stops.
+- Know the standard table: 14.4x over 1h/5m and 6x over 6h/30m page; 1x over 3d/6h (or 3x over 1d/2h) tickets.
+- Name the trade-off: precision versus detection time - a total outage crosses the 1h fast-burn threshold in under a minute and pages within a few minutes (plus the `for:` delay), but a 2x burn is only caught by the slow ticket.
+- Mention generators (Sloth, Pyrra, OpenSLO) so you are not hand-writing dozens of recording rules per SLO.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

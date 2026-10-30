@@ -6,6 +6,7 @@ difficulty: "Intermediate"
 tags:
   - devops
   - interview-questions
+  - site-reliability-engineering
   - sre
   - runbooks
   - automation
@@ -74,10 +75,10 @@ Lag still rising after 15 minutes: page the database on-call (`@db-oncall`).
 
 ## Interview tips
 
-- Linking runbooks directly in the alerting payload.
-- Prioritizing customer mitigation (stopping the bleeding) over immediate root-cause investigation.
-- Evolving procedural manual steps into automated self-healing controllers.
-- Clear diagnostic commands and escalation paths.
+- Every paging alert carries a runbook link in its annotations; an alert nobody can write a runbook for is probably not actionable.
+- Order the runbook for 3 a.m.: what it means, how to confirm, how to mitigate, when to escalate - mitigation before root cause.
+- Runbooks rot: review them after every incident that used one, and test them in GameDays.
+- Automate gradually (executable diagnostics, then approve-to-run, then fully automatic) with guardrails and an audit trail. Tools worth naming: Rundeck/PagerDuty Runbook Automation, AWS Systems Manager Automation, Kubernetes operators, and incident-tool workflows.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

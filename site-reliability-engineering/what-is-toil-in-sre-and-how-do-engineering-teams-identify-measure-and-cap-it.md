@@ -6,6 +6,7 @@ difficulty: "Beginner"
 tags:
   - devops
   - interview-questions
+  - site-reliability-engineering
   - sre
   - toil
   - automation
@@ -57,15 +58,18 @@ Manual TLS certificate renewals        12     20       4.0     cert-manager (thi
 Access requests to prod namespaces     30     10       5.0     self-service via IdP groups
 Restarting stuck consumer pods          8     15       2.0     fix root cause (offset bug)
 Disk clean-up on build agents          10     15       2.5     ephemeral runners
-Total measured toil                                    ~55 h   = 23% of capacity (cap 50%)
+Top four items                                         13.5
+Long tail (manual deploys, alert follow-ups, ...)      41.5     review next quarter
+Total measured toil                                    55.0 h  = 23% of capacity (cap 50%)
 ```
 
 ## Interview tips
 
-- Definition: manual, repetitive, automatable, lacks enduring value, scales linearly.
-- Distinguishing toil from engineering work.
-- The 50% toil cap rule.
-- Routing excess operational toil back to development teams to incentivize automation.
+- Give the definition (manual, repetitive, automatable, tactical, no enduring value, scales linearly) and then a test: "would the service be any better if we did this 100 more times?"
+- Toil is not all operational work: novel incident response, post-mortems, and capacity planning are operational but not toil.
+- The 50% cap is a ceiling, not a target; mature teams aim well below it, and Google's own surveys put SREs nearer a third.
+- The enforcement mechanism matters more than the number: excess operational work is handed back to the developer team, which aligns incentives.
+- Show judgement about automation ROI: some rare tasks are cheaper to leave manual with a good runbook.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

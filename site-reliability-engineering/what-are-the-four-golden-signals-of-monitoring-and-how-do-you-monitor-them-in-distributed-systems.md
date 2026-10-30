@@ -6,6 +6,7 @@ difficulty: "Beginner"
 tags:
   - devops
   - interview-questions
+  - site-reliability-engineering
   - sre
   - monitoring
   - golden-signals
@@ -57,17 +58,21 @@ sum by (service) (rate(http_server_request_duration_seconds_count{http_response_
   / sum by (service) (rate(http_server_request_duration_seconds_count[5m]))
 
 # Saturation: a resource that actually queues - here, DB connection pool usage
-max by (service) (db_client_connections_usage{state="used"} / db_client_connections_max)
+max by (service) (
+  sum by (service, db_client_connection_pool_name) (db_client_connection_count{db_client_connection_state="used"})
+  / sum by (service, db_client_connection_pool_name) (db_client_connection_max)
+)
 ```
 
-Metric names follow the OpenTelemetry HTTP and database semantic conventions as exported to Prometheus; adjust them to whatever your instrumentation emits.
+Metric names follow the OpenTelemetry HTTP and database semantic conventions as exported to Prometheus (older instrumentation emits `db_client_connections_usage{state="used"}` and `db_client_connections_max` for the pool metrics); adjust them to whatever your instrumentation emits.
 
 ## Interview tips
 
-- Listing all four signals: Latency, Traffic, Errors, Saturation.
-- Separating error latency from successful request latency.
-- Saturation measuring capacity constraints before failure occurs.
-- Mapping signals to PromQL queries.
+- Name all four, then relate them to RED (rate, errors, duration - the first three, per request-driven service) and USE (utilisation, saturation, errors - per resource). Interviewers often ask how the frameworks overlap.
+- Separate success latency from failure latency, and use percentiles or threshold proportions, never averages.
+- Saturation is the predictive one and the hardest to pick: choose the resource that actually queues for that service (pool, thread pool, partition lag), not CPU by default.
+- Count implicit errors too - a 200 with the wrong content, or a response slower than the SLO threshold, is a failure to the user.
+- Page on latency and errors (symptoms); use traffic and saturation mostly for diagnosis and capacity.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
