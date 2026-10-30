@@ -97,7 +97,7 @@ THE QUESTION THAT IS A TRAP
 
 - [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
-- [[How do you scale CI/CD across many services and teams?]] (`#459`): [How do you scale CI/CD across many services and teams?](../cicd/how-do-you-scale-ci-cd-across-many-services-and-teams.md)
+- [[What is the difference between DevOps and Agile?]] (`#784`): [What is the difference between DevOps and Agile?](../core-devops-concepts/what-is-the-difference-between-devops-and-agile.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

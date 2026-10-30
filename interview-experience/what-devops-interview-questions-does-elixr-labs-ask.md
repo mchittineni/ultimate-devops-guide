@@ -80,11 +80,11 @@ Elixr Labs — DevOps Engineer (6 YOE), reported round
   Monitoring / alerting        3   techniques, alert-fatigue triage, critical issue
   Ways of working              3   support vs project, QA/UAT pipelines, team size
 
-THE INTERVIEWER'S TECHNIQUE
-  They press the same decision three times — VPN vs ExpressRoute in general,
+THE ROUND'S PATTERN
+  The same decision is pressed three times — VPN vs ExpressRoute in general,
   then under a banking budget constraint, then "in which scenario each".
-  They are testing whether you can defend a recommendation under pressure
-  and change it when a constraint changes. Do not flip-flop; state the
+  It tests whether you can defend a recommendation under pressure and
+  change it when a constraint changes. Do not flip-flop; state the
   deciding variable.
 ```
 

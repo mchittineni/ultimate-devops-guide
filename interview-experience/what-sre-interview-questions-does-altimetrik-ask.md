@@ -84,7 +84,7 @@ THE PATTERN TO NOTICE
 
 ## Interview tips
 
-- Burn rate is the question most candidates fail. Give the arithmetic: burn rate is how fast you are consuming the error budget relative to the rate that would exhaust it exactly at the end of the window, so 1× lands precisely on budget and 2× exhausts it in half the period. Then name multi-window multi-burn-rate alerting — a fast window at roughly 14× for pages and a slower window at around 6× or 3× for tickets. See [error budgets](../site-reliability-engineering/what-is-error-budget.md) and [designing alerts that page a human](../site-reliability-engineering/how-do-you-design-alerts-that-page-a-human.md).
+- Burn rate is the question most candidates fail. Give the arithmetic: burn rate is how fast you are consuming the error budget relative to the rate that would exhaust it exactly at the end of the window, so 1× lands precisely on budget and 2× exhausts it in half the period. Then name multi-window multi-burn-rate alerting from the Google SRE workbook, for a 30-day SLO: page at 14.4× over 1 hour (2% of the budget gone) or 6× over 6 hours (5%), and ticket at 1× over 3 days (10%) — each paired with a short window about one-twelfth as long so the alert stops firing once the burn stops. An "acceptable" burn rate is at or below 1×; above it, you slow or freeze risky releases per the error-budget policy. See [error budgets](../site-reliability-engineering/what-is-error-budget.md) and [designing alerts that page a human](../site-reliability-engineering/how-do-you-design-alerts-that-page-a-human.md).
 - Say the golden signals explicitly — latency, traffic, errors, saturation — and then say which of your dashboards covers each. Naming Grafana without naming the signals reads as tool familiarity, not SRE practice. See [service level indicators](../site-reliability-engineering/what-are-service-level-indicators-slis.md) and [service level objectives](../site-reliability-engineering/what-are-service-level-objectives-slos.md).
 - SLO-based alerting means alerting on budget consumption rather than on raw thresholds, so a brief spike that does not threaten the objective stays quiet. Contrast it with CPU-threshold alerting to show you understand why it exists.
 - The GKE Pod failure question wants a repeatable method, so give one: `kubectl get pod` for phase and restart count, `describe` for events, image pull errors and scheduling failures, `logs --previous` for the crashed container, then the exit code to separate `OOMKilled` from a config or secret error from a failing probe. See [troubleshooting a Pod stuck in Pending or CrashLoopBackOff](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff.md) and [how probes differ](../kubernetes/how-do-liveness-readiness-and-startup-probes-differ.md).
@@ -97,9 +97,9 @@ THE PATTERN TO NOTICE
 
 ## Related Concepts
 
+- [[What is a Blameless Post-Mortem and how do you write effective incident reviews that drive systemic changes?]] (`#645`): [What is a Blameless Post-Mortem and how do you write effective incident reviews that drive systemic changes?](../site-reliability-engineering/what-is-a-blameless-post-mortem-and-how-do-you-write-effective-incident-reviews-that-drive-systemic-changes.md)
 - [[What is Site Reliability Engineering?]] (`#96`): [What is Site Reliability Engineering?](../site-reliability-engineering/what-is-site-reliability-engineering.md)
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
-- [[How do you design alerts that page a human?]] (`#233`): [How do you design alerts that page a human?](../site-reliability-engineering/how-do-you-design-alerts-that-page-a-human.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -33,7 +33,8 @@ tags:
 
 - **What is CI/CD? Explain it briefly and concretely.**
 - **Explain the Kubernetes architecture, naming each component and what it is responsible for.**
-  **How the round was run** — the candidate's own closing note, worth more than any single question:
+
+**How the round was run** — the candidate's own closing note, worth more than any single question:
 
 - **Expect a follow-up on every answer: explain it briefly, explain the code, explain how it is used, and state the output.**
 

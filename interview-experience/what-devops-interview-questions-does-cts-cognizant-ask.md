@@ -31,7 +31,8 @@ tags:
 - **What types of load balancer are available?**
 - **What is Azure Application Gateway, and how does it handle and encrypt HTTP and HTTPS traffic?**
 - **The application is down and returning a 503. What steps do you take?**
-  The candidate also recorded their own proposed answer to the web-application question, which is a useful checklist in its own right: verify the nginx or Apache service is running; check whether firewall or security-group rules are blocking traffic; note that ping and telnet add nothing once the network is confirmed healthy; clear stale browser cache and cookies; run `nslookup` to confirm DNS resolution; check whether the TLS certificate is valid or corrupt; and check whether the server has run out of memory and can no longer load the application's resources.
+
+The candidate also recorded their own proposed answer to the web-application question, which is a useful checklist in its own right: verify the nginx or Apache service is running; check whether firewall or security-group rules are blocking traffic; note that ping and telnet add nothing once the network is confirmed healthy; clear stale browser cache and cookies; run `nslookup` to confirm DNS resolution; check whether the TLS certificate is valid or corrupt; and check whether the server has run out of memory and can no longer load the application's resources.
 
 ### Round 2 — comparisons and design (3-4 YOE)
 

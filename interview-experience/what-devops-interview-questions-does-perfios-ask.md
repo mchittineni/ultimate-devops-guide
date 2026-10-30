@@ -70,7 +70,7 @@ TWO QUESTIONS SAY "DRAW A DIAGRAM"
 ```bash
 # Sum 1..100 — three valid answers, and saying why you'd pick one matters.
 sum=0; for i in $(seq 1 100); do sum=$((sum + i)); done; echo "$sum"   # 5050
-seq 1 100 | paste -sd+ | bc          # shorter
+seq 1 100 | paste -sd+ - | bc        # shorter
 echo $(( 100 * 101 / 2 ))            # O(1) — Gauss; mention it exists
 
 # The triangular pattern: row r holds r numbers, counted DOWN from the
