@@ -25,6 +25,7 @@ Terraform 1.5 introduced top-level `import` blocks, making imports version-contr
 2. **Generate configuration:** Use `terraform plan -generate-config-out=generated.tf` to auto-generate HCL code for the imported resources.
 3. **Refine and apply:** Review `generated.tf`, clean up auto-generated attributes, run `terraform plan` to verify zero changes required, and execute `terraform apply`. The import happens in the apply, so it goes through the same review and locking as any other change.
 4. **Scale it:** since Terraform 1.7 (and OpenTofu), `import` blocks accept `for_each`, so a map of IDs can adopt many resources at once. Remove the blocks after the apply, or leave them - they are no-ops once the resource is in state.
+5. **Discover what to import:** Terraform 1.14+ adds `terraform query`, which runs `list` blocks from `*.tfquery.hcl` files against the provider to find unmanaged resources (by tag, say), and `terraform query -generate-config-out=found.tf` writes the matching `import` and `resource` blocks. It only works for resource types whose provider implements list resources, so coverage is still growing. Since 1.12, `import` blocks can also take an `identity` object instead of a provider-specific `id` string for providers that support resource identity.
 
 ### CLI Command Import (`terraform import`)
 
@@ -72,14 +73,16 @@ resource "aws_security_group" "web_sg" {
 Import command workflow:
 
 ```bash
-# Validate import plan and auto-generate code if needed
+# Import blocks WITHOUT a resource block yet? Generate a draft (the file must not exist)
 terraform plan -generate-config-out=imports.tf
 
-# Check state list to confirm imported resource
-terraform state list
-
-# Verify zero drift after configuration matching
+# Review the plan: it should say "1 to import, 0 to add, 0 to change, 0 to destroy"
 terraform plan
+terraform apply                 # the import happens here, under the state lock
+
+# Confirm the resource is now in state, then prove zero drift
+terraform state list
+terraform plan                  # "No changes."
 ```
 
 ## Interview tips

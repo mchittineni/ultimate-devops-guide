@@ -92,10 +92,16 @@ resource "aws_launch_template" "app" {
 
 # 2. Something else owns the value -> stop fighting it
 resource "aws_autoscaling_group" "app" {
-  name             = "app"
-  min_size         = 2
-  max_size         = 20
-  desired_capacity = 4 # the autoscaler changes this constantly
+  name                = "app"
+  min_size            = 2
+  max_size            = 20
+  desired_capacity    = 4 # the autoscaler changes this constantly
+  vpc_zone_identifier = var.private_subnet_ids
+
+  launch_template {
+    id      = aws_launch_template.app.id
+    version = aws_launch_template.app.latest_version
+  }
 
   lifecycle {
     ignore_changes = [desired_capacity, tag] # otherwise every plan reverts scaling

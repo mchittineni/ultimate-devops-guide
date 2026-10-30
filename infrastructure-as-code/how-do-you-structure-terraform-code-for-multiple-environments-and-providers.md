@@ -42,6 +42,8 @@ Why this beats a single root with workspaces:
 
 Use **workspaces** where they fit well: many near-identical, short-lived instances of the same thing - ephemeral pull-request environments, per-tenant stacks, per-region replicas of one identical stack.
 
+**Orchestration layers** remove the copy-paste this layout invites. **Terragrunt** generates backend and provider blocks per directory and runs dependent stacks in order; **Terramate** adds change detection and code generation; and **HCP Terraform Stacks** model the same idea natively - `components` (the layers) deployed into multiple `deployments` (environments, regions, accounts) with orchestration between them. They are worth naming, but the underlying principle is the same: one state per environment per layer.
+
 ### Module design
 
 - **Modules take variables and return outputs; they do not declare `provider` or `backend` blocks.** A module with its own provider configuration cannot be reused with a different account or region.
@@ -128,7 +130,7 @@ data "terraform_remote_state" "network" {
 }
 
 module "eks" {
-  source  = "git::https://github.com/acme/tf-modules.git//eks?ref=v2.1.0"  # pinned
+  source       = "git::https://github.com/acme/tf-modules.git//eks?ref=v2.1.0" # pinned
   cluster_name = "prod"
   vpc_id       = data.terraform_remote_state.network.outputs.vpc_id
   subnet_ids   = data.terraform_remote_state.network.outputs.private_subnet_ids
@@ -136,8 +138,8 @@ module "eks" {
 }
 
 module "eks_dr" {
-  source    = "git::https://github.com/acme/tf-modules.git//eks?ref=v2.1.0"
-  providers = { aws = aws.dr }                     # same module, other region
+  source       = "git::https://github.com/acme/tf-modules.git//eks?ref=v2.1.0"
+  providers    = { aws = aws.dr } # same module, other region
   cluster_name = "prod-dr"
   vpc_id       = data.terraform_remote_state.network.outputs.dr_vpc_id
   subnet_ids   = data.terraform_remote_state.network.outputs.dr_private_subnet_ids

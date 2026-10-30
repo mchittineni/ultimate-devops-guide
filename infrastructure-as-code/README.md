@@ -11,7 +11,7 @@ tags:
 
 Declarative infrastructure with Terraform and Ansible - state, providers, idempotency, and where each tool belongs.
 
-**24 questions** · 🟢 Beginner: 6 · 🟡 Intermediate: 14 · 🔴 Advanced: 4
+**27 questions** · 🟢 Beginner: 6 · 🟡 Intermediate: 16 · 🔴 Advanced: 5
 
 ## Questions
 
@@ -41,6 +41,9 @@ Declarative infrastructure with Terraform and Ansible - state, providers, idempo
 | 553 | [What is the difference between declarative and imperative Infrastructure as Code?](./what-is-the-difference-between-declarative-and-imperative-infrastructure-as-code.md)                                     | 🟢 Beginner     |
 | 554 | [What are Terraform modules and what are the best practices for module reusability?](./what-are-terraform-modules-and-what-are-the-best-practices-for-module-reusability.md)                                   | 🟡 Intermediate |
 | 555 | [What is Cloud Drift and how do you continuously detect and reconcile it in production?](./what-is-cloud-drift-and-how-do-you-continuously-detect-and-reconcile-it-in-production.md)                           | 🟡 Intermediate |
+| 758 | [What is the difference between Terraform and OpenTofu?](./what-is-the-difference-between-terraform-and-opentofu.md)                                                                                           | 🟡 Intermediate |
+| 759 | [How do you keep secrets out of Terraform state?](./how-do-you-keep-secrets-out-of-terraform-state.md)                                                                                                         | 🔴 Advanced     |
+| 761 | [What is Pulumi and how does it compare to Terraform?](./what-is-pulumi-and-how-does-it-compare-to-terraform.md)                                                                                               | 🟡 Intermediate |
 
 ## What interviewers probe here
 
