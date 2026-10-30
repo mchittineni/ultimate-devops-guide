@@ -131,8 +131,8 @@ namei -l    /opt/app/current/VERSION   # every component's type and permissions
 ## Related Concepts
 
 - [[What Bash scripting exercises come up in DevOps interviews?]] (`#502`): [What Bash scripting exercises come up in DevOps interviews?](../scripting-and-automation/what-bash-scripting-exercises-come-up-in-devops-interviews.md)
+- [[How do you process JSON and YAML on the command line with jq and yq?]] (`#780`): [How do you process JSON and YAML on the command line with jq and yq?](../scripting-and-automation/how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq.md)
 - [[How to handle merge conflicts in Git?]] (`#50`): [How to handle merge conflicts in Git?](../version-control/how-to-handle-merge-conflicts-in-git.md)
-- [[What is the difference between git merge, rebase, and cherry-pick?]] (`#263`): [What is the difference between git merge, rebase, and cherry-pick?](../version-control/what-is-the-difference-between-git-merge-rebase-and-cherry-pick.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

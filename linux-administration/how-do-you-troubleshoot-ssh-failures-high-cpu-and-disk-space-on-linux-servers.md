@@ -19,15 +19,17 @@ System administrators and DevOps engineers regularly encounter three baseline Li
 
 ### 1. SSH Connection Failures (`Permission denied` / `Timeout`)
 
-- **Connection Timeout:** Check network connectivity (Security Groups, firewalls `ufw`/`iptables`, route tables, subnet NACLs), check if `sshd` process is running (`systemctl status sshd`), and verify SSH listening port (default `22`).
+- **Connection Timeout vs Connection Refused:** a _timeout_ means packets are being dropped on the way - Security Groups, subnet NACLs, route tables, or a host firewall (`nft list ruleset`, `firewall-cmd --list-all`, `ufw status`). _Refused_ means the host answered but nothing is listening: check `systemctl status sshd` (unit `ssh` on Debian/Ubuntu, where recent releases also use socket activation via `ssh.socket`) and `ss -tlnp | grep :22`. After editing `sshd_config`, always run `sshd -t` before restarting, and keep your existing session open - a syntax error otherwise locks everyone out.
+- **Host key changed:** "REMOTE HOST IDENTIFICATION HAS CHANGED" after a rebuild is expected for a replaced instance (`ssh-keygen -R <host>`), but on a host that was not rebuilt treat it as a possible man-in-the-middle and verify the fingerprint out of band.
 - **Permission Denied (publickey):** Check permissions on home directory (`700` or `755`), `.ssh` folder (`700`), and `.ssh/authorized_keys` file (`600`). If owned by incorrect user or writable by group/others, `sshd` (with the default `StrictModes yes`) rejects the key. Run verbose mode: `ssh -vvv user@server-ip`, and read the server's view in `journalctl -u ssh` (Debian/Ubuntu unit name) or `-u sshd` (RHEL), or `/var/log/auth.log` / `/var/log/secure`.
-- **Algorithm mismatch:** OpenSSH 8.8+ disables `ssh-rsa` (RSA with SHA-1) signatures by default, so old clients or servers fail with "no matching host key type" or a silent key rejection. The fix is an Ed25519 key or `rsa-sha2-256/512`, not re-enabling SHA-1.
+- **Algorithm mismatch:** OpenSSH 8.8+ disables `ssh-rsa` (RSA with SHA-1) signatures by default, so old clients or servers fail with "no matching host key type" or a silent key rejection. The fix is an Ed25519 key or `rsa-sha2-256/512`, not re-enabling SHA-1. OpenSSH 10.0 (2025) removed DSA keys entirely and made the post-quantum hybrid `mlkem768x25519-sha256` the default key exchange, so very old appliances may fail key exchange against a current client.
+- **Cloud alternative:** where you can, remove the problem class - AWS SSM Session Manager, GCP IAP/OS Login, or Azure Bastion give shell access with IAM-based auth, no open port 22, and audit logs.
 
 ### 2. High CPU & Memory Consumption Troubleshooting
 
 - **Identify Hogs:** Run `top` (press `P` to sort by CPU, `M` to sort by memory) or `htop`.
 - **System Load Average:** Check `uptime` load averages over 1, 5, and 15 minutes relative to total CPU core count (`nproc`).
-- **Trace Process:** Inspect thread usage with `ps -ef --sort=-%cpu | head -10`. Terminate runaway processes gracefully (`kill -15 <PID>`) or forcefully (`kill -9 <PID>`).
+- **Trace Process:** List the top consumers with `ps -eo pid,ppid,user,%cpu,%mem,etime,cmd --sort=-%cpu | head -10` (plain `ps -ef` has no CPU column), then `top -H -p <PID>` for the hot thread. Check `us` versus `sy`, `wa`, and `st` in `top` first - high `wa` or `st` means the bottleneck is storage or the hypervisor, not the process. Terminate runaway processes gracefully (`kill -15 <PID>`) and only escalate to `kill -9` if it does not exit.
 
 ### 3. Disk Space Full & Log Cleanup Scripting
 
