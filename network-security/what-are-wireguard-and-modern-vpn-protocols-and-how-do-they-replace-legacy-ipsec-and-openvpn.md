@@ -81,6 +81,7 @@ wg show             # peers, latest handshake, bytes transferred
 - Give the design reasons for its speed and security: in-kernel data path, one fixed modern suite (no negotiation or downgrade attacks), a 1-RTT handshake from the Noise framework, and silence towards unauthenticated packets.
 - Be balanced: IPsec/IKEv2 remains the interoperable standard for site-to-site links with cloud gateways and firewalls, and is the usual choice where FIPS-validated cryptography is required.
 - Know what WireGuard leaves out - user authentication, key distribution, dynamic addressing - and that mesh products (Tailscale, NetBird) or a zero-trust access proxy supply it.
+- Expect the post-quantum follow-up: WireGuard's Curve25519 handshake is quantum-vulnerable to "harvest now, decrypt later". The protocol's optional `PresharedKey` per peer mixes a symmetric secret into the handshake, and tools such as Rosenpass rotate that key using a post-quantum exchange; IPsec is getting the equivalent through hybrid ML-KEM key exchange in IKEv2 (RFC 9370 multiple key exchanges).
 - Mention the privacy trade-off: the server keeps each peer's last endpoint IP in memory, which some commercial VPNs work around with extra tooling.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

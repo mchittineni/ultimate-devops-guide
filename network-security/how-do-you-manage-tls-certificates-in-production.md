@@ -69,7 +69,7 @@ The trade-off worth naming: a mesh adds a data-plane hop and operational surface
 - **CAA records** restricting which CAs may issue for your domain - a cheap control against mis-issuance.
 - **Private keys never in Git**; issued on the host or in the vault, stored in Key Vault/Secrets Manager or a Kubernetes Secret with restrictive modes, and never emailed.
 - **Inventory**: you cannot renew what you do not know about. Keep a list generated from the estate (ACM, Key Vault, cert-manager resources, plus a scan of your public endpoints) rather than a spreadsheet.
-- **Protocol and cipher policy**: TLS 1.2 minimum, prefer 1.3, disable renegotiation and weak suites, and pin the load balancer's security policy explicitly rather than accepting a default that ages.
+- **Protocol and cipher policy**: TLS 1.2 minimum, prefer 1.3, disable renegotiation and weak suites, and pin the load balancer's security policy explicitly rather than accepting a default that ages - on AWS the CLI and Terraform default is still the 2016 policy, while the post-quantum `...-PQ-2025-09` policies add hybrid ML-KEM key exchange for clients that offer it.
 - **HSTS** once you are confident, so browsers refuse plaintext.
 - **The `.csr` → `.cer` → `.pfx` workflow** that people still do by hand: generate the key and CSR, submit to the CA, receive the certificate, combine with the key and chain into a PKCS#12 for Windows/Azure consumers. Automate it end to end (Key Vault certificate policy with an integrated CA, or an ACME client) rather than scripting the manual steps - the goal is to delete the workflow, not to speed it up.
 
@@ -147,7 +147,7 @@ resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.public.arn
   port              = 443
   protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06" # pin it; do not inherit a default
+  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-Res-PQ-2025-09" # pin it: TLS 1.2+, hybrid ML-KEM key exchange
   certificate_arn   = aws_acm_certificate.main.arn
   default_action {
     type = "forward"

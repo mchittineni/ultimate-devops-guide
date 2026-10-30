@@ -11,7 +11,7 @@ tags:
 
 Zero trust, TLS, web application firewalls, and segmentation - the controls that protect traffic in and between clouds.
 
-**19 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 11 · 🔴 Advanced: 3
+**20 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 11 · 🔴 Advanced: 4
 
 ## Questions
 
@@ -36,6 +36,7 @@ Zero trust, TLS, web application firewalls, and segmentation - the controls that
 | 672 | [What is TLS 1.3 and what security and performance improvements does it introduce over TLS 1.2?](./what-is-tls-1-3-and-what-security-and-performance-improvements-does-it-introduce-over-tls-1-2.md)                           | 🟡 Intermediate |
 | 673 | [What is BGP routing and how do BGP Hijacking attacks redirect enterprise internet traffic?](./what-is-bgp-routing-and-how-do-bgp-hijacking-attacks-redirect-enterprise-internet-traffic.md)                                   | 🔴 Advanced     |
 | 674 | [What are WireGuard and modern VPN protocols and how do they replace legacy IPsec and OpenVPN?](./what-are-wireguard-and-modern-vpn-protocols-and-how-do-they-replace-legacy-ipsec-and-openvpn.md)                             | 🟡 Intermediate |
+| 764 | [How do you plan a migration to post-quantum cryptography?](./how-do-you-plan-a-migration-to-post-quantum-cryptography.md)                                                                                                     | 🔴 Advanced     |
 
 ## What interviewers probe here
 
