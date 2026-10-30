@@ -108,9 +108,9 @@ Dockerfile
 
 ## Related Concepts
 
+- [[How do you troubleshoot a Pod stuck in ImagePullBackOff?]] (`#751`): [How do you troubleshoot a Pod stuck in ImagePullBackOff?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)
 - [[What is a Service in Kubernetes?]] (`#14`): [What is a Service in Kubernetes?](../kubernetes/what-is-a-service-in-kubernetes.md)
 - [[Explain the difference between Docker Swarm and Kubernetes]] (`#15`): [Explain the difference between Docker Swarm and Kubernetes](../kubernetes/explain-the-difference-between-docker-swarm-and-kubernetes.md)
-- [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

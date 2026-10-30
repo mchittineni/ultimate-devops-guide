@@ -132,8 +132,8 @@ spec:
 ## Related Concepts
 
 - [[What is the difference between a ConfigMap and a Secret in Kubernetes?]] (`#442`): [What is the difference between a ConfigMap and a Secret in Kubernetes?](../kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)
-- [[How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?]] (`#405`): [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](../kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)
-- [[How do you troubleshoot a Kubernetes node that is NotReady?]] (`#449`): [How do you troubleshoot a Kubernetes node that is NotReady?](../kubernetes/how-do-you-troubleshoot-a-kubernetes-node-that-is-notready.md)
+- [[How do you troubleshoot a Pod stuck in ImagePullBackOff?]] (`#751`): [How do you troubleshoot a Pod stuck in ImagePullBackOff?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)
+- [[What are Pod Security Standards and how does Pod Security Admission enforce them?]] (`#753`): [What are Pod Security Standards and how does Pod Security Admission enforce them?](../kubernetes/what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

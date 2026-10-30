@@ -40,6 +40,8 @@ Docker uses a pluggable Container Network Model (CNM) to provide network connect
 When using `bridge` mode, exposed container ports are mapped to host ports via Linux `iptables` rules:
 `docker run -d -p 8080:80 nginx` forwards incoming host traffic on TCP `8080` to container TCP `80`.
 
+Two consequences catch people: `-p 8080:80` binds on **all** host interfaces, public ones included, unless you write `-p 127.0.0.1:8080:80`; and because Docker inserts its own NAT and filter rules, published ports bypass host firewalls such as `ufw` - restrictions belong in the `DOCKER-USER` chain. Container-to-container traffic on the same network never needs `-p`.
+
 ## Example
 
 Creating and using a custom user-defined bridge network with automatic DNS resolution:

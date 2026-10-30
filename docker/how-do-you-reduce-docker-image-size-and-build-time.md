@@ -99,9 +99,9 @@ docker buildx build \
 
 ## Related Concepts
 
+- [[How do you troubleshoot a Pod stuck in ImagePullBackOff?]] (`#751`): [How do you troubleshoot a Pod stuck in ImagePullBackOff?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)
 - [[What are the main components of Kubernetes architecture?]] (`#12`): [What are the main components of Kubernetes architecture?](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)
 - [[What is a Service in Kubernetes?]] (`#14`): [What is a Service in Kubernetes?](../kubernetes/what-is-a-service-in-kubernetes.md)
-- [[How does RBAC work in Kubernetes?]] (`#257`): [How does RBAC work in Kubernetes?](../kubernetes/how-does-rbac-work-in-kubernetes.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

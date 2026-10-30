@@ -117,9 +117,9 @@ docker buildx build --progress=plain . 2>&1 | grep -E "CACHED|=> \["
 
 ## Related Concepts
 
+- [[How do you troubleshoot a Pod stuck in ImagePullBackOff?]] (`#751`): [How do you troubleshoot a Pod stuck in ImagePullBackOff?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)
 - [[What is inside a Helm chart, and how do you customise one?]] (`#450`): [What is inside a Helm chart, and how do you customise one?](../container-orchestration-advanced/what-is-inside-a-helm-chart-and-how-do-you-customise-one.md)
 - [[How do you rotate secrets without downtime?]] (`#429`): [How do you rotate secrets without downtime?](../devsecops/how-do-you-rotate-secrets-without-downtime.md)
-- [[What are the main components of Kubernetes architecture?]] (`#12`): [What are the main components of Kubernetes architecture?](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

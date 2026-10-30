@@ -78,9 +78,9 @@ kubectl get pod api-7d9f -o jsonpath='{.status.containerStatuses[0].lastState.te
 
 ## Related Concepts
 
+- [[How do you troubleshoot a Pod stuck in ImagePullBackOff?]] (`#751`): [How do you troubleshoot a Pod stuck in ImagePullBackOff?](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)
 - [[What is Kubernetes?]] (`#11`): [What is Kubernetes?](../kubernetes/what-is-kubernetes.md)
 - [[What are the main components of Kubernetes architecture?]] (`#12`): [What are the main components of Kubernetes architecture?](../kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)
-- [[How do you troubleshoot a Kubernetes Service that has no endpoints?]] (`#403`): [How do you troubleshoot a Kubernetes Service that has no endpoints?](../kubernetes/how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
