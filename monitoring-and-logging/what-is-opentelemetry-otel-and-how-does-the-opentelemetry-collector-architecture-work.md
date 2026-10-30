@@ -6,6 +6,7 @@ difficulty: "Intermediate"
 tags:
   - devops
   - interview-questions
+  - monitoring-and-logging
   - opentelemetry
   - otel
   - tracing
@@ -27,7 +28,9 @@ quiz:
 
 ## Detail
 
-Before OpenTelemetry, applications had to embed vendor-specific libraries (Datadog agent, New Relic SDK, Jaeger client). Changing backends required rewriting application instrumentation.
+Before OpenTelemetry, applications had to embed vendor-specific libraries (Datadog agent, New Relic SDK, Jaeger client). Changing backends required rewriting application instrumentation. OpenTelemetry (formed in 2019 from the merger of OpenTracing and OpenCensus) splits the problem into an **API** (what libraries call), an **SDK** (sampling, batching, export), the **OTLP** wire protocol, **semantic conventions** (standard attribute names such as `service.name` and `http.response.status_code`), and the **Collector**.
+
+**Signal maturity** is a common follow-up: traces, metrics, and logs are stable in the specification and OTLP, though SDK maturity still varies by language (logs in particular usually flow through a bridge from existing loggers such as Log4j or Python `logging`, rather than a new logging API). **Profiles** are the fourth signal and entered public alpha in 2026 - fine to evaluate, not yet something to bet production on.
 
 ### The OTel Collector Architecture
 
@@ -84,20 +87,22 @@ service:
       exporters: [prometheusremotewrite]
 ```
 
+The HTTP exporter was renamed the same way (`otlphttp` -> `otlp_http`); older configs still load but log a deprecation warning.
+
 ## Interview tips
 
-- Vendor-neutral standard eliminating vendor lock-in.
-- Collector pipeline components: Receivers -> Processors -> Exporters.
-- PII scrubbing and batching inside the collector.
-- OTLP (OpenTelemetry Protocol) as the standard transmission format.
+- Frame the value precisely: OTel removes lock-in at the instrumentation layer; you still choose (and pay for) a backend.
+- Processor order matters: `memory_limiter` first, then filtering/redaction, then batching, so you refuse load before spending memory on it.
+- Tail sampling needs every span of a trace on the same Collector instance, which is why it runs in a gateway tier behind a trace-ID-aware load balancer (the `loadbalancing` exporter).
+- Know the alternatives that wrap the Collector: Grafana Alloy and vendor distributions are Collector-based, so the same pipeline concepts apply.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
 ## Related Concepts
 
+- [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 - [[What is Application Performance Monitoring?]] (`#134`): [What is Application Performance Monitoring?](../infrastructure-monitoring/what-is-application-performance-monitoring.md)
 - [[What is Log Management?]] (`#135`): [What is Log Management?](../infrastructure-monitoring/what-is-log-management.md)
-- [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

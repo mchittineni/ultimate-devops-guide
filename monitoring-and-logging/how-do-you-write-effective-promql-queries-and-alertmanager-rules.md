@@ -23,11 +23,15 @@ Prometheus Query Language (PromQL) and Alertmanager form the core monitoring and
 - **`rate()` vs `increase()`:**
   - `rate(http_requests_total[5m])`: Calculates per-second average rate of increase over a counter. Always use `rate()` on Counters, never on Gauges.
   - `increase(http_requests_total[1h])`: Calculates absolute count increase over the time window.
-- **`histogram_quantile()`:** Calculates p90/p99 latency percentiles from Prometheus histogram buckets: `histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))`
+- **`histogram_quantile()`:** Calculates p90/p99 latency percentiles from Prometheus histogram buckets: `histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))`. Always `rate()` first, then `sum ... by (le)`, then the quantile - never average quantiles.
+- **Aggregate ratios correctly:** `sum(rate(errors[5m])) / sum(rate(requests[5m]))`, not `avg()` of per-instance ratios, which over-weights idle instances.
+- **Range size:** use at least 4x the scrape interval (`[1m]` is the minimum with a 15 s scrape) so each window has enough samples; Prometheus 3 range selectors are left-open, so a window can hold one sample fewer than under 2.x.
+- **Detect missing data:** an error-ratio alert is silent when the target disappears; pair it with `up == 0` or `absent(up{job="api"})`.
+- **Recording rules** precompute expensive expressions (`job:http_requests:rate5m`) so dashboards and alerts stay fast and consistent.
 
 ### 2. Prometheus Alerting Rules Structure
 
-Alert rules evaluate PromQL expressions continuously. If an expression evaluates to true for longer than the `for` duration, the alert transitions from `PENDING` to `FIRING`.
+Alert rules evaluate PromQL expressions continuously. If an expression returns results for longer than the `for` duration, the alert transitions from `PENDING` to `FIRING`. `keep_firing_for` holds an alert in `FIRING` for a period after the condition clears, which stops flapping alerts from resolving and re-paging. For SLO-based paging, prefer multi-window burn-rate expressions over a fixed threshold (see the SLO topic).
 
 ### 3. Alertmanager Routing & Inhibition
 

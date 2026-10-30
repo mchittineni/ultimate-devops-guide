@@ -6,6 +6,7 @@ difficulty: "Intermediate"
 tags:
   - devops
   - interview-questions
+  - monitoring-and-logging
   - tracing
   - opentelemetry
   - context-propagation
@@ -85,8 +86,8 @@ Auto-instrumentation libraries for Kafka clients do exactly this for you; the ma
 ## Related Concepts
 
 - [[How Do You Set SLIs and SLOs for Event-Driven and Streaming Architectures?]] (`#723`): [How Do You Set SLIs and SLOs for Event-Driven and Streaming Architectures?](../slo-engineering/how-do-you-set-slis-and-slos-for-event-driven-and-streaming-architectures.md)
+- [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 - [[What is Application Performance Monitoring?]] (`#134`): [What is Application Performance Monitoring?](../infrastructure-monitoring/what-is-application-performance-monitoring.md)
-- [[What is Log Management?]] (`#135`): [What is Log Management?](../infrastructure-monitoring/what-is-log-management.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

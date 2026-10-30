@@ -6,6 +6,7 @@ difficulty: "Intermediate"
 tags:
   - devops
   - interview-questions
+  - monitoring-and-logging
   - prometheus
   - metrics
   - pushgateway
@@ -38,7 +39,8 @@ Pushgateway exists solely for **ephemeral batch jobs** (e.g. a nightly 15-second
 
 ### Why Pushgateway is NOT an InfluxDB / StatsD Replacement
 
-- **No Automatic Expiration**: Metrics sent to Pushgateway remain there forever until explicitly deleted via API. If a failed job stops reporting, Pushgateway continues serving its last recorded metric indefinitely, masking the failure. The fix is to push a `last_success_timestamp` gauge and alert on its age.
+- **No Automatic Expiration**: Metrics sent to Pushgateway remain there forever until explicitly deleted via API. If a failed job stops reporting, Pushgateway continues serving its last recorded metric indefinitely, masking the failure. The fix is to push a `last_success_timestamp` gauge and alert on its age. (Pushgateway also adds `push_time_seconds` per group automatically, but that records the last push, not the last success.)
+- **Grouping-key semantics**: `PUT` replaces every metric in a group, `POST` replaces only metrics with the same name, and `DELETE` removes the group. Pushing per-instance groups from many ephemeral pods recreates the stale-series problem at scale.
 - **Single Point of Failure**: Turning Prometheus into a push architecture creates a massive bottleneck that degrades performance and bypasses health monitoring.
 - **Lost `up` signal and instance labels**: Prometheus sees only the Pushgateway as the target, so `up` reflects the gateway, not the job; scrape it with `honor_labels: true` so the pushed `job`/`instance` labels are kept.
 
@@ -78,7 +80,7 @@ scrape_configs:
 
 - [[How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?]] (`#687`): [How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?](../infrastructure-monitoring/how-does-node-exporter-collect-linux-host-hardware-and-os-metrics-for-prometheus.md)
 - [[What are the Four Golden Signals of Monitoring and how do you monitor them in distributed systems?]] (`#644`): [What are the Four Golden Signals of Monitoring and how do you monitor them in distributed systems?](../site-reliability-engineering/what-are-the-four-golden-signals-of-monitoring-and-how-do-you-monitor-them-in-distributed-systems.md)
-- [[What are Blackbox vs Whitebox monitoring and when should each be used?]] (`#688`): [What are Blackbox vs Whitebox monitoring and when should each be used?](../infrastructure-monitoring/what-are-blackbox-vs-whitebox-monitoring-and-when-should-each-be-used.md)
+- [[How do you add monitoring to an application that has none?]] (`#433`): [How do you add monitoring to an application that has none?](../infrastructure-monitoring/how-do-you-add-monitoring-to-an-application-that-has-none.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
