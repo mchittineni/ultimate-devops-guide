@@ -30,6 +30,12 @@ tags:
 
 **Progressive delivery** comes from the sibling project **Argo Rollouts**, which adds canary and blue/green strategies with automated analysis and rollback.
 
+**Architecture - useful when debugging.** The **repo-server** clones Git and renders manifests (Helm, Kustomize, plugins), so rendering errors and slow syncs usually show up there; the **application-controller** compares rendered and live state and performs syncs (sharded across replicas for large fleets); the **API server** backs the UI, CLI, and SSO; **Redis** caches rendered manifests and cluster state; and the **ApplicationSet controller** generates Applications. Argo CD 3.x (from 2025) tightened defaults - annotation-based resource tracking instead of the `app.kubernetes.io/instance` label, and fine-grained RBAC that no longer lets `update`/`delete` on an Application cascade to its managed resources - so check the version before copying older configuration.
+
+**Argo CD versus Flux.** Both are CNCF-graduated GitOps controllers. Argo CD is an application-centric product with a UI, multi-cluster management from one instance, and its own RBAC/SSO layer; Flux is a set of composable controllers (`GitRepository`, `Kustomization`, `HelmRelease`) that usually runs in each cluster and relies on Kubernetes RBAC, with no first-party UI. Teams that want a portal for developers lean Argo CD; teams that want GitOps as pure Kubernetes APIs lean Flux.
+
+**Limitations to name:** it reconciles desired state but does not order cross-application workflows (use sync waves, hooks, or a pipeline), a central instance holding credentials for every cluster is a high-value target, and the repo-server can become a bottleneck when rendering large Helm charts across hundreds of Applications.
+
 ## Example
 
 ```yaml
@@ -54,6 +60,8 @@ spec:
 - `selfHeal` and `prune` are the two flags every Argo CD question eventually reaches - know exactly what each does and its risk.
 - ApplicationSet is the answer to managing dozens of clusters or environments.
 - Pair Argo CD (delivery) with Argo Rollouts (progressive release) in your answer.
+- Expect "Argo CD or Flux?" - answer with the trade-off (UI and central multi-cluster management versus composable per-cluster controllers), not a preference.
+- Knowing which component does what (repo-server renders, application-controller syncs) is what lets you debug a slow or failing sync quickly.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
