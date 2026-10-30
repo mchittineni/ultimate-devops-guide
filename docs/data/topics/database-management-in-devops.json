@@ -515,10 +515,10 @@
           "topic": "core-devops-concepts"
         },
         {
-          "id": 534,
-          "slug": "what-is-the-difference-between-artifact-promotion-and-rebuilding-binaries-across-environments",
-          "title": "What is the difference between Artifact Promotion and rebuilding binaries across environments?",
-          "topic": "cicd"
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
         }
       ],
       "quiz": {
@@ -763,6 +763,50 @@
         "answerIndex": 1,
         "explanation": "If every transaction locks rows in the exact same sorted order (e.g. always lock ID 1 before ID 2), circular wait dependencies are mathematically impossible, preventing deadlocks."
       }
+    },
+    {
+      "id": 782,
+      "slug": "how-do-you-upgrade-postgresql-to-a-new-major-version-with-minimal-downtime",
+      "title": "How do you upgrade PostgreSQL to a new major version with minimal downtime?",
+      "topic": "database-management-in-devops",
+      "category": "Database Management in DevOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions",
+        "backup-and-disaster-recovery"
+      ],
+      "path": "database-management-in-devops/how-do-you-upgrade-postgresql-to-a-new-major-version-with-minimal-downtime.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/database-management-in-devops/how-do-you-upgrade-postgresql-to-a-new-major-version-with-minimal-downtime.md",
+      "shortAnswer": "Pick the method by how much downtime you can afford. **`pg_upgrade`** rewrites the system catalogs in place and, with `--link` (or `--clone`, or `--swap` from PostgreSQL 18), reuses the existing data files, so even a multi-terabyte database is down for minutes rather than hours - but it is still an outage, and with `--link` the old cluster cannot be started again once the new one has run. **Logical replication** gives near-zero downtime: build a new cluster on the target version, replicate into it with a publication and subscription, let it catch up, then switch the application over in seconds - at the cost of real caveats (DDL, sequences, and large objects are not replicated, and every table needs a primary key or replica identity). On managed services the same two options appear as an in-place major version upgrade and a **blue/green deployment** (RDS and Aurora implement theirs with logical replication). Whatever the method: rehearse on a restored copy of production, check extension compatibility, take a backup you have restored, and run `ANALYZE` afterwards so the planner is not working blind.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
     }
   ]
 }

@@ -368,7 +368,7 @@
       ],
       "path": "azure-engineering/how-do-you-architect-an-end-to-end-production-devops-project-on-azure.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-you-architect-an-end-to-end-production-devops-project-on-azure.md",
-      "shortAnswer": "Architect an end-to-end production DevOps project on Azure by provisioning a Hub-and-Spoke Virtual Network topology using Bicep/Terraform, deploying Azure Kubernetes Service (AKS) with Workload Identity and Entra ID RBAC, running Azure SQL Managed Instance over Private Endpoints, automating CI/CD via Azure DevOps Pipelines, and monitoring with Azure Monitor and Log Analytics.",
+      "shortAnswer": "Architect an end-to-end production DevOps project on Azure by provisioning a Hub-and-Spoke Virtual Network topology using Bicep/Terraform, deploying Azure Kubernetes Service (AKS) with Workload Identity and Entra ID RBAC, running Azure SQL Database over Private Endpoints, automating CI/CD via Azure DevOps Pipelines, and monitoring with Azure Monitor and Log Analytics.",
       "sections": [
         "Detail",
         "Example",
@@ -383,15 +383,15 @@
           "topic": "cloud-platforms"
         },
         {
-          "id": 22,
-          "slug": "what-is-aws-amazon-web-services",
-          "title": "What is AWS (Amazon Web Services)?",
-          "topic": "cloud-platforms"
-        },
-        {
           "id": 23,
           "slug": "what-is-azure",
           "title": "What is Azure?",
+          "topic": "cloud-platforms"
+        },
+        {
+          "id": 24,
+          "slug": "what-is-google-cloud-platform-gcp",
+          "title": "What is Google Cloud Platform (GCP)?",
           "topic": "cloud-platforms"
         }
       ],
@@ -434,10 +434,10 @@
           "topic": "kubernetes"
         },
         {
-          "id": 23,
-          "slug": "what-is-azure",
-          "title": "What is Azure?",
-          "topic": "cloud-platforms"
+          "id": 753,
+          "slug": "what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them",
+          "title": "What are Pod Security Standards and how does Pod Security Admission enforce them?",
+          "topic": "kubernetes"
         }
       ],
       "quiz": null
@@ -562,16 +562,16 @@
           "topic": "kubernetes"
         },
         {
+          "id": 753,
+          "slug": "what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them",
+          "title": "What are Pod Security Standards and how does Pod Security Admission enforce them?",
+          "topic": "kubernetes"
+        },
+        {
           "id": 405,
           "slug": "how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic",
           "title": "How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?",
           "topic": "kubernetes"
-        },
-        {
-          "id": 22,
-          "slug": "what-is-aws-amazon-web-services",
-          "title": "What is AWS (Amazon Web Services)?",
-          "topic": "cloud-platforms"
         }
       ],
       "quiz": null
@@ -593,7 +593,7 @@
       ],
       "path": "azure-engineering/how-do-you-secure-azure-kubernetes-service-aks-using-azure-private-clusters-and-calico-cni.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-you-secure-azure-kubernetes-service-aks-using-azure-private-clusters-and-calico-cni.md",
-      "shortAnswer": "An AKS Private Cluster ensures the Kubernetes API server has no public IP and is accessible only through private endpoints within a VNet or peered network. Calico CNI complements this by enforcing fine-grained east-west network security policies between pods.",
+      "shortAnswer": "A **private cluster** removes the public endpoint from the AKS API server: `kubectl` reaches it through a private endpoint in your VNet (or, with API Server VNet Integration, an internal IP in a delegated subnet), resolved through a private DNS zone. **Calico** is one of AKS's network policy engines and enforces Kubernetes `NetworkPolicy` (and Calico's own richer policies) for east-west traffic between Pods. Together they close the two biggest exposures - a publicly reachable control plane and a flat Pod network - at the cost of harder access for CI and operators. For new clusters, Azure CNI powered by Cilium is now Microsoft's recommended policy engine; Calico remains supported.",
       "sections": [
         "Detail",
         "Example",
@@ -649,7 +649,7 @@
       ],
       "path": "azure-engineering/how-do-azure-virtual-network-nat-gateways-prevent-snat-port-exhaustion.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-azure-virtual-network-nat-gateways-prevent-snat-port-exhaustion.md",
-      "shortAnswer": "Azure Virtual Network NAT Gateway provides high-performance, fully managed outbound internet connectivity with dynamic SNAT port allocation across up to 16 public IP addresses, eliminating the static pre-allocation bottlenecks that cause SNAT port exhaustion on Azure Load Balancers.",
+      "shortAnswer": "NAT Gateway attaches to subnets and gives all their outbound flows a shared pool of SNAT ports - 64,512 per public IP, up to 16 IPs - allocated **on demand** to whichever VM or Pod needs them. Load Balancer outbound rules and the old implicit default outbound access instead **pre-allocate** a fixed slice of ports per backend instance, so one busy instance can exhaust its slice while ports sit idle elsewhere. NAT Gateway removes that per-instance ceiling; it does not remove the need to reuse connections.",
       "sections": [
         "Detail",
         "Example",
@@ -670,9 +670,9 @@
           "topic": "kubernetes"
         },
         {
-          "id": 527,
-          "slug": "how-does-coredns-resolve-services-in-kubernetes-and-how-do-you-troubleshoot-dns-latency-bottlenecks",
-          "title": "How does CoreDNS resolve services in Kubernetes and how do you troubleshoot DNS latency bottlenecks?",
+          "id": 531,
+          "slug": "what-is-the-difference-between-service-types-clusterip-nodeport-loadbalancer-and-externalname",
+          "title": "What is the difference between Service types ClusterIP, NodePort, LoadBalancer, and ExternalName?",
           "topic": "kubernetes"
         }
       ],
@@ -705,7 +705,7 @@
       ],
       "path": "azure-engineering/how-do-you-structure-azure-management-groups-subscriptions-and-resource-groups-for-landing-zones.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-you-structure-azure-management-groups-subscriptions-and-resource-groups-for-landing-zones.md",
-      "shortAnswer": "Azure Landing Zones organize resources into a hierarchical tree: Management Groups apply enterprise policies and RBAC across multiple subscriptions, Subscriptions act as billing, quota, and identity boundaries, and Resource Groups group logically related assets sharing a common lifecycle.",
+      "shortAnswer": "Management groups carry policy and RBAC for many subscriptions and should be organized by **governance need** (platform versus application landing zones, corp versus online), not by org chart or environment. Subscriptions are the unit of billing, quota, and blast radius, so each workload gets its own - typically one per environment. Resource groups hold resources that share a lifecycle. The Azure Landing Zones reference architecture encodes this: Platform (identity, management, connectivity), Landing Zones (corp, online), Sandbox, and Decommissioned.",
       "sections": [
         "Detail",
         "Example",
@@ -720,15 +720,15 @@
           "topic": "cloud-platforms"
         },
         {
-          "id": 282,
-          "slug": "how-does-networking-differ-across-aws-azure-and-gcp",
-          "title": "How does networking differ across AWS, Azure, and GCP?",
+          "id": 25,
+          "slug": "what-are-the-different-types-of-cloud-services",
+          "title": "What are the different types of cloud services?",
           "topic": "cloud-platforms"
         },
         {
-          "id": 544,
-          "slug": "what-are-cloud-availability-zones-and-how-are-they-engineered-for-fault-independence",
-          "title": "What are Cloud Availability Zones and how are they engineered for fault independence?",
+          "id": 281,
+          "slug": "how-do-you-choose-a-cloud-provider-for-a-new-workload",
+          "title": "How do you choose a cloud provider for a new workload?",
           "topic": "cloud-platforms"
         }
       ],
@@ -761,7 +761,7 @@
       ],
       "path": "azure-engineering/how-does-azure-key-vault-managed-hsm-differ-from-standard-key-vault-and-how-do-you-enforce-access.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-does-azure-key-vault-managed-hsm-differ-from-standard-key-vault-and-how-do-you-enforce-access.md",
-      "shortAnswer": "Standard Azure Key Vault is a multi-tenant service with FIPS 140-2 Level 2/3 validation. Managed HSM is a fully single-tenant, dedicated Hardware Security Module cluster offering FIPS 140-2 Level 3 protection, automated cryptographic data isolation, and localized RBAC independent of Microsoft tenant administrators.",
+      "shortAnswer": "Key Vault comes in **Standard** (software-protected keys, multi-tenant) and **Premium** (adds HSM-protected keys in multi-tenant HSMs validated to FIPS 140-3 Level 3). **Managed HSM** is a single-tenant pool of FIPS 140-3 Level 3 HSMs dedicated to you: you own its **security domain** (the key material that lets the HSM be activated or restored), and data-plane access is governed by **Managed HSM local RBAC**, separate from Azure RBAC - so a subscription Owner can manage the resource but cannot use the keys without a local role assignment. It stores keys only (no secrets or certificates) and costs a fixed hourly rate per HSM pool.",
       "sections": [
         "Detail",
         "Example",
@@ -782,9 +782,9 @@
           "topic": "cloud-platforms"
         },
         {
-          "id": 22,
-          "slug": "what-is-aws-amazon-web-services",
-          "title": "What is AWS (Amazon Web Services)?",
+          "id": 25,
+          "slug": "what-are-the-different-types-of-cloud-services",
+          "title": "What are the different types of cloud services?",
           "topic": "cloud-platforms"
         }
       ],
@@ -817,7 +817,7 @@
       ],
       "path": "azure-engineering/how-do-you-use-azure-traffic-manager-and-azure-front-door-for-global-traffic-routing.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-you-use-azure-traffic-manager-and-azure-front-door-for-global-traffic-routing.md",
-      "shortAnswer": "Azure Traffic Manager is a DNS-based global traffic balancer operating at Layer 4, routing clients via DNS responses. Azure Front Door is an anycast Layer 7 global reverse proxy combining HTTP/HTTPS routing, global load balancing, SSL offload, CDN caching, and integrated Web Application Firewall (WAF) capabilities.",
+      "shortAnswer": "**Traffic Manager** is DNS-based: it answers the DNS query for your name with the endpoint chosen by its routing method (priority, weighted, performance, geographic, multivalue, subnet) and never sees the traffic itself, so it works for any protocol but fails over only as fast as DNS caches expire. **Front Door** is a global Layer 7 reverse proxy on Microsoft's edge: clients connect to an anycast edge location, which terminates TLS, applies WAF and caching, and forwards over the Microsoft backbone to the healthiest origin - so failover does not depend on DNS, but it only handles HTTP/HTTPS.",
       "sections": [
         "Detail",
         "Example",
@@ -826,9 +826,9 @@
       ],
       "related": [
         {
-          "id": 25,
-          "slug": "what-are-the-different-types-of-cloud-services",
-          "title": "What are the different types of cloud services?",
+          "id": 23,
+          "slug": "what-is-azure",
+          "title": "What is Azure?",
           "topic": "cloud-platforms"
         },
         {
@@ -838,10 +838,10 @@
           "topic": "cloud-platforms"
         },
         {
-          "id": 220,
-          "slug": "how-do-you-manage-dns-and-global-traffic-routing",
-          "title": "How do you manage DNS and global traffic routing?",
-          "topic": "cloud-engineering"
+          "id": 545,
+          "slug": "what-are-the-core-differences-between-cloud-object-storage-block-storage-and-file-storage",
+          "title": "What are the core differences between Cloud Object Storage, Block Storage, and File Storage?",
+          "topic": "cloud-platforms"
         }
       ],
       "quiz": {
@@ -873,7 +873,7 @@
       ],
       "path": "azure-engineering/how-do-you-implement-azure-monitor-alert-processing-rules-and-action-groups-for-incident-routing.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-you-implement-azure-monitor-alert-processing-rules-and-action-groups-for-incident-routing.md",
-      "shortAnswer": "Azure Monitor Alert Processing Rules intercept fired alerts to modify behavior—such as suppressing notifications during planned maintenance or dynamically applying Action Groups—while Action Groups define the exact notification recipients and automated remediation webhooks (e.g., PagerDuty, Logic Apps, Runbooks).",
+      "shortAnswer": "Alert rules decide _whether_ something is wrong; **action groups** decide _who or what is told_ (email, SMS, push, voice, webhooks, Logic Apps, Functions, Automation runbooks, ITSM, Event Hubs); and **alert processing rules** sit between them, applying at fire time to add action groups or suppress notifications for a scope and schedule - for example, silencing a resource group during a maintenance window without disabling any rule. The benefit is centralized, scope-based routing; the risk is a suppression rule that silently hides a real outage.",
       "sections": [
         "Detail",
         "Example",
@@ -894,10 +894,10 @@
           "topic": "cloud-engineering"
         },
         {
-          "id": 282,
-          "slug": "how-does-networking-differ-across-aws-azure-and-gcp",
-          "title": "How does networking differ across AWS, Azure, and GCP?",
-          "topic": "cloud-platforms"
+          "id": 410,
+          "slug": "how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes",
+          "title": "How do you perform and roll back a rolling update in Kubernetes?",
+          "topic": "kubernetes"
         }
       ],
       "quiz": {
@@ -910,6 +910,61 @@
         ],
         "answerIndex": 1,
         "explanation": "Alert Processing Rules intercept fired alerts and suppress notification delivery during scheduled maintenance windows, eliminating alert fatigue while keeping the underlying alert rules intact."
+      }
+    },
+    {
+      "id": 756,
+      "slug": "how-do-you-choose-azure-storage-redundancy-and-secure-a-storage-account",
+      "title": "How do you choose Azure Storage redundancy and secure a storage account?",
+      "topic": "azure-engineering",
+      "category": "Azure Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "azure-engineering",
+        "storage",
+        "security-and-compliance"
+      ],
+      "path": "azure-engineering/how-do-you-choose-azure-storage-redundancy-and-secure-a-storage-account.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-you-choose-azure-storage-redundancy-and-secure-a-storage-account.md",
+      "shortAnswer": "Redundancy is two independent choices: **within the primary region** - LRS (three copies in one datacenter) or ZRS (synchronously across three availability zones) - and **whether to copy asynchronously to the paired region** - GRS (LRS + secondary) or GZRS (ZRS + secondary), optionally with **read access** to the secondary (RA-GRS / RA-GZRS). Pick ZRS as the production default, add geo-replication when you need a regional DR copy, and remember the geo copy is **asynchronous** (check `LastSyncTime`; there is no RPO SLA). Securing the account is a short, fixed baseline: **Entra ID RBAC instead of account keys** (disable shared key access), **no anonymous blob access**, **private endpoints with public network access disabled**, TLS 1.2 minimum, and **soft delete, versioning, and immutability** for recovery from deletion and ransomware.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 545,
+          "slug": "what-are-the-core-differences-between-cloud-object-storage-block-storage-and-file-storage",
+          "title": "What are the core differences between Cloud Object Storage, Block Storage, and File Storage?",
+          "topic": "cloud-platforms"
+        },
+        {
+          "id": 23,
+          "slug": "what-is-azure",
+          "title": "What is Azure?",
+          "topic": "cloud-platforms"
+        },
+        {
+          "id": 282,
+          "slug": "how-does-networking-differ-across-aws-azure-and-gcp",
+          "title": "How does networking differ across AWS, Azure, and GCP?",
+          "topic": "cloud-platforms"
+        }
+      ],
+      "quiz": {
+        "stem": "A storage account must survive the loss of an availability zone with no data loss, and also keep a copy in another region for a regional disaster. Which redundancy option fits?",
+        "options": [
+          "LRS",
+          "GRS",
+          "GZRS",
+          "ZRS"
+        ],
+        "answerIndex": 2,
+        "explanation": "GZRS replicates synchronously across three zones in the primary region (so a zone loss loses no data) and asynchronously to the paired region. GRS also copies to the paired region, but within the primary region it is only LRS - three copies in a single datacenter - so a zone outage takes the primary down. ZRS survives a zone loss but has no second region."
       }
     }
   ]

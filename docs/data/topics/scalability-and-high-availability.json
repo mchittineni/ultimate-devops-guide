@@ -349,10 +349,10 @@
           "topic": "cicd"
         },
         {
-          "id": 2,
-          "slug": "what-are-the-benefits-of-devops",
-          "title": "What are the benefits of DevOps?",
-          "topic": "core-devops-concepts"
+          "id": 762,
+          "slug": "how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline",
+          "title": "How do you roll back a failed deployment in a CI/CD pipeline?",
+          "topic": "cicd"
         }
       ],
       "quiz": null
@@ -557,10 +557,10 @@
           "topic": "core-devops-concepts"
         },
         {
-          "id": 16,
-          "slug": "what-is-ci-cd-pipeline",
-          "title": "What is CI/CD Pipeline?",
-          "topic": "cicd"
+          "id": 783,
+          "slug": "what-are-the-three-ways-of-devops",
+          "title": "What are the Three Ways of DevOps?",
+          "topic": "core-devops-concepts"
         }
       ],
       "quiz": {
@@ -803,6 +803,98 @@
         "answerIndex": 1,
         "explanation": "Token Bucket permits momentary traffic bursts as long as tokens have accumulated. Leaky Bucket processes requests at a constant, fixed rate, smoothing out all bursts."
       }
+    },
+    {
+      "id": 773,
+      "slug": "what-are-the-main-caching-strategies-and-how-do-you-keep-a-cache-consistent-with-the-database",
+      "title": "What are the main caching strategies and how do you keep a cache consistent with the database?",
+      "topic": "scalability-and-high-availability",
+      "category": "Scalability and High Availability",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "scalability-and-high-availability",
+        "interview-questions",
+        "caching",
+        "redis",
+        "performance"
+      ],
+      "path": "scalability-and-high-availability/what-are-the-main-caching-strategies-and-how-do-you-keep-a-cache-consistent-with-the-database.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/scalability-and-high-availability/what-are-the-main-caching-strategies-and-how-do-you-keep-a-cache-consistent-with-the-database.md",
+      "shortAnswer": "The common patterns are **cache-aside** (the application reads the cache, and on a miss loads from the database and populates it), **read-through** (the cache layer loads misses itself), **write-through** (every write goes to the cache and the database synchronously), **write-behind** (writes land in the cache and are flushed to the database asynchronously), and **write-around** (writes skip the cache entirely). Consistency comes from a deliberate invalidation rule - usually \"write the database, then **delete** the key\", backed by a TTL so any missed invalidation heals itself - plus protection against stampedes and hot keys. A cache is always a trade of freshness for latency and load, so state how stale each piece of data is allowed to be.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 541,
+          "slug": "how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning",
+          "title": "How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?",
+          "topic": "cicd"
+        },
+        {
+          "id": 515,
+          "slug": "how-does-docker-buildkit-work-and-what-caching-and-build-features-does-it-unlock",
+          "title": "How does Docker BuildKit work and what caching and build features does it unlock?",
+          "topic": "docker"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 774,
+      "slug": "what-is-cell-based-architecture-and-how-does-it-limit-blast-radius",
+      "title": "What is cell-based architecture and how does it limit blast radius?",
+      "topic": "scalability-and-high-availability",
+      "category": "Scalability and High Availability",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "scalability-and-high-availability",
+        "interview-questions",
+        "cell-based-architecture",
+        "blast-radius",
+        "resilience"
+      ],
+      "path": "scalability-and-high-availability/what-is-cell-based-architecture-and-how-does-it-limit-blast-radius.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/scalability-and-high-availability/what-is-cell-based-architecture-and-how-does-it-limit-blast-radius.md",
+      "shortAnswer": "A cell-based architecture runs many complete, independent copies of a service stack - **cells** - each serving a fixed subset of customers, with a thin **cell router** in front that sends every request to its customer's cell. A failure, bad deployment, poison request, or noisy tenant then affects only the customers in one cell (roughly 1/N of them) instead of everyone. Cells also give you a fixed, tested unit of scale: you grow by adding cells, not by making one deployment ever bigger. The costs are the router, cross-cell operations (migrating customers, global queries), and running N copies of everything.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
     }
   ]
 }

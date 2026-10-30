@@ -342,15 +342,15 @@
           "topic": "infrastructure-monitoring"
         },
         {
-          "id": 131,
-          "slug": "what-is-infrastructure-monitoring",
-          "title": "What is Infrastructure Monitoring?",
+          "id": 772,
+          "slug": "how-do-you-monitor-a-kubernetes-cluster-end-to-end",
+          "title": "How do you monitor a Kubernetes cluster end to end?",
           "topic": "infrastructure-monitoring"
         },
         {
-          "id": 132,
-          "slug": "what-are-monitoring-tools",
-          "title": "What are Monitoring Tools?",
+          "id": 131,
+          "slug": "what-is-infrastructure-monitoring",
+          "title": "What is Infrastructure Monitoring?",
           "topic": "infrastructure-monitoring"
         }
       ],
@@ -387,15 +387,15 @@
           "topic": "infrastructure-monitoring"
         },
         {
-          "id": 131,
-          "slug": "what-is-infrastructure-monitoring",
-          "title": "What is Infrastructure Monitoring?",
+          "id": 772,
+          "slug": "how-do-you-monitor-a-kubernetes-cluster-end-to-end",
+          "title": "How do you monitor a Kubernetes cluster end to end?",
           "topic": "infrastructure-monitoring"
         },
         {
-          "id": 135,
-          "slug": "what-is-log-management",
-          "title": "What is Log Management?",
+          "id": 131,
+          "slug": "what-is-infrastructure-monitoring",
+          "title": "What is Infrastructure Monitoring?",
           "topic": "infrastructure-monitoring"
         }
       ],
@@ -411,6 +411,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "observability",
         "metrics",
         "logs",
@@ -428,6 +429,12 @@
       ],
       "related": [
         {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
           "id": 132,
           "slug": "what-are-monitoring-tools",
           "title": "What are Monitoring Tools?",
@@ -437,12 +444,6 @@
           "id": 133,
           "slug": "what-are-monitoring-best-practices",
           "title": "What are Monitoring Best Practices?",
-          "topic": "infrastructure-monitoring"
-        },
-        {
-          "id": 134,
-          "slug": "what-is-application-performance-monitoring",
-          "title": "What is Application Performance Monitoring?",
           "topic": "infrastructure-monitoring"
         }
       ],
@@ -468,6 +469,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "prometheus",
         "metrics",
         "pushgateway",
@@ -496,9 +498,9 @@
           "topic": "site-reliability-engineering"
         },
         {
-          "id": 688,
-          "slug": "what-are-blackbox-vs-whitebox-monitoring-and-when-should-each-be-used",
-          "title": "What are Blackbox vs Whitebox monitoring and when should each be used?",
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
           "topic": "infrastructure-monitoring"
         }
       ],
@@ -524,6 +526,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "opentelemetry",
         "otel",
         "tracing",
@@ -540,6 +543,12 @@
       ],
       "related": [
         {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
           "id": 134,
           "slug": "what-is-application-performance-monitoring",
           "title": "What is Application Performance Monitoring?",
@@ -549,12 +558,6 @@
           "id": 135,
           "slug": "what-is-log-management",
           "title": "What is Log Management?",
-          "topic": "infrastructure-monitoring"
-        },
-        {
-          "id": 433,
-          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
-          "title": "How do you add monitoring to an application that has none?",
           "topic": "infrastructure-monitoring"
         }
       ],
@@ -580,6 +583,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "monitoring",
         "prometheus",
         "cardinality",
@@ -609,9 +613,9 @@
           "topic": "site-reliability-engineering"
         },
         {
-          "id": 689,
-          "slug": "what-is-ebpf-based-infrastructure-monitoring-and-how-does-cilium-provide-kernel-level-network-observability",
-          "title": "What is eBPF-based infrastructure monitoring and how does Cilium provide kernel-level network observability?",
+          "id": 686,
+          "slug": "what-is-the-use-method-utilization-saturation-and-errors-for-hardware-capacity-and-performance-analysis",
+          "title": "What is the USE Method (Utilization, Saturation, and Errors) for hardware capacity and performance analysis?",
           "topic": "infrastructure-monitoring"
         }
       ],
@@ -637,6 +641,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "prometheus",
         "metrics",
         "histogram",
@@ -653,6 +658,12 @@
       ],
       "related": [
         {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
           "id": 687,
           "slug": "how-does-node-exporter-collect-linux-host-hardware-and-os-metrics-for-prometheus",
           "title": "How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?",
@@ -662,12 +673,6 @@
           "id": 642,
           "slug": "what-is-multi-window-multi-burn-rate-alerting-and-why-does-it-eliminate-alert-fatigue",
           "title": "What is Multi-Window Multi-Burn-Rate alerting and why does it eliminate alert fatigue?",
-          "topic": "site-reliability-engineering"
-        },
-        {
-          "id": 644,
-          "slug": "what-are-the-four-golden-signals-of-monitoring-and-how-do-you-monitor-them-in-distributed-systems",
-          "title": "What are the Four Golden Signals of Monitoring and how do you monitor them in distributed systems?",
           "topic": "site-reliability-engineering"
         }
       ],
@@ -693,6 +698,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "logging",
         "json",
         "retention",
@@ -710,6 +716,12 @@
       ],
       "related": [
         {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
           "id": 132,
           "slug": "what-are-monitoring-tools",
           "title": "What are Monitoring Tools?",
@@ -719,12 +731,6 @@
           "id": 133,
           "slug": "what-are-monitoring-best-practices",
           "title": "What are Monitoring Best Practices?",
-          "topic": "infrastructure-monitoring"
-        },
-        {
-          "id": 134,
-          "slug": "what-is-application-performance-monitoring",
-          "title": "What is Application Performance Monitoring?",
           "topic": "infrastructure-monitoring"
         }
       ],
@@ -737,7 +743,7 @@
           "Restricting logging access to senior managers only"
         ],
         "answerIndex": 1,
-        "explanation": "Health check probes from Kubernetes readiness and liveness checks execute every few seconds across thousands of pods, generating up to 60% of total cluster log volume with zero diagnostic value."
+        "explanation": "Kubernetes liveness and readiness probes hit every pod every few seconds, so their access-log lines are often a large share of cluster log volume while carrying almost no diagnostic value; dropping them at the node agent saves ingest, indexing, and storage."
       }
     },
     {
@@ -750,6 +756,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "tracing",
         "opentelemetry",
         "context-propagation",
@@ -772,15 +779,15 @@
           "topic": "slo-engineering"
         },
         {
-          "id": 134,
-          "slug": "what-is-application-performance-monitoring",
-          "title": "What is Application Performance Monitoring?",
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
           "topic": "infrastructure-monitoring"
         },
         {
-          "id": 135,
-          "slug": "what-is-log-management",
-          "title": "What is Log Management?",
+          "id": 134,
+          "slug": "what-is-application-performance-monitoring",
+          "title": "What is Application Performance Monitoring?",
           "topic": "infrastructure-monitoring"
         }
       ],
@@ -794,6 +801,175 @@
         ],
         "answerIndex": 1,
         "explanation": "Trace context is injected directly into Kafka record headers, allowing consumers to extract the TraceID and continue the distributed trace without modifying the application payload."
+      }
+    },
+    {
+      "id": 768,
+      "slug": "how-do-you-scale-prometheus-for-high-availability-and-long-term-storage-with-thanos-mimir-or-victoriametrics",
+      "title": "How do you scale Prometheus for high availability and long-term storage with Thanos, Mimir, or VictoriaMetrics?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring-and-logging",
+        "prometheus",
+        "thanos",
+        "mimir",
+        "victoriametrics"
+      ],
+      "path": "monitoring-and-logging/how-do-you-scale-prometheus-for-high-availability-and-long-term-storage-with-thanos-mimir-or-victoriametrics.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/how-do-you-scale-prometheus-for-high-availability-and-long-term-storage-with-thanos-mimir-or-victoriametrics.md",
+      "shortAnswer": "A single Prometheus server is deliberately simple: local disk, no replication, no clustering, typically weeks of retention. You get **high availability** by running two identical replicas and deduplicating, and **long-term, global storage** by shipping data to a horizontally scalable backend. **Thanos** bolts onto existing Prometheus servers (a sidecar uploads 2-hour TSDB blocks to object storage, and a global querier deduplicates and fans out). **Grafana Mimir** (and its predecessor Cortex) is a multi-tenant cluster that Prometheus `remote_write`s into, storing blocks in object storage. **VictoriaMetrics** is a separate, very resource-efficient TSDB that also accepts remote write, stored on block disks rather than object storage. Pick on operating model: keep Prometheus as the store and add a global view (Thanos sidecar), or turn Prometheus into a stateless collector and run a central metrics service (Mimir, VictoriaMetrics, Thanos Receive, or a managed service).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 687,
+          "slug": "how-does-node-exporter-collect-linux-host-hardware-and-os-metrics-for-prometheus",
+          "title": "How does Node Exporter collect Linux host hardware and OS metrics for Prometheus?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 772,
+          "slug": "how-do-you-monitor-a-kubernetes-cluster-end-to-end",
+          "title": "How do you monitor a Kubernetes cluster end to end?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": {
+        "stem": "Two identical Prometheus replicas scrape the same targets for high availability. What stops dashboards built on Thanos or Mimir from showing every series twice?",
+        "options": [
+          "Prometheus replicas elect a leader and only the leader stores samples",
+          "Each replica sets a distinct replica external label, and the query layer (Thanos Querier) or ingest layer (Mimir HA tracker) deduplicates on it",
+          "Alertmanager deletes duplicate series after each scrape",
+          "Object storage automatically merges identical blocks on upload"
+        ],
+        "answerIndex": 1,
+        "explanation": "Prometheus has no clustering, so HA pairs produce duplicate data by design. A per-replica external label lets Thanos deduplicate at query time and Mimir's HA tracker accept samples from only one replica per cluster at ingest."
+      }
+    },
+    {
+      "id": 769,
+      "slug": "how-does-grafana-loki-store-logs-and-how-do-you-query-them-with-logql",
+      "title": "How does Grafana Loki store logs, and how do you query them with LogQL?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring-and-logging",
+        "loki",
+        "logql",
+        "logging"
+      ],
+      "path": "monitoring-and-logging/how-does-grafana-loki-store-logs-and-how-do-you-query-them-with-logql.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/how-does-grafana-loki-store-logs-and-how-do-you-query-them-with-logql.md",
+      "shortAnswer": "Loki indexes only a small set of **labels** per log stream (namespace, app, container, level) and stores the log lines themselves as compressed **chunks in object storage**. A query first uses the label index to pick the streams, then brute-force scans those chunks in parallel. That makes ingest and storage far cheaper than a full-text index like Elasticsearch, at the cost of slower \"search everything for this string\" queries. **LogQL** mirrors PromQL: a stream selector (`{namespace=\"prod\", app=\"checkout\"}`), then a pipeline of line filters (`|= \"timeout\"`), parsers (`| json`, `| logfmt`, `| pattern`), and label filters (`| status >= 500`), and optionally a metric function (`rate`, `count_over_time`, `quantile_over_time`) that turns logs into time series for dashboards and alerts.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 132,
+          "slug": "what-are-monitoring-tools",
+          "title": "What are Monitoring Tools?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 133,
+          "slug": "what-are-monitoring-best-practices",
+          "title": "What are Monitoring Best Practices?",
+          "topic": "infrastructure-monitoring"
+        }
+      ],
+      "quiz": {
+        "stem": "Why is putting `trace_id` or `user_id` in Loki stream labels a mistake?",
+        "options": [
+          "Loki labels cannot contain hexadecimal characters",
+          "Every unique label combination creates a new stream, so unbounded values explode the stream count, the index, and the number of tiny chunks",
+          "Labels are stored in plain text and expose personal data, while log lines are encrypted",
+          "LogQL cannot filter on labels, only on line contents"
+        ],
+        "answerIndex": 1,
+        "explanation": "Loki indexes only stream labels, and each unique label set is a separate stream with its own chunks. High-cardinality values belong in the log line or in structured metadata, where they can still be filtered at query time."
+      }
+    },
+    {
+      "id": 770,
+      "slug": "what-is-the-difference-between-head-based-and-tail-based-trace-sampling",
+      "title": "What is the difference between head-based and tail-based trace sampling?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring-and-logging",
+        "tracing",
+        "sampling",
+        "opentelemetry"
+      ],
+      "path": "monitoring-and-logging/what-is-the-difference-between-head-based-and-tail-based-trace-sampling.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-is-the-difference-between-head-based-and-tail-based-trace-sampling.md",
+      "shortAnswer": "**Head-based sampling** decides whether to keep a trace when it starts, at the root span, and propagates that decision downstream in the `traceparent` sampled flag - cheap and simple, but blind: it keeps 10% of traces whether or not they contain the error you care about. **Tail-based sampling** buffers all spans of a trace and decides after it completes, so it can keep every error and every slow trace while sampling the boring successes - far more useful, but it needs memory, a buffering delay, and every span of a trace routed to the same collector. Most production setups combine them: light head sampling (or none) in the SDKs, tail sampling in a Collector gateway, and metrics computed from spans before any sampling so dashboards stay accurate.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 433,
+          "slug": "how-do-you-add-monitoring-to-an-application-that-has-none",
+          "title": "How do you add monitoring to an application that has none?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 134,
+          "slug": "what-is-application-performance-monitoring",
+          "title": "What is Application Performance Monitoring?",
+          "topic": "infrastructure-monitoring"
+        },
+        {
+          "id": 96,
+          "slug": "what-is-site-reliability-engineering",
+          "title": "What is Site Reliability Engineering?",
+          "topic": "site-reliability-engineering"
+        }
+      ],
+      "quiz": {
+        "stem": "Why must tail-based sampling in the OpenTelemetry Collector run behind a trace-ID-aware load balancer when there are several Collector replicas?",
+        "options": [
+          "Because tail sampling only works over UDP",
+          "Because the sampling decision needs every span of a trace, so all spans with the same trace ID must reach the same Collector instance",
+          "Because the load balancer encrypts the spans before sampling",
+          "Because head-based sampling has already discarded the trace ID"
+        ],
+        "answerIndex": 1,
+        "explanation": "Tail sampling buffers a trace and decides after seeing all of its spans. If spans are spread across replicas, each sees a partial trace and makes an inconsistent decision, so a first tier routes by trace ID (the loadbalancing exporter) to the sampling tier."
       }
     }
   ]

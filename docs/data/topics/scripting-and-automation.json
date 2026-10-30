@@ -269,6 +269,103 @@
         }
       ],
       "quiz": null
+    },
+    {
+      "id": 780,
+      "slug": "how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq",
+      "title": "How do you process JSON and YAML on the command line with jq and yq?",
+      "topic": "scripting-and-automation",
+      "category": "Scripting and Automation",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "scripting-and-automation",
+        "interview-questions"
+      ],
+      "path": "scripting-and-automation/how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/scripting-and-automation/how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq.md",
+      "shortAnswer": "**jq** is a small functional language for JSON: a filter such as `.items[] | select(.status.phase != \"Running\") | .metadata.name` walks the structure, filters, and reshapes it, and `-r` prints raw strings for the next command in the pipe. **yq** brings the same idea to YAML (and can convert between YAML, JSON, TOML, and XML), which makes it the safe way to read or edit Kubernetes manifests, Helm values, and CI files in a script instead of `sed`. The habits that matter in automation: parse structure rather than grepping text, pass shell values in with `--arg`/`--argjson` (or `env()` in yq) rather than interpolating them into the filter, use `-e` so a missing value fails the script, and know there are **two different tools called yq** - the Go one (`mikefarah/yq`, the common default) and a Python jq wrapper - with different syntax.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 497,
+          "slug": "how-do-you-schedule-work-with-cron-and-systemd-timers",
+          "title": "How do you schedule work with cron and systemd timers?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 265,
+          "slug": "how-do-you-analyse-logs-and-text-files-with-grep-awk-and-sed",
+          "title": "How do you analyse logs and text files with grep, awk, and sed?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 494,
+          "slug": "what-is-the-difference-between-a-hard-link-and-a-soft-link",
+          "title": "What is the difference between a hard link and a soft link?",
+          "topic": "linux-administration"
+        }
+      ],
+      "quiz": {
+        "stem": "Why is `jq -r '.items[].metadata.name'` preferred over `grep '\\\"name\\\"' | cut -d'\\\"' -f4` for extracting Kubernetes resource names?",
+        "options": [
+          "jq is faster on files under 1 KB",
+          "jq parses the JSON structure, so it is unaffected by formatting, key order, nesting, or a 'name' key appearing elsewhere",
+          "grep cannot read JSON files",
+          "cut only works on CSV"
+        ],
+        "answerIndex": 1,
+        "explanation": "Text tools match characters, not structure: a reformatted document, a nested 'name' field, or an escaped quote silently breaks them. jq addresses fields by path, so the extraction is correct by construction."
+      }
+    },
+    {
+      "id": 781,
+      "slug": "how-do-you-test-and-lint-shell-and-python-automation-scripts",
+      "title": "How do you test and lint shell and Python automation scripts?",
+      "topic": "scripting-and-automation",
+      "category": "Scripting and Automation",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "scripting-and-automation",
+        "interview-questions",
+        "cicd"
+      ],
+      "path": "scripting-and-automation/how-do-you-test-and-lint-shell-and-python-automation-scripts.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/scripting-and-automation/how-do-you-test-and-lint-shell-and-python-automation-scripts.md",
+      "shortAnswer": "In layers, the same as application code, because automation holds production credentials and runs unattended. **Static checks** on every commit: `shellcheck` and `shfmt` for Bash, `ruff` (lint and format) plus `mypy` or `pyright` for Python, all wired into pre-commit and CI. **Unit tests** for the logic: **bats-core** for shell functions, **pytest** for Python, with external systems replaced by stubs - a fake `kubectl` on `PATH`, botocore's `Stubber` or `moto` for AWS. **Integration or smoke tests** against something real but disposable: a kind cluster, a LocalStack or sandbox account, a container with the target OS. And design for testability - put logic in functions, keep side effects at the edges, and give every destructive script a `--dry-run` - because a script that is one long sequence of commands can only be tested by running it.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 497,
+          "slug": "how-do-you-schedule-work-with-cron-and-systemd-timers",
+          "title": "How do you schedule work with cron and systemd timers?",
+          "topic": "linux-administration"
+        },
+        {
+          "id": 466,
+          "slug": "how-do-you-run-terraform-through-a-ci-cd-pipeline",
+          "title": "How do you run Terraform through a CI/CD pipeline?",
+          "topic": "infrastructure-as-code"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
     }
   ]
 }

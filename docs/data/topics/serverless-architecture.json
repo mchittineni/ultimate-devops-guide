@@ -455,10 +455,10 @@
           "topic": "core-devops-concepts"
         },
         {
-          "id": 18,
-          "slug": "what-are-jenkins-pipelines",
-          "title": "What are Jenkins Pipelines?",
-          "topic": "cicd"
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
         }
       ],
       "quiz": {
@@ -626,10 +626,10 @@
           "topic": "core-devops-concepts"
         },
         {
-          "id": 268,
-          "slug": "how-do-you-use-jenkins-shared-libraries",
-          "title": "How do you use Jenkins shared libraries?",
-          "topic": "cicd"
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
         }
       ],
       "quiz": {
@@ -700,6 +700,52 @@
         "answerIndex": 1,
         "explanation": "LocalStack mocks AWS services in a local container, allowing test suites to validate S3, DynamoDB, SQS, and Lambda integrations rapidly without cloud expenditure or live AWS credentials."
       }
+    },
+    {
+      "id": 776,
+      "slug": "how-do-aws-lambda-google-cloud-run-and-azure-functions-compare-for-serverless-workloads",
+      "title": "How do AWS Lambda, Google Cloud Run, and Azure Functions compare for serverless workloads?",
+      "topic": "serverless-architecture",
+      "category": "Serverless Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "serverless-architecture",
+        "interview-questions",
+        "aws-lambda",
+        "cloud-run",
+        "azure-functions"
+      ],
+      "path": "serverless-architecture/how-do-aws-lambda-google-cloud-run-and-azure-functions-compare-for-serverless-workloads.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/serverless-architecture/how-do-aws-lambda-google-cloud-run-and-azure-functions-compare-for-serverless-workloads.md",
+      "shortAnswer": "All three scale to zero and bill for usage. They differ in the **unit you deploy** and the **concurrency model**. **Lambda** runs functions (zip or container image) with one request per execution environment, a 15-minute cap, and the deepest event-source integration on AWS. **Cloud Run** runs any container that listens on a port, serves many concurrent requests per instance (default 80), allows requests of up to 60 minutes, and has jobs for batch work of up to 7 days. **Azure Functions** on the **Flex Consumption** plan runs functions with triggers and bindings, configurable per-instance concurrency, VNet integration, and optional always-ready instances. Pick by workload shape and by the ecosystem you are already in, not by benchmark headlines.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 3,
+          "slug": "what-is-continuous-integration",
+          "title": "What is Continuous Integration?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": null
     }
   ]
 }

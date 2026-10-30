@@ -1654,7 +1654,68 @@
           "Lead time for changes has no measurable correlation with mean time to recovery"
         ],
         "answer": "2",
-        "explanation": "DORA findings conclusively demonstrate that elite organizations do not compromise stability for speed; small, frequent deployments minimize blast radius and accelerate recovery."
+        "explanation": "DORA's survey data has consistently shown that top performers do not trade stability for speed (a strong correlation, not a controlled experiment); small, frequent deployments minimize blast radius and accelerate recovery."
+      }
+    },
+    {
+      "id": "q:783",
+      "label": "#783 What are the Three Ways of DevOps?",
+      "title": "What are the Three Ways of DevOps?",
+      "group": "Beginner",
+      "section": "Foundations",
+      "val": 3,
+      "color": "#10b981",
+      "url": "./core-devops-concepts/what-are-the-three-ways-of-devops.md",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "core-devops-concepts",
+        "interview-questions",
+        "three-ways",
+        "lean"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best characterizes the core concept or implementation of: What are the Three Ways of DevOps??",
+        "options": [
+          "The Three Ways, popularised by Gene Kim in _The Phoenix Project_ (2013) and _The DevOps Handbook_ (2016), are the principles every DevOps pr...",
+          "It represents an obsolete anti-pattern prohibited in modern Core DevOps Concepts architectures.",
+          "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+          "It strictly applies only to single-node legacy servers without distributed high availability."
+        ],
+        "answer": 1,
+        "explanation": "What are the Three Ways of DevOps?: The Three Ways, popularised by Gene Kim in _The Phoenix Project_ (2013) and _The DevOps Handbook_ (2016), are the principles every DevOps practice derives from: **flow** (make work move fast from development to production), **feedback** (make problems visible quickly, from production back to development), and **continual learning and experimentation** (build a culture that improves the system and takes safe risks)."
+      }
+    },
+    {
+      "id": "q:784",
+      "label": "#784 What is the difference between DevOps and Agile?",
+      "title": "What is the difference between DevOps and Agile?",
+      "group": "Beginner",
+      "section": "Foundations",
+      "val": 3,
+      "color": "#10b981",
+      "url": "./core-devops-concepts/what-is-the-difference-between-devops-and-agile.md",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "core-devops-concepts",
+        "interview-questions",
+        "agile"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best characterizes the core concept or implementation of: What is the difference between DevOps and Agile??",
+        "options": [
+          "Agile is about how a team plans and builds software in short, feedback-driven iterations with the business; DevOps extends that same thinkin...",
+          "It represents an obsolete anti-pattern prohibited in modern Core DevOps Concepts architectures.",
+          "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+          "It strictly applies only to single-node legacy servers without distributed high availability."
+        ],
+        "answer": 1,
+        "explanation": "What is the difference between DevOps and Agile?: Agile is about how a team plans and builds software in short, feedback-driven iterations with the business; DevOps extends that same thinking past \"done\" into delivery and operations, so working software reaches production quickly and safely and production feedback flows back. They are complementary: Agile without DevOps produces finished increments that wait weeks for a release; DevOps without Agile ships the wrong things efficiently."
       }
     },
     {
@@ -2325,6 +2386,35 @@
       }
     },
     {
+      "id": "q:754",
+      "label": "#754 What is the difference between Docker and Podman?",
+      "title": "What is the difference between Docker and Podman?",
+      "group": "Intermediate",
+      "section": "Containers and Kubernetes",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./docker/what-is-the-difference-between-docker-and-podman.md",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "What is the main architectural difference between Docker and Podman?",
+        "options": [
+          "Podman cannot run OCI images built by Docker",
+          "Docker routes commands through a long-running daemon, while Podman forks containers directly from the CLI with no central daemon",
+          "Podman only runs on Windows",
+          "Docker does not use namespaces or cgroups"
+        ],
+        "answer": "2",
+        "explanation": "Docker's CLI talks to dockerd, which supervises containers. Podman's CLI starts each container itself (via conmon and an OCI runtime), so there is no root daemon to compromise, and rootless operation is the default."
+      }
+    },
+    {
       "id": "q:11",
       "label": "#11 What is Kubernetes?",
       "title": "What is Kubernetes?",
@@ -2495,7 +2585,7 @@
           "It strictly applies only to single-node legacy servers without distributed high availability."
         ],
         "answer": 1,
-        "explanation": "How do you troubleshoot a Pod stuck in Pending or CrashLoopBackOff?: Troubleshoot a `Pending` pod by inspecting cluster scheduling (CPU/memory capacity, node selectors, taints/tolerations, PVC binding), and troubleshoot `CrashLoopBackOff` by checking application runtime logs (`kubectl logs --previous`), failing readiness/liveness probes, missing secrets, or exit codes like `137` (OOMKilled)."
+        "explanation": "How do you troubleshoot a Pod stuck in Pending or CrashLoopBackOff?: Troubleshoot a `Pending` pod by inspecting cluster scheduling (CPU/memory capacity, node selectors, taints/tolerations, PVC binding), and troubleshoot `CrashLoopBackOff` by checking the previous container's logs (`kubectl logs --previous`), its exit code (`137` = SIGKILL, usually OOMKilled), failing liveness or startup probes, and missing ConfigMaps or Secrets. A failing readiness probe never causes a crash loop - it only removes the Pod from Service endpoints."
       }
     },
     {
@@ -2856,7 +2946,7 @@
           "It strictly applies only to single-node legacy servers without distributed high availability."
         ],
         "answer": 1,
-        "explanation": "How do you handle node pressure and Pod evictions in Kubernetes?: Understand which mechanism evicted the Pod, because the fixes differ. **The kubelet** evicts under node pressure (memory, disk, inodes, PIDs) and chooses victims by **QoS class** - `BestEffort` first, then `Burstable` exceeding its requests, `Guaranteed` last. **The scheduler** preempts lower-`PriorityClass` Pods to make room for higher ones. **The API server** performs graceful eviction for `drain`, honouring PodDisruptionBudgets. The durable fixes are: set realistic requests and limits so QoS is not accidental, reserve capacity for the system (`--system-reserved`, `--kube-reserved`), give critical workloads a `PriorityClass` and everything else a lower one, protect availability with PDBs, and let the cluster autoscaler add nodes before pressure rather than after."
+        "explanation": "How do you handle node pressure and Pod evictions in Kubernetes?: Understand which mechanism evicted the Pod, because the fixes differ. **The kubelet** evicts under node pressure (memory, disk, inodes, PIDs) and ranks victims by whether usage exceeds requests, then by Pod priority, then by usage relative to requests - which in practice means `BestEffort` first, `Burstable` over its requests next, and `Guaranteed` last. **The scheduler** preempts lower-`PriorityClass` Pods to make room for higher ones. **The API server** performs graceful eviction for `drain`, honouring PodDisruptionBudgets. The durable fixes are: set realistic requests and limits so QoS is not accidental, reserve capacity for the system (`--system-reserved`, `--kube-reserved`), give critical workloads a `PriorityClass` and everything else a lower one, protect availability with PDBs, and let the cluster autoscaler add nodes before pressure rather than after."
       }
     },
     {
@@ -3100,7 +3190,7 @@
           "It strictly applies only to single-node legacy servers without distributed high availability."
         ],
         "answer": 1,
-        "explanation": "What happens when a Kubernetes control-plane node or etcd fails?: Running workloads keep running. The control plane is the _reconciliation_ layer, not the data path: kubelets keep their Pods alive from their local state, kube-proxy's rules stay programmed, and traffic keeps flowing through Services and load balancers. What you lose is **change** - no new scheduling, no rollouts, no scaling, no `kubectl`, no Service/endpoint updates, and no self-healing, so a Pod or node that fails during the outage is _not_ replaced. With three control-plane nodes, losing one is a non-event: the API servers are stateless and behind a load balancer, the controller-manager and scheduler re-elect a leader in seconds, and etcd still has 2 of 3 for quorum. Losing **two of three** is the real failure - etcd loses quorum and goes **read-only**, so the whole control plane stops accepting writes even though the API may still answer reads."
+        "explanation": "What happens when a Kubernetes control-plane node or etcd fails?: Running workloads keep running. The control plane is the _reconciliation_ layer, not the data path: kubelets keep their Pods alive from their local state, kube-proxy's rules stay programmed, and traffic keeps flowing through Services and load balancers. What you lose is **change** - no new scheduling, no rollouts, no scaling, no `kubectl`, no Service/endpoint updates, and no self-healing, so a Pod or node that fails during the outage is _not_ replaced. With three control-plane nodes, losing one is a non-event: the API servers are stateless and behind a load balancer, the controller-manager and scheduler re-elect a leader in seconds, and etcd still has 2 of 3 for quorum. Losing **two of three** is the real failure - etcd loses quorum and goes **read-only**, so the whole control plane stops accepting writes; the API server may still serve some reads from its watch cache, but anything needing a quorum read times out too."
       }
     },
     {
@@ -3516,6 +3606,95 @@
         ],
         "answer": "2",
         "explanation": "ExternalName services have no selector or endpoints; CoreDNS simply returns a CNAME record redirecting client DNS resolution directly to the external hostname."
+      }
+    },
+    {
+      "id": "q:751",
+      "label": "#751 How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+      "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+      "group": "Intermediate",
+      "section": "Containers and Kubernetes",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "docker"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "A Pod shows `ImagePullBackOff` and its events contain `pull access denied ... repository does not exist or may require authorization`. What is the most likely cause?",
+        "options": [
+          "The node has run out of memory",
+          "The image name or tag is wrong, or the kubelet has no valid credentials for a private registry",
+          "The readiness probe is failing",
+          "The container's entrypoint is not executable"
+        ],
+        "answer": "2",
+        "explanation": "Registries return the same 'not found or unauthorized' response for a missing repository and for missing credentials, so check the exact image reference first, then the imagePullSecrets or node IAM role."
+      }
+    },
+    {
+      "id": "q:752",
+      "label": "#752 What is the difference between a Deployment and a ReplicaSet in Kubernetes?",
+      "title": "What is the difference between a Deployment and a ReplicaSet in Kubernetes?",
+      "group": "Beginner",
+      "section": "Containers and Kubernetes",
+      "val": 3,
+      "color": "#10b981",
+      "url": "./kubernetes/what-is-the-difference-between-a-deployment-and-a-replicaset-in-kubernetes.md",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "You change the container image in a Deployment's Pod template. What does the Deployment controller do?",
+        "options": [
+          "It edits the existing ReplicaSet's template, which restarts all Pods at once",
+          "It creates a new ReplicaSet for the new template and scales it up while scaling the old one down",
+          "It deletes the Deployment and recreates it",
+          "It patches the running containers in place without creating Pods"
+        ],
+        "answer": "2",
+        "explanation": "Each distinct Pod template gets its own ReplicaSet (named with the pod-template-hash). A rollout shifts replicas from the old ReplicaSet to the new one within maxSurge and maxUnavailable, and keeps old ReplicaSets for rollback."
+      }
+    },
+    {
+      "id": "q:753",
+      "label": "#753 What are Pod Security Standards and how does Pod Security Admission enforce them?",
+      "title": "What are Pod Security Standards and how does Pod Security Admission enforce them?",
+      "group": "Intermediate",
+      "section": "Containers and Kubernetes",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./kubernetes/what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them.md",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "devsecops"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "A namespace is labelled `pod-security.kubernetes.io/enforce: restricted`. What happens to an existing Deployment whose Pods run as root?",
+        "options": [
+          "Its running Pods are evicted immediately",
+          "Running Pods keep running, but new Pods it tries to create are rejected at admission",
+          "The Deployment object itself is deleted",
+          "Nothing, because Pod Security Admission only audits"
+        ],
+        "answer": "2",
+        "explanation": "Pod Security Admission evaluates Pods when they are created or updated. Existing Pods are not touched, but the ReplicaSet's next Pod creation (scale-up, rollout, node drain) is denied - which is why you roll out with warn and audit modes first."
       }
     },
     {
@@ -4444,6 +4623,37 @@
         ],
         "answer": "2",
         "explanation": "Hashing the lockfile guarantees that as long as dependencies remain identical, builds reuse the cache archive, but any dependency update produces a new cache key."
+      }
+    },
+    {
+      "id": "q:762",
+      "label": "#762 How do you roll back a failed deployment in a CI/CD pipeline?",
+      "title": "How do you roll back a failed deployment in a CI/CD pipeline?",
+      "group": "Intermediate",
+      "section": "Delivery and Automation",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./cicd/how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline.md",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "deployment",
+        "rollback"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "A release included a database migration that dropped a column the previous application version still reads. Why does redeploying the previous image not fix the outage?",
+        "options": [
+          "Container registries delete old images after a deployment",
+          "Rollback restores code, not data or schema - the old version now runs against a schema it is incompatible with, so migrations must follow expand/contract to keep the previous version working",
+          "Kubernetes cannot run two image versions at once",
+          "The previous image must be rebuilt from source first"
+        ],
+        "answer": "2",
+        "explanation": "Redeploying an artefact only changes code. Schema and data changes persist, so a destructive migration makes the previous version incompatible. Expand/contract migrations - additive first, destructive only after the old version is gone - keep rollback possible."
       }
     },
     {
@@ -5578,6 +5788,100 @@
       }
     },
     {
+      "id": "q:758",
+      "label": "#758 What is the difference between Terraform and OpenTofu?",
+      "title": "What is the difference between Terraform and OpenTofu?",
+      "group": "Intermediate",
+      "section": "Delivery and Automation",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./infrastructure-as-code/what-is-the-difference-between-terraform-and-opentofu.md",
+      "category": "Infrastructure as Code",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "infrastructure-as-code",
+        "interview-questions",
+        "terraform",
+        "opentofu"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Why did the OpenTofu project fork Terraform in 2023?",
+        "options": [
+          "Terraform stopped supporting the AWS provider",
+          "HashiCorp relicensed Terraform from the open-source MPL 2.0 to the source-available Business Source License (BSL) starting with 1.6",
+          "Terraform removed support for remote state backends",
+          "OpenTofu wanted to replace HCL with YAML"
+        ],
+        "answer": "2",
+        "explanation": "In August 2023 HashiCorp moved Terraform to the BSL 1.1. OpenTofu forked the last MPL-licensed code (Terraform 1.5.x) and is now maintained under the Linux Foundation and CNCF with an open governance model, staying largely compatible with Terraform configurations, providers, and state."
+      }
+    },
+    {
+      "id": "q:759",
+      "label": "#759 How do you keep secrets out of Terraform state?",
+      "title": "How do you keep secrets out of Terraform state?",
+      "group": "Advanced",
+      "section": "Delivery and Automation",
+      "val": 6,
+      "color": "#ef4444",
+      "url": "./infrastructure-as-code/how-do-you-keep-secrets-out-of-terraform-state.md",
+      "category": "Infrastructure as Code",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "infrastructure-as-code",
+        "interview-questions",
+        "terraform",
+        "secrets",
+        "devsecops"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "A Terraform configuration reads a database password with `data \\\"aws_secretsmanager_secret_version\\\"` and passes it to `aws_db_instance.password`, marking the variable `sensitive = true`. Where does the password end up?",
+        "options": [
+          "Nowhere - `sensitive = true` prevents it from being stored",
+          "Only in the CLI output, which is redacted",
+          "In plaintext in the state file (and in any saved plan), because both the data source result and the resource attribute are persisted; `sensitive` only redacts display",
+          "Only in AWS Secrets Manager"
+        ],
+        "answer": "3",
+        "explanation": "`sensitive` hides values in plan and apply output but does not change what is written to state. Data source results and regular resource arguments are persisted. Ephemeral resources and write-only arguments (Terraform 1.10/1.11+, OpenTofu 1.11+) or provider-managed secrets avoid persisting the value."
+      }
+    },
+    {
+      "id": "q:761",
+      "label": "#761 What is Pulumi and how does it compare to Terraform?",
+      "title": "What is Pulumi and how does it compare to Terraform?",
+      "group": "Intermediate",
+      "section": "Delivery and Automation",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./infrastructure-as-code/what-is-pulumi-and-how-does-it-compare-to-terraform.md",
+      "category": "Infrastructure as Code",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "infrastructure-as-code",
+        "interview-questions",
+        "pulumi",
+        "terraform"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "How does Pulumi behave at deployment time even though programs are written in TypeScript, Python, or Go?",
+        "options": [
+          "It runs the program imperatively, calling cloud APIs line by line",
+          "The program registers resources to build a desired-state graph, and the Pulumi engine diffs that graph against state and applies only the differences",
+          "It converts the program to CloudFormation and submits it",
+          "It has no state, so every run recreates all resources"
+        ],
+        "answer": "2",
+        "explanation": "A Pulumi program is general-purpose code that declares resources. The engine collects them into a desired-state graph, compares it with the stack's state, previews the diff (`pulumi preview`), and applies it (`pulumi up`) - declarative at apply time, like Terraform."
+      }
+    },
+    {
       "id": "q:31",
       "label": "#31 What is monitoring in DevOps?",
       "title": "What is monitoring in DevOps?",
@@ -5856,6 +6160,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "observability",
         "metrics",
         "logs",
@@ -5889,6 +6194,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "prometheus",
         "metrics",
         "pushgateway",
@@ -5921,6 +6227,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "opentelemetry",
         "otel",
         "tracing",
@@ -5953,6 +6260,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "monitoring",
         "prometheus",
         "cardinality",
@@ -5986,6 +6294,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "prometheus",
         "metrics",
         "histogram",
@@ -6018,6 +6327,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "logging",
         "json",
         "retention",
@@ -6034,7 +6344,7 @@
           "Restricting logging access to senior managers only"
         ],
         "answer": "2",
-        "explanation": "Health check probes from Kubernetes readiness and liveness checks execute every few seconds across thousands of pods, generating up to 60% of total cluster log volume with zero diagnostic value."
+        "explanation": "Kubernetes liveness and readiness probes hit every pod every few seconds, so their access-log lines are often a large share of cluster log volume while carrying almost no diagnostic value; dropping them at the node agent saves ingest, indexing, and storage."
       }
     },
     {
@@ -6051,6 +6361,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "tracing",
         "opentelemetry",
         "context-propagation",
@@ -6067,6 +6378,103 @@
         ],
         "answer": "2",
         "explanation": "Trace context is injected directly into Kafka record headers, allowing consumers to extract the TraceID and continue the distributed trace without modifying the application payload."
+      }
+    },
+    {
+      "id": "q:768",
+      "label": "#768 How do you scale Prometheus for high availability and long-term storage with Thanos, Mimir, or VictoriaMetrics?",
+      "title": "How do you scale Prometheus for high availability and long-term storage with Thanos, Mimir, or VictoriaMetrics?",
+      "group": "Advanced",
+      "section": "Reliability and Operations",
+      "val": 6,
+      "color": "#ef4444",
+      "url": "./monitoring-and-logging/how-do-you-scale-prometheus-for-high-availability-and-long-term-storage-with-thanos-mimir-or-victoriametrics.md",
+      "category": "Monitoring and Logging",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring-and-logging",
+        "prometheus",
+        "thanos",
+        "mimir",
+        "victoriametrics"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Two identical Prometheus replicas scrape the same targets for high availability. What stops dashboards built on Thanos or Mimir from showing every series twice?",
+        "options": [
+          "Prometheus replicas elect a leader and only the leader stores samples",
+          "Each replica sets a distinct replica external label, and the query layer (Thanos Querier) or ingest layer (Mimir HA tracker) deduplicates on it",
+          "Alertmanager deletes duplicate series after each scrape",
+          "Object storage automatically merges identical blocks on upload"
+        ],
+        "answer": "2",
+        "explanation": "Prometheus has no clustering, so HA pairs produce duplicate data by design. A per-replica external label lets Thanos deduplicate at query time and Mimir's HA tracker accept samples from only one replica per cluster at ingest."
+      }
+    },
+    {
+      "id": "q:769",
+      "label": "#769 How does Grafana Loki store logs, and how do you query them with LogQL?",
+      "title": "How does Grafana Loki store logs, and how do you query them with LogQL?",
+      "group": "Intermediate",
+      "section": "Reliability and Operations",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./monitoring-and-logging/how-does-grafana-loki-store-logs-and-how-do-you-query-them-with-logql.md",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring-and-logging",
+        "loki",
+        "logql",
+        "logging"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Why is putting `trace_id` or `user_id` in Loki stream labels a mistake?",
+        "options": [
+          "Loki labels cannot contain hexadecimal characters",
+          "Every unique label combination creates a new stream, so unbounded values explode the stream count, the index, and the number of tiny chunks",
+          "Labels are stored in plain text and expose personal data, while log lines are encrypted",
+          "LogQL cannot filter on labels, only on line contents"
+        ],
+        "answer": "2",
+        "explanation": "Loki indexes only stream labels, and each unique label set is a separate stream with its own chunks. High-cardinality values belong in the log line or in structured metadata, where they can still be filtered at query time."
+      }
+    },
+    {
+      "id": "q:770",
+      "label": "#770 What is the difference between head-based and tail-based trace sampling?",
+      "title": "What is the difference between head-based and tail-based trace sampling?",
+      "group": "Intermediate",
+      "section": "Reliability and Operations",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./monitoring-and-logging/what-is-the-difference-between-head-based-and-tail-based-trace-sampling.md",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring-and-logging",
+        "tracing",
+        "sampling",
+        "opentelemetry"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Why must tail-based sampling in the OpenTelemetry Collector run behind a trace-ID-aware load balancer when there are several Collector replicas?",
+        "options": [
+          "Because tail sampling only works over UDP",
+          "Because the sampling decision needs every span of a trace, so all spans with the same trace ID must reach the same Collector instance",
+          "Because the load balancer encrypts the spans before sampling",
+          "Because head-based sampling has already discarded the trace ID"
+        ],
+        "answer": "2",
+        "explanation": "Tail sampling buffers a trace and decides after seeing all of its spans. If spans are spread across replicas, each sees a partial trace and makes an inconsistent decision, so a first tier routes by trace ID (the loadbalancing exporter) to the sampling tier."
       }
     },
     {
@@ -6438,6 +6846,70 @@
         ],
         "answer": "2",
         "explanation": "Compliance as Code turns static compliance rules into continuous automated tests in CI/CD and runtime, preventing drift and ensuring continuous compliance."
+      }
+    },
+    {
+      "id": "q:766",
+      "label": "#766 What are CSPM and CNAPP, and how do they find cloud misconfigurations?",
+      "title": "What are CSPM and CNAPP, and how do they find cloud misconfigurations?",
+      "group": "Intermediate",
+      "section": "Security",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./security-and-compliance/what-are-cspm-and-cnapp-and-how-do-they-find-cloud-misconfigurations.md",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security-and-compliance",
+        "cspm",
+        "cnapp",
+        "cloud-security"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "A CSPM reports 4,000 findings. Which prioritisation approach best reflects how modern CNAPP tools rank risk?",
+        "options": [
+          "Fix findings alphabetically by resource name",
+          "Rank by attack path: combine misconfiguration, exposure to the internet, exploitable vulnerabilities, and privileged identities on the same resource, and fix the combinations that lead to sensitive data first",
+          "Fix only findings older than one year",
+          "Disable all rules that produce more than ten findings"
+        ],
+        "answer": "2",
+        "explanation": "Individual findings are rarely the risk; toxic combinations are. A public VM with a critical CVE and an admin role that can read customer data is an attack path, while the same CVE on an isolated, unprivileged host is backlog."
+      }
+    },
+    {
+      "id": "q:767",
+      "label": "#767 What is the NIST Cybersecurity Framework (CSF) 2.0 and how is it used?",
+      "title": "What is the NIST Cybersecurity Framework (CSF) 2.0 and how is it used?",
+      "group": "Intermediate",
+      "section": "Security",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./security-and-compliance/what-is-the-nist-cybersecurity-framework-csf-2-0-and-how-is-it-used.md",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security-and-compliance",
+        "nist",
+        "governance",
+        "compliance"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which function did NIST CSF 2.0 add to the five functions of CSF 1.1?",
+        "options": [
+          "Deploy",
+          "Govern - covering risk strategy, roles and responsibilities, policy, oversight, and cybersecurity supply chain risk management",
+          "Encrypt",
+          "Audit"
+        ],
+        "answer": "2",
+        "explanation": "CSF 2.0 (February 2024) added Govern to Identify, Protect, Detect, Respond, and Recover, making governance and supply-chain risk explicit and placing it at the centre of the framework."
       }
     },
     {
@@ -7082,6 +7554,65 @@
       }
     },
     {
+      "id": "q:778",
+      "label": "#778 How do Linux file permissions, umask, and the setuid, setgid, and sticky bits work?",
+      "title": "How do Linux file permissions, umask, and the setuid, setgid, and sticky bits work?",
+      "group": "Beginner",
+      "section": "Foundations",
+      "val": 3,
+      "color": "#10b981",
+      "url": "./linux-administration/how-do-linux-file-permissions-umask-and-the-setuid-setgid-and-sticky-bits-work.md",
+      "category": "Linux Administration",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "A directory is mode `drwxrwxrwt` (1777). What does the trailing `t` change compared with plain 777?",
+        "options": [
+          "Files in it are deleted automatically at reboot",
+          "Any user can create files, but only a file's owner, the directory's owner, or root can delete or rename it",
+          "Programs in it run with the directory owner's privileges",
+          "New files inherit the directory's group"
+        ],
+        "answer": "2",
+        "explanation": "The sticky bit on a directory restricts unlink and rename to the file owner, the directory owner, or root - which is why /tmp is world-writable without letting users delete each other's files. Inheriting the group is setgid, not sticky."
+      }
+    },
+    {
+      "id": "q:779",
+      "label": "#779 What is the difference between iptables, nftables, firewalld, and ufw?",
+      "title": "What is the difference between iptables, nftables, firewalld, and ufw?",
+      "group": "Intermediate",
+      "section": "Foundations",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./linux-administration/what-is-the-difference-between-iptables-nftables-firewalld-and-ufw.md",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions",
+        "network-security"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "On a current RHEL, Debian, or Ubuntu host, what usually happens when you run an `iptables` command?",
+        "options": [
+          "It programs the legacy x_tables kernel backend directly, bypassing nftables",
+          "It is the iptables-nft compatibility layer, which translates the rule into nftables objects in the kernel",
+          "It fails, because iptables has been removed from the kernel",
+          "It edits firewalld's XML zone files"
+        ],
+        "answer": "2",
+        "explanation": "Modern distributions ship iptables-nft: the familiar iptables syntax, translated into nftables rules. Mixing it with iptables-legacy, or hand-written nft tables, is what produces rules that seem to be ignored."
+      }
+    },
+    {
       "id": "q:46",
       "label": "#46 What is Git?",
       "title": "What is Git?",
@@ -7562,6 +8093,38 @@
         ],
         "answer": "2",
         "explanation": "Client-side hooks are advisory; developers can bypass them using `git commit --no-verify`. Mandatory security controls must always be duplicated in server-side CI pipelines."
+      }
+    },
+    {
+      "id": "q:760",
+      "label": "#760 How do you sign Git commits and enforce signed commits?",
+      "title": "How do you sign Git commits and enforce signed commits?",
+      "group": "Intermediate",
+      "section": "Foundations",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./version-control/how-do-you-sign-git-commits-and-enforce-signed-commits.md",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions",
+        "git",
+        "security",
+        "supply-chain"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "What does a valid signature on a Git commit actually prove?",
+        "options": [
+          "That the code in the commit has been reviewed and is safe",
+          "That the commit was created by the holder of the signing key and has not been altered since it was signed",
+          "That the commit passed CI",
+          "That the author email in the commit is the real author"
+        ],
+        "answer": "2",
+        "explanation": "A commit signature binds the commit object (tree, parents, metadata, message) to a key. It proves possession of that key and integrity of the commit, not code quality or review. The author field itself is unauthenticated text, which is exactly why signing matters: anyone can set user.email to someone else's address."
       }
     },
     {
@@ -8585,6 +9148,70 @@
       }
     },
     {
+      "id": "q:773",
+      "label": "#773 What are the main caching strategies and how do you keep a cache consistent with the database?",
+      "title": "What are the main caching strategies and how do you keep a cache consistent with the database?",
+      "group": "Intermediate",
+      "section": "Architecture and Scale",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./scalability-and-high-availability/what-are-the-main-caching-strategies-and-how-do-you-keep-a-cache-consistent-with-the-database.md",
+      "category": "Scalability and High Availability",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "scalability-and-high-availability",
+        "interview-questions",
+        "caching",
+        "redis",
+        "performance"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best characterizes the core concept or implementation of: What are the main caching strategies and how do you keep a cache consistent with the database??",
+        "options": [
+          "The common patterns are **cache-aside** (the application reads the cache, and on a miss loads from the database and populates it), **read-th...",
+          "It represents an obsolete anti-pattern prohibited in modern Scalability and High Availability architectures.",
+          "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+          "It strictly applies only to single-node legacy servers without distributed high availability."
+        ],
+        "answer": 1,
+        "explanation": "What are the main caching strategies and how do you keep a cache consistent with the database?: The common patterns are **cache-aside** (the application reads the cache, and on a miss loads from the database and populates it), **read-through** (the cache layer loads misses itself), **write-through** (every write goes to the cache and the database synchronously), **write-behind** (writes land in the cache and are flushed to the database asynchronously), and **write-around** (writes skip the cache entirely). Consistency comes from a deliberate invalidation rule - usually \"write the database, then **delete** the key\", backed by a TTL so any missed invalidation heals itself - plus protection against stampedes and hot keys. A cache is always a trade of freshness for latency and load, so state how stale each piece of data is allowed to be."
+      }
+    },
+    {
+      "id": "q:774",
+      "label": "#774 What is cell-based architecture and how does it limit blast radius?",
+      "title": "What is cell-based architecture and how does it limit blast radius?",
+      "group": "Advanced",
+      "section": "Architecture and Scale",
+      "val": 6,
+      "color": "#ef4444",
+      "url": "./scalability-and-high-availability/what-is-cell-based-architecture-and-how-does-it-limit-blast-radius.md",
+      "category": "Scalability and High Availability",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "scalability-and-high-availability",
+        "interview-questions",
+        "cell-based-architecture",
+        "blast-radius",
+        "resilience"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best characterizes the core concept or implementation of: What is cell-based architecture and how does it limit blast radius??",
+        "options": [
+          "A cell-based architecture runs many complete, independent copies of a service stack - **cells** - each serving a fixed subset of customers, ...",
+          "It represents an obsolete anti-pattern prohibited in modern Scalability and High Availability architectures.",
+          "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+          "It strictly applies only to single-node legacy servers without distributed high availability."
+        ],
+        "answer": 1,
+        "explanation": "What is cell-based architecture and how does it limit blast radius?: A cell-based architecture runs many complete, independent copies of a service stack - **cells** - each serving a fixed subset of customers, with a thin **cell router** in front that sends every request to its customer's cell. A failure, bad deployment, poison request, or noisy tenant then affects only the customers in one cell (roughly 1/N of them) instead of everyone. Cells also give you a fixed, tested unit of scale: you grow by adding cells, not by making one deployment ever bigger. The costs are the router, cross-cell operations (migrating customers, global queries), and running N copies of everything."
+      }
+    },
+    {
       "id": "q:61",
       "label": "#61 What is Backup and Disaster Recovery?",
       "title": "What is Backup and Disaster Recovery?",
@@ -9458,6 +10085,38 @@
       }
     },
     {
+      "id": "q:775",
+      "label": "#775 What is the transactional outbox pattern and how do idempotent consumers complete it?",
+      "title": "What is the transactional outbox pattern and how do idempotent consumers complete it?",
+      "group": "Advanced",
+      "section": "Architecture and Scale",
+      "val": 6,
+      "color": "#ef4444",
+      "url": "./cloud-native-architecture/what-is-the-transactional-outbox-pattern-and-how-do-idempotent-consumers-complete-it.md",
+      "category": "Cloud Native Architecture",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "cloud-native-architecture",
+        "interview-questions",
+        "outbox",
+        "event-driven",
+        "idempotency"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best characterizes the core concept or implementation of: What is the transactional outbox pattern and how do idempotent consumers complete it??",
+        "options": [
+          "A service that must both change its database and publish an event has a **dual-write** problem: if it commits and then crashes before publis...",
+          "It represents an obsolete anti-pattern prohibited in modern Cloud Native Architecture architectures.",
+          "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+          "It strictly applies only to single-node legacy servers without distributed high availability."
+        ],
+        "answer": 1,
+        "explanation": "What is the transactional outbox pattern and how do idempotent consumers complete it?: A service that must both change its database and publish an event has a **dual-write** problem: if it commits and then crashes before publishing, the event is lost; if it publishes first and the commit fails, consumers act on something that never happened. The **transactional outbox** fixes this by writing the event into an `outbox` table **in the same local transaction** as the state change, and having a separate relay (a poller or change data capture such as Debezium) publish rows from that table to the broker. The relay can publish a row more than once, so delivery is at-least-once. **Idempotent consumers** - which record processed message IDs or apply changes in a naturally idempotent way - finish the job, giving you effectively-once processing end to end."
+      }
+    },
+    {
       "id": "q:71",
       "label": "#71 What is Performance Testing?",
       "title": "What is Performance Testing?",
@@ -9833,6 +10492,37 @@
       }
     },
     {
+      "id": "q:771",
+      "label": "#771 What is Little's Law and how do you use it in load testing and capacity planning?",
+      "title": "What is Little's Law and how do you use it in load testing and capacity planning?",
+      "group": "Intermediate",
+      "section": "Architecture and Scale",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./performance-testing/what-is-little-s-law-and-how-do-you-use-it-in-load-testing-and-capacity-planning.md",
+      "category": "Performance Testing",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "performance-testing",
+        "capacity-planning",
+        "queueing-theory"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "A service handles 400 requests per second with an average response time of 250 ms. By Little's Law, how many requests are in flight on average?",
+        "options": [
+          "16",
+          "100",
+          "1,600",
+          "400"
+        ],
+        "answer": "2",
+        "explanation": "Little's Law says L = lambda x W: 400 requests per second x 0.25 seconds = 100 concurrent requests. That figure sizes thread pools, connection pools, and the virtual users a closed-model load test needs."
+      }
+    },
+    {
       "id": "q:76",
       "label": "#76 What is an API Gateway?",
       "title": "What is an API Gateway?",
@@ -10035,7 +10725,7 @@
           "It strictly applies only to single-node legacy servers without distributed high availability."
         ],
         "answer": 1,
-        "explanation": "How do you debug a service mesh that is breaking service-to-service traffic?: Work out which layer is refusing the request, because a mesh adds three new ones. Read the **sidecar's own response flags** first - Envoy tells you exactly why it failed (`UF` upstream failure, `UO` overflow/circuit-breaker, `URX` retry limit, `UAEX` authorization denied, `NR` no route) - then check, in order: **was the sidecar injected at all** (an uninjected Pod cannot participate in mTLS and gets connection resets), **is the mTLS mode consistent** (`STRICT` on one side and plain text on the other is the classic outage), **does an `AuthorizationPolicy` deny it** (they are default-allow until one selects the workload, then default-deny for that workload), and **do `VirtualService`/`DestinationRule` actually route where you think** - `istioctl proxy-config` shows the effective configuration rather than your intent. The single most useful habit: compare the _intended_ config with the _programmed_ config, because a mesh failure is nearly always a divergence between the two."
+        "explanation": "How do you debug a service mesh that is breaking service-to-service traffic?: Work out which layer is refusing the request, because a mesh adds three new ones. Read the **sidecar's own response flags** first - Envoy tells you exactly why it failed (`UF` upstream failure, `UO` overflow/circuit-breaker, `URX` retry limit, `NR` no route, `UAEX` denied by external authorization - and a `403` whose response details read `rbac_access_denied_matched_policy[...]` is an `AuthorizationPolicy` denial) - then check, in order: **was the sidecar injected at all** (an uninjected Pod cannot participate in mTLS and gets connection resets), **is the mTLS mode consistent** (`STRICT` on one side and plain text on the other is the classic outage), **does an `AuthorizationPolicy` deny it** (they are default-allow until one selects the workload, then default-deny for that workload), and **do `VirtualService`/`DestinationRule` actually route where you think** - `istioctl proxy-config` shows the effective configuration rather than your intent. The single most useful habit: compare the _intended_ config with the _programmed_ config, because a mesh failure is nearly always a divergence between the two."
       }
     },
     {
@@ -10295,6 +10985,38 @@
         ],
         "answer": "2",
         "explanation": "Because the service mesh sidecar intercepts network traffic, engineers can inject latency and HTTP failures transparently into any service, regardless of language or framework."
+      }
+    },
+    {
+      "id": "q:765",
+      "label": "#765 How do you authenticate API clients with OAuth 2.0 and OIDC at the API gateway?",
+      "title": "How do you authenticate API clients with OAuth 2.0 and OIDC at the API gateway?",
+      "group": "Intermediate",
+      "section": "Architecture and Scale",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./api-gateway-and-service-mesh/how-do-you-authenticate-api-clients-with-oauth-2-0-and-oidc-at-the-api-gateway.md",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "api-gateway-and-service-mesh",
+        "oauth2",
+        "oidc",
+        "jwt"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "A gateway validates a JWT access token's signature and expiry. Which additional check prevents a token issued for a different API by the same identity provider from being accepted?",
+        "options": [
+          "Checking that the token is base64-encoded",
+          "Validating the audience (`aud`) claim against this API's identifier, along with the issuer (`iss`)",
+          "Checking the token length",
+          "Requiring the token in a query parameter"
+        ],
+        "answer": "2",
+        "explanation": "Signature and expiry prove the token is genuine and current, not that it was meant for you. Without an audience check, any valid token from the same issuer - for any API - is accepted."
       }
     },
     {
@@ -10906,7 +11628,7 @@
       ],
       "type": "question",
       "quiz": {
-        "stem": "Which CSI component is responsible for calling cloud provider APIs to format a raw volume and bind-mount it into a Pod's local container directory?",
+        "stem": "Which CSI component formats a newly attached volume and bind-mounts it into a Pod's directory on the node?",
         "options": [
           "The central `csi-provisioner` controller",
           "The node-level CSI plugin executing `NodeStageVolume` and `NodePublishVolume`",
@@ -12126,6 +12848,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "sli",
         "slo",
@@ -12159,6 +12882,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "burn-rate",
         "alerting",
@@ -12192,6 +12916,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "toil",
         "automation",
@@ -12224,6 +12949,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "monitoring",
         "golden-signals",
@@ -12256,6 +12982,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "post-mortem",
         "incident-management",
@@ -12288,6 +13015,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "chaos-engineering",
         "gameday",
         "resilience",
@@ -12320,6 +13048,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "on-call",
         "pagerduty",
@@ -12353,6 +13082,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "runbooks",
         "automation",
@@ -12574,7 +13304,7 @@
           "Frequent deployments make software development more expensive"
         ],
         "answer": "1",
-        "explanation": "DORA research proved that elite teams achieve both higher deployment frequency AND lower change failure rates simultaneously, because small batches are easier to review, test, and debug."
+        "explanation": "DORA survey research has repeatedly found that the highest-performing teams achieve both higher deployment frequency AND lower change failure rates simultaneously, because small batches are easier to review, test, and debug."
       }
     },
     {
@@ -12607,7 +13337,7 @@
           "They speed up continuous integration build times"
         ],
         "answer": "2",
-        "explanation": "Rigorous empirical research by DORA found that manual CAB approvals introduce massive delays (lead time inflation) with zero statistical correlation with improved system reliability."
+        "explanation": "DORA's survey research (2019 onwards) found heavyweight external change approval was associated with worse lead time and deployment frequency and no evidence of a lower change failure rate. It is a correlation from survey data, but a consistent one."
       }
     },
     {
@@ -12740,6 +13470,71 @@
         ],
         "answer": "3",
         "explanation": "Extraneous cognitive load represents tasks that do not add direct business value (such as fighting with complex Kubernetes manifests or IAM policies). Platform teams eliminate this waste through Golden Paths."
+      }
+    },
+    {
+      "id": "q:786",
+      "label": "#786 What are the SPACE and DevEx frameworks and how do they complement DORA metrics?",
+      "title": "What are the SPACE and DevEx frameworks and how do they complement DORA metrics?",
+      "group": "Intermediate",
+      "section": "Reliability and Operations",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./devops-metrics-and-kpis/what-are-the-space-and-devex-frameworks-and-how-do-they-complement-dora-metrics.md",
+      "category": "DevOps Metrics and KPIs",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devops-metrics-and-kpis",
+        "interview-questions",
+        "developer-productivity",
+        "space",
+        "devex",
+        "dora"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best describes how the SPACE framework should be applied?",
+        "options": [
+          "Pick the single SPACE dimension that is easiest to automate and use it to rank engineers",
+          "Measure several dimensions at once, mixing system data with survey data, and never rely on activity counts alone",
+          "Replace DORA metrics entirely with lines of code and commit counts",
+          "Use it only for individual performance reviews"
+        ],
+        "answer": "2",
+        "explanation": "SPACE's core guidance is to use metrics from at least three of its five dimensions together, combine perceptual (survey) and system data, and avoid treating activity metrics such as commits or PR counts as productivity on their own."
+      }
+    },
+    {
+      "id": "q:787",
+      "label": "#787 How do you measure the impact of AI coding assistants on software delivery?",
+      "title": "How do you measure the impact of AI coding assistants on software delivery?",
+      "group": "Advanced",
+      "section": "Reliability and Operations",
+      "val": 6,
+      "color": "#ef4444",
+      "url": "./devops-metrics-and-kpis/how-do-you-measure-the-impact-of-ai-coding-assistants-on-software-delivery.md",
+      "category": "DevOps Metrics and KPIs",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "devops-metrics-and-kpis",
+        "interview-questions",
+        "ai-assisted-development",
+        "dora",
+        "developer-productivity"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best characterizes the core concept or implementation of: How do you measure the impact of AI coding assistants on software delivery??",
+        "options": [
+          "Measure the delivery system, not the tool. Track adoption, then the DORA metrics (throughput _and_ instability, especially change failure ra...",
+          "It represents an obsolete anti-pattern prohibited in modern DevOps Metrics and KPIs architectures.",
+          "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+          "It strictly applies only to single-node legacy servers without distributed high availability."
+        ],
+        "answer": 1,
+        "explanation": "How do you measure the impact of AI coding assistants on software delivery?: Measure the delivery system, not the tool. Track adoption, then the DORA metrics (throughput _and_ instability, especially change failure rate and rework rate), then developer-experience survey data and code-review load, compared against a baseline or a non-adopting cohort. Self-reported speed-ups and vendor metrics such as \"acceptance rate\" or \"percentage of code written by AI\" are inputs, not outcomes - DORA's research shows AI can raise throughput while also raising instability."
       }
     },
     {
@@ -13175,6 +13970,38 @@
         ],
         "answer": "2",
         "explanation": "LocalStack mocks AWS services in a local container, allowing test suites to validate S3, DynamoDB, SQS, and Lambda integrations rapidly without cloud expenditure or live AWS credentials."
+      }
+    },
+    {
+      "id": "q:776",
+      "label": "#776 How do AWS Lambda, Google Cloud Run, and Azure Functions compare for serverless workloads?",
+      "title": "How do AWS Lambda, Google Cloud Run, and Azure Functions compare for serverless workloads?",
+      "group": "Intermediate",
+      "section": "Architecture and Scale",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./serverless-architecture/how-do-aws-lambda-google-cloud-run-and-azure-functions-compare-for-serverless-workloads.md",
+      "category": "Serverless Architecture",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "serverless-architecture",
+        "interview-questions",
+        "aws-lambda",
+        "cloud-run",
+        "azure-functions"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best characterizes the core concept or implementation of: How do AWS Lambda, Google Cloud Run, and Azure Functions compare for serverless workloads??",
+        "options": [
+          "All three scale to zero and bill for usage. They differ in the **unit you deploy** and the **concurrency model**. **Lambda** runs functions ...",
+          "It represents an obsolete anti-pattern prohibited in modern Serverless Architecture architectures.",
+          "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+          "It strictly applies only to single-node legacy servers without distributed high availability."
+        ],
+        "answer": 1,
+        "explanation": "How do AWS Lambda, Google Cloud Run, and Azure Functions compare for serverless workloads?: All three scale to zero and bill for usage. They differ in the **unit you deploy** and the **concurrency model**. **Lambda** runs functions (zip or container image) with one request per execution environment, a 15-minute cap, and the deepest event-source integration on AWS. **Cloud Run** runs any container that listens on a port, serves many concurrent requests per instance (default 80), allows requests of up to 60 minutes, and has jobs for batch work of up to 7 days. **Azure Functions** on the **Flex Consumption** plan runs functions with triggers and bindings, configurable per-instance concurrency, VNet integration, and optional always-ready instances. Pick by workload shape and by the ecosystem you are already in, not by benchmark headlines."
       }
     },
     {
@@ -13649,6 +14476,36 @@
         ],
         "answer": "2",
         "explanation": "If every transaction locks rows in the exact same sorted order (e.g. always lock ID 1 before ID 2), circular wait dependencies are mathematically impossible, preventing deadlocks."
+      }
+    },
+    {
+      "id": "q:782",
+      "label": "#782 How do you upgrade PostgreSQL to a new major version with minimal downtime?",
+      "title": "How do you upgrade PostgreSQL to a new major version with minimal downtime?",
+      "group": "Advanced",
+      "section": "Architecture and Scale",
+      "val": 6,
+      "color": "#ef4444",
+      "url": "./database-management-in-devops/how-do-you-upgrade-postgresql-to-a-new-major-version-with-minimal-downtime.md",
+      "category": "Database Management in DevOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "database-management-in-devops",
+        "interview-questions",
+        "backup-and-disaster-recovery"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best characterizes the core concept or implementation of: How do you upgrade PostgreSQL to a new major version with minimal downtime??",
+        "options": [
+          "Pick the method by how much downtime you can afford. **`pg_upgrade`** rewrites the system catalogs in place and, with `--link` (or `--clone`...",
+          "It represents an obsolete anti-pattern prohibited in modern Database Management in DevOps architectures.",
+          "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+          "It strictly applies only to single-node legacy servers without distributed high availability."
+        ],
+        "answer": 1,
+        "explanation": "How do you upgrade PostgreSQL to a new major version with minimal downtime?: Pick the method by how much downtime you can afford. **`pg_upgrade`** rewrites the system catalogs in place and, with `--link` (or `--clone`, or `--swap` from PostgreSQL 18), reuses the existing data files, so even a multi-terabyte database is down for minutes rather than hours - but it is still an outage, and with `--link` the old cluster cannot be started again once the new one has run. **Logical replication** gives near-zero downtime: build a new cluster on the target version, replicate into it with a publication and subscription, let it catch up, then switch the application over in seconds - at the cost of real caveats (DDL, sequences, and large objects are not replicated, and every table needs a primary key or replica identity). On managed services the same two options appear as an in-place major version upgrade and a **blue/green deployment** (RDS and Aurora implement theirs with logical replication). Whatever the method: rehearse on a restored copy of production, check extension compatibility, take a backup you have restored, and run `ANALYZE` afterwards so the planner is not working blind."
       }
     },
     {
@@ -14237,6 +15094,38 @@
       }
     },
     {
+      "id": "q:764",
+      "label": "#764 How do you plan a migration to post-quantum cryptography?",
+      "title": "How do you plan a migration to post-quantum cryptography?",
+      "group": "Advanced",
+      "section": "Security",
+      "val": 6,
+      "color": "#ef4444",
+      "url": "./network-security/how-do-you-plan-a-migration-to-post-quantum-cryptography.md",
+      "category": "Network Security",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "network-security",
+        "post-quantum",
+        "cryptography",
+        "tls"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Why do most organisations migrate TLS key exchange to post-quantum algorithms before migrating certificate signatures?",
+        "options": [
+          "Because post-quantum signatures are already mandatory in all browsers",
+          "Because recorded traffic can be decrypted later ('harvest now, decrypt later'), while a forged signature only matters once a quantum computer exists at the moment of the attack",
+          "Because key exchange uses symmetric cryptography only",
+          "Because certificates cannot be changed until 2035"
+        ],
+        "answer": "2",
+        "explanation": "Confidentiality has a long tail: traffic captured today can be broken retroactively. Authentication only needs to resist attackers at connection time, so signature migration can follow once PQ certificates are practical."
+      }
+    },
+    {
       "id": "q:121",
       "label": "#121 What is Incident Management?",
       "title": "What is Incident Management?",
@@ -14584,6 +15473,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "incident-management",
         "automation",
         "self-healing",
         "remediation",
@@ -14871,7 +15761,7 @@
           "Teams must use identical programming languages to collaborate"
         ],
         "answer": "2",
-        "explanation": "Project Aristotle proved that psychological safety outweighed all other factors (including individual talent, seniority, and workload) in determining team success and innovation."
+        "explanation": "Project Aristotle found psychological safety to be the most important of the five team dynamics it identified, ahead of dependability, structure and clarity, meaning, and impact; who was on the team mattered less than how the team worked together."
       }
     },
     {
@@ -14972,6 +15862,38 @@
         ],
         "answer": "2",
         "explanation": "Direct SSH access leaves no team-wide audit trail. ChatOps and GitOps ensure every modification is recorded in public chat channels or version-controlled PR reviews."
+      }
+    },
+    {
+      "id": "q:785",
+      "label": "#785 What is the Westrum organizational culture model and how does DORA use it?",
+      "title": "What is the Westrum organizational culture model and how does DORA use it?",
+      "group": "Intermediate",
+      "section": "Platform and Leadership",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./devops-culture-and-practices/what-is-the-westrum-organizational-culture-model-and-how-does-dora-use-it.md",
+      "category": "DevOps Culture and Practices",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devops-culture-and-practices",
+        "interview-questions",
+        "culture",
+        "westrum",
+        "dora"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best characterizes the core concept or implementation of: What is the Westrum organizational culture model and how does DORA use it??",
+        "options": [
+          "Sociologist Ron Westrum classified organisations by how information flows through them: **pathological** (power-oriented), **bureaucratic** ...",
+          "It represents an obsolete anti-pattern prohibited in modern DevOps Culture and Practices architectures.",
+          "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+          "It strictly applies only to single-node legacy servers without distributed high availability."
+        ],
+        "answer": 1,
+        "explanation": "What is the Westrum organizational culture model and how does DORA use it?: Sociologist Ron Westrum classified organisations by how information flows through them: **pathological** (power-oriented), **bureaucratic** (rule-oriented), and **generative** (performance-oriented). DORA adopted the model because it can be measured with a short survey, and its research has repeatedly found that generative cultures are associated with better software delivery and organisational performance, and with less burnout."
       }
     },
     {
@@ -15194,6 +16116,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "use-method",
         "performance",
@@ -15226,6 +16149,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "prometheus",
         "node-exporter",
@@ -15258,6 +16182,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "blackbox",
         "whitebox",
@@ -15290,6 +16215,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "ebpf",
         "cilium",
@@ -15323,6 +16249,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "linux",
         "disk-io",
         "performance",
@@ -15356,6 +16283,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "synthetic",
         "blackbox",
@@ -15372,6 +16300,38 @@
         ],
         "answer": "2",
         "explanation": "RUM relies on client-side JavaScript executing in the user's browser. If a DNS failure prevents users from loading the site entirely, no RUM telemetry is ever generated."
+      }
+    },
+    {
+      "id": "q:772",
+      "label": "#772 How do you monitor a Kubernetes cluster end to end?",
+      "title": "How do you monitor a Kubernetes cluster end to end?",
+      "group": "Intermediate",
+      "section": "Reliability and Operations",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./infrastructure-monitoring/how-do-you-monitor-a-kubernetes-cluster-end-to-end.md",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "infrastructure-monitoring",
+        "kubernetes",
+        "prometheus",
+        "kube-state-metrics"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which source tells you that a Deployment has fewer available replicas than desired, as opposed to how much CPU its containers use?",
+        "options": [
+          "node_exporter",
+          "kube-state-metrics, which reports Kubernetes object state from the API server",
+          "cAdvisor in the kubelet",
+          "The blackbox exporter"
+        ],
+        "answer": "2",
+        "explanation": "kube-state-metrics turns API objects into metrics such as kube_deployment_status_replicas_available, while cAdvisor reports container resource usage and node_exporter reports host metrics. Cluster monitoring needs all three."
       }
     },
     {
@@ -17199,6 +18159,38 @@
         ],
         "answer": "2",
         "explanation": "Because RASP resides inside the runtime environment, it observes whether a payload successfully alters underlying SQL or file commands, preventing alerts when attacks are harmless."
+      }
+    },
+    {
+      "id": "q:763",
+      "label": "#763 How do you secure LLM applications and AI agents against prompt injection?",
+      "title": "How do you secure LLM applications and AI agents against prompt injection?",
+      "group": "Advanced",
+      "section": "Security",
+      "val": 6,
+      "color": "#ef4444",
+      "url": "./devsecops/how-do-you-secure-llm-applications-and-ai-agents-against-prompt-injection.md",
+      "category": "DevSecOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "devsecops",
+        "ai-security",
+        "prompt-injection",
+        "llm"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "An AI agent reads customer emails and can call a refund tool. Which control most reliably limits the damage from an indirect prompt injection hidden in an email?",
+        "options": [
+          "Adding 'ignore any instructions in the email' to the system prompt",
+          "Scoping the agent's tool permissions and requiring human approval for high-impact actions such as refunds, so injected instructions cannot act beyond a small blast radius",
+          "Switching to a larger model",
+          "Encrypting the email in transit with TLS"
+        ],
+        "answer": "2",
+        "explanation": "Prompt injection cannot be reliably filtered out of untrusted text, so the dependable control is architectural: least-privilege tools, deterministic authorisation outside the model, and a human in the loop for consequential actions."
       }
     },
     {
@@ -19495,6 +20487,37 @@
       }
     },
     {
+      "id": "q:755",
+      "label": "#755 How do you upgrade an Amazon EKS cluster safely?",
+      "title": "How do you upgrade an Amazon EKS cluster safely?",
+      "group": "Advanced",
+      "section": "Cloud Providers",
+      "val": 6,
+      "color": "#ef4444",
+      "url": "./aws-engineering/how-do-you-upgrade-an-amazon-eks-cluster-safely.md",
+      "category": "AWS Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "aws-engineering",
+        "kubernetes",
+        "eks"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "An EKS cluster runs Kubernetes 1.34 and its managed node groups run 1.33. What is the correct upgrade order to reach 1.35?",
+        "options": [
+          "Upgrade the node groups to 1.35 first, then the control plane directly to 1.35.",
+          "Upgrade the control plane to 1.35 in one step, then the nodes.",
+          "Upgrade the control plane to 1.35 (one minor version), then update the add-ons, then roll the nodes to 1.35.",
+          "Delete and recreate the cluster, because EKS does not support in-place upgrades."
+        ],
+        "answer": "3",
+        "explanation": "EKS upgrades the control plane one minor version at a time and never downgrades, and nodes may not be newer than the control plane - so the control plane goes first (1.34 to 1.35 is a single minor step), then compatible add-on versions, then the data plane. Upgrading nodes first would put kubelets ahead of the API server, which Kubernetes' version-skew policy forbids."
+      }
+    },
+    {
       "id": "q:199",
       "label": "#199 How is the Azure resource hierarchy organised?",
       "title": "How is the Azure resource hierarchy organised?",
@@ -19752,7 +20775,7 @@
           "It strictly applies only to single-node legacy servers without distributed high availability."
         ],
         "answer": 1,
-        "explanation": "How do you architect an end-to-end production DevOps project on Azure?: Architect an end-to-end production DevOps project on Azure by provisioning a Hub-and-Spoke Virtual Network topology using Bicep/Terraform, deploying Azure Kubernetes Service (AKS) with Workload Identity and Entra ID RBAC, running Azure SQL Managed Instance over Private Endpoints, automating CI/CD via Azure DevOps Pipelines, and monitoring with Azure Monitor and Log Analytics."
+        "explanation": "How do you architect an end-to-end production DevOps project on Azure?: Architect an end-to-end production DevOps project on Azure by provisioning a Hub-and-Spoke Virtual Network topology using Bicep/Terraform, deploying Azure Kubernetes Service (AKS) with Workload Identity and Entra ID RBAC, running Azure SQL Database over Private Endpoints, automating CI/CD via Azure DevOps Pipelines, and monitoring with Azure Monitor and Log Analytics."
       }
     },
     {
@@ -20068,6 +21091,37 @@
         ],
         "answer": "2",
         "explanation": "Alert Processing Rules intercept fired alerts and suppress notification delivery during scheduled maintenance windows, eliminating alert fatigue while keeping the underlying alert rules intact."
+      }
+    },
+    {
+      "id": "q:756",
+      "label": "#756 How do you choose Azure Storage redundancy and secure a storage account?",
+      "title": "How do you choose Azure Storage redundancy and secure a storage account?",
+      "group": "Intermediate",
+      "section": "Cloud Providers",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./azure-engineering/how-do-you-choose-azure-storage-redundancy-and-secure-a-storage-account.md",
+      "category": "Azure Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "azure-engineering",
+        "storage",
+        "security-and-compliance"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "A storage account must survive the loss of an availability zone with no data loss, and also keep a copy in another region for a regional disaster. Which redundancy option fits?",
+        "options": [
+          "LRS",
+          "GRS",
+          "GZRS",
+          "ZRS"
+        ],
+        "answer": "3",
+        "explanation": "GZRS replicates synchronously across three zones in the primary region (so a zone loss loses no data) and asynchronously to the paired region. GRS also copies to the paired region, but within the primary region it is only LRS - three copies in a single datacenter - so a zone outage takes the primary down. ZRS survives a zone loss but has no second region."
       }
     },
     {
@@ -20526,6 +21580,37 @@
       }
     },
     {
+      "id": "q:757",
+      "label": "#757 How do you choose between Google Cloud load balancers?",
+      "title": "How do you choose between Google Cloud load balancers?",
+      "group": "Intermediate",
+      "section": "Cloud Providers",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./gcp-engineering/how-do-you-choose-between-google-cloud-load-balancers.md",
+      "category": "GCP Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "gcp-engineering",
+        "load-balancing",
+        "networking"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "A game server on Compute Engine needs a UDP load balancer that preserves the client's source IP. Which Google Cloud load balancer fits?",
+        "options": [
+          "Global external Application Load Balancer",
+          "External passthrough Network Load Balancer",
+          "Global external proxy Network Load Balancer",
+          "Regional internal Application Load Balancer"
+        ],
+        "answer": "2",
+        "explanation": "Passthrough Network Load Balancers do not terminate connections: packets reach the backend with the original client IP and the backend replies directly, and they support UDP. Application Load Balancers are HTTP(S) only, and proxy Network Load Balancers terminate TCP at a Google proxy, so backends see the proxy's address and UDP is not supported."
+      }
+    },
+    {
       "id": "q:215",
       "label": "#215 What is a cloud landing zone?",
       "title": "What is a cloud landing zone?",
@@ -20758,6 +21843,38 @@
         ],
         "answer": 1,
         "explanation": "How do you troubleshoot a DNS problem in production?: Query the authoritative server directly and compare it with what clients are actually getting - the gap between those two answers is the whole diagnosis. `dig +trace` walks the delegation from the root, `dig @ns1.provider.net name` gives you the authoritative truth, and `dig name` from an affected client shows what the resolver chain is really returning, including a cached stale record. Then classify: **a wrong record** (fix it, and wait out the TTL), **a delegation or NS problem** (registrar or parent zone), **propagation and caching** (nothing to fix but time, which is why low TTLs are a change-management tool), **DNSSEC validation failure** (SERVFAIL everywhere, and the scariest of the set), or **not-DNS-at-all** (resolution is fine and the target is unhealthy). The prevention that matters more than any of the debugging: manage records as code, lower the TTL **before** a planned change, and monitor resolution from outside your network."
+      }
+    },
+    {
+      "id": "q:777",
+      "label": "#777 How do you manage cloud service quotas and capacity limits?",
+      "title": "How do you manage cloud service quotas and capacity limits?",
+      "group": "Intermediate",
+      "section": "Cloud Providers",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./cloud-engineering/how-do-you-manage-cloud-service-quotas-and-capacity-limits.md",
+      "category": "Cloud Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cloud-engineering",
+        "interview-questions",
+        "quotas",
+        "capacity-planning",
+        "aws"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best characterizes the core concept or implementation of: How do you manage cloud service quotas and capacity limits??",
+        "options": [
+          "Treat limits as three different things. **Quotas** are per-account (or subscription, or project) ceilings you can usually raise on request: ...",
+          "It represents an obsolete anti-pattern prohibited in modern Cloud Engineering architectures.",
+          "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+          "It strictly applies only to single-node legacy servers without distributed high availability."
+        ],
+        "answer": 1,
+        "explanation": "How do you manage cloud service quotas and capacity limits?: Treat limits as three different things. **Quotas** are per-account (or subscription, or project) ceilings you can usually raise on request: vCPUs, IP addresses, Lambda concurrency. **API rate limits** throttle control-plane calls. **Physical capacity** is whether the provider actually has the instance type in that zone right now, which no quota increase fixes. Manage them by monitoring utilisation against every quota that matters, alerting at 70-80%, raising limits ahead of launches and **in your DR region**, managing quota values as code for new accounts, and reserving capacity (capacity reservations, GPU capacity blocks) for anything you cannot afford to be refused."
       }
     },
     {
@@ -21018,7 +22135,7 @@
           "It strictly applies only to single-node legacy servers without distributed high availability."
         ],
         "answer": 1,
-        "explanation": "How do you orchestrate and autoscale GPU workloads in Kubernetes?: Orchestrate GPU workloads in Kubernetes using the NVIDIA GPU Operator (for driver injection and container runtime configuration), partition GPUs via Multi-Instance GPU (MIG) or Time-Slicing, and autoscale GPU nodes using Karpenter or KEDA based on GPU duty cycle and VRAM utilization metrics."
+        "explanation": "How do you orchestrate and autoscale GPU workloads in Kubernetes?: Orchestrate GPU workloads in Kubernetes using the NVIDIA GPU Operator (for driver injection and container runtime configuration), partition GPUs via Multi-Instance GPU (MIG) or Time-Slicing, scale the workload Pods with KEDA or HPA on a demand signal (queue depth, pending requests, latency), and let Karpenter or Cluster Autoscaler add and remove GPU nodes in response to the Pods that cannot be scheduled. Dynamic Resource Allocation (GA in Kubernetes 1.34) is the newer, attribute-based way to request devices."
       }
     },
     {
@@ -21047,7 +22164,7 @@
           "It strictly applies only to single-node legacy servers without distributed high availability."
         ],
         "answer": 1,
-        "explanation": "How do you deploy and scale LLM inference serving with vLLM or Triton on Kubernetes?: Deploy LLM inference engines (such as vLLM or Triton Inference Server) on Kubernetes by mounting model weights via fast local NVMe caches or streaming from S3/OCI, enabling PagedAttention for KV cache optimization, using tensor parallelism across multiple GPUs, and managing zero-downtime model deployments with progressive traffic routing."
+        "explanation": "How do you deploy and scale LLM inference serving with vLLM or Triton on Kubernetes?: Deploy LLM inference engines (such as vLLM or Triton Inference Server) on Kubernetes by mounting model weights via fast local NVMe caches or streaming from S3/OCI, relying on the engine's KV-cache management (vLLM's PagedAttention, on by default) and continuous batching for throughput, using tensor parallelism when a model does not fit on one GPU, autoscaling on queue depth or time-to-first-token rather than GPU utilisation, and managing zero-downtime model deployments with progressive traffic routing."
       }
     },
     {
@@ -21340,6 +22457,65 @@
         ],
         "answer": 1,
         "explanation": "What Python exercises come up in DevOps interviews?: Two categories, and they are graded differently. The **operational** ones are what the job actually is: parse a log and aggregate it, filter a list of dictionaries (job records, API responses) by a field, extract unique IP addresses from a live log, check disk usage and alert above a threshold, list cloud resources with boto3 filtered by tag, retrieve a secret, and watch a directory for new files. The **language** ones are quick screens: reverse a string, palindrome, count word occurrences, longest substring without repeats, find pairs summing to N, list versus tuple versus set, shallow versus deep copy, decorators, `5/2` versus `5//2`, and what the GIL means. For the operational ones you are being judged on **using the right data structure, handling errors, and not loading a 4 GB file into memory**; for the language ones, on picking `set` when you need membership testing and `dict`/`Counter` when you need counting - and on saying the complexity out loud. The habit that earns most of the credit: iterate over a file line by line rather than `read()`, use `collections.Counter` and `defaultdict` instead of hand-rolled loops, and pass subprocess arguments as a list so nothing is ever interpreted by a shell."
+      }
+    },
+    {
+      "id": "q:780",
+      "label": "#780 How do you process JSON and YAML on the command line with jq and yq?",
+      "title": "How do you process JSON and YAML on the command line with jq and yq?",
+      "group": "Intermediate",
+      "section": "Foundations",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./scripting-and-automation/how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq.md",
+      "category": "Scripting and Automation",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "scripting-and-automation",
+        "interview-questions"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Why is `jq -r '.items[].metadata.name'` preferred over `grep '\\\"name\\\"' | cut -d'\\\"' -f4` for extracting Kubernetes resource names?",
+        "options": [
+          "jq is faster on files under 1 KB",
+          "jq parses the JSON structure, so it is unaffected by formatting, key order, nesting, or a 'name' key appearing elsewhere",
+          "grep cannot read JSON files",
+          "cut only works on CSV"
+        ],
+        "answer": "2",
+        "explanation": "Text tools match characters, not structure: a reformatted document, a nested 'name' field, or an escaped quote silently breaks them. jq addresses fields by path, so the extraction is correct by construction."
+      }
+    },
+    {
+      "id": "q:781",
+      "label": "#781 How do you test and lint shell and Python automation scripts?",
+      "title": "How do you test and lint shell and Python automation scripts?",
+      "group": "Intermediate",
+      "section": "Foundations",
+      "val": 4,
+      "color": "#f59e0b",
+      "url": "./scripting-and-automation/how-do-you-test-and-lint-shell-and-python-automation-scripts.md",
+      "category": "Scripting and Automation",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "scripting-and-automation",
+        "interview-questions",
+        "cicd"
+      ],
+      "type": "question",
+      "quiz": {
+        "stem": "Which statement best characterizes the core concept or implementation of: How do you test and lint shell and Python automation scripts??",
+        "options": [
+          "In layers, the same as application code, because automation holds production credentials and runs unattended. **Static checks** on every com...",
+          "It represents an obsolete anti-pattern prohibited in modern Scripting and Automation architectures.",
+          "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
+          "It strictly applies only to single-node legacy servers without distributed high availability."
+        ],
+        "answer": 1,
+        "explanation": "How do you test and lint shell and Python automation scripts?: In layers, the same as application code, because automation holds production credentials and runs unattended. **Static checks** on every commit: `shellcheck` and `shfmt` for Bash, `ruff` (lint and format) plus `mypy` or `pyright` for Python, all wired into pre-commit and CI. **Unit tests** for the logic: **bats-core** for shell functions, **pytest** for Python, with external systems replaced by stubs - a fake `kubectl` on `PATH`, botocore's `Stubber` or `moto` for AWS. **Integration or smoke tests** against something real but disposable: a kind cluster, a LocalStack or sandbox account, a container with the target OS. And design for testability - put logic in functions, keep side effects at the edges, and give every destructive script a `--dry-run` - because a script that is one long sequence of commands can only be tested by running it."
       }
     },
     {
@@ -24991,6 +26167,12 @@
     },
     {
       "source": "q:509",
+      "target": "q:762",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:509",
       "target": "q:16",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -24998,12 +26180,6 @@
     {
       "source": "q:509",
       "target": "q:17",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:509",
-      "target": "q:18",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25069,13 +26245,61 @@
     },
     {
       "source": "q:512",
-      "target": "q:16",
+      "target": "q:785",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:512",
+      "target": "q:16",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:core-devops-concepts",
+      "target": "q:783",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:783",
+      "target": "q:16",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:783",
       "target": "q:17",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:783",
+      "target": "q:20",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:core-devops-concepts",
+      "target": "q:784",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:784",
+      "target": "q:16",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:784",
+      "target": "q:17",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:784",
+      "target": "q:19",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25087,6 +26311,12 @@
     },
     {
       "source": "q:6",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:6",
       "target": "q:11",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25094,12 +26324,6 @@
     {
       "source": "q:6",
       "target": "q:12",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:6",
-      "target": "q:13",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25111,6 +26335,12 @@
     },
     {
       "source": "q:7",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:7",
       "target": "q:11",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25118,12 +26348,6 @@
     {
       "source": "q:7",
       "target": "q:12",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:7",
-      "target": "q:13",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25135,6 +26359,12 @@
     },
     {
       "source": "q:8",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:8",
       "target": "q:11",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25142,12 +26372,6 @@
     {
       "source": "q:8",
       "target": "q:12",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:8",
-      "target": "q:14",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25159,6 +26383,12 @@
     },
     {
       "source": "q:9",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:9",
       "target": "q:11",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25166,12 +26396,6 @@
     {
       "source": "q:9",
       "target": "q:12",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:9",
-      "target": "q:13",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25183,6 +26407,12 @@
     },
     {
       "source": "q:10",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:10",
       "target": "q:11",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25190,12 +26420,6 @@
     {
       "source": "q:10",
       "target": "q:12",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:10",
-      "target": "q:13",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25231,6 +26455,12 @@
     },
     {
       "source": "q:260",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:260",
       "target": "q:12",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25242,16 +26472,16 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
-      "source": "q:260",
-      "target": "q:257",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
       "source": "topic:docker",
       "target": "q:291",
       "type": "topic-link",
       "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:291",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:291",
@@ -25262,12 +26492,6 @@
     {
       "source": "q:291",
       "target": "q:255",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:291",
-      "target": "q:256",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25339,13 +26563,13 @@
     },
     {
       "source": "q:416",
-      "target": "q:405",
+      "target": "q:751",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:416",
-      "target": "q:449",
+      "target": "q:753",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25369,6 +26593,12 @@
     },
     {
       "source": "q:437",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:437",
       "target": "q:11",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25376,12 +26606,6 @@
     {
       "source": "q:437",
       "target": "q:12",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:437",
-      "target": "q:15",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25405,6 +26629,12 @@
     },
     {
       "source": "q:438",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:438",
       "target": "q:14",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25412,12 +26642,6 @@
     {
       "source": "q:438",
       "target": "q:15",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:438",
-      "target": "q:442",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25441,6 +26665,12 @@
     },
     {
       "source": "q:439",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:439",
       "target": "q:450",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25448,12 +26678,6 @@
     {
       "source": "q:439",
       "target": "q:429",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:439",
-      "target": "q:12",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25483,6 +26707,12 @@
     },
     {
       "source": "q:440",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:440",
       "target": "q:12",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25490,12 +26720,6 @@
     {
       "source": "q:440",
       "target": "q:257",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:440",
-      "target": "q:406",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25543,7 +26767,7 @@
     },
     {
       "source": "q:441",
-      "target": "q:161",
+      "target": "q:751",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25561,13 +26785,13 @@
     },
     {
       "source": "q:513",
-      "target": "q:709",
+      "target": "q:751",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:513",
-      "target": "q:711",
+      "target": "q:709",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25579,6 +26803,12 @@
     },
     {
       "source": "q:514",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:514",
       "target": "q:11",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25586,12 +26816,6 @@
     {
       "source": "q:514",
       "target": "q:12",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:514",
-      "target": "q:13",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25627,6 +26851,12 @@
     },
     {
       "source": "q:516",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:516",
       "target": "q:11",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25634,12 +26864,6 @@
     {
       "source": "q:516",
       "target": "q:12",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:516",
-      "target": "q:403",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25699,6 +26923,12 @@
     },
     {
       "source": "q:519",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:519",
       "target": "q:11",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -25710,8 +26940,38 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
-      "source": "q:519",
-      "target": "q:13",
+      "source": "topic:docker",
+      "target": "q:754",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:754",
+      "target": "q:10",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:754",
+      "target": "q:518",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:754",
+      "target": "q:751",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:754",
+      "target": "q:11",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:754",
+      "target": "q:12",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -25855,7 +27115,7 @@
     },
     {
       "source": "q:234",
-      "target": "q:413",
+      "target": "q:622",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -26066,6 +27326,12 @@
     {
       "source": "q:405",
       "target": "q:297",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:405",
+      "target": "q:416",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -26635,6 +27901,12 @@
     },
     {
       "source": "q:449",
+      "target": "q:416",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:449",
       "target": "q:415",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -26906,6 +28178,90 @@
     {
       "source": "q:531",
       "target": "q:413",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:kubernetes",
+      "target": "q:751",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:751",
+      "target": "q:234",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:751",
+      "target": "q:415",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:kubernetes",
+      "target": "q:752",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:752",
+      "target": "q:410",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:752",
+      "target": "q:81",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:752",
+      "target": "q:411",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:752",
+      "target": "q:412",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:752",
+      "target": "q:413",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:kubernetes",
+      "target": "q:753",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:753",
+      "target": "q:518",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:753",
+      "target": "q:524",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:753",
+      "target": "q:453",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:753",
+      "target": "q:623",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -28050,6 +29406,48 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:cicd",
+      "target": "q:762",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:762",
+      "target": "q:90",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:762",
+      "target": "q:399",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:762",
+      "target": "q:410",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:762",
+      "target": "q:511",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:762",
+      "target": "q:428",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:762",
+      "target": "q:20",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:cloud-platforms",
       "target": "q:21",
       "type": "topic-link",
@@ -28249,12 +29647,6 @@
     },
     {
       "source": "q:543",
-      "target": "q:742",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:543",
       "target": "q:746",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -28262,6 +29654,12 @@
     {
       "source": "q:543",
       "target": "q:750",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:543",
+      "target": "q:734",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -28303,13 +29701,13 @@
     },
     {
       "source": "q:545",
-      "target": "q:193",
+      "target": "q:756",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:545",
-      "target": "q:194",
+      "target": "q:193",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -29130,6 +30528,126 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:infrastructure-as-code",
+      "target": "q:758",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:758",
+      "target": "q:27",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:758",
+      "target": "q:548",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:758",
+      "target": "q:468",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:758",
+      "target": "q:586",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:758",
+      "target": "q:456",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:infrastructure-as-code",
+      "target": "q:759",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:759",
+      "target": "q:548",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:759",
+      "target": "q:466",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:759",
+      "target": "q:758",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:759",
+      "target": "q:456",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:759",
+      "target": "q:468",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:759",
+      "target": "q:470",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:infrastructure-as-code",
+      "target": "q:761",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:761",
+      "target": "q:27",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:761",
+      "target": "q:553",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:761",
+      "target": "q:758",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:761",
+      "target": "q:468",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:761",
+      "target": "q:586",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:761",
+      "target": "q:456",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:monitoring-and-logging",
       "target": "q:31",
       "type": "topic-link",
@@ -29335,13 +30853,13 @@
     },
     {
       "source": "q:500",
-      "target": "q:131",
+      "target": "q:772",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:500",
-      "target": "q:132",
+      "target": "q:131",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -29377,6 +30895,12 @@
     },
     {
       "source": "q:501",
+      "target": "q:772",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:501",
       "target": "q:131",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -29389,6 +30913,12 @@
     },
     {
       "source": "q:556",
+      "target": "q:433",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:556",
       "target": "q:132",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -29396,12 +30926,6 @@
     {
       "source": "q:556",
       "target": "q:133",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:556",
-      "target": "q:134",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -29425,7 +30949,7 @@
     },
     {
       "source": "q:557",
-      "target": "q:688",
+      "target": "q:433",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -29437,6 +30961,12 @@
     },
     {
       "source": "q:558",
+      "target": "q:433",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:558",
       "target": "q:134",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -29444,12 +30974,6 @@
     {
       "source": "q:558",
       "target": "q:135",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:558",
-      "target": "q:433",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -29473,7 +30997,7 @@
     },
     {
       "source": "q:559",
-      "target": "q:689",
+      "target": "q:686",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -29482,6 +31006,12 @@
       "target": "q:560",
       "type": "topic-link",
       "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:560",
+      "target": "q:433",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:560",
@@ -29496,16 +31026,16 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
-      "source": "q:560",
-      "target": "q:644",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
       "source": "topic:monitoring-and-logging",
       "target": "q:561",
       "type": "topic-link",
       "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:561",
+      "target": "q:433",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:561",
@@ -29516,12 +31046,6 @@
     {
       "source": "q:561",
       "target": "q:133",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:561",
-      "target": "q:134",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -29539,13 +31063,85 @@
     },
     {
       "source": "q:562",
-      "target": "q:134",
+      "target": "q:433",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:562",
-      "target": "q:135",
+      "target": "q:134",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:monitoring-and-logging",
+      "target": "q:768",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:768",
+      "target": "q:687",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:768",
+      "target": "q:772",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:768",
+      "target": "q:433",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:monitoring-and-logging",
+      "target": "q:769",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:769",
+      "target": "q:433",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:769",
+      "target": "q:132",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:769",
+      "target": "q:133",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:monitoring-and-logging",
+      "target": "q:770",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:770",
+      "target": "q:433",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:770",
+      "target": "q:134",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:770",
+      "target": "q:96",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -29868,6 +31464,78 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:security-and-compliance",
+      "target": "q:766",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:766",
+      "target": "q:434",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:766",
+      "target": "q:563",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:766",
+      "target": "q:491",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:766",
+      "target": "q:713",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:766",
+      "target": "q:429",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:security-and-compliance",
+      "target": "q:767",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:767",
+      "target": "q:568",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:767",
+      "target": "q:434",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:767",
+      "target": "q:707",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:767",
+      "target": "q:491",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:767",
+      "target": "q:429",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:linux-administration",
       "target": "q:41",
       "type": "topic-link",
@@ -30091,13 +31759,13 @@
     },
     {
       "source": "q:494",
-      "target": "q:50",
+      "target": "q:780",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:494",
-      "target": "q:263",
+      "target": "q:50",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -30433,7 +32101,7 @@
     },
     {
       "source": "q:574",
-      "target": "q:46",
+      "target": "q:780",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -30481,6 +32149,84 @@
     },
     {
       "source": "q:576",
+      "target": "q:301",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:linux-administration",
+      "target": "q:778",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:778",
+      "target": "q:45",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:778",
+      "target": "q:238",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:778",
+      "target": "q:416",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:778",
+      "target": "q:430",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:778",
+      "target": "q:502",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:778",
+      "target": "q:266",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:linux-administration",
+      "target": "q:779",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:779",
+      "target": "q:576",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:779",
+      "target": "q:517",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:779",
+      "target": "q:502",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:779",
+      "target": "q:430",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:779",
       "target": "q:301",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -30890,6 +32636,36 @@
     {
       "source": "q:582",
       "target": "q:537",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:version-control",
+      "target": "q:760",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:760",
+      "target": "q:539",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:760",
+      "target": "q:578",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:760",
+      "target": "q:538",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:760",
+      "target": "q:401",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -31609,7 +33385,7 @@
     },
     {
       "source": "q:419",
-      "target": "q:2",
+      "target": "q:762",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -31729,7 +33505,7 @@
     },
     {
       "source": "q:591",
-      "target": "q:16",
+      "target": "q:783",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -31826,6 +33602,60 @@
     {
       "source": "q:595",
       "target": "q:5",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:scalability-and-high-availability",
+      "target": "q:773",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:773",
+      "target": "q:590",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:773",
+      "target": "q:541",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:773",
+      "target": "q:515",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:773",
+      "target": "q:512",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:scalability-and-high-availability",
+      "target": "q:774",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:774",
+      "target": "q:1",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:774",
+      "target": "q:2",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:774",
+      "target": "q:3",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -32053,19 +33883,19 @@
     },
     {
       "source": "q:597",
+      "target": "q:1",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:597",
+      "target": "q:2",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:597",
       "target": "q:3",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:597",
-      "target": "q:4",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:597",
-      "target": "q:5",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -32221,13 +34051,13 @@
     },
     {
       "source": "q:68",
-      "target": "q:2",
+      "target": "q:1",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:68",
-      "target": "q:3",
+      "target": "q:2",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -32551,7 +34381,7 @@
     },
     {
       "source": "q:606",
-      "target": "q:397",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -32604,6 +34434,30 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:cloud-native-architecture",
+      "target": "q:775",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:775",
+      "target": "q:400",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:775",
+      "target": "q:2",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:775",
+      "target": "q:5",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:performance-testing",
       "target": "q:71",
       "type": "topic-link",
@@ -32617,13 +34471,13 @@
     },
     {
       "source": "q:71",
-      "target": "q:237",
+      "target": "q:783",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:71",
-      "target": "q:10",
+      "target": "q:237",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -32892,6 +34746,30 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:performance-testing",
+      "target": "q:771",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:771",
+      "target": "q:1",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:771",
+      "target": "q:2",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:771",
+      "target": "q:4",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:api-gateway-and-service-mesh",
       "target": "q:76",
       "type": "topic-link",
@@ -33073,13 +34951,13 @@
     },
     {
       "source": "q:427",
-      "target": "q:400",
+      "target": "q:416",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:427",
-      "target": "q:416",
+      "target": "q:508",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -33306,6 +35184,48 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:api-gateway-and-service-mesh",
+      "target": "q:765",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:765",
+      "target": "q:78",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:765",
+      "target": "q:76",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:765",
+      "target": "q:615",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:765",
+      "target": "q:533",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:765",
+      "target": "q:2",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:765",
+      "target": "q:3",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:container-orchestration-advanced",
       "target": "q:81",
       "type": "topic-link",
@@ -33337,25 +35257,19 @@
     },
     {
       "source": "q:82",
+      "target": "q:400",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:82",
+      "target": "q:2",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:82",
       "target": "q:3",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:82",
-      "target": "q:4",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:82",
-      "target": "q:511",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:82",
-      "target": "q:20",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -35382,6 +37296,54 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:devops-metrics-and-kpis",
+      "target": "q:786",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:786",
+      "target": "q:512",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:786",
+      "target": "q:396",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:786",
+      "target": "q:459",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:devops-metrics-and-kpis",
+      "target": "q:787",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:787",
+      "target": "q:512",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:787",
+      "target": "q:396",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:787",
+      "target": "q:398",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:serverless-architecture",
       "target": "q:106",
       "type": "topic-link",
@@ -35659,7 +37621,7 @@
     },
     {
       "source": "q:656",
-      "target": "q:18",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -35731,7 +37693,7 @@
     },
     {
       "source": "q:659",
-      "target": "q:268",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -35756,6 +37718,30 @@
     {
       "source": "q:660",
       "target": "q:534",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:serverless-architecture",
+      "target": "q:776",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:776",
+      "target": "q:1",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:776",
+      "target": "q:3",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:776",
+      "target": "q:4",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -36055,7 +38041,7 @@
     },
     {
       "source": "q:663",
-      "target": "q:534",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -36152,6 +38138,48 @@
     {
       "source": "q:667",
       "target": "q:4",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:database-management-in-devops",
+      "target": "q:782",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:782",
+      "target": "q:114",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:782",
+      "target": "q:666",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:782",
+      "target": "q:701",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:782",
+      "target": "q:2",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:782",
+      "target": "q:3",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:782",
+      "target": "q:508",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -36744,6 +38772,48 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:network-security",
+      "target": "q:764",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:764",
+      "target": "q:672",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:764",
+      "target": "q:118",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:764",
+      "target": "q:491",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:764",
+      "target": "q:415",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:764",
+      "target": "q:1",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:764",
+      "target": "q:2",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:incident-management",
       "target": "q:121",
       "type": "topic-link",
@@ -36883,7 +38953,7 @@
     },
     {
       "source": "q:292",
-      "target": "q:20",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -36973,7 +39043,7 @@
     },
     {
       "source": "q:675",
-      "target": "q:268",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -36997,7 +39067,7 @@
     },
     {
       "source": "q:676",
-      "target": "q:16",
+      "target": "q:783",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -37362,6 +39432,24 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:devops-culture-and-practices",
+      "target": "q:785",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:785",
+      "target": "q:398",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:785",
+      "target": "q:1",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:infrastructure-monitoring",
       "target": "q:131",
       "type": "topic-link",
@@ -37700,6 +39788,30 @@
     {
       "source": "q:691",
       "target": "q:5",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:infrastructure-monitoring",
+      "target": "q:772",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:772",
+      "target": "q:535",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:772",
+      "target": "q:416",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:772",
+      "target": "q:508",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -38077,6 +40189,12 @@
     },
     {
       "source": "q:696",
+      "target": "q:762",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:696",
       "target": "q:1",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -38084,12 +40202,6 @@
     {
       "source": "q:696",
       "target": "q:2",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:696",
-      "target": "q:4",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -38305,7 +40417,7 @@
     },
     {
       "source": "q:148",
-      "target": "q:16",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -38329,7 +40441,7 @@
     },
     {
       "source": "q:149",
-      "target": "q:16",
+      "target": "q:783",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -38461,6 +40573,12 @@
     },
     {
       "source": "q:155",
+      "target": "q:784",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:155",
       "target": "q:17",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -38468,12 +40586,6 @@
     {
       "source": "q:155",
       "target": "q:19",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:155",
-      "target": "q:268",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -38617,7 +40729,7 @@
     },
     {
       "source": "q:698",
-      "target": "q:17",
+      "target": "q:783",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -38713,7 +40825,7 @@
     },
     {
       "source": "q:702",
-      "target": "q:17",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -39210,6 +41322,42 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:devsecops",
+      "target": "q:763",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:763",
+      "target": "q:161",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:763",
+      "target": "q:710",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:763",
+      "target": "q:456",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:763",
+      "target": "q:416",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:763",
+      "target": "q:457",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:secops",
       "target": "q:169",
       "type": "topic-link",
@@ -39325,7 +41473,7 @@
     },
     {
       "source": "q:173",
-      "target": "q:16",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -39967,13 +42115,13 @@
     },
     {
       "source": "q:187",
-      "target": "q:540",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:187",
-      "target": "q:1",
+      "target": "q:540",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -41113,12 +43261,6 @@
     },
     {
       "source": "q:734",
-      "target": "q:543",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:734",
       "target": "q:546",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -41216,6 +43358,48 @@
     {
       "source": "q:738",
       "target": "q:23",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:aws-engineering",
+      "target": "q:755",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:755",
+      "target": "q:411",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:755",
+      "target": "q:193",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:755",
+      "target": "q:247",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:755",
+      "target": "q:407",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:755",
+      "target": "q:11",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:755",
+      "target": "q:12",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -41425,13 +43609,13 @@
     },
     {
       "source": "q:250",
-      "target": "q:22",
+      "target": "q:23",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:250",
-      "target": "q:23",
+      "target": "q:24",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -41479,7 +43663,7 @@
     },
     {
       "source": "q:485",
-      "target": "q:23",
+      "target": "q:753",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -41617,13 +43801,13 @@
     },
     {
       "source": "q:488",
-      "target": "q:405",
+      "target": "q:753",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:488",
-      "target": "q:22",
+      "target": "q:405",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -41665,7 +43849,7 @@
     },
     {
       "source": "q:740",
-      "target": "q:527",
+      "target": "q:531",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -41683,13 +43867,13 @@
     },
     {
       "source": "q:741",
-      "target": "q:282",
+      "target": "q:25",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:741",
-      "target": "q:544",
+      "target": "q:281",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -41701,13 +43885,19 @@
     },
     {
       "source": "q:742",
+      "target": "q:543",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:742",
       "target": "q:21",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:742",
-      "target": "q:22",
+      "target": "q:25",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -41719,7 +43909,7 @@
     },
     {
       "source": "q:743",
-      "target": "q:25",
+      "target": "q:23",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -41731,7 +43921,7 @@
     },
     {
       "source": "q:743",
-      "target": "q:220",
+      "target": "q:545",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -41755,6 +43945,42 @@
     },
     {
       "source": "q:744",
+      "target": "q:410",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:azure-engineering",
+      "target": "q:756",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:756",
+      "target": "q:195",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:756",
+      "target": "q:204",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:756",
+      "target": "q:200",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:756",
+      "target": "q:23",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:756",
       "target": "q:282",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -42084,6 +44310,48 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:gcp-engineering",
+      "target": "q:757",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:757",
+      "target": "q:747",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:757",
+      "target": "q:209",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:757",
+      "target": "q:269",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:757",
+      "target": "q:528",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:757",
+      "target": "q:531",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:757",
+      "target": "q:547",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:cloud-engineering",
       "target": "q:215",
       "type": "topic-link",
@@ -42300,6 +44568,30 @@
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
+      "source": "topic:cloud-engineering",
+      "target": "q:777",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:777",
+      "target": "q:533",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:777",
+      "target": "q:3",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:777",
+      "target": "q:783",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
       "source": "topic:platform-engineering",
       "target": "q:222",
       "type": "topic-link",
@@ -42511,7 +44803,7 @@
     },
     {
       "source": "q:240",
-      "target": "q:26",
+      "target": "q:463",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -42523,13 +44815,13 @@
     },
     {
       "source": "q:241",
-      "target": "q:422",
+      "target": "q:634",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:241",
-      "target": "q:634",
+      "target": "q:422",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -42770,6 +45062,78 @@
     {
       "source": "q:503",
       "target": "q:265",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:scripting-and-automation",
+      "target": "q:780",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:780",
+      "target": "q:301",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:780",
+      "target": "q:502",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:780",
+      "target": "q:265",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:780",
+      "target": "q:497",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "topic:scripting-and-automation",
+      "target": "q:781",
+      "type": "topic-link",
+      "color": "rgba(6, 182, 212, 0.4)"
+    },
+    {
+      "source": "q:781",
+      "target": "q:266",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:781",
+      "target": "q:302",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:781",
+      "target": "q:503",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:781",
+      "target": "q:497",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:781",
+      "target": "q:466",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:781",
+      "target": "q:17",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -43303,7 +45667,7 @@
     },
     {
       "source": "q:306",
-      "target": "q:253",
+      "target": "q:296",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -43333,7 +45697,7 @@
     },
     {
       "source": "q:306",
-      "target": "q:17",
+      "target": "q:645",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -43465,19 +45829,19 @@
     },
     {
       "source": "q:308",
-      "target": "q:232",
+      "target": "q:641",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:308",
-      "target": "q:399",
+      "target": "q:647",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:308",
-      "target": "q:535",
+      "target": "q:645",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -43742,6 +46106,12 @@
     {
       "source": "q:312",
       "target": "q:27",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:312",
+      "target": "q:645",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -44822,6 +47192,12 @@
     {
       "source": "q:325",
       "target": "q:232",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:325",
+      "target": "q:641",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -46381,6 +48757,12 @@
     },
     {
       "source": "q:344",
+      "target": "q:262",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:344",
       "target": "q:220",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -47113,6 +49495,12 @@
     },
     {
       "source": "q:353",
+      "target": "q:784",
+      "type": "cross-link",
+      "color": "rgba(59, 130, 246, 0.6)"
+    },
+    {
+      "source": "q:353",
       "target": "q:400",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
@@ -47120,12 +49508,6 @@
     {
       "source": "q:353",
       "target": "q:1",
-      "type": "cross-link",
-      "color": "rgba(59, 130, 246, 0.6)"
-    },
-    {
-      "source": "q:353",
-      "target": "q:508",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -48697,7 +51079,7 @@
     },
     {
       "source": "q:371",
-      "target": "q:16",
+      "target": "q:762",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -48847,13 +51229,13 @@
     },
     {
       "source": "q:373",
-      "target": "q:396",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:373",
-      "target": "q:457",
+      "target": "q:396",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -49165,7 +51547,7 @@
     },
     {
       "source": "q:377",
-      "target": "q:459",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -49357,13 +51739,13 @@
     },
     {
       "source": "q:379",
-      "target": "q:456",
+      "target": "q:784",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
     {
       "source": "q:379",
-      "target": "q:535",
+      "target": "q:456",
       "type": "cross-link",
       "color": "rgba(59, 130, 246, 0.6)"
     },
@@ -50934,38 +53316,8 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
-      "source": "q:512",
-      "target": "q:649",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:512",
-      "target": "q:650",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:512",
-      "target": "q:651",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:649",
-      "target": "q:650",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:649",
-      "target": "q:651",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:650",
-      "target": "q:651",
+      "source": "q:509",
+      "target": "q:762",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
@@ -51175,6 +53527,12 @@
     },
     {
       "source": "q:533",
+      "target": "q:765",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:533",
       "target": "q:546",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -51253,6 +53611,12 @@
     },
     {
       "source": "q:538",
+      "target": "q:760",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:538",
       "target": "q:706",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -51271,6 +53635,12 @@
     },
     {
       "source": "q:539",
+      "target": "q:760",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:539",
       "target": "q:706",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -51283,12 +53653,30 @@
     },
     {
       "source": "q:564",
+      "target": "q:760",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:564",
       "target": "q:706",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
       "source": "q:564",
+      "target": "q:749",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:760",
+      "target": "q:706",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:760",
       "target": "q:749",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -51312,14 +53700,38 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
+      "source": "q:541",
+      "target": "q:773",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
       "source": "q:590",
       "target": "q:592",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
+      "source": "q:590",
+      "target": "q:773",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:592",
+      "target": "q:773",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
       "source": "q:541",
       "target": "q:635",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:762",
+      "target": "q:696",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
@@ -51343,6 +53755,12 @@
     },
     {
       "source": "q:543",
+      "target": "q:767",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:543",
       "target": "q:742",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -51361,6 +53779,12 @@
     },
     {
       "source": "q:563",
+      "target": "q:767",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:563",
       "target": "q:742",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -51373,12 +53797,30 @@
     },
     {
       "source": "q:564",
+      "target": "q:767",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:564",
       "target": "q:742",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
       "source": "q:568",
+      "target": "q:767",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:568",
+      "target": "q:742",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:767",
       "target": "q:742",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -51397,6 +53839,12 @@
     },
     {
       "source": "q:544",
+      "target": "q:774",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:544",
       "target": "q:646",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -51409,7 +53857,19 @@
     },
     {
       "source": "q:590",
+      "target": "q:774",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:590",
       "target": "q:646",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:591",
+      "target": "q:774",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
@@ -51420,8 +53880,26 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
+      "source": "q:774",
+      "target": "q:646",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
       "source": "q:545",
       "target": "q:627",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:545",
+      "target": "q:756",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:627",
+      "target": "q:756",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
@@ -51630,6 +54108,42 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
+      "source": "q:759",
+      "target": "q:585",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:759",
+      "target": "q:631",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:759",
+      "target": "q:705",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:585",
+      "target": "q:631",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:585",
+      "target": "q:705",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:631",
+      "target": "q:705",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
       "source": "q:556",
       "target": "q:702",
       "type": "tag-link",
@@ -51649,6 +54163,12 @@
     },
     {
       "source": "q:556",
+      "target": "q:770",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:556",
       "target": "q:702",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -51661,7 +54181,19 @@
     },
     {
       "source": "q:558",
+      "target": "q:770",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:558",
       "target": "q:702",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:562",
+      "target": "q:770",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
@@ -51672,92 +54204,8 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
-      "source": "q:557",
-      "target": "q:559",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:557",
-      "target": "q:560",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:557",
-      "target": "q:642",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:557",
-      "target": "q:644",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:557",
-      "target": "q:687",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:559",
-      "target": "q:560",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:559",
-      "target": "q:642",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:559",
-      "target": "q:644",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:559",
-      "target": "q:687",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:560",
-      "target": "q:642",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:560",
-      "target": "q:644",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:560",
-      "target": "q:687",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:642",
-      "target": "q:644",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:642",
-      "target": "q:687",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:644",
-      "target": "q:687",
+      "source": "q:770",
+      "target": "q:702",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
@@ -51769,13 +54217,43 @@
     },
     {
       "source": "q:558",
+      "target": "q:770",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:558",
       "target": "q:702",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
       "source": "q:562",
+      "target": "q:770",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:562",
       "target": "q:702",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:770",
+      "target": "q:702",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:561",
+      "target": "q:769",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:561",
+      "target": "q:769",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
@@ -51858,6 +54336,12 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
+      "source": "q:766",
+      "target": "q:713",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
       "source": "q:569",
       "target": "q:698",
       "type": "tag-link",
@@ -51888,26 +54372,14 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
-      "source": "q:585",
-      "target": "q:631",
+      "source": "q:583",
+      "target": "q:775",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
       "source": "q:585",
       "target": "q:631",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:585",
-      "target": "q:705",
-      "type": "tag-link",
-      "color": "rgba(245, 158, 11, 0.2)"
-    },
-    {
-      "source": "q:631",
-      "target": "q:705",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
@@ -52147,6 +54619,12 @@
     },
     {
       "source": "q:595",
+      "target": "q:773",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:595",
       "target": "q:615",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -52261,6 +54739,12 @@
     },
     {
       "source": "q:603",
+      "target": "q:775",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:603",
       "target": "q:659",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -52279,6 +54763,12 @@
     },
     {
       "source": "q:607",
+      "target": "q:775",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:607",
       "target": "q:659",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -52291,6 +54781,24 @@
     },
     {
       "source": "q:607",
+      "target": "q:723",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:775",
+      "target": "q:659",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:775",
+      "target": "q:666",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:775",
       "target": "q:723",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
@@ -52346,6 +54854,12 @@
     {
       "source": "q:618",
       "target": "q:689",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:771",
+      "target": "q:777",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
@@ -52596,6 +55110,12 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
+      "source": "q:645",
+      "target": "q:785",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
       "source": "q:681",
       "target": "q:682",
       "type": "tag-link",
@@ -52614,6 +55134,12 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
+      "source": "q:681",
+      "target": "q:785",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
       "source": "q:682",
       "target": "q:683",
       "type": "tag-link",
@@ -52626,8 +55152,26 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
+      "source": "q:682",
+      "target": "q:785",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
       "source": "q:683",
       "target": "q:684",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:683",
+      "target": "q:785",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:684",
+      "target": "q:785",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
@@ -52646,6 +55190,12 @@
     {
       "source": "q:654",
       "target": "q:683",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:786",
+      "target": "q:787",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
@@ -52740,6 +55290,12 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
+      "source": "q:655",
+      "target": "q:776",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
       "source": "q:656",
       "target": "q:657",
       "type": "tag-link",
@@ -52824,14 +55380,38 @@
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
+      "source": "q:670",
+      "target": "q:764",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
       "source": "q:672",
       "target": "q:674",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },
     {
+      "source": "q:672",
+      "target": "q:764",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:674",
+      "target": "q:764",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
       "source": "q:671",
       "target": "q:747",
+      "type": "tag-link",
+      "color": "rgba(245, 158, 11, 0.2)"
+    },
+    {
+      "source": "q:672",
+      "target": "q:764",
       "type": "tag-link",
       "color": "rgba(245, 158, 11, 0.2)"
     },

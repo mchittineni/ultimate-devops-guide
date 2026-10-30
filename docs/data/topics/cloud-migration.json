@@ -613,6 +613,12 @@
       ],
       "related": [
         {
+          "id": 762,
+          "slug": "how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline",
+          "title": "How do you roll back a failed deployment in a CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
           "id": 1,
           "slug": "what-is-devops",
           "title": "What is DevOps?",
@@ -622,12 +628,6 @@
           "id": 2,
           "slug": "what-are-the-benefits-of-devops",
           "title": "What are the benefits of DevOps?",
-          "topic": "core-devops-concepts"
-        },
-        {
-          "id": 4,
-          "slug": "what-is-continuous-delivery",
-          "title": "What is Continuous Delivery?",
           "topic": "core-devops-concepts"
         }
       ],

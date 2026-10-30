@@ -76,21 +76,21 @@
       ],
       "related": [
         {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
           "id": 3,
           "slug": "what-is-continuous-integration",
           "title": "What is Continuous Integration?",
-          "topic": "core-devops-concepts"
-        },
-        {
-          "id": 4,
-          "slug": "what-is-continuous-delivery",
-          "title": "What is Continuous Delivery?",
-          "topic": "core-devops-concepts"
-        },
-        {
-          "id": 511,
-          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
-          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
           "topic": "core-devops-concepts"
         }
       ],
@@ -959,7 +959,7 @@
         }
       ],
       "quiz": {
-        "stem": "Which CSI component is responsible for calling cloud provider APIs to format a raw volume and bind-mount it into a Pod's local container directory?",
+        "stem": "Which CSI component formats a newly attached volume and bind-mounts it into a Pod's directory on the node?",
         "options": [
           "The central `csi-provisioner` controller",
           "The node-level CSI plugin executing `NodeStageVolume` and `NodePublishVolume`",

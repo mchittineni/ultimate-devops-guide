@@ -6,12 +6,12 @@
   },
   "counts": {
     "topics": 40,
-    "questions": 750,
-    "quiz": 243,
+    "questions": 787,
+    "quiz": 269,
     "byDifficulty": {
-      "Beginner": 173,
-      "Intermediate": 370,
-      "Advanced": 207
+      "Beginner": 177,
+      "Intermediate": 394,
+      "Advanced": 216
     }
   },
   "topics": [
@@ -23,10 +23,10 @@
       "order": 1,
       "file": "topics/core-devops-concepts.json",
       "counts": {
-        "questions": 11,
+        "questions": 13,
         "quiz": 5,
         "byDifficulty": {
-          "Beginner": 6,
+          "Beginner": 8,
           "Intermediate": 4,
           "Advanced": 1
         }
@@ -40,11 +40,11 @@
       "order": 2,
       "file": "topics/docker.json",
       "counts": {
-        "questions": 22,
-        "quiz": 7,
+        "questions": 23,
+        "quiz": 8,
         "byDifficulty": {
           "Beginner": 9,
-          "Intermediate": 10,
+          "Intermediate": 11,
           "Advanced": 3
         }
       }
@@ -57,11 +57,11 @@
       "order": 3,
       "file": "topics/kubernetes.json",
       "counts": {
-        "questions": 39,
-        "quiz": 12,
+        "questions": 42,
+        "quiz": 15,
         "byDifficulty": {
-          "Beginner": 5,
-          "Intermediate": 26,
+          "Beginner": 6,
+          "Intermediate": 28,
           "Advanced": 8
         }
       }
@@ -74,11 +74,11 @@
       "order": 4,
       "file": "topics/cicd.json",
       "counts": {
-        "questions": 30,
-        "quiz": 10,
+        "questions": 31,
+        "quiz": 11,
         "byDifficulty": {
           "Beginner": 5,
-          "Intermediate": 19,
+          "Intermediate": 20,
           "Advanced": 6
         }
       }
@@ -108,12 +108,12 @@
       "order": 6,
       "file": "topics/infrastructure-as-code.json",
       "counts": {
-        "questions": 24,
-        "quiz": 8,
+        "questions": 27,
+        "quiz": 11,
         "byDifficulty": {
           "Beginner": 6,
-          "Intermediate": 14,
-          "Advanced": 4
+          "Intermediate": 16,
+          "Advanced": 5
         }
       }
     },
@@ -125,12 +125,12 @@
       "order": 7,
       "file": "topics/monitoring-and-logging.json",
       "counts": {
-        "questions": 16,
-        "quiz": 7,
+        "questions": 19,
+        "quiz": 10,
         "byDifficulty": {
           "Beginner": 6,
-          "Intermediate": 9,
-          "Advanced": 1
+          "Intermediate": 11,
+          "Advanced": 2
         }
       }
     },
@@ -142,11 +142,11 @@
       "order": 8,
       "file": "topics/security-and-compliance.json",
       "counts": {
-        "questions": 12,
-        "quiz": 6,
+        "questions": 14,
+        "quiz": 8,
         "byDifficulty": {
           "Beginner": 2,
-          "Intermediate": 8,
+          "Intermediate": 10,
           "Advanced": 2
         }
       }
@@ -159,11 +159,11 @@
       "order": 9,
       "file": "topics/linux-administration.json",
       "counts": {
-        "questions": 21,
-        "quiz": 8,
+        "questions": 23,
+        "quiz": 10,
         "byDifficulty": {
-          "Beginner": 8,
-          "Intermediate": 11,
+          "Beginner": 9,
+          "Intermediate": 12,
           "Advanced": 2
         }
       }
@@ -176,11 +176,11 @@
       "order": 10,
       "file": "topics/version-control.json",
       "counts": {
-        "questions": 16,
-        "quiz": 6,
+        "questions": 17,
+        "quiz": 7,
         "byDifficulty": {
           "Beginner": 7,
-          "Intermediate": 8,
+          "Intermediate": 9,
           "Advanced": 1
         }
       }
@@ -210,12 +210,12 @@
       "order": 12,
       "file": "topics/scalability-and-high-availability.json",
       "counts": {
-        "questions": 16,
+        "questions": 18,
         "quiz": 7,
         "byDifficulty": {
           "Beginner": 4,
-          "Intermediate": 8,
-          "Advanced": 4
+          "Intermediate": 9,
+          "Advanced": 5
         }
       }
     },
@@ -244,12 +244,12 @@
       "order": 14,
       "file": "topics/cloud-native-architecture.json",
       "counts": {
-        "questions": 15,
+        "questions": 16,
         "quiz": 7,
         "byDifficulty": {
           "Beginner": 3,
           "Intermediate": 8,
-          "Advanced": 4
+          "Advanced": 5
         }
       }
     },
@@ -261,11 +261,11 @@
       "order": 15,
       "file": "topics/performance-testing.json",
       "counts": {
-        "questions": 12,
-        "quiz": 6,
+        "questions": 13,
+        "quiz": 7,
         "byDifficulty": {
           "Beginner": 5,
-          "Intermediate": 3,
+          "Intermediate": 4,
           "Advanced": 4
         }
       }
@@ -278,11 +278,11 @@
       "order": 16,
       "file": "topics/api-gateway-and-service-mesh.json",
       "counts": {
-        "questions": 15,
-        "quiz": 7,
+        "questions": 16,
+        "quiz": 8,
         "byDifficulty": {
           "Beginner": 3,
-          "Intermediate": 9,
+          "Intermediate": 10,
           "Advanced": 3
         }
       }
@@ -363,12 +363,12 @@
       "order": 21,
       "file": "topics/devops-metrics-and-kpis.json",
       "counts": {
-        "questions": 12,
-        "quiz": 6,
+        "questions": 14,
+        "quiz": 7,
         "byDifficulty": {
           "Beginner": 5,
-          "Intermediate": 6,
-          "Advanced": 1
+          "Intermediate": 7,
+          "Advanced": 2
         }
       }
     },
@@ -380,11 +380,11 @@
       "order": 22,
       "file": "topics/serverless-architecture.json",
       "counts": {
-        "questions": 14,
+        "questions": 15,
         "quiz": 6,
         "byDifficulty": {
           "Beginner": 6,
-          "Intermediate": 7,
+          "Intermediate": 8,
           "Advanced": 1
         }
       }
@@ -397,12 +397,12 @@
       "order": 23,
       "file": "topics/database-management-in-devops.json",
       "counts": {
-        "questions": 15,
+        "questions": 16,
         "quiz": 7,
         "byDifficulty": {
           "Beginner": 3,
           "Intermediate": 8,
-          "Advanced": 4
+          "Advanced": 5
         }
       }
     },
@@ -414,12 +414,12 @@
       "order": 24,
       "file": "topics/network-security.json",
       "counts": {
-        "questions": 19,
-        "quiz": 7,
+        "questions": 20,
+        "quiz": 8,
         "byDifficulty": {
           "Beginner": 5,
           "Intermediate": 11,
-          "Advanced": 3
+          "Advanced": 4
         }
       }
     },
@@ -448,11 +448,11 @@
       "order": 26,
       "file": "topics/devops-culture-and-practices.json",
       "counts": {
-        "questions": 11,
+        "questions": 12,
         "quiz": 5,
         "byDifficulty": {
           "Beginner": 7,
-          "Intermediate": 3,
+          "Intermediate": 4,
           "Advanced": 1
         }
       }
@@ -465,11 +465,11 @@
       "order": 27,
       "file": "topics/infrastructure-monitoring.json",
       "counts": {
-        "questions": 13,
-        "quiz": 6,
+        "questions": 14,
+        "quiz": 7,
         "byDifficulty": {
           "Beginner": 6,
-          "Intermediate": 5,
+          "Intermediate": 6,
           "Advanced": 2
         }
       }
@@ -516,12 +516,12 @@
       "order": 30,
       "file": "topics/devsecops.json",
       "counts": {
-        "questions": 19,
-        "quiz": 7,
+        "questions": 20,
+        "quiz": 8,
         "byDifficulty": {
           "Beginner": 3,
           "Intermediate": 11,
-          "Advanced": 5
+          "Advanced": 6
         }
       }
     },
@@ -584,12 +584,12 @@
       "order": 34,
       "file": "topics/aws-engineering.json",
       "counts": {
-        "questions": 36,
-        "quiz": 10,
+        "questions": 37,
+        "quiz": 11,
         "byDifficulty": {
           "Beginner": 6,
           "Intermediate": 20,
-          "Advanced": 10
+          "Advanced": 11
         }
       }
     },
@@ -601,11 +601,11 @@
       "order": 35,
       "file": "topics/azure-engineering.json",
       "counts": {
-        "questions": 19,
-        "quiz": 6,
+        "questions": 20,
+        "quiz": 7,
         "byDifficulty": {
           "Beginner": 1,
-          "Intermediate": 14,
+          "Intermediate": 15,
           "Advanced": 4
         }
       }
@@ -618,11 +618,11 @@
       "order": 36,
       "file": "topics/gcp-engineering.json",
       "counts": {
-        "questions": 15,
-        "quiz": 6,
+        "questions": 16,
+        "quiz": 7,
         "byDifficulty": {
           "Beginner": 1,
-          "Intermediate": 10,
+          "Intermediate": 11,
           "Advanced": 4
         }
       }
@@ -635,11 +635,11 @@
       "order": 37,
       "file": "topics/cloud-engineering.json",
       "counts": {
-        "questions": 8,
+        "questions": 9,
         "quiz": 0,
         "byDifficulty": {
           "Beginner": 1,
-          "Intermediate": 4,
+          "Intermediate": 5,
           "Advanced": 3
         }
       }
@@ -669,11 +669,11 @@
       "order": 39,
       "file": "topics/scripting-and-automation.json",
       "counts": {
-        "questions": 6,
-        "quiz": 0,
+        "questions": 8,
+        "quiz": 1,
         "byDifficulty": {
           "Beginner": 1,
-          "Intermediate": 4,
+          "Intermediate": 6,
           "Advanced": 1
         }
       }

@@ -39,16 +39,16 @@
           "topic": "core-devops-concepts"
         },
         {
+          "id": 783,
+          "slug": "what-are-the-three-ways-of-devops",
+          "title": "What are the Three Ways of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
           "id": 237,
           "slug": "how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines",
           "title": "How do you prevent and handle secret leaks in CI/CD pipelines?",
           "topic": "cicd"
-        },
-        {
-          "id": 10,
-          "slug": "explain-docker-architecture",
-          "title": "Explain Docker Architecture",
-          "topic": "docker"
         }
       ],
       "quiz": null
@@ -611,6 +611,61 @@
         ],
         "answerIndex": 1,
         "explanation": "On a Flame Graph, width corresponds directly to CPU time. A wide box with nothing on top of it means that specific leaf function is directly burning CPU cycles."
+      }
+    },
+    {
+      "id": 771,
+      "slug": "what-is-little-s-law-and-how-do-you-use-it-in-load-testing-and-capacity-planning",
+      "title": "What is Little's Law and how do you use it in load testing and capacity planning?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "performance-testing",
+        "capacity-planning",
+        "queueing-theory"
+      ],
+      "path": "performance-testing/what-is-little-s-law-and-how-do-you-use-it-in-load-testing-and-capacity-planning.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/what-is-little-s-law-and-how-do-you-use-it-in-load-testing-and-capacity-planning.md",
+      "shortAnswer": "Little's Law states that in a stable system, **L = λ × W**: the average number of items in the system (concurrency) equals the average arrival rate (throughput) times the average time each item spends in the system (latency). It holds for any stable system regardless of the arrival distribution, which makes it the quickest sanity check in performance work: 2,000 requests per second at 50 ms means about 100 requests in flight, so a pool of 20 workers cannot possibly keep up. Use it to size thread and connection pools, to work out how many virtual users a load test needs, and to check that a test's numbers are internally consistent.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "A service handles 400 requests per second with an average response time of 250 ms. By Little's Law, how many requests are in flight on average?",
+        "options": [
+          "16",
+          "100",
+          "1,600",
+          "400"
+        ],
+        "answerIndex": 1,
+        "explanation": "Little's Law says L = lambda x W: 400 requests per second x 0.25 seconds = 100 concurrent requests. That figure sizes thread pools, connection pools, and the virtual users a closed-model load test needs."
       }
     }
   ]

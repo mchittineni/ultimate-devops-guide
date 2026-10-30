@@ -4,7 +4,7 @@
     "repo": "https://github.com/mchittineni/ultimate-devops-guide",
     "branch": "main"
   },
-  "count": 243,
+  "count": 269,
   "questions": [
     {
       "id": 508,
@@ -156,7 +156,7 @@
           "Lead time for changes has no measurable correlation with mean time to recovery"
         ],
         "answerIndex": 1,
-        "explanation": "DORA findings conclusively demonstrate that elite organizations do not compromise stability for speed; small, frequent deployments minimize blast radius and accelerate recovery."
+        "explanation": "DORA's survey data has consistently shown that top performers do not trade stability for speed (a strong correlation, not a controlled experiment); small, frequent deployments minimize blast radius and accelerate recovery."
       }
     },
     {
@@ -367,6 +367,33 @@
         ],
         "answerIndex": 1,
         "explanation": "In shell form, `/bin/sh` is PID 1. Standard shells do not forward signals like SIGTERM to child processes, causing `docker stop` to hang for 10 seconds before forcibly killing the container with SIGKILL."
+      }
+    },
+    {
+      "id": 754,
+      "slug": "what-is-the-difference-between-docker-and-podman",
+      "title": "What is the difference between Docker and Podman?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "docker",
+        "interview-questions"
+      ],
+      "path": "docker/what-is-the-difference-between-docker-and-podman.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/what-is-the-difference-between-docker-and-podman.md",
+      "shortAnswer": "Both build and run the same OCI images with largely the same CLI, so `alias docker=podman` works for most day-to-day commands. The difference is architecture: **Docker** is client/server - the `docker` CLI sends every request to a long-running daemon (`dockerd`, usually root), which supervises containers through containerd. **Podman** is **daemonless** - the CLI starts each container itself through a small monitor process (`conmon`) and an OCI runtime (`crun` or `runc`), and it runs **rootless by default**, so there is no privileged daemon socket to protect. Podman also has native **pods** (shared network namespace, like Kubernetes) and integrates with **systemd** through Quadlet files. Docker's strengths are ecosystem and polish: Compose, Docker Desktop, BuildKit, and near-universal CI support.",
+      "quiz": {
+        "stem": "What is the main architectural difference between Docker and Podman?",
+        "options": [
+          "Podman cannot run OCI images built by Docker",
+          "Docker routes commands through a long-running daemon, while Podman forks containers directly from the CLI with no central daemon",
+          "Podman only runs on Windows",
+          "Docker does not use namespaces or cgroups"
+        ],
+        "answerIndex": 1,
+        "explanation": "Docker's CLI talks to dockerd, which supervises containers. Podman's CLI starts each container itself (via conmon and an OCI runtime), so there is no root daemon to compromise, and rootless operation is the default."
       }
     },
     {
@@ -730,6 +757,89 @@
       }
     },
     {
+      "id": 751,
+      "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+      "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "docker"
+      ],
+      "path": "kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md",
+      "shortAnswer": "`ImagePullBackOff` means the kubelet tried to pull the image, failed (`ErrImagePull`), and is now waiting before it tries again, with the delay doubling up to five minutes. The cause is always in the Pod's events, and it is nearly always one of five things: **a wrong image name or tag**, **missing or wrong registry credentials**, **the node cannot reach the registry** (DNS, proxy, firewall, private endpoint), **registry rate limiting** (Docker Hub's anonymous limits are the classic case), or **no image for the node's CPU architecture**. Read the event message, then reproduce the pull from the node with `crictl pull` to separate a Kubernetes configuration problem from a network or registry problem.",
+      "quiz": {
+        "stem": "A Pod shows `ImagePullBackOff` and its events contain `pull access denied ... repository does not exist or may require authorization`. What is the most likely cause?",
+        "options": [
+          "The node has run out of memory",
+          "The image name or tag is wrong, or the kubelet has no valid credentials for a private registry",
+          "The readiness probe is failing",
+          "The container's entrypoint is not executable"
+        ],
+        "answerIndex": 1,
+        "explanation": "Registries return the same 'not found or unauthorized' response for a missing repository and for missing credentials, so check the exact image reference first, then the imagePullSecrets or node IAM role."
+      }
+    },
+    {
+      "id": 752,
+      "slug": "what-is-the-difference-between-a-deployment-and-a-replicaset-in-kubernetes",
+      "title": "What is the difference between a Deployment and a ReplicaSet in Kubernetes?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions"
+      ],
+      "path": "kubernetes/what-is-the-difference-between-a-deployment-and-a-replicaset-in-kubernetes.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-is-the-difference-between-a-deployment-and-a-replicaset-in-kubernetes.md",
+      "shortAnswer": "A **ReplicaSet** has one job: keep N Pods matching a label selector running, creating or deleting Pods from its template to close the gap. A **Deployment** manages ReplicaSets on top of that: every change to the Pod template creates a **new ReplicaSet**, and the Deployment shifts replicas from the old one to the new one at a controlled pace, keeping old ReplicaSets around so it can roll back. So you create Deployments and let them own ReplicaSets; you almost never create a ReplicaSet directly, because a bare ReplicaSet ignores template changes for existing Pods and has no rollout or rollback.",
+      "quiz": {
+        "stem": "You change the container image in a Deployment's Pod template. What does the Deployment controller do?",
+        "options": [
+          "It edits the existing ReplicaSet's template, which restarts all Pods at once",
+          "It creates a new ReplicaSet for the new template and scales it up while scaling the old one down",
+          "It deletes the Deployment and recreates it",
+          "It patches the running containers in place without creating Pods"
+        ],
+        "answerIndex": 1,
+        "explanation": "Each distinct Pod template gets its own ReplicaSet (named with the pod-template-hash). A rollout shifts replicas from the old ReplicaSet to the new one within maxSurge and maxUnavailable, and keeps old ReplicaSets for rollback."
+      }
+    },
+    {
+      "id": 753,
+      "slug": "what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them",
+      "title": "What are Pod Security Standards and how does Pod Security Admission enforce them?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "kubernetes",
+        "interview-questions",
+        "devsecops"
+      ],
+      "path": "kubernetes/what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them.md",
+      "shortAnswer": "The **Pod Security Standards** are three Kubernetes-defined policy levels for Pod `securityContext` and host access: **`privileged`** (no restrictions), **`baseline`** (blocks known privilege escalations such as `privileged: true`, `hostNetwork`, `hostPID`, `hostPath`, and added dangerous capabilities), and **`restricted`** (baseline plus hardening: must run as non-root, `allowPrivilegeEscalation: false`, drop `ALL` capabilities, a `RuntimeDefault` or `Localhost` seccomp profile). **Pod Security Admission** is the built-in admission controller (GA since 1.25, replacing PodSecurityPolicy, which was removed in 1.25) that applies a level per namespace through labels, in three modes: `enforce` rejects violating Pods, `warn` returns a warning to the client, and `audit` writes an audit annotation. It is simple and always available, but it is namespace-granular with no per-workload exceptions, so finer policy still needs Kyverno, Gatekeeper, or `ValidatingAdmissionPolicy`.",
+      "quiz": {
+        "stem": "A namespace is labelled `pod-security.kubernetes.io/enforce: restricted`. What happens to an existing Deployment whose Pods run as root?",
+        "options": [
+          "Its running Pods are evicted immediately",
+          "Running Pods keep running, but new Pods it tries to create are rejected at admission",
+          "The Deployment object itself is deleted",
+          "Nothing, because Pod Security Admission only audits"
+        ],
+        "answerIndex": 1,
+        "explanation": "Pod Security Admission evaluates Pods when they are created or updated. Existing Pods are not touched, but the ReplicaSet's next Pod creation (scale-up, rollout, node drain) is denied - which is why you roll out with warn and audit modes first."
+      }
+    },
+    {
       "id": 532,
       "slug": "what-is-pipeline-as-code-and-how-do-modern-ci-systems-validate-and-isolate-pipeline-runs",
       "title": "What is Pipeline as Code and how do modern CI systems validate and isolate pipeline runs?",
@@ -1029,6 +1139,35 @@
         ],
         "answerIndex": 1,
         "explanation": "Hashing the lockfile guarantees that as long as dependencies remain identical, builds reuse the cache archive, but any dependency update produces a new cache key."
+      }
+    },
+    {
+      "id": 762,
+      "slug": "how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline",
+      "title": "How do you roll back a failed deployment in a CI/CD pipeline?",
+      "topic": "cicd",
+      "category": "CI/CD",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "cicd",
+        "interview-questions",
+        "deployment",
+        "rollback"
+      ],
+      "path": "cicd/how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/cicd/how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline.md",
+      "shortAnswer": "Make rollback a **redeploy of the previous known-good artefact**, not a rebuild and not a hand-made fix: because you built once and deployed by digest, the last good version is already in the registry and the pipeline only has to point the environment back at it. Detect the failure automatically (health checks, error rate, latency, SLO burn rate) and let progressive delivery **abort and revert** a canary or blue/green rollout before most users see it. Turn features off with a **flag** when the code is fine but the feature is not - the fastest rollback of all. The hard limit is state: code rolls back, **data and schema do not**, so migrations must be backward compatible (expand/contract) or rollback is impossible. And rehearse it - an untested rollback path fails on the day you need it.",
+      "quiz": {
+        "stem": "A release included a database migration that dropped a column the previous application version still reads. Why does redeploying the previous image not fix the outage?",
+        "options": [
+          "Container registries delete old images after a deployment",
+          "Rollback restores code, not data or schema - the old version now runs against a schema it is incompatible with, so migrations must follow expand/contract to keep the previous version working",
+          "Kubernetes cannot run two image versions at once",
+          "The previous image must be rebuilt from source first"
+        ],
+        "answerIndex": 1,
+        "explanation": "Redeploying an artefact only changes code. Schema and data changes persist, so a destructive migration makes the previous version incompatible. Expand/contract migrations - additive first, destructive only after the old version is gone - keep rollback possible."
       }
     },
     {
@@ -1457,6 +1596,94 @@
       }
     },
     {
+      "id": 758,
+      "slug": "what-is-the-difference-between-terraform-and-opentofu",
+      "title": "What is the difference between Terraform and OpenTofu?",
+      "topic": "infrastructure-as-code",
+      "category": "Infrastructure as Code",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "infrastructure-as-code",
+        "interview-questions",
+        "terraform",
+        "opentofu"
+      ],
+      "path": "infrastructure-as-code/what-is-the-difference-between-terraform-and-opentofu.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-as-code/what-is-the-difference-between-terraform-and-opentofu.md",
+      "shortAnswer": "OpenTofu is the open-source fork of Terraform, created after HashiCorp relicensed Terraform from MPL 2.0 to the source-available Business Source License (BSL) in August 2023. It forked from Terraform 1.5, is governed by the Linux Foundation and CNCF, and remains largely drop-in compatible: the same HCL, the same providers, the same state format, with `tofu` replacing `terraform` on the command line. The two have since diverged in features - OpenTofu shipped client-side state encryption and early variable evaluation first, Terraform has HCP Terraform integrations such as Stacks and `terraform query` - so \"which one?\" is now a decision about licensing, governance, and specific features rather than a rename.",
+      "quiz": {
+        "stem": "Why did the OpenTofu project fork Terraform in 2023?",
+        "options": [
+          "Terraform stopped supporting the AWS provider",
+          "HashiCorp relicensed Terraform from the open-source MPL 2.0 to the source-available Business Source License (BSL) starting with 1.6",
+          "Terraform removed support for remote state backends",
+          "OpenTofu wanted to replace HCL with YAML"
+        ],
+        "answerIndex": 1,
+        "explanation": "In August 2023 HashiCorp moved Terraform to the BSL 1.1. OpenTofu forked the last MPL-licensed code (Terraform 1.5.x) and is now maintained under the Linux Foundation and CNCF with an open governance model, staying largely compatible with Terraform configurations, providers, and state."
+      }
+    },
+    {
+      "id": 759,
+      "slug": "how-do-you-keep-secrets-out-of-terraform-state",
+      "title": "How do you keep secrets out of Terraform state?",
+      "topic": "infrastructure-as-code",
+      "category": "Infrastructure as Code",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "infrastructure-as-code",
+        "interview-questions",
+        "terraform",
+        "secrets",
+        "devsecops"
+      ],
+      "path": "infrastructure-as-code/how-do-you-keep-secrets-out-of-terraform-state.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-as-code/how-do-you-keep-secrets-out-of-terraform-state.md",
+      "shortAnswer": "First, know that `sensitive = true` does **not** keep anything out of state - it only redacts CLI output. Anything Terraform reads through a data source or sets as a normal resource argument is written to state (and to saved plan files) in plaintext. To actually keep a secret out: let the **provider or platform generate and hold it** (for example RDS `manage_master_user_password`, which keeps the password in Secrets Manager), use **ephemeral resources** to fetch or generate values that exist only during the run (Terraform 1.10+, OpenTofu 1.11+), and pass them into **write-only arguments** (`password_wo`, `secret_string_wo`, Terraform 1.11+), which the provider uses but never persists. Then protect the state you still have: encrypted, versioned, tightly scoped backend, or OpenTofu's client-side state encryption.",
+      "quiz": {
+        "stem": "A Terraform configuration reads a database password with `data \\\"aws_secretsmanager_secret_version\\\"` and passes it to `aws_db_instance.password`, marking the variable `sensitive = true`. Where does the password end up?",
+        "options": [
+          "Nowhere - `sensitive = true` prevents it from being stored",
+          "Only in the CLI output, which is redacted",
+          "In plaintext in the state file (and in any saved plan), because both the data source result and the resource attribute are persisted; `sensitive` only redacts display",
+          "Only in AWS Secrets Manager"
+        ],
+        "answerIndex": 2,
+        "explanation": "`sensitive` hides values in plan and apply output but does not change what is written to state. Data source results and regular resource arguments are persisted. Ephemeral resources and write-only arguments (Terraform 1.10/1.11+, OpenTofu 1.11+) or provider-managed secrets avoid persisting the value."
+      }
+    },
+    {
+      "id": 761,
+      "slug": "what-is-pulumi-and-how-does-it-compare-to-terraform",
+      "title": "What is Pulumi and how does it compare to Terraform?",
+      "topic": "infrastructure-as-code",
+      "category": "Infrastructure as Code",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "infrastructure-as-code",
+        "interview-questions",
+        "pulumi",
+        "terraform"
+      ],
+      "path": "infrastructure-as-code/what-is-pulumi-and-how-does-it-compare-to-terraform.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-as-code/what-is-pulumi-and-how-does-it-compare-to-terraform.md",
+      "shortAnswer": "Pulumi is an infrastructure-as-code tool where you write infrastructure in a general-purpose language - TypeScript, Python, Go, C#, Java, or YAML - instead of HCL. The program does not call cloud APIs directly: it **registers resources**, the Pulumi engine builds a desired-state graph, diffs it against the **stack's state**, and shows a preview before applying, so it behaves declaratively like Terraform. The real differences are the language (loops, functions, classes, package managers, and unit tests come for free), **secrets encrypted in state by default**, and the ecosystem: Terraform has the larger community, module registry, and hiring pool; Pulumi can reuse Terraform providers through bridged and dynamically generated providers.",
+      "quiz": {
+        "stem": "How does Pulumi behave at deployment time even though programs are written in TypeScript, Python, or Go?",
+        "options": [
+          "It runs the program imperatively, calling cloud APIs line by line",
+          "The program registers resources to build a desired-state graph, and the Pulumi engine diffs that graph against state and applies only the differences",
+          "It converts the program to CloudFormation and submits it",
+          "It has no state, so every run recreates all resources"
+        ],
+        "answerIndex": 1,
+        "explanation": "A Pulumi program is general-purpose code that declares resources. The engine collects them into a desired-state graph, compares it with the stack's state, previews the diff (`pulumi preview`), and applies it (`pulumi up`) - declarative at apply time, like Terraform."
+      }
+    },
+    {
       "id": 556,
       "slug": "what-are-the-three-pillars-of-observability-and-where-do-their-operational-boundaries-blur",
       "title": "What are the Three Pillars of Observability and where do their operational boundaries blur?",
@@ -1466,6 +1693,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "observability",
         "metrics",
         "logs",
@@ -1497,6 +1725,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "prometheus",
         "metrics",
         "pushgateway",
@@ -1527,6 +1756,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "opentelemetry",
         "otel",
         "tracing",
@@ -1557,6 +1787,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "monitoring",
         "prometheus",
         "cardinality",
@@ -1588,6 +1819,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "prometheus",
         "metrics",
         "histogram",
@@ -1618,6 +1850,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "logging",
         "json",
         "retention",
@@ -1636,7 +1869,7 @@
           "Restricting logging access to senior managers only"
         ],
         "answerIndex": 1,
-        "explanation": "Health check probes from Kubernetes readiness and liveness checks execute every few seconds across thousands of pods, generating up to 60% of total cluster log volume with zero diagnostic value."
+        "explanation": "Kubernetes liveness and readiness probes hit every pod every few seconds, so their access-log lines are often a large share of cluster log volume while carrying almost no diagnostic value; dropping them at the node agent saves ingest, indexing, and storage."
       }
     },
     {
@@ -1649,6 +1882,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "monitoring-and-logging",
         "tracing",
         "opentelemetry",
         "context-propagation",
@@ -1667,6 +1901,97 @@
         ],
         "answerIndex": 1,
         "explanation": "Trace context is injected directly into Kafka record headers, allowing consumers to extract the TraceID and continue the distributed trace without modifying the application payload."
+      }
+    },
+    {
+      "id": 768,
+      "slug": "how-do-you-scale-prometheus-for-high-availability-and-long-term-storage-with-thanos-mimir-or-victoriametrics",
+      "title": "How do you scale Prometheus for high availability and long-term storage with Thanos, Mimir, or VictoriaMetrics?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring-and-logging",
+        "prometheus",
+        "thanos",
+        "mimir",
+        "victoriametrics"
+      ],
+      "path": "monitoring-and-logging/how-do-you-scale-prometheus-for-high-availability-and-long-term-storage-with-thanos-mimir-or-victoriametrics.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/how-do-you-scale-prometheus-for-high-availability-and-long-term-storage-with-thanos-mimir-or-victoriametrics.md",
+      "shortAnswer": "A single Prometheus server is deliberately simple: local disk, no replication, no clustering, typically weeks of retention. You get **high availability** by running two identical replicas and deduplicating, and **long-term, global storage** by shipping data to a horizontally scalable backend. **Thanos** bolts onto existing Prometheus servers (a sidecar uploads 2-hour TSDB blocks to object storage, and a global querier deduplicates and fans out). **Grafana Mimir** (and its predecessor Cortex) is a multi-tenant cluster that Prometheus `remote_write`s into, storing blocks in object storage. **VictoriaMetrics** is a separate, very resource-efficient TSDB that also accepts remote write, stored on block disks rather than object storage. Pick on operating model: keep Prometheus as the store and add a global view (Thanos sidecar), or turn Prometheus into a stateless collector and run a central metrics service (Mimir, VictoriaMetrics, Thanos Receive, or a managed service).",
+      "quiz": {
+        "stem": "Two identical Prometheus replicas scrape the same targets for high availability. What stops dashboards built on Thanos or Mimir from showing every series twice?",
+        "options": [
+          "Prometheus replicas elect a leader and only the leader stores samples",
+          "Each replica sets a distinct replica external label, and the query layer (Thanos Querier) or ingest layer (Mimir HA tracker) deduplicates on it",
+          "Alertmanager deletes duplicate series after each scrape",
+          "Object storage automatically merges identical blocks on upload"
+        ],
+        "answerIndex": 1,
+        "explanation": "Prometheus has no clustering, so HA pairs produce duplicate data by design. A per-replica external label lets Thanos deduplicate at query time and Mimir's HA tracker accept samples from only one replica per cluster at ingest."
+      }
+    },
+    {
+      "id": 769,
+      "slug": "how-does-grafana-loki-store-logs-and-how-do-you-query-them-with-logql",
+      "title": "How does Grafana Loki store logs, and how do you query them with LogQL?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring-and-logging",
+        "loki",
+        "logql",
+        "logging"
+      ],
+      "path": "monitoring-and-logging/how-does-grafana-loki-store-logs-and-how-do-you-query-them-with-logql.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/how-does-grafana-loki-store-logs-and-how-do-you-query-them-with-logql.md",
+      "shortAnswer": "Loki indexes only a small set of **labels** per log stream (namespace, app, container, level) and stores the log lines themselves as compressed **chunks in object storage**. A query first uses the label index to pick the streams, then brute-force scans those chunks in parallel. That makes ingest and storage far cheaper than a full-text index like Elasticsearch, at the cost of slower \"search everything for this string\" queries. **LogQL** mirrors PromQL: a stream selector (`{namespace=\"prod\", app=\"checkout\"}`), then a pipeline of line filters (`|= \"timeout\"`), parsers (`| json`, `| logfmt`, `| pattern`), and label filters (`| status >= 500`), and optionally a metric function (`rate`, `count_over_time`, `quantile_over_time`) that turns logs into time series for dashboards and alerts.",
+      "quiz": {
+        "stem": "Why is putting `trace_id` or `user_id` in Loki stream labels a mistake?",
+        "options": [
+          "Loki labels cannot contain hexadecimal characters",
+          "Every unique label combination creates a new stream, so unbounded values explode the stream count, the index, and the number of tiny chunks",
+          "Labels are stored in plain text and expose personal data, while log lines are encrypted",
+          "LogQL cannot filter on labels, only on line contents"
+        ],
+        "answerIndex": 1,
+        "explanation": "Loki indexes only stream labels, and each unique label set is a separate stream with its own chunks. High-cardinality values belong in the log line or in structured metadata, where they can still be filtered at query time."
+      }
+    },
+    {
+      "id": 770,
+      "slug": "what-is-the-difference-between-head-based-and-tail-based-trace-sampling",
+      "title": "What is the difference between head-based and tail-based trace sampling?",
+      "topic": "monitoring-and-logging",
+      "category": "Monitoring and Logging",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "monitoring-and-logging",
+        "tracing",
+        "sampling",
+        "opentelemetry"
+      ],
+      "path": "monitoring-and-logging/what-is-the-difference-between-head-based-and-tail-based-trace-sampling.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/monitoring-and-logging/what-is-the-difference-between-head-based-and-tail-based-trace-sampling.md",
+      "shortAnswer": "**Head-based sampling** decides whether to keep a trace when it starts, at the root span, and propagates that decision downstream in the `traceparent` sampled flag - cheap and simple, but blind: it keeps 10% of traces whether or not they contain the error you care about. **Tail-based sampling** buffers all spans of a trace and decides after it completes, so it can keep every error and every slow trace while sampling the boring successes - far more useful, but it needs memory, a buffering delay, and every span of a trace routed to the same collector. Most production setups combine them: light head sampling (or none) in the SDKs, tail sampling in a Collector gateway, and metrics computed from spans before any sampling so dashboards stay accurate.",
+      "quiz": {
+        "stem": "Why must tail-based sampling in the OpenTelemetry Collector run behind a trace-ID-aware load balancer when there are several Collector replicas?",
+        "options": [
+          "Because tail sampling only works over UDP",
+          "Because the sampling decision needs every span of a trace, so all spans with the same trace ID must reach the same Collector instance",
+          "Because the load balancer encrypts the spans before sampling",
+          "Because head-based sampling has already discarded the trace ID"
+        ],
+        "answerIndex": 1,
+        "explanation": "Tail sampling buffers a trace and decides after seeing all of its spans. If spans are spread across replicas, each sees a partial trace and makes an inconsistent decision, so a first tier routes by trace ID (the loadbalancing exporter) to the sampling tier."
       }
     },
     {
@@ -1849,6 +2174,66 @@
         ],
         "answerIndex": 1,
         "explanation": "Compliance as Code turns static compliance rules into continuous automated tests in CI/CD and runtime, preventing drift and ensuring continuous compliance."
+      }
+    },
+    {
+      "id": 766,
+      "slug": "what-are-cspm-and-cnapp-and-how-do-they-find-cloud-misconfigurations",
+      "title": "What are CSPM and CNAPP, and how do they find cloud misconfigurations?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security-and-compliance",
+        "cspm",
+        "cnapp",
+        "cloud-security"
+      ],
+      "path": "security-and-compliance/what-are-cspm-and-cnapp-and-how-do-they-find-cloud-misconfigurations.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-are-cspm-and-cnapp-and-how-do-they-find-cloud-misconfigurations.md",
+      "shortAnswer": "**CSPM** (Cloud Security Posture Management) continuously reads your cloud accounts' configuration through the provider APIs and compares it with rules - CIS Benchmarks, PCI DSS, your own policies - to flag misconfigurations such as public buckets, open security groups, unencrypted volumes, disabled logging, and over-privileged identities. **CNAPP** (Cloud-Native Application Protection Platform) is the consolidated category that bundles CSPM with workload protection (CWPP), identity entitlement analysis (CIEM), Kubernetes posture (KSPM), IaC and image scanning, and increasingly data and AI posture, then correlates them into **attack paths**. Native options are AWS Security Hub and Config, Microsoft Defender for Cloud, and Google Security Command Center; commercial CNAPPs include Wiz, Prisma Cloud, Orca, and Sysdig. The value is not the finding count - it is prioritising the few combinations that actually lead to your data.",
+      "quiz": {
+        "stem": "A CSPM reports 4,000 findings. Which prioritisation approach best reflects how modern CNAPP tools rank risk?",
+        "options": [
+          "Fix findings alphabetically by resource name",
+          "Rank by attack path: combine misconfiguration, exposure to the internet, exploitable vulnerabilities, and privileged identities on the same resource, and fix the combinations that lead to sensitive data first",
+          "Fix only findings older than one year",
+          "Disable all rules that produce more than ten findings"
+        ],
+        "answerIndex": 1,
+        "explanation": "Individual findings are rarely the risk; toxic combinations are. A public VM with a critical CVE and an admin role that can read customer data is an attack path, while the same CVE on an isolated, unprivileged host is backlog."
+      }
+    },
+    {
+      "id": 767,
+      "slug": "what-is-the-nist-cybersecurity-framework-csf-2-0-and-how-is-it-used",
+      "title": "What is the NIST Cybersecurity Framework (CSF) 2.0 and how is it used?",
+      "topic": "security-and-compliance",
+      "category": "Security and Compliance",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "security-and-compliance",
+        "nist",
+        "governance",
+        "compliance"
+      ],
+      "path": "security-and-compliance/what-is-the-nist-cybersecurity-framework-csf-2-0-and-how-is-it-used.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/security-and-compliance/what-is-the-nist-cybersecurity-framework-csf-2-0-and-how-is-it-used.md",
+      "shortAnswer": "The NIST CSF is a voluntary, outcome-based framework for managing cybersecurity risk, published as **version 2.0 in February 2024**. It organises outcomes into six **Functions** - **Govern, Identify, Protect, Detect, Respond, Recover** - broken into Categories and Subcategories (for example `PR.AA` identity management and access control). Organisations use it by writing a **Current Profile** (where we are), a **Target Profile** (where we need to be, given our risk), and a prioritised plan to close the gap, with **Tiers** describing how rigorous their risk practices are. It is not a certification and not a control catalogue: it says _what_ outcomes to achieve and points, through Informative References, to catalogues such as NIST SP 800-53, ISO/IEC 27001, and the CIS Controls for _how_.",
+      "quiz": {
+        "stem": "Which function did NIST CSF 2.0 add to the five functions of CSF 1.1?",
+        "options": [
+          "Deploy",
+          "Govern - covering risk strategy, roles and responsibilities, policy, oversight, and cybersecurity supply chain risk management",
+          "Encrypt",
+          "Audit"
+        ],
+        "answerIndex": 1,
+        "explanation": "CSF 2.0 (February 2024) added Govern to Identify, Protect, Detect, Respond, and Recover, making governance and supply-chain risk explicit and placing it at the centre of the framework."
       }
     },
     {
@@ -2096,6 +2481,61 @@
       }
     },
     {
+      "id": 778,
+      "slug": "how-do-linux-file-permissions-umask-and-the-setuid-setgid-and-sticky-bits-work",
+      "title": "How do Linux file permissions, umask, and the setuid, setgid, and sticky bits work?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions"
+      ],
+      "path": "linux-administration/how-do-linux-file-permissions-umask-and-the-setuid-setgid-and-sticky-bits-work.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/how-do-linux-file-permissions-umask-and-the-setuid-setgid-and-sticky-bits-work.md",
+      "shortAnswer": "Every file has an owner, a group, and three permission triplets - **user, group, other** - each of **read (4), write (2), execute (1)**, so `chmod 640` means owner read-write, group read, others nothing. The kernel checks exactly one triplet: the owner's if you own the file, else the group's if you are in its group, else other's. On a **directory** the bits mean something different: `r` lists names, `w` creates, deletes, and renames entries, and `x` lets you traverse into it - which is why deleting a file depends on the directory's permissions, not the file's. **umask** removes bits from the default mode of new files (`0666`) and directories (`0777`), so a umask of `022` yields `644` and `755`. Three special bits sit in front: **setuid (4)** runs an executable as its owner (`passwd`), **setgid (2)** runs as the file's group or, on a directory, makes new files inherit the directory's group, and the **sticky bit (1)** on a directory lets only a file's owner delete it (`/tmp`). Beyond the classic model come **ACLs** for per-user grants, **capabilities** to replace setuid-root, and SELinux/AppArmor as a mandatory layer on top.",
+      "quiz": {
+        "stem": "A directory is mode `drwxrwxrwt` (1777). What does the trailing `t` change compared with plain 777?",
+        "options": [
+          "Files in it are deleted automatically at reboot",
+          "Any user can create files, but only a file's owner, the directory's owner, or root can delete or rename it",
+          "Programs in it run with the directory owner's privileges",
+          "New files inherit the directory's group"
+        ],
+        "answerIndex": 1,
+        "explanation": "The sticky bit on a directory restricts unlink and rename to the file owner, the directory owner, or root - which is why /tmp is world-writable without letting users delete each other's files. Inheriting the group is setgid, not sticky."
+      }
+    },
+    {
+      "id": 779,
+      "slug": "what-is-the-difference-between-iptables-nftables-firewalld-and-ufw",
+      "title": "What is the difference between iptables, nftables, firewalld, and ufw?",
+      "topic": "linux-administration",
+      "category": "Linux Administration",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "linux-administration",
+        "interview-questions",
+        "network-security"
+      ],
+      "path": "linux-administration/what-is-the-difference-between-iptables-nftables-firewalld-and-ufw.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/linux-administration/what-is-the-difference-between-iptables-nftables-firewalld-and-ufw.md",
+      "shortAnswer": "They sit at two different layers. **Netfilter** is the packet-filtering framework inside the kernel. **iptables** and **nftables** are the two rule languages and kernel interfaces for it: iptables is the older one, with separate tools per family (`iptables`, `ip6tables`, `arptables`, `ebtables`) and rules evaluated as linear lists; **nftables** (`nft`) replaced it with one tool and one table model for IPv4, IPv6, ARP, and bridging, native **sets and maps** so a thousand addresses are one lookup instead of a thousand rules, and atomic replacement of the whole ruleset. **firewalld** (RHEL, Fedora, SUSE) and **ufw** (Ubuntu) are **front-ends** that generate those rules from a simpler model - firewalld with zones and services managed over D-Bus, ufw with a minimal allow/deny syntax. On current distributions the `iptables` command is usually **iptables-nft**, a compatibility layer writing nftables rules, and firewalld uses the nftables backend by default. The operational rule: pick **one** manager per host, because two tools writing rules (or Docker and Kubernetes adding their own) is the usual cause of \"my rule is there but traffic is still blocked\".",
+      "quiz": {
+        "stem": "On a current RHEL, Debian, or Ubuntu host, what usually happens when you run an `iptables` command?",
+        "options": [
+          "It programs the legacy x_tables kernel backend directly, bypassing nftables",
+          "It is the iptables-nft compatibility layer, which translates the rule into nftables objects in the kernel",
+          "It fails, because iptables has been removed from the kernel",
+          "It edits firewalld's XML zone files"
+        ],
+        "answerIndex": 1,
+        "explanation": "Modern distributions ship iptables-nft: the familiar iptables syntax, translated into nftables rules. Mixing it with iptables-legacy, or hand-written nft tables, is what produces rules that seem to be ignored."
+      }
+    },
+    {
       "id": 577,
       "slug": "what-is-the-difference-between-git-merge-and-git-rebase-and-when-should-each-be-used",
       "title": "What is the difference between Git Merge and Git Rebase and when should each be used?",
@@ -2274,6 +2714,36 @@
         ],
         "answerIndex": 1,
         "explanation": "Client-side hooks are advisory; developers can bypass them using `git commit --no-verify`. Mandatory security controls must always be duplicated in server-side CI pipelines."
+      }
+    },
+    {
+      "id": 760,
+      "slug": "how-do-you-sign-git-commits-and-enforce-signed-commits",
+      "title": "How do you sign Git commits and enforce signed commits?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "version-control",
+        "interview-questions",
+        "git",
+        "security",
+        "supply-chain"
+      ],
+      "path": "version-control/how-do-you-sign-git-commits-and-enforce-signed-commits.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/how-do-you-sign-git-commits-and-enforce-signed-commits.md",
+      "shortAnswer": "Git can attach a cryptographic signature to commits and tags with a **GPG key**, an **SSH key** (Git 2.34+), or an **X.509 certificate** (including keyless Sigstore certificates via `gitsign`). You set `gpg.format`, `user.signingkey`, and `commit.gpgsign=true`, and the forge shows the commit as \"Verified\" when the key is registered to the committer's account. Enforcement happens on the server: a branch protection rule or ruleset that **requires signed commits**, or a GitLab push rule that rejects unsigned ones. The reason it matters: Git's author and committer fields are just text - anyone can commit as `ceo@example.com` - and a signature is the only thing that ties a commit to a key the person controls.",
+      "quiz": {
+        "stem": "What does a valid signature on a Git commit actually prove?",
+        "options": [
+          "That the code in the commit has been reviewed and is safe",
+          "That the commit was created by the holder of the signing key and has not been altered since it was signed",
+          "That the commit passed CI",
+          "That the author email in the commit is the real author"
+        ],
+        "answerIndex": 1,
+        "explanation": "A commit signature binds the commit object (tree, parents, metadata, message) to a key. It proves possession of that key and integrity of the commit, not code quality or review. The author field itself is unauthenticated text, which is exactly why signing matters: anyone can set user.email to someone else's address."
       }
     },
     {
@@ -2727,7 +3197,7 @@
       ],
       "path": "backup-and-disaster-recovery/what-is-the-3-2-1-backup-rule-and-how-is-it-modernized-for-cloud-and-ransomware-protection.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/backup-and-disaster-recovery/what-is-the-3-2-1-backup-rule-and-how-is-it-modernized-for-cloud-and-ransomware-protection.md",
-      "shortAnswer": "The classic 3-2-1 rule mandates 3 copies of data on 2 different media types with 1 copy stored offsite; modern cloud architectures extend this with 3-2-1-1-0 by adding an immutable/WORM (Write Once Read Many) air-gapped copy and zero-error automated restore validation.",
+      "shortAnswer": "The classic 3-2-1 rule is three copies of the data, on two different media types, with one copy off-site. The modern **3-2-1-1-0** version adds **one immutable or logically air-gapped copy** that no production credential can delete or overwrite, and **zero errors** in automated restore tests. The additions exist because ransomware operators now go after the backups first.",
       "quiz": {
         "stem": "Why should critical cloud backups be stored in S3 buckets with Object Lock in Compliance Mode?",
         "options": [
@@ -3270,6 +3740,35 @@
       }
     },
     {
+      "id": 771,
+      "slug": "what-is-little-s-law-and-how-do-you-use-it-in-load-testing-and-capacity-planning",
+      "title": "What is Little's Law and how do you use it in load testing and capacity planning?",
+      "topic": "performance-testing",
+      "category": "Performance Testing",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "performance-testing",
+        "capacity-planning",
+        "queueing-theory"
+      ],
+      "path": "performance-testing/what-is-little-s-law-and-how-do-you-use-it-in-load-testing-and-capacity-planning.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/performance-testing/what-is-little-s-law-and-how-do-you-use-it-in-load-testing-and-capacity-planning.md",
+      "shortAnswer": "Little's Law states that in a stable system, **L = λ × W**: the average number of items in the system (concurrency) equals the average arrival rate (throughput) times the average time each item spends in the system (latency). It holds for any stable system regardless of the arrival distribution, which makes it the quickest sanity check in performance work: 2,000 requests per second at 50 ms means about 100 requests in flight, so a pool of 20 workers cannot possibly keep up. Use it to size thread and connection pools, to work out how many virtual users a load test needs, and to check that a test's numbers are internally consistent.",
+      "quiz": {
+        "stem": "A service handles 400 requests per second with an average response time of 250 ms. By Little's Law, how many requests are in flight on average?",
+        "options": [
+          "16",
+          "100",
+          "1,600",
+          "400"
+        ],
+        "answerIndex": 1,
+        "explanation": "Little's Law says L = lambda x W: 400 requests per second x 0.25 seconds = 100 concurrent requests. That figure sizes thread pools, connection pools, and the virtual users a closed-model load test needs."
+      }
+    },
+    {
       "id": 615,
       "slug": "what-is-the-difference-between-an-api-gateway-and-a-service-mesh-and-how-do-they-work-together",
       "title": "What is the difference between an API Gateway and a Service Mesh and how do they work together?",
@@ -3484,6 +3983,36 @@
       }
     },
     {
+      "id": 765,
+      "slug": "how-do-you-authenticate-api-clients-with-oauth-2-0-and-oidc-at-the-api-gateway",
+      "title": "How do you authenticate API clients with OAuth 2.0 and OIDC at the API gateway?",
+      "topic": "api-gateway-and-service-mesh",
+      "category": "API Gateway and Service Mesh",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "api-gateway-and-service-mesh",
+        "oauth2",
+        "oidc",
+        "jwt"
+      ],
+      "path": "api-gateway-and-service-mesh/how-do-you-authenticate-api-clients-with-oauth-2-0-and-oidc-at-the-api-gateway.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/api-gateway-and-service-mesh/how-do-you-authenticate-api-clients-with-oauth-2-0-and-oidc-at-the-api-gateway.md",
+      "shortAnswer": "The identity provider (Entra ID, Okta, Auth0, Keycloak, Cognito) issues **access tokens**; the gateway **validates** them on every request and forwards a verified identity downstream. For JWT access tokens that means checking the **signature** against the issuer's JWKS (cached, with `kid`-based key rotation), the **issuer**, the **audience**, **expiry and not-before** with small clock skew, the allowed **algorithm**, and the **scopes** the route requires. Pick the grant by client type: **authorization code with PKCE** for browser and mobile apps acting for a user, **client credentials** for service-to-service, and the **device authorization grant** for TVs and CLIs - never the deprecated implicit or password grants. The gateway handles coarse authorisation (valid token, right scope); **object-level** checks (\"does this order belong to this user?\") stay in the service.",
+      "quiz": {
+        "stem": "A gateway validates a JWT access token's signature and expiry. Which additional check prevents a token issued for a different API by the same identity provider from being accepted?",
+        "options": [
+          "Checking that the token is base64-encoded",
+          "Validating the audience (`aud`) claim against this API's identifier, along with the issuer (`iss`)",
+          "Checking the token length",
+          "Requiring the token in a query parameter"
+        ],
+        "answerIndex": 1,
+        "explanation": "Signature and expiry prove the token is genuine and current, not that it was meant for you. Without an audience check, any valid token from the same issuer - for any API - is accepted."
+      }
+    },
+    {
       "id": 622,
       "slug": "how-does-the-kubernetes-controller-pattern-implement-declarative-reconciliation-loops",
       "title": "How does the Kubernetes Controller Pattern implement declarative reconciliation loops?",
@@ -3654,7 +4183,7 @@
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/container-orchestration-advanced/how-does-kubernetes-storage-architecture-coordinate-csi-plugins-provisioners-and-attachers.md",
       "shortAnswer": "A CSI driver is split into a **controller plugin** (a Deployment that talks to the storage backend's API) and a **node plugin** (a DaemonSet that mounts volumes on each node), both implementing the CSI gRPC interface. Kubernetes never calls the backend directly; instead, Kubernetes-maintained **sidecar containers** translate API objects into CSI calls: `external-provisioner` turns a PVC into `CreateVolume` and a PV, `external-attacher` turns a `VolumeAttachment` into `ControllerPublishVolume` (attach the disk to the node's VM), and on the node the kubelet calls `NodeStageVolume` (format and mount once per node) and `NodePublishVolume` (bind-mount into the Pod). `node-driver-registrar` only registers the node plugin's socket with the kubelet. This design lets storage vendors ship on their own release cycle, at the cost of several moving parts to debug.",
       "quiz": {
-        "stem": "Which CSI component is responsible for calling cloud provider APIs to format a raw volume and bind-mount it into a Pod's local container directory?",
+        "stem": "Which CSI component formats a newly attached volume and bind-mounts it into a Pod's directory on the node?",
         "options": [
           "The central `csi-provisioner` controller",
           "The node-level CSI plugin executing `NodeStageVolume` and `NodePublishVolume`",
@@ -4082,6 +4611,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "sli",
         "slo",
@@ -4113,6 +4643,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "burn-rate",
         "alerting",
@@ -4144,6 +4675,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "toil",
         "automation",
@@ -4174,6 +4706,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "monitoring",
         "golden-signals",
@@ -4204,6 +4737,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "post-mortem",
         "incident-management",
@@ -4234,6 +4768,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "chaos-engineering",
         "gameday",
         "resilience",
@@ -4264,6 +4799,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "on-call",
         "pagerduty",
@@ -4295,6 +4831,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "site-reliability-engineering",
         "sre",
         "runbooks",
         "automation",
@@ -4342,7 +4879,7 @@
           "Frequent deployments make software development more expensive"
         ],
         "answerIndex": 0,
-        "explanation": "DORA research proved that elite teams achieve both higher deployment frequency AND lower change failure rates simultaneously, because small batches are easier to review, test, and debug."
+        "explanation": "DORA survey research has repeatedly found that the highest-performing teams achieve both higher deployment frequency AND lower change failure rates simultaneously, because small batches are easier to review, test, and debug."
       }
     },
     {
@@ -4363,7 +4900,7 @@
       ],
       "path": "devops-metrics-and-kpis/how-is-lead-time-for-changes-measured-and-how-do-you-eliminate-pipeline-queue-bottlenecks.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devops-metrics-and-kpis/how-is-lead-time-for-changes-measured-and-how-do-you-eliminate-pipeline-queue-bottlenecks.md",
-      "shortAnswer": "Lead Time for Changes measures the clock time from when a developer commits code to when that commit runs in production; bottlenecks are eliminated by auto-scaling CI runners, parallelizing test suites, and abolishing manual Change Advisory Boards (CABs).",
+      "shortAnswer": "Lead Time for Changes measures the clock time from when a developer commits code to when that commit runs in production; bottlenecks are eliminated by auto-scaling CI runners, parallelizing test suites, and replacing manual Change Advisory Boards (CABs) with peer review and automated, auditable gates.",
       "quiz": {
         "stem": "According to DORA research, what impact do manual Change Advisory Boards (CABs) have on software delivery performance?",
         "options": [
@@ -4373,7 +4910,7 @@
           "They speed up continuous integration build times"
         ],
         "answerIndex": 1,
-        "explanation": "Rigorous empirical research by DORA found that manual CAB approvals introduce massive delays (lead time inflation) with zero statistical correlation with improved system reliability."
+        "explanation": "DORA's survey research (2019 onwards) found heavyweight external change approval was associated with worse lead time and deployment frequency and no evidence of a lower change failure rate. It is a correlation from survey data, but a consistent one."
       }
     },
     {
@@ -4498,6 +5035,37 @@
         ],
         "answerIndex": 2,
         "explanation": "Extraneous cognitive load represents tasks that do not add direct business value (such as fighting with complex Kubernetes manifests or IAM policies). Platform teams eliminate this waste through Golden Paths."
+      }
+    },
+    {
+      "id": 786,
+      "slug": "what-are-the-space-and-devex-frameworks-and-how-do-they-complement-dora-metrics",
+      "title": "What are the SPACE and DevEx frameworks and how do they complement DORA metrics?",
+      "topic": "devops-metrics-and-kpis",
+      "category": "DevOps Metrics and KPIs",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devops-metrics-and-kpis",
+        "interview-questions",
+        "developer-productivity",
+        "space",
+        "devex",
+        "dora"
+      ],
+      "path": "devops-metrics-and-kpis/what-are-the-space-and-devex-frameworks-and-how-do-they-complement-dora-metrics.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devops-metrics-and-kpis/what-are-the-space-and-devex-frameworks-and-how-do-they-complement-dora-metrics.md",
+      "shortAnswer": "DORA measures the outcome of the delivery _system_ (throughput and instability). **SPACE** (2021) is a framework for measuring developer productivity across five dimensions - Satisfaction and well-being, Performance, Activity, Communication and collaboration, Efficiency and flow - insisting that no single metric captures productivity. **DevEx** (2023) narrows that to the three things that shape how work _feels_ to developers: feedback loops, cognitive load, and flow state. Used together, DORA tells you _what_ is happening to delivery and SPACE/DevEx tell you _why_.",
+      "quiz": {
+        "stem": "Which statement best describes how the SPACE framework should be applied?",
+        "options": [
+          "Pick the single SPACE dimension that is easiest to automate and use it to rank engineers",
+          "Measure several dimensions at once, mixing system data with survey data, and never rely on activity counts alone",
+          "Replace DORA metrics entirely with lines of code and commit counts",
+          "Use it only for individual performance reviews"
+        ],
+        "answerIndex": 1,
+        "explanation": "SPACE's core guidance is to use metrics from at least three of its five dimensions together, combine perceptual (survey) and system data, and avoid treating activity metrics such as commits or PR counts as productivity on their own."
       }
     },
     {
@@ -5123,6 +5691,36 @@
       }
     },
     {
+      "id": 764,
+      "slug": "how-do-you-plan-a-migration-to-post-quantum-cryptography",
+      "title": "How do you plan a migration to post-quantum cryptography?",
+      "topic": "network-security",
+      "category": "Network Security",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "network-security",
+        "post-quantum",
+        "cryptography",
+        "tls"
+      ],
+      "path": "network-security/how-do-you-plan-a-migration-to-post-quantum-cryptography.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/network-security/how-do-you-plan-a-migration-to-post-quantum-cryptography.md",
+      "shortAnswer": "Start with an **inventory**, because you cannot migrate cryptography you have not found; then prioritise by **data lifetime**, fixing key exchange first because of \"harvest now, decrypt later\"; then roll out **hybrid** schemes (classical plus post-quantum, such as the TLS group `X25519MLKEM768`) through the components you already patch - TLS libraries, load balancers, CDNs, service meshes, VPNs - while building **crypto agility** so the next change is configuration, not a rewrite. The standards are settled enough to act on: NIST published ML-KEM (FIPS 203) for key establishment and ML-DSA (FIPS 204) and SLH-DSA (FIPS 205) for signatures in August 2024, and its transition plan (NIST IR 8547) deprecates quantum-vulnerable public-key algorithms such as RSA and ECC after 2030 and disallows them after 2035.",
+      "quiz": {
+        "stem": "Why do most organisations migrate TLS key exchange to post-quantum algorithms before migrating certificate signatures?",
+        "options": [
+          "Because post-quantum signatures are already mandatory in all browsers",
+          "Because recorded traffic can be decrypted later ('harvest now, decrypt later'), while a forged signature only matters once a quantum computer exists at the moment of the attack",
+          "Because key exchange uses symmetric cryptography only",
+          "Because certificates cannot be changed until 2035"
+        ],
+        "answerIndex": 1,
+        "explanation": "Confidentiality has a long tail: traffic captured today can be broken retroactively. Authentication only needs to resist attackers at connection time, so signature migration can follow once PQ certificates are practical."
+      }
+    },
+    {
       "id": 675,
       "slug": "what-are-incident-severity-levels-sev-1-to-sev-4-and-how-do-they-govern-response-slas-and-war-rooms",
       "title": "What are Incident Severity Levels (Sev-1 to Sev-4) and how do they govern response SLAs and war rooms?",
@@ -5252,6 +5850,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "incident-management",
         "automation",
         "self-healing",
         "remediation",
@@ -5361,7 +5960,7 @@
           "Teams must use identical programming languages to collaborate"
         ],
         "answerIndex": 1,
-        "explanation": "Project Aristotle proved that psychological safety outweighed all other factors (including individual talent, seniority, and workload) in determining team success and innovation."
+        "explanation": "Project Aristotle found psychological safety to be the most important of the five team dynamics it identified, ahead of dependability, structure and clarity, meaning, and impact; who was on the team mattered less than how the team worked together."
       }
     },
     {
@@ -5468,6 +6067,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "use-method",
         "performance",
@@ -5498,6 +6098,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "prometheus",
         "node-exporter",
@@ -5528,6 +6129,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "blackbox",
         "whitebox",
@@ -5558,6 +6160,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "ebpf",
         "cilium",
@@ -5589,6 +6192,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "linux",
         "disk-io",
         "performance",
@@ -5620,6 +6224,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "synthetic",
         "blackbox",
@@ -5638,6 +6243,36 @@
         ],
         "answerIndex": 1,
         "explanation": "RUM relies on client-side JavaScript executing in the user's browser. If a DNS failure prevents users from loading the site entirely, no RUM telemetry is ever generated."
+      }
+    },
+    {
+      "id": 772,
+      "slug": "how-do-you-monitor-a-kubernetes-cluster-end-to-end",
+      "title": "How do you monitor a Kubernetes cluster end to end?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "infrastructure-monitoring",
+        "kubernetes",
+        "prometheus",
+        "kube-state-metrics"
+      ],
+      "path": "infrastructure-monitoring/how-do-you-monitor-a-kubernetes-cluster-end-to-end.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/how-do-you-monitor-a-kubernetes-cluster-end-to-end.md",
+      "shortAnswer": "Monitor it in layers, each with its own data source: the **control plane** (API server latency and errors, etcd health, scheduler backlog), the **nodes** (node_exporter host metrics, kubelet and node conditions), **workloads** (kube-state-metrics for object state such as restarts, pending pods, and replica counts; cAdvisor for container CPU, memory, and throttling), **cluster capacity** (requests against allocatable, not just usage), **cluster services** (CoreDNS, ingress or Gateway API controllers, CNI, certificates), and **events and logs**. The usual implementation is kube-prometheus-stack with the community kubernetes-mixin alerts, plus a log agent and an events exporter. Then page only on user-facing SLOs and a handful of genuinely urgent cluster conditions; most cluster signals are diagnostic, not paging.",
+      "quiz": {
+        "stem": "Which source tells you that a Deployment has fewer available replicas than desired, as opposed to how much CPU its containers use?",
+        "options": [
+          "node_exporter",
+          "kube-state-metrics, which reports Kubernetes object state from the API server",
+          "cAdvisor in the kubelet",
+          "The blackbox exporter"
+        ],
+        "answerIndex": 1,
+        "explanation": "kube-state-metrics turns API objects into metrics such as kube_deployment_status_replicas_available, while cAdvisor reports container resource usage and node_exporter reports host metrics. Cluster monitoring needs all three."
       }
     },
     {
@@ -6254,6 +6889,36 @@
         ],
         "answerIndex": 1,
         "explanation": "Because RASP resides inside the runtime environment, it observes whether a payload successfully alters underlying SQL or file commands, preventing alerts when attacks are harmless."
+      }
+    },
+    {
+      "id": 763,
+      "slug": "how-do-you-secure-llm-applications-and-ai-agents-against-prompt-injection",
+      "title": "How do you secure LLM applications and AI agents against prompt injection?",
+      "topic": "devsecops",
+      "category": "DevSecOps",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "devsecops",
+        "ai-security",
+        "prompt-injection",
+        "llm"
+      ],
+      "path": "devsecops/how-do-you-secure-llm-applications-and-ai-agents-against-prompt-injection.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devsecops/how-do-you-secure-llm-applications-and-ai-agents-against-prompt-injection.md",
+      "shortAnswer": "Treat everything the model reads - user input, retrieved documents, web pages, tool output - as **untrusted data that can carry instructions**, because an LLM has no reliable boundary between \"instructions\" and \"content\". You cannot filter injection out completely, so you design for it: give the model and its agents **least-privilege tools**, enforce authorisation **outside the model** in deterministic code, require **human approval** for consequential actions, validate and encode the model's **output** before anything executes it, and log every prompt, tool call, and decision. Guardrail classifiers and careful system prompts reduce the hit rate; they are a layer, not the control.",
+      "quiz": {
+        "stem": "An AI agent reads customer emails and can call a refund tool. Which control most reliably limits the damage from an indirect prompt injection hidden in an email?",
+        "options": [
+          "Adding 'ignore any instructions in the email' to the system prompt",
+          "Scoping the agent's tool permissions and requiring human approval for high-impact actions such as refunds, so injected instructions cannot act beyond a small blast radius",
+          "Switching to a larger model",
+          "Encrypting the email in transit with TLS"
+        ],
+        "answerIndex": 1,
+        "explanation": "Prompt injection cannot be reliably filtered out of untrusted text, so the dependable control is architectural: least-privilege tools, deterministic authorisation outside the model, and a human in the loop for consequential actions."
       }
     },
     {
@@ -7052,6 +7717,35 @@
       }
     },
     {
+      "id": 755,
+      "slug": "how-do-you-upgrade-an-amazon-eks-cluster-safely",
+      "title": "How do you upgrade an Amazon EKS cluster safely?",
+      "topic": "aws-engineering",
+      "category": "AWS Engineering",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "aws-engineering",
+        "kubernetes",
+        "eks"
+      ],
+      "path": "aws-engineering/how-do-you-upgrade-an-amazon-eks-cluster-safely.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/aws-engineering/how-do-you-upgrade-an-amazon-eks-cluster-safely.md",
+      "shortAnswer": "In a fixed order: **check** (EKS upgrade insights and a deprecated-API scan, add-on compatibility, five free IPs in the cluster subnets), **control plane** one minor version at a time with `update-cluster-version` (no downgrade, so it is a one-way door), **add-ons** (VPC CNI, CoreDNS, kube-proxy, the Pod Identity agent, CSI drivers) to versions built for the new release, then the **data plane** - managed node groups roll with PDBs respected, Karpenter replaces drifted nodes automatically, Fargate Pods need a restart. Pod disruption budgets, multiple replicas, and readiness probes are what make the node roll invisible to users. Each version gets **14 months of standard support** and then **12 months of paid extended support**, so the honest framing is a quarterly-ish treadmill you plan for, not an occasional project.",
+      "quiz": {
+        "stem": "An EKS cluster runs Kubernetes 1.34 and its managed node groups run 1.33. What is the correct upgrade order to reach 1.35?",
+        "options": [
+          "Upgrade the node groups to 1.35 first, then the control plane directly to 1.35.",
+          "Upgrade the control plane to 1.35 in one step, then the nodes.",
+          "Upgrade the control plane to 1.35 (one minor version), then update the add-ons, then roll the nodes to 1.35.",
+          "Delete and recreate the cluster, because EKS does not support in-place upgrades."
+        ],
+        "answerIndex": 2,
+        "explanation": "EKS upgrades the control plane one minor version at a time and never downgrades, and nodes may not be newer than the control plane - so the control plane goes first (1.34 to 1.35 is a single minor step), then compatible add-on versions, then the data plane. Upgrading nodes first would put kubelets ahead of the API server, which Kubernetes' version-skew policy forbids."
+      }
+    },
+    {
       "id": 739,
       "slug": "how-do-you-secure-azure-kubernetes-service-aks-using-azure-private-clusters-and-calico-cni",
       "title": "How Do You Secure Azure Kubernetes Service (AKS) Using Azure Private Clusters and Calico CNI?",
@@ -7068,7 +7762,7 @@
       ],
       "path": "azure-engineering/how-do-you-secure-azure-kubernetes-service-aks-using-azure-private-clusters-and-calico-cni.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-you-secure-azure-kubernetes-service-aks-using-azure-private-clusters-and-calico-cni.md",
-      "shortAnswer": "An AKS Private Cluster ensures the Kubernetes API server has no public IP and is accessible only through private endpoints within a VNet or peered network. Calico CNI complements this by enforcing fine-grained east-west network security policies between pods.",
+      "shortAnswer": "A **private cluster** removes the public endpoint from the AKS API server: `kubectl` reaches it through a private endpoint in your VNet (or, with API Server VNet Integration, an internal IP in a delegated subnet), resolved through a private DNS zone. **Calico** is one of AKS's network policy engines and enforces Kubernetes `NetworkPolicy` (and Calico's own richer policies) for east-west traffic between Pods. Together they close the two biggest exposures - a publicly reachable control plane and a flat Pod network - at the cost of harder access for CI and operators. For new clusters, Azure CNI powered by Cilium is now Microsoft's recommended policy engine; Calico remains supported.",
       "quiz": {
         "stem": "In an Azure Kubernetes Service (AKS) Private Cluster, how is the Kubernetes API server exposed to administrators?",
         "options": [
@@ -7098,7 +7792,7 @@
       ],
       "path": "azure-engineering/how-do-azure-virtual-network-nat-gateways-prevent-snat-port-exhaustion.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-azure-virtual-network-nat-gateways-prevent-snat-port-exhaustion.md",
-      "shortAnswer": "Azure Virtual Network NAT Gateway provides high-performance, fully managed outbound internet connectivity with dynamic SNAT port allocation across up to 16 public IP addresses, eliminating the static pre-allocation bottlenecks that cause SNAT port exhaustion on Azure Load Balancers.",
+      "shortAnswer": "NAT Gateway attaches to subnets and gives all their outbound flows a shared pool of SNAT ports - 64,512 per public IP, up to 16 IPs - allocated **on demand** to whichever VM or Pod needs them. Load Balancer outbound rules and the old implicit default outbound access instead **pre-allocate** a fixed slice of ports per backend instance, so one busy instance can exhaust its slice while ports sit idle elsewhere. NAT Gateway removes that per-instance ceiling; it does not remove the need to reuse connections.",
       "quiz": {
         "stem": "Why does an Azure VNet NAT Gateway prevent SNAT port exhaustion more effectively than default Azure Load Balancer outbound rules?",
         "options": [
@@ -7128,7 +7822,7 @@
       ],
       "path": "azure-engineering/how-do-you-structure-azure-management-groups-subscriptions-and-resource-groups-for-landing-zones.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-you-structure-azure-management-groups-subscriptions-and-resource-groups-for-landing-zones.md",
-      "shortAnswer": "Azure Landing Zones organize resources into a hierarchical tree: Management Groups apply enterprise policies and RBAC across multiple subscriptions, Subscriptions act as billing, quota, and identity boundaries, and Resource Groups group logically related assets sharing a common lifecycle.",
+      "shortAnswer": "Management groups carry policy and RBAC for many subscriptions and should be organized by **governance need** (platform versus application landing zones, corp versus online), not by org chart or environment. Subscriptions are the unit of billing, quota, and blast radius, so each workload gets its own - typically one per environment. Resource groups hold resources that share a lifecycle. The Azure Landing Zones reference architecture encodes this: Platform (identity, management, connectivity), Landing Zones (corp, online), Sandbox, and Decommissioned.",
       "quiz": {
         "stem": "In the Azure resource hierarchy, what is the primary operational role of Management Groups?",
         "options": [
@@ -7158,7 +7852,7 @@
       ],
       "path": "azure-engineering/how-does-azure-key-vault-managed-hsm-differ-from-standard-key-vault-and-how-do-you-enforce-access.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-does-azure-key-vault-managed-hsm-differ-from-standard-key-vault-and-how-do-you-enforce-access.md",
-      "shortAnswer": "Standard Azure Key Vault is a multi-tenant service with FIPS 140-2 Level 2/3 validation. Managed HSM is a fully single-tenant, dedicated Hardware Security Module cluster offering FIPS 140-2 Level 3 protection, automated cryptographic data isolation, and localized RBAC independent of Microsoft tenant administrators.",
+      "shortAnswer": "Key Vault comes in **Standard** (software-protected keys, multi-tenant) and **Premium** (adds HSM-protected keys in multi-tenant HSMs validated to FIPS 140-3 Level 3). **Managed HSM** is a single-tenant pool of FIPS 140-3 Level 3 HSMs dedicated to you: you own its **security domain** (the key material that lets the HSM be activated or restored), and data-plane access is governed by **Managed HSM local RBAC**, separate from Azure RBAC - so a subscription Owner can manage the resource but cannot use the keys without a local role assignment. It stores keys only (no secrets or certificates) and costs a fixed hourly rate per HSM pool.",
       "quiz": {
         "stem": "What is a major security distinction regarding data-plane access control in Azure Key Vault Managed HSM compared to Standard Key Vault?",
         "options": [
@@ -7188,7 +7882,7 @@
       ],
       "path": "azure-engineering/how-do-you-use-azure-traffic-manager-and-azure-front-door-for-global-traffic-routing.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-you-use-azure-traffic-manager-and-azure-front-door-for-global-traffic-routing.md",
-      "shortAnswer": "Azure Traffic Manager is a DNS-based global traffic balancer operating at Layer 4, routing clients via DNS responses. Azure Front Door is an anycast Layer 7 global reverse proxy combining HTTP/HTTPS routing, global load balancing, SSL offload, CDN caching, and integrated Web Application Firewall (WAF) capabilities.",
+      "shortAnswer": "**Traffic Manager** is DNS-based: it answers the DNS query for your name with the endpoint chosen by its routing method (priority, weighted, performance, geographic, multivalue, subnet) and never sees the traffic itself, so it works for any protocol but fails over only as fast as DNS caches expire. **Front Door** is a global Layer 7 reverse proxy on Microsoft's edge: clients connect to an anycast edge location, which terminates TLS, applies WAF and caching, and forwards over the Microsoft backbone to the healthiest origin - so failover does not depend on DNS, but it only handles HTTP/HTTPS.",
       "quiz": {
         "stem": "Why does Azure Front Door achieve significantly faster regional failover than Azure Traffic Manager for web applications?",
         "options": [
@@ -7218,7 +7912,7 @@
       ],
       "path": "azure-engineering/how-do-you-implement-azure-monitor-alert-processing-rules-and-action-groups-for-incident-routing.md",
       "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-you-implement-azure-monitor-alert-processing-rules-and-action-groups-for-incident-routing.md",
-      "shortAnswer": "Azure Monitor Alert Processing Rules intercept fired alerts to modify behavior—such as suppressing notifications during planned maintenance or dynamically applying Action Groups—while Action Groups define the exact notification recipients and automated remediation webhooks (e.g., PagerDuty, Logic Apps, Runbooks).",
+      "shortAnswer": "Alert rules decide _whether_ something is wrong; **action groups** decide _who or what is told_ (email, SMS, push, voice, webhooks, Logic Apps, Functions, Automation runbooks, ITSM, Event Hubs); and **alert processing rules** sit between them, applying at fire time to add action groups or suppress notifications for a scope and schedule - for example, silencing a resource group during a maintenance window without disabling any rule. The benefit is centralized, scope-based routing; the risk is a suppression rule that silently hides a real outage.",
       "quiz": {
         "stem": "What is the primary operational advantage of using Azure Monitor Alert Processing Rules to manage maintenance windows?",
         "options": [
@@ -7229,6 +7923,35 @@
         ],
         "answerIndex": 1,
         "explanation": "Alert Processing Rules intercept fired alerts and suppress notification delivery during scheduled maintenance windows, eliminating alert fatigue while keeping the underlying alert rules intact."
+      }
+    },
+    {
+      "id": 756,
+      "slug": "how-do-you-choose-azure-storage-redundancy-and-secure-a-storage-account",
+      "title": "How do you choose Azure Storage redundancy and secure a storage account?",
+      "topic": "azure-engineering",
+      "category": "Azure Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "azure-engineering",
+        "storage",
+        "security-and-compliance"
+      ],
+      "path": "azure-engineering/how-do-you-choose-azure-storage-redundancy-and-secure-a-storage-account.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/azure-engineering/how-do-you-choose-azure-storage-redundancy-and-secure-a-storage-account.md",
+      "shortAnswer": "Redundancy is two independent choices: **within the primary region** - LRS (three copies in one datacenter) or ZRS (synchronously across three availability zones) - and **whether to copy asynchronously to the paired region** - GRS (LRS + secondary) or GZRS (ZRS + secondary), optionally with **read access** to the secondary (RA-GRS / RA-GZRS). Pick ZRS as the production default, add geo-replication when you need a regional DR copy, and remember the geo copy is **asynchronous** (check `LastSyncTime`; there is no RPO SLA). Securing the account is a short, fixed baseline: **Entra ID RBAC instead of account keys** (disable shared key access), **no anonymous blob access**, **private endpoints with public network access disabled**, TLS 1.2 minimum, and **soft delete, versioning, and immutability** for recovery from deletion and ransomware.",
+      "quiz": {
+        "stem": "A storage account must survive the loss of an availability zone with no data loss, and also keep a copy in another region for a regional disaster. Which redundancy option fits?",
+        "options": [
+          "LRS",
+          "GRS",
+          "GZRS",
+          "ZRS"
+        ],
+        "answerIndex": 2,
+        "explanation": "GZRS replicates synchronously across three zones in the primary region (so a zone loss loses no data) and asynchronously to the paired region. GRS also copies to the paired region, but within the primary region it is only LRS - three copies in a single datacenter - so a zone outage takes the primary down. ZRS survives a zone loss but has no second region."
       }
     },
     {
@@ -7411,6 +8134,62 @@
         ],
         "answerIndex": 1,
         "explanation": "Standard IAM only verifies identity permissions. VPC Service Controls creates a perimeter boundary that blocks data transfers between internal projects and external unauthorized storage buckets, preventing exfiltration even with valid credentials."
+      }
+    },
+    {
+      "id": 757,
+      "slug": "how-do-you-choose-between-google-cloud-load-balancers",
+      "title": "How do you choose between Google Cloud load balancers?",
+      "topic": "gcp-engineering",
+      "category": "GCP Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "gcp-engineering",
+        "load-balancing",
+        "networking"
+      ],
+      "path": "gcp-engineering/how-do-you-choose-between-google-cloud-load-balancers.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/gcp-engineering/how-do-you-choose-between-google-cloud-load-balancers.md",
+      "shortAnswer": "Answer three questions. **Layer**: HTTP(S) traffic goes to an **Application Load Balancer** (L7, Envoy-based proxy - URL maps, TLS termination, Cloud Armor, Cloud CDN, IAP); other TCP/UDP traffic goes to a **Network Load Balancer**, either **proxy** (terminates TCP/SSL at Google's proxies) or **passthrough** (packets go straight to the backend, client IP preserved, UDP supported, backends reply directly). **Exposure**: external (internet-facing) or internal (only inside the VPC). **Scope**: global (one anycast IP, backends in many regions) or regional (data stays in one region; required for some compliance cases). The common answers: a **global external Application Load Balancer** for public web apps and APIs, an **internal Application Load Balancer** for service-to-service HTTP, and an **internal passthrough Network Load Balancer** for TCP services such as databases or as a next hop for firewall appliances.",
+      "quiz": {
+        "stem": "A game server on Compute Engine needs a UDP load balancer that preserves the client's source IP. Which Google Cloud load balancer fits?",
+        "options": [
+          "Global external Application Load Balancer",
+          "External passthrough Network Load Balancer",
+          "Global external proxy Network Load Balancer",
+          "Regional internal Application Load Balancer"
+        ],
+        "answerIndex": 1,
+        "explanation": "Passthrough Network Load Balancers do not terminate connections: packets reach the backend with the original client IP and the backend replies directly, and they support UDP. Application Load Balancers are HTTP(S) only, and proxy Network Load Balancers terminate TCP at a Google proxy, so backends see the proxy's address and UDP is not supported."
+      }
+    },
+    {
+      "id": 780,
+      "slug": "how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq",
+      "title": "How do you process JSON and YAML on the command line with jq and yq?",
+      "topic": "scripting-and-automation",
+      "category": "Scripting and Automation",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "scripting-and-automation",
+        "interview-questions"
+      ],
+      "path": "scripting-and-automation/how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/scripting-and-automation/how-do-you-process-json-and-yaml-on-the-command-line-with-jq-and-yq.md",
+      "shortAnswer": "**jq** is a small functional language for JSON: a filter such as `.items[] | select(.status.phase != \"Running\") | .metadata.name` walks the structure, filters, and reshapes it, and `-r` prints raw strings for the next command in the pipe. **yq** brings the same idea to YAML (and can convert between YAML, JSON, TOML, and XML), which makes it the safe way to read or edit Kubernetes manifests, Helm values, and CI files in a script instead of `sed`. The habits that matter in automation: parse structure rather than grepping text, pass shell values in with `--arg`/`--argjson` (or `env()` in yq) rather than interpolating them into the filter, use `-e` so a missing value fails the script, and know there are **two different tools called yq** - the Go one (`mikefarah/yq`, the common default) and a Python jq wrapper - with different syntax.",
+      "quiz": {
+        "stem": "Why is `jq -r '.items[].metadata.name'` preferred over `grep '\\\"name\\\"' | cut -d'\\\"' -f4` for extracting Kubernetes resource names?",
+        "options": [
+          "jq is faster on files under 1 KB",
+          "jq parses the JSON structure, so it is unaffected by formatting, key order, nesting, or a 'name' key appearing elsewhere",
+          "grep cannot read JSON files",
+          "cut only works on CSV"
+        ],
+        "answerIndex": 1,
+        "explanation": "Text tools match characters, not structure: a reformatted document, a nested 'name' field, or an escaped quote silently breaks them. jq addresses fields by path, so the extraction is correct by construction."
       }
     }
   ]

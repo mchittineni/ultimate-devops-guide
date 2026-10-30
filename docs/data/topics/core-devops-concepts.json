@@ -352,6 +352,12 @@
       ],
       "related": [
         {
+          "id": 762,
+          "slug": "how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline",
+          "title": "How do you roll back a failed deployment in a CI/CD pipeline?",
+          "topic": "cicd"
+        },
+        {
           "id": 16,
           "slug": "what-is-ci-cd-pipeline",
           "title": "What is CI/CD Pipeline?",
@@ -361,12 +367,6 @@
           "id": 17,
           "slug": "what-is-jenkins",
           "title": "What is Jenkins?",
-          "topic": "cicd"
-        },
-        {
-          "id": 18,
-          "slug": "what-are-jenkins-pipelines",
-          "title": "What are Jenkins Pipelines?",
           "topic": "cicd"
         }
       ],
@@ -527,15 +527,15 @@
           "topic": "cicd"
         },
         {
+          "id": 785,
+          "slug": "what-is-the-westrum-organizational-culture-model-and-how-does-dora-use-it",
+          "title": "What is the Westrum organizational culture model and how does DORA use it?",
+          "topic": "devops-culture-and-practices"
+        },
+        {
           "id": 16,
           "slug": "what-is-ci-cd-pipeline",
           "title": "What is CI/CD Pipeline?",
-          "topic": "cicd"
-        },
-        {
-          "id": 17,
-          "slug": "what-is-jenkins",
-          "title": "What is Jenkins?",
           "topic": "cicd"
         }
       ],
@@ -548,8 +548,97 @@
           "Lead time for changes has no measurable correlation with mean time to recovery"
         ],
         "answerIndex": 1,
-        "explanation": "DORA findings conclusively demonstrate that elite organizations do not compromise stability for speed; small, frequent deployments minimize blast radius and accelerate recovery."
+        "explanation": "DORA's survey data has consistently shown that top performers do not trade stability for speed (a strong correlation, not a controlled experiment); small, frequent deployments minimize blast radius and accelerate recovery."
       }
+    },
+    {
+      "id": 783,
+      "slug": "what-are-the-three-ways-of-devops",
+      "title": "What are the Three Ways of DevOps?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "core-devops-concepts",
+        "interview-questions",
+        "three-ways",
+        "lean"
+      ],
+      "path": "core-devops-concepts/what-are-the-three-ways-of-devops.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-are-the-three-ways-of-devops.md",
+      "shortAnswer": "The Three Ways, popularised by Gene Kim in _The Phoenix Project_ (2013) and _The DevOps Handbook_ (2016), are the principles every DevOps practice derives from: **flow** (make work move fast from development to production), **feedback** (make problems visible quickly, from production back to development), and **continual learning and experimentation** (build a culture that improves the system and takes safe risks).",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 20,
+          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
+          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
+    },
+    {
+      "id": 784,
+      "slug": "what-is-the-difference-between-devops-and-agile",
+      "title": "What is the difference between DevOps and Agile?",
+      "topic": "core-devops-concepts",
+      "category": "Core DevOps Concepts",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "core-devops-concepts",
+        "interview-questions",
+        "agile"
+      ],
+      "path": "core-devops-concepts/what-is-the-difference-between-devops-and-agile.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/core-devops-concepts/what-is-the-difference-between-devops-and-agile.md",
+      "shortAnswer": "Agile is about how a team plans and builds software in short, feedback-driven iterations with the business; DevOps extends that same thinking past \"done\" into delivery and operations, so working software reaches production quickly and safely and production feedback flows back. They are complementary: Agile without DevOps produces finished increments that wait weeks for a release; DevOps without Agile ships the wrong things efficiently.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 16,
+          "slug": "what-is-ci-cd-pipeline",
+          "title": "What is CI/CD Pipeline?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 19,
+          "slug": "what-is-gitlab-ci",
+          "title": "What is GitLab CI?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
     }
   ]
 }

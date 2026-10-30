@@ -393,12 +393,6 @@
       ],
       "related": [
         {
-          "id": 742,
-          "slug": "how-does-azure-key-vault-managed-hsm-differ-from-standard-key-vault-and-how-do-you-enforce-access",
-          "title": "How Does Azure Key Vault Managed HSM Differ from Standard Key Vault and How Do You Enforce Access?",
-          "topic": "azure-engineering"
-        },
-        {
           "id": 746,
           "slug": "how-do-you-configure-google-cloud-workload-identity-for-secure-gke-service-authentication",
           "title": "How Do You Configure Google Cloud Workload Identity for Secure GKE Service Authentication?",
@@ -409,6 +403,12 @@
           "slug": "how-do-you-implement-vpc-service-controls-to-prevent-data-exfiltration-in-google-cloud",
           "title": "How Do You Implement VPC Service Controls to Prevent Data Exfiltration in Google Cloud?",
           "topic": "gcp-engineering"
+        },
+        {
+          "id": 734,
+          "slug": "what-is-aws-privatelink-and-how-does-it-enable-secure-cross-vpc-service-consumption",
+          "title": "What is AWS PrivateLink and How Does It Enable Secure Cross-VPC Service Consumption?",
+          "topic": "aws-engineering"
         }
       ],
       "quiz": {
@@ -512,15 +512,15 @@
           "topic": "aws-engineering"
         },
         {
+          "id": 756,
+          "slug": "how-do-you-choose-azure-storage-redundancy-and-secure-a-storage-account",
+          "title": "How do you choose Azure Storage redundancy and secure a storage account?",
+          "topic": "azure-engineering"
+        },
+        {
           "id": 193,
           "slug": "what-is-the-difference-between-ecs-eks-and-fargate",
           "title": "What is the difference between ECS, EKS, and Fargate?",
-          "topic": "aws-engineering"
-        },
-        {
-          "id": 194,
-          "slug": "how-do-auto-scaling-groups-and-load-balancers-work-together-on-aws",
-          "title": "How do Auto Scaling groups and load balancers work together on AWS?",
           "topic": "aws-engineering"
         }
       ],

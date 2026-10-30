@@ -260,10 +260,10 @@
           "topic": "core-devops-concepts"
         },
         {
-          "id": 20,
-          "slug": "what-is-the-difference-between-continuous-delivery-and-continuous-deployment",
-          "title": "What is the difference between Continuous Delivery and Continuous Deployment?",
-          "topic": "cicd"
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
         }
       ],
       "quiz": null
@@ -352,10 +352,10 @@
           "topic": "core-devops-concepts"
         },
         {
-          "id": 268,
-          "slug": "how-do-you-use-jenkins-shared-libraries",
-          "title": "How do you use Jenkins shared libraries?",
-          "topic": "cicd"
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
         }
       ],
       "quiz": {
@@ -408,10 +408,10 @@
           "topic": "core-devops-concepts"
         },
         {
-          "id": 16,
-          "slug": "what-is-ci-cd-pipeline",
-          "title": "What is CI/CD Pipeline?",
-          "topic": "cicd"
+          "id": 783,
+          "slug": "what-are-the-three-ways-of-devops",
+          "title": "What are the Three Ways of DevOps?",
+          "topic": "core-devops-concepts"
         }
       ],
       "quiz": {
@@ -548,6 +548,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "incident-management",
         "automation",
         "self-healing",
         "remediation",

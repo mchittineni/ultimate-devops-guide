@@ -324,6 +324,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "use-method",
         "performance",
@@ -380,6 +381,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "prometheus",
         "node-exporter",
@@ -436,6 +438,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "blackbox",
         "whitebox",
@@ -492,6 +495,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "ebpf",
         "cilium",
@@ -549,6 +553,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "linux",
         "disk-io",
         "performance",
@@ -606,6 +611,7 @@
       "tags": [
         "devops",
         "interview-questions",
+        "infrastructure-monitoring",
         "monitoring",
         "synthetic",
         "blackbox",
@@ -650,6 +656,62 @@
         ],
         "answerIndex": 1,
         "explanation": "RUM relies on client-side JavaScript executing in the user's browser. If a DNS failure prevents users from loading the site entirely, no RUM telemetry is ever generated."
+      }
+    },
+    {
+      "id": 772,
+      "slug": "how-do-you-monitor-a-kubernetes-cluster-end-to-end",
+      "title": "How do you monitor a Kubernetes cluster end to end?",
+      "topic": "infrastructure-monitoring",
+      "category": "Infrastructure Monitoring",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "infrastructure-monitoring",
+        "kubernetes",
+        "prometheus",
+        "kube-state-metrics"
+      ],
+      "path": "infrastructure-monitoring/how-do-you-monitor-a-kubernetes-cluster-end-to-end.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-monitoring/how-do-you-monitor-a-kubernetes-cluster-end-to-end.md",
+      "shortAnswer": "Monitor it in layers, each with its own data source: the **control plane** (API server latency and errors, etcd health, scheduler backlog), the **nodes** (node_exporter host metrics, kubelet and node conditions), **workloads** (kube-state-metrics for object state such as restarts, pending pods, and replica counts; cAdvisor for container CPU, memory, and throttling), **cluster capacity** (requests against allocatable, not just usage), **cluster services** (CoreDNS, ingress or Gateway API controllers, CNI, certificates), and **events and logs**. The usual implementation is kube-prometheus-stack with the community kubernetes-mixin alerts, plus a log agent and an events exporter. Then page only on user-facing SLOs and a handful of genuinely urgent cluster conditions; most cluster signals are diagnostic, not paging.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 535,
+          "slug": "what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup",
+          "title": "What are ephemeral preview environments and how do you manage their lifecycle and cleanup?",
+          "topic": "cicd"
+        },
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Which source tells you that a Deployment has fewer available replicas than desired, as opposed to how much CPU its containers use?",
+        "options": [
+          "node_exporter",
+          "kube-state-metrics, which reports Kubernetes object state from the API server",
+          "cAdvisor in the kubelet",
+          "The blackbox exporter"
+        ],
+        "answerIndex": 1,
+        "explanation": "kube-state-metrics turns API objects into metrics such as kube_deployment_status_replicas_available, while cAdvisor reports container resource usage and node_exporter reports host metrics. Cluster monitoring needs all three."
       }
     }
   ]

@@ -1160,6 +1160,172 @@
         "answerIndex": 2,
         "explanation": "When invoked with `-detailed-exitcode`, 0 means clean with no changes, 1 indicates an error, and 2 indicates that a diff exists (drift detected)."
       }
+    },
+    {
+      "id": 758,
+      "slug": "what-is-the-difference-between-terraform-and-opentofu",
+      "title": "What is the difference between Terraform and OpenTofu?",
+      "topic": "infrastructure-as-code",
+      "category": "Infrastructure as Code",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "infrastructure-as-code",
+        "interview-questions",
+        "terraform",
+        "opentofu"
+      ],
+      "path": "infrastructure-as-code/what-is-the-difference-between-terraform-and-opentofu.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-as-code/what-is-the-difference-between-terraform-and-opentofu.md",
+      "shortAnswer": "OpenTofu is the open-source fork of Terraform, created after HashiCorp relicensed Terraform from MPL 2.0 to the source-available Business Source License (BSL) in August 2023. It forked from Terraform 1.5, is governed by the Linux Foundation and CNCF, and remains largely drop-in compatible: the same HCL, the same providers, the same state format, with `tofu` replacing `terraform` on the command line. The two have since diverged in features - OpenTofu shipped client-side state encryption and early variable evaluation first, Terraform has HCP Terraform integrations such as Stacks and `terraform query` - so \"which one?\" is now a decision about licensing, governance, and specific features rather than a rename.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 468,
+          "slug": "how-do-you-structure-an-ansible-role-and-share-it-through-galaxy",
+          "title": "How do you structure an Ansible role and share it through Galaxy?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 586,
+          "slug": "what-is-the-difference-between-mutable-and-immutable-infrastructure-in-modern-deployment-patterns",
+          "title": "What is the difference between mutable and immutable infrastructure in modern deployment patterns?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "Why did the OpenTofu project fork Terraform in 2023?",
+        "options": [
+          "Terraform stopped supporting the AWS provider",
+          "HashiCorp relicensed Terraform from the open-source MPL 2.0 to the source-available Business Source License (BSL) starting with 1.6",
+          "Terraform removed support for remote state backends",
+          "OpenTofu wanted to replace HCL with YAML"
+        ],
+        "answerIndex": 1,
+        "explanation": "In August 2023 HashiCorp moved Terraform to the BSL 1.1. OpenTofu forked the last MPL-licensed code (Terraform 1.5.x) and is now maintained under the Linux Foundation and CNCF with an open governance model, staying largely compatible with Terraform configurations, providers, and state."
+      }
+    },
+    {
+      "id": 759,
+      "slug": "how-do-you-keep-secrets-out-of-terraform-state",
+      "title": "How do you keep secrets out of Terraform state?",
+      "topic": "infrastructure-as-code",
+      "category": "Infrastructure as Code",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "infrastructure-as-code",
+        "interview-questions",
+        "terraform",
+        "secrets",
+        "devsecops"
+      ],
+      "path": "infrastructure-as-code/how-do-you-keep-secrets-out-of-terraform-state.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-as-code/how-do-you-keep-secrets-out-of-terraform-state.md",
+      "shortAnswer": "First, know that `sensitive = true` does **not** keep anything out of state - it only redacts CLI output. Anything Terraform reads through a data source or sets as a normal resource argument is written to state (and to saved plan files) in plaintext. To actually keep a secret out: let the **provider or platform generate and hold it** (for example RDS `manage_master_user_password`, which keeps the password in Secrets Manager), use **ephemeral resources** to fetch or generate values that exist only during the run (Terraform 1.10+, OpenTofu 1.11+), and pass them into **write-only arguments** (`password_wo`, `secret_string_wo`, Terraform 1.11+), which the provider uses but never persists. Then protect the state you still have: encrypted, versioned, tightly scoped backend, or OpenTofu's client-side state encryption.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 468,
+          "slug": "how-do-you-structure-an-ansible-role-and-share-it-through-galaxy",
+          "title": "How do you structure an Ansible role and share it through Galaxy?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 470,
+          "slug": "how-do-you-handle-secrets-in-ansible-with-vault",
+          "title": "How do you handle secrets in Ansible with Vault?",
+          "topic": "configuration-management"
+        }
+      ],
+      "quiz": {
+        "stem": "A Terraform configuration reads a database password with `data \\\"aws_secretsmanager_secret_version\\\"` and passes it to `aws_db_instance.password`, marking the variable `sensitive = true`. Where does the password end up?",
+        "options": [
+          "Nowhere - `sensitive = true` prevents it from being stored",
+          "Only in the CLI output, which is redacted",
+          "In plaintext in the state file (and in any saved plan), because both the data source result and the resource attribute are persisted; `sensitive` only redacts display",
+          "Only in AWS Secrets Manager"
+        ],
+        "answerIndex": 2,
+        "explanation": "`sensitive` hides values in plan and apply output but does not change what is written to state. Data source results and regular resource arguments are persisted. Ephemeral resources and write-only arguments (Terraform 1.10/1.11+, OpenTofu 1.11+) or provider-managed secrets avoid persisting the value."
+      }
+    },
+    {
+      "id": 761,
+      "slug": "what-is-pulumi-and-how-does-it-compare-to-terraform",
+      "title": "What is Pulumi and how does it compare to Terraform?",
+      "topic": "infrastructure-as-code",
+      "category": "Infrastructure as Code",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "infrastructure-as-code",
+        "interview-questions",
+        "pulumi",
+        "terraform"
+      ],
+      "path": "infrastructure-as-code/what-is-pulumi-and-how-does-it-compare-to-terraform.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/infrastructure-as-code/what-is-pulumi-and-how-does-it-compare-to-terraform.md",
+      "shortAnswer": "Pulumi is an infrastructure-as-code tool where you write infrastructure in a general-purpose language - TypeScript, Python, Go, C#, Java, or YAML - instead of HCL. The program does not call cloud APIs directly: it **registers resources**, the Pulumi engine builds a desired-state graph, diffs it against the **stack's state**, and shows a preview before applying, so it behaves declaratively like Terraform. The real differences are the language (loops, functions, classes, package managers, and unit tests come for free), **secrets encrypted in state by default**, and the ecosystem: Terraform has the larger community, module registry, and hiring pool; Pulumi can reuse Terraform providers through bridged and dynamically generated providers.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 468,
+          "slug": "how-do-you-structure-an-ansible-role-and-share-it-through-galaxy",
+          "title": "How do you structure an Ansible role and share it through Galaxy?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 586,
+          "slug": "what-is-the-difference-between-mutable-and-immutable-infrastructure-in-modern-deployment-patterns",
+          "title": "What is the difference between mutable and immutable infrastructure in modern deployment patterns?",
+          "topic": "configuration-management"
+        },
+        {
+          "id": 456,
+          "slug": "how-do-you-run-and-secure-a-jenkins-controller-in-production",
+          "title": "How do you run and secure a Jenkins controller in production?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "How does Pulumi behave at deployment time even though programs are written in TypeScript, Python, or Go?",
+        "options": [
+          "It runs the program imperatively, calling cloud APIs line by line",
+          "The program registers resources to build a desired-state graph, and the Pulumi engine diffs that graph against state and applies only the differences",
+          "It converts the program to CloudFormation and submits it",
+          "It has no state, so every run recreates all resources"
+        ],
+        "answerIndex": 1,
+        "explanation": "A Pulumi program is general-purpose code that declares resources. The engine collects them into a desired-state graph, compares it with the stack's state, previews the diff (`pulumi preview`), and applies it (`pulumi up`) - declarative at apply time, like Terraform."
+      }
     }
   ]
 }
