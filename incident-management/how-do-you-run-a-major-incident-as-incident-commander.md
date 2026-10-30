@@ -85,7 +85,7 @@ Channel #inc-2026-08-07-checkout-errors   (one channel of record)
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
-- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#20`): [What is the difference between Continuous Delivery and Continuous Deployment?](../cicd/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
+- [[What is the difference between DevOps and Agile?]] (`#784`): [What is the difference between DevOps and Agile?](../core-devops-concepts/what-is-the-difference-between-devops-and-agile.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
