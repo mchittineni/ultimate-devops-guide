@@ -70,8 +70,8 @@ export default function () {
 ## Related Concepts
 
 - [[What is progressive delivery and how does it differ from traditional deployment strategies?]] (`#509`): [What is progressive delivery and how does it differ from traditional deployment strategies?](../core-devops-concepts/what-is-progressive-delivery-and-how-does-it-differ-from-traditional-deployment-strategies.md)
+- [[What are the Three Ways of DevOps?]] (`#783`): [What are the Three Ways of DevOps?](../core-devops-concepts/what-are-the-three-ways-of-devops.md)
 - [[How do you prevent and handle secret leaks in CI/CD pipelines?]] (`#237`): [How do you prevent and handle secret leaks in CI/CD pipelines?](../cicd/how-do-you-prevent-and-handle-secret-leaks-in-ci-cd-pipelines.md)
-- [[Explain Docker Architecture]] (`#10`): [Explain Docker Architecture](../docker/explain-docker-architecture.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

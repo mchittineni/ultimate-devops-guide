@@ -24,7 +24,7 @@ tags:
 | **Artillery**          | YAML/JS                         | Simple YAML scenarios, serverless-friendly                   | Less powerful reporting                                                        |
 | **wrk / Vegeta / hey** | CLI                             | Instant micro-benchmarks                                     | HTTP only, no scenario logic                                                   |
 
-**Choosing:** prefer a code-first tool that lives in Git and runs in CI. k6 (Grafana Labs) is the common modern default for HTTP and gRPC services. Check how the tool models load, too: closed-model virtual users that wait for each response under-report latency when the system stalls (coordinated omission), so use arrival-rate executors or open injection profiles when measuring tail latency. JMeter still wins when you must test JDBC, JMS, or legacy protocols.
+**Choosing:** prefer a code-first tool that lives in Git and runs in CI. k6 (Grafana Labs; 1.0 shipped in 2025 with stable APIs and native TypeScript support) is the common modern default for HTTP, gRPC, and WebSocket services, with the k6 Operator or Grafana Cloud k6 for distributed runs. Check how the tool models load, too: closed-model virtual users that wait for each response under-report latency when the system stalls (coordinated omission), so use arrival-rate executors or open injection profiles when measuring tail latency. JMeter still wins when you must test JDBC, JMS, or legacy protocols.
 
 **Do not test in a vacuum.** Pair the load generator with server-side observability - Prometheus/Grafana, an APM (Datadog, New Relic, Dynatrace), database performance insights, and profilers. The load tool tells you _that_ p99 rose; the APM tells you _why_.
 
@@ -58,7 +58,9 @@ export default function () {
 
 - Thresholds as pass/fail criteria are what make a load test usable in a pipeline - show that in the example.
 - Always mention pairing with server-side metrics and profiling.
-- Note that distributed load generation is needed once one machine cannot produce the target load.
+- Note that distributed load generation is needed once one machine cannot produce the target load: k6 Operator on Kubernetes, Locust master/workers, JMeter remote engines, or a managed service (Grafana Cloud k6, Azure Load Testing, BlazeMeter).
+- Know the load-model difference: closed-model virtual users versus open-model arrival rates (k6 `constant-arrival-rate`, Gatling `constantUsersPerSec`), and which one avoids coordinated omission.
+- Pick by team and protocol, not fashion: k6/Gatling for code-first HTTP in CI, Locust when the team writes Python, JMeter for JDBC/JMS/legacy protocols.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
