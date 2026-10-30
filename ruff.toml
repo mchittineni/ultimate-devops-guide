@@ -1,0 +1,20 @@
+# Lint and format config for the stdlib-only scripts in scripts/ and tests/.
+# CI runs `ruff check` and `ruff format --check`; nothing here is needed to run the scripts.
+target-version = "py311"
+line-length = 120
+
+[lint]
+select = ["E", "F", "W", "B", "I", "UP", "SIM", "RUF"]
+ignore = [
+  "E501", # long lines are left to the formatter; HTML/CSS template strings cannot wrap
+]
+
+[lint.per-file-ignores]
+# These scripts put scripts/ on sys.path before importing the shared library.
+"scripts/build_knowledge_graph.py" = ["E402", "RUF001"] # RUF001: the zoom-out button label is a deliberate U+2212 minus
+"scripts/build_quiz_data.py" = ["E402"]
+"scripts/inject_wikilinks.py" = ["E402"]
+"tests/*" = ["E402"]
+
+[lint.isort]
+known-first-party = ["lib_content", "generate_indexes", "validate_content", "build_knowledge_graph", "build_quiz_data", "inject_wikilinks", "translate_lessons", "question_builder"]
