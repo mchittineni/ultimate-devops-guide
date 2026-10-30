@@ -30,7 +30,7 @@ The useful trick is the third row: define a `ClusterRole` once, then bind it wit
 
 **Rules are verbs on resources.** Verbs are `get`, `list`, `watch`, `create`, `update`, `patch`, `delete`, `deletecollection`; resources are named by their API plural (`pods`, `deployments`), with `apiGroups: [""]` meaning the core group. Subresources are separate grants - `pods/log` and `pods/exec` are not covered by `pods`.
 
-**Deny is impossible, and that shapes design.** Because rules only add, the model is least-privilege-by-default: start with nothing, grant narrowly. There is no way to grant `*` and then carve out an exception.
+**Deny is impossible, and that shapes design.** Because rules only add, the model is least-privilege-by-default: start with nothing, grant narrowly. There is no way to grant `*` and then carve out an exception in RBAC itself. When you genuinely need a deny - "nobody may delete this namespace", "no one but the platform team may create `ClusterRoleBindings`" - put it in admission instead: a `ValidatingAdmissionPolicy` (CEL, GA since 1.30) runs after authorisation and can reject requests RBAC allowed.
 
 **Escalation paths are the security-interview follow-up.** These grants are effectively cluster-admin even though they do not look like it:
 
@@ -39,6 +39,8 @@ The useful trick is the third row: define a `ClusterRole` once, then bind it wit
 - `secrets: get/list` - read every credential in scope.
 - `escalate` / `bind` on RBAC objects - grant yourself more than you have.
 - `create` on `clusterrolebindings`.
+- `impersonate` on users, groups, or ServiceAccounts - act as someone more privileged.
+- `get` on `nodes/proxy` - reach the kubelet API, which can run commands in any Pod on the node.
 
 **Built-in ClusterRoles** ship with every cluster: `cluster-admin` (everything), `admin` (namespace admin via RoleBinding), `edit` (mutate workloads but not RBAC), and `view` (read-only, excludes Secrets). Bind these before writing your own - `edit` and `view` cover most human access.
 

@@ -11,7 +11,7 @@ tags:
 
 The control plane, the workload objects you touch daily, and the networking abstractions that make Pods reachable.
 
-**39 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 26 · 🔴 Advanced: 8
+**42 questions** · 🟢 Beginner: 6 · 🟡 Intermediate: 28 · 🔴 Advanced: 8
 
 ## Questions
 
@@ -56,6 +56,9 @@ The control plane, the workload objects you touch daily, and the networking abst
 | 529 | [What are Kubernetes Finalizers and how do you resolve a namespace stuck in the Terminating state?](./what-are-kubernetes-finalizers-and-how-do-you-resolve-a-namespace-stuck-in-the-terminating-state.md)       | 🟡 Intermediate |
 | 530 | [How do Pod Disruption Budgets (PDB) protect application availability during cluster maintenance?](./how-do-pod-disruption-budgets-pdb-protect-application-availability-during-cluster-maintenance.md)           | 🟢 Beginner     |
 | 531 | [What is the difference between Service types ClusterIP, NodePort, LoadBalancer, and ExternalName?](./what-is-the-difference-between-service-types-clusterip-nodeport-loadbalancer-and-externalname.md)          | 🟢 Beginner     |
+| 751 | [How do you troubleshoot a Pod stuck in ImagePullBackOff?](./how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)                                                                                         | 🟡 Intermediate |
+| 752 | [What is the difference between a Deployment and a ReplicaSet in Kubernetes?](./what-is-the-difference-between-a-deployment-and-a-replicaset-in-kubernetes.md)                                                   | 🟢 Beginner     |
+| 753 | [What are Pod Security Standards and how does Pod Security Admission enforce them?](./what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them.md)                                       | 🟡 Intermediate |
 
 ## What interviewers probe here
 

@@ -29,7 +29,7 @@ tags:
 
 **The most common production mistake** is pointing the liveness probe at an endpoint that checks downstream dependencies. When the database blips, every replica fails liveness, every container restarts simultaneously, and a recoverable dependency outage becomes a self-inflicted total outage. **Liveness must only test the process itself.** Dependency health belongs in the readiness probe, if anywhere.
 
-**Tuning matters.** `periodSeconds × failureThreshold` is your detection window. Too tight and a GC pause or a slow request restarts a healthy container; too loose and a wedged pod serves errors for minutes. `terminationGracePeriodSeconds` interacts with this: a readiness probe that starts failing on `SIGTERM`, plus a `preStop` sleep, is what gives the load balancer time to stop sending new connections before the process exits.
+**Tuning matters.** `periodSeconds × failureThreshold` is your detection window. Too tight and a GC pause or a slow request restarts a healthy container; too loose and a wedged pod serves errors for minutes. `terminationGracePeriodSeconds` interacts with this: a readiness probe that starts failing on `SIGTERM`, plus a `preStop` sleep (the built-in `sleep` action, GA in 1.34, works even in distroless images with no shell), is what gives the load balancer time to stop sending new connections before the process exits.
 
 ## Example
 
@@ -66,8 +66,7 @@ spec:
 
           lifecycle:
             preStop:
-              exec:
-                command: ["sleep", "10"] # let endpoints propagate before exit
+              sleep: { seconds: 10 } # native sleep action (GA 1.34): no sleep binary needed in the image
       terminationGracePeriodSeconds: 30
 ```
 

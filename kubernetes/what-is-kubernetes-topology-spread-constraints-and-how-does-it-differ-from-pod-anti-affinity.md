@@ -85,9 +85,9 @@ spec:
 
 ```bash
 # Count replicas per zone to check the spread actually holds
-kubectl get pods -l app=payment-api -o wide --no-headers \
-  | awk '{print $7}' | xargs -I{} kubectl get node {} -L topology.kubernetes.io/zone --no-headers \
-  | awk '{print $NF}' | sort | uniq -c
+kubectl get pods -l app=payment-api -o custom-columns=NODE:.spec.nodeName --no-headers \
+  | xargs -I{} kubectl get node {} -o jsonpath='{.metadata.labels.topology\.kubernetes\.io/zone}{"\n"}' \
+  | sort | uniq -c
 ```
 
 ## Interview tips

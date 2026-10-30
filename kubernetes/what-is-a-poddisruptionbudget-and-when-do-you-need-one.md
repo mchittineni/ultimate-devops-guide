@@ -106,7 +106,7 @@ spec:
         - name: api
           image: registry.example.com/api:1.9.0
           lifecycle:
-            preStop: { exec: { command: ["sh", "-c", "sleep 10"] } } # let the LB deregister
+            preStop: { sleep: { seconds: 10 } } # native sleep action: let the LB deregister
 ```
 
 ```bash

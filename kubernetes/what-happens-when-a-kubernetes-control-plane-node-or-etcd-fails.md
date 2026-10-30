@@ -13,7 +13,7 @@ tags:
 
 # What happens when a Kubernetes control-plane node or etcd fails?
 
-**Short answer:** Running workloads keep running. The control plane is the _reconciliation_ layer, not the data path: kubelets keep their Pods alive from their local state, kube-proxy's rules stay programmed, and traffic keeps flowing through Services and load balancers. What you lose is **change** - no new scheduling, no rollouts, no scaling, no `kubectl`, no Service/endpoint updates, and no self-healing, so a Pod or node that fails during the outage is _not_ replaced. With three control-plane nodes, losing one is a non-event: the API servers are stateless and behind a load balancer, the controller-manager and scheduler re-elect a leader in seconds, and etcd still has 2 of 3 for quorum. Losing **two of three** is the real failure - etcd loses quorum and goes **read-only**, so the whole control plane stops accepting writes even though the API may still answer reads.
+**Short answer:** Running workloads keep running. The control plane is the _reconciliation_ layer, not the data path: kubelets keep their Pods alive from their local state, kube-proxy's rules stay programmed, and traffic keeps flowing through Services and load balancers. What you lose is **change** - no new scheduling, no rollouts, no scaling, no `kubectl`, no Service/endpoint updates, and no self-healing, so a Pod or node that fails during the outage is _not_ replaced. With three control-plane nodes, losing one is a non-event: the API servers are stateless and behind a load balancer, the controller-manager and scheduler re-elect a leader in seconds, and etcd still has 2 of 3 for quorum. Losing **two of three** is the real failure - etcd loses quorum and goes **read-only**, so the whole control plane stops accepting writes; the API server may still serve some reads from its watch cache, but anything needing a quorum read times out too.
 
 ## Detail
 
@@ -42,7 +42,7 @@ etcd uses Raft, so it needs a **majority** (`n/2 + 1`) to commit a write:
 | 5            | 3      | **2**                            |
 | 4            | 3      | 1 (no better than 3, and slower) |
 
-Hence odd numbers only, and hence three control-plane nodes across three availability zones. When quorum is lost, etcd serves reads from its local state but refuses writes; the API server surfaces this as timeouts and `etcdserver: request timed out` on every mutation. Recovery is either restoring the failed members (preferred - the surviving member catches them up) or, in the worst case, a **snapshot restore** onto a new single-member cluster followed by re-adding peers.
+Hence odd numbers only, and hence three control-plane nodes across three availability zones. When quorum is lost, etcd can still answer serializable reads from a member's local state but refuses writes and linearizable reads; the API server surfaces this as timeouts and `etcdserver: request timed out` on every mutation. Recovery is either restoring the failed members (preferred - the surviving member catches them up) or, in the worst case, a **snapshot restore** onto a new single-member cluster followed by re-adding peers.
 
 Two more etcd realities worth naming:
 

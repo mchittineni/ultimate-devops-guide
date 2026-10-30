@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-Pods come and go with new IPs each time. A Service provides the fixed address in front of them. The EndpointSlice controller keeps the backend list in sync with the pods matching the selector _and_ passing their readiness probes (the older `Endpoints` API is deprecated since Kubernetes 1.33 but still populated for compatibility); kube-proxy, or an eBPF replacement such as Cilium, watches those slices and programmes the data path on every node. The trade-off of this design is that a ClusterIP is a layer-4 construct: it balances connections, not requests, so long-lived HTTP/2 or gRPC connections can pin to one backend - which is where client-side balancing through a headless Service, or a mesh, comes in.
+Pods come and go with new IPs each time. A Service provides the fixed address in front of them. The EndpointSlice controller keeps the backend list in sync with the pods matching the selector _and_ passing their readiness probes (the older `Endpoints` API is deprecated since Kubernetes 1.33 but still populated for compatibility); kube-proxy, or an eBPF replacement such as Cilium, watches those slices and programmes the data path on every node. The trade-off of this design is that a ClusterIP is a layer-4 construct: it balances connections, not requests, so long-lived HTTP/2 or gRPC connections can pin to one backend - which is where client-side balancing through a headless Service, or a mesh, comes in. Two routing knobs worth knowing: `internalTrafficPolicy: Local` keeps in-cluster traffic on the caller's node, and `spec.trafficDistribution: PreferClose` (GA in 1.33) prefers endpoints in the caller's zone - cutting cross-zone data-transfer cost at the price of less even load.
 
 **Types:**
 

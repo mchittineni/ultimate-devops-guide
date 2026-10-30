@@ -93,7 +93,7 @@ spec:
           restartPolicy: Never # each failure is a new, inspectable Pod
           initContainers:
             - name: proxy # native sidecar: stopped when the main container exits
-              image: cloud-sql-proxy:2.11
+              image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.11.0
               restartPolicy: Always
           containers:
             - name: worker

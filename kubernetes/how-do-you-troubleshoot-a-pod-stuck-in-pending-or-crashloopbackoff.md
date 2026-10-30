@@ -11,7 +11,7 @@ tags:
 
 # How do you troubleshoot a Pod stuck in Pending or CrashLoopBackOff?
 
-**Short answer:** Troubleshoot a `Pending` pod by inspecting cluster scheduling (CPU/memory capacity, node selectors, taints/tolerations, PVC binding), and troubleshoot `CrashLoopBackOff` by checking application runtime logs (`kubectl logs --previous`), failing readiness/liveness probes, missing secrets, or exit codes like `137` (OOMKilled).
+**Short answer:** Troubleshoot a `Pending` pod by inspecting cluster scheduling (CPU/memory capacity, node selectors, taints/tolerations, PVC binding), and troubleshoot `CrashLoopBackOff` by checking the previous container's logs (`kubectl logs --previous`), its exit code (`137` = SIGKILL, usually OOMKilled), failing liveness or startup probes, and missing ConfigMaps or Secrets. A failing readiness probe never causes a crash loop - it only removes the Pod from Service endpoints.
 
 ## Detail
 
@@ -80,7 +80,7 @@ Last State:     Terminated
 
 - [[How do you upgrade a production Kubernetes cluster with zero downtime?]] (`#411`): [How do you upgrade a production Kubernetes cluster with zero downtime?](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md)
 - [[How do you troubleshoot a failed Helm release?]] (`#412`): [How do you troubleshoot a failed Helm release?](../container-orchestration-advanced/how-do-you-troubleshoot-a-failed-helm-release.md)
-- [[How do you run and scale a stateful application on Kubernetes?]] (`#413`): [How do you run and scale a stateful application on Kubernetes?](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)
+- [[How does the Kubernetes Controller Pattern implement declarative reconciliation loops?]] (`#622`): [How does the Kubernetes Controller Pattern implement declarative reconciliation loops?](../container-orchestration-advanced/how-does-the-kubernetes-controller-pattern-implement-declarative-reconciliation-loops.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
