@@ -111,7 +111,7 @@ Quote quote = Try.ofSupplier(guarded).recover(ex -> Quote.cachedOrDefault()).get
 
 - [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
-- [[What is CI/CD Pipeline?]] (`#16`): [What is CI/CD Pipeline?](../cicd/what-is-ci-cd-pipeline.md)
+- [[What are the Three Ways of DevOps?]] (`#783`): [What are the Three Ways of DevOps?](../core-devops-concepts/what-are-the-three-ways-of-devops.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

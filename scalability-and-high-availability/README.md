@@ -11,7 +11,7 @@ tags:
 
 Designing systems that grow and stay up: scaling dimensions, load balancing, auto scaling, and recovery objectives.
 
-**16 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 8 · 🔴 Advanced: 4
+**18 questions** · 🟢 Beginner: 4 · 🟡 Intermediate: 9 · 🔴 Advanced: 5
 
 ## Questions
 
@@ -33,6 +33,8 @@ Designing systems that grow and stay up: scaling dimensions, load balancing, aut
 | 593 | [What are the differences between Active-Active and Active-Passive multi-region disaster recovery architectures?](./what-are-the-differences-between-active-active-and-active-passive-multi-region-disaster-recovery-architectures.md) | 🟡 Intermediate |
 | 594 | [What is Read-Replica Lag in relational databases and how do you prevent stale reads?](./what-is-read-replica-lag-in-relational-databases-and-how-do-you-prevent-stale-reads.md)                                                       | 🟡 Intermediate |
 | 595 | [What is Rate Limiting and how do Token Bucket and Leaky Bucket algorithms differ?](./what-is-rate-limiting-and-how-do-token-bucket-and-leaky-bucket-algorithms-differ.md)                                                             | 🟡 Intermediate |
+| 773 | [What are the main caching strategies and how do you keep a cache consistent with the database?](./what-are-the-main-caching-strategies-and-how-do-you-keep-a-cache-consistent-with-the-database.md)                                   | 🟡 Intermediate |
+| 774 | [What is cell-based architecture and how does it limit blast radius?](./what-is-cell-based-architecture-and-how-does-it-limit-blast-radius.md)                                                                                         | 🔴 Advanced     |
 
 ## What interviewers probe here
 
