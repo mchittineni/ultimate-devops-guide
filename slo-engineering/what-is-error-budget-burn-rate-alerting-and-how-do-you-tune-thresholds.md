@@ -79,7 +79,7 @@ Budget consumed = burn rate x long window / SLO period, e.g. 3 x 1 day / 30 days
 
 ### Real-World Production Scenario
 
-A payment gateway experiences a misconfigured DNS update that drops 15% of transactions. The 14.4x burn rate alert triggers within about six minutes (the time for 15% errors to push the 1-hour average above 1.44%, plus the `for` duration), paging the on-call engineer before more than 2% of the monthly budget is lost. Later, a minor third-party partner timeout causes a sustained 0.2% error rate (2x burn); rather than waking someone up at midnight, the 1x/3-day ticket alert routes it to the team queue for the following morning.
+A payment gateway experiences a misconfigured DNS update that drops 15% of transactions. The 14.4x burn rate alert's condition becomes true after about six minutes (the time for 15% errors - a 150x burn - to push the 1-hour average above 1.44%), and it pages after the 2-minute `for` duration, by which point roughly 3% of the monthly budget is gone (150 x 8 min / 43,200 min). The "2% in an hour" figure is the detection threshold, not a cap on the damage: the harder the burn, the more budget is spent before anyone is paged, which is why fast rollback matters as much as fast alerting. Later, a minor third-party partner timeout causes a sustained 0.2% error rate (2x burn); rather than waking someone up at midnight, the 1x/3-day ticket alert routes it to the team queue for the following morning.
 
 ## Example
 

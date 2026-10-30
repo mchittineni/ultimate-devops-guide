@@ -71,15 +71,19 @@ A financial fraud detection engine consumes a Kafka topic handling 50,000 credit
 ## Example
 
 ```python
-# Synthetic heartbeat producer: one canary event every 10 s carrying its creation time.
+# Synthetic heartbeat producer: every 10 s, one canary event per partition carrying its
+# creation time. A single fixed key would hash to one partition and miss a stalled one.
 # The pipeline's sink records now - created_at for records with canary=true as the freshness SLI.
 import json, time
 from confluent_kafka import Producer
 
+TOPIC = "card-authorizations"
 p = Producer({"bootstrap.servers": "kafka:9092", "acks": "all", "enable.idempotence": True})
+partitions = list(p.list_topics(TOPIC, timeout=10).topics[TOPIC].partitions)
 while True:
-    p.produce("card-authorizations", key="canary",
-              value=json.dumps({"canary": True, "created_at": time.time()}))
+    for part in partitions:
+        p.produce(TOPIC, partition=part,
+                  value=json.dumps({"canary": True, "partition": part, "created_at": time.time()}))
     p.poll(0)
     time.sleep(10)
 ```
@@ -94,6 +98,8 @@ avg_over_time((max(pipeline_canary_e2e_latency_seconds) < bool 2)[28d:1m])
 - Explain consumer lag in terms of time rather than just raw offset count, as offset count significance varies based on message size and processing complexity.
 - Mention synthetic canary events as a vital tool for verifying streaming pipeline health during off-peak periods.
 - Discuss how watermark delays and out-of-order event handling in Apache Flink impact latency calculations.
+- Canaries must cover every partition and be filtered out of business outputs (fraud scores, billing) by every consumer - agree the `canary=true` contract up front.
+- Use event time (the producer timestamp) for freshness, not processing time, and watch for producer clock skew; consumer lag in seconds (from a lag exporter, Burrow, or your managed Kafka service's metrics) is the cheap passive signal to pair with the canary.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
