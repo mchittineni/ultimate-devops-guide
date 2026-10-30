@@ -42,6 +42,7 @@ tags:
 
 - **North-south (users in):** DNS with health checks and latency or geo routing (Route 53, Azure Traffic Manager, Cloud DNS), a global load balancer, or Anycast at the CDN edge. Know the failover time you are actually buying: DNS TTL plus resolver behaviour means minutes, whereas a global load balancer or Anycast fails over in seconds. Say which you need.
 - **East-west (service to service across clusters):** either keep calls in-cluster and replicate the whole stack per cluster - much simpler, and usually correct - or connect the clusters explicitly with a multi-cluster mesh (Istio multi-primary, Linkerd multi-cluster, Cilium Cluster Mesh) which gives cross-cluster service discovery, mTLS, and failover at the cost of a shared trust domain and real operational complexity. Cross-cluster synchronous calls also import the inter-region latency into every request, so treat them as a last resort rather than a default.
+- **Standard APIs are emerging.** The Multi-Cluster Services API (`ServiceExport`/`ServiceImport`, implemented by GKE multi-cluster Services, Cilium, and Submariner) gives a `clusterset.local` name that resolves across clusters, and SIG Multicluster's `ClusterProfile` (Cluster Inventory API) gives fleet tools a common way to list member clusters.
 - **Non-overlapping CIDRs** for Pod and Service networks if the clusters must talk directly - a detail that is painful to retrofit.
 
 ### Data: the part that decides the design

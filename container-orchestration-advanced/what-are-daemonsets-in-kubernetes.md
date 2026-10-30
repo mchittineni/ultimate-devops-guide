@@ -17,7 +17,7 @@ tags:
 
 **Typical uses:** log collectors (Fluent Bit, Filebeat), metrics agents (node_exporter, Datadog agent), CNI network plugins (Calico, Cilium), storage drivers (CSI node plugins), security agents (Falco), and node-level maintenance daemons.
 
-**Behaviour.** The DaemonSet controller - not the scheduler's usual replica logic - creates one pod per eligible node. New nodes get the pod as soon as they join; nodes removed take their pod with them. `nodeSelector`, node affinity, and tolerations control which nodes are eligible.
+**Behaviour.** The DaemonSet controller - not a replica count - decides that one pod should exist per eligible node. Since Kubernetes 1.12 it creates each Pod with a node affinity pinning it to its target node and lets the default scheduler bind it, so taints, resource fit, and preemption apply as for any Pod. New nodes get the pod as soon as they join; nodes removed take their pod with them. `nodeSelector`, node affinity, and tolerations control which nodes are eligible.
 
 **Tolerations matter.** Control-plane and specialised nodes carry taints. A monitoring agent that must run everywhere needs the corresponding tolerations, otherwise you get silent blind spots on exactly the nodes you most want to watch.
 
@@ -62,9 +62,9 @@ spec:
 
 ## Related Concepts
 
+- [[How do you design CI/CD for a microservices architecture?]] (`#400`): [How do you design CI/CD for a microservices architecture?](../cicd/how-do-you-design-ci-cd-for-a-microservices-architecture.md)
+- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 - [[What is Continuous Integration?]] (`#3`): [What is Continuous Integration?](../core-devops-concepts/what-is-continuous-integration.md)
-- [[What is Continuous Delivery?]] (`#4`): [What is Continuous Delivery?](../core-devops-concepts/what-is-continuous-delivery.md)
-- [[What is the difference between Continuous Delivery and Continuous Deployment?]] (`#511`): [What is the difference between Continuous Delivery and Continuous Deployment?](../core-devops-concepts/what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

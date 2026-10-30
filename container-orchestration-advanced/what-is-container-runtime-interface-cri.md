@@ -27,7 +27,7 @@ kubelet ──CRI (gRPC)──▶ containerd / CRI-O ──OCI runtime spec─�
 
 **Runtime options**
 
-- **containerd** - the default on most managed Kubernetes services; also underpins Docker itself.
+- **containerd** - the default on most managed Kubernetes services; also underpins Docker itself. Kubernetes 1.35 is the last release that supports containerd 1.x, so nodes need containerd 2.x before moving to 1.36.
 - **CRI-O** - purpose-built for Kubernetes, the default in OpenShift.
 - **gVisor** - a user-space kernel providing stronger isolation for untrusted workloads.
 - **Kata Containers** - lightweight VMs per pod for hardware-level isolation.
