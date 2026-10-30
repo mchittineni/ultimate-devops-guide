@@ -139,7 +139,7 @@ resource "aws_lb_target_group" "api" {
 
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?]] (`#402`): [How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?](../cicd/how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue.md)
-- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
+- [[How do you roll back a failed deployment in a CI/CD pipeline?]] (`#762`): [How do you roll back a failed deployment in a CI/CD pipeline?](../cicd/how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
