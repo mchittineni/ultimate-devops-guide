@@ -37,8 +37,12 @@ security:
   runs-on: ubuntu-latest
   steps:
     - uses: actions/checkout@v7
+      with: { fetch-depth: 0 } # full history for the secret scan
     - name: Secret scan
       uses: gitleaks/gitleaks-action@v3
+      env: { GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}" }
+    - name: Build image
+      run: docker build -t app:${{ github.sha }} .
     - name: Dependency + image scan
       run: trivy image --severity HIGH,CRITICAL --exit-code 1 --ignore-unfixed app:${{ github.sha }}
     - name: IaC policy scan
@@ -51,6 +55,7 @@ security:
 
 - `--ignore-unfixed` and severity thresholds show you have run these tools in anger, not just installed them.
 - Name the acronyms accurately: SAST, DAST, SCA, IAST, SBOM.
+- Anchor the vocabulary to current references: the OWASP Top 10:2025 (which added software supply chain failures as A03), SLSA for build provenance, and OWASP SAMM or DSOMM if asked how you would measure a programme's maturity.
 - The cultural answer matters as much as the tooling: security champions in each team, and blameless handling of vulnerabilities.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
