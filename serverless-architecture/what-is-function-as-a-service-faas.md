@@ -25,7 +25,9 @@ tags:
 | Startup concern     | Cold start          | Cold start             | Warm              | Always on         |
 | State               | Stateless           | Stateless              | Can be stateful   | Anything          |
 
-**Implementations:** AWS Lambda, Azure Functions (the Flex Consumption plan is the current serverless plan), Cloud Run functions (formerly Google Cloud Functions), Cloudflare Workers (V8 isolates, near-zero cold start), and self-hosted options such as Knative and OpenFaaS on Kubernetes.
+**Implementations:** AWS Lambda, Azure Functions (the **Flex Consumption** plan is the current serverless plan - per-function scaling, configurable per-instance concurrency and instance memory, VNet integration, and optional always-ready instances; the older Linux Consumption plan retires on 30 September 2028), Cloud Run functions (formerly Google Cloud Functions), Cloudflare Workers (V8 isolates, near-zero cold start), and self-hosted options such as Knative and OpenFaaS on Kubernetes.
+
+**Concurrency models differ.** Classic Lambda gives each execution environment one request at a time, so concurrency equals environments; Cloud Run and Azure Flex Consumption let one instance serve many concurrent requests, which cuts cold starts and cost for I/O-bound code but means your handler must be thread- or async-safe. Cloudflare Workers run many isolates inside one process.
 
 **The programming model.** A function receives an event and a context, does one thing, and returns. It is stateless between invocations, subject to execution time and memory limits, and must tolerate being run concurrently many times over and being retried.
 
