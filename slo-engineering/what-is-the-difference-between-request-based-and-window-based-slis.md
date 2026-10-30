@@ -72,7 +72,7 @@ sum(rate(http_requests_total{job="payroll",code!~"5.."}[28d]))
 avg_over_time(
   (
     (
-      sum(rate(http_requests_total{job="payroll",code=~"5.."}[1m]))
+      (sum(rate(http_requests_total{job="payroll",code=~"5.."}[1m])) or vector(0))
         / sum(rate(http_requests_total{job="payroll"}[1m])) < bool 0.01
     )
     *
@@ -83,7 +83,7 @@ avg_over_time(
 )
 ```
 
-Minutes with no traffic produce no sample and drop out of the window count, which is one reason window-based SLIs for very quiet services are often paired with a synthetic probe.
+The `or vector(0)` matters: if no 5xx series exists yet, the numerator is empty rather than zero and every healthy minute would silently vanish from the calculation. Minutes with no traffic still produce no sample and drop out of the window count, which is one reason window-based SLIs for very quiet services are often paired with a synthetic probe.
 
 ## Interview tips
 

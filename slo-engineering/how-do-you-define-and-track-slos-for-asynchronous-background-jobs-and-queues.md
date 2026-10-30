@@ -72,12 +72,12 @@ A healthtech platform processes lab results asynchronously. During morning clini
 max(aws_sqs_approximate_age_of_oldest_message_maximum{dimension_QueueName="lab-results"})
 
 # Completion SLI: jobs finished within 3 minutes of enqueue / all jobs (histogram on end-to-end duration)
-sum(rate(job_end_to_end_duration_seconds_bucket{queue="lab-results",outcome="success",le="180"}[28d]))
+sum(rate(job_end_to_end_duration_seconds_bucket{queue="lab-results",outcome="success",le="180.0"}[28d]))
   /
 sum(rate(job_end_to_end_duration_seconds_count{queue="lab-results"}[28d]))
 ```
 
-The second query only works if the worker records `now - enqueue_timestamp` when it acknowledges the message, and counts DLQ-bound jobs with `outcome="failed"` so they land in the denominator.
+Note `le="180.0"`: Prometheus 3 normalises classic-histogram bucket labels to float form, so a matcher written as `le="180"` silently matches nothing after an upgrade from 2.x. The second query only works if the worker records `now - enqueue_timestamp` when it acknowledges the message, and counts DLQ-bound jobs with `outcome="failed"` so they land in the denominator.
 
 ## Interview tips
 

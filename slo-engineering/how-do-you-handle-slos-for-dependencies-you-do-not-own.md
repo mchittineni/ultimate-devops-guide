@@ -34,7 +34,19 @@ Classifying every dependency as hard or soft, and testing the soft path, is the 
 ## Example
 
 ```yaml
-# Envoy/Istio: outlier detection ejects a failing upstream, with a strict timeout
+# Istio: a strict timeout and a bounded retry (VirtualService), plus outlier detection
+# that ejects a failing upstream endpoint (DestinationRule)
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: payments
+spec:
+  hosts: [payments.external.svc]
+  http:
+    - route: [{ destination: { host: payments.external.svc } }]
+      timeout: 2s # well inside checkout's own latency SLO
+      retries: { attempts: 2, perTryTimeout: 800ms, retryOn: "connect-failure,reset,503" }
+---
 apiVersion: networking.istio.io/v1
 kind: DestinationRule
 metadata:

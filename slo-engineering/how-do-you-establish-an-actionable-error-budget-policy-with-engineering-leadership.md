@@ -45,6 +45,7 @@ An **Error Budget Policy** turns metrics into governance.
 | :-------------------- | :--------------------- | :------------------------------------------------------------------------------------------------------------------------ |
 | **> 50%**             | Green (Healthy)        | Normal roadmap; standard deployment velocity.                                                                             |
 | **20% - 50%**         | Yellow (Warning)       | On-call and dev teams review top failure modes in sprint planning; non-urgent migrations postponed.                       |
+| **0% - 20%**          | Orange (At risk)       | One reliability item per engineer per sprint; canary duration doubled; risky launches need SRE sign-off.                  |
 | **0% (Exhausted)**    | Red (Reliability Halt) | Feature deployments frozen. Engineering dedicates 100% of sprint capacity to reliability bugs, testing, and architecture. |
 | **Exception Process** | Override               | Requires written executive sign-off from VP of Engineering and VP of Product, with public post-mortem accountability.     |
 
