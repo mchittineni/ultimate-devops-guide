@@ -48,7 +48,8 @@ Deploying OpenCost Helm Chart on Kubernetes:
 helm repo add opencost https://opencost.github.io/opencost-helm/
 helm repo update
 
-# Install OpenCost with Prometheus integration
+# Install OpenCost pointed at an existing in-cluster Prometheus (the chart does not install one;
+# set opencost.prometheus.internal.serviceName/namespaceName to match your Prometheus service)
 helm install opencost opencost/opencost \
   --namespace opencost \
   --create-namespace \
