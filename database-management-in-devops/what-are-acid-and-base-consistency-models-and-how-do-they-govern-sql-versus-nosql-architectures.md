@@ -87,7 +87,7 @@ INSERT INTO clicks (user_id, ts, url) VALUES (42, toTimestamp(now()), '/pricing'
 
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
 - [[What are the core capabilities measured by DORA metrics and why do they correlate with high performance?]] (`#512`): [What are the core capabilities measured by DORA metrics and why do they correlate with high performance?](../core-devops-concepts/what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance.md)
-- [[What is the difference between Artifact Promotion and rebuilding binaries across environments?]] (`#534`): [What is the difference between Artifact Promotion and rebuilding binaries across environments?](../cicd/what-is-the-difference-between-artifact-promotion-and-rebuilding-binaries-across-environments.md)
+- [[What is the difference between DevOps and Agile?]] (`#784`): [What is the difference between DevOps and Agile?](../core-devops-concepts/what-is-the-difference-between-devops-and-agile.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

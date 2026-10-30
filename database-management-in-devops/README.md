@@ -11,7 +11,7 @@ tags:
 
 Treating schemas as code: version control, migration tooling, backup strategy, and performance tuning.
 
-**15 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 8 · 🔴 Advanced: 4
+**16 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 8 · 🔴 Advanced: 5
 
 ## Questions
 
@@ -32,6 +32,7 @@ Treating schemas as code: version control, migration tooling, backup strategy, a
 | 665 | [What is Database Sharding and what are the trade-offs of Range, Hash, and Directory-based sharding?](./what-is-database-sharding-and-what-are-the-trade-offs-of-range-hash-and-directory-based-sharding.md)                             | 🔴 Advanced     |
 | 666 | [What is Change Data Capture (CDC) and how does Debezium stream database changes into event architectures?](./what-is-change-data-capture-cdc-and-how-does-debezium-stream-database-changes-into-event-architectures.md)                 | 🟡 Intermediate |
 | 667 | [What are Database Deadlocks, how does the engine detect them, and how do you design transactions to prevent them?](./what-are-database-deadlocks-how-does-the-engine-detect-them-and-how-do-you-design-transactions-to-prevent-them.md) | 🟡 Intermediate |
+| 782 | [How do you upgrade PostgreSQL to a new major version with minimal downtime?](./how-do-you-upgrade-postgresql-to-a-new-major-version-with-minimal-downtime.md)                                                                           | 🔴 Advanced     |
 
 ## What interviewers probe here
 
