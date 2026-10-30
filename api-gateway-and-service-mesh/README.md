@@ -11,7 +11,7 @@ tags:
 
 The API edge: gateway responsibilities, security, rate limiting, and documentation as a first-class artifact.
 
-**15 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 9 · 🔴 Advanced: 3
+**16 questions** · 🟢 Beginner: 3 · 🟡 Intermediate: 10 · 🔴 Advanced: 3
 
 ## Questions
 
@@ -32,6 +32,7 @@ The API edge: gateway responsibilities, security, rate limiting, and documentati
 | 619 | [What is Traffic Shadowing (Mirroring) and how is it used for zero-risk production testing?](./what-is-traffic-shadowing-mirroring-and-how-is-it-used-for-zero-risk-production-testing.md)               | 🟡 Intermediate |
 | 620 | [How do you implement Canary Releases with weighted traffic shifting in an API Gateway?](./how-do-you-implement-canary-releases-with-weighted-traffic-shifting-in-an-api-gateway.md)                     | 🟡 Intermediate |
 | 621 | [What is Fault Injection testing and how is it executed via a Service Mesh?](./what-is-fault-injection-testing-and-how-is-it-executed-via-a-service-mesh.md)                                             | 🟡 Intermediate |
+| 765 | [How do you authenticate API clients with OAuth 2.0 and OIDC at the API gateway?](./how-do-you-authenticate-api-clients-with-oauth-2-0-and-oidc-at-the-api-gateway.md)                                   | 🟡 Intermediate |
 
 ## What interviewers probe here
 
