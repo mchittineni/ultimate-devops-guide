@@ -36,20 +36,21 @@ tags:
 
 ```yaml
 # A portable Sigma rule: cloud audit log shows public exposure of a bucket
-title: S3 bucket ACL made public
+title: S3 bucket exposed publicly
 id: 4f2c8b1e-2c1a-4d55-9f2e-2b8a1d3c9f01
 status: stable
 logsource:
   product: aws
   service: cloudtrail
 detection:
-  selection:
+  public_acl: # legacy ACL grant to everyone (ACLs are disabled by default on new buckets)
     eventSource: s3.amazonaws.com
-    eventName:
-      - PutBucketAcl
-      - PutBucketPolicy
+    eventName: PutBucketAcl
     requestParameters|contains: "AllUsers"
-  condition: selection
+  bpa_removed: # the usual modern path: Block Public Access switched off first
+    eventSource: s3.amazonaws.com
+    eventName: DeleteBucketPublicAccessBlock
+  condition: public_acl or bpa_removed
 falsepositives:
   - Static website buckets in the public-web account
 level: high

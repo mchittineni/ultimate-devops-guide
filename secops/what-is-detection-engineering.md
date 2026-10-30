@@ -29,6 +29,9 @@ tags:
 
 ```yaml
 # Falco: shell spawned inside a container - behavioural, tool-agnostic
+- list: allowed_debug_images # must be defined, or the rule fails to load
+  items: [docker.io/nicolaka/netshoot]
+
 - rule: Shell in container
   desc: A shell was executed inside a container, excluding known debug workflows
   condition: >
@@ -45,7 +48,13 @@ tags:
 
 ```bash
 # Validate it: generate the behaviour, then assert the detection fired
-stratus detonate aws.execution.ec2-user-data
+kubectl run falco-test --image=alpine:3.22 --restart=Never -- sh -c 'sleep 5'
+kubectl -n falco logs ds/falco --since=2m | grep -q 'Shell in container' \
+  && echo "detection fired" || echo "DETECTION GAP"
+kubectl delete pod falco-test
+
+# Same idea for cloud detections: detonate a technique, check the SIEM, then clean up
+stratus detonate aws.persistence.iam-create-user-login-profile --cleanup
 ```
 
 ## Interview tips

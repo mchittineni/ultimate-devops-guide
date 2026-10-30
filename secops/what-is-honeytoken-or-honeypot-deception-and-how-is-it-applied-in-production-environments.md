@@ -65,7 +65,7 @@ Attacker Scrapes Git Repo / Memory
 ### Best Practices for Enterprise Deployment
 
 - **Maintain Realism**: Canary keys should look identical to production keys (e.g., named `prod-backup-service-key`).
-- **Zero Permissions**: Ensure IAM honeytokens possess an explicit `DenyAll` policy so adversaries cannot use them to perform any actual cloud operations.
+- **Zero Permissions**: Ensure IAM honeytokens possess an explicit `DenyAll` policy so adversaries cannot use them to perform any actual cloud operations. `sts:GetCallerIdentity` still succeeds - no policy can deny it - which is fine: it is the attacker's usual first call, and CloudTrail records it.
 - **Automated Revocation & Tracing**: Capture the caller's source IP, User-Agent, and geolocation immediately to trace the intrusion source.
 - **Know the Evasion**: Careful attackers fingerprint canaries before using them - for example by mapping an access key to its AWS account ID (`sts:GetAccessKeyInfo`, which is logged only in the attacker's own account) and comparing it with the well-known accounts of public canary services. Self-hosted canaries in your own accounts avoid that tell.
 
