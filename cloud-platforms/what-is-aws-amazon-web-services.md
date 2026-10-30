@@ -23,9 +23,11 @@ Services a DevOps engineer touches constantly:
 - **Databases** - RDS and Aurora (relational), DynamoDB (key-value), ElastiCache (Valkey, Redis OSS, Memcached).
 - **Identity and security** - IAM roles and policies, KMS (encryption keys), Secrets Manager, GuardDuty, Security Hub.
 - **DevOps tooling** - CloudFormation and CDK (IaC), CodePipeline/CodeBuild, ECR (registry), Systems Manager (patching, Parameter Store, session access).
-- **Observability** - CloudWatch metrics, logs, and alarms; X-Ray for tracing.
+- **Observability** - CloudWatch metrics, logs, and alarms; X-Ray for tracing (instrument with OpenTelemetry/ADOT - the X-Ray SDKs and daemon entered maintenance mode in February 2026, with end of support in February 2027).
 
-Structurally, AWS is organised into **regions** (independent geographies) containing multiple **availability zones** (physically separate data centres with low-latency links). Designing across at least two AZs is the baseline for high availability; multi-region is for disaster recovery and latency.
+Structurally, AWS is organised into **regions** (independent geographies) containing multiple **availability zones** (physically separate data centres with low-latency links). Designing across at least two AZs (three is better) is the baseline for high availability; multi-region is for disaster recovery, latency, and data residency. Most services are regional, but a few - IAM, Organizations, Route 53, CloudFront - are global, with control planes concentrated in one region (historically us-east-1), which is why failover paths should rely on their data planes rather than on making changes during an outage.
+
+**Accounts are the hard boundary.** An AWS account is the unit of isolation for blast radius, billing, and quotas; real estates use many accounts under AWS Organizations with SCPs as guardrails and IAM Identity Center for human access, rather than one big account separated by tags.
 
 ## Example
 

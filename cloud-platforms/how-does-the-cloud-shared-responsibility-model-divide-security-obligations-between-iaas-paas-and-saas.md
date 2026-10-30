@@ -84,9 +84,9 @@ aws artifact list-reports --max-results 5
 
 ## Related Concepts
 
-- [[How Does Azure Key Vault Managed HSM Differ from Standard Key Vault and How Do You Enforce Access?]] (`#742`): [How Does Azure Key Vault Managed HSM Differ from Standard Key Vault and How Do You Enforce Access?](../azure-engineering/how-does-azure-key-vault-managed-hsm-differ-from-standard-key-vault-and-how-do-you-enforce-access.md)
 - [[How Do You Configure Google Cloud Workload Identity for Secure GKE Service Authentication?]] (`#746`): [How Do You Configure Google Cloud Workload Identity for Secure GKE Service Authentication?](../gcp-engineering/how-do-you-configure-google-cloud-workload-identity-for-secure-gke-service-authentication.md)
 - [[How Do You Implement VPC Service Controls to Prevent Data Exfiltration in Google Cloud?]] (`#750`): [How Do You Implement VPC Service Controls to Prevent Data Exfiltration in Google Cloud?](../gcp-engineering/how-do-you-implement-vpc-service-controls-to-prevent-data-exfiltration-in-google-cloud.md)
+- [[What is AWS PrivateLink and How Does It Enable Secure Cross-VPC Service Consumption?]] (`#734`): [What is AWS PrivateLink and How Does It Enable Secure Cross-VPC Service Consumption?](../aws-engineering/what-is-aws-privatelink-and-how-does-it-enable-secure-cross-vpc-service-consumption.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

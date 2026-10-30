@@ -20,7 +20,7 @@ Signature services:
 - **GKE** - the most mature managed Kubernetes offering, with Autopilot mode running nodes for you entirely.
 - **BigQuery** - serverless analytics warehouse; separates storage from compute and scales to petabytes with plain SQL.
 - **Cloud Run** - run any container serverlessly, scale to zero, pay per request. Often the simplest good answer for a stateless HTTP service.
-- **Compute Engine** - VMs, with live migration during host maintenance and sustained-use discounts applied automatically.
+- **Compute Engine** - VMs, with live migration during host maintenance and sustained-use discounts applied automatically on older families (N1, N2, N2D, C2 and similar - not E2 or the newest generations such as C3, C4, and N4, where committed use discounts are the lever).
 - **Cloud Storage** - object storage with a single global namespace and lifecycle-managed classes.
 - **Pub/Sub** - global messaging, and **Dataflow** for stream and batch processing.
 - **Vertex AI** - managed ML platform.

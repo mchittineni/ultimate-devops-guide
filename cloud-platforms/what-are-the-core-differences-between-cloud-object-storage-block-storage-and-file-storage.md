@@ -72,8 +72,8 @@ aws s3 cp backup.tar.zst s3://acme-backups/2026/09/backup.tar.zst --storage-clas
 ## Related Concepts
 
 - [[How Do You Protect S3 Buckets from Accidental Deletion and Ransomware Attacks?]] (`#736`): [How Do You Protect S3 Buckets from Accidental Deletion and Ransomware Attacks?](../aws-engineering/how-do-you-protect-s3-buckets-from-accidental-deletion-and-ransomware-attacks.md)
+- [[How do you choose Azure Storage redundancy and secure a storage account?]] (`#756`): [How do you choose Azure Storage redundancy and secure a storage account?](../azure-engineering/how-do-you-choose-azure-storage-redundancy-and-secure-a-storage-account.md)
 - [[What is the difference between ECS, EKS, and Fargate?]] (`#193`): [What is the difference between ECS, EKS, and Fargate?](../aws-engineering/what-is-the-difference-between-ecs-eks-and-fargate.md)
-- [[How do Auto Scaling groups and load balancers work together on AWS?]] (`#194`): [How do Auto Scaling groups and load balancers work together on AWS?](../aws-engineering/how-do-auto-scaling-groups-and-load-balancers-work-together-on-aws.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
