@@ -52,6 +52,7 @@ Each plugin implements a lifecycle step: `commit-analyzer` reads commits since t
 - It only works if commit messages are disciplined; enforce Conventional Commits with commitlint in a hook and in CI (or squash-merge with a validated PR title).
 - Fully automatic releases on every merge suit libraries and continuously delivered services; products that batch releases often prefer **release-please**, which opens a release PR you merge when ready.
 - Current semantic-release versions require a recent Node.js LTS in CI, even for non-JavaScript projects.
+- Publishing credentials: npm's **trusted publishing** (OIDC from the CI job, the `id-token: write` permission above) lets a registry accept a publish without a stored `NPM_TOKEN`, and npm now caps the lifetime of write tokens - so prefer trusted publishing where your plugin version supports it and keep any remaining token short-lived.
 
 ## Example
 

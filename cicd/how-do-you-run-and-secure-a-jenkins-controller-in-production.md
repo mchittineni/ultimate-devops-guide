@@ -126,7 +126,7 @@ aws s3 cp /tmp/jenkins-$(date +%F).tgz s3://acme-jenkins-backups/ \
   --sse aws:kms --storage-class STANDARD_IA
 
 # Prove it: restore into a throwaway controller and check a credential binds
-docker run -d -p 8081:8080 -v /restore/jenkins:/var/jenkins_home jenkins/jenkins:2.568.3-lts-jdk21
+docker run -d -p 8081:8080 -v /restore/jenkins:/var/jenkins_home jenkins/jenkins:2.580.2-lts-jdk21  # same version as the source controller
 ```
 
 ```bash

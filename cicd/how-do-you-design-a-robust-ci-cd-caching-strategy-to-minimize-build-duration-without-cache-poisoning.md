@@ -70,13 +70,13 @@ jobs:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
       - uses: actions/cache@v6
         with:
           path: ~/.npm # the download store, not node_modules
-          key: npm-deps-${{ runner.os }}-node22-${{ hashFiles('**/package-lock.json') }}
+          key: npm-deps-${{ runner.os }}-node24-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            npm-deps-${{ runner.os }}-node22-
+            npm-deps-${{ runner.os }}-node24-
       - run: npm ci # verifies the lockfile; a poisoned or stale entry cannot change what is installed
       - run: npm test
 ```

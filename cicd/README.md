@@ -11,7 +11,7 @@ tags:
 
 Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deployment distinction interviewers love to test.
 
-**30 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 19 · 🔴 Advanced: 6
+**31 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 20 · 🔴 Advanced: 6
 
 ## Questions
 
@@ -47,6 +47,7 @@ Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deploy
 | 539 | [What are SLSA (Supply-chain Levels for Software Artifacts) frameworks and how do they verify build integrity?](./what-are-slsa-supply-chain-levels-for-software-artifacts-frameworks-and-how-do-they-verify-build-integrity.md) | 🔴 Advanced     |
 | 540 | [What is Semantic Release and how does it automate versioning and changelogs from commits?](./what-is-semantic-release-and-how-does-it-automate-versioning-and-changelogs-from-commits.md)                                       | 🟢 Beginner     |
 | 541 | [How do you design a robust CI/CD caching strategy to minimize build duration without cache poisoning?](./how-do-you-design-a-robust-ci-cd-caching-strategy-to-minimize-build-duration-without-cache-poisoning.md)               | 🟡 Intermediate |
+| 762 | [How do you roll back a failed deployment in a CI/CD pipeline?](./how-do-you-roll-back-a-failed-deployment-in-a-ci-cd-pipeline.md)                                                                                               | 🟡 Intermediate |
 
 ## What interviewers probe here
 

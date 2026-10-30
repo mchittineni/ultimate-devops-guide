@@ -41,7 +41,7 @@ A CI runner holds exactly what an attacker wants - secrets, a write token to the
    uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
    ```
 
-   GitHub now lets administrators **enforce** this: the allowed-actions policy can require full-SHA pinning (unpinned `uses:` fails the run) and block specific actions or versions. Pinning the SHA does not pin what the action itself downloads at runtime, so prefer actions without unpinned transitive fetches, and let Dependabot or Renovate bump the SHAs.
+   GitHub now lets administrators **enforce** this: the allowed-actions policy can require full-SHA pinning (unpinned `uses:` fails the run) and block specific actions or versions. Pinning the SHA does not pin what the action itself downloads at runtime, so prefer actions without unpinned transitive fetches, and let Dependabot or Renovate bump the SHAs. GitHub's **immutable releases** stop a publisher from moving a release's exact tag (`v7.0.1`) once published, but the floating major tag (`v7`) is still a movable ref - which is why the SHA remains the pin.
 
 3. **Network Egress Filtering**: Restrict build runner outbound traffic. If an untrusted build script attempts to send environment variables to an external command-and-control server, egress firewall rules or eBPF agents block the connection.
 4. **Read-Only Permissions by Default**:
