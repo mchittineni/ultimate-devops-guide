@@ -96,13 +96,23 @@ locals {
   # => 10.0.0.0/21, 10.0.8.0/21, 10.0.16.0/21, 10.0.24.0/21
 }
 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+resource "aws_vpc" "main" {
+  cidr_block = local.vpc_cidr
+}
+
 resource "aws_subnet" "this" {
-  for_each          = local.subnets
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = each.value
-  availability_zone = data.aws_availability_zones.available.names[
-    index(keys(local.subnets), each.key) % 3
-  ]
+  for_each   = local.subnets
+  vpc_id     = aws_vpc.main.id
+  cidr_block = each.value
+  # element() wraps around, so four subnets spread over however many AZs exist.
+  availability_zone = element(
+    data.aws_availability_zones.available.names,
+    index(keys(local.subnets), each.key)
+  )
   tags = { Name = each.key }
 }
 ```

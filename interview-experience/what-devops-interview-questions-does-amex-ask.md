@@ -70,7 +70,7 @@ WHERE THE WEIGHT SITS
 
 - Three of the twelve questions are open experience prompts. Have one production incident, one migration, and one architecture rehearsed as 90-second narratives with a number in each (users affected, minutes of downtime, cost saved).
 - "How does endpoint authentication work in Kubernetes" is the depth probe in this set. Answer in stages — authentication (certificates, tokens, OIDC), then authorisation (RBAC), then admission control — and say which your cluster actually used. See [how RBAC works](../kubernetes/how-does-rbac-work-in-kubernetes.md).
-- For the 100-applications logging question, do not name a tool and stop. Describe the pipeline: structured logs, an agent per node, a central store, retention tiers, and an index or label scheme that makes search possible. See [PromQL and Alertmanager](../monitoring-and-logging/how-do-you-write-effective-promql-queries-and-alertmanager-rules.md).
+- For the 100-applications logging question, do not name a tool and stop. Describe the pipeline: structured logs, an agent per node, a central store, retention tiers, and an index or label scheme that makes search possible. The detail that makes one error findable is a shared correlation or trace ID logged by every service, so an engineer can pivot from one request to every line it produced. See [designing a logging pipeline that stays affordable at scale](../monitoring-and-logging/how-do-you-design-a-logging-pipeline-that-stays-affordable-at-scale.md).
 - SLA versus SLO is asked as a definition but graded on whether you mention the error budget. Add it unprompted — see [error budgets](../site-reliability-engineering/what-is-error-budget.md).
 - Financial-services interviews follow the deployment question with change control: who approves a release, what the rollback plan is, and how you prove it worked. Be ready even though it was not asked here.
 - The CrashLoopBackOff answer should name `kubectl logs --previous`, the container exit code, and the split between `OOMKilled`, a bad config or secret, and a failing probe. See [debugging Pods](../kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff.md).
@@ -81,7 +81,7 @@ WHERE THE WEIGHT SITS
 
 - [[What is the difference between Artifact Promotion and rebuilding binaries across environments?]] (`#534`): [What is the difference between Artifact Promotion and rebuilding binaries across environments?](../cicd/what-is-the-difference-between-artifact-promotion-and-rebuilding-binaries-across-environments.md)
 - [[What is the difference between SRE, DevOps, and Platform Engineering?]] (`#232`): [What is the difference between SRE, DevOps, and Platform Engineering?](../site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md)
-- [[What is Jenkins?]] (`#17`): [What is Jenkins?](../cicd/what-is-jenkins.md)
+- [[What is a Blameless Post-Mortem and how do you write effective incident reviews that drive systemic changes?]] (`#645`): [What is a Blameless Post-Mortem and how do you write effective incident reviews that drive systemic changes?](../site-reliability-engineering/what-is-a-blameless-post-mortem-and-how-do-you-write-effective-incident-reviews-that-drive-systemic-changes.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

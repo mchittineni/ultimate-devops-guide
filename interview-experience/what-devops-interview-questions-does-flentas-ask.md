@@ -98,17 +98,23 @@ THE QUESTION THAT DECIDES THE ROUND
 THE PACKING PUZZLE — worked through
 
   Node capacity:      8 vCPU, 32 GB
-  Allocatable:        LESS than that — kubelet, kube-proxy, CNI, and OS
-                      reservations take a slice (on EKS, roughly 0.5 vCPU
-                      and a few GB), so assume ~7.5 vCPU / ~28 GB usable.
+  Allocatable:        LESS than that — the kernel, kube-reserved and
+                      system-reserved slices, and the eviction threshold
+                      come off the top, and DaemonSet Pods (CNI,
+                      kube-proxy) request a slice of what is left.
+                      On EKS a 32 GiB node typically reports ~29-30 GiB
+                      allocatable memory and ~7.8 vCPU.
 
   Scheduling uses REQUESTS, not limits:
       per pod requests = 2 vCPU, 10 GB
-      by CPU:     7.5 / 2  = 3 pods
-      by memory:  28  / 10 = 2 pods   <-- binding constraint
+      by CPU:     7.8 / 2  = 3 pods
+      by memory:  ~29 / 10 = 2 pods   <-- binding constraint
+                  (32 / 10 = 3 on paper — the reservations cost the 3rd)
 
-  ANSWER: 2 pods fit on that one node. The HPA will try for 4 replicas;
-  the remaining 2 sit Pending until the Cluster Autoscaler adds nodes.
+  ANSWER: 2 pods in practice, 3 only if allocatable memory is >= 30 GB —
+  check `kubectl describe node` rather than assuming. Never all 4: the
+  HPA asks for 4 replicas and the rest sit Pending until the Cluster
+  Autoscaler adds a node.
 
   Why limits don't decide placement: limits (4 vCPU / 16 GB) cap RUNTIME
   usage and set the QoS class. Requests are the reservation the scheduler
@@ -117,7 +123,7 @@ THE PACKING PUZZLE — worked through
 
 ## Interview tips
 
-- Work the arithmetic out loud on the packing question and name the binding constraint. The key facts, in order: the scheduler sums **requests** against **allocatable** capacity; allocatable is less than the node's nominal capacity because of kubelet and system reservations; memory is the limiting dimension at 10 GB per Pod; and the Pods that do not fit go `Pending` rather than failing. Finishing with "and the Cluster Autoscaler is what turns two into four" ties it to the autoscaling questions that follow. See [autoscaling workloads and nodes](../kubernetes/how-do-you-autoscale-workloads-and-nodes-in-kubernetes.md).
+- Work the arithmetic out loud on the packing question and name the binding constraint. The key facts, in order: the scheduler sums **requests** against **allocatable** capacity; allocatable is less than the node's nominal capacity because of kubelet and system reservations; memory is the limiting dimension at 10 GB per Pod; and the Pods that do not fit go `Pending` rather than failing. Saying that the naive 32 / 10 = 3 becomes 2 once you subtract reservations, and finishing with "and the Cluster Autoscaler is what gets the remaining replicas scheduled", ties it to the autoscaling questions that follow. See [autoscaling workloads and nodes](../kubernetes/how-do-you-autoscale-workloads-and-nodes-in-kubernetes.md).
 - "Why not S3 and CloudFront for the frontend?" is a challenge to your design, and the wrong move is to concede immediately. Give the legitimate reasons a frontend lives on EKS — server-side rendering, a Node process rather than static files, shared ingress and TLS with the backend, one deployment pipeline and one set of network controls — and then acknowledge that if it were genuinely static, S3 with CloudFront would be cheaper and faster. Showing you know the trade-off is what is being tested, not defending EKS at all costs.
 - Targeted deletion of the load balancer has two answers and you should distinguish them. `terraform destroy -target=aws_lb.this` removes just that resource, but flag it as a blunt tool HashiCorp warns about because dependent resources drift out of sync. The cleaner path is to remove the resource block from the configuration and apply, so the dependency graph is respected — and if you want to keep the load balancer but stop managing it, `terraform state rm` is the right command instead. Naming all three distinctions is a strong answer.
 - The `tfvars` question wants a policy, not a mechanism: commit non-sensitive per-environment `tfvars`, never commit secrets, and in Jenkins supply the sensitive values through `withCredentials` as environment variables Terraform reads as `TF_VAR_*`, or better, have Terraform fetch them at runtime from Secrets Manager via a data source so nothing is passed at all. Add that a secret retrieved with a data source still lands in the state file in plain text, which is why state must be encrypted — that detail wins the question. See [managing secrets in CI/CD pipelines](../devsecops/how-do-you-manage-secrets-in-ci-cd-pipelines.md).

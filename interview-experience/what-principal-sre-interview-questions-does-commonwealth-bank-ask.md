@@ -89,8 +89,8 @@ PICKING AN SLI — the shape of a good answer
 ## Related Concepts
 
 - [[What is the difference between SRE, DevOps, and Platform Engineering?]] (`#232`): [What is the difference between SRE, DevOps, and Platform Engineering?](../site-reliability-engineering/what-is-the-difference-between-sre-devops-and-platform-engineering.md)
+- [[What is the difference between SLI, SLO, SLA, and Error Budgets in SRE practice?]] (`#641`): [What is the difference between SLI, SLO, SLA, and Error Budgets in SRE practice?](../site-reliability-engineering/what-is-the-difference-between-sli-slo-sla-and-error-budgets-in-sre-practice.md)
 - [[What is Site Reliability Engineering?]] (`#96`): [What is Site Reliability Engineering?](../site-reliability-engineering/what-is-site-reliability-engineering.md)
-- [[What are Service Level Objectives (SLOs)?]] (`#97`): [What are Service Level Objectives (SLOs)?](../site-reliability-engineering/what-are-service-level-objectives-slos.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

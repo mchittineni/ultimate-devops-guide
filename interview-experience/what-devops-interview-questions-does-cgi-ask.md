@@ -41,7 +41,8 @@ tags:
 - **What is a CVE?**
 - **Which CVEs have you actually encountered in production, and how did you resolve them?**
 - **Name five tools for identifying and remediating CVEs.**
-  **How the round was run** — the candidate's closing note:
+
+**How the round was run** — the candidate's closing note:
 
 - **Expect CI/CD in depth, and expect to write out the pipeline stages in detail.**
 

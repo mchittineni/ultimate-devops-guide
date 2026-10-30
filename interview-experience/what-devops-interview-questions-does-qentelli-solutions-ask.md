@@ -66,8 +66,8 @@ THE SCENARIO WORTH PREPARING
 ```
 
 ```bash
-# The 7-day log backup script — archive the recent window, then prune.
 #!/usr/bin/env bash
+# The 7-day log backup script — archive the recent window, then prune.
 set -euo pipefail
 
 SRC=${1:?usage: $0 <log-dir> <backup-dir>}
@@ -80,7 +80,8 @@ find "$SRC" -xdev -type f -name '*.log' -mtime -7 -print0 \
   | tar --null -czf "$DEST/logs-$stamp.tar.gz" --files-from=-
 
 # Only prune AFTER the archive exists and is non-empty.
-[[ -s "$DEST/logs-$stamp.tar.gz" ]] || { echo "archive empty, not pruning" >&2; exit 1; }
+# (-s alone is not enough: an empty tar.gz is still a few dozen bytes.)
+[[ $(tar -tzf "$DEST/logs-$stamp.tar.gz" | wc -l) -gt 0 ]] || { echo "archive empty, not pruning" >&2; exit 1; }
 find "$SRC" -xdev -type f -name '*.log' -mtime +7 -delete
 ```
 
@@ -102,8 +103,8 @@ find "$SRC" -xdev -type f -name '*.log' -mtime +7 -delete
 ## Related Concepts
 
 - [[How do you run and secure a Jenkins controller in production?]] (`#456`): [How do you run and secure a Jenkins controller in production?](../cicd/how-do-you-run-and-secure-a-jenkins-controller-in-production.md)
+- [[What is the difference between DevOps and Agile?]] (`#784`): [What is the difference between DevOps and Agile?](../core-devops-concepts/what-is-the-difference-between-devops-and-agile.md)
 - [[How do you speed up a slow CI/CD pipeline?]] (`#396`): [How do you speed up a slow CI/CD pipeline?](../cicd/how-do-you-speed-up-a-slow-ci-cd-pipeline.md)
-- [[How do you write an efficient and secure GitHub Actions workflow?]] (`#457`): [How do you write an efficient and secure GitHub Actions workflow?](../cicd/how-do-you-write-an-efficient-and-secure-github-actions-workflow.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
