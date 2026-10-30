@@ -39,7 +39,7 @@ A concrete before/after for a single change:
 ## Interview tips
 
 - Define it without naming a single tool first, then mention tools as implementation detail.
-- Anchor the answer in the four DORA metrics - it shows you think in outcomes.
+- Anchor the answer in the DORA delivery metrics (the original four plus rework rate, added in 2024) - it shows you think in outcomes.
 - Have one story ready about a cultural change you made, not just a pipeline you built.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
