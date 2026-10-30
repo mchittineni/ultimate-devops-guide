@@ -15,7 +15,7 @@ tags:
 
 ## Detail
 
-**The DORA bands, and the health warning that goes with them.** In the reports that published performance tiers, the top band was less than one day, high was one day to one week, medium was one week to one month, and low was more than one month. Quote them as a rough scale, not gospel: the cut-offs moved between report years (the top band was under one hour in the 2021–22 reports and under one day from 2023), and the 2025 State of DevOps report **dropped the elite/high/medium/low ranking altogether** in favour of seven team archetypes that combine delivery performance with human factors like burnout and friction. An interviewer who tracks DORA will be more impressed that you know the tiers were retired than that you can recite a threshold.
+**The DORA bands, and the health warning that goes with them.** In the reports that published performance tiers, the top band was less than one day, high was one day to one week, medium was one week to one month, and low was more than one month. Quote them as a rough scale, not gospel: the cut-offs moved between report years (the elite band was under one hour in 2021, the 2022 report had no elite cluster at all, and the top band was under one day from 2023), and the 2025 DORA report (_State of AI-assisted Software Development_) **dropped the elite/high/medium/low ranking altogether** in favour of seven team archetypes that combine delivery performance with human factors like burnout and friction. An interviewer who tracks DORA will be more impressed that you know the tiers were retired than that you can recite a threshold.
 
 Treat your own trend as the real benchmark - lead time falling quarter over quarter beats hitting somebody else's number once.
 

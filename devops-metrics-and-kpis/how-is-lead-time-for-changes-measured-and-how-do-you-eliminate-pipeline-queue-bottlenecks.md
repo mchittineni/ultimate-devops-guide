@@ -19,12 +19,12 @@ quiz:
     - "They are legally required by all cloud providers"
     - "They speed up continuous integration build times"
   answer: 2
-  explanation: "Rigorous empirical research by DORA found that manual CAB approvals introduce massive delays (lead time inflation) with zero statistical correlation with improved system reliability."
+  explanation: "DORA's survey research (2019 onwards) found heavyweight external change approval was associated with worse lead time and deployment frequency and no evidence of a lower change failure rate. It is a correlation from survey data, but a consistent one."
 ---
 
 # How is Lead Time for Changes measured and how do you eliminate pipeline queue bottlenecks?
 
-**Short answer:** Lead Time for Changes measures the clock time from when a developer commits code to when that commit runs in production; bottlenecks are eliminated by auto-scaling CI runners, parallelizing test suites, and abolishing manual Change Advisory Boards (CABs).
+**Short answer:** Lead Time for Changes measures the clock time from when a developer commits code to when that commit runs in production; bottlenecks are eliminated by auto-scaling CI runners, parallelizing test suites, and replacing manual Change Advisory Boards (CABs) with peer review and automated, auditable gates.
 
 ## Detail
 

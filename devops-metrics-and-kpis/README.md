@@ -11,7 +11,7 @@ tags:
 
 The four DORA metrics and the measurement habits that keep them honest.
 
-**12 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 6 · 🔴 Advanced: 1
+**14 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 7 · 🔴 Advanced: 2
 
 ## Questions
 
@@ -29,6 +29,8 @@ The four DORA metrics and the measurement habits that keep them honest.
 | 652 | [What are MTTR, MTTD, MTBF, and MTTF and what are their limitations in modern distributed systems?](./what-are-mttr-mttd-mtbf-and-mttf-and-what-are-their-limitations-in-modern-distributed-systems.md) | 🟡 Intermediate |
 | 653 | [What is Flow Efficiency and how does Value Stream Mapping uncover engineering waste?](./what-is-flow-efficiency-and-how-does-value-stream-mapping-uncover-engineering-waste.md)                        | 🟡 Intermediate |
 | 654 | [How do you measure and reduce Developer Cognitive Load to accelerate delivery velocity?](./how-do-you-measure-and-reduce-developer-cognitive-load-to-accelerate-delivery-velocity.md)                  | 🟡 Intermediate |
+| 786 | [What are the SPACE and DevEx frameworks and how do they complement DORA metrics?](./what-are-the-space-and-devex-frameworks-and-how-do-they-complement-dora-metrics.md)                                | 🟡 Intermediate |
+| 787 | [How do you measure the impact of AI coding assistants on software delivery?](./how-do-you-measure-the-impact-of-ai-coding-assistants-on-software-delivery.md)                                          | 🔴 Advanced     |
 
 ## What interviewers probe here
 

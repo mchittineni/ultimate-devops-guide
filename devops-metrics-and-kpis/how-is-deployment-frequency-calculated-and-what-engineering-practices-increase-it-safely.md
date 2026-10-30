@@ -18,7 +18,7 @@ quiz:
     - "Deploying frequently is only possible for static websites"
     - "Frequent deployments make software development more expensive"
   answer: 1
-  explanation: "DORA research proved that elite teams achieve both higher deployment frequency AND lower change failure rates simultaneously, because small batches are easier to review, test, and debug."
+  explanation: "DORA survey research has repeatedly found that the highest-performing teams achieve both higher deployment frequency AND lower change failure rates simultaneously, because small batches are easier to review, test, and debug."
 ---
 
 # How is Deployment Frequency calculated and what engineering practices increase it safely?
