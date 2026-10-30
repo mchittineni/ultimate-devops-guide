@@ -38,7 +38,7 @@ tags:
 
 **`git clean` handles untracked files,** which `reset --hard` does not touch. Always dry-run first: `git clean -nd`, then `git clean -fd`. Running `-fdx` also removes ignored files - including `.env` files and `node_modules`.
 
-**`git reflog` is the undo for the undo.** Git records every position `HEAD` has held for roughly 90 days, including commits orphaned by a `reset --hard`, a bad rebase, or a deleted branch. If you can find it in the reflog, you can get it back. This is the single most valuable git command to know, and the reason destructive-looking operations on committed work are usually recoverable.
+**`git reflog` is the undo for the undo.** Git records every position `HEAD` (and each branch) has held, including commits orphaned by a `reset --hard`, a bad rebase, or a deleted branch. Entries expire - 90 days by default for commits still reachable, 30 days for unreachable ones like those orphaned commits (`gc.reflogExpire` / `gc.reflogExpireUnreachable`) - and the reflog is local to your clone. If you can find it in the reflog, you can get it back. This is the single most valuable git command to know, and the reason destructive-looking operations on committed work are usually recoverable.
 
 **Removing a secret that was committed is a different problem.** Reverting or amending does not remove the blob from history - it is still reachable from earlier commits, and if it was pushed, it is in every clone and in the hosting provider's cache. You must rewrite history (`git filter-repo`, or BFG Repo-Cleaner), force-push, have everyone re-clone, and - most importantly - **rotate the credential**, because you must assume it is compromised. Rotation is the real fix; history rewriting is cleanup.
 

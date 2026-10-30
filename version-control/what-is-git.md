@@ -53,7 +53,7 @@ cat .git/refs/heads/main                 # the "branch" is one line: a commit ID
 
 - The SHA-addressed object graph and "branches are pointers" are the answers that show real understanding.
 - `revert` versus `reset`: revert makes a new commit and is safe on shared history; reset rewrites and is not.
-- `git reflog` is the answer to "I destroyed my work" - almost nothing is truly lost for 90 days.
+- `git reflog` is the answer to "I destroyed my work" - committed work orphaned by a reset or rebase stays recoverable for about 30 days by default (90 for entries still reachable), but uncommitted edits are not in it.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
