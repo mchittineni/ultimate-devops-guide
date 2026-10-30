@@ -23,7 +23,7 @@ tags:
 - **Network** - packet loss, latency, connection counts, NAT gateway usage, DNS resolution success.
 - **Cloud services** - managed database connections and replication lag, queue depth and age, load balancer target health, and service quotas approaching their limits.
 
-**The USE method** structures this well: for every resource, measure **Utilisation** (how busy), **Saturation** (how much queued work) and **Errors**. Saturation is the underrated one - a CPU at 100% utilisation with no run queue is fine; one with a long run queue is not.
+**The USE method** structures this well: for every resource, measure **Utilisation** (how busy), **Saturation** (how much queued work) and **Errors**. Saturation is the underrated one - a CPU at 100% utilisation with no run queue is fine; one with a long run queue is not. On modern Linux kernels (4.20+), **Pressure Stall Information** (`/proc/pressure/{cpu,memory,io}`, exposed by node_exporter as `node_pressure_*`) measures saturation directly as the share of time tasks were stalled waiting for a resource - a better signal than load average, which mixes CPU and uninterruptible I/O waits.
 
 **Practical guidance**
 
@@ -47,6 +47,9 @@ sum by (namespace, pod) (rate(container_cpu_cfs_throttled_periods_total[5m]))
 # The forgotten ones: inodes and file descriptors
 node_filesystem_files_free{fstype!~"tmpfs|overlay"} / node_filesystem_files < 0.1
 process_open_fds / process_max_fds > 0.8
+
+# Direct saturation via PSI: share of time some task waited on memory (0.1 = 10%)
+rate(node_pressure_memory_waiting_seconds_total[5m]) > 0.1
 ```
 
 ## Interview tips

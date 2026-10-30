@@ -11,7 +11,7 @@ tags:
 
 Host and platform monitoring, APM, log management, and the practices that keep dashboards and alerts useful.
 
-**13 questions** · 🟢 Beginner: 6 · 🟡 Intermediate: 5 · 🔴 Advanced: 2
+**14 questions** · 🟢 Beginner: 6 · 🟡 Intermediate: 6 · 🔴 Advanced: 2
 
 ## Questions
 
@@ -30,6 +30,7 @@ Host and platform monitoring, APM, log management, and the practices that keep d
 | 689 | [What is eBPF-based infrastructure monitoring and how does Cilium provide kernel-level network observability?](./what-is-ebpf-based-infrastructure-monitoring-and-how-does-cilium-provide-kernel-level-network-observability.md) | 🔴 Advanced     |
 | 690 | [How do you detect Disk I/O bottlenecks using iostat, iotop, and vmstat?](./how-do-you-detect-disk-i-o-bottlenecks-using-iostat-iotop-and-vmstat.md)                                                                             | 🟡 Intermediate |
 | 691 | [What are Synthetic Monitoring probes and how do they detect edge network outages before users report them?](./what-are-synthetic-monitoring-probes-and-how-do-they-detect-edge-network-outages-before-users-report-them.md)     | 🟢 Beginner     |
+| 772 | [How do you monitor a Kubernetes cluster end to end?](./how-do-you-monitor-a-kubernetes-cluster-end-to-end.md)                                                                                                                   | 🟡 Intermediate |
 
 ## What interviewers probe here
 

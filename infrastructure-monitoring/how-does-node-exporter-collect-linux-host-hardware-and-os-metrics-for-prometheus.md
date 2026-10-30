@@ -6,6 +6,7 @@ difficulty: "Beginner"
 tags:
   - devops
   - interview-questions
+  - infrastructure-monitoring
   - monitoring
   - prometheus
   - node-exporter
@@ -34,7 +35,7 @@ Node Exporter requires no kernel modules and runs as an unprivileged daemon or K
 Linux exposes deep kernel telemetry as virtual text files:
 
 - **CPU**: Reads `/proc/stat` to calculate jiffies spent in user, system, idle, and iowait states (`node_cpu_seconds_total`).
-- **Memory**: Reads `/proc/meminfo` (`node_memory_MemAvailable_bytes`).
+- **Memory**: Reads `/proc/meminfo` (`node_memory_MemAvailable_bytes`). Use `MemAvailable`, not `MemFree`: Linux deliberately fills free memory with page cache, so a "low free memory" alert fires on every healthy host.
 - **Disks**: Reads `/proc/diskstats` (`node_disk_read_bytes_total`).
 - **Network**: Reads `/proc/net/dev` (`node_network_receive_bytes_total`).
 - **Pressure**: Reads `/proc/pressure/*` (`node_pressure_cpu_waiting_seconds_total`) on kernels with PSI.
@@ -74,10 +75,10 @@ On Kubernetes, the `prometheus-node-exporter` Helm chart (included in kube-prome
 
 ## Interview tips
 
-- Scraping Linux `/proc` and `/sys` virtual filesystems.
-- Exposing metrics in Prometheus exposition format on port 9100.
-- Running as a Kubernetes DaemonSet across all nodes.
-- Calculating CPU rate from counter `node_cpu_seconds_total`.
+- The mechanism: it reads `/proc` and `/sys` at scrape time (no polling loop of its own) and serves Prometheus text format on `:9100`.
+- In a container it must see the host: `hostPID`, `hostNetwork`, and the host root mounted read-only with `--path.rootfs`, or it reports the container's view.
+- CPU utilisation comes from `rate(node_cpu_seconds_total[5m])` per mode - it is a counter of seconds, not a percentage gauge.
+- Know the textfile collector for cron/backup metrics, and that node_exporter is for hosts only - container metrics come from cAdvisor and Kubernetes object state from kube-state-metrics. On Windows the equivalent is `windows_exporter`.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

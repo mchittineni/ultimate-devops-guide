@@ -6,6 +6,7 @@ difficulty: "Beginner"
 tags:
   - devops
   - interview-questions
+  - infrastructure-monitoring
   - monitoring
   - blackbox
   - whitebox
@@ -66,10 +67,10 @@ pg_stat_activity_count{state="idle in transaction"} > 20                        
 
 ## Interview tips
 
-- Blackbox: testing from the outside without internal knowledge (synthetic probes).
-- Whitebox: monitoring internal mechanics from inside (JVM, queues, memory, logs).
-- Blackbox alerts on symptoms affecting users.
-- Whitebox provides diagnostic root-cause context.
+- Blackbox answers "is it broken for a user?"; whitebox answers "why?" and gives early warning before users notice. You need both.
+- The Google SRE framing: page mostly on symptoms; whitebox SLIs measured at the load balancer are the best of both - every real request, measured close to the user.
+- Name the blind spots each way: probes sample a tiny fraction of traffic; internal metrics miss DNS, CDN, TLS, and firewall failures in front of the service.
+- Probe from more than one location and require multiple failures before paging, or probe flakiness becomes alert fatigue.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
