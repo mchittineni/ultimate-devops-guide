@@ -11,7 +11,7 @@ tags:
 
 # How do you deploy and scale LLM inference serving with vLLM or Triton on Kubernetes?
 
-**Short answer:** Deploy LLM inference engines (such as vLLM or Triton Inference Server) on Kubernetes by mounting model weights via fast local NVMe caches or streaming from S3/OCI, enabling PagedAttention for KV cache optimization, using tensor parallelism across multiple GPUs, and managing zero-downtime model deployments with progressive traffic routing.
+**Short answer:** Deploy LLM inference engines (such as vLLM or Triton Inference Server) on Kubernetes by mounting model weights via fast local NVMe caches or streaming from S3/OCI, relying on the engine's KV-cache management (vLLM's PagedAttention, on by default) and continuous batching for throughput, using tensor parallelism when a model does not fit on one GPU, autoscaling on queue depth or time-to-first-token rather than GPU utilisation, and managing zero-downtime model deployments with progressive traffic routing.
 
 ## Detail
 
@@ -30,7 +30,8 @@ Serving Large Language Models (LLMs) in production presents distinct infrastruct
 ### 3. Parallelism & Scaling Strategy
 
 - **Tensor Parallelism (`--tensor-parallel-size`):** Splits single model matrix multiplications across multiple GPUs on the same node (e.g. 4x A10G GPUs).
-- **Pipeline Parallelism:** Distributes model layers across multiple nodes over high-speed interconnects (NVIDIA NVLink / InfiniBand).
+- **Pipeline Parallelism:** Distributes groups of model layers across GPUs, typically across nodes; tensor parallelism wants the fast intra-node NVLink, while pipeline parallelism tolerates the slower inter-node network (InfiniBand/RoCE, or EFA on AWS).
+- **Continuous batching:** vLLM and TensorRT-LLM add new requests to the running batch token by token instead of waiting for a batch to finish, which is where most of the throughput gain over naive serving comes from - and why per-request latency depends on what else is in the batch.
 - **Zero-Downtime Model Updates:** Use Istio or Argo Rollouts to perform canary releases when deploying updated model weights or prompt templates.
 - **Autoscale on the right signal:** GPU utilisation sits near 100% whenever a batch is running, so it says little about headroom. Scale on queue depth (`vllm:num_requests_waiting`), KV-cache usage, or TTFT, and route with a model-aware layer (the Gateway API Inference Extension, KServe, or llm-d) that considers each replica's load and cached prefixes.
 - **Trade-off:** GPU replicas take minutes to become ready (node provisioning, image pull, weight loading), so scale-from-zero saves money at the price of long cold starts; latency-sensitive endpoints keep a warm minimum.
@@ -116,8 +117,8 @@ curl http://vllm-llama3.ai-platform.svc.cluster.local:8000/v1/chat/completions \
 
 ## Related Concepts
 
-- [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
 - [[What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?]] (`#634`): [What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?](../devops-tools-and-automation/what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs.md)
+- [[How do you structure Terraform code for multiple environments and providers?]] (`#422`): [How do you structure Terraform code for multiple environments and providers?](../infrastructure-as-code/how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md)
 - [[How do you write and structure a reusable Terraform module?]] (`#463`): [How do you write and structure a reusable Terraform module?](../infrastructure-as-code/how-do-you-write-and-structure-a-reusable-terraform-module.md)
 
 <!-- END GENERATED RELATED TOPICS -->
