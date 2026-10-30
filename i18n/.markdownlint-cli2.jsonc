@@ -1,0 +1,9 @@
+{
+  // Merged over the root .markdownlint-cli2.jsonc for the translated landing pages.
+  "config": {
+    // Prettier owns table padding. It measures Devanagari combining marks and some
+    // Arabic text at a different width than markdownlint does, so the two can never
+    // agree on column alignment in these files.
+    "MD060": false,
+  },
+}
