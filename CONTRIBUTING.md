@@ -87,6 +87,7 @@ Topic READMEs and the root README's table of contents are **generated**. Never e
 python3 scripts/generate_indexes.py        # rewrite all indexes from the question files
 python3 scripts/inject_wikilinks.py        # inject cross-topic [[wikilinks]]
 python3 scripts/build_knowledge_graph.py   # regenerate 3D knowledge graph (docs/index.html)
+python3 scripts/build_quiz_data.py         # regenerate the quiz data feed (docs/data/)
 python3 scripts/validate_content.py        # frontmatter, naming, links, index freshness
 ```
 
@@ -95,8 +96,8 @@ All are stdlib-only Python 3.11+ - nothing to install.
 Then run the two Markdown checks CI runs. Neither needs a `package.json`; `npx` fetches them on demand:
 
 ```bash
-npx prettier@3 --write "**/*.md"        # formatting (config: .prettierrc.json)
-npx markdownlint-cli2 "**/*.md"         # linting   (config: .markdownlint-cli2.jsonc)
+npx prettier@3.9.10 --write "**/*.md"          # formatting (config: .prettierrc.json)
+npx markdownlint-cli2@0.24.0 "**/*.md"         # linting   (config: .markdownlint-cli2.jsonc)
 ```
 
 Run the generator _before_ Prettier. The generator emits compact tables and Prettier pads them into aligned columns; comparisons are whitespace-normalised, so running them in that order settles and neither tool undoes the other.
@@ -109,7 +110,20 @@ A few linter conventions worth knowing, all deliberate and encoded in `.markdown
 
 ### 5. Open the pull request
 
-Fill in the [pull request template](./.github/pull_request_template.md). CI runs `validate_content.py`, Prettier, and markdownlint on every pull request.
+Fill in the [pull request template](./.github/pull_request_template.md). On every pull request CI runs:
+
+- `validate_content.py`, plus `--check` mode of the index, knowledge-graph, and quiz-feed generators, so committed output can never drift from the question files.
+- Prettier and markdownlint, at the versions pinned in [`validate-and-format.yml`](./.github/workflows/validate-and-format.yml).
+- `ruff check`, `ruff format --check`, and the unit tests under `tests/`.
+- `actionlint` and the `zizmor` security audit over the workflows.
+
+If you change anything under `scripts/`, run the same Python checks locally. Ruff is dev-only; the scripts themselves stay stdlib-only:
+
+```bash
+python3 -m unittest discover -s tests       # unit tests and generator freshness checks
+pipx run ruff==0.17.3 check scripts tests   # lint (config: ruff.toml)
+pipx run ruff==0.17.3 format scripts tests  # format
+```
 
 ## Adding a new topic
 
