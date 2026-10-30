@@ -99,7 +99,7 @@ spec:
 - Compare **Kyverno** (YAML-native, easier K8s adoption) with **OPA Gatekeeper** (Rego language, cross-system policy engine beyond Kubernetes).
 - Always mention starting new policies in **Audit mode** before moving to **Enforce mode** to prevent accidental pipeline downtime.
 - Explain admission controller mechanics: `ValidatingWebhookConfiguration` (blocks or allows) runs after `MutatingWebhookConfiguration` (modifies requests defaults).
-- Mention the trade-off of webhooks: they add latency and a failure mode (`failurePolicy: Fail` blocks the cluster if the engine is down; `Ignore` fails open). Kubernetes' built-in, in-process **ValidatingAdmissionPolicy** (CEL, GA since 1.30) avoids the webhook hop for simple rules, and recent Kyverno releases add CEL-based policy types that compile to it.
+- Mention the trade-off of webhooks: they add latency and a failure mode (`failurePolicy: Fail` blocks the cluster if the engine is down; `Ignore` fails open). Kubernetes' built-in, in-process **ValidatingAdmissionPolicy** (CEL, GA since 1.30) avoids the webhook hop for simple rules, **MutatingAdmissionPolicy** does the same for mutation (GA in 1.36), and recent Kyverno releases add CEL-based policy types that compile to them. Webhook engines still earn their place for image verification, generation, external data lookups, and reporting.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

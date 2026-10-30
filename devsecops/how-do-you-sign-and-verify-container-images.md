@@ -23,6 +23,10 @@ tags:
 
 **What else to attach.** The same mechanism carries attestations: SBOM, SLSA provenance, vulnerability-scan results, even a "passed integration tests" claim. Policy can then require, for example, an SBOM attestation plus a scan attestation less than 7 days old.
 
+**Where the signature lives.** Cosign v3 writes a Sigstore **bundle** (signature, certificate, and transparency-log proof in one object) and stores it as an OCI 1.1 **referrer** of the image digest, falling back to the referrers-tag scheme on registries without the referrers API; older releases used a `sha256-<digest>.sig` tag. Mixed estates matter here: verifiers and admission policies that only look for the old `.sig` tag will report "no signature" for a perfectly signed image, so upgrade the verification side first.
+
+**Enforcing it.** Kyverno `verifyImages` (or its newer `ImageValidatingPolicy`), the Sigstore policy-controller, or Gatekeeper with Ratify check the identity at admission. The main alternative to Sigstore is **Notation** (CNCF Notary Project), which signs with X.509 certificates from your own PKI and suits organisations that want no public transparency log; Ratify and Kyverno verify both.
+
 **Trade-offs.** Verification adds latency and a hard dependency on Sigstore infrastructure (mitigate by mirroring or self-hosting Fulcio/Rekor). Third-party base images usually have no signature you can pin, so most teams mirror them internally and re-sign after scanning.
 
 ## Example
@@ -36,6 +40,12 @@ cosign sign --yes ghcr.io/acme/api@"$DIGEST"
 cosign verify ghcr.io/acme/api@"$DIGEST" \
   --certificate-identity-regexp '^https://github.com/acme/.+$' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
+
+# Attestations use the same identity: attach an SBOM, then require it at deploy time
+cosign attest --yes --type cyclonedx --predicate sbom.json ghcr.io/acme/api@"$DIGEST"
+cosign verify-attestation --type cyclonedx ghcr.io/acme/api@"$DIGEST" \
+  --certificate-identity-regexp '^https://github.com/acme/.+$' \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com > /dev/null
 ```
 
 ## Interview tips
@@ -43,6 +53,7 @@ cosign verify ghcr.io/acme/api@"$DIGEST" \
 - Say "sign by digest" unprompted - interviewers listen for the tag-mutability trap.
 - Keyless and Rekor transparency logging are the modern answer; explain the key-management problem they remove.
 - Be ready for "how do you handle upstream images with no signatures?" - mirror, scan, re-sign, and pin by digest.
+- If asked "Sigstore or Notation?": Sigstore keyless for public and CI-native workflows; Notation (or cosign with a KMS key) when signatures must chain to a corporate CA or no public log is acceptable.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

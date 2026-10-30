@@ -108,7 +108,7 @@ kyverno apply ./policies/ --resource ./k8s/deployment.yaml
 - Frame policy as code by its properties: versioned, reviewed, tested, and enforced automatically - the same lifecycle as application code.
 - Enforce in more than one place: CI (fast feedback via `kyverno apply`/`kyverno test` or Conftest), admission (the real gate), and background audit (catches resources that existed before the policy).
 - Roll out in audit/dry-run mode first and read the reports; flipping straight to enforce is how you block a production rollout at 2 a.m.
-- Mention the built-in option: **ValidatingAdmissionPolicy** (CEL, GA since Kubernetes 1.30) handles simple validations in-process without a webhook, and both Kyverno and Gatekeeper can generate or use it. Webhook engines remain the choice for mutation, generation, image verification, and complex logic.
+- Mention the built-in option: **ValidatingAdmissionPolicy** (CEL, GA since Kubernetes 1.30) handles simple validations in-process without a webhook, and both Kyverno and Gatekeeper can generate or use it. Its mutating counterpart, **MutatingAdmissionPolicy**, reached GA in Kubernetes 1.36, so simple defaulting no longer needs a webhook either. Webhook engines remain the choice for generation, image verification, external data, policy reports, and complex logic.
 - Trade-off to name: webhooks add latency and a failure mode - decide `failurePolicy` deliberately and exclude system namespaces so a policy-engine outage cannot stop the control plane healing itself.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
