@@ -45,7 +45,9 @@ jobs:
         if: env.ANTHROPIC_API_KEY == ''
         run: echo "::notice::ANTHROPIC_API_KEY secret is not set - skipping lesson translation."
 
-      - name: Checkout Repository
+      # Credentials stay configured: the last step pushes the translations branch, and this job
+      # uploads no artifacts that could leak them.
+      - name: Checkout Repository # zizmor: ignore[artipacked]
         if: env.ANTHROPIC_API_KEY != ''
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 

@@ -15,14 +15,22 @@ concurrency:
 env:
   PYTHON_VERSION: "3.13"
   NODE_VERSION: "24"
+  PRETTIER_VERSION: "3.9.10"
+  MARKDOWNLINT_CLI2_VERSION: "0.24.0"
+  RUFF_VERSION: "0.17.3"
+  ZIZMOR_VERSION: "1.31.1"
+  ACTIONLINT_IMAGE: "rhysd/actionlint:1.7.12"
 
 jobs:
   validate:
     name: Validate content vault
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
@@ -35,12 +43,49 @@ jobs:
       - name: Fail if indexes are stale
         run: python3 scripts/generate_indexes.py --check
 
-  lint:
-    name: Lint and format Markdown
+      - name: Fail if the knowledge graph is stale
+        run: python3 scripts/build_knowledge_graph.py --check
+
+      - name: Fail if the quiz data feed is stale
+        run: python3 scripts/build_quiz_data.py --check
+
+  python:
+    name: Lint and test Python tooling
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      # Dev-only: the scripts themselves stay stdlib-only.
+      - name: Install ruff
+        run: python3 -m pip install --quiet "ruff==${RUFF_VERSION}"
+
+      - name: Lint with ruff
+        run: ruff check --output-format=github scripts tests
+
+      - name: Check formatting with ruff
+        run: ruff format --check scripts tests
+
+      - name: Run unit tests
+        run: python3 -m unittest discover -s tests -v
+
+  lint:
+    name: Lint and format Markdown
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -48,15 +93,39 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Check formatting with Prettier
-        run: npx --yes prettier@3 --check "**/*.md"
+        run: npx --yes "prettier@${PRETTIER_VERSION}" --check "**/*.md"
 
       - name: Lint with markdownlint
-        run: npx --yes markdownlint-cli2 "**/*.md"
+        run: npx --yes "markdownlint-cli2@${MARKDOWNLINT_CLI2_VERSION}" "**/*.md"
+
+  workflows:
+    name: Lint and audit workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Lint with actionlint
+        run: docker run --rm -v "$PWD:/repo" --workdir /repo "$ACTIONLINT_IMAGE" -color
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Audit with zizmor
+        run: |
+          python3 -m pip install --quiet "zizmor==${ZIZMOR_VERSION}"
+          zizmor --offline --format=github .github/workflows
 
   pr-success-comment:
     if: github.event_name == 'pull_request'
-    needs: [validate, lint]
+    needs: [validate, python, lint, workflows]
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     permissions:
       pull-requests: write
@@ -74,9 +143,11 @@ jobs:
             The following checks completed successfully:
 
             - ✅ Content validation
-            - ✅ Index validation
+            - ✅ Index, knowledge graph, and quiz feed freshness
+            - ✅ Python lint, format, and unit tests
             - ✅ Markdown formatting
             - ✅ Markdown linting
+            - ✅ Workflow lint and security audit
 
             Your contribution is ready for review. 🎉`;
 

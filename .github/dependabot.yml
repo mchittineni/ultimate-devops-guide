@@ -1,0 +1,12 @@
+version: 2
+updates:
+  # Keeps the SHA-pinned actions current; Dependabot updates the pin and its version comment together.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: semiannually
+    groups:
+      github-actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: ci
