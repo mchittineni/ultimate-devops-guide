@@ -68,29 +68,21 @@ def check_questions(topics, errors: list[str]) -> None:
             if q.id < 0:
                 errors.append(f"{rel}: missing or non-numeric `id` in frontmatter")
             elif q.id in seen_ids:
-                errors.append(
-                    f"{rel}: duplicate id {q.id} (also {seen_ids[q.id].relative_to(REPO_ROOT)})"
-                )
+                errors.append(f"{rel}: duplicate id {q.id} (also {seen_ids[q.id].relative_to(REPO_ROOT)})")
             else:
                 seen_ids[q.id] = q.path
 
             if q.category != topic.title:
-                errors.append(
-                    f"{rel}: category '{q.category}' does not match topic '{topic.title}'"
-                )
+                errors.append(f"{rel}: category '{q.category}' does not match topic '{topic.title}'")
             if q.difficulty not in DIFFICULTIES:
-                errors.append(
-                    f"{rel}: difficulty '{q.difficulty}' not one of {', '.join(DIFFICULTIES)}"
-                )
+                errors.append(f"{rel}: difficulty '{q.difficulty}' not one of {', '.join(DIFFICULTIES)}")
             missing_tags = REQUIRED_TAGS - set(q.tags)
             if missing_tags:
                 errors.append(f"{rel}: missing required tag(s): {', '.join(sorted(missing_tags))}")
 
             expected_slug = slugify(q.title)
             if q.title and q.slug != expected_slug:
-                errors.append(
-                    f"{rel}: filename slug '{q.slug}' should be '{expected_slug}' for this title"
-                )
+                errors.append(f"{rel}: filename slug '{q.slug}' should be '{expected_slug}' for this title")
 
             heading = HEADING_RE.search(q.body)
             if not heading:
@@ -107,9 +99,7 @@ def check_questions(topics, errors: list[str]) -> None:
                 if in_fence:
                     continue
                 if line.startswith("    ") and not line.strip().startswith(("-", "*", "|")):
-                    errors.append(
-                        f"{rel}: 4-space indented prose renders as a code block - de-indent it"
-                    )
+                    errors.append(f"{rel}: 4-space indented prose renders as a code block - de-indent it")
                     break
 
 
@@ -138,8 +128,7 @@ def check_quiz_blocks(topics, errors: list[str]) -> None:
                 continue
             if not QUIZ_MIN_OPTIONS <= len(options) <= QUIZ_MAX_OPTIONS:
                 errors.append(
-                    f"{rel}: quiz.options has {len(options)} entries "
-                    f"(need {QUIZ_MIN_OPTIONS}-{QUIZ_MAX_OPTIONS})"
+                    f"{rel}: quiz.options has {len(options)} entries (need {QUIZ_MIN_OPTIONS}-{QUIZ_MAX_OPTIONS})"
                 )
             if any(not o.strip() for o in options):
                 errors.append(f"{rel}: quiz.options contains an empty option")
@@ -154,9 +143,7 @@ def check_quiz_blocks(topics, errors: list[str]) -> None:
             if not answer.isdigit():
                 errors.append(f"{rel}: quiz.answer must be the 1-based index of the correct option")
             elif not 1 <= int(answer) <= len(options):
-                errors.append(
-                    f"{rel}: quiz.answer {answer} is out of range for {len(options)} options"
-                )
+                errors.append(f"{rel}: quiz.answer {answer} is out of range for {len(options)} options")
 
             explanation = quiz.get("explanation")
             if not isinstance(explanation, str) or len(explanation.strip()) < QUIZ_MIN_EXPLANATION:
@@ -188,6 +175,7 @@ def check_indexes(topics, errors: list[str]) -> None:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from generate_indexes import (
         render_badges,
+        render_headline,
         render_language_bar,
         render_root_toc,
         render_stats,
@@ -201,20 +189,18 @@ def check_indexes(topics, errors: list[str]) -> None:
             continue
         current = readme.read_text(encoding="utf-8")
         if normalize_markdown(render_topic_readme(topic, current)) != normalize_markdown(current):
-            errors.append(
-                f"{topic.directory}/README.md: stale - run `python3 scripts/generate_indexes.py`"
-            )
+            errors.append(f"{topic.directory}/README.md: stale - run `python3 scripts/generate_indexes.py`")
 
     root = normalize_markdown((REPO_ROOT / "README.md").read_text(encoding="utf-8"))
     for marker, payload in (
+        ("HEADLINE", render_headline(topics)),
+        ("BADGES", render_badges(topics)),
         ("TOC", render_root_toc(topics)),
         ("STATS", render_stats(topics)),
         ("LANGS", render_language_bar(i18n_config()["canonical"]["code"])),
     ):
         if normalize_markdown(payload) not in root:
-            errors.append(
-                f"README.md: {marker} block is stale - run `python3 scripts/generate_indexes.py`"
-            )
+            errors.append(f"README.md: {marker} block is stale - run `python3 scripts/generate_indexes.py`")
 
     for lang in i18n_config()["languages"]:
         page_path = landing_page(lang["code"])
@@ -228,28 +214,22 @@ def check_indexes(topics, errors: list[str]) -> None:
             ("BADGES", render_badges(topics)),
         ):
             if normalize_markdown(payload) not in page:
-                errors.append(
-                    f"{rel}: {marker} block is stale - run `python3 scripts/generate_indexes.py`"
-                )
+                errors.append(f"{rel}: {marker} block is stale - run `python3 scripts/generate_indexes.py`")
 
 
 def check_orphan_files(errors: list[str]) -> None:
     """Catch topic directories that exist on disk but are not registered, and bad filenames."""
     registered = set(topic_meta())
-    skip = {"scripts", "docs", "i18n", ".git", ".github", "node_modules", "DevOps-Interview-Guide"}
+    skip = {"scripts", "tests", "docs", "i18n", ".git", ".github", "node_modules", "DevOps-Interview-Guide"}
     for entry in sorted(p for p in REPO_ROOT.iterdir() if p.is_dir()):
         if entry.name in skip or entry.name.startswith("."):
             continue
         if entry.name not in registered:
-            errors.append(
-                f"{entry.name}/: directory is not registered in scripts/topic_meta.json"
-            )
+            errors.append(f"{entry.name}/: directory is not registered in scripts/topic_meta.json")
             continue
         for md in sorted(entry.glob("*.md")):
             if md.name != "README.md" and not QUESTION_FILE_RE.match(md.name):
-                errors.append(
-                    f"{md.relative_to(REPO_ROOT)}: filename must match question-slug.md"
-                )
+                errors.append(f"{md.relative_to(REPO_ROOT)}: filename must match question-slug.md")
 
 
 def main() -> int:

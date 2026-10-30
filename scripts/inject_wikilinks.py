@@ -49,13 +49,13 @@ def build_cross_link_map(topics, questions) -> dict[int, list[int]]:
 
     # Validate all RELATED_TOPICS_MAP source topics exist
     unmapped_sources = set()
-    for source_topic in RELATED_TOPICS_MAP.keys():
+    for source_topic in RELATED_TOPICS_MAP:
         if source_topic not in topic_to_questions or not topic_to_questions[source_topic]:
             unmapped_sources.add(source_topic)
 
     # Validate all target topics in RELATED_TOPICS_MAP exist
     unmapped_targets = set()
-    for source_topic, target_list in RELATED_TOPICS_MAP.items():
+    for target_list in RELATED_TOPICS_MAP.values():
         for target_topic in target_list:
             if target_topic not in topic_to_questions or not topic_to_questions[target_topic]:
                 unmapped_targets.add(target_topic)
@@ -75,9 +75,7 @@ def build_cross_link_map(topics, questions) -> dict[int, list[int]]:
         t_slug = q.topic_dir
 
         # Get related topic slugs from map, or default to common foundation topics
-        rel_slugs = RELATED_TOPICS_MAP.get(
-            t_slug, ["core-devops-concepts", "cicd", "docker"]
-        )
+        rel_slugs = RELATED_TOPICS_MAP.get(t_slug, ["core-devops-concepts", "cicd", "docker"])
 
         # Find semantically related questions from target topics
         candidates = []
@@ -108,7 +106,31 @@ def build_cross_link_map(topics, questions) -> dict[int, list[int]]:
                 q_terms = set(q.title.lower().split()) | set(q.body.lower().split()[:100])
                 tq_terms = set(tq.title.lower().split()) | set(tq.body.lower().split()[:100])
                 # Filter out common stopwords
-                stopwords = {'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'of', 'and', 'or', 'is', 'are', 'was', 'were', 'what', 'how', 'when', 'where', 'why', 'which', 'do', 'does'}
+                stopwords = {
+                    "the",
+                    "a",
+                    "an",
+                    "in",
+                    "on",
+                    "at",
+                    "to",
+                    "for",
+                    "of",
+                    "and",
+                    "or",
+                    "is",
+                    "are",
+                    "was",
+                    "were",
+                    "what",
+                    "how",
+                    "when",
+                    "where",
+                    "why",
+                    "which",
+                    "do",
+                    "does",
+                }
                 q_terms = {t for t in q_terms if len(t) > 3 and t not in stopwords}
                 tq_terms = {t for t in tq_terms if len(t) > 3 and t not in stopwords}
                 shared_terms = q_terms & tq_terms
@@ -163,14 +185,14 @@ def main():
 
     id_to_question = {q.id: q for q in questions}
     cross_link_map = build_cross_link_map(topics, questions)
-    
+
     modified_count = 0
     for q_id, target_ids in cross_link_map.items():
         if q_id not in id_to_question:
             continue
-            
+
         q = id_to_question[q_id]
-        
+
         # Build wikilink list items
         wikilink_items = []
         for tid in target_ids:
@@ -178,10 +200,8 @@ def main():
                 target_q = id_to_question[tid]
                 rel_path = f"../{target_q.path.parent.name}/{target_q.filename}"
                 # Wikilink format [[Title]] + standard markdown link format
-                wikilink_items.append(
-                    f"- [[{target_q.title}]] (`#{target_q.id}`): [{target_q.title}]({rel_path})"
-                )
-                
+                wikilink_items.append(f"- [[{target_q.title}]] (`#{target_q.id}`): [{target_q.title}]({rel_path})")
+
         if not wikilink_items:
             continue
 
@@ -193,20 +213,12 @@ def main():
 
         # Build the generated section with markers
         # Blank lines around the markers keep the block Prettier-clean.
-        generated_block = (
-            f"{begin_marker}\n\n"
-            f"## Related Concepts\n\n"
-            + "\n".join(wikilink_items) + "\n\n"
-            f"{end_marker}"
-        )
+        generated_block = f"{begin_marker}\n\n## Related Concepts\n\n" + "\n".join(wikilink_items) + f"\n\n{end_marker}"
 
         # Check if a marked block already exists (replace it)
         if begin_marker in content and end_marker in content:
             # Replace existing marked block
-            pattern = re.compile(
-                re.escape(begin_marker) + r".*?" + re.escape(end_marker),
-                re.DOTALL
-            )
+            pattern = re.compile(re.escape(begin_marker) + r".*?" + re.escape(end_marker), re.DOTALL)
             new_content = pattern.sub(generated_block, content)
 
         # Check for unmarked Related Concepts/Questions section (fail)
@@ -228,7 +240,7 @@ def main():
 
         q.path.write_text(new_content, encoding="utf-8")
         modified_count += 1
-        
+
     print(f"Successfully processed {len(cross_link_map)} question mappings (injected into {modified_count} files).")
 
 

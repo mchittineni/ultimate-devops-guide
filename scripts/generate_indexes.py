@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Regenerate every index in the repo from the question files themselves.
 
-Rewrites each topic ``README.md`` in full, replaces the ``TOC``, ``STATS``, and
-``LANGS`` marker blocks in the root ``README.md``, and the ``LANGS`` and ``BADGES``
+Rewrites each topic ``README.md`` in full, replaces the ``HEADLINE``, ``BADGES``,
+``TOC``, ``STATS``, and ``LANGS`` marker blocks in the root ``README.md``, and the ``LANGS`` and ``BADGES``
 blocks in each translated landing page under ``i18n/``. Run after adding or
 renaming any question, or adding a language to ``scripts/i18n.json``; CI fails if
 the committed indexes differ from what this produces.
@@ -57,18 +57,13 @@ def grouped_topics(topics: list[Topic]) -> list[tuple[str, str, list[Topic]]]:
         group = str(meta.get(topic.directory, {}).get("group", "Other"))
         buckets.setdefault(group, []).append(topic)
     emoji = dict(GROUP_ORDER)
-    ordered = [name for name, _ in GROUP_ORDER] + [
-        name for name in buckets if name not in emoji
-    ]
-    return [
-        (name, emoji.get(name, "📚"), buckets[name]) for name in ordered if buckets.get(name)
-    ]
+    ordered = [name for name, _ in GROUP_ORDER] + [name for name in buckets if name not in emoji]
+    return [(name, emoji.get(name, "📚"), buckets[name]) for name in ordered if buckets.get(name)]
 
 
 def difficulty_counts(questions) -> dict[str, int]:
     return {
-        level: sum(1 for q in questions if q.difficulty == level)
-        for level in ("Beginner", "Intermediate", "Advanced")
+        level: sum(1 for q in questions if q.difficulty == level) for level in ("Beginner", "Intermediate", "Advanced")
     }
 
 
@@ -91,8 +86,7 @@ def render_topic_readme(topic: Topic, _current: str | None = None) -> str:
         "",
         f"**{len(topic.questions)} questions** · "
         + " · ".join(
-            f"{DIFFICULTY_BADGE.get(level, level)}: "
-            f"{sum(1 for q in topic.questions if q.difficulty == level)}"
+            f"{DIFFICULTY_BADGE.get(level, level)}: {sum(1 for q in topic.questions if q.difficulty == level)}"
             for level in ("Beginner", "Intermediate", "Advanced")
         ),
         "",
@@ -102,10 +96,7 @@ def render_topic_readme(topic: Topic, _current: str | None = None) -> str:
         "| --- | --- | --- |",
     ]
     for q in topic.questions:
-        lines.append(
-            f"| {q.id} | [{q.title}](./{q.filename}) | "
-            f"{DIFFICULTY_BADGE.get(q.difficulty, q.difficulty)} |"
-        )
+        lines.append(f"| {q.id} | [{q.title}](./{q.filename}) | {DIFFICULTY_BADGE.get(q.difficulty, q.difficulty)} |")
     if not topic.questions:
         lines.append("| - | _No questions yet - contributions welcome._ | - |")
 
@@ -203,19 +194,24 @@ def render_language_bar(current: str) -> str:
         f"**{lang['name']}**" if lang["code"] == current else f"[{lang['name']}]({href(lang['code'])})"
         for lang in entries
     ]
-    label = next((lang["label"] for lang in [canonical, *languages] if lang["code"] == current))
+    label = next(lang["label"] for lang in [canonical, *languages] if lang["code"] == current)
     line = f"🌐 **{label}:** " + " · ".join(links)
     return f"{line}\n\n_{canonical['caption']}_" if on_root else line
 
 
+def render_headline(topics: list[Topic]) -> str:
+    """The bold tagline under the root README title."""
+    return (
+        f"**{len(all_questions(topics))} questions across {len(topics)} topics - "
+        "answered to the depth an interviewer actually expects.**"
+    )
+
+
 def render_badges(topics: list[Topic]) -> str:
-    """Count badges for the translated landing pages, so their numbers never go stale."""
+    """Count badges for every landing page, so their numbers never go stale."""
     questions = all_questions(topics)
     counts = difficulty_counts(questions)
-    difficulty = (
-        f"🟢%20{counts['Beginner']}%20·%20🟡%20{counts['Intermediate']}%20·%20"
-        f"🔴%20{counts['Advanced']}"
-    )
+    difficulty = f"🟢%20{counts['Beginner']}%20·%20🟡%20{counts['Intermediate']}%20·%20🔴%20{counts['Advanced']}"
     return "\n".join(
         [
             f"![Questions](https://img.shields.io/badge/questions-{len(questions)}-blue)",
@@ -246,7 +242,9 @@ def main() -> int:
 
     root_path = REPO_ROOT / "README.md"
     root = root_path.read_text(encoding="utf-8")
-    updated = replace_block(root, "TOC", render_root_toc(topics))
+    updated = replace_block(root, "HEADLINE", render_headline(topics))
+    updated = replace_block(updated, "BADGES", render_badges(topics))
+    updated = replace_block(updated, "TOC", render_root_toc(topics))
     updated = replace_block(updated, "STATS", render_stats(topics))
     updated = replace_block(updated, "LANGS", render_language_bar(i18n_config()["canonical"]["code"]))
     if normalize_markdown(updated) != normalize_markdown(root):

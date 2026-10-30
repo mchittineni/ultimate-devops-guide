@@ -43,7 +43,6 @@ import re
 import sys
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from pathlib import Path
 
 from lib_content import FRONTMATTER_RE, I18N_DIR, REPO_ROOT, i18n_config, landing_page, load_topics
 
@@ -90,7 +89,7 @@ def source_files() -> list[str]:
 
 
 def digest(text: str) -> str:
-    return hashlib.sha256(f"{PROMPT_VERSION}\n{text}".encode("utf-8")).hexdigest()
+    return hashlib.sha256(f"{PROMPT_VERSION}\n{text}".encode()).hexdigest()
 
 
 def rewrite_links(text: str, src_rel: str, dest_rel: str, translated: set[str], out_rel: str) -> str:
@@ -211,13 +210,11 @@ class Translator:
         return "".join(block.text for block in message.content if block.type == "text")
 
 
-def translate_file(
-    rel: str, lang: dict, out_rel: str, translated_set: set[str], translate
-) -> str:
+def translate_file(rel: str, lang: dict, out_rel: str, translated_set: set[str], translate) -> str:
     source = (REPO_ROOT / rel).read_text(encoding="utf-8")
     dest_rel = f"{out_rel}/{rel}"
     match = FRONTMATTER_RE.match(source)
-    frontmatter, body = (match.group(0), source[match.end():]) if match else ("", source)
+    frontmatter, body = (match.group(0), source[match.end() :]) if match else ("", source)
 
     masked, saved = mask(body)
     # After masking, so links inside code blocks are left exactly as written.

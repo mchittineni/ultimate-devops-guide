@@ -238,7 +238,9 @@ def main() -> int:
         return 0
 
     if not args.quiet:
-        rel_dir = args.output_dir.relative_to(REPO_ROOT) if args.output_dir.is_relative_to(REPO_ROOT) else args.output_dir
+        rel_dir = (
+            args.output_dir.relative_to(REPO_ROOT) if args.output_dir.is_relative_to(REPO_ROOT) else args.output_dir
+        )
         print(f"Wrote {len(files)} file(s) to {rel_dir}")
         print(f"Topics:     {manifest['topics']}")
         print(f"Questions:  {manifest['questions']}")
