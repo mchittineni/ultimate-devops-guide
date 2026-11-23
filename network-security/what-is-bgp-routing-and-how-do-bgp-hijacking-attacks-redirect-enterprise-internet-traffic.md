@@ -84,7 +84,7 @@ Prefix: 203.0.113.0/24   Origin AS: 64500   maxLength: 24
 
 - [[How do you troubleshoot Docker networking between containers?]] (`#415`): [How do you troubleshoot Docker networking between containers?](../docker/how-do-you-troubleshoot-docker-networking-between-containers.md)
 - [[How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?]] (`#517`): [How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?](../docker/how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation.md)
-- [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
+- [[How do you containerise a three-tier application with Docker and Docker Compose?]] (`#794`): [How do you containerise a three-tier application with Docker and Docker Compose?](../docker/how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -58,6 +58,21 @@ Asked as a scenario constantly ("the Application Gateway TLS certificate has exp
 5. **Verify from outside**, not from the host: a client-side `curl` plus your synthetic probe going green.
 6. **Fix the cause**: move to managed/automated issuance, add the 30/7-day alert, and remove the manual step. If the renewal existed but failed, find out why (DNS record deleted, API credential expired, rate limit, reload hook missing) - that is the actual incident.
 
+### When cert-manager let an Ingress certificate expire
+
+cert-manager renews on its own well before expiry, so an expired certificate on an Ingress means **renewal has been failing for weeks** and nobody was alerted. Writing a script to renew it is the wrong reflex - find out why the controller is stuck. Follow the chain of resources it creates, top to bottom:
+
+```text
+Certificate  ->  CertificateRequest  ->  Order  ->  Challenge   (ACME issuers)
+ READY=False      APPROVED / READY        state      reason: the real error lives here
+```
+
+1. `kubectl get certificate,certificaterequest,order,challenge -A` to see where it stopped, then `kubectl describe` the lowest failing object - the Challenge's events usually name the cause.
+2. Read the controller logs: `kubectl logs -n cert-manager deploy/cert-manager`.
+3. Typical causes: an **HTTP-01** challenge that never reaches the solver (wrong ingress class, a WAF or redirect rule intercepting `/.well-known/acme-challenge/`, port 80 closed); **DNS-01** permission errors (the IAM role behind IRSA or Pod Identity no longer covers the hosted zone); a misconfigured or not-ready `ClusterIssuer`; or ACME rate limits after repeated failed attempts.
+4. Fix the cause, trigger issuance with `cmctl renew <certificate> -n <namespace>`, and confirm the new `notAfter` from outside with `openssl s_client`.
+5. Close the gap with alerts on cert-manager's own metrics - `certmanager_certificate_ready_status{condition="False"}` and `certmanager_certificate_expiration_timestamp_seconds - time()` below 14 days - in addition to the external probe, so the next failed renewal pages someone while there is still time.
+
 ### Internal TLS and mTLS
 
 For service-to-service, a public CA is the wrong tool - you cannot get a public certificate for `payments.prod.svc.cluster.local`. Use a **private CA** and issue short-lived certificates automatically: cert-manager with a Vault or AWS Private CA issuer, or let a **service mesh** (Istio, Linkerd, Consul) handle it - the mesh issues workload identities, rotates them every few hours, and enforces mTLS without the application knowing. That is the answer to "how do you secure service-to-service communication": mTLS with automatically rotated, short-lived workload certificates, plus authorisation policy on top.
@@ -183,6 +198,7 @@ The alert that prevents the incident - from an EXTERNAL probe, not from the CA's
 - Explain DNS-01 versus HTTP-01 and say why DNS-01 is preferred: wildcards and non-public endpoints, fully automatable. Then add the ACM detail that the validation CNAME must remain in place for renewals.
 - Get the wildcard rule right: `*.example.com` covers one label only, not the apex and not a second level - so you need the apex in the SAN list. That precision is frequently tested.
 - Volunteer the missing-intermediate failure mode ("works in the browser, fails in `curl` or Java") and `openssl s_client -showcerts` as the check. It is the most common real TLS bug after expiry.
+- For "the cert-manager certificate on an Ingress expired", do not propose a renewal script: trace Certificate → CertificateRequest → Order → Challenge, read the Challenge events and controller logs, fix the cause (blocked HTTP-01, DNS-01 IAM permissions, issuer), force a renewal with `cmctl renew`, and add an alert on the expiry metric.
 - Mention that a renewed file is not a renewed service - the server must reload. A renewal that succeeded without a reload is a silent failure.
 - Have the expired-certificate runbook as an ordered sequence, ending with "fix the cause and add the 30/7-day alert" rather than just "install the new cert".
 - For internal traffic, say a public CA cannot issue for cluster-internal names, so use a private CA or a service mesh with short-lived automatically-rotated workload certificates - and name the mesh trade-off honestly.
