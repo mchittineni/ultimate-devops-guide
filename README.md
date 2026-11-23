@@ -54,7 +54,7 @@ Explore the entire repository visually through our **Interactive 3D Telemetry Gr
 - **Visual Infrastructure Mapping**: Explore relationship edges connecting every question and topic in the repository.
 - **Cross-Topic Concept Wikilinks**: Discover cross-cutting concepts between Docker, Kubernetes, CI/CD, IaC, and SRE.
 - **Filterable Telemetry**: Filter nodes live by difficulty, domain group, or specific keywords.
-- **Brain-Shaped Layout**: Topic domains sit where they would in a brain - the main domains as cerebral lobes mirrored across both hemispheres, interview prep in the cerebellum, and the foundations in the brainstem.
+- **Globe Layout**: Every question sits on the surface of a globe, with each topic domain as its own region and topic hubs just below the surface.
 
 ---
 
