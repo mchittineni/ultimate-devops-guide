@@ -57,6 +57,8 @@ The senior answer names the third and explains _why_: patching mutates state and
 
 Patch on a schedule the fleet is used to (weekly security, monthly full) so the path is exercised constantly; auto-apply security updates on non-critical tiers; report coverage and mean time to patch as metrics; and drive urgency from **exploitability**, not CVE count - a critical remote code execution on an internet-facing host is an incident, a medium in a package you do not load is a ticket. See [how do you prioritise vulnerabilities without blocking delivery](../devsecops/how-do-you-prioritise-vulnerabilities-without-blocking-delivery.md).
 
+**Let a scanner choose the next wave.** On AWS, **Amazon Inspector** continuously scans EC2 instances for package CVEs, either through the SSM agent or agentless by scanning EBS snapshots, and also covers ECR container images and Lambda functions. Its findings name the package, the fixed version, and a risk score that accounts for network reachability. Feed those findings into the patch plan: hosts with critical, internet-reachable findings go into the next Patch Manager or Ansible wave, the rest stay on the normal cadence. Inspector is a detection tool, not a patching tool; findings close only once the fixed package is actually installed and the host is rescanned. That makes it a useful check that a wave really worked. Other clouds have equivalents (Microsoft Defender for Servers, GCP VM Manager vulnerability reports), and outside the cloud an agent-based scanner plays the same role.
+
 ## Example
 
 ```yaml
@@ -143,6 +145,7 @@ aws ec2 create-snapshot --volume-id vol-0abc ...   # take this BEFORE patching
 - Be honest about rollback being weak for packages, and give the real mitigations: snapshots, keeping the previous kernel, and image replacement.
 - `serial` plus `max_fail_percentage: 0` is the concrete Ansible answer - it shows you know how to make a run stop rather than plough on.
 - Volunteer the immutable alternative and why it is better where the workload allows: replacing an instance is a deployment with a known rollback, whereas patching mutates state and can half-fail.
+- If asked "which AWS service tells you which installed packages are vulnerable?", the answer is Amazon Inspector. Then go one step further and say how its findings drive which hosts are patched first, and how a rescan confirms the wave worked.
 - Close on cadence and prioritisation: frequent small patch runs beat quarterly big ones, and urgency comes from exploitability and exposure rather than CVE counts. See [how do you manage services in Linux](../linux-administration/how-do-you-manage-services-in-linux.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
