@@ -386,6 +386,12 @@
       ],
       "related": [
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 508,
           "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
           "title": "What is GitOps and how does it fundamentally change release management?",
@@ -396,12 +402,6 @@
           "slug": "what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup",
           "title": "What are ephemeral preview environments and how do you manage their lifecycle and cleanup?",
           "topic": "cicd"
-        },
-        {
-          "id": 416,
-          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
-          "title": "Why does a container fail to start with a permission denied error?",
-          "topic": "docker"
         }
       ],
       "quiz": {
@@ -562,16 +562,16 @@
           "topic": "cicd"
         },
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 416,
           "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
           "title": "Why does a container fail to start with a permission denied error?",
           "topic": "docker"
-        },
-        {
-          "id": 508,
-          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
-          "title": "What is GitOps and how does it fundamentally change release management?",
-          "topic": "core-devops-concepts"
         }
       ],
       "quiz": {

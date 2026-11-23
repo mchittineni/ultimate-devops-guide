@@ -746,6 +746,63 @@
         "answerIndex": 1,
         "explanation": "The Backstage Software Catalog centralizes ownership, dependencies, documentation, and lifecycle status for every service across an enterprise, ending microservice discovery chaos."
       }
+    },
+    {
+      "id": 804,
+      "slug": "how-do-you-use-ai-assistants-and-agents-safely-in-day-to-day-devops-work",
+      "title": "How do you use AI assistants and agents safely in day-to-day DevOps work?",
+      "topic": "devops-tools-and-automation",
+      "category": "DevOps Tools and Automation",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devops-tools-and-automation",
+        "interview-questions",
+        "ai-assisted-development",
+        "llm",
+        "mcp",
+        "least-privilege"
+      ],
+      "path": "devops-tools-and-automation/how-do-you-use-ai-assistants-and-agents-safely-in-day-to-day-devops-work.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devops-tools-and-automation/how-do-you-use-ai-assistants-and-agents-safely-in-day-to-day-devops-work.md",
+      "shortAnswer": "Use AI where it is fast and checkable - scaffolding Terraform and Helm, explaining errors and logs, drafting runbooks and tests, triaging failed pipelines - and keep judgment and accountability with engineers. The safety comes from the same gates you apply to human work: generated code goes through pull requests, `terraform plan`, linters, policy checks and tests; agents connected to real systems (often through **MCP** servers) start with **read-only, least-privilege identities**; every state change is human-approved and audited; and no secrets or customer data go into prompts outside approved tools.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 399,
+          "slug": "how-do-you-promote-a-release-across-dev-staging-and-production",
+          "title": "How do you promote a release across dev, staging, and production?",
+          "topic": "cicd"
+        },
+        {
+          "id": 400,
+          "slug": "how-do-you-design-ci-cd-for-a-microservices-architecture",
+          "title": "How do you design CI/CD for a microservices architecture?",
+          "topic": "cicd"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Your team pilots an AI agent connected to the production EKS cluster through an MCP server. Which setup is the safest starting point?",
+        "options": [
+          "Bind the agent's ServiceAccount to cluster-admin so it can fix incidents without waiting for a human",
+          "Give the agent a read-only identity (for example the built-in view ClusterRole, which excludes Secrets) and route any change through a pull request and the normal GitOps review",
+          "Let the agent run kubectl with an engineer's personal kubeconfig so actions are attributed to a person",
+          "Allow write access but tell the model in its system prompt never to delete anything"
+        ],
+        "answerIndex": 1,
+        "explanation": "Start with least privilege: read-only access the agent can use for diagnosis, and every state change going through the same PR, plan and approval gates as human changes. Prompt instructions are not a security control, and shared personal credentials destroy the audit trail."
+      }
     }
   ]
 }

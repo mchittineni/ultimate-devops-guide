@@ -856,10 +856,10 @@
           "topic": "docker"
         },
         {
-          "id": 1,
-          "slug": "what-is-devops",
-          "title": "What is DevOps?",
-          "topic": "core-devops-concepts"
+          "id": 794,
+          "slug": "how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose",
+          "title": "How do you containerise a three-tier application with Docker and Docker Compose?",
+          "topic": "docker"
         }
       ],
       "quiz": {

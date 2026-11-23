@@ -1765,6 +1765,229 @@
         "answerIndex": 2,
         "explanation": "EKS upgrades the control plane one minor version at a time and never downgrades, and nodes may not be newer than the control plane - so the control plane goes first (1.34 to 1.35 is a single minor step), then compatible add-on versions, then the data plane. Upgrading nodes first would put kubelets ahead of the API server, which Kubernetes' version-skew policy forbids."
       }
+    },
+    {
+      "id": 795,
+      "slug": "how-do-you-control-image-sprawl-and-storage-cost-in-amazon-ecr",
+      "title": "How do you control image sprawl and storage cost in Amazon ECR?",
+      "topic": "aws-engineering",
+      "category": "AWS Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "aws-engineering",
+        "ecr",
+        "containers",
+        "cloud-cost-optimization"
+      ],
+      "path": "aws-engineering/how-do-you-control-image-sprawl-and-storage-cost-in-amazon-ecr.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/aws-engineering/how-do-you-control-image-sprawl-and-storage-cost-in-amazon-ecr.md",
+      "shortAnswer": "Attach an **ECR lifecycle policy** to every repository, managed in IaC, instead of writing a cleanup Lambda. A typical policy has a rule that expires **untagged** images a few days after push, a rule that keeps only the last N **build or PR** images by tag prefix, and a longer-lived rule for **release** tags, so anything you might roll back to survives. Preview the policy before enforcing it, turn on **tag immutability** so a tag always means one image, and remember that a lifecycle policy has no idea what is deployed - retention for release tags has to cover your rollback window.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 407,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim",
+          "title": "How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 444,
+          "slug": "how-do-requests-limits-and-qos-classes-work-in-kubernetes",
+          "title": "How do requests, limits, and QoS classes work in Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 281,
+          "slug": "how-do-you-choose-a-cloud-provider-for-a-new-workload",
+          "title": "How do you choose a cloud provider for a new workload?",
+          "topic": "cloud-platforms"
+        }
+      ],
+      "quiz": {
+        "stem": "A team wants ECR to delete untagged images after 7 days and keep only the 30 most recent `build-` images. What is the recommended mechanism?",
+        "options": [
+          "A scheduled Lambda function that lists images and calls batch-delete-image every night",
+          "An ECR lifecycle policy with one rule for untagged images (sinceImagePushed) and one for the build- prefix (imageCountMoreThan)",
+          "An S3 lifecycle rule on the bucket that stores ECR layers",
+          "Enabling tag immutability, which removes older images automatically"
+        ],
+        "answerIndex": 1,
+        "explanation": "ECR lifecycle policies are the native, free way to expire images by age or count, selected by tag status and tag prefix or pattern. ECR's backing storage is not exposed as an S3 bucket, and tag immutability only prevents tags being overwritten - it deletes nothing."
+      }
+    },
+    {
+      "id": 796,
+      "slug": "what-baseline-security-controls-would-you-apply-to-an-aws-account-on-a-tight-budget",
+      "title": "What baseline security controls would you apply to an AWS account on a tight budget?",
+      "topic": "aws-engineering",
+      "category": "AWS Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "aws-engineering",
+        "security",
+        "iam",
+        "guardrails"
+      ],
+      "path": "aws-engineering/what-baseline-security-controls-would-you-apply-to-an-aws-account-on-a-tight-budget.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/aws-engineering/what-baseline-security-controls-would-you-apply-to-an-aws-account-on-a-tight-budget.md",
+      "shortAnswer": "Most of the baseline is free settings, not paid products. Lock down the **root user** (MFA, no access keys), move people to **IAM Identity Center** with least-privilege permission sets and workloads to **roles** with no long-lived keys, turn on account-wide **S3 Block Public Access**, **default EBS encryption** and **IMDSv2 by default**, keep a **CloudTrail** trail to a locked-down bucket, restrict network exposure with tight **security groups** and SSM Session Manager instead of open SSH, and enforce it all with **SCPs** and Terraform-only changes. Then spend the small budget where detection pays most: **GuardDuty**, **IAM Access Analyzer** and budget alerts. Shield Standard is already on for everyone.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 546,
+          "slug": "how-does-cloud-iam-role-federation-differ-from-static-service-account-keys",
+          "title": "How does Cloud IAM Role Federation differ from static Service Account keys?",
+          "topic": "cloud-platforms"
+        },
+        {
+          "id": 543,
+          "slug": "how-does-the-cloud-shared-responsibility-model-divide-security-obligations-between-iaas-paas-and-saas",
+          "title": "How does the Cloud Shared Responsibility Model divide security obligations between IaaS, PaaS, and SaaS?",
+          "topic": "cloud-platforms"
+        },
+        {
+          "id": 790,
+          "slug": "what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost",
+          "title": "What Kubernetes production best practices do you follow for reliability, security, and cost?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": {
+        "stem": "A cost-conscious customer says they cannot afford Shield or WAF. Which statement about their baseline is accurate?",
+        "options": [
+          "Without paying for Shield Advanced they have no DDoS protection at all",
+          "Shield Standard is already applied to every account at no extra cost, and most of the highest-value baseline controls (root MFA, Block Public Access, default EBS encryption, IMDSv2, SCPs) are free settings",
+          "Security groups and network ACLs alone are a sufficient security baseline",
+          "CloudTrail must be bought as an add-on before any API activity is recorded"
+        ],
+        "answerIndex": 1,
+        "explanation": "Shield Standard protects every AWS customer automatically. The cheapest, highest-return controls are account settings and identity hygiene, not paid services; network rules matter but cover only one of several layers. CloudTrail event history records management events for 90 days at no cost."
+      }
+    },
+    {
+      "id": 797,
+      "slug": "what-are-the-pillars-of-the-aws-well-architected-framework",
+      "title": "What are the pillars of the AWS Well-Architected Framework?",
+      "topic": "aws-engineering",
+      "category": "AWS Engineering",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "aws-engineering",
+        "well-architected",
+        "architecture"
+      ],
+      "path": "aws-engineering/what-are-the-pillars-of-the-aws-well-architected-framework.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/aws-engineering/what-are-the-pillars-of-the-aws-well-architected-framework.md",
+      "shortAnswer": "Six: **Operational Excellence**, **Security**, **Reliability**, **Performance Efficiency**, **Cost Optimization**, and **Sustainability** (added in 2021 to the original five). Each pillar has design principles and a set of review questions, and the framework is applied through **Well-Architected Reviews** - usually in the free Well-Architected Tool - that produce a list of high- and medium-risk issues to fix. The point is not to memorise names but to show you can turn each pillar into concrete controls and make trade-offs between them.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 542,
+          "slug": "what-are-the-core-trade-offs-between-multi-cloud-hybrid-cloud-and-single-cloud-architectures",
+          "title": "What are the core trade-offs between Multi-Cloud, Hybrid-Cloud, and Single-Cloud architectures?",
+          "topic": "cloud-platforms"
+        },
+        {
+          "id": 407,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim",
+          "title": "How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 544,
+          "slug": "what-are-cloud-availability-zones-and-how-are-they-engineered-for-fault-independence",
+          "title": "What are Cloud Availability Zones and how are they engineered for fault independence?",
+          "topic": "cloud-platforms"
+        }
+      ],
+      "quiz": {
+        "stem": "Under the AWS shared responsibility model for sustainability, which of these is the customer's responsibility?",
+        "options": [
+          "The energy efficiency of AWS data-centre cooling systems",
+          "Rightsizing instances, scaling idle non-production resources to zero, and applying data lifecycle policies",
+          "Choosing renewable energy contracts for AWS regions",
+          "Nothing - the Sustainability pillar is entirely handled by AWS"
+        ],
+        "answerIndex": 1,
+        "explanation": "AWS is responsible for sustainability of the cloud (facilities, hardware, power). Customers are responsible for sustainability in the cloud: using only the resources a workload needs, choosing efficient instance types such as Graviton, and deleting or tiering data they no longer need."
+      }
+    },
+    {
+      "id": 798,
+      "slug": "when-do-you-use-amazon-api-gateway-versus-an-application-load-balancer",
+      "title": "When do you use Amazon API Gateway versus an Application Load Balancer?",
+      "topic": "aws-engineering",
+      "category": "AWS Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "aws-engineering",
+        "api-gateway",
+        "load-balancing",
+        "serverless"
+      ],
+      "path": "aws-engineering/when-do-you-use-amazon-api-gateway-versus-an-application-load-balancer.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/aws-engineering/when-do-you-use-amazon-api-gateway-versus-an-application-load-balancer.md",
+      "shortAnswer": "Use **API Gateway** when you need **API management**: per-client API keys, usage plans and quotas, request validation and transformation, caching, authorizers (IAM, Cognito, JWT, Lambda), and pay-per-request pricing that suits spiky or low-volume serverless APIs. Use an **ALB** when you need a **load balancer**: steady high-volume HTTP traffic to containers or EC2, long-lived connections and WebSockets at scale, gRPC, and predictable hourly-plus-capacity pricing that becomes far cheaper than per-request pricing at sustained volume. TLS, WAF, path routing, Lambda targets and basic OIDC authentication exist on **both**, so they are not the deciding factors.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 407,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim",
+          "title": "How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 25,
+          "slug": "what-are-the-different-types-of-cloud-services",
+          "title": "What are the different types of cloud services?",
+          "topic": "cloud-platforms"
+        },
+        {
+          "id": 546,
+          "slug": "how-does-cloud-iam-role-federation-differ-from-static-service-account-keys",
+          "title": "How does Cloud IAM Role Federation differ from static Service Account keys?",
+          "topic": "cloud-platforms"
+        }
+      ],
+      "quiz": {
+        "stem": "Which requirement most clearly points to Amazon API Gateway (REST API) rather than an Application Load Balancer?",
+        "options": [
+          "TLS termination with an ACM certificate",
+          "Attaching AWS WAF managed rules",
+          "Per-client API keys with usage plans that enforce throttling and monthly quotas",
+          "Routing requests to different target groups by URL path"
+        ],
+        "answerIndex": 2,
+        "explanation": "ALBs also terminate TLS with ACM certificates, integrate with AWS WAF, and route by path and host. Per-client API keys, usage plans, quotas and per-client throttling are API-management features that API Gateway REST APIs provide and ALB does not."
+      }
     }
   ]
 }

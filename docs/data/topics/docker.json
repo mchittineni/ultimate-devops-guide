@@ -701,10 +701,10 @@
           "topic": "kubernetes"
         },
         {
-          "id": 709,
-          "slug": "what-is-dast-dynamic-application-security-testing-and-how-is-owasp-zap-integrated-into-ci-cd-pipelines",
-          "title": "What is DAST (Dynamic Application Security Testing) and how is OWASP ZAP integrated into CI/CD pipelines?",
-          "topic": "devsecops"
+          "id": 790,
+          "slug": "what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost",
+          "title": "What Kubernetes production best practices do you follow for reliability, security, and cost?",
+          "topic": "kubernetes"
         }
       ],
       "quiz": {
@@ -1106,6 +1106,173 @@
         ],
         "answerIndex": 1,
         "explanation": "Docker's CLI talks to dockerd, which supervises containers. Podman's CLI starts each container itself (via conmon and an OCI runtime), so there is no root daemon to compromise, and rootless operation is the default."
+      }
+    },
+    {
+      "id": 792,
+      "slug": "can-you-delete-a-docker-image-that-a-container-is-still-using-and-what-happens-to-that-container",
+      "title": "Can you delete a Docker image that a container is still using, and what happens to that container?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "images",
+        "disk-cleanup"
+      ],
+      "path": "docker/can-you-delete-a-docker-image-that-a-container-is-still-using-and-what-happens-to-that-container.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/can-you-delete-a-docker-image-that-a-container-is-still-using-and-what-happens-to-that-container.md",
+      "shortAnswer": "Not really. A plain `docker rmi` fails while **any** container, running or stopped, was created from the image. With `-f` against a **tag**, Docker only removes the tag: the image becomes `<none>:<none>` and its layers stay on disk, because the container's filesystem is built on them. With `-f` against the **image ID** while a running container uses it, Docker refuses outright. The container is unaffected either way, and even after it is stopped it can be started again with `docker start`. What you lose is the ability to **recreate** it from that tag without pulling the image again.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 11,
+          "slug": "what-is-kubernetes",
+          "title": "What is Kubernetes?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 12,
+          "slug": "what-are-the-main-components-of-kubernetes-architecture",
+          "title": "What are the main components of Kubernetes architecture?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": {
+        "stem": "You run `docker rmi -f myapp:1.4` while a running container was created from that image. What happens?",
+        "options": [
+          "The container is stopped and deleted along with the image",
+          "The tag is removed, the image shows as `<none>`, and its layers stay because the container still needs them",
+          "The image layers are deleted and the container crashes on its next disk read",
+          "Docker refuses the command because `-f` cannot be used on tagged images"
+        ],
+        "answerIndex": 1,
+        "explanation": "A container references its image by ID, not by tag. Force-removing the tag only untags the image; Docker keeps the layers while any container depends on them, so no space is freed and the container keeps running."
+      }
+    },
+    {
+      "id": 793,
+      "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+      "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "troubleshooting",
+        "multi-arch",
+        "kubernetes"
+      ],
+      "path": "docker/why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs.md",
+      "shortAnswer": "Usually because \"the same image\" is not actually the same, or because the image is the same but the **environment around it** differs. The repeat causes are: a **different image** (rebuilt per environment, or a mutable tag such as `latest` that now points elsewhere), a **CPU architecture mismatch** (arm64 laptop build on amd64 nodes gives `exec format error`), **missing configuration** (environment variables, secrets, config files, endpoints), **identity and network** (IAM role, security groups, DNS, the app listening on `127.0.0.1`), and **runtime constraints** the laptop did not apply (memory limits, non-root user, read-only filesystem, probes). Build once in CI, deploy by digest, and diff the runtime settings rather than guessing.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 529,
+          "slug": "what-are-kubernetes-finalizers-and-how-do-you-resolve-a-namespace-stuck-in-the-terminating-state",
+          "title": "What are Kubernetes Finalizers and how do you resolve a namespace stuck in the Terminating state?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 788,
+          "slug": "how-do-you-troubleshoot-a-pod-that-fails-because-a-secret-or-configmap-cannot-be-mounted-or-referenced",
+          "title": "How do you troubleshoot a Pod that fails because a Secret or ConfigMap cannot be mounted or referenced?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": {
+        "stem": "An image built on an Apple Silicon laptop runs locally but every Pod on the cluster's x86 nodes exits immediately with `exec format error`. What is the cause?",
+        "options": [
+          "The image was built for arm64 only and the nodes run amd64",
+          "The container is running out of memory",
+          "The security group blocks the container port",
+          "The Deployment is missing a readiness probe"
+        ],
+        "answerIndex": 0,
+        "explanation": "exec format error means the kernel cannot execute the binary's architecture. Build multi-platform images in CI with docker buildx --platform linux/amd64,linux/arm64, or match the node architecture."
+      }
+    },
+    {
+      "id": 794,
+      "slug": "how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose",
+      "title": "How do you containerise a three-tier application with Docker and Docker Compose?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "docker-compose",
+        "multi-stage",
+        "networking"
+      ],
+      "path": "docker/how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose.md",
+      "shortAnswer": "One image per tier, one Compose file to run them together. The **frontend** (for example React) is built in a Node stage and served as static files by nginx using a multi-stage Dockerfile. The **API** (Node.js, Python, or similar) gets a slim, non-root image with only production dependencies. The **database** uses the official image unchanged, with a named volume for its data. Compose then puts the tiers on **separate networks** so only the API can reach the database, publishes **only the frontend port**, uses **health checks with `depends_on: condition: service_healthy`** for start order, and passes credentials as secrets rather than baking them into images.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 520,
+          "slug": "how-does-the-kubernetes-gateway-api-evolve-beyond-standard-ingress-resources",
+          "title": "How does the Kubernetes Gateway API evolve beyond standard Ingress resources?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 751,
+          "slug": "how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff",
+          "title": "How do you troubleshoot a Pod stuck in ImagePullBackOff?",
+          "topic": "kubernetes"
+        },
+        {
+          "id": 531,
+          "slug": "what-is-the-difference-between-service-types-clusterip-nodeport-loadbalancer-and-externalname",
+          "title": "What is the difference between Service types ClusterIP, NodePort, LoadBalancer, and ExternalName?",
+          "topic": "kubernetes"
+        }
+      ],
+      "quiz": {
+        "stem": "In a Compose file for a React frontend, a Node.js API, and MySQL, how should the database be exposed?",
+        "options": [
+          "Publish 3306 on the host so the frontend can query it directly",
+          "Put it on a backend network shared only with the API and publish no ports for it",
+          "Put all three services on the default network and publish every port",
+          "Run MySQL inside the API container to avoid networking"
+        ],
+        "answerIndex": 1,
+        "explanation": "Only the API needs the database. A separate backend network keeps the frontend from reaching it, and not publishing 3306 means nothing outside the Docker host can connect to it."
       }
     }
   ]

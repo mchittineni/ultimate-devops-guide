@@ -4825,6 +4825,278 @@
         }
       ],
       "quiz": null
+    },
+    {
+      "id": 800,
+      "slug": "how-do-you-answer-tell-me-about-yourself-in-a-devops-interview",
+      "title": "How do you answer 'tell me about yourself' in a DevOps interview?",
+      "topic": "interview-experience",
+      "category": "Interview Experience",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-experience",
+        "interview-questions",
+        "behavioural",
+        "self-introduction",
+        "career-switch"
+      ],
+      "path": "interview-experience/how-do-you-answer-tell-me-about-yourself-in-a-devops-interview.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/interview-experience/how-do-you-answer-tell-me-about-yourself-in-a-devops-interview.md",
+      "shortAnswer": "Give a 60-90 second story, not a resume recital: **who you are now** (role, team, what you own), **one concrete result** with a number, **how you got here** in a sentence or two, and **why this role is the logical next step**. Then stop. The opener sets the agenda for the whole interview, so mention only things you are happy to be questioned on - and be explicit about which experience was production work and which was self-directed learning.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 4,
+          "slug": "what-is-continuous-delivery",
+          "title": "What is Continuous Delivery?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Which opening best answers 'tell me about yourself' in a DevOps interview?",
+        "options": [
+          "A chronological recital of every job since graduation, followed by a list of every tool you have touched",
+          "A 60-90 second story: your current role and scope, one result with a number, how you got here, and why this role is the next step",
+          "A short personal biography covering hometown, hobbies, and family, leaving technical topics for later rounds",
+          "A description of a course project presented as if it ran at your current employer, because interviewers prefer production work"
+        ],
+        "answerIndex": 1,
+        "explanation": "The opener sets the agenda for the rest of the interview. A short present-past-future story with one measurable result gives the interviewer threads to pull, while a tool list or an inflated project invites probing you cannot survive."
+      }
+    },
+    {
+      "id": 801,
+      "slug": "how-do-you-answer-tell-me-about-a-challenge-you-faced-in-a-devops-interview",
+      "title": "How do you answer 'tell me about a challenge you faced' in a DevOps interview?",
+      "topic": "interview-experience",
+      "category": "Interview Experience",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-experience",
+        "interview-questions",
+        "behavioural",
+        "star-method",
+        "kubernetes-upgrades"
+      ],
+      "path": "interview-experience/how-do-you-answer-tell-me-about-a-challenge-you-faced-in-a-devops-interview.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/interview-experience/how-do-you-answer-tell-me-about-a-challenge-you-faced-in-a-devops-interview.md",
+      "shortAnswer": "Pick one real, recent problem with technical depth and a measurable outcome, and tell it as **STAR** - Situation, Task, Action, Result - in about two minutes, spending most of the time on **Action**: the options you weighed, why you chose one, and exactly what you did. Use \"I\" for your own decisions, give a number in the Result, and finish with what you would do differently. The technical details must be correct, because the interviewer will drill into them.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 2,
+          "slug": "what-are-the-benefits-of-devops",
+          "title": "What are the benefits of DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 5,
+          "slug": "what-is-continuous-deployment",
+          "title": "What is Continuous Deployment?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "In a 'challenge you faced' answer about upgrading EKS clusters three minor versions behind, which detail is technically correct?",
+        "options": [
+          "The control plane can jump straight to the target version, and nodes must always match it exactly",
+          "Since Kubernetes 1.28 the kubelet may be up to three minor versions older than the API server, so nodes need not be upgraded at every control-plane hop",
+          "The kubelet may be newer than the API server, so upgrading nodes first is the safest order",
+          "Tainting old nodes is enough to move workloads safely, so PodDisruptionBudgets are unnecessary"
+        ],
+        "answerIndex": 1,
+        "explanation": "The control plane moves one minor version at a time. From 1.28 the supported skew lets kubelets lag the API server by up to three minor versions (never lead it), and workloads move with cordon and drain, which respects PodDisruptionBudgets."
+      }
+    },
+    {
+      "id": 802,
+      "slug": "how-do-you-answer-where-do-you-see-yourself-in-five-years-in-a-devops-interview",
+      "title": "How do you answer 'where do you see yourself in five years' in a DevOps interview?",
+      "topic": "interview-experience",
+      "category": "Interview Experience",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-experience",
+        "interview-questions",
+        "behavioural",
+        "career-growth"
+      ],
+      "path": "interview-experience/how-do-you-answer-where-do-you-see-yourself-in-five-years-in-a-devops-interview.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/interview-experience/how-do-you-answer-where-do-you-see-yourself-in-five-years-in-a-devops-interview.md",
+      "shortAnswer": "Give an honest direction that fits the role you are interviewing for, a reason for it, and evidence you are already moving that way. For most DevOps candidates that means one of three tracks - **deep technical** (senior, staff or principal engineer), **architecture** (platform or solutions architect), or **people leadership** (team lead, engineering manager) - and saying clearly that you want to stay hands-on for the next couple of years. Finish by asking how people in the team have grown.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 510,
+          "slug": "what-is-shift-left-and-how-is-it-practically-implemented-across-the-sdlc",
+          "title": "What is Shift-Left and how is it practically implemented across the SDLC?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 512,
+          "slug": "what-are-the-core-capabilities-measured-by-dora-metrics-and-why-do-they-correlate-with-high-performance",
+          "title": "What are the core capabilities measured by DORA metrics and why do they correlate with high performance?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "Which answer to 'where do you see yourself in five years' is strongest for a hands-on senior DevOps role?",
+        "options": [
+          "\\\"In your job\\\" - it shows ambition",
+          "\\\"I haven't really thought about it\\\" - it shows flexibility",
+          "\\\"Hands-on for the next few years deepening platform skills, then a platform or solutions architect who still builds prototypes - and I'm already writing design docs and running reviews\\",
+          "\\\"Running my own consultancy\\\" - it shows entrepreneurial drive"
+        ],
+        "answerIndex": 2,
+        "explanation": "A strong answer is honest, fits the role on offer, names a direction with a reason, and shows concrete steps already taken. Architect paths in DevOps stay hands-on, which reassures an interviewer hiring for hands-on work."
+      }
+    },
+    {
+      "id": 803,
+      "slug": "how-do-you-describe-your-day-to-day-responsibilities-as-a-devops-engineer",
+      "title": "How do you describe your day-to-day responsibilities as a DevOps engineer?",
+      "topic": "interview-experience",
+      "category": "Interview Experience",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-experience",
+        "interview-questions",
+        "behavioural",
+        "agile",
+        "career-switch"
+      ],
+      "path": "interview-experience/how-do-you-describe-your-day-to-day-responsibilities-as-a-devops-engineer.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/interview-experience/how-do-you-describe-your-day-to-day-responsibilities-as-a-devops-engineer.md",
+      "shortAnswer": "Describe **how work reaches you** (sprint planning, tickets, on-call, ad-hoc requests), the **three or four areas you own** - typically Kubernetes, infrastructure as code, CI/CD, and Git or observability - with a concrete recurring task in each, **one improvement** you made with a number, and **how you handle interruptions** such as production issues. Pitch it to your level: juniors talk about running and supporting, seniors about designing, leading proofs of concept, and rolling changes out across teams. Only describe work you have actually done, and label anything self-directed as such.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 784,
+          "slug": "what-is-the-difference-between-devops-and-agile",
+          "title": "What is the difference between DevOps and Agile?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 1,
+          "slug": "what-is-devops",
+          "title": "What is DevOps?",
+          "topic": "core-devops-concepts"
+        },
+        {
+          "id": 508,
+          "slug": "what-is-gitops-and-how-does-it-fundamentally-change-release-management",
+          "title": "What is GitOps and how does it fundamentally change release management?",
+          "topic": "core-devops-concepts"
+        }
+      ],
+      "quiz": {
+        "stem": "What makes a description of your day-to-day DevOps work most convincing to an interviewer?",
+        "options": [
+          "Listing every tool on the job description, whether or not you have used it in production",
+          "Explaining how work reaches you, the three or four areas you own, one improvement with a measured result, and how you handle interruptions",
+          "Saying the job is mostly firefighting, so there is no typical day to describe",
+          "Describing tutorial projects as work done for your current client so the list looks complete"
+        ],
+        "answerIndex": 1,
+        "explanation": "Interviewers want to see how you actually work: where tasks come from, what you own, how you balance planned work against interrupts, and evidence of improvement. A tool list or borrowed projects collapse under the first follow-up."
+      }
+    },
+    {
+      "id": 805,
+      "slug": "what-questions-come-up-in-public-devops-mock-interviews",
+      "title": "What questions come up in public DevOps mock interviews?",
+      "topic": "interview-experience",
+      "category": "Interview Experience",
+      "difficulty": "Advanced",
+      "tags": [
+        "devops",
+        "interview-experience",
+        "interview-questions",
+        "mock-interviews",
+        "aws-engineering",
+        "kubernetes",
+        "infrastructure-as-code",
+        "cicd",
+        "docker"
+      ],
+      "path": "interview-experience/what-questions-come-up-in-public-devops-mock-interviews.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/interview-experience/what-questions-come-up-in-public-devops-mock-interviews.md",
+      "shortAnswer": "",
+      "sections": [
+        "Questions",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 535,
+          "slug": "what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup",
+          "title": "What are ephemeral preview environments and how do you manage their lifecycle and cleanup?",
+          "topic": "cicd"
+        },
+        {
+          "id": 17,
+          "slug": "what-is-jenkins",
+          "title": "What is Jenkins?",
+          "topic": "cicd"
+        },
+        {
+          "id": 396,
+          "slug": "how-do-you-speed-up-a-slow-ci-cd-pipeline",
+          "title": "How do you speed up a slow CI/CD pipeline?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": null
     }
   ]
 }

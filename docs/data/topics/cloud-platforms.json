@@ -337,6 +337,12 @@
       ],
       "related": [
         {
+          "id": 797,
+          "slug": "what-are-the-pillars-of-the-aws-well-architected-framework",
+          "title": "What are the pillars of the AWS Well-Architected Framework?",
+          "topic": "aws-engineering"
+        },
+        {
           "id": 191,
           "slug": "how-do-you-design-a-production-ready-vpc-on-aws",
           "title": "How do you design a production-ready VPC on AWS?",
@@ -346,12 +352,6 @@
           "id": 192,
           "slug": "how-does-aws-iam-evaluate-a-request",
           "title": "How does AWS IAM evaluate a request?",
-          "topic": "aws-engineering"
-        },
-        {
-          "id": 193,
-          "slug": "what-is-the-difference-between-ecs-eks-and-fargate",
-          "title": "What is the difference between ECS, EKS, and Fargate?",
           "topic": "aws-engineering"
         }
       ],
@@ -393,6 +393,12 @@
       ],
       "related": [
         {
+          "id": 796,
+          "slug": "what-baseline-security-controls-would-you-apply-to-an-aws-account-on-a-tight-budget",
+          "title": "What baseline security controls would you apply to an AWS account on a tight budget?",
+          "topic": "aws-engineering"
+        },
+        {
           "id": 746,
           "slug": "how-do-you-configure-google-cloud-workload-identity-for-secure-gke-service-authentication",
           "title": "How Do You Configure Google Cloud Workload Identity for Secure GKE Service Authentication?",
@@ -403,12 +409,6 @@
           "slug": "how-do-you-implement-vpc-service-controls-to-prevent-data-exfiltration-in-google-cloud",
           "title": "How Do You Implement VPC Service Controls to Prevent Data Exfiltration in Google Cloud?",
           "topic": "gcp-engineering"
-        },
-        {
-          "id": 734,
-          "slug": "what-is-aws-privatelink-and-how-does-it-enable-secure-cross-vpc-service-consumption",
-          "title": "What is AWS PrivateLink and How Does It Enable Secure Cross-VPC Service Consumption?",
-          "topic": "aws-engineering"
         }
       ],
       "quiz": {
@@ -449,6 +449,12 @@
       ],
       "related": [
         {
+          "id": 797,
+          "slug": "what-are-the-pillars-of-the-aws-well-architected-framework",
+          "title": "What are the pillars of the AWS Well-Architected Framework?",
+          "topic": "aws-engineering"
+        },
+        {
           "id": 191,
           "slug": "how-do-you-design-a-production-ready-vpc-on-aws",
           "title": "How do you design a production-ready VPC on AWS?",
@@ -458,12 +464,6 @@
           "id": 193,
           "slug": "what-is-the-difference-between-ecs-eks-and-fargate",
           "title": "What is the difference between ECS, EKS, and Fargate?",
-          "topic": "aws-engineering"
-        },
-        {
-          "id": 194,
-          "slug": "how-do-auto-scaling-groups-and-load-balancers-work-together-on-aws",
-          "title": "How do Auto Scaling groups and load balancers work together on AWS?",
           "topic": "aws-engineering"
         }
       ],
@@ -562,6 +562,12 @@
       ],
       "related": [
         {
+          "id": 796,
+          "slug": "what-baseline-security-controls-would-you-apply-to-an-aws-account-on-a-tight-budget",
+          "title": "What baseline security controls would you apply to an AWS account on a tight budget?",
+          "topic": "aws-engineering"
+        },
+        {
           "id": 746,
           "slug": "how-do-you-configure-google-cloud-workload-identity-for-secure-gke-service-authentication",
           "title": "How Do You Configure Google Cloud Workload Identity for Secure GKE Service Authentication?",
@@ -571,12 +577,6 @@
           "id": 747,
           "slug": "how-does-google-cloud-armor-defend-against-ddos-and-owasp-top-10-web-vulnerabilities",
           "title": "How Does Google Cloud Armor Defend Against DDoS and OWASP Top 10 Web Vulnerabilities?",
-          "topic": "gcp-engineering"
-        },
-        {
-          "id": 750,
-          "slug": "how-do-you-implement-vpc-service-controls-to-prevent-data-exfiltration-in-google-cloud",
-          "title": "How Do You Implement VPC Service Controls to Prevent Data Exfiltration in Google Cloud?",
           "topic": "gcp-engineering"
         }
       ],

@@ -6,12 +6,12 @@
   },
   "counts": {
     "topics": 40,
-    "questions": 787,
-    "quiz": 269,
+    "questions": 805,
+    "quiz": 286,
     "byDifficulty": {
-      "Beginner": 177,
-      "Intermediate": 394,
-      "Advanced": 216
+      "Beginner": 184,
+      "Intermediate": 404,
+      "Advanced": 217
     }
   },
   "topics": [
@@ -40,11 +40,11 @@
       "order": 2,
       "file": "topics/docker.json",
       "counts": {
-        "questions": 23,
-        "quiz": 8,
+        "questions": 26,
+        "quiz": 11,
         "byDifficulty": {
           "Beginner": 9,
-          "Intermediate": 11,
+          "Intermediate": 14,
           "Advanced": 3
         }
       }
@@ -57,11 +57,11 @@
       "order": 3,
       "file": "topics/kubernetes.json",
       "counts": {
-        "questions": 42,
-        "quiz": 15,
+        "questions": 46,
+        "quiz": 19,
         "byDifficulty": {
-          "Beginner": 6,
-          "Intermediate": 28,
+          "Beginner": 8,
+          "Intermediate": 30,
           "Advanced": 8
         }
       }
@@ -176,11 +176,11 @@
       "order": 10,
       "file": "topics/version-control.json",
       "counts": {
-        "questions": 17,
-        "quiz": 7,
+        "questions": 18,
+        "quiz": 8,
         "byDifficulty": {
           "Beginner": 7,
-          "Intermediate": 9,
+          "Intermediate": 10,
           "Advanced": 1
         }
       }
@@ -312,11 +312,11 @@
       "order": 18,
       "file": "topics/devops-tools-and-automation.json",
       "counts": {
-        "questions": 15,
-        "quiz": 6,
+        "questions": 16,
+        "quiz": 7,
         "byDifficulty": {
           "Beginner": 5,
-          "Intermediate": 8,
+          "Intermediate": 9,
           "Advanced": 2
         }
       }
@@ -584,11 +584,11 @@
       "order": 34,
       "file": "topics/aws-engineering.json",
       "counts": {
-        "questions": 37,
-        "quiz": 11,
+        "questions": 41,
+        "quiz": 15,
         "byDifficulty": {
-          "Beginner": 6,
-          "Intermediate": 20,
+          "Beginner": 7,
+          "Intermediate": 23,
           "Advanced": 11
         }
       }
@@ -686,12 +686,12 @@
       "order": 40,
       "file": "topics/interview-experience.json",
       "counts": {
-        "questions": 96,
-        "quiz": 0,
+        "questions": 101,
+        "quiz": 4,
         "byDifficulty": {
-          "Beginner": 5,
+          "Beginner": 9,
           "Intermediate": 28,
-          "Advanced": 63
+          "Advanced": 64
         }
       }
     }

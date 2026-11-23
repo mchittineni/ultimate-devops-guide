@@ -549,9 +549,9 @@
           "topic": "cloud-platforms"
         },
         {
-          "id": 524,
-          "slug": "what-is-the-difference-between-mutating-and-validating-admission-webhooks-in-kubernetes",
-          "title": "What is the difference between Mutating and Validating Admission Webhooks in Kubernetes?",
+          "id": 790,
+          "slug": "what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost",
+          "title": "What Kubernetes production best practices do you follow for reliability, security, and cost?",
           "topic": "kubernetes"
         }
       ],
@@ -717,9 +717,9 @@
           "topic": "cloud-platforms"
         },
         {
-          "id": 524,
-          "slug": "what-is-the-difference-between-mutating-and-validating-admission-webhooks-in-kubernetes",
-          "title": "What is the difference between Mutating and Validating Admission Webhooks in Kubernetes?",
+          "id": 790,
+          "slug": "what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost",
+          "title": "What Kubernetes production best practices do you follow for reliability, security, and cost?",
           "topic": "kubernetes"
         }
       ],
