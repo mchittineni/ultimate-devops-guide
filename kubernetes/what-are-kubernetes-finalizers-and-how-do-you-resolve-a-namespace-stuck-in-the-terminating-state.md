@@ -86,9 +86,9 @@ kubectl get ns stuck-namespace -o json | jq '.spec.finalizers = []' \
 
 ## Related Concepts
 
+- [[Why does a container image that works locally fail on Kubernetes or ECS?]] (`#793`): [Why does a container image that works locally fail on Kubernetes or ECS?](../docker/why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs.md)
 - [[How does the Kubernetes Controller Pattern implement declarative reconciliation loops?]] (`#622`): [How does the Kubernetes Controller Pattern implement declarative reconciliation loops?](../container-orchestration-advanced/how-does-the-kubernetes-controller-pattern-implement-declarative-reconciliation-loops.md)
 - [[What is the difference between client-go Informers, Listers, and Reflector components?]] (`#625`): [What is the difference between client-go Informers, Listers, and Reflector components?](../container-orchestration-advanced/what-is-the-difference-between-client-go-informers-listers-and-reflector-components.md)
-- [[What are Kubernetes Admission Webhook failure policies and how do you prevent self-locking outage loops?]] (`#628`): [What are Kubernetes Admission Webhook failure policies and how do you prevent self-locking outage loops?](../container-orchestration-advanced/what-are-kubernetes-admission-webhook-failure-policies-and-how-do-you-prevent-self-locking-outage-loops.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

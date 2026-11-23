@@ -103,9 +103,9 @@ kubectl top pods -l app=api          # is the metrics-server even reporting?
 
 ## Related Concepts
 
+- [[Why does a container image that works locally fail on Kubernetes or ECS?]] (`#793`): [Why does a container image that works locally fail on Kubernetes or ECS?](../docker/why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs.md)
 - [[How do you troubleshoot a failed Helm release?]] (`#412`): [How do you troubleshoot a failed Helm release?](../container-orchestration-advanced/how-do-you-troubleshoot-a-failed-helm-release.md)
 - [[How do you run and scale a stateful application on Kubernetes?]] (`#413`): [How do you run and scale a stateful application on Kubernetes?](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md)
-- [[What are CustomResourceDefinitions and operators in Kubernetes?]] (`#452`): [What are CustomResourceDefinitions and operators in Kubernetes?](../container-orchestration-advanced/what-are-customresourcedefinitions-and-operators-in-kubernetes.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
