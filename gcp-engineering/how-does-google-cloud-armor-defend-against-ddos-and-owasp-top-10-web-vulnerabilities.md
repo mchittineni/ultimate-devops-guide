@@ -100,7 +100,7 @@ gcloud compute backend-services update checkout-backend --global --security-poli
 
 - [[How does Cloud IAM Role Federation differ from static Service Account keys?]] (`#546`): [How does Cloud IAM Role Federation differ from static Service Account keys?](../cloud-platforms/how-does-cloud-iam-role-federation-differ-from-static-service-account-keys.md)
 - [[How does the Cloud Shared Responsibility Model divide security obligations between IaaS, PaaS, and SaaS?]] (`#543`): [How does the Cloud Shared Responsibility Model divide security obligations between IaaS, PaaS, and SaaS?](../cloud-platforms/how-does-the-cloud-shared-responsibility-model-divide-security-obligations-between-iaas-paas-and-saas.md)
-- [[What is the difference between Mutating and Validating Admission Webhooks in Kubernetes?]] (`#524`): [What is the difference between Mutating and Validating Admission Webhooks in Kubernetes?](../kubernetes/what-is-the-difference-between-mutating-and-validating-admission-webhooks-in-kubernetes.md)
+- [[What Kubernetes production best practices do you follow for reliability, security, and cost?]] (`#790`): [What Kubernetes production best practices do you follow for reliability, security, and cost?](../kubernetes/what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
