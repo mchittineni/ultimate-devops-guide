@@ -78,9 +78,9 @@ curl -s "http://127.0.0.1:8500/v1/health/service/payments?passing" | jq '.[].Ser
 
 ## Related Concepts
 
+- [[Why does a container image that works locally fail on Kubernetes or ECS?]] (`#793`): [Why does a container image that works locally fail on Kubernetes or ECS?](../docker/why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs.md)
+- [[How do you containerise a three-tier application with Docker and Docker Compose?]] (`#794`): [How do you containerise a three-tier application with Docker and Docker Compose?](../docker/how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose.md)
 - [[What is GitOps and how does it fundamentally change release management?]] (`#508`): [What is GitOps and how does it fundamentally change release management?](../core-devops-concepts/what-is-gitops-and-how-does-it-fundamentally-change-release-management.md)
-- [[What are ephemeral preview environments and how do you manage their lifecycle and cleanup?]] (`#535`): [What are ephemeral preview environments and how do you manage their lifecycle and cleanup?](../cicd/what-are-ephemeral-preview-environments-and-how-do-you-manage-their-lifecycle-and-cleanup.md)
-- [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
