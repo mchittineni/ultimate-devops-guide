@@ -56,6 +56,17 @@ PodDisruptionBudgets on every multi-replica workload (and none that allow zero d
 
 For a large jump (several versions behind) or a risky change (a CNI swap), build a new cluster at the target version, deploy everything through GitOps, and shift traffic with weighted DNS or the load balancer. It costs a second cluster for a while and requires stateless workloads or externalised state, but it gives you something in-place upgrades never can: a rollback.
 
+### What if the upgrade fails partway?
+
+Because the control plane cannot be downgraded, "rollback" has to mean **fail over to something prepared beforehand**, not undo. Decide which of these you have before you start:
+
+- **Data plane**: reversible. Keep the previous launch template version or AMI, or leave the old node group running (cordoned) until the new one is verified, so a node-level problem is fixed by shifting Pods back rather than by rebuilding anything.
+- **Add-ons**: record the current versions and configuration (`describe-addon`) so a misbehaving CNI or CoreDNS build can be pinned back to the previous version that is still compatible with the new control plane.
+- **Workloads**: Velero backups of cluster resources and volume snapshots, plus everything in Git (Terraform, Helm values, Argo CD applications), so any cluster can be rebuilt as a routine operation rather than an emergency.
+- **Traffic**: for risky or multi-version jumps, a blue/green cluster on the old version that stays up until the new one is proven; Route 53 weighted records (or the load balancer's weighted target groups) move traffic back in seconds.
+
+Answering "we would restore from backups, with some downtime" is honest but weak: it treats the failure as unplanned. The stronger answer is that the pre-flight checks make failure unlikely, and the parallel cluster or old node group makes it cheap.
+
 ## Example
 
 ```bash
@@ -105,6 +116,7 @@ spec:
 - Know the support numbers: 14 months standard, 12 months extended at a much higher price, and the upgrade policy that lets EKS force the upgrade instead.
 - Explain how each data-plane type rolls: managed node groups drain with PDBs, Karpenter replaces drifted nodes, Fargate needs Pod restarts.
 - Mention a PDB that allows zero disruptions as the classic stuck drain, and the five-free-IPs requirement as the classic blocked control-plane upgrade.
+- When asked "what if it fails halfway?", say the control plane is a one-way door, so the contingency is prepared in advance: old node group or launch template for the data plane, pinned add-on versions, Velero backups, and a blue/green cluster whose DNS weight is the tested rollback.
 - Offer blue/green clusters for big jumps, and be honest that it needs GitOps and externalised state. See [how do you upgrade a production Kubernetes cluster with zero downtime](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md), [what is the difference between ECS, EKS, and Fargate](./what-is-the-difference-between-ecs-eks-and-fargate.md), and [securing Pod access with EKS Pod Identity or IRSA](./how-do-you-secure-pod-access-to-aws-resources-using-eks-pod-identity-or-irsa.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

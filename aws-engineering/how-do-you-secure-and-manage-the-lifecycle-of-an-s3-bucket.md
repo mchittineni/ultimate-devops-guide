@@ -46,6 +46,14 @@ Note the distinction interviewers probe: **IAM policies** are attached to the id
 
 The full process, which comes up as a step-by-step question: create or identify the **principal** (ideally a role, not an IAM user with keys), attach an **identity policy** granting the specific actions on the specific bucket and prefix ARNs (both `arn:...:bucket` for `ListBucket` and `arn:...:bucket/*` for object actions - forgetting the first is why `aws s3 ls` fails while `cp` works), add a **bucket policy** statement if the principal is in another account, ensure the **KMS key policy** allows that principal if the bucket uses SSE-KMS, and then verify with `aws sts get-caller-identity` and an actual call. For temporary sharing with someone who has no AWS identity at all, use a **presigned URL** with a short expiry rather than making anything public.
 
+**How presigned URLs actually behave.** `aws s3 presign s3://bucket/key --expires-in 900` (or `generate_presigned_url` in an SDK) signs a request locally with the caller's credentials - no API call, nothing stored in S3. Three consequences interviewers probe:
+
+- The URL carries the **signer's permissions**, evaluated when it is used: if the signing role cannot read the object (IAM, bucket policy, KMS key policy, or a `SourceVpce` condition the downloader does not meet), the URL returns 403.
+- It is a **bearer token**: anyone holding it can use it until it expires, so keep the expiry to minutes, log the access, and never paste one into a ticket.
+- It stops working at the **earlier** of `--expires-in` and the expiry of the signing credentials. SigV4 allows up to 7 days, but a URL signed with a role's temporary session credentials (an instance profile, Lambda, or a CI role) dies with that session, however long you asked for. Sign with a dedicated role and a sensible session duration if links must last hours.
+
+For uploads, a presigned `PUT` (or a presigned POST with conditions on size and content type) lets clients send large files straight to S3 without passing them through your API.
+
 The related debugging question - _a user has a role with a policy granting bucket access but still cannot access it_ - has a fixed checklist: an explicit **deny** somewhere (bucket policy, SCP, or a permissions **boundary**), a **KMS key policy** that does not include them, **Block Public Access** or a `SourceVpce`/`SourceIp` condition they do not satisfy, the missing bucket-level ARN, a **wrong region endpoint**, or an SCP at the organisation level. Name permission boundaries and SCPs explicitly - that is often the intended answer.
 
 ### Lifecycle configuration
@@ -83,6 +91,21 @@ Multipart upload splits a large object into parts, uploads them in parallel (and
 ### Static websites without public access
 
 The modern pattern: keep the bucket **private**, put CloudFront in front, and use **Origin Access Control** so only that distribution can read the bucket. You get TLS, a custom domain, caching, WAF, and no public bucket. The legacy S3 website endpoint requires public objects and is not the right answer any more.
+
+Hosting `abc.com` end to end, the steps asked for in order:
+
+1. **Bucket**: private, Block Public Access on, Object Ownership `BucketOwnerEnforced`, with `index.html` (and an error page) uploaded. Static website hosting does not need to be enabled for this pattern.
+2. **CloudFront distribution** with the bucket's **REST endpoint** as origin and **Origin Access Control** - OAC does not work with the website endpoint. The bucket policy allows `s3:GetObject` only to `cloudfront.amazonaws.com` with `AWS:SourceArn` set to the distribution's ARN.
+3. **Default root object** `index.html`, and custom error responses (a real 404 page, or 403/404 mapped to `/index.html` with status 200 for a single-page app).
+4. **Certificate**: an ACM certificate for `abc.com` and `www.abc.com`, requested in **us-east-1** (CloudFront only uses certificates from that region) and DNS-validated; add both names as alternate domain names and redirect HTTP to HTTPS.
+5. **DNS**: Route 53 **alias** A and AAAA records for the apex and `www` pointing at the distribution - an alias works at the zone apex, where a CNAME cannot.
+6. **Deploy**: `aws s3 sync --delete`, then a CloudFront invalidation (or versioned file names so invalidation is rarely needed).
+
+The legacy alternative without CloudFront - enable static website hosting, name the bucket exactly `abc.com`, grant public read, and alias the domain to the website endpoint - works but is **HTTP only** and needs a public bucket, which is why it is the wrong default.
+
+### Cross-origin access (CORS)
+
+A site served from one bucket or domain that loads assets from another bucket with browser JavaScript (`fetch`, XHR, drawing to a canvas, web fonts) is blocked by the browser's same-origin policy, not by S3 - two S3 website endpoints have different hostnames, so they are different origins, regardless of region. The fix is a **CORS configuration on the bucket that serves the assets**: `AllowedOrigins` set to the site's exact origin, `AllowedMethods` `GET` and `HEAD`, the headers the client sends, and a `MaxAgeSeconds` so preflights are cached. Replication is a common wrong answer - it copies objects to another bucket but grants no cross-origin access. Also note that a plain `<img src>` does not need CORS at all; it only matters when script reads the response. The cleaner long-term design is one CloudFront distribution with both buckets as origins on different paths, so the browser sees a single origin.
 
 ### Replication
 
@@ -227,6 +250,21 @@ aws s3api list-objects-v2 --bucket acme-prod-data --query \
   '[sum(Contents[].Size), length(Contents)]'
 aws s3api get-bucket-metrics-configuration --bucket acme-prod-data --id EntireBucket
 
+# Temporary access to one object for 15 minutes (capped by the signer's session lifetime)
+aws s3 presign s3://acme-prod-data/reports/q3.pdf --expires-in 900
+
+# CORS on the bucket that SERVES the images, allowing only the site's origin
+aws s3api put-bucket-cors --bucket acme-images --cors-configuration '{
+  "CORSRules": [{
+    "AllowedOrigins": ["https://www.example.com"],
+    "AllowedMethods": ["GET", "HEAD"],
+    "AllowedHeaders": ["*"],
+    "MaxAgeSeconds": 3000
+  }]
+}'
+curl -sI -H 'Origin: https://www.example.com' https://acme-images.s3.amazonaws.com/logo.png \
+  | grep -i access-control-allow-origin             # header present = CORS rule matched
+
 # Why can this role not read the bucket? Check for denies, not just allows.
 aws iam simulate-principal-policy --policy-source-arn arn:aws:iam::111122223333:role/app \
   --action-names s3:GetObject --resource-arns arn:aws:s3:::acme-prod-data/x
@@ -242,7 +280,9 @@ aws accessanalyzer list-findings --analyzer-arn "$ANALYZER"   # unintended publi
 - For lifecycle, cover all four rule types and lead with the two people forget: **noncurrent version expiry** (why storage grows despite deletions) and **AbortIncompleteMultipartUpload** (invisible, billed waste). Answer the versioned-delete-after-10-days scenario with expiration plus noncurrent expiration plus delete-marker cleanup.
 - Mention minimum storage durations and per-object transition charges, and the "do not transition tiny objects" rule. Then offer Intelligent-Tiering as the default when access patterns are unknown.
 - For the failed 5 GB of a 10 GB upload, answer with `list-multipart-uploads`/`list-parts` and note the parts are billed - then either complete or abort. That is the exact question, and the storage-cost consequence is the part that impresses.
-- For static websites, give the private-bucket-plus-CloudFront-with-OAC pattern rather than the legacy public website endpoint.
+- For static websites, give the private-bucket-plus-CloudFront-with-OAC pattern rather than the legacy public website endpoint - and be able to list every step: OAC bucket policy, default root object, an ACM certificate in **us-east-1**, and Route 53 alias records.
+- For presigned URLs, say the URL inherits the signer's permissions and dies when the signing credentials do, even if `--expires-in` is longer - the reason a link signed by a Lambda role stops working early.
+- For "a site in one bucket loads images from another bucket", the answer is CORS on the image bucket, not replication - and a plain `<img>` tag does not need CORS.
 - Have the "policy allows but access is denied" checklist ready: explicit deny, SCP, permissions boundary, KMS key policy, missing bucket-level ARN, or a source condition. See [what are the S3 storage classes](./what-are-the-s3-storage-classes-and-when-do-you-use-each.md), [how does AWS IAM evaluate a request](./how-does-aws-iam-evaluate-a-request.md), [what are VPC endpoints](./what-are-vpc-endpoints-and-when-do-you-use-a-gateway-versus-an-interface-endpoint.md), and [choosing between EBS, EFS, and S3](./how-do-you-choose-between-ebs-efs-and-s3.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

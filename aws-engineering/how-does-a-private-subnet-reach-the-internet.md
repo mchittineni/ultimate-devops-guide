@@ -30,6 +30,8 @@ isolated subnet route table:  10.20.0.0/16 -> local           <- no default rout
 
 So the answer to "how can you tell whether a subnet is public or private?" is: look at its route table for a `0.0.0.0/0` route to an internet gateway. Auto-assign public IP being enabled is a hint, not the definition - an instance with a public IP in a subnet with no IGW route still cannot reach the internet, and that is a genuinely common misconfiguration.
 
+**Where the internet gateway attaches.** An internet gateway is attached to the **VPC**, never to a subnet, and a VPC can have at most one. There is no subnet-level attachment to make: a subnet becomes public only because the route table associated with it sends `0.0.0.0/0` (and `::/0` for IPv6) to that gateway, and instances in it also need a public IPv4 or Elastic IP. Interviewers often push back with "are you sure it is not the subnet?" to test whether you hold the right model - hold it. Contrast it with the zonal NAT gateway, which _is_ created in a specific subnet. A subnet with no explicit association silently uses the VPC's **main** route table, which is a classic reason a "public" subnet from a new module has no internet route.
+
 ### Why the NAT gateway must be in a public subnet
 
 This is the question interviewers ask to see whether you understand routing rather than diagrams. The NAT gateway is itself a resource that needs to reach the internet: it takes the private instance's traffic, rewrites the source to its own Elastic IP, and forwards it - to its subnet's default route. If you place it in a private subnet, its own default route points at a NAT gateway (possibly itself), and the traffic goes nowhere. **A zonal NAT gateway in a private subnet is a black hole.**
@@ -152,6 +154,7 @@ aws cloudwatch get-metric-statistics --namespace AWS/NATGateway \
 ## Interview tips
 
 - Define public versus private by the **route table**, not by the presence of a public IP. That single reframe answers several questions at once, including "how can you tell whether a subnet is public?"
+- If asked whether an internet gateway attaches to a subnet or a VPC, answer **the VPC** (one per VPC) and explain that the subnet's route table is what uses it. Expect an "are you sure?" and stand by it.
 - Explain why the NAT gateway must sit in a public subnet - it needs its own default route to the internet gateway - and say plainly that a NAT in a private subnet is a black hole.
 - Describe the protection as "no inbound translation mapping exists", not as filtering. It shows you understand NAT rather than repeating a diagram caption.
 - For the how-many-NAT-gateways question, give minimum one and recommended one **per AZ**, and justify it with both AZ failure isolation and cross-AZ data-transfer cost. Then mention the regional NAT gateway, which delivers the same per-AZ behaviour as one resource with no public subnet.
