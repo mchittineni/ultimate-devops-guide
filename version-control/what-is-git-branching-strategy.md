@@ -27,6 +27,14 @@ tags:
 
 Whatever the model, the practices that matter more than the diagram are: short-lived branches, small pull requests, protected `main` with required checks, and a linear, readable history.
 
+**Hotfixes: the procedure every model needs.** A bug found after release is where a branching strategy is actually tested. The safe sequence is the same whichever model you use:
+
+1. **Mitigate first.** Roll back to the previous version or flip the feature-flag kill switch. That buys time, so the code fix does not have to be rushed.
+2. **Branch from what is actually running**, meaning the release tag (`v1.8.0`) or the release branch, not a `main` that already holds two weeks of unreleased work. With pure trunk-based development and continuous deployment, `main` _is_ what is running, so you fix forward on `main`.
+3. **Minimal fix plus a regression test.** Review can be expedited, but the change still goes through the same CI pipeline, scans, and single build as any other change.
+4. **Tag a patch version** (`v1.8.1`) and deploy it through the normal promotion path, ideally as a short canary.
+5. **Bring the fix back** to `main` (and any other supported release branches) by merge or `git cherry-pick -x`, so the next release does not bring the bug back.
+
 ## Example
 
 ```bash
@@ -40,6 +48,13 @@ gh pr create --fill                       # review + required checks, then squas
 git switch -c release/2.4 v2.4.0
 git cherry-pick -x 9f2c1ab                # -x records the original commit in the message
 git tag -a v2.4.1 -m "2.4.1" && git push origin release/2.4 v2.4.1
+
+# Hotfix: branch from the released tag, not from a main that has moved on
+git switch -c hotfix/1.8.1 v1.8.0
+git commit -am "fix: correct refund rounding (+ regression test)"
+git push -u origin hotfix/1.8.1          # PR, full CI, expedited review
+git tag -a v1.8.1 -m "1.8.1" && git push origin v1.8.1
+git switch main && git cherry-pick -x hotfix/1.8.1   # so the next release does not regress
 ```
 
 ## Interview tips
@@ -47,6 +62,14 @@ git tag -a v2.4.1 -m "2.4.1" && git push origin release/2.4 v2.4.1
 - The strongest answer explains the _criteria_ for choosing, not just the diagrams.
 - Long-lived branches are the real enemy - name merge hell and delayed integration feedback.
 - Feature flags are what let trunk-based development work with unfinished features.
+- Expect "a bug is found right after a release, now what?". A weak answer is "fix it on `main` and redeploy", which ships every unreleased change along with the fix. Walk through mitigate, branch from the tag, patch version, same pipeline, and merge back.
+
+**Telling it as a STAR story** (an adaptable example)
+
+- **Situation:** After releasing v1.8.0 of a payments API, a rounding bug hit a small share of refunds, and `main` already held two weeks of unreleased features.
+- **Task:** Get a fix to production fast without shipping the unreleased work.
+- **Action:** Turned off the new refund path with its feature flag to stop the damage, branched `hotfix/1.8.1` from the `v1.8.0` tag, wrote a failing test and a minimal fix, ran the full CI pipeline with an expedited review, tagged `v1.8.1`, promoted it through staging to a prod canary, then cherry-picked it into `main` with `-x`.
+- **Result:** The fix was live about 90 minutes after detection with no unreleased code leaking, and the postmortem added a property-based test for currency rounding.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
