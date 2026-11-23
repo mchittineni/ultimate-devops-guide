@@ -90,8 +90,8 @@ resource "aws_dx_gateway_association" "prod_vpc" {
 ## Related Concepts
 
 - [[How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?]] (`#517`): [How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?](../docker/how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation.md)
+- [[How do you containerise a three-tier application with Docker and Docker Compose?]] (`#794`): [How do you containerise a three-tier application with Docker and Docker Compose?](../docker/how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose.md)
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
-- [[What are the benefits of DevOps?]] (`#2`): [What are the benefits of DevOps?](../core-devops-concepts/what-are-the-benefits-of-devops.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
