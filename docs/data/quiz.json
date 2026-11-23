@@ -4,7 +4,7 @@
     "repo": "https://github.com/mchittineni/ultimate-devops-guide",
     "branch": "main"
   },
-  "count": 269,
+  "count": 286,
   "questions": [
     {
       "id": 508,
@@ -394,6 +394,95 @@
         ],
         "answerIndex": 1,
         "explanation": "Docker's CLI talks to dockerd, which supervises containers. Podman's CLI starts each container itself (via conmon and an OCI runtime), so there is no root daemon to compromise, and rootless operation is the default."
+      }
+    },
+    {
+      "id": 792,
+      "slug": "can-you-delete-a-docker-image-that-a-container-is-still-using-and-what-happens-to-that-container",
+      "title": "Can you delete a Docker image that a container is still using, and what happens to that container?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "images",
+        "disk-cleanup"
+      ],
+      "path": "docker/can-you-delete-a-docker-image-that-a-container-is-still-using-and-what-happens-to-that-container.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/can-you-delete-a-docker-image-that-a-container-is-still-using-and-what-happens-to-that-container.md",
+      "shortAnswer": "Not really. A plain `docker rmi` fails while **any** container, running or stopped, was created from the image. With `-f` against a **tag**, Docker only removes the tag: the image becomes `<none>:<none>` and its layers stay on disk, because the container's filesystem is built on them. With `-f` against the **image ID** while a running container uses it, Docker refuses outright. The container is unaffected either way, and even after it is stopped it can be started again with `docker start`. What you lose is the ability to **recreate** it from that tag without pulling the image again.",
+      "quiz": {
+        "stem": "You run `docker rmi -f myapp:1.4` while a running container was created from that image. What happens?",
+        "options": [
+          "The container is stopped and deleted along with the image",
+          "The tag is removed, the image shows as `<none>`, and its layers stay because the container still needs them",
+          "The image layers are deleted and the container crashes on its next disk read",
+          "Docker refuses the command because `-f` cannot be used on tagged images"
+        ],
+        "answerIndex": 1,
+        "explanation": "A container references its image by ID, not by tag. Force-removing the tag only untags the image; Docker keeps the layers while any container depends on them, so no space is freed and the container keeps running."
+      }
+    },
+    {
+      "id": 793,
+      "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+      "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "troubleshooting",
+        "multi-arch",
+        "kubernetes"
+      ],
+      "path": "docker/why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs.md",
+      "shortAnswer": "Usually because \"the same image\" is not actually the same, or because the image is the same but the **environment around it** differs. The repeat causes are: a **different image** (rebuilt per environment, or a mutable tag such as `latest` that now points elsewhere), a **CPU architecture mismatch** (arm64 laptop build on amd64 nodes gives `exec format error`), **missing configuration** (environment variables, secrets, config files, endpoints), **identity and network** (IAM role, security groups, DNS, the app listening on `127.0.0.1`), and **runtime constraints** the laptop did not apply (memory limits, non-root user, read-only filesystem, probes). Build once in CI, deploy by digest, and diff the runtime settings rather than guessing.",
+      "quiz": {
+        "stem": "An image built on an Apple Silicon laptop runs locally but every Pod on the cluster's x86 nodes exits immediately with `exec format error`. What is the cause?",
+        "options": [
+          "The image was built for arm64 only and the nodes run amd64",
+          "The container is running out of memory",
+          "The security group blocks the container port",
+          "The Deployment is missing a readiness probe"
+        ],
+        "answerIndex": 0,
+        "explanation": "exec format error means the kernel cannot execute the binary's architecture. Build multi-platform images in CI with docker buildx --platform linux/amd64,linux/arm64, or match the node architecture."
+      }
+    },
+    {
+      "id": 794,
+      "slug": "how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose",
+      "title": "How do you containerise a three-tier application with Docker and Docker Compose?",
+      "topic": "docker",
+      "category": "Docker",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "docker",
+        "docker-compose",
+        "multi-stage",
+        "networking"
+      ],
+      "path": "docker/how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/docker/how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose.md",
+      "shortAnswer": "One image per tier, one Compose file to run them together. The **frontend** (for example React) is built in a Node stage and served as static files by nginx using a multi-stage Dockerfile. The **API** (Node.js, Python, or similar) gets a slim, non-root image with only production dependencies. The **database** uses the official image unchanged, with a named volume for its data. Compose then puts the tiers on **separate networks** so only the API can reach the database, publishes **only the frontend port**, uses **health checks with `depends_on: condition: service_healthy`** for start order, and passes credentials as secrets rather than baking them into images.",
+      "quiz": {
+        "stem": "In a Compose file for a React frontend, a Node.js API, and MySQL, how should the database be exposed?",
+        "options": [
+          "Publish 3306 on the host so the frontend can query it directly",
+          "Put it on a backend network shared only with the API and publish no ports for it",
+          "Put all three services on the default network and publish every port",
+          "Run MySQL inside the API container to avoid networking"
+        ],
+        "answerIndex": 1,
+        "explanation": "Only the API needs the database. A separate backend network keeps the frontend from reaching it, and not publishing 3306 means nothing outside the Docker host can connect to it."
       }
     },
     {
@@ -837,6 +926,126 @@
         ],
         "answerIndex": 1,
         "explanation": "Pod Security Admission evaluates Pods when they are created or updated. Existing Pods are not touched, but the ReplicaSet's next Pod creation (scale-up, rollout, node drain) is denied - which is why you roll out with warn and audit modes first."
+      }
+    },
+    {
+      "id": 788,
+      "slug": "how-do-you-troubleshoot-a-pod-that-fails-because-a-secret-or-configmap-cannot-be-mounted-or-referenced",
+      "title": "How do you troubleshoot a Pod that fails because a Secret or ConfigMap cannot be mounted or referenced?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "secrets",
+        "configmap",
+        "troubleshooting"
+      ],
+      "path": "kubernetes/how-do-you-troubleshoot-a-pod-that-fails-because-a-secret-or-configmap-cannot-be-mounted-or-referenced.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-troubleshoot-a-pod-that-fails-because-a-secret-or-configmap-cannot-be-mounted-or-referenced.md",
+      "shortAnswer": "Start with `kubectl describe pod` and read the **status and events**, because the way the Pod fails tells you how the object is referenced. A missing Secret or ConfigMap used as a **volume** leaves the Pod in `ContainerCreating` with a `FailedMount` event; one used for **environment variables** gives `CreateContainerConfigError`. From there the cause is almost always one of a short list: the object does not exist yet, it is in a **different namespace**, the **name or key** is misspelled, an external secret controller has not synced it, or the mount works but the application cannot **read** the file. The kubelet keeps retrying, so once the object is fixed the Pod usually recovers without being recreated.",
+      "quiz": {
+        "stem": "A Pod is stuck in `CreateContainerConfigError` and its events say `secret \\\"db-creds\\\" not found`. Where is the Secret most likely referenced?",
+        "options": [
+          "In a `secretKeyRef` or `secretRef` used to build environment variables",
+          "In an `imagePullSecrets` entry",
+          "In a `secret` volume mounted into the container",
+          "In the ServiceAccount's token projection"
+        ],
+        "answerIndex": 0,
+        "explanation": "Environment variables are resolved when the kubelet builds the container config, so a missing Secret or key there gives CreateContainerConfigError. A missing Secret in a volume leaves the Pod in ContainerCreating with a FailedMount event instead."
+      }
+    },
+    {
+      "id": 789,
+      "slug": "what-are-namespaces-in-kubernetes-and-what-do-they-isolate",
+      "title": "What are namespaces in Kubernetes, and what do they isolate?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "namespaces",
+        "multi-tenancy",
+        "rbac"
+      ],
+      "path": "kubernetes/what-are-namespaces-in-kubernetes-and-what-do-they-isolate.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-are-namespaces-in-kubernetes-and-what-do-they-isolate.md",
+      "shortAnswer": "A namespace is a named scope inside one cluster. It gives object names their own space (two teams can each have a Service called `api`) and it is the unit that **RBAC, ResourceQuota, LimitRange, Pod Security Admission, and NetworkPolicy** attach to. What it does **not** do by default is isolate anything at runtime: Pods in different namespaces can talk to each other over the network, share the same nodes and kernel, and share the same control plane. Namespaces are a boundary for administration, and only become a security boundary once you add policies on top.",
+      "quiz": {
+        "stem": "Which of these resources is cluster-scoped rather than namespaced?",
+        "options": [
+          "Secret",
+          "PersistentVolumeClaim",
+          "PersistentVolume",
+          "ServiceAccount"
+        ],
+        "answerIndex": 2,
+        "explanation": "PersistentVolumes, Nodes, StorageClasses, ClusterRoles and CRDs are cluster-scoped, so a namespace does not contain or isolate them. The PVC that claims a PV is namespaced."
+      }
+    },
+    {
+      "id": 790,
+      "slug": "what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost",
+      "title": "What Kubernetes production best practices do you follow for reliability, security, and cost?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "best-practices",
+        "security",
+        "finops"
+      ],
+      "path": "kubernetes/what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost.md",
+      "shortAnswer": "Group the answer into three areas and give one concrete control for each item. **Reliability:** accurate requests, at least two replicas spread across zones, readiness and liveness probes, PodDisruptionBudgets, and autoscaling for both Pods and nodes. **Security:** least-privilege RBAC, per-workload cloud identity (EKS Pod Identity or IRSA, Azure or GKE Workload Identity), Pod Security Admission at `restricted`, default-deny NetworkPolicies, and secrets from an external manager. **Cost:** right-size requests from real usage, let the node autoscaler consolidate, use Spot for stateless work, and allocate spend by team label. All of it is delivered through Git and enforced with admission policy, so it is not left to memory.",
+      "quiz": {
+        "stem": "A team alerts when any node passes 80% CPU. Which change best aligns alerting with production best practice?",
+        "options": [
+          "Lower the threshold to 60% so alerts fire earlier",
+          "Alert on user-facing symptoms such as error rate and latency against an SLO, plus Pods stuck Pending, and treat node utilisation as a dashboard signal",
+          "Remove all alerts and rely on the cluster autoscaler",
+          "Alert on every container restart in every namespace"
+        ],
+        "answerIndex": 1,
+        "explanation": "High node utilisation is often healthy and is what bin-packing aims for. Pages should fire on symptoms users feel and on capacity failures such as unschedulable Pods, not on resource percentages alone."
+      }
+    },
+    {
+      "id": 791,
+      "slug": "what-are-labels-and-selectors-in-kubernetes-and-where-are-they-used",
+      "title": "What are labels and selectors in Kubernetes, and where are they used?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "labels",
+        "selectors",
+        "services"
+      ],
+      "path": "kubernetes/what-are-labels-and-selectors-in-kubernetes-and-where-are-they-used.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-are-labels-and-selectors-in-kubernetes-and-where-are-they-used.md",
+      "shortAnswer": "**Labels** are key/value pairs attached to any Kubernetes object, such as `app.kubernetes.io/name: web` or `env: prod`. **Selectors** are queries over those labels. They are how loosely coupled objects find each other: a Deployment's ReplicaSet owns the Pods its selector matches, a Service sends traffic to the Pods its selector matches, and NetworkPolicies, PodDisruptionBudgets, and node scheduling rules all pick their targets the same way. Labels identify things; **annotations** hold non-identifying metadata and cannot be selected on.",
+      "quiz": {
+        "stem": "You need to change the `spec.selector` of an existing `apps/v1` Deployment. What happens?",
+        "options": [
+          "The Deployment updates and adopts matching Pods automatically",
+          "The API server rejects the change because the selector is immutable, so you create a new Deployment instead",
+          "The selector changes, but only for Pods created after the update",
+          "Kubernetes converts the selector into an annotation"
+        ],
+        "answerIndex": 1,
+        "explanation": "In apps/v1 a Deployment's spec.selector is immutable after creation and must match the Pod template labels. Changing it means creating a new Deployment and moving traffic before deleting the old one."
       }
     },
     {
@@ -2747,6 +2956,36 @@
       }
     },
     {
+      "id": 799,
+      "slug": "how-do-you-version-releases-with-git-tags-and-how-do-you-fix-a-tag-that-is-already-pushed",
+      "title": "How do you version releases with Git tags, and how do you fix a tag that is already pushed?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "version-control",
+        "git",
+        "release-management",
+        "semantic-versioning"
+      ],
+      "path": "version-control/how-do-you-version-releases-with-git-tags-and-how-do-you-fix-a-tag-that-is-already-pushed.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/how-do-you-version-releases-with-git-tags-and-how-do-you-fix-a-tag-that-is-already-pushed.md",
+      "shortAnswer": "Mark each release with an **annotated tag** following semantic versioning (`v1.4.0`), created on the exact commit CI built, pushed explicitly, and used by the release pipeline to name its artefacts. A tag is a ref, a named pointer to one commit, so it cannot be \"edited\". If a tagged release turns out to be broken, **fix forward**: merge the fix and tag a new patch version (`v1.4.1`). Tags _can_ be moved (`git tag -f` plus a force push) or deleted, but once a tag is published that breaks reproducibility for everyone who fetched it or built from it, so treat published tags as immutable and enforce it with tag protection.",
+      "quiz": {
+        "stem": "You pushed tag v2.3.0, the release pipeline published artefacts from it, and then you found a bug. What is the recommended fix?",
+        "options": [
+          "Check out the tag, commit the fix on it, and push the tag again",
+          "Merge the fix and release it under a new tag such as v2.3.1, leaving v2.3.0 pointing at the original commit",
+          "Run git tag -f v2.3.0 on the fixed commit and force-push it so everyone gets the fix automatically",
+          "Delete the remote branch the tag was created from so the tag disappears"
+        ],
+        "answerIndex": 1,
+        "explanation": "A tag is a named pointer to a commit and cannot be edited. It can be moved with git tag -f and a force push, but clones that already fetched it keep the old commit and published artefacts no longer match the tag. Fixing forward with a new patch version keeps every version reproducible."
+      }
+    },
+    {
       "id": 583,
       "slug": "what-is-idempotency-in-configuration-management-and-why-is-it-essential-for-infrastructure-stability",
       "title": "What is Idempotency in configuration management and why is it essential for infrastructure stability?",
@@ -4411,6 +4650,37 @@
         ],
         "answerIndex": 1,
         "explanation": "The Backstage Software Catalog centralizes ownership, dependencies, documentation, and lifecycle status for every service across an enterprise, ending microservice discovery chaos."
+      }
+    },
+    {
+      "id": 804,
+      "slug": "how-do-you-use-ai-assistants-and-agents-safely-in-day-to-day-devops-work",
+      "title": "How do you use AI assistants and agents safely in day-to-day DevOps work?",
+      "topic": "devops-tools-and-automation",
+      "category": "DevOps Tools and Automation",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "devops-tools-and-automation",
+        "interview-questions",
+        "ai-assisted-development",
+        "llm",
+        "mcp",
+        "least-privilege"
+      ],
+      "path": "devops-tools-and-automation/how-do-you-use-ai-assistants-and-agents-safely-in-day-to-day-devops-work.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/devops-tools-and-automation/how-do-you-use-ai-assistants-and-agents-safely-in-day-to-day-devops-work.md",
+      "shortAnswer": "Use AI where it is fast and checkable - scaffolding Terraform and Helm, explaining errors and logs, drafting runbooks and tests, triaging failed pipelines - and keep judgment and accountability with engineers. The safety comes from the same gates you apply to human work: generated code goes through pull requests, `terraform plan`, linters, policy checks and tests; agents connected to real systems (often through **MCP** servers) start with **read-only, least-privilege identities**; every state change is human-approved and audited; and no secrets or customer data go into prompts outside approved tools.",
+      "quiz": {
+        "stem": "Your team pilots an AI agent connected to the production EKS cluster through an MCP server. Which setup is the safest starting point?",
+        "options": [
+          "Bind the agent's ServiceAccount to cluster-admin so it can fix incidents without waiting for a human",
+          "Give the agent a read-only identity (for example the built-in view ClusterRole, which excludes Secrets) and route any change through a pull request and the normal GitOps review",
+          "Let the agent run kubectl with an engineer's personal kubeconfig so actions are attributed to a person",
+          "Allow write access but tell the model in its system prompt never to delete anything"
+        ],
+        "answerIndex": 1,
+        "explanation": "Start with least privilege: read-only access the agent can use for diagnosis, and every state change going through the same PR, plan and approval gates as human changes. Prompt instructions are not a security control, and shared personal credentials destroy the audit trail."
       }
     },
     {
@@ -7746,6 +8016,125 @@
       }
     },
     {
+      "id": 795,
+      "slug": "how-do-you-control-image-sprawl-and-storage-cost-in-amazon-ecr",
+      "title": "How do you control image sprawl and storage cost in Amazon ECR?",
+      "topic": "aws-engineering",
+      "category": "AWS Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "aws-engineering",
+        "ecr",
+        "containers",
+        "cloud-cost-optimization"
+      ],
+      "path": "aws-engineering/how-do-you-control-image-sprawl-and-storage-cost-in-amazon-ecr.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/aws-engineering/how-do-you-control-image-sprawl-and-storage-cost-in-amazon-ecr.md",
+      "shortAnswer": "Attach an **ECR lifecycle policy** to every repository, managed in IaC, instead of writing a cleanup Lambda. A typical policy has a rule that expires **untagged** images a few days after push, a rule that keeps only the last N **build or PR** images by tag prefix, and a longer-lived rule for **release** tags, so anything you might roll back to survives. Preview the policy before enforcing it, turn on **tag immutability** so a tag always means one image, and remember that a lifecycle policy has no idea what is deployed - retention for release tags has to cover your rollback window.",
+      "quiz": {
+        "stem": "A team wants ECR to delete untagged images after 7 days and keep only the 30 most recent `build-` images. What is the recommended mechanism?",
+        "options": [
+          "A scheduled Lambda function that lists images and calls batch-delete-image every night",
+          "An ECR lifecycle policy with one rule for untagged images (sinceImagePushed) and one for the build- prefix (imageCountMoreThan)",
+          "An S3 lifecycle rule on the bucket that stores ECR layers",
+          "Enabling tag immutability, which removes older images automatically"
+        ],
+        "answerIndex": 1,
+        "explanation": "ECR lifecycle policies are the native, free way to expire images by age or count, selected by tag status and tag prefix or pattern. ECR's backing storage is not exposed as an S3 bucket, and tag immutability only prevents tags being overwritten - it deletes nothing."
+      }
+    },
+    {
+      "id": 796,
+      "slug": "what-baseline-security-controls-would-you-apply-to-an-aws-account-on-a-tight-budget",
+      "title": "What baseline security controls would you apply to an AWS account on a tight budget?",
+      "topic": "aws-engineering",
+      "category": "AWS Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "aws-engineering",
+        "security",
+        "iam",
+        "guardrails"
+      ],
+      "path": "aws-engineering/what-baseline-security-controls-would-you-apply-to-an-aws-account-on-a-tight-budget.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/aws-engineering/what-baseline-security-controls-would-you-apply-to-an-aws-account-on-a-tight-budget.md",
+      "shortAnswer": "Most of the baseline is free settings, not paid products. Lock down the **root user** (MFA, no access keys), move people to **IAM Identity Center** with least-privilege permission sets and workloads to **roles** with no long-lived keys, turn on account-wide **S3 Block Public Access**, **default EBS encryption** and **IMDSv2 by default**, keep a **CloudTrail** trail to a locked-down bucket, restrict network exposure with tight **security groups** and SSM Session Manager instead of open SSH, and enforce it all with **SCPs** and Terraform-only changes. Then spend the small budget where detection pays most: **GuardDuty**, **IAM Access Analyzer** and budget alerts. Shield Standard is already on for everyone.",
+      "quiz": {
+        "stem": "A cost-conscious customer says they cannot afford Shield or WAF. Which statement about their baseline is accurate?",
+        "options": [
+          "Without paying for Shield Advanced they have no DDoS protection at all",
+          "Shield Standard is already applied to every account at no extra cost, and most of the highest-value baseline controls (root MFA, Block Public Access, default EBS encryption, IMDSv2, SCPs) are free settings",
+          "Security groups and network ACLs alone are a sufficient security baseline",
+          "CloudTrail must be bought as an add-on before any API activity is recorded"
+        ],
+        "answerIndex": 1,
+        "explanation": "Shield Standard protects every AWS customer automatically. The cheapest, highest-return controls are account settings and identity hygiene, not paid services; network rules matter but cover only one of several layers. CloudTrail event history records management events for 90 days at no cost."
+      }
+    },
+    {
+      "id": 797,
+      "slug": "what-are-the-pillars-of-the-aws-well-architected-framework",
+      "title": "What are the pillars of the AWS Well-Architected Framework?",
+      "topic": "aws-engineering",
+      "category": "AWS Engineering",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "aws-engineering",
+        "well-architected",
+        "architecture"
+      ],
+      "path": "aws-engineering/what-are-the-pillars-of-the-aws-well-architected-framework.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/aws-engineering/what-are-the-pillars-of-the-aws-well-architected-framework.md",
+      "shortAnswer": "Six: **Operational Excellence**, **Security**, **Reliability**, **Performance Efficiency**, **Cost Optimization**, and **Sustainability** (added in 2021 to the original five). Each pillar has design principles and a set of review questions, and the framework is applied through **Well-Architected Reviews** - usually in the free Well-Architected Tool - that produce a list of high- and medium-risk issues to fix. The point is not to memorise names but to show you can turn each pillar into concrete controls and make trade-offs between them.",
+      "quiz": {
+        "stem": "Under the AWS shared responsibility model for sustainability, which of these is the customer's responsibility?",
+        "options": [
+          "The energy efficiency of AWS data-centre cooling systems",
+          "Rightsizing instances, scaling idle non-production resources to zero, and applying data lifecycle policies",
+          "Choosing renewable energy contracts for AWS regions",
+          "Nothing - the Sustainability pillar is entirely handled by AWS"
+        ],
+        "answerIndex": 1,
+        "explanation": "AWS is responsible for sustainability of the cloud (facilities, hardware, power). Customers are responsible for sustainability in the cloud: using only the resources a workload needs, choosing efficient instance types such as Graviton, and deleting or tiering data they no longer need."
+      }
+    },
+    {
+      "id": 798,
+      "slug": "when-do-you-use-amazon-api-gateway-versus-an-application-load-balancer",
+      "title": "When do you use Amazon API Gateway versus an Application Load Balancer?",
+      "topic": "aws-engineering",
+      "category": "AWS Engineering",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "aws-engineering",
+        "api-gateway",
+        "load-balancing",
+        "serverless"
+      ],
+      "path": "aws-engineering/when-do-you-use-amazon-api-gateway-versus-an-application-load-balancer.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/aws-engineering/when-do-you-use-amazon-api-gateway-versus-an-application-load-balancer.md",
+      "shortAnswer": "Use **API Gateway** when you need **API management**: per-client API keys, usage plans and quotas, request validation and transformation, caching, authorizers (IAM, Cognito, JWT, Lambda), and pay-per-request pricing that suits spiky or low-volume serverless APIs. Use an **ALB** when you need a **load balancer**: steady high-volume HTTP traffic to containers or EC2, long-lived connections and WebSockets at scale, gRPC, and predictable hourly-plus-capacity pricing that becomes far cheaper than per-request pricing at sustained volume. TLS, WAF, path routing, Lambda targets and basic OIDC authentication exist on **both**, so they are not the deciding factors.",
+      "quiz": {
+        "stem": "Which requirement most clearly points to Amazon API Gateway (REST API) rather than an Application Load Balancer?",
+        "options": [
+          "TLS termination with an ACM certificate",
+          "Attaching AWS WAF managed rules",
+          "Per-client API keys with usage plans that enforce throttling and monthly quotas",
+          "Routing requests to different target groups by URL path"
+        ],
+        "answerIndex": 2,
+        "explanation": "ALBs also terminate TLS with ACM certificates, integrate with AWS WAF, and route by path and host. Per-client API keys, usage plans, quotas and per-client throttling are API-management features that API Gateway REST APIs provide and ALB does not."
+      }
+    },
+    {
       "id": 739,
       "slug": "how-do-you-secure-azure-kubernetes-service-aks-using-azure-private-clusters-and-calico-cni",
       "title": "How Do You Secure Azure Kubernetes Service (AKS) Using Azure Private Clusters and Calico CNI?",
@@ -8190,6 +8579,125 @@
         ],
         "answerIndex": 1,
         "explanation": "Text tools match characters, not structure: a reformatted document, a nested 'name' field, or an escaped quote silently breaks them. jq addresses fields by path, so the extraction is correct by construction."
+      }
+    },
+    {
+      "id": 800,
+      "slug": "how-do-you-answer-tell-me-about-yourself-in-a-devops-interview",
+      "title": "How do you answer 'tell me about yourself' in a DevOps interview?",
+      "topic": "interview-experience",
+      "category": "Interview Experience",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-experience",
+        "interview-questions",
+        "behavioural",
+        "self-introduction",
+        "career-switch"
+      ],
+      "path": "interview-experience/how-do-you-answer-tell-me-about-yourself-in-a-devops-interview.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/interview-experience/how-do-you-answer-tell-me-about-yourself-in-a-devops-interview.md",
+      "shortAnswer": "Give a 60-90 second story, not a resume recital: **who you are now** (role, team, what you own), **one concrete result** with a number, **how you got here** in a sentence or two, and **why this role is the logical next step**. Then stop. The opener sets the agenda for the whole interview, so mention only things you are happy to be questioned on - and be explicit about which experience was production work and which was self-directed learning.",
+      "quiz": {
+        "stem": "Which opening best answers 'tell me about yourself' in a DevOps interview?",
+        "options": [
+          "A chronological recital of every job since graduation, followed by a list of every tool you have touched",
+          "A 60-90 second story: your current role and scope, one result with a number, how you got here, and why this role is the next step",
+          "A short personal biography covering hometown, hobbies, and family, leaving technical topics for later rounds",
+          "A description of a course project presented as if it ran at your current employer, because interviewers prefer production work"
+        ],
+        "answerIndex": 1,
+        "explanation": "The opener sets the agenda for the rest of the interview. A short present-past-future story with one measurable result gives the interviewer threads to pull, while a tool list or an inflated project invites probing you cannot survive."
+      }
+    },
+    {
+      "id": 801,
+      "slug": "how-do-you-answer-tell-me-about-a-challenge-you-faced-in-a-devops-interview",
+      "title": "How do you answer 'tell me about a challenge you faced' in a DevOps interview?",
+      "topic": "interview-experience",
+      "category": "Interview Experience",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-experience",
+        "interview-questions",
+        "behavioural",
+        "star-method",
+        "kubernetes-upgrades"
+      ],
+      "path": "interview-experience/how-do-you-answer-tell-me-about-a-challenge-you-faced-in-a-devops-interview.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/interview-experience/how-do-you-answer-tell-me-about-a-challenge-you-faced-in-a-devops-interview.md",
+      "shortAnswer": "Pick one real, recent problem with technical depth and a measurable outcome, and tell it as **STAR** - Situation, Task, Action, Result - in about two minutes, spending most of the time on **Action**: the options you weighed, why you chose one, and exactly what you did. Use \"I\" for your own decisions, give a number in the Result, and finish with what you would do differently. The technical details must be correct, because the interviewer will drill into them.",
+      "quiz": {
+        "stem": "In a 'challenge you faced' answer about upgrading EKS clusters three minor versions behind, which detail is technically correct?",
+        "options": [
+          "The control plane can jump straight to the target version, and nodes must always match it exactly",
+          "Since Kubernetes 1.28 the kubelet may be up to three minor versions older than the API server, so nodes need not be upgraded at every control-plane hop",
+          "The kubelet may be newer than the API server, so upgrading nodes first is the safest order",
+          "Tainting old nodes is enough to move workloads safely, so PodDisruptionBudgets are unnecessary"
+        ],
+        "answerIndex": 1,
+        "explanation": "The control plane moves one minor version at a time. From 1.28 the supported skew lets kubelets lag the API server by up to three minor versions (never lead it), and workloads move with cordon and drain, which respects PodDisruptionBudgets."
+      }
+    },
+    {
+      "id": 802,
+      "slug": "how-do-you-answer-where-do-you-see-yourself-in-five-years-in-a-devops-interview",
+      "title": "How do you answer 'where do you see yourself in five years' in a DevOps interview?",
+      "topic": "interview-experience",
+      "category": "Interview Experience",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-experience",
+        "interview-questions",
+        "behavioural",
+        "career-growth"
+      ],
+      "path": "interview-experience/how-do-you-answer-where-do-you-see-yourself-in-five-years-in-a-devops-interview.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/interview-experience/how-do-you-answer-where-do-you-see-yourself-in-five-years-in-a-devops-interview.md",
+      "shortAnswer": "Give an honest direction that fits the role you are interviewing for, a reason for it, and evidence you are already moving that way. For most DevOps candidates that means one of three tracks - **deep technical** (senior, staff or principal engineer), **architecture** (platform or solutions architect), or **people leadership** (team lead, engineering manager) - and saying clearly that you want to stay hands-on for the next couple of years. Finish by asking how people in the team have grown.",
+      "quiz": {
+        "stem": "Which answer to 'where do you see yourself in five years' is strongest for a hands-on senior DevOps role?",
+        "options": [
+          "\\\"In your job\\\" - it shows ambition",
+          "\\\"I haven't really thought about it\\\" - it shows flexibility",
+          "\\\"Hands-on for the next few years deepening platform skills, then a platform or solutions architect who still builds prototypes - and I'm already writing design docs and running reviews\\",
+          "\\\"Running my own consultancy\\\" - it shows entrepreneurial drive"
+        ],
+        "answerIndex": 2,
+        "explanation": "A strong answer is honest, fits the role on offer, names a direction with a reason, and shows concrete steps already taken. Architect paths in DevOps stay hands-on, which reassures an interviewer hiring for hands-on work."
+      }
+    },
+    {
+      "id": 803,
+      "slug": "how-do-you-describe-your-day-to-day-responsibilities-as-a-devops-engineer",
+      "title": "How do you describe your day-to-day responsibilities as a DevOps engineer?",
+      "topic": "interview-experience",
+      "category": "Interview Experience",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-experience",
+        "interview-questions",
+        "behavioural",
+        "agile",
+        "career-switch"
+      ],
+      "path": "interview-experience/how-do-you-describe-your-day-to-day-responsibilities-as-a-devops-engineer.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/interview-experience/how-do-you-describe-your-day-to-day-responsibilities-as-a-devops-engineer.md",
+      "shortAnswer": "Describe **how work reaches you** (sprint planning, tickets, on-call, ad-hoc requests), the **three or four areas you own** - typically Kubernetes, infrastructure as code, CI/CD, and Git or observability - with a concrete recurring task in each, **one improvement** you made with a number, and **how you handle interruptions** such as production issues. Pitch it to your level: juniors talk about running and supporting, seniors about designing, leading proofs of concept, and rolling changes out across teams. Only describe work you have actually done, and label anything self-directed as such.",
+      "quiz": {
+        "stem": "What makes a description of your day-to-day DevOps work most convincing to an interviewer?",
+        "options": [
+          "Listing every tool on the job description, whether or not you have used it in production",
+          "Explaining how work reaches you, the three or four areas you own, one improvement with a measured result, and how you handle interruptions",
+          "Saying the job is mostly firefighting, so there is no typical day to describe",
+          "Describing tutorial projects as work done for your current client so the list looks complete"
+        ],
+        "answerIndex": 1,
+        "explanation": "Interviewers want to see how you actually work: where tasks come from, what you own, how you balance planned work against interrupts, and evidence of improvement. A tool list or borrowed projects collapse under the first follow-up."
       }
     }
   ]

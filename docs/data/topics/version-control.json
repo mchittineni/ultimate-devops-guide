@@ -832,6 +832,62 @@
         "answerIndex": 1,
         "explanation": "A commit signature binds the commit object (tree, parents, metadata, message) to a key. It proves possession of that key and integrity of the commit, not code quality or review. The author field itself is unauthenticated text, which is exactly why signing matters: anyone can set user.email to someone else's address."
       }
+    },
+    {
+      "id": 799,
+      "slug": "how-do-you-version-releases-with-git-tags-and-how-do-you-fix-a-tag-that-is-already-pushed",
+      "title": "How do you version releases with Git tags, and how do you fix a tag that is already pushed?",
+      "topic": "version-control",
+      "category": "Version Control",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "version-control",
+        "git",
+        "release-management",
+        "semantic-versioning"
+      ],
+      "path": "version-control/how-do-you-version-releases-with-git-tags-and-how-do-you-fix-a-tag-that-is-already-pushed.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/version-control/how-do-you-version-releases-with-git-tags-and-how-do-you-fix-a-tag-that-is-already-pushed.md",
+      "shortAnswer": "Mark each release with an **annotated tag** following semantic versioning (`v1.4.0`), created on the exact commit CI built, pushed explicitly, and used by the release pipeline to name its artefacts. A tag is a ref, a named pointer to one commit, so it cannot be \"edited\". If a tagged release turns out to be broken, **fix forward**: merge the fix and tag a new patch version (`v1.4.1`). Tags _can_ be moved (`git tag -f` plus a force push) or deleted, but once a tag is published that breaks reproducibility for everyone who fetched it or built from it, so treat published tags as immutable and enforce it with tag protection.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 401,
+          "slug": "how-do-you-keep-dependencies-up-to-date-without-breaking-the-build",
+          "title": "How do you keep dependencies up to date without breaking the build?",
+          "topic": "cicd"
+        },
+        {
+          "id": 455,
+          "slug": "how-do-you-trigger-a-pipeline-webhooks-polling-schedules-and-upstream-jobs",
+          "title": "How do you trigger a pipeline — webhooks, polling, schedules, and upstream jobs?",
+          "topic": "cicd"
+        },
+        {
+          "id": 402,
+          "slug": "how-do-you-troubleshoot-a-jenkins-pipeline-that-never-starts-or-hangs-in-the-queue",
+          "title": "How do you troubleshoot a Jenkins pipeline that never starts or hangs in the queue?",
+          "topic": "cicd"
+        }
+      ],
+      "quiz": {
+        "stem": "You pushed tag v2.3.0, the release pipeline published artefacts from it, and then you found a bug. What is the recommended fix?",
+        "options": [
+          "Check out the tag, commit the fix on it, and push the tag again",
+          "Merge the fix and release it under a new tag such as v2.3.1, leaving v2.3.0 pointing at the original commit",
+          "Run git tag -f v2.3.0 on the fixed commit and force-push it so everyone gets the fix automatically",
+          "Delete the remote branch the tag was created from so the tag disappears"
+        ],
+        "answerIndex": 1,
+        "explanation": "A tag is a named pointer to a commit and cannot be edited. It can be moved with git tag -f and a force push, but clones that already fetched it keep the old commit and published artefacts no longer match the tag. Fixing forward with a new patch version keeps every version reproducible."
+      }
     }
   ]
 }

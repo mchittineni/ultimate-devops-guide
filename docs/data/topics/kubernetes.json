@@ -39,15 +39,15 @@
           "topic": "docker"
         },
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 411,
           "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
           "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 412,
-          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
-          "title": "How do you troubleshoot a failed Helm release?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -82,15 +82,15 @@
           "topic": "docker"
         },
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 411,
           "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
           "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 412,
-          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
-          "title": "How do you troubleshoot a failed Helm release?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -125,15 +125,15 @@
           "topic": "docker"
         },
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 411,
           "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
           "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 412,
-          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
-          "title": "How do you troubleshoot a failed Helm release?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -420,6 +420,12 @@
       ],
       "related": [
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 412,
           "slug": "how-do-you-troubleshoot-a-failed-helm-release",
           "title": "How do you troubleshoot a failed Helm release?",
@@ -429,12 +435,6 @@
           "id": 413,
           "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
           "title": "How do you run and scale a stateful application on Kubernetes?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 452,
-          "slug": "what-are-customresourcedefinitions-and-operators-in-kubernetes",
-          "title": "What are CustomResourceDefinitions and operators in Kubernetes?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -469,15 +469,15 @@
           "topic": "docker"
         },
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 411,
           "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
           "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 412,
-          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
-          "title": "How do you troubleshoot a failed Helm release?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -519,10 +519,10 @@
           "topic": "docker"
         },
         {
-          "id": 412,
-          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
-          "title": "How do you troubleshoot a failed Helm release?",
-          "topic": "container-orchestration-advanced"
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
         }
       ],
       "quiz": null
@@ -654,10 +654,10 @@
           "topic": "docker"
         },
         {
-          "id": 414,
-          "slug": "how-do-you-run-an-application-across-multiple-kubernetes-clusters",
-          "title": "How do you run an application across multiple Kubernetes clusters?",
-          "topic": "container-orchestration-advanced"
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
         }
       ],
       "quiz": null
@@ -1005,15 +1005,15 @@
           "topic": "docker"
         },
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 413,
           "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
           "title": "How do you run and scale a stateful application on Kubernetes?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 452,
-          "slug": "what-are-customresourcedefinitions-and-operators-in-kubernetes",
-          "title": "What are CustomResourceDefinitions and operators in Kubernetes?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -1100,10 +1100,10 @@
           "topic": "docker"
         },
         {
-          "id": 412,
-          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
-          "title": "How do you troubleshoot a failed Helm release?",
-          "topic": "container-orchestration-advanced"
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
         }
       ],
       "quiz": null
@@ -1190,10 +1190,10 @@
           "topic": "docker"
         },
         {
-          "id": 411,
-          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
-          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
-          "topic": "container-orchestration-advanced"
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
         }
       ],
       "quiz": null
@@ -1236,10 +1236,10 @@
           "topic": "docker"
         },
         {
-          "id": 411,
-          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
-          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
-          "topic": "container-orchestration-advanced"
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
         }
       ],
       "quiz": {
@@ -1286,15 +1286,15 @@
           "topic": "docker"
         },
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 411,
           "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
           "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 412,
-          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
-          "title": "How do you troubleshoot a failed Helm release?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -1398,15 +1398,15 @@
           "topic": "docker"
         },
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 411,
           "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
           "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 452,
-          "slug": "what-are-customresourcedefinitions-and-operators-in-kubernetes",
-          "title": "What are CustomResourceDefinitions and operators in Kubernetes?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -1460,10 +1460,10 @@
           "topic": "docker"
         },
         {
-          "id": 411,
-          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
-          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
-          "topic": "container-orchestration-advanced"
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
         }
       ],
       "quiz": {
@@ -1560,6 +1560,12 @@
       ],
       "related": [
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 411,
           "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
           "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
@@ -1569,12 +1575,6 @@
           "id": 412,
           "slug": "how-do-you-troubleshoot-a-failed-helm-release",
           "title": "How do you troubleshoot a failed Helm release?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 413,
-          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
-          "title": "How do you run and scale a stateful application on Kubernetes?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -1728,6 +1728,12 @@
       ],
       "related": [
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 622,
           "slug": "how-does-the-kubernetes-controller-pattern-implement-declarative-reconciliation-loops",
           "title": "How does the Kubernetes Controller Pattern implement declarative reconciliation loops?",
@@ -1737,12 +1743,6 @@
           "id": 625,
           "slug": "what-is-the-difference-between-client-go-informers-listers-and-reflector-components",
           "title": "What is the difference between client-go Informers, Listers, and Reflector components?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 628,
-          "slug": "what-are-kubernetes-admission-webhook-failure-policies-and-how-do-you-prevent-self-locking-outage-loops",
-          "title": "What are Kubernetes Admission Webhook failure policies and how do you prevent self-locking outage loops?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -1784,6 +1784,12 @@
       ],
       "related": [
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 411,
           "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
           "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
@@ -1793,12 +1799,6 @@
           "id": 412,
           "slug": "how-do-you-troubleshoot-a-failed-helm-release",
           "title": "How do you troubleshoot a failed Helm release?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 413,
-          "slug": "how-do-you-run-and-scale-a-stateful-application-on-kubernetes",
-          "title": "How do you run and scale a stateful application on Kubernetes?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -1900,15 +1900,15 @@
           "topic": "docker"
         },
         {
-          "id": 6,
-          "slug": "what-is-docker",
-          "title": "What is Docker?",
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
           "topic": "docker"
         },
         {
-          "id": 415,
-          "slug": "how-do-you-troubleshoot-docker-networking-between-containers",
-          "title": "How do you troubleshoot Docker networking between containers?",
+          "id": 6,
+          "slug": "what-is-docker",
+          "title": "What is Docker?",
           "topic": "docker"
         }
       ],
@@ -2007,15 +2007,15 @@
           "topic": "docker"
         },
         {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
           "id": 453,
           "slug": "how-do-you-run-a-multi-tenant-kubernetes-cluster",
           "title": "How do you run a multi-tenant Kubernetes cluster?",
-          "topic": "container-orchestration-advanced"
-        },
-        {
-          "id": 623,
-          "slug": "what-are-custom-resource-definitions-crds-and-how-do-custom-operators-extend-the-kubernetes-api",
-          "title": "What are Custom Resource Definitions (CRDs) and how do Custom Operators extend the Kubernetes API?",
           "topic": "container-orchestration-advanced"
         }
       ],
@@ -2029,6 +2029,230 @@
         ],
         "answerIndex": 1,
         "explanation": "Pod Security Admission evaluates Pods when they are created or updated. Existing Pods are not touched, but the ReplicaSet's next Pod creation (scale-up, rollout, node drain) is denied - which is why you roll out with warn and audit modes first."
+      }
+    },
+    {
+      "id": 788,
+      "slug": "how-do-you-troubleshoot-a-pod-that-fails-because-a-secret-or-configmap-cannot-be-mounted-or-referenced",
+      "title": "How do you troubleshoot a Pod that fails because a Secret or ConfigMap cannot be mounted or referenced?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "secrets",
+        "configmap",
+        "troubleshooting"
+      ],
+      "path": "kubernetes/how-do-you-troubleshoot-a-pod-that-fails-because-a-secret-or-configmap-cannot-be-mounted-or-referenced.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/how-do-you-troubleshoot-a-pod-that-fails-because-a-secret-or-configmap-cannot-be-mounted-or-referenced.md",
+      "shortAnswer": "Start with `kubectl describe pod` and read the **status and events**, because the way the Pod fails tells you how the object is referenced. A missing Secret or ConfigMap used as a **volume** leaves the Pod in `ContainerCreating` with a `FailedMount` event; one used for **environment variables** gives `CreateContainerConfigError`. From there the cause is almost always one of a short list: the object does not exist yet, it is in a **different namespace**, the **name or key** is misspelled, an external secret controller has not synced it, or the mount works but the application cannot **read** the file. The kubelet keeps retrying, so once the object is fixed the Pod usually recovers without being recreated.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
+          "id": 628,
+          "slug": "what-are-kubernetes-admission-webhook-failure-policies-and-how-do-you-prevent-self-locking-outage-loops",
+          "title": "What are Kubernetes Admission Webhook failure policies and how do you prevent self-locking outage loops?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        }
+      ],
+      "quiz": {
+        "stem": "A Pod is stuck in `CreateContainerConfigError` and its events say `secret \\\"db-creds\\\" not found`. Where is the Secret most likely referenced?",
+        "options": [
+          "In a `secretKeyRef` or `secretRef` used to build environment variables",
+          "In an `imagePullSecrets` entry",
+          "In a `secret` volume mounted into the container",
+          "In the ServiceAccount's token projection"
+        ],
+        "answerIndex": 0,
+        "explanation": "Environment variables are resolved when the kubelet builds the container config, so a missing Secret or key there gives CreateContainerConfigError. A missing Secret in a volume leaves the Pod in ContainerCreating with a FailedMount event instead."
+      }
+    },
+    {
+      "id": 789,
+      "slug": "what-are-namespaces-in-kubernetes-and-what-do-they-isolate",
+      "title": "What are namespaces in Kubernetes, and what do they isolate?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "namespaces",
+        "multi-tenancy",
+        "rbac"
+      ],
+      "path": "kubernetes/what-are-namespaces-in-kubernetes-and-what-do-they-isolate.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-are-namespaces-in-kubernetes-and-what-do-they-isolate.md",
+      "shortAnswer": "A namespace is a named scope inside one cluster. It gives object names their own space (two teams can each have a Service called `api`) and it is the unit that **RBAC, ResourceQuota, LimitRange, Pod Security Admission, and NetworkPolicy** attach to. What it does **not** do by default is isolate anything at runtime: Pods in different namespaces can talk to each other over the network, share the same nodes and kernel, and share the same control plane. Namespaces are a boundary for administration, and only become a security boundary once you add policies on top.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 416,
+          "slug": "why-does-a-container-fail-to-start-with-a-permission-denied-error",
+          "title": "Why does a container fail to start with a permission denied error?",
+          "topic": "docker"
+        },
+        {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "Which of these resources is cluster-scoped rather than namespaced?",
+        "options": [
+          "Secret",
+          "PersistentVolumeClaim",
+          "PersistentVolume",
+          "ServiceAccount"
+        ],
+        "answerIndex": 2,
+        "explanation": "PersistentVolumes, Nodes, StorageClasses, ClusterRoles and CRDs are cluster-scoped, so a namespace does not contain or isolate them. The PVC that claims a PV is namespaced."
+      }
+    },
+    {
+      "id": 790,
+      "slug": "what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost",
+      "title": "What Kubernetes production best practices do you follow for reliability, security, and cost?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Intermediate",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "best-practices",
+        "security",
+        "finops"
+      ],
+      "path": "kubernetes/what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost.md",
+      "shortAnswer": "Group the answer into three areas and give one concrete control for each item. **Reliability:** accurate requests, at least two replicas spread across zones, readiness and liveness probes, PodDisruptionBudgets, and autoscaling for both Pods and nodes. **Security:** least-privilege RBAC, per-workload cloud identity (EKS Pod Identity or IRSA, Azure or GKE Workload Identity), Pod Security Admission at `restricted`, default-deny NetworkPolicies, and secrets from an external manager. **Cost:** right-size requests from real usage, let the node autoscaler consolidate, use Spot for stateless work, and allocate spend by team label. All of it is delivered through Git and enforced with admission policy, so it is not left to memory.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 513,
+          "slug": "how-does-docker-multi-stage-building-optimize-container-security-and-image-size",
+          "title": "How does Docker multi-stage building optimize container security and image size?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "A team alerts when any node passes 80% CPU. Which change best aligns alerting with production best practice?",
+        "options": [
+          "Lower the threshold to 60% so alerts fire earlier",
+          "Alert on user-facing symptoms such as error rate and latency against an SLO, plus Pods stuck Pending, and treat node utilisation as a dashboard signal",
+          "Remove all alerts and rely on the cluster autoscaler",
+          "Alert on every container restart in every namespace"
+        ],
+        "answerIndex": 1,
+        "explanation": "High node utilisation is often healthy and is what bin-packing aims for. Pages should fire on symptoms users feel and on capacity failures such as unschedulable Pods, not on resource percentages alone."
+      }
+    },
+    {
+      "id": 791,
+      "slug": "what-are-labels-and-selectors-in-kubernetes-and-where-are-they-used",
+      "title": "What are labels and selectors in Kubernetes, and where are they used?",
+      "topic": "kubernetes",
+      "category": "Kubernetes",
+      "difficulty": "Beginner",
+      "tags": [
+        "devops",
+        "interview-questions",
+        "kubernetes",
+        "labels",
+        "selectors",
+        "services"
+      ],
+      "path": "kubernetes/what-are-labels-and-selectors-in-kubernetes-and-where-are-they-used.md",
+      "url": "https://github.com/mchittineni/ultimate-devops-guide/blob/main/kubernetes/what-are-labels-and-selectors-in-kubernetes-and-where-are-they-used.md",
+      "shortAnswer": "**Labels** are key/value pairs attached to any Kubernetes object, such as `app.kubernetes.io/name: web` or `env: prod`. **Selectors** are queries over those labels. They are how loosely coupled objects find each other: a Deployment's ReplicaSet owns the Pods its selector matches, a Service sends traffic to the Pods its selector matches, and NetworkPolicies, PodDisruptionBudgets, and node scheduling rules all pick their targets the same way. Labels identify things; **annotations** hold non-identifying metadata and cannot be selected on.",
+      "sections": [
+        "Detail",
+        "Example",
+        "Interview tips",
+        "Related Concepts"
+      ],
+      "related": [
+        {
+          "id": 793,
+          "slug": "why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs",
+          "title": "Why does a container image that works locally fail on Kubernetes or ECS?",
+          "topic": "docker"
+        },
+        {
+          "id": 411,
+          "slug": "how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime",
+          "title": "How do you upgrade a production Kubernetes cluster with zero downtime?",
+          "topic": "container-orchestration-advanced"
+        },
+        {
+          "id": 412,
+          "slug": "how-do-you-troubleshoot-a-failed-helm-release",
+          "title": "How do you troubleshoot a failed Helm release?",
+          "topic": "container-orchestration-advanced"
+        }
+      ],
+      "quiz": {
+        "stem": "You need to change the `spec.selector` of an existing `apps/v1` Deployment. What happens?",
+        "options": [
+          "The Deployment updates and adopts matching Pods automatically",
+          "The API server rejects the change because the selector is immutable, so you create a new Deployment instead",
+          "The selector changes, but only for Pods created after the update",
+          "Kubernetes converts the selector into an annotation"
+        ],
+        "answerIndex": 1,
+        "explanation": "In apps/v1 a Deployment's spec.selector is immutable after creation and must match the Pod template labels. Changing it means creating a new Deployment and moving traffic before deleting the old one."
       }
     }
   ]
