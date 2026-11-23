@@ -35,6 +35,8 @@ tags:
 
 **The tax nobody mentions in the design review.** A network between two modules means timeouts, retries, idempotency, circuit breakers, and versioned contracts. A database per service means no cross-service joins and no cross-service transactions - you need sagas or outbox patterns instead. Local development needs mocks or a way to run a subset. And a "distributed monolith", where services are separate but must all deploy together because their contracts are entangled, is worse than either option: all the network cost with none of the autonomy.
 
+**Architecture and runtime platform are separate decisions.** Interviewers sometimes ask "which is more complicated, Kubernetes or a monolith?" or "monolith, microservices or EKS?" - which mixes two axes. Monolith versus microservices is how you split the code and who deploys what; EKS, ECS, EC2 or a serverless platform is where it runs. A monolith runs perfectly well as a container on EKS or ECS, and microservices can run on ECS or plain EC2 behind a load balancer. Choose the architecture from team and domain boundaries first, then the platform from operational capacity: Kubernetes pays off when you have many services and people who can run it, while ECS (or a PaaS) is often the better fit for a team without Kubernetes expertise, whatever the architecture.
+
 **Where DevOps sits in this.** Microservices only work on top of platform investment: containers and an orchestrator, automated per-service pipelines, centralised logs, metrics and traces, service discovery, and a paved road so a new service does not take three weeks of setup. If that platform does not exist, splitting the monolith moves the problem into the network where it is harder to see.
 
 ## Example
@@ -71,6 +73,7 @@ publish("order.created", {"order_id": order.id, "total": order.total})
 - Say microservices solve a team-coordination problem. Reaching for them with two teams and no platform is the mistake they want you to avoid.
 - Recommend the modular monolith as a starting point, and name a concrete trigger for extraction (different scaling profile, blocked release cadence, compliance boundary).
 - Name the tax explicitly: network failures, eventual consistency, distributed tracing, per-service pipelines.
+- If asked "Kubernetes or a monolith?", point out the category error before answering: one is an architecture, the other a runtime platform. Pick the architecture by team and domain boundaries, then the platform by operational capacity.
 - Know the phrase "distributed monolith" and why it is the worst outcome - services that cannot deploy independently.
 - If your experience is only monoliths, say so and describe where you would draw the first boundary and why. That answers better than pretending.
 
