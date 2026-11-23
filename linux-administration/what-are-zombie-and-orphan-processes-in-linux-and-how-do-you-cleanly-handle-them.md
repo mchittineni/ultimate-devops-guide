@@ -52,6 +52,17 @@ You **cannot kill a zombie with `kill -9`** because the process is already dead!
   1. Send `SIGCHLD` to the parent to prompt it to reap its children - this only helps if the parent has a `SIGCHLD` handler that calls `wait()`; a parent that never reaps will ignore it.
   2. Kill the parent process. Once the parent dies, the zombies become orphans adopted by PID 1, which instantly reaps them.
 
+### 3. Daemon Processes - the third term usually asked alongside
+
+- A **daemon** is a long-running background service with no controlling terminal - `sshd`, `crond`, `containerd`, `kubelet`. In `ps` its `TTY` column shows `?`.
+- On modern Linux, daemons are started and supervised by **systemd** as service units: systemd tracks them in a cgroup, restarts them on failure (`Restart=on-failure`), and collects their logs in the journal. Traditional daemons detached themselves by double-forking and calling `setsid()`; under systemd they should simply stay in the foreground.
+- **Daemon versus orphan:** a daemon is _intentionally_ detached and managed, while an orphan is any still-running process whose parent happened to exit. A classic self-daemonising service is technically orphaned on purpose during start-up, which is why the two get confused - but "orphan" describes an accident of parentage, "daemon" describes a role.
+
+```bash
+ps -o pid,ppid,tty,stat,cmd -C sshd     # TTY "?" = no controlling terminal; PPID 1 = started by systemd
+systemctl status sshd                    # supervised unit: main PID, cgroup, restart policy, recent logs
+```
+
 ## Example
 
 ```bash
@@ -79,6 +90,7 @@ CMD ["/usr/local/bin/app"]
 ## Interview tips
 
 - Separate the two clearly: an **orphan** is alive with a dead parent (harmless, adopted by PID 1 or the nearest subreaper); a **zombie** is dead with a living parent that has not collected its exit status.
+- If asked for **daemons** too, add the third category: a deliberately detached, systemd-supervised background service such as `sshd`. A common wrong answer describes a zombie as "a killed process still running in the background because files are open" - a zombie is not running at all, and open files are already closed.
 - Zombies use no memory or CPU, only a PID and a process-table entry; the risk is PID exhaustion (`kernel.pid_max`, or a cgroup `pids.max` inside containers) when a buggy parent leaks thousands.
 - You cannot kill a zombie - kill or fix the parent so the zombie is re-parented and reaped.
 - In containers, PID 1 has special duties: it must reap adopted children and handle signals itself (the kernel does not apply default signal actions to PID 1). Use `tini`, `docker run --init`, or a language runtime that reaps, and exec-form `ENTRYPOINT` so signals reach the app.

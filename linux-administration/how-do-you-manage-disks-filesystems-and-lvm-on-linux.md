@@ -52,6 +52,16 @@ The zero-downtime path, in order:
 
 Everything above is online. **Shrinking** is not: XFS cannot shrink at all, and ext4 shrinking requires an unmount and a fsck. If someone asks how to shrink, the honest answer is "create a new smaller volume, copy, and swap" - and that is a maintenance window.
 
+### Growing an EBS volume on EC2
+
+The classic interview version is "the root disk on an EC2 instance is full - add space". The common wrong answer is "change the volume from gp2 to gp3": that changes performance and price, not capacity. And growing the volume in the console is only half the job - the OS will not use the new space until the partition and filesystem are grown too.
+
+- **Snapshot first** - a cheap rollback point before touching anything.
+- **Modify the size** with `aws ec2 modify-volume --size` (Elastic Volumes - online, no detach, no reboot). Combine a size and type change into one call if you want both.
+- **Wait for the modification state** to reach `optimizing` or `completed` (`aws ec2 describe-volumes-modifications`) before extending the filesystem.
+- **On the instance**: `lsblk` shows the disk larger than the partition; `growpart` the partition, then `resize2fs` (ext4) or `xfs_growfs` (XFS, the Amazon Linux default). For LVM, `pvresize` then `lvextend -r`.
+- **Limits**: EBS volumes can grow but **never shrink** - shrinking means a new volume and a data copy - and there is a cooldown before the same volume can be modified again (historically six hours), so get the size right in one change.
+
 ### XFS versus ext4, briefly
 
 **XFS** is the default on RHEL-family systems, scales well to large files and parallel I/O, and cannot be shrunk. **ext4** is the Debian/Ubuntu default, can shrink offline, and has slightly lower metadata overhead for many small files. Both are fine; the choice matters less than the operational facts - XFS grows only, ext4 grows online and shrinks offline. Mention `noatime` (or `relatime`, the modern default) to cut needless metadata writes on write-heavy volumes, and `discard`/`fstrim.timer` for SSDs.
@@ -103,6 +113,21 @@ lvextend -r -l +100%FREE /dev/vg0/opt
 ```
 
 ```bash
+# Grow a full EC2 root volume (EBS) from 20 GB to 60 GB with no downtime
+VOL=vol-0123456789abcdef0
+aws ec2 create-snapshot --volume-id "$VOL" --description "pre-resize"
+aws ec2 modify-volume --volume-id "$VOL" --size 60          # gp2 -> gp3 alone adds NO space
+aws ec2 describe-volumes-modifications --volume-ids "$VOL" \
+  --query 'VolumesModifications[0].ModificationState'       # wait for optimizing/completed
+
+# on the instance
+lsblk                                  # nvme0n1 is 60G, nvme0n1p1 still 20G
+sudo growpart /dev/nvme0n1 1           # grow the partition
+sudo xfs_growfs -d /                   # XFS (Amazon Linux); ext4: sudo resize2fs /dev/nvme0n1p1
+df -h /
+```
+
+```bash
 # Separate the observability stack onto its own filesystem
 lvcreate -L 100G -n lv_app  vg0
 lvcreate -L 50G  -n lv_obs  vg0
@@ -139,6 +164,7 @@ umount /data && xfs_repair /dev/vg0/data   # only on an UNMOUNTED device
 - Define the directory-versus-mount-point difference in one line (a mount point is a directory where a _different_ filesystem is attached) and give a consequence: `df` and `du` disagree, and files hidden under a mount become invisible.
 - For "add 50 GB with no downtime", give the exact sequence and emphasise `lvextend -r`, which grows the filesystem in the same step. Add `growpart` + `pvresize` for the grow-an-existing-disk variant.
 - Say clearly that growing is online and **shrinking is not** - XFS cannot shrink at all, ext4 needs an unmount - so shrinking means create-copy-swap in a maintenance window.
+- For "increase disk space on an EC2 instance", do not stop at the console: snapshot, `modify-volume --size`, wait for `optimizing`, then `growpart` and `resize2fs`/`xfs_growfs`. Changing gp2 to gp3 adds no capacity, and EBS volumes cannot shrink.
 - Volunteer the **inode exhaustion** case with `df -ih`, because "50% full but out of space" is a classic interview scenario and the answer surprises people.
 - Add the deleted-but-open-file case (`lsof +L1`) as the reason `du` and `df` disagree, and give the real fix - log rotation with `copytruncate` or a reload hook.
 - Treat a read-only remount as an I/O error until proven otherwise: read `dmesg`, do not just remount read-write. That instinct is what separates someone who has lost data from someone who has not.
