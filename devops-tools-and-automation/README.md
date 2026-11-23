@@ -11,7 +11,7 @@ tags:
 
 GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to ship without downtime.
 
-**15 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 8 · 🔴 Advanced: 2
+**16 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 9 · 🔴 Advanced: 2
 
 ## Questions
 
@@ -32,6 +32,7 @@ GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to shi
 | 632 | [What is Packer and how does it automate immutable golden machine image generation across clouds?](./what-is-packer-and-how-does-it-automate-immutable-golden-machine-image-generation-across-clouds.md)               | 🟢 Beginner     |
 | 633 | [What is Crossplane and how does it turn Kubernetes into a universal cloud infrastructure control plane?](./what-is-crossplane-and-how-does-it-turn-kubernetes-into-a-universal-cloud-infrastructure-control-plane.md) | 🔴 Advanced     |
 | 634 | [What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?](./what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs.md)             | 🟡 Intermediate |
+| 804 | [How do you use AI assistants and agents safely in day-to-day DevOps work?](./how-do-you-use-ai-assistants-and-agents-safely-in-day-to-day-devops-work.md)                                                             | 🟡 Intermediate |
 
 ## What interviewers probe here
 
