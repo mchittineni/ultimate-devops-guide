@@ -47,6 +47,14 @@ Last Data Backup             Incident Occurs             Service Restored
 | **Warm Standby**               | High    | Minutes         | Seconds                                            | Scaled-down version of full stack always running in secondary region; auto-scales up on failover  |
 | **Multi-Region Active-Active** | Highest | Near zero       | Near zero (zero only with synchronous replication) | All regions live, handling traffic concurrently with continuous replication                       |
 
+### Tier per service, not per company
+
+A cost-sensitive system that "cannot afford downtime" rarely needs one tier for everything. Set RTO and RPO per service from the business impact, then match the tier: checkout, payments and user accounts on **warm standby** in a second region; reviews, recommendations and reporting on **pilot light** or **backup and restore**, rebuilt from Terraform and GitOps only when needed. Most of the DR budget then goes where an hour of downtime actually costs money.
+
+### Check the data layer's real replication
+
+A common mistake is assuming data is already in a second region. **S3 is regional**: it stores objects across multiple AZs in one region by default, which protects against a data-centre failure but not a regional outage. Cross-region copies need **Cross-Region Replication** (versioning on both buckets, new objects only unless you run Batch Replication) or **AWS Backup cross-region copy** jobs. The same check applies to every store: DynamoDB global tables, Aurora Global Database (typically about a second of replication lag), RDS cross-region read replicas, and AWS Backup copies for everything else. Your achievable RPO is the replication lag or backup interval of the slowest store a service depends on.
+
 ## Example
 
 A tier decision is recorded per system, straight from the business impact analysis. AWS Elastic Disaster Recovery, Aurora Global Database, and Route 53 map onto the tiers like this:
@@ -75,6 +83,8 @@ A tier decision is recorded per system, straight from the business impact analys
 - The four tiers: Backup/Restore, Pilot Light, Warm Standby, Active-Active.
 - Higher availability / lower RTO/RPO exponentially increases cloud costs.
 - Say the trade-off out loud: RPO zero needs synchronous replication, and synchronous replication across regions adds round-trip latency to every write, which is why most "active-active" designs quietly accept a few seconds of RPO.
+- Tier per service: warm standby for revenue paths such as checkout and payments, pilot light or backup and restore for low-impact services - that is how you answer "cannot afford downtime but is cost-sensitive".
+- Do not claim S3 replicates across regions by default: it is multi-AZ within one region, and cross-region needs CRR (with versioning) or AWS Backup cross-region copies.
 - Measured RTO/RPO from DR tests beat the targets on paper - interviewers like hearing that you track the gap.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
