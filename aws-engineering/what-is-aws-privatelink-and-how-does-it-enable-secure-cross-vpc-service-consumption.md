@@ -73,6 +73,23 @@ PrivateLink establishes a private, unidirectional connection between a **Service
 
 A SaaS provider hosts an analytics platform in AWS and sells to Fortune 500 banks. The banks refuse to allow their financial data to traverse the public internet or peer VPCs due to overlapping IP space. The SaaS provider configures AWS PrivateLink, allowing the banks to query the service as a local private IP inside their existing private subnets.
 
+### Scenario: a third party needs direct access to our database
+
+A frequent follow-up is "a partner needs to query our RDS database - do we put it in a public subnet?" Push back first: a publicly reachable database is the last resort. In order of preference:
+
+1. **Keep it private and use PrivateLink.** If the partner has an AWS account, share the database as a **resource endpoint** (or put an NLB in front and publish an endpoint service). They get a private IP in their own VPC; nothing has a public address, and overlapping CIDRs do not matter.
+2. **Site-to-Site VPN** (or the partner's Direct Connect) if they are on-premises, with security groups allowing only their routed ranges.
+3. **A narrow API or proxy** in front of the data, which is often what they actually need, rather than SQL access at all.
+
+If it genuinely must be public, compensate with layered controls:
+
+- Security group allowing only the partner's fixed **/32 egress IPs** on the database port - never `0.0.0.0/0` - and ideally a **read replica** in a dedicated subnet rather than the primary.
+- **TLS enforced** on the server (`rds.force_ssl = 1` for PostgreSQL, `require_secure_transport = ON` for MySQL) with the client verifying the RDS CA certificate (`sslmode=verify-full`).
+- A **dedicated least-privilege database user** (read-only, limited to specific views or schemas), with IAM database authentication or Secrets Manager rotation rather than a shared password.
+- **Audit and expiry**: database audit logging (for example `pgaudit`), GuardDuty RDS Protection, alarms on failed logins and connection counts, and a review date after which the access is removed.
+
+IP allowlisting plus TLS plus IAM authentication is a reasonable answer, but naming the private options first is what shows judgement.
+
 ## Example
 
 ```bash
@@ -93,11 +110,20 @@ aws ec2 accept-vpc-endpoint-connections --service-id vpce-svc-0abc123 \
   --vpc-endpoint-ids vpce-0consumer123
 ```
 
+```bash
+# Last-resort public database for a partner: only their egress IP, TLS enforced
+aws ec2 authorize-security-group-ingress --group-id sg-0partnerdb \
+  --protocol tcp --port 5432 --cidr 203.0.113.10/32
+aws rds modify-db-parameter-group --db-parameter-group-name partner-replica-pg \
+  --parameters "ParameterName=rds.force_ssl,ParameterValue=1,ApplyMethod=immediate"
+```
+
 ## Interview tips
 
 - Highlight that PrivateLink works seamlessly across overlapping CIDR blocks, which is a major limitation of VPC Peering.
 - Explain the difference between Gateway Endpoints (free, routing-table based for S3 and DynamoDB) and Interface Endpoints (ENI-based, powered by PrivateLink).
 - Mention unidirectional connectivity: consumers can initiate connections to providers, but providers cannot initiate connections back into consumer networks.
+- For "a third party needs our database", offer PrivateLink (a resource endpoint or an NLB-backed endpoint service) or a VPN before a public endpoint; if it must be public, list /32 allowlisting, enforced TLS, a dedicated least-privilege user, audit logging and an expiry date.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

@@ -11,7 +11,7 @@ tags:
 
 Depth on AWS: VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage classes, highly available databases, multi-account organisations, and IaC choices.
 
-**37 questions** · 🟢 Beginner: 6 · 🟡 Intermediate: 20 · 🔴 Advanced: 11
+**41 questions** · 🟢 Beginner: 7 · 🟡 Intermediate: 23 · 🔴 Advanced: 11
 
 ## Questions
 
@@ -54,6 +54,10 @@ Depth on AWS: VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling w
 | 737 | [How Do You Implement Blue-Green and Canary Deployments on Amazon ECS with CodeDeploy?](./how-do-you-implement-blue-green-and-canary-deployments-on-amazon-ecs-with-codedeploy.md)                     | 🟡 Intermediate |
 | 738 | [How Do You Implement Automated Drift Detection and Remediation in AWS CloudFormation?](./how-do-you-implement-automated-drift-detection-and-remediation-in-aws-cloudformation.md)                     | 🟡 Intermediate |
 | 755 | [How do you upgrade an Amazon EKS cluster safely?](./how-do-you-upgrade-an-amazon-eks-cluster-safely.md)                                                                                               | 🔴 Advanced     |
+| 795 | [How do you control image sprawl and storage cost in Amazon ECR?](./how-do-you-control-image-sprawl-and-storage-cost-in-amazon-ecr.md)                                                                 | 🟡 Intermediate |
+| 796 | [What baseline security controls would you apply to an AWS account on a tight budget?](./what-baseline-security-controls-would-you-apply-to-an-aws-account-on-a-tight-budget.md)                       | 🟡 Intermediate |
+| 797 | [What are the pillars of the AWS Well-Architected Framework?](./what-are-the-pillars-of-the-aws-well-architected-framework.md)                                                                         | 🟢 Beginner     |
+| 798 | [When do you use Amazon API Gateway versus an Application Load Balancer?](./when-do-you-use-amazon-api-gateway-versus-an-application-load-balancer.md)                                                 | 🟡 Intermediate |
 
 ## What interviewers probe here
 
