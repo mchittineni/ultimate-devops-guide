@@ -19,9 +19,9 @@ Chaque réponse vous donne une réponse courte à dire à voix haute, le détail
 
 <!-- BADGES:START -->
 
-![Questions](https://img.shields.io/badge/questions-787-blue)
+![Questions](https://img.shields.io/badge/questions-805-blue)
 ![Topics](https://img.shields.io/badge/topics-40-blueviolet)
-![Difficulty](https://img.shields.io/badge/difficulty-🟢%20177%20·%20🟡%20394%20·%20🔴%20216-lightgrey)
+![Difficulty](https://img.shields.io/badge/difficulty-🟢%20184%20·%20🟡%20404%20·%20🔴%20217-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 <!-- BADGES:END -->
