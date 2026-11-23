@@ -80,9 +80,9 @@ module "app_gcp" {
 
 ## Related Concepts
 
+- [[What are the pillars of the AWS Well-Architected Framework?]] (`#797`): [What are the pillars of the AWS Well-Architected Framework?](../aws-engineering/what-are-the-pillars-of-the-aws-well-architected-framework.md)
 - [[How do you design a production-ready VPC on AWS?]] (`#191`): [How do you design a production-ready VPC on AWS?](../aws-engineering/how-do-you-design-a-production-ready-vpc-on-aws.md)
 - [[How does AWS IAM evaluate a request?]] (`#192`): [How does AWS IAM evaluate a request?](../aws-engineering/how-does-aws-iam-evaluate-a-request.md)
-- [[What is the difference between ECS, EKS, and Fargate?]] (`#193`): [What is the difference between ECS, EKS, and Fargate?](../aws-engineering/what-is-the-difference-between-ecs-eks-and-fargate.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

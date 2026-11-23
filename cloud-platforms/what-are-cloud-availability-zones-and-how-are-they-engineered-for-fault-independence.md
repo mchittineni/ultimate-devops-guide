@@ -36,6 +36,14 @@ quiz:
 
 **Zone names are logical, not physical.** On AWS, the name `us-east-1a` may map to different physical zones in different accounts; use the **AZ ID** (for example `use1-az1`) when coordinating across accounts, such as for PrivateLink or shared subnets. Azure does the same per subscription with logical zones 1, 2, and 3. GCP zone names (`europe-west1-b`) are the same for every project.
 
+**Regions, zones, and edge locations.** The three terms are often asked together, and they are different kinds of thing:
+
+- A **region** is a separate geographic area (for example `ap-south-1` Mumbai or `ap-south-2` Hyderabad) with its own set of services and data residency; most services are regional.
+- An **Availability Zone** is one or more data centres inside a region, designed as an independent failure domain - the unit you spread workloads across.
+- **Edge locations** are hundreds of points of presence in many more cities than there are regions. They run edge services - CloudFront caching, Route 53 DNS, Global Accelerator, Shield, and CloudFront Functions or Lambda@Edge - to serve users with low latency. You cannot launch EC2 instances or RDS databases there.
+
+When compute itself must be close to users, the options are **Local Zones** (an extension of a region into a specific metro area) and **Wavelength Zones** (inside telecom 5G networks), not edge locations.
+
 **What zones do not protect against.**
 
 - Regional control-plane or shared-service failures (IAM, DNS, a regional API) - these have caused the largest multi-hour cloud outages.
@@ -63,6 +71,7 @@ aws autoscaling create-auto-scaling-group --auto-scaling-group-name web \
 - Define an AZ by its failure properties (independent power, cooling, network) rather than as "a data center".
 - Explain the distance trade-off: far enough for independent failures, close enough for synchronous replication.
 - Mention AZ IDs versus names - a detail that shows hands-on multi-account experience.
+- If edge locations come up, do not describe them as "smaller data centres" for general workloads: they serve CloudFront, Route 53 and Global Accelerator traffic close to users, and Local Zones or Wavelength are the answer when compute must be nearby.
 - Be clear about the limit: multi-AZ protects against zone loss, not region-wide control-plane failures or bad global deploys. That is where multi-region and cell-based design come in.
 - Expect a follow-up on static stability: surviving a zone loss without needing to launch new capacity during the event.
 
@@ -70,9 +79,9 @@ aws autoscaling create-auto-scaling-group --auto-scaling-group-name web \
 
 ## Related Concepts
 
+- [[What are the pillars of the AWS Well-Architected Framework?]] (`#797`): [What are the pillars of the AWS Well-Architected Framework?](../aws-engineering/what-are-the-pillars-of-the-aws-well-architected-framework.md)
 - [[How do you design a production-ready VPC on AWS?]] (`#191`): [How do you design a production-ready VPC on AWS?](../aws-engineering/how-do-you-design-a-production-ready-vpc-on-aws.md)
 - [[What is the difference between ECS, EKS, and Fargate?]] (`#193`): [What is the difference between ECS, EKS, and Fargate?](../aws-engineering/what-is-the-difference-between-ecs-eks-and-fargate.md)
-- [[How do Auto Scaling groups and load balancers work together on AWS?]] (`#194`): [How do Auto Scaling groups and load balancers work together on AWS?](../aws-engineering/how-do-auto-scaling-groups-and-load-balancers-work-together-on-aws.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
