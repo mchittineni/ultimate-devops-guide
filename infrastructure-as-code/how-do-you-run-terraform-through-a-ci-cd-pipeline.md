@@ -76,6 +76,12 @@ For secrets _inside_ Terraform (database passwords, API keys), pull them at runt
 
 There is no rollback. A failed apply leaves partial resources recorded in state, so you **fix forward** - correct the code and apply again. Design for it: idempotent configuration, `create_before_destroy` on anything replacement-prone, and small blast radius per state so a partial failure is bounded. If an apply is interrupted, expect a held lock and a possibly stale state; verify with `plan` before doing anything else, and only `force-unlock` after confirming no run is alive. See [recovering a lost or corrupted Terraform state file](./how-do-you-recover-a-lost-or-corrupted-terraform-state-file.md).
 
+### The emergency path: "we need it in five minutes"
+
+Urgency is not a reason to bypass the pipeline; it is a test of whether the pipeline was built well. A plan and apply against a small, targeted state should take minutes, so the emergency path is the **same pipeline with an expedited approval**: the change still goes through a PR, the plan is still posted, but an on-call approver (rather than the usual reviewers or change board) signs off and the saved plan is applied. The audit trail stays intact and nothing drifts.
+
+If the pipeline itself is down, or the outage blocks it, have a documented **break-glass** route: a dedicated role whose use is logged in CloudTrail and alerts security, used only for the minimum console or CLI change. The change must then be back-ported to code straight away: update the configuration, adopt any new resource with an `import` block, run `terraform plan -refresh-only` to reconcile state, and confirm a normal `plan` comes back **empty**. Until then, the next routine apply will quietly undo the fix. `-target` is a last resort for the same reason: it skips the rest of the graph, so follow it with a full plan.
+
 ### Making it fast
 
 A slow plan is usually a huge state (every refresh queries every resource), a distant backend, or an artificially serialised graph. Split state, cache the provider plugin directory between runs (`TF_PLUGIN_CACHE_DIR`), use `-refresh=false` where you know state is fresh, and only plan the components a change actually touches - path filters or a tool such as Terragrunt/Terramate that understands your stack layout. That is the answer to "the Terraform pipeline takes 25 minutes".
@@ -202,7 +208,15 @@ esac
 - Distinguish scanning code (Checkov/Trivy) from policy on the **plan JSON** (Conftest/OPA/Sentinel), and give an example rule such as "no database deletions without an explicit approval label". Evaluating the real change is a level above linting files.
 - Bring up scheduled drift detection with `-detailed-exitcode` unprompted; it is how you stop console changes accumulating silently.
 - Be clear there is no rollback - fix forward, keep blast radius small, expect a held lock after an interrupted apply and verify with `plan` before force-unlocking.
+- "The business needs it in five minutes, do you still go through every stage?" is a pressure test. Answering "yes, rules are rules" with no plan sounds rigid; "just click it in the console" fails it. Say the pipeline is fast enough for emergencies, describe the expedited approval and the break-glass role, and stress back-porting the change until `plan` is empty.
 - If the pipeline is slow, diagnose it: state size, backend distance, plugin cache, and planning only the components a change touches. Name Atlantis, HCP Terraform, or Spacelift as ready-made options. See [managing Terraform state safely in a team](./how-do-you-manage-terraform-state-safely-in-a-team.md), [structuring Terraform code for multiple environments and providers](./how-do-you-structure-terraform-code-for-multiple-environments-and-providers.md), [scanning IaC before it is applied](../devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md), and [authenticating to AWS without long-lived access keys](../aws-engineering/how-do-you-authenticate-to-aws-without-long-lived-access-keys.md).
+
+**Telling it as a STAR story** (an adaptable example)
+
+- **Situation:** During a traffic spike, the business asked for a new WAF rate-based rule and a larger RDS instance within minutes.
+- **Task:** Deliver quickly without manual drift or skipped controls.
+- **Action:** Pushed back on console changes because the pipeline for that stack ran plan and apply in about four minutes. Opened the PR, let the pipeline post the plan, and had the on-call senior engineer approve it under the emergency change process, so the reviewed plan was applied. Explained the fallback: a break-glass role that pages security, with any console change codified (import block, refresh-only plan) within 24 hours.
+- **Result:** The fix shipped in about ten minutes with a full audit trail and no drift, and the emergency path was adopted as policy instead of allowing console changes.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

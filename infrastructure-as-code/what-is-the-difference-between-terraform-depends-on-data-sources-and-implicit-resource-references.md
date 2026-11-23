@@ -58,6 +58,40 @@ data "aws_ami" "ubuntu" {
 
 Data sources are normally read during `plan`. If a data source depends on something not yet known (an attribute of a resource being created, or an explicit `depends_on`), Terraform defers the read to `apply` and everything downstream shows as "known after apply" - which is why `depends_on` on a data source makes plans noisier and less useful.
 
+**Looking up something created by hand.** A common scenario: a VPC called `demo-vpc` was created in the console, and your configuration must put a Lambda function inside it, but all you know is its name. Look it up by tag and feed the result into the resource:
+
+```hcl
+data "aws_vpc" "demo" {
+  filter {
+    name   = "tag:Name"
+    values = ["demo-vpc"]
+  }
+}
+
+data "aws_subnets" "demo_private" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.demo.id]
+  }
+  tags = { Tier = "private" }
+}
+
+resource "aws_lambda_function" "worker" {
+  function_name = "worker"
+  role          = aws_iam_role.worker.arn
+  runtime       = "python3.13"
+  handler       = "app.handler"
+  filename      = "build/worker.zip"
+
+  vpc_config {
+    subnet_ids         = data.aws_subnets.demo_private.ids
+    security_group_ids = [aws_security_group.worker.id]
+  }
+}
+```
+
+A singular data source such as `aws_vpc` must match **exactly one** object: zero matches or several matches (two VPCs both tagged `demo-vpc`) fail the plan. That is a useful guard, but it couples your plan to a tag someone can edit in the console. The alternatives are to pass the ID in as a variable (explicit, but someone has to look it up), or to bring the VPC under Terraform management with an `import` block if your team should own it from now on. Do not do both: importing a resource that another configuration (or a person) still manages leads to two owners fighting over it.
+
 ### 3. Explicit `depends_on` (Use Sparingly)
 
 Used only when an application depends on a permission or background service that is not referenced in the resource's arguments:
@@ -113,6 +147,7 @@ terraform graph | grep -E 'aws_instance.app|s3_read'   # inspect the edges Terra
 - Say implicit references are preferred and `depends_on` is for behavioural dependencies with no data flow - the IAM attachment before boot is the classic example.
 - Know that `depends_on` on a data source defers the read to apply time, and on a module waits for everything inside it.
 - Distinguish data sources (read-only lookups, not managed, not destroyed) from resources.
+- "A VPC was made by hand and you only know its name" is a common scenario question. Answer with a data source filtered on `tag:Name`, say it must match exactly one VPC or the plan fails, and offer the variable and `import` alternatives.
 - Likely follow-up: "what does a dependency cycle error mean?" - two resources reference each other; break it by splitting a resource (for example separate security group rule resources) or removing one reference.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

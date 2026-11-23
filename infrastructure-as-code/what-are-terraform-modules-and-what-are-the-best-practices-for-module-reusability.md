@@ -53,6 +53,15 @@ Modules enable DRY (Don't Repeat Yourself) infrastructure and establish corporat
 
 Every module is an abstraction consumers must learn and trust. A module that merely wraps one resource and passes every argument through adds indirection without encoding any decision; a module with dozens of inputs becomes as complex as the resources it hides. Good internal modules are opinionated - encryption, logging, tagging, and naming on by default - and expose only what genuinely varies.
 
+### Build your own or reuse a community module?
+
+Public and verified modules (for example the `terraform-aws-modules` family) are a good starting point: well tested, widely used, and quick to adopt. But they are built for everyone, so they expose dozens of inputs, default to what is broadly reasonable rather than what your organisation requires, and release on their own schedule. Teams therefore usually do one of two things:
+
+- **Write a thin wrapper** around the community module that hard-codes the organisation's decisions (encryption with the right KMS key, mandatory tags, naming convention, access logging, no public access), exposes only the handful of inputs teams actually need, and pins the upstream version. Upgrades become a deliberate change: read the upstream changelog, bump the pin in the wrapper, test, release a new wrapper version.
+- **Write their own module** when the community one adds more complexity than it saves, or when its resources are simple enough that owning the code is cheaper than tracking someone else's releases.
+
+Either way there is a supply-chain angle: a module runs with your deploy role's permissions, so pin by exact version (or commit for Git sources), review upgrades like any dependency, and consider mirroring approved modules into a private registry. The resources underneath are often identical; the value of your own module is in the interface and the defaults.
+
 ## Example
 
 ```hcl
@@ -109,6 +118,7 @@ module "exports" {
 - Name the anti-patterns: the kitchen-sink mega-module and the pass-through wrapper that encodes no decision.
 - Pin module versions (registry `version` or Git `?ref=`) and describe upgrades as reviewed PRs where you read the plan for replacements.
 - Explain why child modules declare `required_providers` but never configure providers: portability across accounts and regions, and aliases passed in via `providers = {}`.
+- "Why write a module when an official one exists?" Answer with the wrapper pattern: org defaults baked in, a smaller interface, controlled upgrades, and less supply-chain exposure. "We always write everything ourselves" and "we always use the public module directly" are both weaker answers.
 - Likely follow-up: "how do you roll out a breaking module change to 40 consumers?" - a major version with `moved` blocks and an upgrade guide, adopted environment by environment.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->

@@ -29,6 +29,14 @@ Core concepts:
 
 Ansible shines at configuration management, application deployment, and orchestrated multi-step operations (rolling restarts, patching runs). It can provision cloud resources, but Terraform is generally the better fit for that half of the problem, because Ansible keeps no state: it cannot plan a diff against what exists or notice that a resource was removed from the playbook.
 
+**Play execution order: `pre_tasks`, roles, `tasks`, `post_tasks`.** Inside one play, Ansible runs sections in a fixed order regardless of how they are written in the file:
+
+1. `pre_tasks`, then any handlers they notified
+2. `roles`, then `tasks`, then handlers notified by either of those two (roles and tasks share one flush)
+3. `post_tasks`, then any handlers they notified
+
+`pre_tasks` exist for work that must happen _before_ roles touch the host: refresh the package cache, `assert` prerequisites such as free disk space or OS version, silence monitoring, or drain the host from the load balancer. `post_tasks` do the reverse: poll a health endpoint, put the host back into the pool, re-enable alerts. Because handlers are flushed at the end of each stage, a service restart notified in `pre_tasks` happens before roles start, not at the end of the play. Combined with `serial:` (a few hosts per batch), `delegate_to:` (run the load-balancer call on the balancer or `localhost`) and `max_fail_percentage:`, this is how a patching play becomes a zero-downtime rolling update.
+
 The trade-offs of the push/SSH model: runs are only as current as the last execution (no continuous enforcement unless you schedule it, for example with AWX/Ansible Automation Platform), large fleets need tuning (`forks`, pipelining, fact caching), and idempotency is only as good as the modules - `command`/`shell` tasks are not idempotent unless you add `creates:` or `changed_when:`.
 
 ## Example
@@ -70,11 +78,68 @@ The trade-offs of the push/SSH model: runs are only as current as the last execu
 ansible-playbook -i inventory/prod site.yml --check --diff   # dry run
 ```
 
+A rolling patch play using `pre_tasks` and `post_tasks` around the roles:
+
+```yaml
+- name: Patch web tier safely
+  hosts: webservers
+  become: true
+  serial: 5 # five hosts per batch
+  max_fail_percentage: 0 # stop the rollout if any host in a batch fails
+
+  pre_tasks:
+    - name: Check there is room to patch
+      ansible.builtin.assert:
+        that: (ansible_facts.mounts | selectattr('mount', 'equalto', '/') | first).size_available > 2 * 1024 ** 3
+        fail_msg: "Less than 2 GiB free on / - not patching this host"
+
+    - name: Refresh the apt cache
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Take the host out of the load balancer
+      community.general.haproxy:
+        state: disabled
+        backend: web
+        host: "{{ inventory_hostname }}"
+        drain: true
+      delegate_to: "{{ groups['loadbalancers'][0] }}"
+
+  roles:
+    - os_patching
+    - nginx
+
+  post_tasks:
+    - name: Wait until the app is healthy
+      ansible.builtin.uri:
+        url: "http://{{ inventory_hostname }}:8080/healthz"
+        status_code: 200
+      register: health
+      retries: 20
+      delay: 5
+      until: health.status == 200
+
+    - name: Put the host back into the load balancer
+      community.general.haproxy:
+        state: enabled
+        backend: web
+        host: "{{ inventory_hostname }}"
+      delegate_to: "{{ groups['loadbalancers'][0] }}"
+```
+
 ## Interview tips
 
 - Idempotency and handlers are the concepts to demonstrate - a task that always reports `changed` is a bug.
 - `--check --diff` for dry runs, and `serial:` for rolling updates without downtime.
 - Vault (or an external secrets manager) is the expected answer on secrets in playbooks.
+- "What are `pre_tasks`?" comes up often. State the order (`pre_tasks`, roles, `tasks`, `post_tasks`, with handlers flushed after each stage) and give a concrete use, such as draining a host from the load balancer before roles restart services.
+
+**Telling it as a STAR story** (an adaptable example)
+
+- **Situation:** A patching playbook restarted nginx on all 30 web servers at once while they were still in the load balancer, and users saw errors.
+- **Task:** Make patching safe enough to run during business hours.
+- **Action:** Added `serial: 5`, used `pre_tasks` to assert free disk space, refresh the package cache and drain each host from the load balancer with `delegate_to`, let the roles patch and restart services through handlers, and used `post_tasks` to poll the health endpoint before re-enabling the host. `max_fail_percentage` stopped the run if a batch failed.
+- **Result:** Patching became zero-downtime, and a bad package later stopped the rollout after the first five hosts instead of all thirty.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

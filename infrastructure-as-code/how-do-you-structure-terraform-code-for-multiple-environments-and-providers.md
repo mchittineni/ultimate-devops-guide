@@ -90,6 +90,31 @@ Smaller states mean faster plans, smaller blast radius, and fewer lock conflicts
 
 - **Genuinely multi-cloud**: do not write one module that branches on cloud. Write `modules/aws/kubernetes` and `modules/azure/kubernetes` with a deliberately similar variable interface, and compose them in the environment root. The abstraction that survives is at the _interface_ level, not inside the resources - because the resources have no common shape. Keep provider credentials out of the code (environment variables, OIDC federation from CI, or a workload identity), and be honest that a single state containing two clouds means one provider outage blocks changes to both. See [what are the real trade-offs of multi-cloud](../cloud-engineering/what-are-the-real-trade-offs-of-multi-cloud.md).
 
+### Scaling to a multi-account landing zone
+
+With 15, 50, or hundreds of AWS accounts (log archive, security, network, shared services, and dev/UAT/prod workload accounts) the environment folder is no longer enough. Two more dimensions appear, **account** and **region**, and the layout should make each one explicit:
+
+```text
+live/
+  log-archive/  eu-west-1/  logging/                 # central accounts, applied first
+  security/     eu-west-1/  security-tooling/
+  network/      eu-west-1/  tgw/   eu-central-1/ tgw/
+  payments-prod/
+    _global/    iam/                                 # global services once per account
+    eu-west-1/  network/  eks/  data/
+    eu-central-1/  network/  eks/                    # DR region: its own roots and state
+  payments-dev/
+    eu-west-1/  network/  eks/
+```
+
+- **One state per account x region x layer.** A failed apply in `eu-west-1` cannot block the DR region, and a bad change can only damage one account's component.
+- **Each root assumes a role in its own account** (`provider "aws" { assume_role { role_arn = "arn:aws:iam::<account>:role/TerraformDeploy" } }`), created by the account baseline. The CI job for that root can only assume that one role, ideally via OIDC.
+- **Regions are separate roots** by default. Use aliased providers only when one stack genuinely spans two places, such as a transit gateway shared through RAM from the network account and accepted in the workload account (`aws.network` and `aws.workload`).
+- **Global resources** (IAM roles, Route 53 zones) live in a per-account `_global` root so they are not duplicated per region.
+- **Account vending is its own layer.** Control Tower with **Account Factory for Terraform (AFT)**, or an equivalent pipeline, creates accounts and applies a baseline (logging, GuardDuty, the deploy role) automatically. Organizations, SCPs and AFT requests belong in a separate repository with stricter approvers.
+- **All accounts consume one versioned module registry.** Promote a change by bumping the module version in dev, then UAT, then prod, not by copying code. Per-leaf `tfvars` hold only real differences: CIDRs, sizes, account IDs.
+- **DRY the boilerplate.** Around a hundred leaves each repeating backend and provider blocks is where Terragrunt (deriving account and region from the path), Terramate, or HCP Terraform Stacks pay for themselves. Share values across roots via SSM parameters or `terraform_remote_state`.
+
 ### Variables, secrets, and the pipeline
 
 Per-environment `terraform.tfvars` committed to Git for non-secret values; secrets from a secret manager or CI-injected environment variables, never in `.tfvars` and never in state you have not encrypted. In CI: `fmt -check`, `validate`, `tflint`, a security scan (Checkov or `trivy config`, which absorbed tfsec), then `plan -out=tfplan` on the pull request with the plan posted as a comment, and `apply tfplan` after approval so what is applied is provably what was reviewed. Protect production with a separate approval and separate credentials. See [how do you scan Infrastructure as Code before it is applied](../devsecops/how-do-you-scan-infrastructure-as-code-before-it-is-applied.md).
@@ -167,6 +192,14 @@ module "eks_dr" {
 - For multi-provider, show aliased providers passed with the `providers` argument, and reject one module branching on cloud - per-cloud modules with a similar interface is the pattern that survives.
 - Mention pinning: Terraform version, provider versions, module tags, and a committed lock file. Then `plan -out` reviewed and `apply` of that exact plan.
 - Close on the diff between environment variable files being your best drift documentation - it is a practical detail that shows you have operated this, not just designed it.
+- For a landing-zone version of the question ("15-20 accounts, several environments and regions"), a common incomplete answer is "a folder per environment, a subfolder per account, and a modules directory". It misses the region dimension, per-account provider roles, and per-root state. Name all three, plus account vending (Control Tower/AFT) as its own layer.
+
+**Telling it as a STAR story** (an adaptable example)
+
+- **Situation:** About 150 AWS accounts under Control Tower, with Terraform in one repository and a handful of huge states. A plan took 20 minutes and one apply could touch dozens of accounts.
+- **Task:** Restructure the layout so it scaled with the number of accounts and regions.
+- **Action:** Split into an org repository (Organizations, SCPs, AFT requests), a platform repository (network, security tooling, logging) and team-owned workload repositories. Moved modules to their own repository with semantic version tags. Laid out live code as `<account>/<region>/<component>`, each with its own state key and a provider assuming a deploy role in that account, and used Terragrunt to generate backends and run plans across roots in parallel.
+- **Result:** Typical plans dropped to under two minutes, a bad change could only affect one account, region and component, and vending a compliant account went from days to under an hour.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
