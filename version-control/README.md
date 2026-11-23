@@ -11,7 +11,7 @@ tags:
 
 Git mechanics and the branching models teams actually argue about, including how to resolve conflicts calmly.
 
-**17 questions** · 🟢 Beginner: 7 · 🟡 Intermediate: 9 · 🔴 Advanced: 1
+**18 questions** · 🟢 Beginner: 7 · 🟡 Intermediate: 10 · 🔴 Advanced: 1
 
 ## Questions
 
@@ -34,6 +34,7 @@ Git mechanics and the branching models teams actually argue about, including how
 | 581 | [What are Git submodules and how do they differ from Git subtrees and monorepos?](./what-are-git-submodules-and-how-do-they-differ-from-git-subtrees-and-monorepos.md)                             | 🟡 Intermediate |
 | 582 | [What are Git Hooks and how are they used with pre-commit frameworks to enforce quality gates?](./what-are-git-hooks-and-how-are-they-used-with-pre-commit-frameworks-to-enforce-quality-gates.md) | 🟢 Beginner     |
 | 760 | [How do you sign Git commits and enforce signed commits?](./how-do-you-sign-git-commits-and-enforce-signed-commits.md)                                                                             | 🟡 Intermediate |
+| 799 | [How do you version releases with Git tags, and how do you fix a tag that is already pushed?](./how-do-you-version-releases-with-git-tags-and-how-do-you-fix-a-tag-that-is-already-pushed.md)      | 🟡 Intermediate |
 
 ## What interviewers probe here
 
