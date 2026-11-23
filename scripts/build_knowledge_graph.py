@@ -852,7 +852,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       </div>
     </div>
     <h1>⚡ DevOps Knowledge Graph</h1>
-    <p>A 3D map shaped like a brain, linking {question_count} DevOps interview questions, platform topics, and architecture wikilinks.</p>
+    <p>A 3D globe linking {question_count} DevOps interview questions, platform topics, and architecture wikilinks.</p>
 
     <div class="search-box">
       <span class="search-icon" aria-hidden="true">🔍</span>
@@ -868,7 +868,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <div class="legend-item"><span class="dot" style="background:#10b981"></span> Beginner</div>
       <div class="legend-item"><span class="dot" style="background:#f59e0b"></span> Intermediate</div>
       <div class="legend-item"><span class="dot" style="background:#ef4444"></span> Advanced</div>
-      <div class="legend-item" style="flex-basis:100%">🧠 Lobes are topic domains · cerebellum: interview prep · brainstem: foundations</div>
+      <div class="legend-item" style="flex-basis:100%">🌍 Each region of the globe is a topic domain; hubs sit just below the surface</div>
     </div>
 
     <div class="stats-bar">
@@ -997,30 +997,27 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       throw new Error('3D graph unavailable: library failed to load or WebGL is unsupported');
     }}
 
-    /* --------------------------- Brain layout --------------------------- */
-    // Every node gets a fixed home on a brain-shaped surface, and a gentle
-    // force pulls it there, so the graph settles into the shape of a brain.
-    // Topic domains map to regions: cerebral lobes for the main domains
-    // (mirrored across both hemispheres), the cerebellum for interview prep,
-    // and the brainstem for the foundations everything else builds on.
-    // lon runs front (0) over the top (90) to the back (180); lat runs from
-    // the midline (0) out to the side of the head (90).
-    // Cortical lobes in surface order: the temporal band (low, front-side)
-    // first, then front to back over the top of the head.
-    const CORTEX_ORDER = [
-      'Cloud Providers',
-      'Platform and Leadership',
-      'Architecture and Scale',
-      'Security',
-      'Containers and Kubernetes',
-      'Delivery and Automation',
-      'Reliability and Operations'
-    ];
-    const CEREBELLUM_GROUP = 'Interview Prep';
-    const BRAINSTEM_GROUP = 'Foundations';
-    const DEG = Math.PI / 180;
+    /* --------------------------- Globe layout --------------------------- */
+    // Every node gets a fixed home on the surface of a globe, and a gentle
+    // force pulls it there, so the graph settles into a sphere. Each topic
+    // domain is a contiguous region, like a continent; within a region each
+    // topic takes a wedge, and its hub sits just below the surface.
+    const GLOBE_RADIUS = 260;
+    const HUB_DEPTH = 0.82;
 
-    // Deterministic per-node randomness, so the brain looks the same on every visit.
+    // Evenly spaced unit vectors (a Fibonacci sphere).
+    function fibonacciSphere(count) {{
+      const golden = Math.PI * (3 - Math.sqrt(5));
+      return Array.from({{ length: count }}, (_, i) => {{
+        const y = 1 - (2 * (i + 0.5)) / count;
+        const ring = Math.sqrt(1 - y * y);
+        return {{ x: Math.cos(golden * i) * ring, y: y, z: Math.sin(golden * i) * ring }};
+      }});
+    }}
+
+    const dot = (a, b) => a.x * b.x + a.y * b.y + a.z * b.z;
+
+    // Deterministic per-node randomness, so the globe looks the same on every visit.
     function seededRandom(seedText) {{
       let h = 2166136261;
       for (let i = 0; i < seedText.length; i++) {{
@@ -1035,149 +1032,74 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }};
     }}
 
-    function gaussian(rand) {{
-      return Math.sqrt(-2 * Math.log(rand() || 1e-9)) * Math.cos(2 * Math.PI * rand());
-    }}
-
-    // Cerebral cortex: a half-ellipsoid either side of the midline, flatter
-    // underneath, with the temporal lobe hanging lower at the front-side and a
-    // ripple on the radius standing in for gyri and sulci.
-    function cortexPoint(lonDeg, latDeg, side, depth) {{
-      const lon = lonDeg * DEG;
-      const lat = Math.max(4, Math.min(86, latDeg)) * DEG;
-      const dx = Math.cos(lat) * Math.cos(lon);
-      const dy = Math.cos(lat) * Math.sin(lon);
-      const dz = Math.sin(lat);
-      const r = depth * (1 + 0.05 * Math.sin(lon * 9 + lat * 5) * Math.cos(lat * 11 - lon * 4));
-      const temporal = lonDeg > -70 && lonDeg < 20 ? 45 * Math.cos((lonDeg + 25) * DEG) * dz : 0;
-      return {{
-        x: 250 * dx * r,
-        y: 30 + (dy < 0 ? 0.6 : 1) * 170 * dy * r - temporal,
-        z: side * (14 + 110 * dz * r)
-      }};
-    }}
-
-    // Cerebellum: two smaller lobes tucked under the back of the cortex, with
-    // tight horizontal folds (folia).
-    function cerebellumPoint(rand) {{
-      const side = rand() < 0.5 ? -1 : 1;
-      const u = rand() * 2 * Math.PI;
-      const v = Math.acos(2 * rand() - 1);
-      const sx = Math.sin(v) * Math.cos(u);
-      const sy = Math.cos(v);
-      const sz = Math.abs(Math.sin(v) * Math.sin(u));
-      const r = (0.82 + 0.18 * rand()) * (1 + 0.06 * Math.sin(sy * 26));
-      return {{ x: -175 + 80 * sx * r, y: -95 + 52 * sy * r, z: side * (8 + 66 * sz * r) }};
-    }}
-
-    // Brainstem: a slanted column running down from under the cortex; t is 0 at the top, 1 at the bottom.
-    function brainstemPoint(t, rand) {{
-      const a = rand() * 2 * Math.PI;
-      const rad = 30 * Math.sqrt(rand());
-      return {{ x: -70 - 35 * t + rad * Math.cos(a), y: -40 - 210 * t, z: rad * Math.sin(a) }};
-    }}
-
-    // Evenly spread points over one hemisphere's visible cortex (front, top,
-    // back and the outer side), leaving the underside free for the cerebellum
-    // and brainstem. Fibonacci sampling keeps the spacing even, so the
-    // silhouette reads as a solid brain rather than separate islands.
-    function cortexSurface(count) {{
-      const pts = [];
-      if (!count) return pts;
-      let total = Math.ceil(count / 0.33);
-      for (;;) {{
-        pts.length = 0;
-        const golden = Math.PI * (3 - Math.sqrt(5));
-        for (let i = 0; i < total; i++) {{
-          const y = 1 - (2 * (i + 0.5)) / total;
-          const ring = Math.sqrt(1 - y * y);
-          const theta = golden * i;
-          const d = {{ x: Math.cos(theta) * ring, y: y, z: Math.sin(theta) * ring }};
-          if (d.z < 0.08) continue;
-          let lon = Math.atan2(d.y, d.x) / DEG;
-          if (lon < -75) lon += 360;
-          if (lon > 205) continue;
-          pts.push({{ lon: lon, lat: Math.asin(d.z) / DEG }});
-        }}
-        if (pts.length >= count) break;
-        total = Math.ceil(total * 1.1);
-      }}
-      // Thin evenly down to exactly `count` points.
-      const step = pts.length / count;
-      return Array.from({{ length: count }}, (_, i) => pts[Math.floor(i * step)]);
-    }}
-
-    function assignBrainTargets(nodes) {{
-      const topicSizes = {{}};
+    function assignGlobeTargets(nodes) {{
+      const sizes = {{}};
       nodes.forEach(n => {{
-        if (n.type === 'question') topicSizes[n.category] = (topicSizes[n.category] || 0) + 1;
+        if (n.type === 'question') sizes[n.category] = (sizes[n.category] || 0) + 1;
       }});
-
       const topics = nodes.filter(n => n.type === 'topic')
         .sort((a, b) => a.label.localeCompare(b.label));
-      const byGroup = {{}};
-      topics.forEach(t => (byGroup[t.section] = byGroup[t.section] || []).push(t));
+      const groups = {{}};
+      topics.forEach(t => (groups[t.section] = groups[t.section] || []).push(t));
+      const groupNames = Object.keys(groups).sort();
+      const capacity = groupNames.map(g => groups[g].reduce((s, t) => s + (sizes[t.label] || 0), 0));
+      const total = capacity.reduce((s, c) => s + c, 0);
 
-      // Cortical topics alternate between hemispheres within each domain, then
-      // each hemisphere's surface is cut into contiguous lobes: the temporal
-      // band first (lowest lon), then front to back.
+      // 1. Cut the sphere into one region per domain: seed a centre per domain,
+      //    then hand out surface points nearest-first until each is full.
+      const points = fibonacciSphere(total);
+      const centres = fibonacciSphere(groupNames.length);
+      const pairs = [];
+      points.forEach((p, pi) => centres.forEach((c, gi) => pairs.push([dot(p, c), pi, gi])));
+      pairs.sort((a, b) => b[0] - a[0]);
+      const taken = new Array(points.length).fill(false);
+      const regions = groupNames.map(() => []);
+      for (const [, pi, gi] of pairs) {{
+        if (taken[pi] || regions[gi].length >= capacity[gi]) continue;
+        taken[pi] = true;
+        regions[gi].push(points[pi]);
+      }}
+
+      // 2. Within a region, sort points by bearing around its centre and give
+      //    each topic a contiguous wedge.
       const homes = {{}};
-      [1, -1].forEach(side => {{
-        const lobes = CORTEX_ORDER.map(group => ({{
-          group: group,
-          topics: (byGroup[group] || []).filter((t, i) => (i % 2 === 0 ? 1 : -1) === side)
-        }}));
-        const count = lobes.reduce((sum, l) => sum + l.topics.reduce((s, t) => s + (topicSizes[t.label] || 0), 0), 0);
-        const surface = cortexSurface(count).sort((a, b) => a.lon - b.lon);
-        let cursor = 0;
-        lobes.forEach(lobe => {{
-          const lobeSize = lobe.topics.reduce((s, t) => s + (topicSizes[t.label] || 0), 0);
-          // Within a lobe, topics take bands from the midline outwards.
-          const lobePts = surface.slice(cursor, cursor + lobeSize).sort((a, b) => a.lat - b.lat);
-          cursor += lobeSize;
-          let offset = 0;
-          lobe.topics.forEach(t => {{
-            const size = topicSizes[t.label] || 0;
-            const pts = lobePts.slice(offset, offset + size);
-            offset += size;
-            const mean = pts.length
-              ? {{ lon: pts.reduce((s, p) => s + p.lon, 0) / pts.length, lat: pts.reduce((s, p) => s + p.lat, 0) / pts.length }}
-              : {{ lon: 90, lat: 50 }};
-            homes[t.label] = {{ kind: 'cortex', side: side, pts: pts, next: 0, hub: mean }};
-          }});
+      groupNames.forEach((g, gi) => {{
+        const c = centres[gi];
+        const ref = Math.abs(c.y) < 0.9 ? {{ x: 0, y: 1, z: 0 }} : {{ x: 1, y: 0, z: 0 }};
+        const u = {{ x: ref.y * c.z - ref.z * c.y, y: ref.z * c.x - ref.x * c.z, z: ref.x * c.y - ref.y * c.x }};
+        const v = {{ x: c.y * u.z - c.z * u.y, y: c.z * u.x - c.x * u.z, z: c.x * u.y - c.y * u.x }};
+        const pts = regions[gi].slice().sort((a, b) => Math.atan2(dot(a, v), dot(a, u)) - Math.atan2(dot(b, v), dot(b, u)));
+        let offset = 0;
+        groups[g].forEach(t => {{
+          const size = sizes[t.label] || 0;
+          const mine = pts.slice(offset, offset + size);
+          offset += size;
+          const sum = mine.reduce((s, p) => ({{ x: s.x + p.x, y: s.y + p.y, z: s.z + p.z }}), {{ x: c.x * 0.5, y: c.y * 0.5, z: c.z * 0.5 }});
+          const len = Math.hypot(sum.x, sum.y, sum.z) || 1;
+          homes[t.label] = {{ pts: mine, next: 0, hub: {{ x: sum.x / len, y: sum.y / len, z: sum.z / len }} }};
         }});
       }});
-      const stem = byGroup[BRAINSTEM_GROUP] || [];
-      stem.forEach((t, i) => {{
-        homes[t.label] = {{ kind: 'brainstem', t0: i / stem.length, t1: (i + 1) / stem.length }};
-      }});
-      (byGroup[CEREBELLUM_GROUP] || []).forEach(t => {{ homes[t.label] = {{ kind: 'cerebellum' }}; }});
 
       nodes.forEach(n => {{
         const isTopic = n.type === 'topic';
         const home = homes[isTopic ? n.label : n.category];
         const rand = seededRandom(n.id);
-        let p;
-        if (!home) {{
-          p = cortexPoint(90, 50, 1, 1);
-        }} else if (home.kind === 'cerebellum') {{
-          p = isTopic ? {{ x: -175, y: -95, z: 0 }} : cerebellumPoint(rand);
-        }} else if (home.kind === 'brainstem') {{
-          const t = isTopic ? (home.t0 + home.t1) / 2 : home.t0 + (home.t1 - home.t0) * rand();
-          p = brainstemPoint(t, isTopic ? () => 0 : rand);
-        }} else if (isTopic) {{
-          p = cortexPoint(home.hub.lon, home.hub.lat, home.side, 0.8);
-        }} else {{
-          const spot = home.pts[home.next++] || home.hub;
-          p = cortexPoint(spot.lon, spot.lat, home.side, 0.92 + 0.08 * rand());
+        let dir = {{ x: 0, y: 1, z: 0 }};
+        let r = GLOBE_RADIUS;
+        if (home && isTopic) {{
+          dir = home.hub;
+          r = GLOBE_RADIUS * HUB_DEPTH;
+        }} else if (home) {{
+          dir = home.pts[home.next++] || home.hub;
+          r = GLOBE_RADIUS * (0.97 + 0.03 * rand());
         }}
-        n.tx = p.x; n.ty = p.y; n.tz = p.z;
-        n.x = p.x; n.y = p.y; n.z = p.z;
+        n.tx = dir.x * r; n.ty = dir.y * r; n.tz = dir.z * r;
+        n.x = n.tx; n.y = n.ty; n.z = n.tz;
       }});
     }}
 
-    // A positional force towards each node's home on the brain surface.
-    function forceBrain(strength) {{
+    // A positional force towards each node's home on the globe.
+    function forceHome(strength) {{
       let simNodes = [];
       function force(alpha) {{
         const k = strength * alpha;
@@ -1192,7 +1114,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       return force;
     }}
 
-    assignBrainTargets(gData.nodes);
+    assignGlobeTargets(gData.nodes);
 
     const Graph = ForceGraph3D()
       (document.getElementById('graph'))
@@ -1361,14 +1283,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }}
     }});
 
-    // Physics tuning: the brain force dominates; charge and links only nudge
+    // Physics tuning: the home force dominates; charge and links only nudge
     // neighbours apart, so the shape holds once the layout settles.
-    Graph.d3Force('brain', forceBrain(0.35));
+    Graph.d3Force('home', forceHome(0.35));
     Graph.d3Force('charge').strength(-4);
     Graph.d3Force('link').strength(0.01);
     Graph.d3Force('center', null);
-    // Open on a side view, front of the brain to the right.
-    Graph.cameraPosition({{ x: 140, y: 40, z: 820 }}, {{ x: -20, y: -20, z: 0 }});
+    // Frame the whole globe, tilted slightly from above.
+    Graph.cameraPosition({{ x: 0, y: 220, z: 820 }}, {{ x: 0, y: 0, z: 0 }});
 
 
     // Sync the switcher's checked state and the scene palette with the mode
@@ -1399,7 +1321,7 @@ def render_html(graph_data: dict) -> str:
     topic_count = len(graph_data["nodes"]) - question_count
     description = (
         f"Interactive 3D map of {question_count} DevOps, SRE, cloud and platform engineering "
-        f"interview questions across {topic_count} topics, laid out in the shape of a brain."
+        f"interview questions across {topic_count} topics, laid out as a globe."
     )
     return HTML_TEMPLATE.format(
         graph_json=embed_json(graph_data),
