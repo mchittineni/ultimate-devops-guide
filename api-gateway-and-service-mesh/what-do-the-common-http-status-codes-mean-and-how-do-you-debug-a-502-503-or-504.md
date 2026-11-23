@@ -106,6 +106,16 @@ In Kubernetes, "no endpoints" comes from a **selector mismatch** or a **failing 
 
 **"Clients report 504s intermittently"** - intermittent means capacity or a specific slow path, not a total failure. Correlate the 504s with p99 latency, pool saturation, GC pauses, and a specific endpoint or tenant; a single slow query on one code path will produce exactly this.
 
+### 401 and 403 against the Kubernetes API and AWS
+
+The same split applies to infrastructure APIs, and it tells you where to look. A common wrong answer calls 403 "an internal application error" - it is not a 5xx at all, and both codes are about identity.
+
+**Kubernetes API (EKS).** `error: You must be logged in to the server (Unauthorized)` is a **401**: the API server could not authenticate you. Typical causes are an expired SSO session behind the `aws eks get-token` exec plugin in your kubeconfig, the wrong AWS profile or role, or an IAM principal that has no EKS access entry (or legacy `aws-auth` mapping) for this cluster. `Error from server (Forbidden): pods is forbidden: User "..." cannot list resource "pods"` is a **403**: you are authenticated but RBAC or the access entry's access policy does not grant that verb. Check who the cluster thinks you are with `kubectl auth whoami`, and test permissions with `kubectl auth can-i <verb> <resource> --as=<user>`.
+
+**AWS APIs called from Pods.** An `AccessDenied` (403) from S3, DynamoDB or another service usually means the Pod is not running as the identity you think. Run `aws sts get-caller-identity` inside the Pod: if it shows the **node role** instead of the workload role, the IRSA annotation or EKS Pod Identity association is missing or points at a ServiceAccount name that has changed. If the identity is right, the policy is wrong - find the `AccessDenied` event in CloudTrail, which names the action and resource, and check for an explicit deny in a bucket policy, SCP or permissions boundary.
+
+**Application-level 401s** come from token validation: an expired JWT, a wrong audience or issuer, clock skew between services, or an ingress auth plugin configured for the wrong identity provider.
+
 ### What to do while you are debugging
 
 Mitigate before you have the root cause: shift traffic away from the failing version, scale out if it is a capacity problem, raise the timeout **temporarily** if that stops user-visible errors while you fix the slow query, and shed load with 429 plus `Retry-After` rather than letting everything time out. Retries need care - retrying a 504 amplifies load on an already-slow backend, so retries must be bounded, jittered, and only on idempotent requests, with a circuit breaker so a struggling dependency is not hammered.
@@ -168,6 +178,19 @@ kubectl logs -n istio-system deploy/istio-ingressgateway --tail=200 \
 #   target_status_code = '-'  ->  the target never returned a valid response (502/504)
 ```
 
+```bash
+# 401 / 403 on EKS: who am I, and what may I do?
+aws sts get-caller-identity                       # which IAM principal is the kubeconfig using?
+aws eks list-access-entries --cluster-name prod   # is that principal mapped to the cluster at all? (401 if not)
+kubectl auth whoami                               # the Kubernetes identity it maps to
+kubectl auth can-i list pods -n payments --as=jane@example.com   # RBAC answer (403 if "no")
+
+# AccessDenied from a Pod: is it using the workload role or the node role?
+kubectl exec -n payments deploy/payments -- aws sts get-caller-identity
+aws eks list-pod-identity-associations --cluster-name prod --namespace payments
+kubectl get sa payments -n payments -o jsonpath='{.metadata.annotations.eks\.amazonaws\.com/role-arn}'  # IRSA
+```
+
 ```text
 The timeout ladder - get this wrong and you generate your own 504s
 
@@ -186,6 +209,7 @@ The timeout ladder - get this wrong and you generate your own 504s
 
 - Lead with the class semantics - `4xx` is the client's fault, `5xx` is the server's - then give the three-way split that answers the real question: **502 the backend answered badly, 503 nothing to answer, 504 answered too slowly**. That single sentence is the most useful thing you can say here.
 - Distinguish `401` from `403` precisely: not authenticated versus authenticated but not permitted. It is asked constantly and often fumbled.
+- Carry the 401/403 split into infrastructure: on EKS, 401 points at the kubeconfig token or a missing access entry, 403 at RBAC; for AWS calls from Pods, check `aws sts get-caller-identity`, the IRSA or Pod Identity association, and CloudTrail `AccessDenied` events.
 - Give a fixed debugging order and stick to it: reproduce with `curl -v` and the timing breakdown, read the proxy log's **upstream** fields, check backend health and endpoints, then the application's own logs.
 - Name the fields that actually resolve it - nginx's `$upstream_status`/`$upstream_response_time`, the ALB's `target_status_code` being `-`, and Envoy's `UH`/`UF`/`UT` response flags. Knowing the flags is a strong differentiator.
 - For 503 in Kubernetes, go straight to endpoints and readiness: a `Running` but not `Ready` Pod is removed from the Service by design, and a health check probing the wrong path or expecting the wrong status marks healthy backends down.

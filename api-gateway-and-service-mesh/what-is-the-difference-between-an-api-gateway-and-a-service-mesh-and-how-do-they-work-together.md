@@ -97,8 +97,8 @@ spec:
 ## Related Concepts
 
 - [[How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?]] (`#517`): [How do Docker bridge, host, and macvlan network drivers differ in packet routing and isolation?](../docker/how-do-docker-bridge-host-and-macvlan-network-drivers-differ-in-packet-routing-and-isolation.md)
+- [[How do you containerise a three-tier application with Docker and Docker Compose?]] (`#794`): [How do you containerise a three-tier application with Docker and Docker Compose?](../docker/how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose.md)
 - [[What is DevOps?]] (`#1`): [What is DevOps?](../core-devops-concepts/what-is-devops.md)
-- [[What is Continuous Deployment?]] (`#5`): [What is Continuous Deployment?](../core-devops-concepts/what-is-continuous-deployment.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 
