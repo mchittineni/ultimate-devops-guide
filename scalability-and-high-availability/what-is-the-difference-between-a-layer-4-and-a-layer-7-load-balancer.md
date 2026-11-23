@@ -48,6 +48,13 @@ Because it terminates the connection, the backend sees the balancer's IP - the o
 
 **Choosing between them.** Use layer 7 for anything HTTP - it is the default for web traffic and everything a microservice architecture needs. Use layer 4 when the protocol is not HTTP, when you need the absolute lowest latency, when you need true TLS passthrough for end-to-end encryption or client-certificate authentication at the application, or when you need a static IP. A common production pattern is both: an NLB with a static IP fronting an NGINX or Envoy ingress layer that does the layer 7 work.
 
+**AWS has four load balancer types, not two.** The follow-up "how many load balancers does AWS offer?" expects all four:
+
+- **Application Load Balancer (ALB)** - layer 7: HTTP, HTTPS and gRPC; host, path, header and query routing; WAF and OIDC/Cognito authentication; instance, IP and Lambda targets. The default for web traffic.
+- **Network Load Balancer (NLB)** - layer 4: TCP, UDP and TLS; very high throughput and low latency; a static or Elastic IP per AZ; client IP preservation; and the required front end for a PrivateLink endpoint service.
+- **Gateway Load Balancer (GWLB)** - layer 3: transparently passes **all IP traffic** through a fleet of third-party virtual appliances (firewalls, IDS/IPS, deep packet inspection), encapsulating packets in **GENEVE on port 6081** and scaling the appliances behind GWLB endpoints that are used as route-table targets. It does not route HTTP requests, authenticate users, or integrate with API Gateway or WAF - describing it as an internet-facing or layer 7 "security" balancer is a common wrong answer.
+- **Classic Load Balancer** - the previous generation, still running in older estates; migrate to ALB or NLB and do not use it for new designs.
+
 **Algorithms** differ by layer too. Layer 4 typically uses round robin or a 5-tuple hash (which naturally gives connection affinity). Layer 7 can use least outstanding requests - usually the better choice, because it accounts for slow backends that round robin keeps feeding.
 
 **Where Kubernetes fits.** `kube-proxy` and a `LoadBalancer` Service are effectively layer 4. An Ingress controller or a Gateway API implementation is layer 7 running inside the cluster. A service mesh sidecar is a per-Pod layer 7 proxy. Knowing which layer each abstraction operates at is what lets you answer "why can I not do path routing with a Service?"
@@ -125,6 +132,7 @@ resource "aws_lb_listener" "mqtt" {
 - The one-line distinction: **layer 4 routes connections on IP and port; layer 7 routes requests on their content.** Everything else follows from that.
 - Give the concrete capability layer 4 cannot provide - path-based routing - rather than saying "it is less flexible."
 - Name the cloud equivalents. "NLB versus ALB" is often how the question is actually phrased.
+- If asked how many load balancer types AWS has, say four - ALB, NLB, Gateway Load Balancer, and the legacy Classic - and describe GWLB correctly: layer 3, GENEVE, for inserting firewall and inspection appliances, not an HTTP balancer.
 - Volunteering `X-Forwarded-For` shows operational experience: at layer 7 the backend loses the real client IP unless you handle it.
 - Know the legitimate reasons to pick layer 4 in 2026: non-HTTP protocols, static IPs, true TLS passthrough, and lowest latency. "Layer 7 is always better" is the wrong answer.
 - Expect a follow-up connecting this to Kubernetes: a `LoadBalancer` Service is layer 4, an Ingress or Gateway is layer 7.
