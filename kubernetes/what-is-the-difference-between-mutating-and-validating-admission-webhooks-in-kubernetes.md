@@ -133,7 +133,7 @@ kubectl apply -f pod.yaml --dry-run=server -o yaml | diff pod.yaml - | head
 
 - [[What are Kubernetes Admission Webhook failure policies and how do you prevent self-locking outage loops?]] (`#628`): [What are Kubernetes Admission Webhook failure policies and how do you prevent self-locking outage loops?](../container-orchestration-advanced/what-are-kubernetes-admission-webhook-failure-policies-and-how-do-you-prevent-self-locking-outage-loops.md)
 - [[How does Docker multi-stage building optimize container security and image size?]] (`#513`): [How does Docker multi-stage building optimize container security and image size?](../docker/how-does-docker-multi-stage-building-optimize-container-security-and-image-size.md)
-- [[How do you upgrade a production Kubernetes cluster with zero downtime?]] (`#411`): [How do you upgrade a production Kubernetes cluster with zero downtime?](../container-orchestration-advanced/how-do-you-upgrade-a-production-kubernetes-cluster-with-zero-downtime.md)
+- [[Why does a container image that works locally fail on Kubernetes or ECS?]] (`#793`): [Why does a container image that works locally fail on Kubernetes or ECS?](../docker/why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

@@ -116,8 +116,8 @@ kubectl get events -n payments --field-selector reason=FailedCreate
 ## Related Concepts
 
 - [[Why does a container fail to start with a permission denied error?]] (`#416`): [Why does a container fail to start with a permission denied error?](../docker/why-does-a-container-fail-to-start-with-a-permission-denied-error.md)
+- [[Why does a container image that works locally fail on Kubernetes or ECS?]] (`#793`): [Why does a container image that works locally fail on Kubernetes or ECS?](../docker/why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs.md)
 - [[How do you run a multi-tenant Kubernetes cluster?]] (`#453`): [How do you run a multi-tenant Kubernetes cluster?](../container-orchestration-advanced/how-do-you-run-a-multi-tenant-kubernetes-cluster.md)
-- [[What are Custom Resource Definitions (CRDs) and how do Custom Operators extend the Kubernetes API?]] (`#623`): [What are Custom Resource Definitions (CRDs) and how do Custom Operators extend the Kubernetes API?](../container-orchestration-advanced/what-are-custom-resource-definitions-crds-and-how-do-custom-operators-extend-the-kubernetes-api.md)
 
 <!-- END GENERATED RELATED TOPICS -->
 

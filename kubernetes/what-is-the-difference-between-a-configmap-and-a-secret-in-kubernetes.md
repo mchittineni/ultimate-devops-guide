@@ -48,6 +48,8 @@ This is the question behind the question. A ConfigMap edit does not restart anyt
 2. **Immutable ConfigMaps/Secrets** (`immutable: true`) - blocks edits entirely, forces a new object name, and reduces API server watch load at scale. Good discipline for anything versioned.
 3. **In-app reload** - watch the mounted file (or accept a SIGHUP). Only worth it for things like nginx or a log level you want to flip live.
 
+**Two operational shortcuts.** When you need a change live right now, `kubectl rollout restart deployment/<name>` stamps a `restartedAt` annotation on the Pod template, which triggers an ordinary rolling update with readiness checks and no downtime; it is a one-off fix, not a process, and under GitOps the next sync should carry the real change. For workloads whose charts you do not control, so you cannot add a checksum annotation, run **Stakater Reloader**: annotate the Deployment with `reloader.stakater.com/auto: "true"` and it rolls the workload whenever a ConfigMap or Secret it references changes (or name specific objects with `configmap.reloader.stakater.com/reload`). That also covers Secrets synced by the External Secrets Operator, which change without any Git commit.
+
 ### Making Secrets genuinely secret
 
 - **Encryption at rest**: `EncryptionConfiguration` on the API server with a local provider (`secretbox` or `aesgcm`; `aescbc` is no longer recommended) or, better, a **KMS v2 provider** (AWS KMS, Azure Key Vault, Google Cloud KMS, HashiCorp Vault via a plugin) so the key is not on the control-plane host. Without this, etcd holds your secrets in plaintext. On managed clusters check what the provider does: EKS envelope-encrypts all Kubernetes API data by default on current versions and lets you supply your own KMS key, while GKE and AKS offer application-layer or KMS encryption with a customer-managed key.
@@ -107,6 +109,14 @@ spec:
 ```
 
 ```bash
+# Config changed but Pods still use the old value? Compare live state with the object
+kubectl exec deploy/api -- env | grep LOG_LEVEL
+kubectl get configmap api-config-7f4c2b -o jsonpath='{.data.LOG_LEVEL}'
+kubectl rollout restart deployment/api && kubectl rollout status deployment/api
+
+# Let Stakater Reloader roll the Deployment on future ConfigMap/Secret changes
+kubectl annotate deployment api reloader.stakater.com/auto="true"
+
 # Prove that "Secret" is encoding, not encryption
 kubectl create secret generic demo --from-literal=pw='changeme'
 kubectl get secret demo -o jsonpath='{.data.pw}' | base64 -d   # -> changeme
@@ -139,7 +149,7 @@ spec:
 - State the real difference in one line - same mechanism, different intent and handling - then immediately say **base64 is encoding, not encryption**. Volunteering that is the single highest-signal thing in this answer.
 - Follow with what makes a Secret actually safe: encryption at rest with a KMS provider, narrow RBAC on `get secrets`, and an external secret manager for rotation and audit.
 - Know the update semantics cold: env vars are frozen at Pod start, mounted files refresh (except `subPath` mounts, which never do). This is the answer to "I rotated the secret in Key Vault, why is the Pod still using the old one?"
-- Name the rollout trigger - a config checksum annotation, or Kustomize/Helm name suffixing - because "how do you make the change take effect?" always follows.
+- Name the rollout trigger - a config checksum annotation, or Kustomize/Helm name suffixing - because "how do you make the change take effect?" always follows. Add `kubectl rollout restart` for an immediate one-off roll and Stakater Reloader for charts you cannot modify; a common weak answer is "edit the ConfigMap and the Pods pick it up", which is false for env vars and `subPath` mounts.
 - Mention `immutable: true` as both a safety and a scale control; it reduces API server watch traffic in large clusters.
 - If GitOps comes up, say Secrets never go into Git in plaintext - SOPS, Sealed Secrets, or the External Secrets Operator. See [how do you manage Kubernetes secrets in a GitOps workflow](../devsecops/how-do-you-manage-kubernetes-secrets-in-a-gitops-workflow.md), [how do you manage secrets in CI/CD pipelines](../devsecops/how-do-you-manage-secrets-in-ci-cd-pipelines.md), [how do you rotate secrets without downtime](../devsecops/how-do-you-rotate-secrets-without-downtime.md), and [how does RBAC work in Kubernetes](./how-does-rbac-work-in-kubernetes.md).
 

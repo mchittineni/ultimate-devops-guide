@@ -59,6 +59,15 @@ With `Immediate`, the driver provisions the disk as soon as the PVC is created -
 - **Changing performance, not size**: a `VolumeAttributesClass` (GA in Kubernetes 1.34) holds driver parameters such as IOPS and throughput; pointing a PVC's `volumeAttributesClassName` at a different class asks the CSI driver to modify the live volume - for example, raising a gp3 volume's IOPS - without recreating it. Support depends on the driver.
 - **Snapshots**: `VolumeSnapshotClass` + `VolumeSnapshot` capture point-in-time state, and a new PVC can be created with `dataSource` pointing at a snapshot - the standard clone/restore path. Snapshots are per-volume and usually not application-consistent on their own, so quiesce or use the database's own backup for anything transactional.
 
+### When a PVC fills up
+
+A full volume shows up as write errors in the application (`No space left on device`), a database refusing writes, or a Pod crash-looping on startup. The runbook:
+
+1. **Confirm and find the cause.** `kubectl exec <pod> -- df -h <mount>` shows usage, and `du -sh` on the subdirectories shows what is growing. For alerting, the kubelet exports `kubelet_volume_stats_used_bytes`, `kubelet_volume_stats_capacity_bytes`, and `kubelet_volume_stats_available_bytes` per PVC (for CSI drivers that report volume stats, which the major cloud drivers do); alert at 80% and 90%, and on `predict_linear` for "full within 24 hours".
+2. **Buy room.** If the class has `allowVolumeExpansion: true`, raise `spec.resources.requests.storage` on the PVC; the CSI driver grows the disk and, for most drivers, the filesystem while the Pod keeps running. Watch the PVC's conditions (`FileSystemResizePending`) and events to confirm it completed. Size with headroom: volumes cannot shrink, and cloud disks limit how often one volume can be modified (Amazon EBS has enforced a cool-down of about six hours between modifications for most of its history), so a second resize the same day may not be possible.
+3. **Fix the growth.** Log rotation and retention, database vacuuming or compaction, dropping stale replication slots or WAL, and sending application logs to stdout instead of a volume. Expansion without this only delays the next page.
+4. **StatefulSets.** Editing `volumeClaimTemplates` is rejected, so patch each existing PVC directly, then delete the StatefulSet with `--cascade=orphan` (the Pods keep running) and re-apply it with the larger template so new replicas get the new size.
+
 ### StatefulSets and `volumeClaimTemplates`
 
 A Deployment shares one PVC across replicas; a **StatefulSet** with `volumeClaimTemplates` gives every replica **its own** PVC (`data-mysql-0`, `data-mysql-1`) with stable identity, which is what a replicated database needs. Those PVCs deliberately **survive** scale-down and Pod deletion so the data comes back with the same ordinal - which also means scaling down does not free the disks, and you must delete them yourself.
@@ -129,8 +138,17 @@ kubectl describe pvc data-postgres-0 | tail -20      # events name the real caus
 kubectl get storageclass                             # is there a default? right binding mode?
 kubectl get events --field-selector reason=ProvisioningFailed -A
 
+# A PVC is filling up: how full, and what is growing?
+kubectl exec postgres-0 -- df -h /var/lib/postgresql/data
+kubectl exec postgres-0 -- sh -c 'du -sh /var/lib/postgresql/data/* | sort -h | tail -5'
+
 # Grow a volume online
 kubectl patch pvc data-postgres-0 -p '{"spec":{"resources":{"requests":{"storage":"200Gi"}}}}'
+kubectl describe pvc data-postgres-0 | grep -A5 Conditions   # FileSystemResizePending until done
+
+# Make a StatefulSet template match the resized PVCs without stopping Pods
+kubectl delete statefulset postgres --cascade=orphan
+kubectl apply -f postgres-statefulset.yaml   # volumeClaimTemplates now request 200Gi
 
 # Re-use a Retained PV: clear the stale claimRef so it can bind again
 kubectl patch pv pvc-9f2c8b1d -p '{"spec":{"claimRef":null}}'
@@ -144,6 +162,7 @@ kubectl patch pv pvc-9f2c8b1d -p '{"spec":{"claimRef":null}}'
 - Name `WaitForFirstConsumer` and explain the zone-mismatch failure it prevents. This is the single most useful piece of storage trivia in a real cluster.
 - Talk about `reclaimPolicy: Retain` for anything holding data, and warn that StatefulSet PVCs survive scale-down - so "we scaled to zero" does not stop the storage bill.
 - Mention volume expansion (grow only, never shrink) and snapshot-to-PVC restore as the clone path.
+- For "a PVC is full", give a runbook rather than just "increase the size": find what is growing with `df`/`du` or the `kubelet_volume_stats_*` metrics, expand online if the class allows it, fix the cause (retention, rotation, vacuum), and alert before it happens again. Note that StatefulSet templates need the `--cascade=orphan` recreate.
 - Close with quotas per namespace and class for multi-tenant clusters. See [how do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim](./how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md), [what are StatefulSets in Kubernetes](../container-orchestration-advanced/what-are-statefulsets-in-kubernetes.md), [running and scaling a stateful application on Kubernetes](../container-orchestration-advanced/how-do-you-run-and-scale-a-stateful-application-on-kubernetes.md), and [how do you back up and restore a Kubernetes cluster](../container-orchestration-advanced/how-do-you-back-up-and-restore-a-kubernetes-cluster.md).
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
