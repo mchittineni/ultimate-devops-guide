@@ -4,7 +4,7 @@
 
 <!-- HEADLINE:START -->
 
-**787 questions across 40 topics - answered to the depth an interviewer actually expects.**
+**805 questions across 40 topics - answered to the depth an interviewer actually expects.**
 
 <!-- HEADLINE:END -->
 
@@ -25,9 +25,9 @@ _Translated landing pages, committed to the repo. English is canonical; lesson p
 
 <!-- BADGES:START -->
 
-![Questions](https://img.shields.io/badge/questions-787-blue)
+![Questions](https://img.shields.io/badge/questions-805-blue)
 ![Topics](https://img.shields.io/badge/topics-40-blueviolet)
-![Difficulty](https://img.shields.io/badge/difficulty-🟢%20177%20·%20🟡%20394%20·%20🔴%20216-lightgrey)
+![Difficulty](https://img.shields.io/badge/difficulty-🟢%20184%20·%20🟡%20404%20·%20🔴%20217-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 <!-- BADGES:END -->
@@ -54,6 +54,7 @@ Explore the entire repository visually through our **Interactive 3D Telemetry Gr
 - **Visual Infrastructure Mapping**: Explore relationship edges connecting every question and topic in the repository.
 - **Cross-Topic Concept Wikilinks**: Discover cross-cutting concepts between Docker, Kubernetes, CI/CD, IaC, and SRE.
 - **Filterable Telemetry**: Filter nodes live by difficulty, domain group, or specific keywords.
+- **Brain-Shaped Layout**: Topic domains sit where they would in a brain - the main domains as cerebral lobes mirrored across both hemispheres, interview prep in the cerebellum, and the foundations in the brainstem.
 
 ---
 
@@ -87,7 +88,7 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 
 <!-- STATS:START -->
 
-**787 questions** across **40 topics** - 🟢 177 Beginner · 🟡 394 Intermediate · 🔴 216 Advanced
+**805 questions** across **40 topics** - 🟢 184 Beginner · 🟡 404 Intermediate · 🔴 217 Advanced
 
 ### 🧱 Foundations
 
@@ -95,15 +96,15 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 | -------------------------------------------------------------------- | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------ |
 | **[Core DevOps Concepts](./core-devops-concepts/README.md)**         | 13        | 8   | 4   | 1   | what DevOps actually changes, why it exists, and how CI, continuous delivery, and continuous…    |
 | **[Linux Administration](./linux-administration/README.md)**         | 23        | 9   | 12  | 2   | The operating system under everything - commands, shell scripting, systemd, service management,… |
-| **[Version Control](./version-control/README.md)**                   | 17        | 7   | 9   | 1   | Git mechanics and the branching models teams actually argue about, including how to resolve…     |
+| **[Version Control](./version-control/README.md)**                   | 18        | 7   | 10  | 1   | Git mechanics and the branching models teams actually argue about, including how to resolve…     |
 | **[Scripting and Automation](./scripting-and-automation/README.md)** | 8         | 1   | 6   | 1   | The scripting layer under every pipeline - defensive Bash for orchestration, and Python for…     |
 
 ### 📦 Containers and Kubernetes
 
 | Topic                                                                                | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                                   |
 | ------------------------------------------------------------------------------------ | --------- | --- | --- | --- | ------------------------------------------------------------------------------------------------ |
-| **[Docker](./docker/README.md)**                                                     | 23        | 9   | 11  | 3   | Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the…       |
-| **[Kubernetes](./kubernetes/README.md)**                                             | 42        | 6   | 28  | 8   | The control plane, the workload objects you touch daily, and the networking abstractions that…   |
+| **[Docker](./docker/README.md)**                                                     | 26        | 9   | 14  | 3   | Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the…       |
+| **[Kubernetes](./kubernetes/README.md)**                                             | 46        | 8   | 30  | 8   | The control plane, the workload objects you touch daily, and the networking abstractions that…   |
 | **[Container Orchestration Advanced](./container-orchestration-advanced/README.md)** | 21        | 1   | 6   | 14  | Beyond Deployments - StatefulSets, DaemonSets, Helm packaging, Istio, and the container runtime… |
 
 ### 🔁 Delivery and Automation
@@ -113,7 +114,7 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 | **[CI/CD](./cicd/README.md)**                                              | 31        | 5   | 20  | 6   | Pipeline design, Jenkins and GitLab CI mechanics, and the delivery-versus-deployment distinction…   |
 | **[Infrastructure as Code](./infrastructure-as-code/README.md)**           | 27        | 6   | 16  | 5   | Declarative infrastructure with Terraform and Ansible - state, providers, idempotency, and where…   |
 | **[Configuration Management](./configuration-management/README.md)**       | 17        | 3   | 12  | 2   | Keeping fleets consistent with Puppet, Chef, Ansible, and Salt - push versus pull, agent versus…    |
-| **[DevOps Tools and Automation](./devops-tools-and-automation/README.md)** | 15        | 5   | 8   | 2   | GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to ship without downtime. |
+| **[DevOps Tools and Automation](./devops-tools-and-automation/README.md)** | 16        | 5   | 9   | 2   | GitOps with Argo CD, Tekton pipelines, and the deployment strategies used to ship without downtime. |
 
 ### ☁️ Cloud Providers
 
@@ -122,7 +123,7 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 | **[Cloud Platforms](./cloud-platforms/README.md)**                 | 13        | 8   | 4   | 1   | Cloud service models and the three major providers - enough breadth to discuss AWS, Azure, and…   |
 | **[Cloud Cost Optimization](./cloud-cost-optimization/README.md)** | 14        | 5   | 8   | 1   | Reserved and spot capacity, tagging discipline, and the reports that turn a cloud bill into…      |
 | **[Cloud Migration](./cloud-migration/README.md)**                 | 14        | 3   | 8   | 3   | Assessment, the 6 Rs, application modernization, and the tooling that moves workloads without…    |
-| **[AWS Engineering](./aws-engineering/README.md)**                 | 37        | 6   | 20  | 11  | VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage… |
+| **[AWS Engineering](./aws-engineering/README.md)**                 | 41        | 7   | 23  | 11  | VPC design, IAM policy evaluation, ECS/EKS/Fargate, Auto Scaling with load balancers, S3 storage… |
 | **[Azure Engineering](./azure-engineering/README.md)**             | 20        | 1   | 15  | 4   | the resource hierarchy, Entra ID and RBAC, VNet and private endpoint design, AKS, Bicep, Azure…   |
 | **[GCP Engineering](./gcp-engineering/README.md)**                 | 16        | 1   | 11  | 4   | resource hierarchy and org policies, IAM without service-account keys, the global VPC, GKE…       |
 | **[Cloud Engineering](./cloud-engineering/README.md)**             | 9         | 1   | 5   | 3   | landing zones, hybrid connectivity, least-privilege identity, multi-region resilience,…           |
@@ -172,7 +173,7 @@ Grouped by theme, with question counts and difficulty mix. Click a topic to open
 
 | Topic                                                        | Questions | 🟢  | 🟡  | 🔴  | What it covers                                                                            |
 | ------------------------------------------------------------ | --------- | --- | --- | --- | ----------------------------------------------------------------------------------------- |
-| **[Interview Experience](./interview-experience/README.md)** | 96        | 5   | 28  | 63  | How the interview itself works - the round structure, explaining your project, answering… |
+| **[Interview Experience](./interview-experience/README.md)** | 101       | 9   | 28  | 64  | How the interview itself works - the round structure, explaining your project, answering… |
 
 <!-- STATS:END -->
 
@@ -186,7 +187,7 @@ Every question in the repository, collapsed by topic - open only the ones you ar
 
 ### 🧱 Foundations
 
-_61 questions_
+_62 questions_
 
 <details>
 <summary><b>Core DevOps Concepts</b> · 13 questions · 🟢 8 🟡 4 🔴 1</summary>
@@ -245,7 +246,7 @@ _61 questions_
 </details>
 
 <details>
-<summary><b>Version Control</b> · 17 questions · 🟢 7 🟡 9 🔴 1</summary>
+<summary><b>Version Control</b> · 18 questions · 🟢 7 🟡 10 🔴 1</summary>
 
 [Open the Version Control index →](./version-control/README.md)
 
@@ -268,6 +269,7 @@ _61 questions_
 | 581 | [What are Git submodules and how do they differ from Git subtrees and monorepos?](./version-control/what-are-git-submodules-and-how-do-they-differ-from-git-subtrees-and-monorepos.md)                             | 🟡 Intermediate |
 | 582 | [What are Git Hooks and how are they used with pre-commit frameworks to enforce quality gates?](./version-control/what-are-git-hooks-and-how-are-they-used-with-pre-commit-frameworks-to-enforce-quality-gates.md) | 🟢 Beginner     |
 | 760 | [How do you sign Git commits and enforce signed commits?](./version-control/how-do-you-sign-git-commits-and-enforce-signed-commits.md)                                                                             | 🟡 Intermediate |
+| 799 | [How do you version releases with Git tags, and how do you fix a tag that is already pushed?](./version-control/how-do-you-version-releases-with-git-tags-and-how-do-you-fix-a-tag-that-is-already-pushed.md)      | 🟡 Intermediate |
 
 </details>
 
@@ -291,10 +293,10 @@ _61 questions_
 
 ### 📦 Containers and Kubernetes
 
-_86 questions_
+_93 questions_
 
 <details>
-<summary><b>Docker</b> · 23 questions · 🟢 9 🟡 11 🔴 3</summary>
+<summary><b>Docker</b> · 26 questions · 🟢 9 🟡 14 🔴 3</summary>
 
 [Open the Docker index →](./docker/README.md)
 
@@ -323,58 +325,65 @@ _86 questions_
 | 518 | [Why should you avoid running containers as the root user and how do you enforce non-root execution?](./docker/why-should-you-avoid-running-containers-as-the-root-user-and-how-do-you-enforce-non-root-execution.md) | 🟢 Beginner     |
 | 519 | [What is the difference between ENTRYPOINT and CMD in a Dockerfile and how do they interact?](./docker/what-is-the-difference-between-entrypoint-and-cmd-in-a-dockerfile-and-how-do-they-interact.md)                 | 🟢 Beginner     |
 | 754 | [What is the difference between Docker and Podman?](./docker/what-is-the-difference-between-docker-and-podman.md)                                                                                                     | 🟡 Intermediate |
+| 792 | [Can you delete a Docker image that a container is still using, and what happens to that container?](./docker/can-you-delete-a-docker-image-that-a-container-is-still-using-and-what-happens-to-that-container.md)    | 🟡 Intermediate |
+| 793 | [Why does a container image that works locally fail on Kubernetes or ECS?](./docker/why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs.md)                                                       | 🟡 Intermediate |
+| 794 | [How do you containerise a three-tier application with Docker and Docker Compose?](./docker/how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose.md)                                       | 🟡 Intermediate |
 
 </details>
 
 <details>
-<summary><b>Kubernetes</b> · 42 questions · 🟢 6 🟡 28 🔴 8</summary>
+<summary><b>Kubernetes</b> · 46 questions · 🟢 8 🟡 30 🔴 8</summary>
 
 [Open the Kubernetes index →](./kubernetes/README.md)
 
-| No. | Question                                                                                                                                                                                                                    | Difficulty      |
-| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 11  | [What is Kubernetes?](./kubernetes/what-is-kubernetes.md)                                                                                                                                                                   | 🟢 Beginner     |
-| 12  | [What are the main components of Kubernetes architecture?](./kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)                                                                                         | 🟡 Intermediate |
-| 13  | [What is a Pod in Kubernetes?](./kubernetes/what-is-a-pod-in-kubernetes.md)                                                                                                                                                 | 🟢 Beginner     |
-| 14  | [What is a Service in Kubernetes?](./kubernetes/what-is-a-service-in-kubernetes.md)                                                                                                                                         | 🟢 Beginner     |
-| 15  | [Explain the difference between Docker Swarm and Kubernetes](./kubernetes/explain-the-difference-between-docker-swarm-and-kubernetes.md)                                                                                    | 🟡 Intermediate |
-| 234 | [How do you troubleshoot a Pod stuck in Pending or CrashLoopBackOff?](./kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff.md)                                                                   | 🟡 Intermediate |
-| 255 | [How do liveness, readiness, and startup probes differ?](./kubernetes/how-do-liveness-readiness-and-startup-probes-differ.md)                                                                                               | 🟡 Intermediate |
-| 256 | [How do you control which node a Pod runs on?](./kubernetes/how-do-you-control-which-node-a-pod-runs-on.md)                                                                                                                 | 🟡 Intermediate |
-| 257 | [How does RBAC work in Kubernetes?](./kubernetes/how-does-rbac-work-in-kubernetes.md)                                                                                                                                       | 🟡 Intermediate |
-| 258 | [How do you autoscale workloads and nodes in Kubernetes?](./kubernetes/how-do-you-autoscale-workloads-and-nodes-in-kubernetes.md)                                                                                           | 🔴 Advanced     |
-| 259 | [How do you expose an application running in Kubernetes to the outside world?](./kubernetes/how-do-you-expose-an-application-running-in-kubernetes-to-the-outside-world.md)                                                 | 🟡 Intermediate |
-| 403 | [How do you troubleshoot a Kubernetes Service that has no endpoints?](./kubernetes/how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints.md)                                                                   | 🟡 Intermediate |
-| 404 | [How do you debug DNS resolution failures inside a Kubernetes cluster?](./kubernetes/how-do-you-debug-dns-resolution-failures-inside-a-kubernetes-cluster.md)                                                               | 🟡 Intermediate |
-| 405 | [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](./kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)                                | 🔴 Advanced     |
-| 406 | [How do you debug a Kubernetes Ingress that is not routing traffic?](./kubernetes/how-do-you-debug-a-kubernetes-ingress-that-is-not-routing-traffic.md)                                                                     | 🟡 Intermediate |
-| 407 | [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](./kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)                                                         | 🟡 Intermediate |
-| 408 | [How do you troubleshoot a Kubernetes Job or CronJob that never completes?](./kubernetes/how-do-you-troubleshoot-a-kubernetes-job-or-cronjob-that-never-completes.md)                                                       | 🟡 Intermediate |
-| 409 | [How do you handle node pressure and Pod evictions in Kubernetes?](./kubernetes/how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md)                                                                         | 🔴 Advanced     |
-| 410 | [How do you perform and roll back a rolling update in Kubernetes?](./kubernetes/how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes.md)                                                                         | 🟡 Intermediate |
-| 442 | [What is the difference between a ConfigMap and a Secret in Kubernetes?](./kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)                                                             | 🟡 Intermediate |
-| 443 | [How does persistent storage work in Kubernetes?](./kubernetes/how-does-persistent-storage-work-in-kubernetes.md)                                                                                                           | 🟡 Intermediate |
-| 444 | [How do requests, limits, and QoS classes work in Kubernetes?](./kubernetes/how-do-requests-limits-and-qos-classes-work-in-kubernetes.md)                                                                                   | 🟡 Intermediate |
-| 445 | [What are init containers and sidecar containers in Kubernetes?](./kubernetes/what-are-init-containers-and-sidecar-containers-in-kubernetes.md)                                                                             | 🟡 Intermediate |
-| 446 | [What is a PodDisruptionBudget and when do you need one?](./kubernetes/what-is-a-poddisruptionbudget-and-when-do-you-need-one.md)                                                                                           | 🔴 Advanced     |
-| 447 | [How does Pod networking and service discovery work in Kubernetes?](./kubernetes/how-does-pod-networking-and-service-discovery-work-in-kubernetes.md)                                                                       | 🔴 Advanced     |
-| 448 | [What happens when a Kubernetes control-plane node or etcd fails?](./kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md)                                                                         | 🔴 Advanced     |
-| 449 | [How do you troubleshoot a Kubernetes node that is NotReady?](./kubernetes/how-do-you-troubleshoot-a-kubernetes-node-that-is-notready.md)                                                                                   | 🟡 Intermediate |
-| 520 | [How does the Kubernetes Gateway API evolve beyond standard Ingress resources?](./kubernetes/how-does-the-kubernetes-gateway-api-evolve-beyond-standard-ingress-resources.md)                                               | 🟡 Intermediate |
-| 521 | [What is the difference between Kubernetes Horizontal Pod Autoscaler and Vertical Pod Autoscaler?](./kubernetes/what-is-the-difference-between-kubernetes-horizontal-pod-autoscaler-and-vertical-pod-autoscaler.md)         | 🟡 Intermediate |
-| 522 | [How does Kubernetes In-Place Pod Resource Resizing work and what problem does it solve?](./kubernetes/how-does-kubernetes-in-place-pod-resource-resizing-work-and-what-problem-does-it-solve.md)                           | 🔴 Advanced     |
-| 523 | [What are Kubernetes Ephemeral Containers and how are they used for zero-downtime debugging?](./kubernetes/what-are-kubernetes-ephemeral-containers-and-how-are-they-used-for-zero-downtime-debugging.md)                   | 🟡 Intermediate |
-| 524 | [What is the difference between Mutating and Validating Admission Webhooks in Kubernetes?](./kubernetes/what-is-the-difference-between-mutating-and-validating-admission-webhooks-in-kubernetes.md)                         | 🟡 Intermediate |
-| 525 | [How does Kubernetes Leader Election work for HA control planes and custom controllers?](./kubernetes/how-does-kubernetes-leader-election-work-for-ha-control-planes-and-custom-controllers.md)                             | 🔴 Advanced     |
-| 526 | [What is Kubernetes Topology Spread Constraints and how does it differ from Pod Anti-Affinity?](./kubernetes/what-is-kubernetes-topology-spread-constraints-and-how-does-it-differ-from-pod-anti-affinity.md)               | 🟡 Intermediate |
-| 527 | [How does CoreDNS resolve services in Kubernetes and how do you troubleshoot DNS latency bottlenecks?](./kubernetes/how-does-coredns-resolve-services-in-kubernetes-and-how-do-you-troubleshoot-dns-latency-bottlenecks.md) | 🟡 Intermediate |
-| 528 | [What is the Container Network Interface (CNI) and how do overlay and routed CNI plugins differ?](./kubernetes/what-is-the-container-network-interface-cni-and-how-do-overlay-and-routed-cni-plugins-differ.md)             | 🟡 Intermediate |
-| 529 | [What are Kubernetes Finalizers and how do you resolve a namespace stuck in the Terminating state?](./kubernetes/what-are-kubernetes-finalizers-and-how-do-you-resolve-a-namespace-stuck-in-the-terminating-state.md)       | 🟡 Intermediate |
-| 530 | [How do Pod Disruption Budgets (PDB) protect application availability during cluster maintenance?](./kubernetes/how-do-pod-disruption-budgets-pdb-protect-application-availability-during-cluster-maintenance.md)           | 🟢 Beginner     |
-| 531 | [What is the difference between Service types ClusterIP, NodePort, LoadBalancer, and ExternalName?](./kubernetes/what-is-the-difference-between-service-types-clusterip-nodeport-loadbalancer-and-externalname.md)          | 🟢 Beginner     |
-| 751 | [How do you troubleshoot a Pod stuck in ImagePullBackOff?](./kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)                                                                                         | 🟡 Intermediate |
-| 752 | [What is the difference between a Deployment and a ReplicaSet in Kubernetes?](./kubernetes/what-is-the-difference-between-a-deployment-and-a-replicaset-in-kubernetes.md)                                                   | 🟢 Beginner     |
-| 753 | [What are Pod Security Standards and how does Pod Security Admission enforce them?](./kubernetes/what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them.md)                                       | 🟡 Intermediate |
+| No. | Question                                                                                                                                                                                                                          | Difficulty      |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| 11  | [What is Kubernetes?](./kubernetes/what-is-kubernetes.md)                                                                                                                                                                         | 🟢 Beginner     |
+| 12  | [What are the main components of Kubernetes architecture?](./kubernetes/what-are-the-main-components-of-kubernetes-architecture.md)                                                                                               | 🟡 Intermediate |
+| 13  | [What is a Pod in Kubernetes?](./kubernetes/what-is-a-pod-in-kubernetes.md)                                                                                                                                                       | 🟢 Beginner     |
+| 14  | [What is a Service in Kubernetes?](./kubernetes/what-is-a-service-in-kubernetes.md)                                                                                                                                               | 🟢 Beginner     |
+| 15  | [Explain the difference between Docker Swarm and Kubernetes](./kubernetes/explain-the-difference-between-docker-swarm-and-kubernetes.md)                                                                                          | 🟡 Intermediate |
+| 234 | [How do you troubleshoot a Pod stuck in Pending or CrashLoopBackOff?](./kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-pending-or-crashloopbackoff.md)                                                                         | 🟡 Intermediate |
+| 255 | [How do liveness, readiness, and startup probes differ?](./kubernetes/how-do-liveness-readiness-and-startup-probes-differ.md)                                                                                                     | 🟡 Intermediate |
+| 256 | [How do you control which node a Pod runs on?](./kubernetes/how-do-you-control-which-node-a-pod-runs-on.md)                                                                                                                       | 🟡 Intermediate |
+| 257 | [How does RBAC work in Kubernetes?](./kubernetes/how-does-rbac-work-in-kubernetes.md)                                                                                                                                             | 🟡 Intermediate |
+| 258 | [How do you autoscale workloads and nodes in Kubernetes?](./kubernetes/how-do-you-autoscale-workloads-and-nodes-in-kubernetes.md)                                                                                                 | 🔴 Advanced     |
+| 259 | [How do you expose an application running in Kubernetes to the outside world?](./kubernetes/how-do-you-expose-an-application-running-in-kubernetes-to-the-outside-world.md)                                                       | 🟡 Intermediate |
+| 403 | [How do you troubleshoot a Kubernetes Service that has no endpoints?](./kubernetes/how-do-you-troubleshoot-a-kubernetes-service-that-has-no-endpoints.md)                                                                         | 🟡 Intermediate |
+| 404 | [How do you debug DNS resolution failures inside a Kubernetes cluster?](./kubernetes/how-do-you-debug-dns-resolution-failures-inside-a-kubernetes-cluster.md)                                                                     | 🟡 Intermediate |
+| 405 | [How do Kubernetes NetworkPolicies work, and how do you debug one that blocks traffic?](./kubernetes/how-do-kubernetes-networkpolicies-work-and-how-do-you-debug-one-that-blocks-traffic.md)                                      | 🔴 Advanced     |
+| 406 | [How do you debug a Kubernetes Ingress that is not routing traffic?](./kubernetes/how-do-you-debug-a-kubernetes-ingress-that-is-not-routing-traffic.md)                                                                           | 🟡 Intermediate |
+| 407 | [How do you troubleshoot a Pod stuck waiting for a PersistentVolumeClaim?](./kubernetes/how-do-you-troubleshoot-a-pod-stuck-waiting-for-a-persistentvolumeclaim.md)                                                               | 🟡 Intermediate |
+| 408 | [How do you troubleshoot a Kubernetes Job or CronJob that never completes?](./kubernetes/how-do-you-troubleshoot-a-kubernetes-job-or-cronjob-that-never-completes.md)                                                             | 🟡 Intermediate |
+| 409 | [How do you handle node pressure and Pod evictions in Kubernetes?](./kubernetes/how-do-you-handle-node-pressure-and-pod-evictions-in-kubernetes.md)                                                                               | 🔴 Advanced     |
+| 410 | [How do you perform and roll back a rolling update in Kubernetes?](./kubernetes/how-do-you-perform-and-roll-back-a-rolling-update-in-kubernetes.md)                                                                               | 🟡 Intermediate |
+| 442 | [What is the difference between a ConfigMap and a Secret in Kubernetes?](./kubernetes/what-is-the-difference-between-a-configmap-and-a-secret-in-kubernetes.md)                                                                   | 🟡 Intermediate |
+| 443 | [How does persistent storage work in Kubernetes?](./kubernetes/how-does-persistent-storage-work-in-kubernetes.md)                                                                                                                 | 🟡 Intermediate |
+| 444 | [How do requests, limits, and QoS classes work in Kubernetes?](./kubernetes/how-do-requests-limits-and-qos-classes-work-in-kubernetes.md)                                                                                         | 🟡 Intermediate |
+| 445 | [What are init containers and sidecar containers in Kubernetes?](./kubernetes/what-are-init-containers-and-sidecar-containers-in-kubernetes.md)                                                                                   | 🟡 Intermediate |
+| 446 | [What is a PodDisruptionBudget and when do you need one?](./kubernetes/what-is-a-poddisruptionbudget-and-when-do-you-need-one.md)                                                                                                 | 🔴 Advanced     |
+| 447 | [How does Pod networking and service discovery work in Kubernetes?](./kubernetes/how-does-pod-networking-and-service-discovery-work-in-kubernetes.md)                                                                             | 🔴 Advanced     |
+| 448 | [What happens when a Kubernetes control-plane node or etcd fails?](./kubernetes/what-happens-when-a-kubernetes-control-plane-node-or-etcd-fails.md)                                                                               | 🔴 Advanced     |
+| 449 | [How do you troubleshoot a Kubernetes node that is NotReady?](./kubernetes/how-do-you-troubleshoot-a-kubernetes-node-that-is-notready.md)                                                                                         | 🟡 Intermediate |
+| 520 | [How does the Kubernetes Gateway API evolve beyond standard Ingress resources?](./kubernetes/how-does-the-kubernetes-gateway-api-evolve-beyond-standard-ingress-resources.md)                                                     | 🟡 Intermediate |
+| 521 | [What is the difference between Kubernetes Horizontal Pod Autoscaler and Vertical Pod Autoscaler?](./kubernetes/what-is-the-difference-between-kubernetes-horizontal-pod-autoscaler-and-vertical-pod-autoscaler.md)               | 🟡 Intermediate |
+| 522 | [How does Kubernetes In-Place Pod Resource Resizing work and what problem does it solve?](./kubernetes/how-does-kubernetes-in-place-pod-resource-resizing-work-and-what-problem-does-it-solve.md)                                 | 🔴 Advanced     |
+| 523 | [What are Kubernetes Ephemeral Containers and how are they used for zero-downtime debugging?](./kubernetes/what-are-kubernetes-ephemeral-containers-and-how-are-they-used-for-zero-downtime-debugging.md)                         | 🟡 Intermediate |
+| 524 | [What is the difference between Mutating and Validating Admission Webhooks in Kubernetes?](./kubernetes/what-is-the-difference-between-mutating-and-validating-admission-webhooks-in-kubernetes.md)                               | 🟡 Intermediate |
+| 525 | [How does Kubernetes Leader Election work for HA control planes and custom controllers?](./kubernetes/how-does-kubernetes-leader-election-work-for-ha-control-planes-and-custom-controllers.md)                                   | 🔴 Advanced     |
+| 526 | [What is Kubernetes Topology Spread Constraints and how does it differ from Pod Anti-Affinity?](./kubernetes/what-is-kubernetes-topology-spread-constraints-and-how-does-it-differ-from-pod-anti-affinity.md)                     | 🟡 Intermediate |
+| 527 | [How does CoreDNS resolve services in Kubernetes and how do you troubleshoot DNS latency bottlenecks?](./kubernetes/how-does-coredns-resolve-services-in-kubernetes-and-how-do-you-troubleshoot-dns-latency-bottlenecks.md)       | 🟡 Intermediate |
+| 528 | [What is the Container Network Interface (CNI) and how do overlay and routed CNI plugins differ?](./kubernetes/what-is-the-container-network-interface-cni-and-how-do-overlay-and-routed-cni-plugins-differ.md)                   | 🟡 Intermediate |
+| 529 | [What are Kubernetes Finalizers and how do you resolve a namespace stuck in the Terminating state?](./kubernetes/what-are-kubernetes-finalizers-and-how-do-you-resolve-a-namespace-stuck-in-the-terminating-state.md)             | 🟡 Intermediate |
+| 530 | [How do Pod Disruption Budgets (PDB) protect application availability during cluster maintenance?](./kubernetes/how-do-pod-disruption-budgets-pdb-protect-application-availability-during-cluster-maintenance.md)                 | 🟢 Beginner     |
+| 531 | [What is the difference between Service types ClusterIP, NodePort, LoadBalancer, and ExternalName?](./kubernetes/what-is-the-difference-between-service-types-clusterip-nodeport-loadbalancer-and-externalname.md)                | 🟢 Beginner     |
+| 751 | [How do you troubleshoot a Pod stuck in ImagePullBackOff?](./kubernetes/how-do-you-troubleshoot-a-pod-stuck-in-imagepullbackoff.md)                                                                                               | 🟡 Intermediate |
+| 752 | [What is the difference between a Deployment and a ReplicaSet in Kubernetes?](./kubernetes/what-is-the-difference-between-a-deployment-and-a-replicaset-in-kubernetes.md)                                                         | 🟢 Beginner     |
+| 753 | [What are Pod Security Standards and how does Pod Security Admission enforce them?](./kubernetes/what-are-pod-security-standards-and-how-does-pod-security-admission-enforce-them.md)                                             | 🟡 Intermediate |
+| 788 | [How do you troubleshoot a Pod that fails because a Secret or ConfigMap cannot be mounted or referenced?](./kubernetes/how-do-you-troubleshoot-a-pod-that-fails-because-a-secret-or-configmap-cannot-be-mounted-or-referenced.md) | 🟡 Intermediate |
+| 789 | [What are namespaces in Kubernetes, and what do they isolate?](./kubernetes/what-are-namespaces-in-kubernetes-and-what-do-they-isolate.md)                                                                                        | 🟢 Beginner     |
+| 790 | [What Kubernetes production best practices do you follow for reliability, security, and cost?](./kubernetes/what-kubernetes-production-best-practices-do-you-follow-for-reliability-security-and-cost.md)                         | 🟡 Intermediate |
+| 791 | [What are labels and selectors in Kubernetes, and where are they used?](./kubernetes/what-are-labels-and-selectors-in-kubernetes-and-where-are-they-used.md)                                                                      | 🟢 Beginner     |
 
 </details>
 
@@ -411,7 +420,7 @@ _86 questions_
 
 ### 🔁 Delivery and Automation
 
-_90 questions_
+_91 questions_
 
 <details>
 <summary><b>CI/CD</b> · 31 questions · 🟢 5 🟡 20 🔴 6</summary>
@@ -519,7 +528,7 @@ _90 questions_
 </details>
 
 <details>
-<summary><b>DevOps Tools and Automation</b> · 15 questions · 🟢 5 🟡 8 🔴 2</summary>
+<summary><b>DevOps Tools and Automation</b> · 16 questions · 🟢 5 🟡 9 🔴 2</summary>
 
 [Open the DevOps Tools and Automation index →](./devops-tools-and-automation/README.md)
 
@@ -540,12 +549,13 @@ _90 questions_
 | 632 | [What is Packer and how does it automate immutable golden machine image generation across clouds?](./devops-tools-and-automation/what-is-packer-and-how-does-it-automate-immutable-golden-machine-image-generation-across-clouds.md)               | 🟢 Beginner     |
 | 633 | [What is Crossplane and how does it turn Kubernetes into a universal cloud infrastructure control plane?](./devops-tools-and-automation/what-is-crossplane-and-how-does-it-turn-kubernetes-into-a-universal-cloud-infrastructure-control-plane.md) | 🔴 Advanced     |
 | 634 | [What is Backstage and how does it build an Internal Developer Portal (IDP) with software catalogs?](./devops-tools-and-automation/what-is-backstage-and-how-does-it-build-an-internal-developer-portal-idp-with-software-catalogs.md)             | 🟡 Intermediate |
+| 804 | [How do you use AI assistants and agents safely in day-to-day DevOps work?](./devops-tools-and-automation/how-do-you-use-ai-assistants-and-agents-safely-in-day-to-day-devops-work.md)                                                             | 🟡 Intermediate |
 
 </details>
 
 ### ☁️ Cloud Providers
 
-_123 questions_
+_127 questions_
 
 <details>
 <summary><b>Cloud Platforms</b> · 13 questions · 🟢 8 🟡 4 🔴 1</summary>
@@ -619,7 +629,7 @@ _123 questions_
 </details>
 
 <details>
-<summary><b>AWS Engineering</b> · 37 questions · 🟢 6 🟡 20 🔴 11</summary>
+<summary><b>AWS Engineering</b> · 41 questions · 🟢 7 🟡 23 🔴 11</summary>
 
 [Open the AWS Engineering index →](./aws-engineering/README.md)
 
@@ -662,6 +672,10 @@ _123 questions_
 | 737 | [How Do You Implement Blue-Green and Canary Deployments on Amazon ECS with CodeDeploy?](./aws-engineering/how-do-you-implement-blue-green-and-canary-deployments-on-amazon-ecs-with-codedeploy.md)                     | 🟡 Intermediate |
 | 738 | [How Do You Implement Automated Drift Detection and Remediation in AWS CloudFormation?](./aws-engineering/how-do-you-implement-automated-drift-detection-and-remediation-in-aws-cloudformation.md)                     | 🟡 Intermediate |
 | 755 | [How do you upgrade an Amazon EKS cluster safely?](./aws-engineering/how-do-you-upgrade-an-amazon-eks-cluster-safely.md)                                                                                               | 🔴 Advanced     |
+| 795 | [How do you control image sprawl and storage cost in Amazon ECR?](./aws-engineering/how-do-you-control-image-sprawl-and-storage-cost-in-amazon-ecr.md)                                                                 | 🟡 Intermediate |
+| 796 | [What baseline security controls would you apply to an AWS account on a tight budget?](./aws-engineering/what-baseline-security-controls-would-you-apply-to-an-aws-account-on-a-tight-budget.md)                       | 🟡 Intermediate |
+| 797 | [What are the pillars of the AWS Well-Architected Framework?](./aws-engineering/what-are-the-pillars-of-the-aws-well-architected-framework.md)                                                                         | 🟢 Beginner     |
+| 798 | [When do you use Amazon API Gateway versus an Application Load Balancer?](./aws-engineering/when-do-you-use-amazon-api-gateway-versus-an-application-load-balancer.md)                                                 | 🟡 Intermediate |
 
 </details>
 
@@ -1299,10 +1313,10 @@ _53 questions_
 
 ### 🎤 Interview Prep
 
-_96 questions_
+_101 questions_
 
 <details>
-<summary><b>Interview Experience</b> · 96 questions · 🟢 5 🟡 28 🔴 63</summary>
+<summary><b>Interview Experience</b> · 101 questions · 🟢 9 🟡 28 🔴 64</summary>
 
 [Open the Interview Experience index →](./interview-experience/README.md)
 
@@ -1404,6 +1418,11 @@ _96 questions_
 | 393 | [What DevOps interview questions does ZS Associates ask?](./interview-experience/what-devops-interview-questions-does-zs-associates-ask.md)                                                       | 🔴 Advanced     |
 | 394 | [What DevOps interview questions does Zensar ask?](./interview-experience/what-devops-interview-questions-does-zensar-ask.md)                                                                     | 🟡 Intermediate |
 | 395 | [What DevOps interview questions does ZopSmart ask?](./interview-experience/what-devops-interview-questions-does-zopsmart-ask.md)                                                                 | 🟡 Intermediate |
+| 800 | [How do you answer 'tell me about yourself' in a DevOps interview?](./interview-experience/how-do-you-answer-tell-me-about-yourself-in-a-devops-interview.md)                                     | 🟢 Beginner     |
+| 801 | [How do you answer 'tell me about a challenge you faced' in a DevOps interview?](./interview-experience/how-do-you-answer-tell-me-about-a-challenge-you-faced-in-a-devops-interview.md)           | 🟢 Beginner     |
+| 802 | [How do you answer 'where do you see yourself in five years' in a DevOps interview?](./interview-experience/how-do-you-answer-where-do-you-see-yourself-in-five-years-in-a-devops-interview.md)   | 🟢 Beginner     |
+| 803 | [How do you describe your day-to-day responsibilities as a DevOps engineer?](./interview-experience/how-do-you-describe-your-day-to-day-responsibilities-as-a-devops-engineer.md)                 | 🟢 Beginner     |
+| 805 | [What questions come up in public DevOps mock interviews?](./interview-experience/what-questions-come-up-in-public-devops-mock-interviews.md)                                                     | 🔴 Advanced     |
 
 </details>
 
@@ -1494,19 +1513,6 @@ New questions, better answers, and corrections are all welcome. [CONTRIBUTING.md
 Not sure where to start? Open an issue - there are templates for [a new question](https://github.com/mchittineni/ultimate-devops-guide/issues/new?template=1-new-question.yml), [a correction to an existing answer](https://github.com/mchittineni/ultimate-devops-guide/issues/new?template=2-improve-answer.yml), and [an interview experience to add](https://github.com/mchittineni/ultimate-devops-guide/issues/new?template=3-interview-experience.yml).
 
 Two documents set the ground rules: the [Code of Conduct](./CODE_OF_CONDUCT.md) - including the rules on interviewer privacy, NDAs, and plagiarism that apply to interview write-ups - and the [Security Policy](./SECURITY.md), which covers how to report a committed credential or a workflow vulnerability privately.
-
-## 🙏 Acknowledgements & Inspiration
-
-Special thanks and heartfelt gratitude to the creators and maintainers of the following open-source repositories and community resources whose work provided inspiration, practical insights, and foundational ideas for this project:
-
-- **[rohitg00/devops-interview-questions](https://github.com/rohitg00/devops-interview-questions)** – Comprehensive DevOps interview questions repository.
-- **[bregman-arie/devops-exercises](https://github.com/bregman-arie/devops-exercises)** – Extensive collection of DevOps exercises, diagrams, and practical questions.
-- **[tikam02/devops-guide](https://github.com/tikam02/devops-guide)** – Practical guide for DevOps configurations, cheat sheets, and systems management.
-- **[NotHarshhaa/AWS-GCP-Azure-Cloud-Projects-Workshop](https://github.com/NotHarshhaa/AWS-GCP-Azure-Cloud-Projects-Workshop)** – Hands-on multi-cloud architecture projects and workshop guides.
-- **[NotHarshhaa/DevOps-Projects](https://github.com/NotHarshhaa/DevOps-Projects)** – Practical real-world DevOps project blueprints and automation pipelines.
-- **[NotHarshhaa/DevOps-Interview-Questions](https://github.com/NotHarshhaa/DevOps-Interview-Questions)** – Collection of 1100+ DevOps interview questions with detailed answers and solutions.
-- **[iam-veeramalla/devops-interview-preparation-guide](https://github.com/iam-veeramalla/devops-interview-preparation-guide)** – Detailed interview preparation guide and practical scenario breakdowns.
-- **[litu54/DevOps-Interview-Guide](https://github.com/litu54/DevOps-Interview-Guide)** – Real-world company interview experiences and question collections.
 
 ## 📄 License
 
