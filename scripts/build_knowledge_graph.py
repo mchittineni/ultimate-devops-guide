@@ -25,7 +25,6 @@ from lib_content import REPO_ROOT, all_questions, load_topics, topic_meta
 
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^:)\s][^)\s]*)\)")
 WIKILINK_RE = re.compile(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]")
-SHORT_ANSWER_RE = re.compile(r"^\*\*Short answer:\*\*\s*(.+?)\s*$", re.M)
 
 DIFFICULTY_COLORS = {
     "Beginner": "#10b981",  # Emerald Green
@@ -112,26 +111,6 @@ def build_graph_data(repo_root: Path = REPO_ROOT) -> dict:
         topic_node_id = f"topic:{topic_dir}"
         t_group = meta.get(topic_dir, {}).get("group", "Other")
 
-        # Attach full quiz block or high-quality synthesized quiz
-        quiz_data = q.quiz
-        if not quiz_data:
-            sa_match = SHORT_ANSWER_RE.search(q.body)
-            clean_ans = sa_match.group(1).strip() if sa_match else ""
-            if not clean_ans:
-                clean_ans = f"Apply standard {q.category} best practices and automated declarative patterns."
-            clean_ans_summary = clean_ans[:140] + ("..." if len(clean_ans) > 140 else "")
-            quiz_data = {
-                "stem": f"Which statement best characterizes the core concept or implementation of: {q.title}?",
-                "options": [
-                    clean_ans_summary,
-                    f"It represents an obsolete anti-pattern prohibited in modern {q.category} architectures.",
-                    "It requires executing manual console overrides rather than automated CI/CD or Infrastructure as Code.",
-                    "It strictly applies only to single-node legacy servers without distributed high availability.",
-                ],
-                "answer": 1,
-                "explanation": f"{q.title}: {clean_ans}",
-            }
-
         nodes.append(
             {
                 "id": node_id,
@@ -146,7 +125,6 @@ def build_graph_data(repo_root: Path = REPO_ROOT) -> dict:
                 "difficulty": q.difficulty,
                 "tags": q.tags,
                 "type": "question",
-                "quiz": quiz_data,
             }
         )
 
@@ -494,39 +472,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       font-size: 0.85rem;
     }}
 
-    /* Quiz Launch Button */
-    .actions-row {{
-      margin-bottom: 12px;
-      display: flex;
-      gap: 8px;
-    }}
-    .quiz-launch-btn {{
-      width: 100%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 9px 14px;
-      background: linear-gradient(135deg, var(--btn-bg) 0%, #0284c7 100%);
-      color: #ffffff;
-      border: 1px solid var(--accent);
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 12px var(--accent-ring);
-      transition: all 0.2s ease;
-    }}
-    .quiz-launch-btn:hover {{
-      background: linear-gradient(135deg, var(--btn-bg-hover) 0%, #0369a1 100%);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px var(--accent-ring);
-    }}
-    .quiz-launch-btn:active {{
-      transform: translateY(0);
-    }}
-
     /* Search Results List */
 
     #search-results {{
@@ -746,133 +691,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       line-height: 1.45;
     }}
 
-    /* Interactive Quiz in Card */
-    #card-quiz {{
-      margin: 12px 0 16px 0;
-      padding: 12px;
-      border-radius: 10px;
-      background: var(--result-bg);
-      border: 1px solid var(--panel-border);
-    }}
-    .quiz-stem-wrapper {{
-      margin-bottom: 10px;
-    }}
-    .quiz-badge {{
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 4px;
-      letter-spacing: 0.5px;
-    }}
-    .quiz-stem {{
-      margin: 0 !important;
-      font-size: 0.86rem !important;
-      font-weight: 600;
-      color: var(--text-strong) !important;
-      line-height: 1.4 !important;
-    }}
-    .quiz-options-list {{
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 10px;
-    }}
-    .quiz-opt-btn {{
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      width: 100%;
-      text-align: left;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid var(--input-border);
-      background: var(--input-bg);
-      color: var(--text-body);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      line-height: 1.35;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }}
-    .quiz-opt-btn:hover:not(:disabled) {{
-      background: var(--accent-hover-bg);
-      border-color: var(--accent);
-      color: var(--text-strong);
-    }}
-    .quiz-opt-btn:disabled {{
-      cursor: default;
-    }}
-    .quiz-opt-btn.correct {{
-      background: rgba(16, 185, 129, 0.15) !important;
-      border-color: #10b981 !important;
-      color: #047857 !important;
-      font-weight: 600;
-    }}
-    .quiz-opt-btn.incorrect {{
-      background: rgba(239, 68, 68, 0.15) !important;
-      border-color: #ef4444 !important;
-      color: #b91c1c !important;
-      font-weight: 600;
-    }}
-    .opt-key {{
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: 0.75rem;
-      flex-shrink: 0;
-      opacity: 0.7;
-    }}
-    .quiz-feedback {{
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      animation: fadeIn 0.2s ease-out;
-    }}
-    @keyframes fadeIn {{
-      from {{ opacity: 0; transform: translateY(-4px); }}
-      to {{ opacity: 1; transform: translateY(0); }}
-    }}
-    .quiz-feedback.correct-feedback {{
-      background: rgba(16, 185, 129, 0.10);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-    }}
-    .quiz-feedback.incorrect-feedback {{
-      background: rgba(239, 68, 68, 0.10);
-      border: 1px solid rgba(239, 68, 68, 0.35);
-    }}
-    .feedback-status {{
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }}
-    .feedback-explanation {{
-      font-size: 0.76rem !important;
-      color: var(--text-body) !important;
-      margin: 0 !important;
-      line-height: 1.4 !important;
-    }}
-    .quiz-card-actions {{
-      display: flex;
-      gap: 6px;
-    }}
-    .quiz-next-btn {{
-      width: 100%;
-      padding: 7px 12px;
-      border-radius: 6px;
-      border: 1px solid var(--accent);
-      background: var(--accent-soft-bg);
-      color: var(--accent-fg);
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }}
-    .quiz-next-btn:hover {{
-      background: var(--accent);
-      color: #ffffff;
-    }}
-
     .card-actions {{
 
       display: flex;
@@ -1034,17 +852,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       </div>
     </div>
     <h1>⚡ DevOps Knowledge Graph</h1>
-    <p>Interactive 3D infrastructure map linking {question_count} DevOps interview questions, platform topics, and architecture wikilinks.</p>
+    <p>A 3D map shaped like a brain, linking {question_count} DevOps interview questions, platform topics, and architecture wikilinks.</p>
 
     <div class="search-box">
       <span class="search-icon" aria-hidden="true">🔍</span>
       <input type="search" id="search-input" aria-label="Filter questions or topics" placeholder="Filter questions or topics (e.g. docker, kubernetes)...">
-    </div>
-
-    <div class="actions-row">
-      <button type="button" id="random-quiz-btn" class="quiz-launch-btn">
-        <span class="dice-icon">🎲</span> Random Question & Quiz
-      </button>
     </div>
 
     <div id="search-results" role="region" aria-label="Search results">
@@ -1056,6 +868,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <div class="legend-item"><span class="dot" style="background:#10b981"></span> Beginner</div>
       <div class="legend-item"><span class="dot" style="background:#f59e0b"></span> Intermediate</div>
       <div class="legend-item"><span class="dot" style="background:#ef4444"></span> Advanced</div>
+      <div class="legend-item" style="flex-basis:100%">🧠 Lobes are topic domains · cerebellum: interview prep · brainstem: foundations</div>
     </div>
 
     <div class="stats-bar">
@@ -1070,26 +883,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <div class="card-meta">
         <span id="card-type" class="card-tag" data-kind="question">QUESTION</span>
         <span id="card-difficulty" class="card-tag" data-level="beginner">BEGINNER</span>
-        <span id="quiz-streak" class="card-tag" style="display:none; margin-left:auto; background:rgba(245,158,11,0.15); color:#f59e0b;">🔥 Streak: <strong id="streak-num">0</strong></span>
       </div>
       <h3 id="card-title">Node Info</h3>
       <p id="card-desc"></p>
-
-      <!-- Interactive Quiz Section -->
-      <div id="card-quiz" style="display:none;">
-        <div class="quiz-stem-wrapper">
-          <div class="quiz-badge">⚡ KNOWLEDGE CHECK</div>
-          <p id="quiz-stem" class="quiz-stem"></p>
-        </div>
-        <div id="quiz-options" class="quiz-options-list"></div>
-        <div id="quiz-feedback" class="quiz-feedback" style="display:none;">
-          <div id="feedback-status" class="feedback-status"></div>
-          <p id="feedback-explanation" class="feedback-explanation"></p>
-        </div>
-        <div class="quiz-card-actions">
-          <button type="button" id="next-quiz-btn" class="quiz-next-btn">Next Random Question 🎲</button>
-        </div>
-      </div>
 
       <div class="card-actions">
         <a id="card-link" href="#" target="_blank" rel="noopener">View Markdown Source ↗</a>
@@ -1161,7 +957,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       cardTitle.innerText = node.label;
       cardDesc.innerText = `Domain: ${{node.section || node.category || 'DevOps Platform'}}\\nCategory: ${{node.category || 'Topic Index'}}\\nNode Type: ${{node.type}}`;
       cardLink.href = `https://github.com/mchittineni/ultimate-devops-guide/blob/main/${{node.url.replace('./', '')}}`;
-      renderQuizForNode(node);
       card.style.display = 'block';
       card.focus();
     }}
@@ -1201,6 +996,203 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       document.getElementById('graph-fallback').hidden = false;
       throw new Error('3D graph unavailable: library failed to load or WebGL is unsupported');
     }}
+
+    /* --------------------------- Brain layout --------------------------- */
+    // Every node gets a fixed home on a brain-shaped surface, and a gentle
+    // force pulls it there, so the graph settles into the shape of a brain.
+    // Topic domains map to regions: cerebral lobes for the main domains
+    // (mirrored across both hemispheres), the cerebellum for interview prep,
+    // and the brainstem for the foundations everything else builds on.
+    // lon runs front (0) over the top (90) to the back (180); lat runs from
+    // the midline (0) out to the side of the head (90).
+    // Cortical lobes in surface order: the temporal band (low, front-side)
+    // first, then front to back over the top of the head.
+    const CORTEX_ORDER = [
+      'Cloud Providers',
+      'Platform and Leadership',
+      'Architecture and Scale',
+      'Security',
+      'Containers and Kubernetes',
+      'Delivery and Automation',
+      'Reliability and Operations'
+    ];
+    const CEREBELLUM_GROUP = 'Interview Prep';
+    const BRAINSTEM_GROUP = 'Foundations';
+    const DEG = Math.PI / 180;
+
+    // Deterministic per-node randomness, so the brain looks the same on every visit.
+    function seededRandom(seedText) {{
+      let h = 2166136261;
+      for (let i = 0; i < seedText.length; i++) {{
+        h ^= seedText.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }}
+      return () => {{
+        h = (h + 0x6D2B79F5) | 0;
+        let t = Math.imul(h ^ (h >>> 15), 1 | h);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      }};
+    }}
+
+    function gaussian(rand) {{
+      return Math.sqrt(-2 * Math.log(rand() || 1e-9)) * Math.cos(2 * Math.PI * rand());
+    }}
+
+    // Cerebral cortex: a half-ellipsoid either side of the midline, flatter
+    // underneath, with the temporal lobe hanging lower at the front-side and a
+    // ripple on the radius standing in for gyri and sulci.
+    function cortexPoint(lonDeg, latDeg, side, depth) {{
+      const lon = lonDeg * DEG;
+      const lat = Math.max(4, Math.min(86, latDeg)) * DEG;
+      const dx = Math.cos(lat) * Math.cos(lon);
+      const dy = Math.cos(lat) * Math.sin(lon);
+      const dz = Math.sin(lat);
+      const r = depth * (1 + 0.05 * Math.sin(lon * 9 + lat * 5) * Math.cos(lat * 11 - lon * 4));
+      const temporal = lonDeg > -70 && lonDeg < 20 ? 45 * Math.cos((lonDeg + 25) * DEG) * dz : 0;
+      return {{
+        x: 250 * dx * r,
+        y: 30 + (dy < 0 ? 0.6 : 1) * 170 * dy * r - temporal,
+        z: side * (14 + 110 * dz * r)
+      }};
+    }}
+
+    // Cerebellum: two smaller lobes tucked under the back of the cortex, with
+    // tight horizontal folds (folia).
+    function cerebellumPoint(rand) {{
+      const side = rand() < 0.5 ? -1 : 1;
+      const u = rand() * 2 * Math.PI;
+      const v = Math.acos(2 * rand() - 1);
+      const sx = Math.sin(v) * Math.cos(u);
+      const sy = Math.cos(v);
+      const sz = Math.abs(Math.sin(v) * Math.sin(u));
+      const r = (0.82 + 0.18 * rand()) * (1 + 0.06 * Math.sin(sy * 26));
+      return {{ x: -175 + 80 * sx * r, y: -95 + 52 * sy * r, z: side * (8 + 66 * sz * r) }};
+    }}
+
+    // Brainstem: a slanted column running down from under the cortex; t is 0 at the top, 1 at the bottom.
+    function brainstemPoint(t, rand) {{
+      const a = rand() * 2 * Math.PI;
+      const rad = 30 * Math.sqrt(rand());
+      return {{ x: -70 - 35 * t + rad * Math.cos(a), y: -40 - 210 * t, z: rad * Math.sin(a) }};
+    }}
+
+    // Evenly spread points over one hemisphere's visible cortex (front, top,
+    // back and the outer side), leaving the underside free for the cerebellum
+    // and brainstem. Fibonacci sampling keeps the spacing even, so the
+    // silhouette reads as a solid brain rather than separate islands.
+    function cortexSurface(count) {{
+      const pts = [];
+      if (!count) return pts;
+      let total = Math.ceil(count / 0.33);
+      for (;;) {{
+        pts.length = 0;
+        const golden = Math.PI * (3 - Math.sqrt(5));
+        for (let i = 0; i < total; i++) {{
+          const y = 1 - (2 * (i + 0.5)) / total;
+          const ring = Math.sqrt(1 - y * y);
+          const theta = golden * i;
+          const d = {{ x: Math.cos(theta) * ring, y: y, z: Math.sin(theta) * ring }};
+          if (d.z < 0.08) continue;
+          let lon = Math.atan2(d.y, d.x) / DEG;
+          if (lon < -75) lon += 360;
+          if (lon > 205) continue;
+          pts.push({{ lon: lon, lat: Math.asin(d.z) / DEG }});
+        }}
+        if (pts.length >= count) break;
+        total = Math.ceil(total * 1.1);
+      }}
+      // Thin evenly down to exactly `count` points.
+      const step = pts.length / count;
+      return Array.from({{ length: count }}, (_, i) => pts[Math.floor(i * step)]);
+    }}
+
+    function assignBrainTargets(nodes) {{
+      const topicSizes = {{}};
+      nodes.forEach(n => {{
+        if (n.type === 'question') topicSizes[n.category] = (topicSizes[n.category] || 0) + 1;
+      }});
+
+      const topics = nodes.filter(n => n.type === 'topic')
+        .sort((a, b) => a.label.localeCompare(b.label));
+      const byGroup = {{}};
+      topics.forEach(t => (byGroup[t.section] = byGroup[t.section] || []).push(t));
+
+      // Cortical topics alternate between hemispheres within each domain, then
+      // each hemisphere's surface is cut into contiguous lobes: the temporal
+      // band first (lowest lon), then front to back.
+      const homes = {{}};
+      [1, -1].forEach(side => {{
+        const lobes = CORTEX_ORDER.map(group => ({{
+          group: group,
+          topics: (byGroup[group] || []).filter((t, i) => (i % 2 === 0 ? 1 : -1) === side)
+        }}));
+        const count = lobes.reduce((sum, l) => sum + l.topics.reduce((s, t) => s + (topicSizes[t.label] || 0), 0), 0);
+        const surface = cortexSurface(count).sort((a, b) => a.lon - b.lon);
+        let cursor = 0;
+        lobes.forEach(lobe => {{
+          const lobeSize = lobe.topics.reduce((s, t) => s + (topicSizes[t.label] || 0), 0);
+          // Within a lobe, topics take bands from the midline outwards.
+          const lobePts = surface.slice(cursor, cursor + lobeSize).sort((a, b) => a.lat - b.lat);
+          cursor += lobeSize;
+          let offset = 0;
+          lobe.topics.forEach(t => {{
+            const size = topicSizes[t.label] || 0;
+            const pts = lobePts.slice(offset, offset + size);
+            offset += size;
+            const mean = pts.length
+              ? {{ lon: pts.reduce((s, p) => s + p.lon, 0) / pts.length, lat: pts.reduce((s, p) => s + p.lat, 0) / pts.length }}
+              : {{ lon: 90, lat: 50 }};
+            homes[t.label] = {{ kind: 'cortex', side: side, pts: pts, next: 0, hub: mean }};
+          }});
+        }});
+      }});
+      const stem = byGroup[BRAINSTEM_GROUP] || [];
+      stem.forEach((t, i) => {{
+        homes[t.label] = {{ kind: 'brainstem', t0: i / stem.length, t1: (i + 1) / stem.length }};
+      }});
+      (byGroup[CEREBELLUM_GROUP] || []).forEach(t => {{ homes[t.label] = {{ kind: 'cerebellum' }}; }});
+
+      nodes.forEach(n => {{
+        const isTopic = n.type === 'topic';
+        const home = homes[isTopic ? n.label : n.category];
+        const rand = seededRandom(n.id);
+        let p;
+        if (!home) {{
+          p = cortexPoint(90, 50, 1, 1);
+        }} else if (home.kind === 'cerebellum') {{
+          p = isTopic ? {{ x: -175, y: -95, z: 0 }} : cerebellumPoint(rand);
+        }} else if (home.kind === 'brainstem') {{
+          const t = isTopic ? (home.t0 + home.t1) / 2 : home.t0 + (home.t1 - home.t0) * rand();
+          p = brainstemPoint(t, isTopic ? () => 0 : rand);
+        }} else if (isTopic) {{
+          p = cortexPoint(home.hub.lon, home.hub.lat, home.side, 0.8);
+        }} else {{
+          const spot = home.pts[home.next++] || home.hub;
+          p = cortexPoint(spot.lon, spot.lat, home.side, 0.92 + 0.08 * rand());
+        }}
+        n.tx = p.x; n.ty = p.y; n.tz = p.z;
+        n.x = p.x; n.y = p.y; n.z = p.z;
+      }});
+    }}
+
+    // A positional force towards each node's home on the brain surface.
+    function forceBrain(strength) {{
+      let simNodes = [];
+      function force(alpha) {{
+        const k = strength * alpha;
+        for (const n of simNodes) {{
+          if (n.tx === undefined) continue;
+          n.vx += (n.tx - n.x) * k;
+          n.vy += (n.ty - n.y) * k;
+          n.vz += (n.tz - n.z) * k;
+        }}
+      }}
+      force.initialize = ns => {{ simNodes = ns; }};
+      return force;
+    }}
+
+    assignBrainTargets(gData.nodes);
 
     const Graph = ForceGraph3D()
       (document.getElementById('graph'))
@@ -1369,94 +1361,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }}
     }});
 
-    // Physics Tuning
-    Graph.d3Force('charge').strength(-130);
+    // Physics tuning: the brain force dominates; charge and links only nudge
+    // neighbours apart, so the shape holds once the layout settles.
+    Graph.d3Force('brain', forceBrain(0.35));
+    Graph.d3Force('charge').strength(-4);
+    Graph.d3Force('link').strength(0.01);
+    Graph.d3Force('center', null);
+    // Open on a side view, front of the brain to the right.
+    Graph.cameraPosition({{ x: 140, y: 40, z: 820 }}, {{ x: -20, y: -20, z: 0 }});
 
-    /* ----------------------------- Quiz Logic ----------------------------- */
-    let quizStreak = 0;
-
-    function renderQuizForNode(node) {{
-      const quizContainer = document.getElementById('card-quiz');
-      const streakTag = document.getElementById('quiz-streak');
-      const streakNum = document.getElementById('streak-num');
-
-      if (!node || node.type !== 'question' || !node.quiz) {{
-        quizContainer.style.display = 'none';
-        streakTag.style.display = 'none';
-        return;
-      }}
-
-      streakTag.style.display = 'inline-flex';
-      streakNum.innerText = quizStreak;
-      quizContainer.style.display = 'block';
-
-      const quiz = node.quiz;
-      document.getElementById('quiz-stem').innerText = quiz.stem || node.title;
-
-      const feedback = document.getElementById('quiz-feedback');
-      feedback.style.display = 'none';
-      feedback.className = 'quiz-feedback';
-
-      const optList = document.getElementById('quiz-options');
-      optList.replaceChildren();
-
-      const letters = ['A', 'B', 'C', 'D', 'E'];
-      const correctIdx = typeof quiz.answer === 'number' ? quiz.answer : 1; // 1-based index
-
-      (quiz.options || []).forEach((optText, idx) => {{
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'quiz-opt-btn';
-
-        const keySpan = document.createElement('span');
-        keySpan.className = 'opt-key';
-        keySpan.textContent = (letters[idx] || (idx + 1)) + '.';
-
-        const textSpan = document.createElement('span');
-        textSpan.textContent = optText;
-
-        btn.appendChild(keySpan);
-        btn.appendChild(textSpan);
-
-        btn.addEventListener('click', () => {{
-          const allBtns = optList.querySelectorAll('.quiz-opt-btn');
-          allBtns.forEach(b => b.disabled = true);
-
-          const isCorrect = (idx + 1) === correctIdx;
-          if (isCorrect) {{
-            btn.classList.add('correct');
-            quizStreak++;
-            streakNum.innerText = quizStreak;
-            feedback.className = 'quiz-feedback correct-feedback';
-            document.getElementById('feedback-status').innerHTML = '✅ <strong>Correct!</strong> Great job.';
-          }} else {{
-            btn.classList.add('incorrect');
-            if (allBtns[correctIdx - 1]) {{
-              allBtns[correctIdx - 1].classList.add('correct');
-            }}
-            quizStreak = 0;
-            streakNum.innerText = quizStreak;
-            feedback.className = 'quiz-feedback incorrect-feedback';
-            document.getElementById('feedback-status').innerHTML = '❌ <strong>Incorrect.</strong> See explanation below:';
-          }}
-
-          document.getElementById('feedback-explanation').innerText = quiz.explanation || '';
-          feedback.style.display = 'block';
-        }});
-
-        optList.appendChild(btn);
-      }});
-    }}
-
-    function selectRandomQuestionQuiz() {{
-      const questionNodes = gData.nodes.filter(n => n.type === 'question');
-      if (!questionNodes.length) return;
-      const picked = questionNodes[Math.floor(Math.random() * questionNodes.length)];
-      handleNodeActivation(picked);
-    }}
-
-    document.getElementById('random-quiz-btn').addEventListener('click', selectRandomQuestionQuiz);
-    document.getElementById('next-quiz-btn').addEventListener('click', selectRandomQuestionQuiz);
 
     // Sync the switcher's checked state and the scene palette with the mode
     // the pre-paint script already resolved. Not persisted: nothing changed yet.
@@ -1486,7 +1399,7 @@ def render_html(graph_data: dict) -> str:
     topic_count = len(graph_data["nodes"]) - question_count
     description = (
         f"Interactive 3D map of {question_count} DevOps, SRE, cloud and platform engineering "
-        f"interview questions across {topic_count} topics, with a built-in quiz."
+        f"interview questions across {topic_count} topics, laid out in the shape of a brain."
     )
     return HTML_TEMPLATE.format(
         graph_json=embed_json(graph_data),
