@@ -30,6 +30,8 @@ tags:
 
 **Durability:** pipeline state is checkpointed, so a controller restart mid-build can resume rather than lose the run - subject to the durability setting (`PERFORMANCE_OPTIMIZED` trades some resumability for speed) and to the agent still being connected. It is not high availability.
 
+**Routing work to different agent pools.** Agents carry **labels** (static agents, or the templates of a cloud such as the EC2 or Kubernetes plugin), and the `agent { label '...' }` directive picks a pool by label expression. A common setup is small, cheap instances for PR and QA builds (`qa-small`, on t3 instances) and larger ones for release builds (`prod-c5`, on c5.xlarge). Use `agent none` at the top level so no executor is held for the whole run, then choose an agent per stage, guarded by `when { branch 'main' }`, or compute the label from `env.BRANCH_NAME` once at the start. Labels choose capacity; they are not a security boundary. Agents that can reach production, and the credentials they use, should also be restricted to production jobs: folder-scoped credentials, and agent or node restrictions (for example the Job Restrictions plugin, or separate Kubernetes clouds per namespace) so a PR build cannot schedule itself onto a production agent just by naming its label.
+
 **Shared libraries** live in their own repository under `vars/` and `src/`, letting you call `standardBuild(language: 'java')` from every team's Jenkinsfile and change the implementation centrally.
 
 ## Example
@@ -65,11 +67,32 @@ pipeline {
 }
 ```
 
+```groovy
+// Pick the agent pool by branch: small QA agents for everything, c5 agents for main
+def buildLabel = (env.BRANCH_NAME == 'main') ? 'prod-c5' : 'qa-small'
+
+pipeline {
+  agent none
+  stages {
+    stage('Build and test') {
+      agent { label "${buildLabel}" }
+      steps { sh 'make build test' }
+    }
+    stage('Deploy to production') {
+      when { branch 'main' }
+      agent { label 'prod-c5 && linux' } // label expressions are allowed
+      steps { sh './deploy.sh prod' }
+    }
+  }
+}
+```
+
 ## Interview tips
 
 - Recommend declarative, and be able to say precisely when you would drop into `script { }` blocks.
 - `parallel` plus per-stage agents is the standard answer to "how do you speed up a Jenkins build?"
 - Shared libraries are the answer to pipeline sprawl across many repositories.
+- "How do you run QA builds on small instances and production builds on big ones?" Labels plus `agent { label ... }`, per stage under `agent none`, chosen by branch. Then add that labels are not access control, so production agents and credentials must also be restricted to production jobs.
 - Know the limit: pipeline Groovy runs on the controller (CPS-transformed), so heavy logic in the `Jenkinsfile` loads the controller - push real work into `sh` steps on agents.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
