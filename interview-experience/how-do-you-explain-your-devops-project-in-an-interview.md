@@ -34,6 +34,8 @@ Then stop talking. Silence invites the drill-down, and the drill-down is where y
 
 **Own your actual scope honestly.** If you worked on one component of a large platform, say so and describe that component deeply. Claiming to have architected everything invites questions you cannot answer, and the collapse is worse than the modest version would have been. "I owned X, and I worked alongside the team that owned Y" is a strong, credible framing.
 
+**Switching into DevOps from QA, development or support.** With several years in another stream you are an experienced engineer, not a fresher, so "my project" is still the business system or client you work on now - not a generic "three-tier app deployment". Lead with the real production work, especially the DevOps-adjacent parts you actually did: the CI stage you added, test automation you moved into the pipeline, environments you supported, release scripts you wrote, deployments you helped debug. Then present course or lab work separately and label it plainly as self-directed: the problem it solves, the design choices, what broke and how you fixed it, and a repository the interviewer can look at. Some interview advice recommends describing course projects as work done at your current employer. Do not do this. Two or three follow-ups about scale, approvals, incidents or teammates expose it, background and reference checks catch what the interview misses, and once one claim falls the interviewer discounts the rest. Drawing the boundary clearly makes your production claims more credible, and a well-built lab still leads to a good technical discussion.
+
 **Have a failure story ready.** "Tell me about something that went wrong" is close to universal at senior level. Use a real incident: what broke, how you detected it, what you did, what the root cause was, and - the part most candidates omit - what you changed so it could not recur. Blameless framing, specific timeline, no hero narrative.
 
 **Rehearse it out loud.** This is the one answer worth practising verbatim until it is fluent, because it is the only one you are guaranteed to be asked.
@@ -86,6 +88,7 @@ ANTICIPATED FOLLOW-UPS — prepare two sentences each
 - Prepare the full browser-to-Pod request path including NACLs, security groups, and route tables - it is asked verbatim.
 - Ask if you may sketch the architecture. It buys thinking time and interviewers remember candidates who draw.
 - Keep one failure story and one improvement story loaded. They cover most of the behavioural round too.
+- Switching streams? Lead with the real DevOps-adjacent work from your current role, then the lab, explicitly labelled as self-directed. "It's a personal project, not production - here's the repo" is credible; a lab dressed up as client work is not.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

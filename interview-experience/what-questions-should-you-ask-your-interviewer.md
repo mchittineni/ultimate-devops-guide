@@ -53,6 +53,15 @@ That last one is the single best predictor of job satisfaction in this field. If
 - What is the migration or modernisation you know is coming?
 - How do you handle cost - does anyone own the cloud bill?
 
+**The closing prompt: "Is there anything else you'd like us to know?"** It often comes just before "do you have any questions for us?", and it is a free minute most candidates waste on "no, I think we covered it" or a list of tools. Use it for a 60-90 second pitch instead:
+
+1. Pick one or two strengths that matter for this role and have **not** come up yet - security ownership, observability, mentoring, incident leadership.
+2. Back each one with a concrete example and its impact: "I triage critical CVEs for my group and added a CI gate that blocks images with known-exploitable critical vulnerabilities; our open critical findings went from about 40 to under 5 in a quarter."
+3. Tie it to something the interviewer said earlier, and restate your interest in the role.
+4. Then ask one sharp question about the team's current challenges - which hands you straight into the question list below.
+
+How you work (ownership, mentoring, a security mindset) is as worth mentioning here as what you know. Even if the interviewer says the topic belongs to a later round, you have put it on the record, and the next round may well open with it.
+
 **Questions to skip.** Anything answered on the careers page. Compensation in an early technical round - that is the recruiter's conversation. And avoid interrogating the interviewer about their own tooling choices in a way that reads as criticism; "why did you pick Jenkins over GitHub Actions?" is fine, "you're still on Jenkins?" is not.
 
 **Adjust by round.** Ask the technical interviewer about architecture, toil, and on-call; ask the hiring manager about scope, success criteria, and team structure; ask HR about process, timeline, and compensation. Asking the right person the right question is itself a signal.
@@ -108,6 +117,7 @@ WHAT THE ANSWERS TELL YOU
 - Take notes on the answers. It reads as seriousness, and you will need the comparison if you get multiple offers.
 - Reference something from earlier in the conversation. It proves you listened and turns the close into a discussion rather than a checklist.
 - Save compensation for the recruiter, and do not skip it - just put it in the right round.
+- Treat "anything else you'd like us to know?" as a 60-90 second pitch: one or two uncovered, role-relevant strengths with evidence and impact, not a tool list.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
