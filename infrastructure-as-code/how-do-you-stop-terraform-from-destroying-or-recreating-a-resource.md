@@ -72,6 +72,17 @@ And the process controls: separate state per environment so a production resourc
 
 `-/+` means destroy then create - a gap. `+/-` (which `create_before_destroy` produces) means create then destroy - no gap, but momentarily two resources. The scenario _"a configuration change caused brief downtime during apply - what happened and how do you prevent it?"_ is answered exactly here: an in-place-looking change actually forced replacement, Terraform destroyed before creating, and the fix is `create_before_destroy` plus, where the resource fronts traffic, ensuring the load balancer or DNS shifts over before the old one goes away.
 
+### The inverse: forcing a replacement on purpose
+
+Sometimes you want the opposite: the configuration has not changed, but one instance is broken (a corrupted disk, a host that needs to re-run `user_data` from scratch), so a normal `plan` shows nothing to do. The old tool was **`terraform taint ADDRESS`**, which marked the resource in state so the next apply destroyed and recreated it. It is **deprecated since Terraform v0.15.2**, because it modified state immediately, outside any reviewed plan. The current form is **`-replace`**:
+
+```bash
+terraform plan -replace='aws_instance.worker["b"]' -out=tfplan   # shows exactly one replacement
+terraform apply tfplan                                            # applies the reviewed plan
+```
+
+The replacement now appears in a plan that can be reviewed and saved like any other change. Check that plan for knock-on effects: anything referencing the instance (an EIP association, a DNS record) should show an update, not a destroy, and `create_before_destroy` still applies. Terraform still taints resources **automatically** when a create fails partway (for example, a provisioner errors), and the plan reports them as `tainted`. If the resource is actually fine, `terraform untaint ADDRESS` clears the mark. For fleets, prefer making single-node replacement routine (an Auto Scaling group instance refresh) over replacing named instances by hand.
+
 ### Stopping an accidental `terraform destroy`
 
 Frequently asked as its own question. Layers, not one answer: `prevent_destroy` on the critical resources; IAM denying delete actions for the CI role; no `destroy` stage in the production pipeline at all (make it a separate, manually-triggered, approval-gated job); provider deletion protection; and separate state files so blast radius is bounded. Also remove local `terraform destroy` capability from production by not giving humans production credentials - the deploy role belongs to the pipeline.
@@ -188,6 +199,7 @@ terraform show -json tfplan | jq -e '
 - Name the two limits of `prevent_destroy` explicitly: it does not stop a console deletion, and it disappears if you remove the resource block. Those caveats are what interviewers probe.
 - Give a concrete `ignore_changes` example that a practitioner would recognise - `desired_capacity` fought over by an autoscaler, or `task_definition` owned by the deploy pipeline. It proves the flag is not theoretical for you.
 - For "take resources out of Terraform without destroying them", give the exact order - `state rm` first, then delete the code - and warn that reversing the order destroys them. Mention `removed` blocks as the declarative 1.7+ form.
+- Expect the inverse question, "what does tainting a resource mean?". Explain the idea (destroy and recreate on the next apply even though the code has not changed), then say `terraform taint` is deprecated and `terraform apply -replace=ADDRESS` is the current form because the replacement shows in a reviewable plan. Describing `taint` as the current tool is a common out-of-date answer.
 - Distinguish `-/+` from `+/-` and use it to answer the brief-downtime scenario: an apparently in-place change forced replacement, destroy happened before create, and `create_before_destroy` (plus traffic shifting) is the fix.
 - Layer provider-side protection over Terraform-side, and add the process controls: separate state per environment, reviewed saved plans, a policy check that fails unexpected deletions, and no destroy stage in the production pipeline. See [what do terraform init, plan, apply, and refresh actually do](./what-do-terraform-init-plan-apply-and-refresh-actually-do.md), [managing Terraform state safely in a team](./how-do-you-manage-terraform-state-safely-in-a-team.md), [importing existing infrastructure](./how-do-you-import-existing-cloud-infrastructure-into-terraform.md), and [count versus for_each](./what-is-the-difference-between-count-and-for-each-in-terraform.md).
 

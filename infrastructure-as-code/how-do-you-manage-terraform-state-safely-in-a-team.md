@@ -40,6 +40,11 @@ Locking is what prevents the classic corruption case: two engineers run `apply` 
 
 **Workspaces are not environments.** `terraform workspace` gives multiple state files against one backend and one configuration. That is fine for short-lived, identical copies (per-PR preview stacks), but a poor fit for dev/stage/prod, which drift apart in size and configuration and should not share a backend or credentials. Use separate directories or a tool like Terragrunt with per-environment `.tfvars`.
 
+**CLI workspaces are not HCP Terraform workspaces.** The same word means two different things, and interviewers check whether you know it:
+
+- A **CLI workspace** (`terraform workspace new feature-tgw`) is only an extra state file for the same configuration, backend and credentials. With the S3 backend, non-default workspaces are stored under a key prefix, by default `env:/<workspace>/<key>`. Nothing is "pushed": state is written to the backend on every apply, so anyone with backend access can `terraform workspace select` a colleague's workspace and carry on.
+- An **HCP Terraform / Terraform Enterprise workspace** is a complete unit of its own: its own state, variables (including sensitive ones), cloud credentials (ideally dynamic provider credentials via OIDC), team permissions, run queue and history, policy checks, and a link to a VCS repository and directory. It is the equivalent of a directory per environment plus its pipeline, not of a CLI workspace. The usual mapping is one HCP workspace per component per environment (`network-prod`, `network-staging`), grouped into projects. Runs are triggered by VCS commits, the API, or the CLI with the `cloud` block; there is no separate step to publish a workspace.
+
 **Drift.** State records what Terraform last saw; someone clicking in the console changes reality without changing state. `terraform plan` detects the difference because it refreshes against the provider before diffing. The durable fixes are: run `plan` on a schedule and alert on non-empty output, remove human write access to production, and adopt changes made by hand with `terraform import` rather than reverting them blindly.
 
 **`terraform state` is a real toolkit,** not just a file. `list`, `show`, `mv` (rename a resource without destroying it), `rm` (forget a resource without deleting it), and `pull`/`push` for surgery. `terraform state mv` is the answer to "how do you refactor modules without downtime" - though `moved` blocks in configuration are the safer, reviewable, version-controlled way to do the same thing.
@@ -96,6 +101,7 @@ terraform plan -detailed-exitcode   # exit 0 = no changes, 2 = drift, 1 = error
 - Be current on locking: native S3 lockfiles have replaced the DynamoDB table for new configurations, but plenty of production code still uses DynamoDB.
 - Flag that state holds secrets in plaintext. It is a compliance point interviewers use to separate readers from operators.
 - On workspaces, do not say you use them for dev/stage/prod. Say why: separate directories and backends give real credential and blast-radius isolation.
+- If asked "CLI or HCP workspaces?", separate the two clearly. A common slip is describing "pushing" a workspace like a Git commit; CLI workspace state simply lives in the backend under the `env:/` prefix, and HCP workspaces run from VCS or API triggers.
 - `terraform plan -detailed-exitcode` in a scheduled job is a concrete, quotable drift-detection answer.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
