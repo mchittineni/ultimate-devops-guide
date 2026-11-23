@@ -11,7 +11,7 @@ tags:
 
 Container fundamentals - images versus containers, Dockerfile authoring, Compose, and the client/daemon architecture underneath `docker run`.
 
-**23 questions** · 🟢 Beginner: 9 · 🟡 Intermediate: 11 · 🔴 Advanced: 3
+**26 questions** · 🟢 Beginner: 9 · 🟡 Intermediate: 14 · 🔴 Advanced: 3
 
 ## Questions
 
@@ -40,6 +40,9 @@ Container fundamentals - images versus containers, Dockerfile authoring, Compose
 | 518 | [Why should you avoid running containers as the root user and how do you enforce non-root execution?](./why-should-you-avoid-running-containers-as-the-root-user-and-how-do-you-enforce-non-root-execution.md) | 🟢 Beginner     |
 | 519 | [What is the difference between ENTRYPOINT and CMD in a Dockerfile and how do they interact?](./what-is-the-difference-between-entrypoint-and-cmd-in-a-dockerfile-and-how-do-they-interact.md)                 | 🟢 Beginner     |
 | 754 | [What is the difference between Docker and Podman?](./what-is-the-difference-between-docker-and-podman.md)                                                                                                     | 🟡 Intermediate |
+| 792 | [Can you delete a Docker image that a container is still using, and what happens to that container?](./can-you-delete-a-docker-image-that-a-container-is-still-using-and-what-happens-to-that-container.md)    | 🟡 Intermediate |
+| 793 | [Why does a container image that works locally fail on Kubernetes or ECS?](./why-does-a-container-image-that-works-locally-fail-on-kubernetes-or-ecs.md)                                                       | 🟡 Intermediate |
+| 794 | [How do you containerise a three-tier application with Docker and Docker Compose?](./how-do-you-containerise-a-three-tier-application-with-docker-and-docker-compose.md)                                       | 🟡 Intermediate |
 
 ## What interviewers probe here
 
