@@ -11,7 +11,7 @@ tags:
 
 How the interview itself works - the round structure, explaining your project, answering scenario questions, and the company-by-company record of what was actually asked across 85 employers.
 
-**96 questions** · 🟢 Beginner: 5 · 🟡 Intermediate: 28 · 🔴 Advanced: 63
+**101 questions** · 🟢 Beginner: 9 · 🟡 Intermediate: 28 · 🔴 Advanced: 64
 
 ## Questions
 
@@ -113,6 +113,11 @@ How the interview itself works - the round structure, explaining your project, a
 | 393 | [What DevOps interview questions does ZS Associates ask?](./what-devops-interview-questions-does-zs-associates-ask.md)                                                       | 🔴 Advanced     |
 | 394 | [What DevOps interview questions does Zensar ask?](./what-devops-interview-questions-does-zensar-ask.md)                                                                     | 🟡 Intermediate |
 | 395 | [What DevOps interview questions does ZopSmart ask?](./what-devops-interview-questions-does-zopsmart-ask.md)                                                                 | 🟡 Intermediate |
+| 800 | [How do you answer 'tell me about yourself' in a DevOps interview?](./how-do-you-answer-tell-me-about-yourself-in-a-devops-interview.md)                                     | 🟢 Beginner     |
+| 801 | [How do you answer 'tell me about a challenge you faced' in a DevOps interview?](./how-do-you-answer-tell-me-about-a-challenge-you-faced-in-a-devops-interview.md)           | 🟢 Beginner     |
+| 802 | [How do you answer 'where do you see yourself in five years' in a DevOps interview?](./how-do-you-answer-where-do-you-see-yourself-in-five-years-in-a-devops-interview.md)   | 🟢 Beginner     |
+| 803 | [How do you describe your day-to-day responsibilities as a DevOps engineer?](./how-do-you-describe-your-day-to-day-responsibilities-as-a-devops-engineer.md)                 | 🟢 Beginner     |
+| 805 | [What questions come up in public DevOps mock interviews?](./what-questions-come-up-in-public-devops-mock-interviews.md)                                                     | 🔴 Advanced     |
 
 ## What interviewers probe here
 
