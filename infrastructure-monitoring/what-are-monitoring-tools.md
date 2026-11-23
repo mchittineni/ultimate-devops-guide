@@ -32,6 +32,8 @@ tags:
 
 **Choosing.** Weigh cost at your data volume (commercial platforms are excellent and become extremely expensive at scale), the operational burden of self-hosting, existing team skills, ecosystem fit (Prometheus is native to Kubernetes), and long-term retention needs.
 
+**"Why pay for Datadog if CloudWatch and X-Ray already exist?"** For a stack that lives entirely in one AWS account set, the native tools often are enough, and saying so is a good answer. A third-party platform (Datadog, New Relic, Dynatrace, Grafana Cloud) earns its cost when you need one view across many accounts, several clouds, on-premises systems and SaaS; when you want metrics, logs and traces correlated in one UI (jump from a latency spike to the trace to the log line); when you need richer APM, service maps and dashboards than the native consoles give; or when the team already knows the tool. The trade-off is cost, which grows with hosts, custom metrics and log volume, and lock-in. Instrumenting with OpenTelemetry keeps the switching cost low either way, because the same telemetry can go to CloudWatch, X-Ray or a vendor by changing Collector configuration.
+
 A very common pattern: Prometheus and Grafana for metrics and dashboards, Loki for logs, Tempo or Jaeger for traces, all instrumented via OpenTelemetry, with PagerDuty for on-call - self-hosted, portable, and cost-predictable.
 
 ## Example
@@ -52,6 +54,7 @@ opentelemetry-instrument python app.py
 - Lead with OpenTelemetry; it is the answer that shows current thinking rather than tool trivia.
 - Be ready to discuss cost - observability spend rivalling infrastructure spend is a real and common problem.
 - Have a reasoned opinion on build-versus-buy rather than a favourite tool.
+- For "why Datadog when CloudWatch exists?", avoid the vague "CloudWatch has limits" answer. Name the real reasons - cross-account and multi-cloud visibility, correlated metrics, logs and traces, richer APM - and concede that native tools are often enough for an AWS-only stack.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
