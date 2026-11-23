@@ -28,6 +28,8 @@ tags:
 
 **Repository structure.** The common pattern separates the application source repository from the configuration repository. CI builds and pushes an image, then updates the image tag in the config repo; the GitOps controller notices and deploys. This keeps deployment history distinct from code history.
 
+**"Why not just run `helm upgrade` from CI?"** Because Helm and GitOps answer different questions. Helm is packaging and templating - one chart, per-environment values. GitOps is the delivery model - who applies the result, from where, and what keeps it true afterwards. They combine: Argo CD and Flux both render Helm charts natively. The difference with `helm upgrade` from a pipeline is that it is a one-shot push: the CI system needs cluster credentials, the release reflects whatever the pipeline ran rather than a reviewed commit, and once it finishes nothing notices if someone edits the cluster by hand. With GitOps, CI only commits a new image tag or values change, the in-cluster controller applies it, and drift is detected and reverted continuously.
+
 **Tools:** Argo CD and Flux for Kubernetes; Crossplane or Terraform controllers extend the model to cloud infrastructure.
 
 **Challenges to acknowledge:** secret management (sealed secrets, SOPS, or an external secrets operator), promotion between environments, and the temptation to hand-edit clusters during incidents - which the controller will undo. GitOps also describes desired state, not ordered procedures: database migrations, one-off jobs, and cross-cluster sequencing still need hooks, waves, or a pipeline around the controller.
@@ -60,6 +62,7 @@ spec:
 - Pull-based reconciliation and the credential inversion is the key architectural point.
 - "How do you handle secrets in Git?" is the guaranteed follow-up - have SOPS or External Secrets ready.
 - Mention that drift correction means break-glass changes must also go through Git, or be explicitly excluded.
+- If asked "why not Helm from Jenkins?", do not answer only with Helm's benefits (templating, reusable values) - that compares packaging, not delivery. The GitOps answer is no cluster credentials in CI, Git as the reviewed source of truth, and continuous drift correction; Helm charts still work underneath.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 
