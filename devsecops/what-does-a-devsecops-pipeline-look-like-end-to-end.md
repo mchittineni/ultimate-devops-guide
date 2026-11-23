@@ -29,6 +29,14 @@ tags:
 
 **Every gate needs an exception path.** A time-boxed, approved, expiring waiver recorded in the repository (not a Slack message) is the difference between a control teams respect and one they route around. Waivers without expiry dates become permanent.
 
+**Make the gates impossible to skip.** "Developers should scan locally" is a convenience that saves pipeline minutes, not a control: nobody can prove it ran. A gate only counts if there is no route to production around it:
+
+- **The pipeline checks are required.** Branch protection or a ruleset on `main` lists the scan jobs as required status checks, blocks direct pushes, and applies to admins too, so a pull request cannot merge with a failing or missing scan.
+- **Only the pipeline can publish artefacts.** The registry (for example an ECR repository policy plus IAM) allows pushes only from the CI system's OIDC-assumed role, scoped to the protected branch. Developers can pull but not push, so an image built and pushed from a laptop cannot exist.
+- **Production admits only what the pipeline produced.** The pipeline signs the image and attaches provenance and scan attestations; admission control in the cluster (Kyverno `verifyImages`, Sigstore policy-controller, or a cloud equivalent) rejects anything unsigned or signed by any identity other than that workflow. This closes the last gap, someone running `kubectl set image` with an unscanned tag.
+
+With those three in place, local scans become what they should be: fast feedback that avoids a failed pipeline run, not the thing standing between a vulnerability and production.
+
 **Shift left, but do not shift alone.** Developers get findings in the pull request with a fix suggestion; the security team owns the rules, the thresholds, and the triage of anything the developer cannot resolve. Tooling that only reports into a security dashboard has not shifted left at all.
 
 ## Example
@@ -58,10 +66,30 @@ jobs:
             config /src --severity HIGH,CRITICAL --exit-code 1
 ```
 
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "OnlyCiMayPush",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": ["ecr:PutImage", "ecr:InitiateLayerUpload", "ecr:UploadLayerPart", "ecr:CompleteLayerUpload"],
+      "Condition": {
+        "StringNotEquals": { "aws:PrincipalArn": "arn:aws:iam::111122223333:role/ci-image-publisher" }
+      }
+    }
+  ]
+}
+```
+
+The ECR repository policy above denies image pushes from every principal except the CI role, which the pipeline assumes through OIDC with a trust policy limited to the protected branch.
+
 ## Interview tips
 
 - Name the gates in order and say which ones block. "Security is everyone's responsibility" without a pipeline is not an answer.
 - The baseline/new-findings distinction and expiring waivers are the two details that show you have run this in a real team.
+- "You can't trust developers to scan locally, so how do you enforce it?" A weak answer stops at "the pipeline scans anyway". The strong one shows there is no way around the pipeline: required status checks, a registry only the CI role can push to, and admission control that admits only images signed by that pipeline.
 - Expect the follow-up: "what do you do when the critical has no fix?" - compensating control, documented risk acceptance, and a tracked ticket.
 - Treat the security tooling as supply chain too: pin actions and scanner images to a commit SHA or digest (the tags above are for readability). In March 2026 attackers force-pushed most `aquasecurity/trivy-action` tags to a credential stealer - tag-pinned pipelines ran it, SHA-pinned ones did not.
 
