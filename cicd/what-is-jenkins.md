@@ -28,6 +28,8 @@ Modern Jenkins practice:
 
 The trade-off versus hosted options like GitHub Actions or GitLab CI is that you operate Jenkins yourself: upgrades, plugin compatibility, agent capacity, and security hardening are your responsibility. That includes the runtime: current LTS releases require Java 21 or newer on the controller and agents (2.555.1, April 2026, was the first LTS to drop Java 17; Java 25 is also supported), and plugin CVEs are the most common Jenkins vulnerability class, so you need a patch cadence.
 
+**Multibranch pipelines in more detail.** A Multibranch Pipeline is a folder-like job pointed at one repository through a **branch source** (GitHub, GitLab, Bitbucket, or plain Git). Jenkins scans the repository ("branch indexing") and creates a sub-job for every branch, pull request, or tag (depending on the discovery behaviours you enable) that contains a `Jenkinsfile`. Branches without one are ignored. When a branch is deleted or a PR is closed, the **orphaned item strategy** decides how long its job and build history are kept before it is removed. New commits trigger builds through a **webhook** from the forge (the normal setup) or, as a fallback, a periodic re-index. Because every branch runs the same `Jenkinsfile`, per-branch behaviour lives in the pipeline itself: `when { branch 'main' }` for deploy stages, `when { changeRequest() }` for PR-only checks, or `env.BRANCH_NAME` / `env.CHANGE_ID` in expressions. For many repositories, an **organization folder** applies the same idea one level up and creates a multibranch job per repository automatically.
+
 ## Example
 
 ```groovy
@@ -65,6 +67,7 @@ pipeline {
 - Emphasise pipeline-as-code and shared libraries; UI-configured jobs are the anti-pattern.
 - Know how credentials are handled (`withCredentials`, never plain environment variables in the Jenkinsfile).
 - Be ready to compare Jenkins with GitHub Actions/GitLab CI on operational cost versus control.
+- "What is a multibranch pipeline?" deserves more than "it runs a pipeline for each branch". Mention the branch source and indexing, a job only for branches with a `Jenkinsfile`, cleanup of deleted branches through the orphaned item strategy, webhook triggers, and `when { branch ... }` / `changeRequest()` for per-branch behaviour.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
 

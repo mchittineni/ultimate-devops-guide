@@ -40,6 +40,7 @@ Promotion is earned, and each gate should produce evidence you could show an aud
 
 - **Version everything visible.** Record which digest is in which environment, by whom and when. `kubectl get deploy -o jsonpath` or an ArgoCD/Flux application status is the source of truth; a wiki page is not.
 - **Prefer GitOps for the promotion step.** Promotion becomes a pull request that changes an image digest in the environment repository, which gives review, audit, and rollback (`git revert`) for free. See [what is GitOps](../devops-tools-and-automation/what-is-gitops.md).
+- **Require approval only for production, on a single branch.** With GitOps and no long-lived environment branches, staging and production values live side by side on `main`, so how does GitHub know that one PR needs a lead's approval and another does not? Path-based ownership. A `CODEOWNERS` entry assigns `values-prod.yaml` (or `envs/prod/`) to the platform leads, and the branch ruleset on `main` requires a pull request **with code-owner review**, even with zero general required approvals. A PR that only touches staging values has no code owner and can auto-merge once checks pass; any PR touching production values is blocked until an owner approves. If the deploy is a pipeline job rather than a GitOps sync, add a GitHub **environment** with required reviewers on the production job as a second gate.
 - **Handle stateful changes separately.** Schema migrations must be backward compatible and applied before the code that needs them, or promotion breaks the moment you roll back. See [how do you change a production database schema without downtime](../database-management-in-devops/how-do-you-change-a-production-database-schema-without-downtime.md).
 - **Keep environment count honest.** Every long-lived environment costs money and drifts; prefer ephemeral per-pull-request environments for testing and a small number of durable ones for promotion.
 
@@ -73,11 +74,22 @@ externalSecrets:
     remoteRef: /app/prod/db-password # resolved at deploy time from the secret store
 ```
 
+```text
+# .github/CODEOWNERS in the GitOps repo - only production config has an owner
+/apps/checkout/values-prod.yaml   @acme/platform-leads
+/envs/prod/                       @acme/platform-leads
+
+# Ruleset on main: require a pull request, 0 required approvals,
+# "Require review from Code Owners" on, required status checks on.
+# Result: staging PRs auto-merge on green checks; prod PRs wait for a platform lead.
+```
+
 ## Interview tips
 
 - Say "build once, promote the artefact" in the first sentence, and give the reason: rebuilding per environment means production runs something untested. That single line answers most of the question.
 - Be concrete about _what_ is allowed to differ between environments - configuration, secrets, scale - and call anything else drift.
 - Describe gates as evidence rather than ceremony: smoke test, contract tests, migration rehearsal, soak, then approval by a second person for production.
+- A common follow-up: "if staging and prod values are on the same branch, how does only the prod PR need approval?" The answer is `CODEOWNERS` on the prod paths plus a ruleset requiring code-owner review, not separate long-lived branches per environment.
 - Mention rollback as part of promotion, not a separate topic, and note the constraint that database migrations impose on it.
 - If the interviewer uses Kubernetes, offer the GitOps version - promotion as a pull request changing an image digest, with `git revert` as the rollback path.
 - Have an opinion on environment count. "We had seven long-lived environments and cut to three plus ephemeral PR environments" is a strong, real answer. See [what are deployment strategies](../devops-tools-and-automation/what-are-deployment-strategies.md) and [continuous delivery versus continuous deployment](./what-is-the-difference-between-continuous-delivery-and-continuous-deployment.md).
