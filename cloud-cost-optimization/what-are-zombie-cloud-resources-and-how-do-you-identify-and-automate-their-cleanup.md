@@ -43,6 +43,7 @@ Cloud bills accumulate orphaned infrastructure: resources left behind by deleted
 ### Finding and cleaning them up
 
 - **Detect**: AWS Trusted Advisor and Compute Optimizer (idle resource recommendations), Cost Explorer grouped by usage type, provider equivalents (Azure Advisor, Google Recommender), or queries against the Cost and Usage Report.
+- **Know what is free**: Trusted Advisor is only partly free. Every account, including Basic and Developer support, gets the core security checks and the service-quota checks; the **cost optimisation checks** (idle load balancers, underused EBS volumes, unassociated Elastic IPs and the rest), the full check catalogue, and API/EventBridge access need **Business, Enterprise On-Ramp or Enterprise** support. On a lower plan, use the free tools instead - Compute Optimizer (including idle-resource findings), Cost Optimization Hub, and Cost Explorer rightsizing recommendations.
 - **Automate with policy**: **Cloud Custodian** (open source) expresses rules as YAML - find, tag, notify, then delete after a grace period. Scheduled Lambda or Azure Functions "janitor" jobs do the same for simpler cases.
 - **Use a staged workflow** rather than deleting immediately: tag the resource with a deletion date, notify the owner (from tags), snapshot volumes before deletion where data might matter, then delete. Immediate deletion is how cleanup automation causes outages.
 - **Prevent them**: IaC for everything (so `terraform destroy` removes what was created), mandatory `Owner` and expiry tags, TTLs on ephemeral environments, lifecycle policies (Amazon Data Lifecycle Manager for snapshots, S3 lifecycle rules), and default log retention.
@@ -91,6 +92,7 @@ aws ec2 describe-volumes --filters Name=status,Values=available \
 - Be current on IPv4: AWS has charged for all public IPv4 addresses since 2024, not just idle Elastic IPs.
 - Describe a staged cleanup - tag, notify, grace period, snapshot, delete - rather than instant deletion.
 - Mention Cloud Custodian (or provider advisors) for detection and automation.
+- If asked "is Trusted Advisor free?", the precise answer is "partly": core security and quota checks are free for everyone, while the cost optimisation checks need Business support or higher - so name Compute Optimizer and Cost Optimization Hub as the free alternatives.
 - Close with prevention: IaC, owner and expiry tags, TTLs, and lifecycle policies.
 
 <!-- BEGIN GENERATED RELATED TOPICS -->
